@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Séquence 1 · Activité 2 — Du téléphone au smartphone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{
+  --papier:#F4F7F7; --carte:#FFFFFF; --encre:#14262B; --doux:#5A6C71;
+  --teal:#0E6E6B; --teal-pale:#E2EFEE; --magenta:#C2185B; --trait:#D2DEDE;
+  --ok:#2E7D5B; --r:10px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--papier);color:var(--encre);
+  font-family:"Source Sans 3",system-ui,sans-serif;font-size:17px;line-height:1.55}
+.page{max-width:820px;margin:0 auto;padding:0 20px 140px}
+
+/* En-tête */
+.entete{position:relative;background:var(--carte);border:1px solid var(--trait);
+  border-top:4px solid var(--teal);border-radius:var(--r);margin-top:26px;padding:26px 26px 0}
+.marque{display:flex;align-items:center;gap:13px;margin:0 0 14px}
+.marque img{height:44px;width:auto;display:block}
+.fil{font-family:"Archivo",sans-serif;font-weight:600;font-size:13px;color:var(--teal);
+  margin:0;padding-left:13px;border-left:1px solid var(--trait)}
+.titre{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(25px,4.2vw,34px);
+  line-height:1.14;margin:0 0 10px;max-width:22ch}
+.sous{color:var(--doux);margin:0 0 22px;font-size:16px}
+.cycle{position:absolute;right:26px;top:26px;display:flex;align-items:center;gap:8px}
+.cycle .lab{font-family:"Archivo",sans-serif;font-weight:600;font-size:11px;color:var(--doux)}
+.cycle .niv{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+  border:1.5px solid var(--trait);color:var(--doux);font-family:"Archivo",sans-serif;font-weight:600;font-size:13px}
+.cycle .niv.actif{background:var(--magenta);border-color:var(--magenta);color:#fff}
+@media(max-width:640px){.cycle{position:static;margin-bottom:14px}}
+
+.chrono{display:flex;gap:2px;border-top:1px solid var(--trait);margin:0 -26px;
+  overflow-x:auto;scrollbar-width:thin}
+.chrono a{flex:1 0 auto;min-width:78px;text-align:center;padding:12px 8px 14px;text-decoration:none;
+  color:var(--doux);border-top:3px solid transparent;font-size:12px;line-height:1.3}
+.chrono a:hover{background:var(--teal-pale);color:var(--teal)}
+.chrono a b{display:block;font-family:"Archivo",sans-serif;font-size:16px;color:var(--encre);font-weight:600}
+.chrono a.fait{border-top-color:var(--teal)}
+.chrono a.fait b{color:var(--teal)}
+
+/* Identité */
+.identite{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);
+  margin-top:18px;padding:18px 22px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px 18px}
+@media(max-width:640px){.identite{grid-template-columns:repeat(2,1fr)}}
+.champ label{display:block;font-size:13px;color:var(--doux);margin-bottom:4px}
+.champ input{width:100%;border:0;border-bottom:1.5px solid var(--trait);background:transparent;
+  font:inherit;font-size:16px;color:var(--encre);padding:4px 2px}
+.champ input:focus{outline:0;border-bottom-color:var(--teal)}
+.champ input.manque{border-bottom-color:var(--magenta)}
+
+/* Référentiel repliable */
+.ref{margin-top:18px;background:var(--carte);border:1px solid var(--trait);border-radius:var(--r)}
+.ref summary{cursor:pointer;padding:14px 22px;font-size:15px;color:var(--doux);
+  font-family:"Archivo",sans-serif;font-weight:600}
+.ref summary::marker{color:var(--teal)}
+.ref .dedans{padding:0 22px 20px;font-size:15px}
+.ref dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px}
+.ref dt{color:var(--teal);font-weight:600;white-space:nowrap}
+.ref dd{margin:0}
+.ref ul{margin:10px 0 0;padding-left:20px}
+
+/* Blocs */
+.bloc{display:grid;grid-template-columns:64px 1fr;gap:0 18px;margin-top:32px;scroll-margin-top:16px}
+@media(max-width:640px){.bloc{grid-template-columns:1fr}}
+.marge{text-align:right;padding-top:3px}
+.marge .duree{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;color:var(--doux);
+  display:inline-block;padding:2px 8px;border-radius:20px;background:var(--carte);border:1px solid var(--trait)}
+.bloc.fait .marge .duree{color:var(--teal);border-color:var(--teal);background:var(--teal-pale)}
+@media(max-width:640px){.marge{text-align:left;margin-bottom:8px}}
+.corps h2{font-family:"Archivo",sans-serif;font-weight:600;font-size:20px;margin:0 0 4px}
+.corps h3{font-family:"Archivo",sans-serif;font-weight:600;font-size:17px;margin:26px 0 6px}
+.consigne{color:var(--doux);font-size:15px;margin:0 0 12px}
+.amorce{background:var(--teal-pale);border-radius:var(--r);padding:16px 18px;font-size:16px;margin:0 0 6px}
+
+textarea{width:100%;min-height:130px;resize:vertical;background:var(--carte);
+  border:1px solid var(--trait);border-radius:var(--r);padding:16px;font:inherit;
+  font-size:16.5px;line-height:1.7;color:var(--encre)}
+textarea:focus{outline:0;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-pale)}
+textarea::placeholder{color:#9FB0B3}
+
+/* Situation */
+.situation{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:22px}
+.situation p{margin:0;font-size:18px;line-height:1.65}
+.illus{width:100%;border-radius:6px;display:block;margin:0 0 18px}
+
+/* QCM */
+.qcm{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:18px 20px}
+.qcm .enonce{font-weight:600;margin:0 0 4px}
+.qcm .note{color:var(--doux);font-size:14.5px;margin:0 0 12px}
+.choix{display:grid;gap:8px}
+.choix label{display:flex;gap:12px;align-items:flex-start;padding:11px 14px;
+  border:1px solid var(--trait);border-radius:8px;cursor:pointer;font-size:16px}
+.choix label:hover{border-color:var(--teal)}
+.choix input{accent-color:var(--teal);margin:4px 0 0;width:18px;height:18px;flex:none}
+.choix label:has(input:checked){border-color:var(--teal);background:var(--teal-pale)}
+.choix .lt{font-family:"Archivo",sans-serif;font-weight:600;color:var(--teal);flex:none}
+
+/* Association */
+.assoc{display:grid;gap:12px}
+.paire{display:flex;gap:16px;align-items:center;background:var(--carte);
+  border:1px solid var(--trait);border-radius:var(--r);padding:14px 16px}
+.paire img{width:54px;height:auto;flex:none;border-radius:4px}
+.paire .nom{font-weight:600;flex:none;width:150px;font-size:15.5px}
+.paire select{flex:1;min-width:0;font:inherit;font-size:15.5px;padding:9px 10px;
+  border:1px solid var(--trait);border-radius:8px;background:#fff;color:var(--encre)}
+.paire select:focus{outline:0;border-color:var(--teal)}
+@media(max-width:640px){
+  .paire{flex-wrap:wrap}
+  .paire .nom{width:auto}
+  .paire select{flex-basis:100%}
+}
+
+/* Cartes de saisie (frise, fiche technique) */
+.cartes{display:grid;gap:12px}
+.cartefiche{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:16px 18px}
+.cartefiche .chapeau{font-family:"Archivo",sans-serif;font-weight:600;font-size:16px;
+  color:var(--teal);margin:0 0 12px}
+.grille{display:grid;gap:12px}
+.grille.trois{grid-template-columns:1fr 1fr 1fr}
+.grille.deuxtiers{grid-template-columns:130px 1fr}
+@media(max-width:640px){.grille.trois,.grille.deuxtiers{grid-template-columns:1fr}}
+.mini label{display:block;font-size:13px;color:var(--doux);margin-bottom:4px}
+.mini input,.mini select,.mini textarea{width:100%;font:inherit;font-size:15.5px;
+  border:1px solid var(--trait);border-radius:8px;padding:9px 10px;background:#fff;color:var(--encre)}
+.mini textarea{min-height:64px;line-height:1.5}
+.mini input:focus,.mini select:focus,.mini textarea:focus{outline:0;border-color:var(--teal);box-shadow:none}
+
+/* Vidéos */
+.video{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);
+  padding:16px 18px;margin:14px 0}
+.video .vt{font-weight:600;margin:0 0 3px}
+.video .vs{color:var(--doux);font-size:14.5px;margin:0 0 12px}
+.video .actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.vlire{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;background:var(--teal);
+  color:#fff;border:0;border-radius:8px;padding:10px 18px;cursor:pointer}
+.vlire:hover{background:#0b5a58}
+.video a{color:var(--doux);font-size:14.5px}
+.cadre16{position:relative;padding-top:56.25%;border-radius:8px;overflow:hidden;background:#000}
+.cadre16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* Ressources */
+.ressources{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:18px 20px}
+.ressources ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ressources li{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.code{font-family:"Archivo",sans-serif;font-weight:600;font-size:13px;color:var(--teal);
+  background:var(--teal-pale);border-radius:5px;padding:3px 8px;flex:none}
+.ressources a{color:var(--encre)}
+.ressources a:hover{color:var(--magenta)}
+.ressources .appli{margin:0 0 14px;color:var(--doux);font-size:15px}
+
+/* CPS */
+.cps{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:20px 22px}
+.cps>p{margin:0 0 14px;font-size:15px;color:var(--doux)}
+.niveaux{display:grid;gap:8px}
+.niveaux label{display:flex;gap:12px;align-items:flex-start;padding:11px 14px;
+  border:1px solid var(--trait);border-radius:8px;cursor:pointer;font-size:16px}
+.niveaux input{accent-color:var(--teal);margin:4px 0 0;width:18px;height:18px;flex:none}
+.niveaux label:has(input:checked){border-color:var(--teal);background:var(--teal-pale)}
+.niveaux b{font-family:"Archivo",sans-serif;font-weight:600;color:var(--teal)}
+
+/* Corrigé */
+.corrige{margin-top:12px;border-left:3px solid var(--ok);background:#F0F7F3;
+  border-radius:0 8px 8px 0;padding:14px 16px;font-size:15.5px;color:#245C45}
+.corrige h4{margin:0 0 6px;font-size:13px;font-family:"Archivo",sans-serif;color:var(--ok)}
+.corrige ul{margin:0;padding-left:18px}
+.corrige li{margin-bottom:3px}
+
+/* Barre */
+.barre{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);
+  border-top:1px solid var(--trait);backdrop-filter:blur(6px);padding:12px 20px;
+  display:flex;align-items:center;gap:16px;justify-content:center}
+.barre .etat{font-size:14px;color:var(--doux);flex:1;text-align:right;max-width:340px}
+.btn{font-family:"Archivo",sans-serif;font-weight:600;font-size:17px;background:var(--teal);
+  color:#fff;border:0;border-radius:8px;padding:13px 26px;cursor:pointer}
+.btn:hover{background:#0b5a58}
+.btn:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+.lien{background:none;border:0;color:var(--doux);font:inherit;font-size:14px;
+  text-decoration:underline;cursor:pointer;padding:0;flex:1;max-width:340px}
+.lien:hover{color:var(--magenta)}
+@media(max-width:640px){
+  .barre{flex-wrap:wrap;justify-content:space-between;gap:8px}
+  .barre .etat{order:-1;flex-basis:100%;text-align:left;max-width:none}
+  .btn{flex:1}
+}
+.alerte{background:#FDECF2;border:1px solid var(--magenta);color:#8E1244;
+  border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
+@media print{.barre,.chrono{display:none}}
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <header class="entete">
+    <div class="cycle">
+      <span class="lab">Cycle 4</span>
+      <span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
+    </div>
+    <div class="marque">
+      <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
+      <p class="fil">Technologie · Séquence 1 · Activité 2</p>
+    </div>
+    <h1 class="titre">Du téléphone au smartphone : identifier les innovations et les ruptures</h1>
+    <p class="sous">T1 — L'évolution des OST · 1 h 30</p>
+    <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
+      <a href="#situation"><b>2′</b>Situation</a>
+      <a href="#constats"><b>5′</b>Constats</a>
+      <a href="#probleme"><b>3′</b>Problème</a>
+      <a href="#idees"><b>5′</b>Idées</a>
+      <a href="#niveaux12"><b>20′</b>Niveaux 1-2</a>
+      <a href="#niveaux34"><b>40′</b>Niveaux 3-4</a>
+      <a href="#synthese"><b>5′</b>Synthèse</a>
+      <a href="#ressources"><b>20′</b>Ressources</a>
+    </nav>
+  </header>
+
+  <section class="identite" aria-label="Mon identité">
+    <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="family-name"></div>
+    <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
+    <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
+    <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
+    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"></div>
+    <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
+  </section>
+
+  <details class="ref">
+    <summary>Ce que je travaille dans cette activité</summary>
+    <div class="dedans">
+      <dl>
+        <dt>Thème</dt><dd>OST — Les objets et systèmes techniques : leurs usages et leurs interactions à découvrir et à analyser</dd>
+        <dt>Attendu</dt><dd>OST1 — Décrire les liens entre usages et évolutions technologiques des objets et des systèmes techniques</dd>
+        <dt>OST11</dt><dd>Identifier les innovations de rupture attachées à l'évolution d'un OST</dd>
+        <dt>OST12</dt><dd>Mettre en relation une découverte scientifique avec ses développements technologiques et leurs effets sur la société</dd>
+        <dt>OST13</dt><dd>Argumentaire court : incidence d'un OST sur la société</dd>
+        <dt>OST1a</dt><dd>Les éléments qui participent à l'évolution des besoins (invention, innovation, développement durable)</dd>
+        <dt>OST1c</dt><dd>La famille et la lignée d'OST</dd>
+        <dt>OST1d</dt><dd>Les contraintes sociétales</dd>
+      </dl>
+      <ul>
+        <li>N1 — Je sais reconnaître une lignée d'OST et identifier les principales ruptures technologiques</li>
+        <li>N2 — et je sais mettre en relation une découverte scientifique avec l'évolution d'un OST</li>
+        <li>N3 — et je sais expliquer l'incidence d'un OST sur la société</li>
+        <li>N4 — et je sais analyser les contraintes sociétales qui ont influencé l'évolution des OST</li>
+      </ul>
+    </div>
+  </details>
+
+  <article class="bloc" id="situation">
+    <div class="marge"><span class="duree">2′</span></div>
+    <div class="corps">
+      <h2>Situation déclenchante</h2>
+      <div class="situation">
+        <img class="illus" src="img/seq1-act2.jpg"
+             alt="Des visiteurs devant une exposition sur 150 ans d'évolution des moyens de communication."
+             onerror="this.remove()">
+        <p>Votre collège prépare une exposition intitulée <em>150 ans d'évolution des moyens de communication</em>. Vous devez expliquer aux visiteurs pourquoi ces objets ont autant changé et quels besoins ou contraintes ont conduit à leur évolution.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="bloc" id="constats">
+    <div class="marge"><span class="duree">5′</span></div>
+    <div class="corps">
+      <h2>Mes constats, mes observations</h2>
+      <p class="consigne">Que remarques-tu sur les objets présentés dans l'exposition ?</p>
+      <textarea id="rep-constats" data-rep placeholder="J'observe que…"></textarea>
+    </div>
+  </article>
+
+  <article class="bloc" id="probleme">
+    <div class="marge"><span class="duree">3′</span></div>
+    <div class="corps">
+      <h2>Mon problème à résoudre</h2>
+      <p class="consigne">Formule une seule question, celle que l'exposition doit permettre d'expliquer.</p>
+      <textarea id="rep-probleme" data-rep placeholder="Comment… ?" style="min-height:100px"></textarea>
+    </div>
+  </article>
+
+  <article class="bloc" id="idees">
+    <div class="marge"><span class="duree">5′</span></div>
+    <div class="corps">
+      <h2>Mes idées pour le résoudre</h2>
+      <textarea id="rep-idees" data-rep placeholder="Peut-être que…"></textarea>
+    </div>
+  </article>
+
+  <article class="bloc" id="niveaux12">
+    <div class="marge"><span class="duree">20′</span></div>
+    <div class="corps">
+      <h2>Activités — niveaux 1 et 2</h2>
+      <p class="amorce">Avant d'expliquer pourquoi les moyens de communication ont évolué, il faut comprendre les notions qui caractérisent cette évolution. Tu vas identifier les innovations, les découvertes scientifiques et les besoins qui ont marqué l'histoire du téléphone jusqu'au smartphone.</p>
+
+      <h3>N1a — Invention ou innovation ?</h3>
+      <div class="qcm" data-qcm="n1a" data-titre="N1a — Invention ou innovation ?">
+        <p class="enonce">Qu'est-ce qui distingue une invention d'une innovation ?</p>
+        <p class="note">Une seule réponse.</p>
+        <div class="choix">
+          <label><input type="radio" name="n1a" id="n1a-A" value="A"><span class="lt">A</span><span>Une invention est une nouvelle idée ou un nouveau principe technique ; une innovation est sa mise sur le marché avec succès auprès des utilisateurs.</span></label>
+          <label><input type="radio" name="n1a" id="n1a-B" value="B"><span class="lt">B</span><span>Une invention et une innovation désignent exactement la même chose.</span></label>
+          <label><input type="radio" name="n1a" id="n1a-C" value="C"><span class="lt">C</span><span>Une innovation précède toujours l'invention correspondante.</span></label>
+          <label><input type="radio" name="n1a" id="n1a-D" value="D"><span class="lt">D</span><span>Une invention concerne uniquement le développement durable.</span></label>
+        </div>
+      </div>
+
+      <h3>N1b — Développement durable</h3>
+      <div class="qcm" data-qcm="n1b" data-titre="N1b — Évolutions relevant du développement durable">
+        <p class="enonce">Parmi les évolutions suivantes du smartphone, lesquelles relèvent du développement durable ?</p>
+        <p class="note">Plusieurs réponses possibles.</p>
+        <div class="choix">
+          <label><input type="checkbox" name="n1b" id="n1b-A" value="A"><span class="lt">A</span><span>L'utilisation de plastique recyclé dans la coque.</span></label>
+          <label><input type="checkbox" name="n1b" id="n1b-B" value="B"><span class="lt">B</span><span>L'ajout d'un appareil photo à plus haute résolution.</span></label>
+          <label><input type="checkbox" name="n1b" id="n1b-C" value="C"><span class="lt">C</span><span>La conception d'une batterie remplaçable par l'utilisateur pour prolonger la durée de vie de l'appareil.</span></label>
+          <label><input type="checkbox" name="n1b" id="n1b-D" value="D"><span class="lt">D</span><span>L'augmentation de la puissance du processeur.</span></label>
+        </div>
+      </div>
+
+      <h3>N1c — La lignée du téléphone</h3>
+      <p class="consigne">Associe chaque étape de la lignée à sa description.</p>
+      <div class="assoc">
+        <div class="paire">
+          <img src="img/tel-cadran.png" alt="" onerror="this.remove()">
+          <span class="nom">Téléphone fixe à cadran</span>
+          <select id="n1c-1" data-assoc data-objet="Téléphone fixe à cadran" aria-label="Description du téléphone fixe à cadran">
+            <option value="">Choisir une description…</option>
+            <option>Permet d'appeler sans être relié par un fil, depuis n'importe quel lieu.</option>
+            <option>Introduit la commande par le doigt sur un écran, remplaçant les touches physiques.</option>
+            <option>Fonctionne uniquement branché à une ligne téléphonique filaire.</option>
+            <option>Combine un grand écran et un format compact grâce à un écran flexible.</option>
+          </select>
+        </div>
+        <div class="paire">
+          <img src="img/tel-touches.png" alt="" onerror="this.remove()">
+          <span class="nom">Téléphone mobile à touches</span>
+          <select id="n1c-2" data-assoc data-objet="Téléphone mobile à touches" aria-label="Description du téléphone mobile à touches">
+            <option value="">Choisir une description…</option>
+            <option>Permet d'appeler sans être relié par un fil, depuis n'importe quel lieu.</option>
+            <option>Introduit la commande par le doigt sur un écran, remplaçant les touches physiques.</option>
+            <option>Fonctionne uniquement branché à une ligne téléphonique filaire.</option>
+            <option>Combine un grand écran et un format compact grâce à un écran flexible.</option>
+          </select>
+        </div>
+        <div class="paire">
+          <img src="img/tel-tactile.png" alt="" onerror="this.remove()">
+          <span class="nom">Premier smartphone à écran tactile</span>
+          <select id="n1c-3" data-assoc data-objet="Premier smartphone à écran tactile" aria-label="Description du premier smartphone à écran tactile">
+            <option value="">Choisir une description…</option>
+            <option>Permet d'appeler sans être relié par un fil, depuis n'importe quel lieu.</option>
+            <option>Introduit la commande par le doigt sur un écran, remplaçant les touches physiques.</option>
+            <option>Fonctionne uniquement branché à une ligne téléphonique filaire.</option>
+            <option>Combine un grand écran et un format compact grâce à un écran flexible.</option>
+          </select>
+        </div>
+        <div class="paire">
+          <img src="img/tel-pliable.png" alt="" onerror="this.remove()">
+          <span class="nom">Smartphone pliable actuel</span>
+          <select id="n1c-4" data-assoc data-objet="Smartphone pliable actuel" aria-label="Description du smartphone pliable actuel">
+            <option value="">Choisir une description…</option>
+            <option>Permet d'appeler sans être relié par un fil, depuis n'importe quel lieu.</option>
+            <option>Introduit la commande par le doigt sur un écran, remplaçant les touches physiques.</option>
+            <option>Fonctionne uniquement branché à une ligne téléphonique filaire.</option>
+            <option>Combine un grand écran et un format compact grâce à un écran flexible.</option>
+          </select>
+        </div>
+      </div>
+
+      <h3>N1d — Contraintes sociétales</h3>
+      <div class="qcm" data-qcm="n1d" data-titre="N1d — Contraintes sociétales">
+        <p class="enonce">Parmi les éléments suivants, lesquels sont des contraintes sociétales qui influencent la conception des smartphones ?</p>
+        <p class="note">Plusieurs réponses possibles.</p>
+        <div class="choix">
+          <label><input type="checkbox" name="n1d" id="n1d-A" value="A"><span class="lt">A</span><span>L'accessibilité pour les personnes malvoyantes ou malentendantes.</span></label>
+          <label><input type="checkbox" name="n1d" id="n1d-B" value="B"><span class="lt">B</span><span>Le coût de fabrication.</span></label>
+          <label><input type="checkbox" name="n1d" id="n1d-C" value="C"><span class="lt">C</span><span>La couleur préférée du concepteur.</span></label>
+          <label><input type="checkbox" name="n1d" id="n1d-D" value="D"><span class="lt">D</span><span>Le respect des règlements sur le recyclage des appareils électroniques.</span></label>
+        </div>
+      </div>
+      <div class="video" data-src="https://podeduc.apps.education.fr/video/113246-ost1d-les-contraintes-societales/?is_iframe=true">
+        <p class="vt">OST1d — Les contraintes sociétales</p>
+        <p class="vs">Vidéo PodEduc · code application élève : VOST1d</p>
+        <div class="actions">
+          <button class="vlire" type="button">Lire la vidéo</button>
+          <a href="https://podeduc.apps.education.fr/video/113246-ost1d-les-contraintes-societales" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
+        </div>
+      </div>
+
+      <h3>N2a — Expliquer avec mes mots</h3>
+      <p class="consigne">En t'appuyant sur la vidéo OST1a, explique la différence entre invention et innovation. Illustre ta réponse avec un exemple pris dans l'histoire du téléphone portable.</p>
+      <div class="video" data-src="https://podeduc.apps.education.fr/video/113251-ost1a-les-elements-qui-participent-a-levolution-des-besoins-invention-innovation-developpement-durable/?is_iframe=true">
+        <p class="vt">OST1a — Les éléments qui participent à l'évolution des besoins</p>
+        <p class="vs">Vidéo PodEduc · code application élève : VOST1a</p>
+        <div class="actions">
+          <button class="vlire" type="button">Lire la vidéo</button>
+          <a href="https://podeduc.apps.education.fr/video/113251-ost1a-les-elements-qui-participent-a-levolution-des-besoins-invention-innovation-developpement-durable" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
+        </div>
+      </div>
+      <textarea id="n2a" data-rep placeholder="Une invention, c'est… alors qu'une innovation…"></textarea>
+
+      <h3>N2b — La lignée d'OST</h3>
+      <p class="consigne">En t'appuyant sur la vidéo OST1c, explique ce qu'est une « lignée d'OST ». Montre en quoi le smartphone appartient à la même famille d'objets que le téléphone fixe et le talkie-walkie.</p>
+      <div class="video" data-src="https://podeduc.apps.education.fr/video/113247-ost1c-la-famille-et-la-lignee-dost/?is_iframe=true">
+        <p class="vt">OST1c — La famille et la lignée d'OST</p>
+        <p class="vs">Vidéo PodEduc · code application élève : VOST1c</p>
+        <div class="actions">
+          <button class="vlire" type="button">Lire la vidéo</button>
+          <a href="https://podeduc.apps.education.fr/video/113247-ost1c-la-famille-et-la-lignee-dost" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
+        </div>
+      </div>
+      <textarea id="n2b" data-rep placeholder="Une lignée d'OST, c'est…"></textarea>
+    </div>
+  </article>
+
+  <article class="bloc" id="niveaux34">
+    <div class="marge"><span class="duree">40′</span></div>
+    <div class="corps">
+      <h2>Activités — niveaux 3 et 4</h2>
+      <p class="amorce">Tu maîtrises maintenant les notions essentielles. Tu vas les mobiliser pour analyser cette évolution, réaliser une frise chronologique et imaginer un smartphone répondant aux enjeux de la société de demain.</p>
+
+      <h3>N3 — Frise chronologique</h3>
+      <p class="consigne">Prépare ici le contenu des cinq panneaux de l'exposition, puis réalise la frise sur Canva ou un autre outil.</p>
+      <div class="cartes" id="frise">
+        <div class="cartefiche" data-objet="Télégraphe">
+          <p class="chapeau">Télégraphe</p>
+          <div class="grille deuxtiers">
+            <div class="mini"><label for="fr1-date">Date d'apparition</label><input id="fr1-date" data-frise="date"></div>
+            <div class="grille">
+              <div class="mini"><label for="fr1-inno">Innovation majeure</label>
+                <select id="fr1-inno" data-frise="innovation">
+                  <option value="">Choisir…</option>
+                  <option>numérisation des documents</option>
+                  <option>transmission électrique</option>
+                  <option>miniaturisation et ondes radio</option>
+                  <option>transmission vocale analogique</option>
+                  <option>écran tactile et applications</option>
+                </select>
+              </div>
+              <div class="mini"><label for="fr1-bes">Besoin sociétal</label>
+                <select id="fr1-bes" data-frise="besoin">
+                  <option value="">Choisir…</option>
+                  <option>accéder à internet et aux services numériques</option>
+                  <option>transmettre des documents rapidement</option>
+                  <option>discuter en temps réel sans se déplacer</option>
+                  <option>communiquer en se déplaçant</option>
+                  <option>communiquer rapidement sur de longues distances</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cartefiche" data-objet="Téléphone fixe">
+          <p class="chapeau">Téléphone fixe</p>
+          <div class="grille deuxtiers">
+            <div class="mini"><label for="fr2-date">Date d'apparition</label><input id="fr2-date" data-frise="date"></div>
+            <div class="grille">
+              <div class="mini"><label for="fr2-inno">Innovation majeure</label>
+                <select id="fr2-inno" data-frise="innovation">
+                  <option value="">Choisir…</option>
+                  <option>numérisation des documents</option>
+                  <option>transmission électrique</option>
+                  <option>miniaturisation et ondes radio</option>
+                  <option>transmission vocale analogique</option>
+                  <option>écran tactile et applications</option>
+                </select>
+              </div>
+              <div class="mini"><label for="fr2-bes">Besoin sociétal</label>
+                <select id="fr2-bes" data-frise="besoin">
+                  <option value="">Choisir…</option>
+                  <option>accéder à internet et aux services numériques</option>
+                  <option>transmettre des documents rapidement</option>
+                  <option>discuter en temps réel sans se déplacer</option>
+                  <option>communiquer en se déplaçant</option>
+                  <option>communiquer rapidement sur de longues distances</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cartefiche" data-objet="Fax">
+          <p class="chapeau">Fax</p>
+          <div class="grille deuxtiers">
+            <div class="mini"><label for="fr3-date">Date d'apparition</label><input id="fr3-date" data-frise="date"></div>
+            <div class="grille">
+              <div class="mini"><label for="fr3-inno">Innovation majeure</label>
+                <select id="fr3-inno" data-frise="innovation">
+                  <option value="">Choisir…</option>
+                  <option>numérisation des documents</option>
+                  <option>transmission électrique</option>
+                  <option>miniaturisation et ondes radio</option>
+                  <option>transmission vocale analogique</option>
+                  <option>écran tactile et applications</option>
+                </select>
+              </div>
+              <div class="mini"><label for="fr3-bes">Besoin sociétal</label>
+                <select id="fr3-bes" data-frise="besoin">
+                  <option value="">Choisir…</option>
+                  <option>accéder à internet et aux services numériques</option>
+                  <option>transmettre des documents rapidement</option>
+                  <option>discuter en temps réel sans se déplacer</option>
+                  <option>communiquer en se déplaçant</option>
+                  <option>communiquer rapidement sur de longues distances</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cartefiche" data-objet="Téléphone mobile">
+          <p class="chapeau">Téléphone mobile</p>
+          <div class="grille deuxtiers">
+            <div class="mini"><label for="fr4-date">Date d'apparition</label><input id="fr4-date" data-frise="date"></div>
+            <div class="grille">
+              <div class="mini"><label for="fr4-inno">Innovation majeure</label>
+                <select id="fr4-inno" data-frise="innovation">
+                  <option value="">Choisir…</option>
+                  <option>numérisation des documents</option>
+                  <option>transmission électrique</option>
+                  <option>miniaturisation et ondes radio</option>
+                  <option>transmission vocale analogique</option>
+                  <option>écran tactile et applications</option>
+                </select>
+              </div>
+              <div class="mini"><label for="fr4-bes">Besoin sociétal</label>
+                <select id="fr4-bes" data-frise="besoin">
+                  <option value="">Choisir…</option>
+                  <option>accéder à internet et aux services numériques</option>
+                  <option>transmettre des documents rapidement</option>
+                  <option>discuter en temps réel sans se déplacer</option>
+                  <option>communiquer en se déplaçant</option>
+                  <option>communiquer rapidement sur de longues distances</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cartefiche" data-objet="Smartphone">
+          <p class="chapeau">Smartphone</p>
+          <div class="grille deuxtiers">
+            <div class="mini"><label for="fr5-date">Date d'apparition</label><input id="fr5-date" data-frise="date"></div>
+            <div class="grille">
+              <div class="mini"><label for="fr5-inno">Innovation majeure</label>
+                <select id="fr5-inno" data-frise="innovation">
+                  <option value="">Choisir…</option>
+                  <option>numérisation des documents</option>
+                  <option>transmission électrique</option>
+                  <option>miniaturisation et ondes radio</option>
+                  <option>transmission vocale analogique</option>
+                  <option>écran tactile et applications</option>
+                </select>
+              </div>
+              <div class="mini"><label for="fr5-bes">Besoin sociétal</label>
+                <select id="fr5-bes" data-frise="besoin">
+                  <option value="">Choisir…</option>
+                  <option>accéder à internet et aux services numériques</option>
+                  <option>transmettre des documents rapidement</option>
+                  <option>discuter en temps réel sans se déplacer</option>
+                  <option>communiquer en se déplaçant</option>
+                  <option>communiquer rapidement sur de longues distances</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mini" style="margin-top:14px">
+        <label for="frise-lien">Lien vers ma frise (Canva ou autre) — facultatif</label>
+        <input id="frise-lien" data-lien placeholder="https://…">
+      </div>
+
+      <h3>N4 — Smartphone du futur (2030)</h3>
+      <p class="consigne">Conçois un smartphone idéal qui répond à trois enjeux sociétaux tout en intégrant des innovations.</p>
+      <div class="cartes" id="futur">
+        <div class="cartefiche" data-enjeu="Éducation">
+          <p class="chapeau">Éducation</p>
+          <div class="grille trois">
+            <div class="mini"><label for="n4a-f">Fonctionnalité innovante</label><textarea id="n4a-f" data-n4="fonctionnalite" placeholder="Ex. : traduction instantanée et cours interactifs"></textarea></div>
+            <div class="mini"><label for="n4a-t">Technologie utilisée</label><textarea id="n4a-t" data-n4="technologie" placeholder="Ex. : IA générative"></textarea></div>
+            <div class="mini"><label for="n4a-b">Bénéfices pour la société</label><textarea id="n4a-b" data-n4="benefices" placeholder="Ex. : accès à l'éducation pour tous, réduction des inégalités"></textarea></div>
+          </div>
+        </div>
+        <div class="cartefiche" data-enjeu="Environnement">
+          <p class="chapeau">Environnement</p>
+          <div class="grille trois">
+            <div class="mini"><label for="n4b-f">Fonctionnalité innovante</label><textarea id="n4b-f" data-n4="fonctionnalite"></textarea></div>
+            <div class="mini"><label for="n4b-t">Technologie utilisée</label><textarea id="n4b-t" data-n4="technologie"></textarea></div>
+            <div class="mini"><label for="n4b-b">Bénéfices pour la société</label><textarea id="n4b-b" data-n4="benefices"></textarea></div>
+          </div>
+        </div>
+        <div class="cartefiche" data-enjeu="Santé">
+          <p class="chapeau">Santé</p>
+          <div class="grille trois">
+            <div class="mini"><label for="n4c-f">Fonctionnalité innovante</label><textarea id="n4c-f" data-n4="fonctionnalite"></textarea></div>
+            <div class="mini"><label for="n4c-t">Technologie utilisée</label><textarea id="n4c-t" data-n4="technologie"></textarea></div>
+            <div class="mini"><label for="n4c-b">Bénéfices pour la société</label><textarea id="n4c-b" data-n4="benefices"></textarea></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="bloc" id="synthese">
+    <div class="marge"><span class="duree">5′</span></div>
+    <div class="corps">
+      <h2>Ma synthèse</h2>
+      <p class="consigne">En quelques lignes : pourquoi les moyens de communication ont-ils autant changé ?</p>
+      <textarea id="rep-synthese" data-rep></textarea>
+    </div>
+  </article>
+
+  <article class="bloc" id="ressources">
+    <div class="marge"><span class="duree">20′</span></div>
+    <div class="corps">
+      <h2>Fiches de connaissances et quiz</h2>
+      <div class="ressources">
+        <p class="appli">Les codes ci-dessous s'utilisent dans l'application élève : <a href="https://www.app.sti-ac-bordeaux.fr/" target="_blank" rel="noopener">app.sti-ac-bordeaux.fr</a></p>
+        <h3 style="margin-top:0">Fiches de connaissances <span style="color:var(--doux);font-weight:400;font-size:15px">(10′)</span></h3>
+        <ul>
+          <li><span class="code">FOST1a</span><a href="https://nuage01.apps.education.fr/public.php/dav/files/SW5baiZ2eJTqWfQ?accept=zip">Les éléments qui participent à l'évolution des besoins</a></li>
+          <li><span class="code">FOST1d</span><a href="https://nuage01.apps.education.fr/public.php/dav/files/yrkbGNrTRKceMJp?accept=zip">Les contraintes sociétales</a></li>
+          <li><span class="code">FOST1c</span><a href="https://nuage01.apps.education.fr/public.php/dav/files/o2qoHTQBzyHqgGf?accept=zip">La famille et la lignée d'OST</a></li>
+        </ul>
+        <h3>Quiz auto-correctifs <span style="color:var(--doux);font-weight:400;font-size:15px">(10′)</span></h3>
+        <ul>
+          <li><span class="code">QVOST1a</span><a href="https://podeduc.apps.education.fr/quiz/113251-ost1a-les-elements-qui-participent-a-levolution-des-besoins-invention-innovation-developpement-durable" target="_blank" rel="noopener">Quiz — Invention, innovation, développement durable</a></li>
+          <li><span class="code">QVOST1d</span><a href="https://podeduc.apps.education.fr/quiz/113246-ost1d-les-contraintes-societales" target="_blank" rel="noopener">Quiz — Les contraintes sociétales</a></li>
+          <li><span class="code">QVOST1c</span><a href="https://podeduc.apps.education.fr/quiz/113247-ost1c-la-famille-et-la-lignee-dost" target="_blank" rel="noopener">Quiz — La famille et la lignée d'OST</a></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="bloc" id="cps">
+    <div class="marge"><span class="duree">CPS</span></div>
+    <div class="corps">
+      <h2>Je développe mes compétences psychosociales</h2>
+      <div class="cps">
+        <p>Se fixer un objectif et le mener à son terme. Où est-ce que je me situe aujourd'hui ?</p>
+        <div class="niveaux">
+          <label><input type="radio" name="cps" id="cps-1" value="1"><span><b>N1</b> — Je peux dire ce que je veux réussir.</span></label>
+          <label><input type="radio" name="cps" id="cps-2" value="2"><span><b>N2</b> — Je peux décomposer un but en étapes.</span></label>
+          <label><input type="radio" name="cps" id="cps-3" value="3"><span><b>N3</b> — Je prépare un plan pour y arriver.</span></label>
+          <label><input type="radio" name="cps" id="cps-4" value="4"><span><b>N4</b> — Je vais jusqu'au bout de mes objectifs.</span></label>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <div id="alerte" class="alerte" hidden></div>
+
+</main>
+
+<div class="barre">
+  <button class="lien" id="effacer" type="button">Effacer mes réponses</button>
+  <button class="btn" id="pdf" type="button">Générer le PDF</button>
+  <p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   1. DONNÉES DE LA FICHE
+   ============================================================ */
+/* Logo de l'établissement, intégré au fichier. */
+var LOGO = "data:image/png;base64,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";
+
+var FICHE = {
+  id: "seq1-act2",
+  sequence: 1,
+  activite: 2,
+  titre: "Du téléphone au smartphone : identifier les innovations et les ruptures",
+  thematique: "T1 - L'évolution des OST",
+  duree: "1h30",
+  niveau: "3e",
+  cps: {
+    intitule: "Se fixer un objectif et le mener à son terme",
+    niveaux: [
+      "N1 — Je peux dire ce que je veux réussir.",
+      "N2 — Je peux décomposer un but en étapes.",
+      "N3 — Je prépare un plan pour y arriver.",
+      "N4 — Je vais jusqu'au bout de mes objectifs."
+    ]
+  },
+  /* Ce que le PDF reprend, dans l'ordre. Seules les productions de l'élève. */
+  sortie: [
+    { type:"texte",  cle:"rep-constats", titre:"Mes constats, mes observations", duree:"5'" },
+    { type:"texte",  cle:"rep-probleme", titre:"Mon problème à résoudre", duree:"3'", min:3 },
+    { type:"texte",  cle:"rep-idees",    titre:"Mes idées pour le résoudre", duree:"5'" },
+    { type:"qcm",    cle:"n1a" },
+    { type:"qcm",    cle:"n1b" },
+    { type:"assoc",  titre:"N1c — La lignée du téléphone" },
+    { type:"qcm",    cle:"n1d" },
+    { type:"texte",  cle:"n2a", titre:"N2a — Invention et innovation, avec mes mots" },
+    { type:"texte",  cle:"n2b", titre:"N2b — La lignée d'OST" },
+    { type:"frise",  titre:"N3 — Frise chronologique", duree:"40'" },
+    { type:"futur",  titre:"N4 — Smartphone du futur (2030)" },
+    { type:"texte",  cle:"rep-synthese", titre:"Ma synthèse", duree:"5'" },
+    { type:"cps" }
+  ],
+  /* Éléments de réponse attendus, visibles seulement avec ?prof=1 */
+  corrige: {
+    n1a: ["Réponse A. L'invention est l'idée ou le principe technique nouveau ; l'innovation est sa mise sur le marché avec succès."],
+    n1b: ["Réponses A et C. Le plastique recyclé et la batterie remplaçable prolongent la durée de vie et limitent les déchets.",
+          "B et D améliorent les performances, sans effet sur la durabilité."],
+    n1c: ["Téléphone fixe à cadran → fonctionne uniquement branché à une ligne téléphonique filaire.",
+          "Téléphone mobile à touches → permet d'appeler sans être relié par un fil, depuis n'importe quel lieu.",
+          "Premier smartphone à écran tactile → introduit la commande par le doigt sur un écran.",
+          "Smartphone pliable actuel → combine un grand écran et un format compact grâce à un écran flexible."],
+    n1d: ["Réponses A et D. L'accessibilité et la réglementation sur le recyclage s'imposent au concepteur au nom de la société.",
+          "C relève d'un goût personnel. B est une contrainte économique : à discuter en classe selon ce que tu attends."],
+    n2a: ["L'invention est une idée ou un principe technique nouveau ; l'innovation est sa diffusion réussie auprès des utilisateurs.",
+          "Exemple : l'écran tactile capacitif existait avant l'iPhone (invention) ; son association aux applications en a fait une innovation."],
+    n2b: ["Une lignée d'OST regroupe les objets qui répondent à la même fonction d'usage et se succèdent par ruptures techniques.",
+          "Téléphone fixe, talkie-walkie et smartphone servent tous à communiquer à distance : même famille, même lignée."],
+    n3: ["Télégraphe — vers 1840 — transmission électrique — communiquer rapidement sur de longues distances.",
+         "Téléphone fixe — 1876 — transmission vocale analogique — discuter en temps réel sans se déplacer.",
+         "Fax — années 1970 — numérisation des documents — transmettre des documents rapidement.",
+         "Téléphone mobile — années 1980 — miniaturisation et ondes radio — communiquer en se déplaçant.",
+         "Smartphone — 2007 — écran tactile et applications — accéder à internet et aux services numériques."]
+  }
+};
+
+/* ============================================================
+   2. SAISIE, SAUVEGARDE LOCALE, PROGRESSION
+   ============================================================ */
+var CLE = "fiche-techno:" + FICHE.id;
+var champsId = ["nom","prenom","classe","groupe","role","date"];
+var etat = document.getElementById("etat");
+var alerte = document.getElementById("alerte");
+function el(id){ return document.getElementById(id); }
+function tous(sel){ return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+
+/* Toutes les commandes de saisie de la page, repérées par leur id. */
+function controles(){
+  return tous("input[id], textarea[id], select[id]");
+}
+
+function sauver(){
+  var d = {};
+  controles().forEach(function(c){
+    if(c.type === "checkbox" || c.type === "radio"){ if(c.checked) d[c.id] = true; }
+    else if(c.value) d[c.id] = c.value;
+  });
+  try{ localStorage.setItem(CLE, JSON.stringify(d)); }catch(e){}
+}
+
+function restaurer(){
+  var brut = null;
+  try{ brut = localStorage.getItem(CLE); }catch(e){}
+  if(!brut) return;
+  try{
+    var d = JSON.parse(brut);
+    controles().forEach(function(c){
+      if(!(c.id in d)) return;
+      if(c.type === "checkbox" || c.type === "radio") c.checked = true;
+      else c.value = d[c.id];
+    });
+    etat.textContent = "Réponses retrouvées sur cet appareil.";
+  }catch(e){}
+}
+
+function grandir(z){ z.style.height = "auto"; z.style.height = (z.scrollHeight + 4) + "px"; }
+
+function majProgression(){
+  var liens = tous("#chrono a");
+  var repere = ["situation","constats","probleme","idees","niveaux12","niveaux34","synthese","ressources"];
+  repere.forEach(function(id, i){
+    var b = el(id);
+    if(!b || !liens[i]) return;
+    var rempli;
+    if(id === "situation" || id === "ressources") rempli = true;
+    else{
+      rempli = tous("#" + id + " textarea, #" + id + " input[type=text], #" + id + " input:not([type]), #" + id + " select")
+        .some(function(c){ return c.value.trim(); })
+        || tous("#" + id + " input:checked").length > 0;
+    }
+    b.classList.toggle("fait", rempli);
+    liens[i].classList.toggle("fait", rempli);
+  });
+}
+
+document.addEventListener("input", function(e){
+  if(e.target.matches("textarea")) grandir(e.target);
+  if(e.target.matches("input, textarea, select")){
+    e.target.classList.remove("manque");
+    majProgression(); sauver();
+    etat.textContent = "Réponses enregistrées sur cet appareil.";
+  }
+});
+document.addEventListener("change", function(e){
+  if(e.target.matches("input, select")){ majProgression(); sauver(); }
+});
+
+el("effacer").addEventListener("click", function(){
+  if(!confirm("Effacer toutes tes réponses sur cette fiche ? Cette action est définitive.")) return;
+  controles().forEach(function(c){
+    if(c.type === "checkbox" || c.type === "radio") c.checked = false;
+    else if(champsId.indexOf(c.id) === -1) c.value = "";
+  });
+  tous("textarea").forEach(grandir);
+  try{ localStorage.removeItem(CLE); }catch(e){}
+  majProgression();
+  etat.textContent = "Réponses effacées.";
+});
+
+/* Date du jour */
+(function(){
+  var d = new Date(), p = function(n){ return String(n).padStart(2,"0"); };
+  el("date").value = d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate());
+})();
+
+/* Vidéos : chargées seulement au clic, jamais à l'ouverture de la page. */
+tous(".video").forEach(function(v){
+  v.querySelector(".vlire").addEventListener("click", function(){
+    var c = document.createElement("div");
+    c.className = "cadre16";
+    var f = document.createElement("iframe");
+    f.src = v.dataset.src;
+    f.allowFullscreen = true;
+    f.title = v.querySelector(".vt").textContent;
+    c.appendChild(f);
+    v.querySelector(".actions").replaceWith(c);
+  });
+});
+
+restaurer();
+tous("textarea").forEach(grandir);
+majProgression();
+
+/* ============================================================
+   3. MODE PROFESSEUR  →  ?prof=1
+   ============================================================ */
+if(new URLSearchParams(location.search).get("prof") === "1"){
+  var cibles = {
+    n1a: '[data-qcm="n1a"]', n1b: '[data-qcm="n1b"]', n1d: '[data-qcm="n1d"]',
+    n1c: ".assoc", n2a: "#n2a", n2b: "#n2b", n3: "#frise"
+  };
+  Object.keys(cibles).forEach(function(k){
+    var liste = FICHE.corrige[k];
+    var ancre = document.querySelector(cibles[k]);
+    if(!liste || !ancre) return;
+    var d = document.createElement("div");
+    d.className = "corrige";
+    d.innerHTML = "<h4>Éléments de réponse attendus</h4><ul>" +
+      liste.map(function(x){ return "<li>" + x.replace(/&/g,"&amp;").replace(/</g,"&lt;") + "</li>"; }).join("") + "</ul>";
+    ancre.insertAdjacentElement("afterend", d);
+  });
+}
+
+/* ============================================================
+   4. LECTURE DES RÉPONSES
+   ============================================================ */
+function lire(){
+  var d = { identite:{}, textes:{}, qcm:{}, assoc:[], frise:[], futur:[], lien:"", cps:null };
+  champsId.forEach(function(k){ d.identite[k] = el(k).value.trim(); });
+  tous("textarea[data-rep]").forEach(function(z){ d.textes[z.id] = z.value.trim(); });
+
+  tous("[data-qcm]").forEach(function(b){
+    var choix = tous("#" + b.dataset.qcm + "-A, #" + b.dataset.qcm + "-B, #" + b.dataset.qcm + "-C, #" + b.dataset.qcm + "-D")
+      .filter(function(i){ return i.checked; })
+      .map(function(i){
+        var l = i.closest("label");
+        return i.value + ". " + l.querySelector("span:last-child").textContent.trim();
+      });
+    d.qcm[b.dataset.qcm] = { titre: b.dataset.titre, reponses: choix };
+  });
+
+  tous("select[data-assoc]").forEach(function(s){
+    d.assoc.push([s.dataset.objet, s.value]);
+  });
+
+  tous("#frise .cartefiche").forEach(function(c){
+    d.frise.push([
+      c.dataset.objet,
+      (c.querySelector('[data-frise="date"]').value || "").trim(),
+      c.querySelector('[data-frise="innovation"]').value,
+      c.querySelector('[data-frise="besoin"]').value
+    ]);
+  });
+  d.lien = el("frise-lien").value.trim();
+
+  tous("#futur .cartefiche").forEach(function(c){
+    d.futur.push([
+      c.dataset.enjeu,
+      c.querySelector('[data-n4="fonctionnalite"]').value.trim(),
+      c.querySelector('[data-n4="technologie"]').value.trim(),
+      c.querySelector('[data-n4="benefices"]').value.trim()
+    ]);
+  });
+
+  var r = document.querySelector('input[name="cps"]:checked');
+  d.cps = r ? Number(r.value) : null;
+  return d;
+}
+
+/* ============================================================
+   5. GÉNÉRATION DU PDF — uniquement les productions de l'élève
+   ============================================================ */
+var M = 14, LARG = 182, BAS = 279;
+var TEAL = [14,110,107], ENCRE = [20,38,43], DOUX = [110,125,130],
+    TRAIT = [200,214,214], MAGENTA = [194,24,91];
+
+function propre(t){
+  return String(t == null ? "" : t)
+    .replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"')
+    .replace(/\u2026/g, "...").replace(/[\u2013\u2014]/g, "-")
+    .replace(/\u00A0/g, " ").replace(/\u2192/g, "->");
+}
+function dateFr(iso){
+  if(!iso) return "";
+  var p = iso.split("-");
+  return p.length === 3 ? p[2]+"/"+p[1]+"/"+p[0] : iso;
+}
+
+function construirePDF(d){
+  var doc = new window.jspdf.jsPDF({ unit:"mm", format:"a4" });
+  var y = 0, page = 1;
+  var nomComplet = propre((d.identite.nom + " " + d.identite.prenom).trim());
+
+  function pied(){
+    doc.setFont("helvetica","normal"); doc.setFontSize(7.5);
+    doc.setTextColor(DOUX[0],DOUX[1],DOUX[2]);
+    doc.text(nomComplet + (d.identite.classe ? " - " + propre(d.identite.classe) : ""), M, 288);
+    doc.text("Page " + page, 210 - M, 288, { align:"right" });
+  }
+  function nouvellePage(){
+    pied(); doc.addPage(); page++;
+    doc.setFont("helvetica","normal"); doc.setFontSize(7.5);
+    doc.setTextColor(DOUX[0],DOUX[1],DOUX[2]);
+    doc.text(propre("Séquence " + FICHE.sequence + " - Activité " + FICHE.activite + " - " + FICHE.titre), M, 12);
+    doc.setDrawColor(TRAIT[0],TRAIT[1],TRAIT[2]); doc.setLineWidth(0.2);
+    doc.line(M, 14.5, 210-M, 14.5);
+    y = 22;
+  }
+  function place(h){ if(y + h > BAS) nouvellePage(); }
+
+  /* Cartouche */
+  doc.setDrawColor(TEAL[0],TEAL[1],TEAL[2]); doc.setLineWidth(0.5);
+  doc.roundedRect(M, 12, LARG, 24, 2, 2);
+  try{ doc.addImage(LOGO, "PNG", M + 5, 16, 13.1, 14); }catch(e){}
+  doc.setDrawColor(TRAIT[0],TRAIT[1],TRAIT[2]); doc.setLineWidth(0.3);
+  doc.line(M + 22, 16, M + 22, 32);
+  doc.setFont("helvetica","bold"); doc.setFontSize(10);
+  doc.setTextColor(ENCRE[0],ENCRE[1],ENCRE[2]);
+  doc.text(propre("Fiche d'activité n°" + FICHE.activite + " de la séquence n°" + FICHE.sequence), M + 27, 20);
+  doc.setFont("helvetica","normal"); doc.setTextColor(TEAL[0],TEAL[1],TEAL[2]);
+  doc.text(propre(FICHE.titre), M + 27, 26, { maxWidth: 128 });
+  doc.setFontSize(7.5); doc.setTextColor(DOUX[0],DOUX[1],DOUX[2]);
+  doc.text(propre("Technologie - " + FICHE.niveau + " - " + FICHE.thematique + " - Durée : " + FICHE.duree), M + 27, 32);
+  var cx = 210 - M - 8;
+  ["3","4","5"].forEach(function(n, i){
+    var x = cx - i * 9;
+    if(n === "3"){ doc.setFillColor(MAGENTA[0],MAGENTA[1],MAGENTA[2]); doc.circle(x, 28, 3.4, "F"); doc.setTextColor(255,255,255); }
+    else{ doc.setDrawColor(TRAIT[0],TRAIT[1],TRAIT[2]); doc.setLineWidth(0.3); doc.circle(x, 28, 3.4, "S"); doc.setTextColor(DOUX[0],DOUX[1],DOUX[2]); }
+    doc.setFont("helvetica","bold"); doc.setFontSize(8);
+    doc.text(n, x, 29.4, { align:"center" });
+  });
+  doc.setFontSize(6.5); doc.setTextColor(DOUX[0],DOUX[1],DOUX[2]);
+  doc.text("CYCLE 4", cx - 9, 21, { align:"center" });
+  y = 41;
+
+  /* Identité */
+  doc.setFillColor(240,246,246); doc.setDrawColor(TRAIT[0],TRAIT[1],TRAIT[2]); doc.setLineWidth(0.2);
+  doc.roundedRect(M, y, LARG, 15, 1.5, 1.5, "FD");
+  var col = [M + 5, M + 66, M + 127];
+  [["NOM", d.identite.nom, "Prénom", d.identite.prenom],
+   ["Groupe", d.identite.groupe, "Rôle", d.identite.role],
+   ["Classe", d.identite.classe, "Date", dateFr(d.identite.date)]].forEach(function(duo, i){
+    [[duo[0], duo[1], y + 6], [duo[2], duo[3], y + 11.5]].forEach(function(l){
+      doc.setFont("helvetica","normal"); doc.setFontSize(7.5);
+      doc.setTextColor(DOUX[0],DOUX[1],DOUX[2]);
+      doc.text(propre(l[0]) + " :", col[i], l[2]);
+      doc.setFont("helvetica","bold"); doc.setFontSize(9);
+      doc.setTextColor(ENCRE[0],ENCRE[1],ENCRE[2]);
+      doc.text(propre(l[1]), col[i] + 18, l[2]);
+    });
+  });
+  y += 22;
+
+  function rubrique(titre, duree){
+    place(28);
+    doc.setFont("helvetica","bold"); doc.setFontSize(10);
+    doc.setTextColor(ENCRE[0],ENCRE[1],ENCRE[2]);
+    var t = propre(titre);
+    doc.text(t, M + 1, y);
+    var w = doc.getTextWidth(t);
+    if(duree){
+      doc.setFont("helvetica","normal"); doc.setFontSize(8.5);
+      doc.setTextColor(TEAL[0],TEAL[1],TEAL[2]);
+      doc.text(propre("(" + duree + ")"), M + 3 + w, y);
+    }
+    y += 3;
+  }
+
+  function cadre(texte, opts){
+    opts = opts || {};
+    var taille = 9.5, lh = 4.7, pad = 3.2, minL = opts.min || 4;
+    doc.setFont("helvetica","normal"); doc.setFontSize(taille);
+    doc.setLineHeightFactor(lh * 2.83465 / taille);
+    var lignes = texte ? doc.splitTextToSize(propre(texte), LARG - 2*pad) : [];
+    if(!lignes.length){
+      var h0 = minL * lh + 2*pad;
+      place(h0);
+      doc.setDrawColor(TRAIT[0],TRAIT[1],TRAIT[2]); doc.setLineWidth(0.25);
+      doc.roundedRect(M, y, LARG, h0, 1.5, 1.5);
+      y += h0 + 5; doc.setLineHeightFactor(1.15); return;
+    }
+    var i = 0;
+    while(i < lignes.length){
+      if(BAS - y < lh + 2*pad + 4) nouvellePage();
+      var n = Math.min(Math.floor((BAS - y - 2*pad) / lh), lignes.length - i);
+      var nAff = (i === 0 && lignes.length <= minL) ? minL : n;
+      var h = nAff * lh + 2*pad;
+      doc.setDrawColor(TRAIT[0],TRAIT[1],TRAIT[2]); doc.setLineWidth(0.25);
+      doc.roundedRect(M, y, LARG, h, 1.5, 1.5);
+      doc.setTextColor(ENCRE[0],ENCRE[1],ENCRE[2]);
+      doc.text(lignes.slice(i, i + n), M + pad, y + pad + lh * 0.72);
+      y += h + 5; i += n;
+    }
+    doc.setLineHeightFactor(1.15);
+  }
+
+  function tableau(entetes, lignes, largeurs){
+    var taille = 8.5, lh = 4.1, pad = 2;
+    function rang(cells, gras, fond){
+      doc.setFont("helvetica", gras ? "bold" : "normal");
+      doc.setFontSize(taille);
+      doc.setLineHeightFactor(lh * 2.83465 / taille);
+      var wrap = cells.map(function(c, k){ return doc.splitTextToSize(propre(c) || " ", largeurs[k] - 2*pad); });
+      var nmax = wrap.reduce(function(a, w){ return Math.max(a, w.length); }, 1);
+      var h = Math.max(nmax * lh + 2*pad, 8);
+      place(h);
+      var x = M;
+      for(var k = 0; k < cells.length; k++){
+        doc.setDrawColor(TRAIT[0],TRAIT[1],TRAIT[2]); doc.setLineWidth(0.2);
+        if(fond){ doc.setFillColor(240,246,246); doc.rect(x, y, largeurs[k], h, "FD"); }
+        else doc.rect(x, y, largeurs[k], h);
+        doc.setTextColor(gras ? DOUX[0] : ENCRE[0], gras ? DOUX[1] : ENCRE[1], gras ? DOUX[2] : ENCRE[2]);
+        doc.text(wrap[k], x + pad, y + pad + lh * 0.72);
+        x += largeurs[k];
+      }
+      y += h;
+    }
+    rang(entetes, true, true);
+    lignes.forEach(function(l){ rang(l, false, false); });
+    y += 5;
+    doc.setLineHeightFactor(1.15);
+  }
+
+  /* Parcours de la sortie déclarée */
+  FICHE.sortie.forEach(function(s){
+    if(s.type === "texte"){
+      rubrique(s.titre, s.duree);
+      cadre(d.textes[s.cle], { min: s.min || 5 });
+    }
+    else if(s.type === "qcm"){
+      var q = d.qcm[s.cle];
+      rubrique(q.titre, null);
+      cadre(q.reponses.join("\n"), { min: 2 });
+    }
+    else if(s.type === "assoc"){
+      rubrique(s.titre, null);
+      tableau(["Objet", "Description associée"], d.assoc, [58, 124]);
+    }
+    else if(s.type === "frise"){
+      rubrique(s.titre, s.duree);
+      tableau(["Objet", "Date", "Innovation majeure", "Besoin sociétal"], d.frise, [32, 22, 64, 64]);
+      if(d.lien){
+        doc.setFont("helvetica","normal"); doc.setFontSize(8.5);
+        doc.setTextColor(DOUX[0],DOUX[1],DOUX[2]);
+        place(8);
+        doc.text(propre("Frise en ligne : " + d.lien), M + 1, y);
+        y += 7;
+      }
+    }
+    else if(s.type === "futur"){
+      rubrique(s.titre, null);
+      tableau(["Enjeu", "Fonctionnalité innovante", "Technologie", "Bénéfices pour la société"],
+              d.futur, [28, 56, 40, 58]);
+    }
+    else if(s.type === "cps"){
+      place(36);
+      rubrique("Je développe mes compétences CPS", null);
+      doc.setFont("helvetica","normal"); doc.setFontSize(8.5);
+      doc.setTextColor(DOUX[0],DOUX[1],DOUX[2]);
+      doc.setLineHeightFactor(4.4 * 2.83465 / 8.5);
+      var intro = doc.splitTextToSize(propre(FICHE.cps.intitule), LARG);
+      doc.text(intro, M + 1, y + 4);
+      doc.setLineHeightFactor(1.15);
+      y += 4 + intro.length * 4.4 + 2;
+      FICHE.cps.niveaux.forEach(function(n, i){
+        place(8);
+        var coche = d.cps === (i + 1);
+        doc.setLineWidth(0.3);
+        if(coche){
+          doc.setFillColor(TEAL[0],TEAL[1],TEAL[2]); doc.setDrawColor(TEAL[0],TEAL[1],TEAL[2]);
+          doc.rect(M + 1, y, 3.6, 3.6, "FD");
+          doc.setDrawColor(255,255,255); doc.setLineWidth(0.5);
+          doc.line(M + 1.8, y + 1.9, M + 2.5, y + 2.7);
+          doc.line(M + 2.5, y + 2.7, M + 3.9, y + 0.9);
+        }else{
+          doc.setDrawColor(TRAIT[0],TRAIT[1],TRAIT[2]); doc.rect(M + 1, y, 3.6, 3.6, "S");
+        }
+        doc.setFont("helvetica", coche ? "bold" : "normal"); doc.setFontSize(9);
+        doc.setTextColor(coche ? TEAL[0] : ENCRE[0], coche ? TEAL[1] : ENCRE[1], coche ? TEAL[2] : ENCRE[2]);
+        doc.text(propre(n), M + 7, y + 3);
+        y += 6.5;
+      });
+    }
+  });
+
+  pied();
+  return doc;
+}
+
+function nomFichier(d){
+  var net = function(t){
+    return propre(t).normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^A-Za-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  };
+  return ["Seq" + FICHE.sequence + "-Act" + FICHE.activite,
+          net(d.identite.nom).toUpperCase(), net(d.identite.prenom),
+          net(d.identite.classe)].filter(Boolean).join("_") + ".pdf";
+}
+
+el("pdf").addEventListener("click", function(){
+  var d = lire(), manquants = [], premier = null;
+  [["nom","ton nom"],["prenom","ton prénom"],["classe","ta classe"]].forEach(function(c){
+    if(!d.identite[c[0]]){ manquants.push(c[1]); el(c[0]).classList.add("manque"); if(!premier) premier = c[0]; }
+  });
+  if(manquants.length){
+    alerte.hidden = false;
+    alerte.textContent = "Complète " + manquants.join(", ") + " en haut de la fiche avant de générer le PDF.";
+    el(premier).scrollIntoView({ behavior:"smooth", block:"center" });
+    el(premier).focus();
+    return;
+  }
+  alerte.hidden = true;
+  var b = el("pdf");
+  b.disabled = true; b.textContent = "Création du PDF…";
+  try{
+    construirePDF(d).save(nomFichier(d));
+    etat.textContent = "PDF téléchargé. Dépose-le sur Pronote.";
+  }catch(e){
+    alerte.hidden = false;
+    alerte.textContent = "Le PDF n'a pas pu être créé. Vérifie ta connexion, puis réessaie.";
+  }
+  b.disabled = false; b.textContent = "Générer le PDF";
+});
+
+})();
+</script>
+</body>
+</html>

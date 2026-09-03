@@ -7,8 +7,11 @@ Chaque fiche est **un seul fichier HTML autonome** : elle contient sa mise en pa
 techno-3e/
 ├── index.html        ← sommaire des fiches
 ├── seq1-act1.html    ← Séquence 1 · Activité 1
+├── seq1-act2.html    ← Séquence 1 · Activité 2
 ├── img/
-│   ├── seq1-act1.jpg ← photo de la situation déclenchante
+│   ├── seq1-act1.jpg ← photo de la situation déclenchante (activité 1)
+│   ├── seq1-act2.jpg ← illustration de l'exposition (activité 2)
+│   ├── tel-cadran.png, tel-touches.png, tel-tactile.png, tel-pliable.png
 │   └── logo-lfv.png  ← logo affiché en tête des pages
 └── README.md
 ```
@@ -72,6 +75,17 @@ Les élèves n'ont aucun moyen de tomber dessus par hasard, mais l'adresse reste
 - Le bouton **Générer le PDF** exige le nom, le prénom et la classe. Le fichier obtenu s'appelle par exemple `Seq1-Act1_KLABI_Fehmi_3e-A.pdf`.
 - Le PDF reprend la mise en page de la trame : cartouche d'en-tête, bandeau d'identité, situation déclenchante, image, un cadre par rubrique avec la durée, et l'auto-positionnement CPS coché.
 - Le bouton **Effacer mes réponses** demande confirmation.
+
+## Particularités de l'activité 2
+
+Le PDF ne reprend que les productions de l'élève : constats, problème, idées, réponses aux QCM, associations, N2a, N2b, frise, fiche technique du smartphone de 2030, synthèse et positionnement CPS. Les consignes, les vidéos, les liens et les images restent sur la page.
+
+Les vidéos PodEduc ne se chargent qu'au clic sur « Lire la vidéo ». Rien n'est appelé tant que l'élève n'a pas demandé la lecture.
+
+Les liens ont été extraits directement de ta trame. Deux points à vérifier :
+
+- l'ordre des trois fiches de connaissances (FOST1a, FOST1d, FOST1c) est déduit de leur position dans le document, pas d'un titre ;
+- l'intitulé de la compétence CPS était vide dans la trame ; j'ai mis « Se fixer un objectif et le mener à son terme ».
 
 ## Ajouter une fiche
 
