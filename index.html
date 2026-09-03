@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Technologie 3e — Fiches d'activité</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --papier:#F4F7F7; --carte:#FFFFFF; --encre:#14262B; --doux:#5A6C71;
+  --teal:#0E6E6B; --teal-pale:#E2EFEE; --magenta:#C2185B; --trait:#D2DEDE;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--papier);color:var(--encre);
+  font-family:"Source Sans 3",system-ui,sans-serif;font-size:17px;line-height:1.55;
+}
+.page{max-width:760px;margin:0 auto;padding:0 20px 80px}
+header{padding:56px 0 34px;border-bottom:1px solid var(--trait)}
+.marque{display:flex;align-items:center;gap:13px;margin:0 0 16px}
+.marque img{height:52px;width:auto;display:block}
+.fil{font-family:"Archivo",sans-serif;font-weight:600;font-size:13px;color:var(--teal);margin:0;
+     padding-left:13px;border-left:1px solid var(--trait)}
+h1{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(30px,5.5vw,44px);line-height:1.1;margin:0 0 14px;max-width:16ch}
+header p{color:var(--doux);margin:0;max-width:58ch}
+
+h2{
+  font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;color:var(--doux);
+  margin:44px 0 14px;display:flex;align-items:baseline;gap:10px;
+}
+h2 span{font-size:13px;color:var(--teal)}
+
+.fiche{
+  display:flex;align-items:center;gap:20px;text-decoration:none;color:inherit;
+  background:var(--carte);border:1px solid var(--trait);border-radius:10px;
+  padding:20px 22px;margin-bottom:10px;
+}
+.fiche:hover{border-color:var(--teal);background:#FBFDFD}
+.fiche:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+.num{
+  font-family:"Archivo",sans-serif;font-weight:700;font-size:22px;color:var(--teal);
+  background:var(--teal-pale);width:46px;height:46px;border-radius:50%;
+  display:grid;place-items:center;flex:none;
+}
+.fiche h3{font-family:"Archivo",sans-serif;font-weight:600;font-size:19px;margin:0 0 3px}
+.fiche p{margin:0;color:var(--doux);font-size:15px}
+
+.venir{
+  border:1.5px dashed var(--trait);border-radius:10px;padding:20px 22px;
+  color:var(--doux);font-size:15.5px;
+}
+footer{margin-top:50px;padding-top:22px;border-top:1px solid var(--trait);color:var(--doux);font-size:14.5px}
+footer p{margin:0 0 6px}
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header>
+    <div class="marque">
+      <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
+      <p class="fil">Cycle 4 · Classe de 3e</p>
+    </div>
+    <h1>Fiches d'activité de technologie</h1>
+    <p>Ouvre la fiche du jour, réponds directement dans les cadres, puis génère ton PDF et dépose-le sur Pronote. Tes réponses restent enregistrées sur ton appareil tant que tu ne les effaces pas.</p>
+  </header>
+
+  <h2>Séquence 1 <span>Le smartphone : entre innovation et responsabilité</span></h2>
+
+  <a class="fiche" href="seq1-act1.html">
+    <span class="num">1</span>
+    <span>
+      <h3>Lancement de séquence</h3>
+      <p>Du téléphone du grand-père au smartphone · 30 min</p>
+    </span>
+  </a>
+
+  <div class="venir">Les activités suivantes de la séquence seront ajoutées ici au fur et à mesure.</div>
+
+  <footer>
+    <p>Lycée français de Vienne · Technologie · M. Klabi</p>
+    <p>Un problème avec une fiche ? Signale-le en cours ou par la messagerie de l'ENT.</p>
+  </footer>
+
+</main>
+</body>
+</html>
