@@ -12,6 +12,8 @@ techno-3e/
 ├── seq2-act1-p1.html ← Séquence 2 · Activité 1, partie 1
 ├── seq2-act1-p2.html ← Séquence 2 · Activité 1, partie 2
 ├── seq2-act1-p3.html ← Séquence 2 · Activité 1, partie 3
+├── seq3-act1-p1.html ← Séquence 3 · Activité 1, partie 1 (micro:bit)
+├── seq3-act1-p2.html ← Séquence 3 · Activité 1, partie 2 (micro:bit)
 ├── outils/
 │   ├── aide-reseau.html    ← fiche d'aide réseau (vocabulaire, Filius, calculs)
 │   ├── reseau-simple.html  ← trajet d'un paquet et tables de routage
@@ -119,6 +121,18 @@ L'activité 1 de la séquence 2 dure 3 h : elle est découpée en trois pages d'
 Les réponses sont enregistrées séparément pour chaque partie : remplir la partie 2 n'écrase rien de la partie 1.
 
 **Si tu déploies par-dessus une version précédente, supprime `seq2-act1.html` de ton dossier** : la copie n'efface pas les fichiers disparus, et l'ancienne version en un seul morceau resterait en ligne.
+
+## Séquence 3 — micro:bit, en deux séances
+
+Programmation **par blocs uniquement**, dans MakeCode. Aucun lien vers l'éditeur Python, aucun code recopié.
+
+**Partie 1 (55 min)** — schéma légendé de la carte que j'ai dessiné, tableau des quatorze composants avec leur rôle et leur famille, trois exercices de repérage, puis le programme du dé en sept étapes cochables, dix lancers à relever et deux explications.
+
+**Partie 2 (55 min)** — comment deux cartes se parlent par radio et pourquoi il faut le même numéro de groupe, avec un champ pour noter le groupe du binôme. Puis l'algorithme écrit en français, le logigramme construit ligne par ligne (forme + contenu), et enfin la réalisation par blocs en sept étapes.
+
+Le logigramme est **dessiné dans le PDF** avec les symboles normalisés : ovale pour début et fin, parallélogramme pour les entrées et sorties, rectangle pour les traitements, losange pour les tests, reliés par des flèches. L'élève choisit la forme de chaque étape dans une liste, le PDF s'occupe du tracé.
+
+Adapté du projet « Pierre, feuille, ciseaux » de la Micro:bit Educational Foundation, sous licence CC BY-SA 4.0.
 
 ## Navigation
 
