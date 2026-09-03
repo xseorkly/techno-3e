@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Séquence 1 · Activité 3 — L'IA dans notre poche</title>
+<title>Les chemins de l'information — partie 1 : comprendre</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -175,6 +175,23 @@ textarea::placeholder{color:#9FB0B3}
 .cadre16{position:relative;padding-top:56.25%;border-radius:8px;overflow:hidden;background:#000}
 .cadre16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
+/* Outils intégrés */
+.outil{background:var(--carte);border:1px solid var(--teal);border-radius:var(--r);
+  padding:16px 18px;margin:14px 0}
+.outil .vt{font-weight:600;margin:0 0 3px}
+.outil .vs{color:var(--doux);font-size:14.5px;margin:0 0 12px}
+.outil .actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.outil a{color:var(--doux);font-size:14.5px}
+.cadreoutil{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--trait)}
+.cadreoutil iframe{width:100%;height:820px;border:0;display:block;background:#fff}
+@media(max-width:640px){.cadreoutil iframe{height:640px}}
+.bandeau{display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+  background:var(--teal-pale);border-radius:var(--r);padding:16px 18px;margin:0 0 20px}
+.bandeau p{margin:0;flex:1;min-width:220px;font-size:15.5px}
+.bandeau a{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;
+  background:var(--teal);color:#fff;border-radius:8px;padding:10px 18px;text-decoration:none}
+.bandeau a:hover{background:#0b5a58}
+
 /* Ressources */
 .ressources{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:18px 20px}
 .ressources ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
@@ -194,6 +211,22 @@ textarea::placeholder{color:#9FB0B3}
 .niveaux input{accent-color:var(--teal);margin:4px 0 0;width:18px;height:18px;flex:none}
 .niveaux label:has(input:checked){border-color:var(--teal);background:var(--teal-pale)}
 .niveaux b{font-family:"Archivo",sans-serif;font-weight:600;color:var(--teal)}
+
+.etape{display:flex;gap:12px;align-items:flex-start;font-size:16px;cursor:pointer}
+.etape input{accent-color:var(--teal);margin:4px 0 0;width:19px;height:19px;flex:none}
+.etape b{font-family:"Archivo",sans-serif;color:var(--teal)}
+.cartefiche:has(.etape input:checked){border-color:var(--teal);background:#FAFDFD}
+.apercu{width:100%;max-width:520px;display:block;margin:14px 0 0;border-radius:6px;border:1px solid var(--trait)}
+.ligne{display:flex;gap:12px;align-items:center;background:var(--carte);
+  border:1px solid var(--trait);border-radius:var(--r);padding:12px 16px;flex-wrap:wrap}
+.ligne .cle{font-family:"Archivo",sans-serif;font-weight:600;font-size:15.5px;
+  min-width:120px;flex:none;color:var(--teal)}
+.ligne select,.ligne input{flex:1;min-width:150px;font:inherit;font-size:15.5px;
+  padding:9px 10px;border:1px solid var(--trait);border-radius:8px;background:#fff;color:var(--encre)}
+.ligne select:focus,.ligne input:focus{outline:0;border-color:var(--teal)}
+table.routage{border-collapse:collapse;font-size:15px;margin:0}
+table.routage th,table.routage td{border:1px solid var(--trait);padding:7px 14px;text-align:left}
+table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Archivo",sans-serif;font-weight:600;font-size:13px}
 
 /* Corrigé */
 .corrige{margin-top:12px;border-left:3px solid var(--ok);background:#F0F7F3;
@@ -235,10 +268,10 @@ textarea::placeholder{color:#9FB0B3}
         <optgroup label="Séquence 1">
           <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
           <option value="seq1-act2.html">Activité 2 — Du téléphone au smartphone</option>
-          <option value="seq1-act3.html" selected>Activité 3 — L'IA dans notre poche</option>
+          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
         </optgroup>
         <optgroup label="Séquence 2">
-          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Comprendre</option>
+          <option value="seq2-act1-p1.html" selected>Activité 1 · partie 1 — Comprendre</option>
           <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Filius</option>
           <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Analyser le routage</option>
         </optgroup>
@@ -267,19 +300,17 @@ document.getElementById("navfiches").addEventListener("change", function(){
     </div>
     <div class="marque">
       <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
-      <p class="fil">Technologie · Séquence 1 · Activité 3</p>
+      <p class="fil">Technologie · Séquence 2 · Activité 1</p>
     </div>
-    <h1 class="titre">L'IA dans notre poche : comment les assistants vocaux transforment notre quotidien ?</h1>
-    <p class="sous">T1 — L'évolution des OST · 1 h 30</p>
+    <h1 class="titre">Les chemins de l'information — partie 1 : comprendre</h1>
+    <p class="sous">T10 — La circulation de l'information dans un réseau · 55 min</p>
     <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
       <a href="#situation"><b>2′</b>Situation</a>
       <a href="#constats"><b>5′</b>Constats</a>
       <a href="#probleme"><b>3′</b>Problème</a>
       <a href="#idees"><b>5′</b>Idées</a>
-      <a href="#niveaux12"><b>15′</b>Niveaux 1-2</a>
-      <a href="#niveaux34"><b>20′</b>Niveaux 3-4</a>
-      <a href="#synthese"><b>5′</b>Synthèse</a>
-      <a href="#ressources"><b>10′</b>Ressources</a>
+      <a href="#niveaux12"><b>35′</b>Niveaux 1-2</a>
+      <a href="#ressources"><b>5′</b>Ressources</a>
     </nav>
   </header>
 
@@ -296,16 +327,18 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <summary>Ce que je travaille dans cette activité</summary>
     <div class="dedans">
       <dl>
-        <dt>Thème</dt><dd>Les objets et les systèmes techniques : leurs usages et leurs interactions à découvrir et à analyser</dd>
-        <dt>Attendu</dt><dd>OST1 — Décrire les liens entre usages et évolutions technologiques des objets et des systèmes techniques</dd>
-        <dt>Compétence</dt><dd>Exprimer dans un argumentaire court l'incidence des contraintes sociétales sur les OST</dd>
-        <dt>Connaissances</dt><dd>Les grands types d'apprentissage des intelligences artificielles et leurs usages possibles (géolocalisation, identification, calcul, traduction…) ; les incidences sociétales, notamment l'étude du biais et de l'effet de l'usage d'une IA</dd>
+        <dt>Thème</dt><dd>Structure, fonctionnement, comportement : des objets et des systèmes techniques à comprendre</dd>
+        <dt>Attendu</dt><dd>SFC1 — Décrire et caractériser l'organisation interne d'un objet ou d'un système technique et ses échanges avec son environnement (énergies, données)</dd>
+        <dt>SFC17</dt><dd>Identifier et représenter la circulation d'une information dans le réseau Internet</dd>
+        <dt>SFC18</dt><dd>Justifier la nécessité d'un protocole de routage pour faire communiquer plusieurs réseaux</dd>
+        <dt>SFC1p</dt><dd>Le rôle et la structure d'une adresse IP, des tables de routage</dd>
+        <dt>SFC1q</dt><dd>Le débit et les ordres de grandeur associés</dd>
       </dl>
       <ul>
-        <li>N1 — Je sais définir les grands types d'apprentissage des IA (supervisé, non supervisé, par renforcement) et citer leurs usages possibles dans les moyens de communication</li>
-        <li>N2 — et je sais expliquer comment un type d'apprentissage de l'IA permet un usage concret dans un moyen de communication</li>
-        <li>N3 — et je sais identifier les biais possibles dans un système utilisant l'IA et proposer des solutions pour les limiter</li>
-        <li>N4 — et je sais analyser les effets positifs et négatifs de l'usage de l'IA dans un moyen de communication et proposer des améliorations responsables</li>
+        <li>N1 — Je sais qu'une information est acheminée entre réseaux grâce à son adresse IP et à des tables de routage, et que la quantité de données transmise par seconde s'appelle le débit</li>
+        <li>N2 — et je sais expliquer, avec mes mots, le rôle d'une table de routage, l'effet du débit sur la vitesse de circulation d'une information, et la différence entre une adresse IP privée et une adresse IP publique</li>
+        <li>N3 — et je sais configurer et tester, sur un réseau simulé, les adresses IP et les passerelles permettant à plusieurs réseaux de communiquer entre eux</li>
+        <li>N4 — et je sais expliquer, adresses IP, tables de routage et débits à l'appui, comment une information est acheminée entre plusieurs réseaux et pourquoi le chemin choisi dépend à la fois du routage et de l'état du trafic</li>
       </ul>
     </div>
   </details>
@@ -315,11 +348,11 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="corps">
       <h2>Situation déclenchante</h2>
       <div class="situation">
-        <img class="illus" src="img/seq1-act3.jpg"
-             alt="Des élèves regardent ensemble l'écran d'un smartphone autour d'une table."
+        <p>Le collège vient de recevoir une nouvelle salle informatique et tous les ordinateurs sont bien reliés au réseau. Pourtant, certains élèves arrivent à ouvrir Pronote, à accéder à leur espace de travail ou au serveur vidéo, alors que d'autres obtiennent un message d'erreur. Parfois, Internet fonctionne mais les pages mettent beaucoup de temps à s'afficher.</p>
+        <img class="illus" style="margin:18px auto" src="img/seq2-act1-situation.jpg"
+             alt="Le réseau du collège relié à Internet : plusieurs chemins possibles, certains bloqués."
              onerror="this.remove()">
-        <p>Une nouvelle application de messagerie, <strong>LexIA</strong>, intègre une intelligence artificielle capable de traduire automatiquement les conversations, de proposer des réponses toutes faites et de filtrer les messages considérés comme offensants. Certains utilisateurs trouvent ces fonctions très pratiques, tandis que d'autres dénoncent des erreurs de traduction, des messages mal interprétés et des blocages injustifiés de certains contenus.</p>
-        <p style="margin-top:14px">Des associations s'interrogent également sur les biais de l'IA et sur les conséquences de ces choix techniques pour les utilisateurs.</p>
+        <p>Le chef d'établissement demande au professeur de technologie et à ses élèves de comprendre pourquoi les informations n'arrivent pas toujours à destination.</p>
       </div>
     </div>
   </article>
@@ -328,7 +361,6 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="marge"><span class="duree">5′</span></div>
     <div class="corps">
       <h2>Mes constats, mes observations</h2>
-      <p class="consigne">Que remarques-tu dans cette situation ?</p>
       <textarea id="rep-constats" data-rep placeholder="J'observe que…"></textarea>
     </div>
   </article>
@@ -337,7 +369,6 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="marge"><span class="duree">3′</span></div>
     <div class="corps">
       <h2>Mon problème à résoudre</h2>
-      <p class="consigne">Formule une seule question.</p>
       <textarea id="rep-probleme" data-rep placeholder="Comment… ?" style="min-height:100px"></textarea>
     </div>
   </article>
@@ -351,117 +382,116 @@ document.getElementById("navfiches").addEventListener("change", function(){
   </article>
 
   <article class="bloc" id="niveaux12">
-    <div class="marge"><span class="duree">15′</span></div>
+    <div class="marge"><span class="duree">35′</span></div>
     <div class="corps">
       <h2>Activités — niveaux 1 et 2</h2>
-      <p class="amorce">Avant d'analyser les conséquences de l'intelligence artificielle sur notre quotidien, il faut comprendre comment elle fonctionne et quels sont ses principaux usages. Tu vas découvrir les différents types d'apprentissage de l'IA et expliquer comment ils permettent d'offrir de nouveaux services dans les moyens de communication.</p>
+      <p class="amorce">Pour résoudre ce problème, nous allons d'abord identifier les éléments qui permettent de comprendre comment une information circule dans un réseau, puis comprendre comment se déterminent le chemin et la vitesse de son trajet.</p>
+      <img class="illus" src="img/seq2-act1-schema.jpg"
+           alt="Le PC de Léa envoie un paquet vers le serveur Pronote : plusieurs chemins traversent Internet."
+           onerror="this.remove()">
 
-      <h3>N1a — Les usages possibles d'une IA</h3>
-      <div class="qcm" data-qcm="n1a1" data-titre="N1a.1 — La traduction automatique">
-        <p class="enonce">La fonction de traduction automatique de l'application de messagerie est un usage de l'IA lié à :</p>
+      <h3>N1a — Identifier un ordinateur sur le réseau</h3>
+      <div class="qcm" data-qcm="n1a" data-titre="N1a — Le numéro qui identifie l'ordinateur de Léa">
+        <p class="enonce">Comment appelle-t-on le numéro qui identifie de façon unique l'ordinateur de Léa sur le réseau ?</p>
         <div class="choix">
-          <label><input type="radio" name="n1a1" id="n1a1-a" value="a"><span class="lt">a</span><span>la géolocalisation</span></label>
-          <label><input type="radio" name="n1a1" id="n1a1-b" value="b"><span class="lt">b</span><span>la traduction</span></label>
-          <label><input type="radio" name="n1a1" id="n1a1-c" value="c"><span class="lt">c</span><span>l'identification</span></label>
+          <label><input type="radio" name="n1a" id="n1a-a" value="a"><span class="lt">a</span><span>Son mot de passe</span></label>
+          <label><input type="radio" name="n1a" id="n1a-b" value="b"><span class="lt">b</span><span>Son adresse IP</span></label>
+          <label><input type="radio" name="n1a" id="n1a-c" value="c"><span class="lt">c</span><span>Son nom d'utilisateur</span></label>
+          <label><input type="radio" name="n1a" id="n1a-d" value="d"><span class="lt">d</span><span>Sa clé Wi-Fi</span></label>
         </div>
       </div>
 
-      <div class="qcm" data-qcm="n1a2" data-titre="N1a.2 — Le filtrage des messages" style="margin-top:12px">
-        <p class="enonce">La fonction de filtrage des messages offensants repose plutôt sur un usage de l'IA lié à :</p>
+      <h3>N1b — Choisir le prochain routeur</h3>
+      <div class="qcm" data-qcm="n1b" data-titre="N1b — La structure utilisée par un routeur">
+        <p class="enonce">Quelle structure utilise un routeur pour savoir vers quel prochain routeur envoyer une information ?</p>
         <div class="choix">
-          <label><input type="radio" name="n1a2" id="n1a2-a" value="a"><span class="lt">a</span><span>l'identification / la classification de contenus</span></label>
-          <label><input type="radio" name="n1a2" id="n1a2-b" value="b"><span class="lt">b</span><span>le calcul d'itinéraire</span></label>
-          <label><input type="radio" name="n1a2" id="n1a2-c" value="c"><span class="lt">c</span><span>la géolocalisation</span></label>
+          <label><input type="radio" name="n1b" id="n1b-a" value="a"><span class="lt">a</span><span>Une table de routage</span></label>
+          <label><input type="radio" name="n1b" id="n1b-b" value="b"><span class="lt">b</span><span>Un tableur</span></label>
+          <label><input type="radio" name="n1b" id="n1b-c" value="c"><span class="lt">c</span><span>Un antivirus</span></label>
+          <label><input type="radio" name="n1b" id="n1b-d" value="d"><span class="lt">d</span><span>Un moteur de recherche</span></label>
         </div>
       </div>
 
-      <div class="qcm" data-qcm="n1a3" data-titre="N1a.3 — Les usages possibles d'une IA" style="margin-top:12px">
-        <p class="enonce">Parmi les usages suivants, lesquels sont des usages possibles d'une IA ?</p>
+      <h3>N1c — Les unités de débit</h3>
+      <div class="qcm" data-qcm="n1c" data-titre="N1c — Les unités qui expriment un débit">
+        <p class="enonce">Parmi ces unités, lesquelles servent à exprimer un débit ?</p>
+        <p class="note">Plusieurs réponses possibles.</p>
         <div class="choix">
-          <label><input type="radio" name="n1a3" id="n1a3-a" value="a"><span class="lt">a</span><span>reconnaître un visage sur une photo (identification)</span></label>
-          <label><input type="radio" name="n1a3" id="n1a3-b" value="b"><span class="lt">b</span><span>proposer un itinéraire routier (géolocalisation)</span></label>
-          <label><input type="radio" name="n1a3" id="n1a3-c" value="c"><span class="lt">c</span><span>calculer automatiquement une trajectoire (calcul)</span></label>
-          <label><input type="radio" name="n1a3" id="n1a3-d" value="d"><span class="lt">d</span><span>toutes ces réponses</span></label>
+          <label><input type="checkbox" name="n1c" id="n1c-a" value="a"><span class="lt">a</span><span>bps</span></label>
+          <label><input type="checkbox" name="n1c" id="n1c-b" value="b"><span class="lt">b</span><span>Mo</span></label>
+          <label><input type="checkbox" name="n1c" id="n1c-c" value="c"><span class="lt">c</span><span>Mbps</span></label>
+          <label><input type="checkbox" name="n1c" id="n1c-d" value="d"><span class="lt">d</span><span>Gb/s</span></label>
         </div>
       </div>
 
-      <h3>N1b — Le biais de l'IA</h3>
-      <div class="qcm" data-qcm="n1b" data-titre="N1b — Ce qu'est un biais">
-        <p class="enonce">Un « biais » d'une intelligence artificielle correspond à :</p>
-        <div class="choix">
-          <label><input type="radio" name="n1b" id="n1b-a" value="a"><span class="lt">a</span><span>une panne matérielle du serveur</span></label>
-          <label><input type="radio" name="n1b" id="n1b-b" value="b"><span class="lt">b</span><span>une erreur ou une déformation dans les résultats de l'IA, souvent liée aux données utilisées pour l'entraîner</span></label>
-          <label><input type="radio" name="n1b" id="n1b-c" value="c"><span class="lt">c</span><span>un bug dans l'interface graphique de l'application</span></label>
-          <label><input type="radio" name="n1b" id="n1b-d" value="d"><span class="lt">d</span><span>une mise à jour du logiciel</span></label>
-        </div>
-      </div>
-
-      <h3>N2a — L'apprentissage supervisé dans LexIA</h3>
-      <p class="consigne">Après avoir regardé la vidéo OST1e : qu'est-ce que l'apprentissage supervisé ? Donne un exemple concret dans LexIA.</p>
-      <div class="video" data-src="https://podeduc.apps.education.fr/video/113245-ost1e-les-grands-types-dapprentissage-des-intelligences-artificielles-et-leurs-usages-possibles/?is_iframe=true">
-        <p class="vt">OST1e — Les grands types d'apprentissage des intelligences artificielles</p>
-        <p class="vs">Vidéo PodEduc · code application élève : VOST1e</p>
-        <div class="actions">
-          <button class="vlire" type="button">Lire la vidéo</button>
-          <a href="https://podeduc.apps.education.fr/video/113245-ost1e-les-grands-types-dapprentissage-des-intelligences-artificielles-et-leurs-usages-possibles" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
-        </div>
-      </div>
-      <textarea id="n2a" data-rep placeholder="L'apprentissage supervisé, c'est…"></textarea>
-
-      <h3>N2b — Biais et incidences sociétales</h3>
-      <p class="consigne">Après avoir regardé la vidéo OST1f, cite deux effets négatifs des biais de l'IA sur les utilisateurs de LexIA.</p>
-      <div class="video" data-src="https://podeduc.apps.education.fr/video/113242-ost1f-les-incidences-societales-notamment-letude-du-biais-et-de-leffet-de-lusage-dune-intelligence-artificielle-ia/?is_iframe=true">
-        <p class="vt">OST1f — Les incidences sociétales : le biais et l'effet de l'usage d'une IA</p>
-        <p class="vs">Vidéo PodEduc · code application élève : VOST1f</p>
-        <div class="actions">
-          <button class="vlire" type="button">Lire la vidéo</button>
-          <a href="https://podeduc.apps.education.fr/video/113242-ost1f-les-incidences-societales-notamment-letude-du-biais-et-de-leffet-de-lusage-dune-intelligence-artificielle-ia" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
-        </div>
-      </div>
-      <textarea id="n2b" data-rep placeholder="Premier effet négatif :&#10;Deuxième effet négatif :"></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="niveaux34">
-    <div class="marge"><span class="duree">20′</span></div>
-    <div class="corps">
-      <h2>Activités — niveaux 3 et 4</h2>
-      <p class="amorce">Tu connais maintenant les principes de fonctionnement de l'intelligence artificielle et ses principaux usages. Tu vas exercer ton esprit critique en analysant les biais de l'IA, leurs conséquences pour les utilisateurs et les solutions permettant de concevoir des applications plus fiables et plus responsables.</p>
-
-      <h3>N3 — Débat : les biais de l'IA, un mal nécessaire ?</h3>
-      <p class="consigne">Au sein de l'îlot, organisez le débat en deux groupes. Prépare trois arguments en t'appuyant sur la vidéo OST1f et sur la situation déclenchante.</p>
-      <div class="cartefiche">
-        <div class="mini" style="margin-bottom:14px">
-          <label for="debat-groupe">Mon groupe</label>
-          <select id="debat-groupe">
-            <option value="">Choisir…</option>
-            <option>Groupe A — Les biais de l'IA sont inévitables et peu importants.</option>
-            <option>Groupe B — Les biais de l'IA sont dangereux et doivent être éliminés à tout prix.</option>
+      <h3>N1d — Chaque terme et sa définition</h3>
+      <div class="assoc">
+        <div class="paire">
+          <span class="nom">Adresse IP</span>
+          <select id="n1d-1" data-assoc data-terme="Adresse IP" aria-label="Définition de l'adresse IP">
+            <option value="">Choisir une définition…</option>
+            <option>Quantité de données transmises par seconde</option>
+            <option>Numéro d'identification unique d'un appareil sur un réseau</option>
+            <option>Structure de données qui indique le chemin à suivre pour joindre une destination</option>
           </select>
         </div>
-        <div class="grille">
-          <div class="mini"><label for="debat-1">Argument 1</label><textarea id="debat-1"></textarea></div>
-          <div class="mini"><label for="debat-2">Argument 2</label><textarea id="debat-2"></textarea></div>
-          <div class="mini"><label for="debat-3">Argument 3</label><textarea id="debat-3"></textarea></div>
+        <div class="paire">
+          <span class="nom">Débit</span>
+          <select id="n1d-2" data-assoc data-terme="Débit" aria-label="Définition du débit">
+            <option value="">Choisir une définition…</option>
+            <option>Quantité de données transmises par seconde</option>
+            <option>Numéro d'identification unique d'un appareil sur un réseau</option>
+            <option>Structure de données qui indique le chemin à suivre pour joindre une destination</option>
+          </select>
+        </div>
+        <div class="paire">
+          <span class="nom">Table de routage</span>
+          <select id="n1d-3" data-assoc data-terme="Table de routage" aria-label="Définition de la table de routage">
+            <option value="">Choisir une définition…</option>
+            <option>Quantité de données transmises par seconde</option>
+            <option>Numéro d'identification unique d'un appareil sur un réseau</option>
+            <option>Structure de données qui indique le chemin à suivre pour joindre une destination</option>
+          </select>
         </div>
       </div>
 
-      <h3>N4a — Pourquoi un site de streaming utilise-t-il l'IA ?</h3>
-      <p class="consigne">Explique en trois ou quatre phrases comment l'IA analyse tes préférences (films regardés, notes, temps passé) pour proposer des contenus adaptés.</p>
-      <textarea id="n4a" data-rep></textarea>
+      <h3>N2 — Comprendre le routage</h3>
+      <div class="video" data-src="https://podeduc.apps.education.fr/video/113089-sfc1p-le-role-et-la-structure-dune-adresse-ip-le-role-des-tables-de-routage/?is_iframe=true">
+        <p class="vt">Vidéo 1 · SFC1p — Le rôle et la structure d'une adresse IP, le rôle des tables de routage</p>
+        <p class="vs">PodEduc</p>
+        <div class="actions">
+          <button class="vlire" type="button">Lire la vidéo</button>
+          <a href="https://podeduc.apps.education.fr/video/113089-sfc1p-le-role-et-la-structure-dune-adresse-ip-le-role-des-tables-de-routage/" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
+        </div>
+      </div>
+      <div class="outil" data-src="outils/reseau-simple.html">
+        <p class="vt">Réseau virtuel — trajet d'un paquet et tables de routage</p>
+        <p class="vs">Choisis une destination, envoie le paquet, et regarde quelle ligne de la table s'allume à chaque routeur. Coupe le câble R2–R3 pour voir le chemin changer.</p>
+        <div class="actions">
+          <button class="vlire" type="button">Ouvrir le réseau virtuel</button>
+          <a href="outils/reseau-simple.html" target="_blank" rel="noopener">Ouvrir en pleine page</a>
+        </div>
+      </div>
+      <p class="consigne" style="margin-top:16px">N2a — En t'appuyant sur la vidéo 1, explique avec tes mots à quoi sert une table de routage pour un routeur.</p>
+      <textarea id="n2a" data-rep></textarea>
 
-      <h3>N4b — Reconnaissance faciale et biais</h3>
-      <p class="consigne">Un logiciel de reconnaissance faciale a plus de mal à reconnaître les visages des femmes que ceux des hommes. Pourquoi est-ce un problème ? Donne un exemple de conséquence négative et propose une solution simple.</p>
-      <textarea id="n4b" data-rep></textarea>
-    </div>
-  </article>
+      <div class="video" data-src="https://podeduc.apps.education.fr/video/113086-sfc1q-le-debit-et-les-ordres-de-grandeur-associes/?is_iframe=true">
+        <p class="vt">Vidéo 2 · SFC1q — Le débit et les ordres de grandeur associés</p>
+        <p class="vs">PodEduc</p>
+        <div class="actions">
+          <button class="vlire" type="button">Lire la vidéo</button>
+          <a href="https://podeduc.apps.education.fr/video/113086-sfc1q-le-debit-et-les-ordres-de-grandeur-associes/" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
+        </div>
+      </div>
+      <div class="bandeau">
+        <p>Pour mesurer : l'onglet <em>Débit</em> de l'application compare fibre, Wi-Fi, 4G et ADSL sur des fichiers de 5 Mo à 15 Go.</p>
+        <a href="outils/reseau-complet.html" target="_blank" rel="noopener">Ouvrir l'onglet Débit</a>
+      </div>
+      <p class="consigne" style="margin-top:16px">N2b — En t'appuyant sur la vidéo 2, explique pourquoi une vidéo peut mettre du temps à se charger si le débit d'une connexion est faible.</p>
+      <textarea id="n2b" data-rep></textarea>
 
-  <article class="bloc" id="synthese">
-    <div class="marge"><span class="duree">5′</span></div>
-    <div class="corps">
-      <h2>Ma synthèse</h2>
-      <p class="consigne">En quelques lignes : que change l'IA dans nos moyens de communication, et à quelles conditions ?</p>
-      <textarea id="rep-synthese" data-rep></textarea>
+      <p class="consigne" style="margin-top:22px">N2c — Explique la différence entre l'adresse IP privée du PC de Léa (192.168.1.25) et l'adresse IP publique du serveur vidéo (203.0.113.10).</p>
+      <textarea id="n2c" data-rep></textarea>
     </div>
   </article>
 
@@ -470,33 +500,22 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="corps">
       <h2>Fiches de connaissances et quiz</h2>
       <div class="ressources">
-        <p class="appli">Les codes ci-dessous s'utilisent dans l'application élève : <a href="https://www.app.sti-ac-bordeaux.fr/" target="_blank" rel="noopener">app.sti-ac-bordeaux.fr</a></p>
         <h3 style="margin-top:0">Fiches de connaissances <span style="color:var(--doux);font-weight:400;font-size:15px">(5′)</span></h3>
         <ul>
-          <li><span class="code">FOST1e</span><a href="https://nuage01.apps.education.fr/public.php/dav/files/tD2HPYQLCKKTgjG?accept=zip">Les grands types d'apprentissage des IA et leurs usages</a></li>
-          <li><span class="code">FOST1f</span><a href="https://nuage01.apps.education.fr/public.php/dav/files/kZSCaGnqFzFYE6C?accept=zip">Les incidences sociétales : biais et effets de l'usage d'une IA</a></li>
+          <li><span class="code">SFC1p</span><a href="https://edurl.fr/GXcP5jen" target="_blank" rel="noopener">Le rôle et la structure d'une adresse IP, des tables de routage</a></li>
+          <li><span class="code">SFC1q</span><a href="https://edurl.fr/gIOgcXl7" target="_blank" rel="noopener">Le débit et les ordres de grandeur associés</a></li>
+        </ul>
+        <h3>Outils de la séance</h3>
+        <ul>
+          <li><span class="code">Aide</span><a href="outils/aide-reseau.html" target="_blank" rel="noopener">Fiche d'aide : vocabulaire, commandes Filius, calcul d'un temps de transfert</a></li>
+          <li><span class="code">Simple</span><a href="outils/reseau-simple.html" target="_blank" rel="noopener">Réseau virtuel : trajet d'un paquet et tables de routage</a></li>
+          <li><span class="code">Complet</span><a href="outils/reseau-complet.html" target="_blank" rel="noopener">Réseau virtuel : trajet, débit et trafic</a></li>
         </ul>
         <h3>Quiz auto-correctifs <span style="color:var(--doux);font-weight:400;font-size:15px">(5′)</span></h3>
         <ul>
-          <li><span class="code">QVOST1e</span><a href="https://podeduc.apps.education.fr/quiz/113245-ost1e-les-grands-types-dapprentissage-des-intelligences-artificielles-et-leurs-usages-possibles" target="_blank" rel="noopener">Quiz — Les types d'apprentissage des IA</a></li>
-          <li><span class="code">QVOST1f</span><a href="https://podeduc.apps.education.fr/quiz/113242-ost1f-les-incidences-societales-notamment-letude-du-biais-et-de-leffet-de-lusage-dune-intelligence-artificielle-ia" target="_blank" rel="noopener">Quiz — Biais et incidences sociétales</a></li>
+          <li><span class="code">SFC1p</span><a href="https://edurl.fr/kA8KRUvy" target="_blank" rel="noopener">Quiz — Adresse IP et tables de routage</a></li>
+          <li><span class="code">SFC1q</span><a href="https://edurl.fr/v7rvRP5L" target="_blank" rel="noopener">Quiz — Le débit et les ordres de grandeur</a></li>
         </ul>
-      </div>
-    </div>
-  </article>
-
-  <article class="bloc" id="cps">
-    <div class="marge"><span class="duree">CPS</span></div>
-    <div class="corps">
-      <h2>Je développe mes compétences psychosociales</h2>
-      <div class="cps">
-        <p>Exercer son esprit critique face à une réponse produite par une IA. Où est-ce que je me situe aujourd'hui ?</p>
-        <div class="niveaux">
-          <label><input type="radio" name="cps" id="cps-1" value="1"><span><b>N1</b> — Je ne sais pas distinguer une information vraie d'une opinion.</span></label>
-          <label><input type="radio" name="cps" id="cps-2" value="2"><span><b>N2</b> — Je sais, avec de l'aide, repérer un biais dans une réponse d'IA.</span></label>
-          <label><input type="radio" name="cps" id="cps-3" value="3"><span><b>N3</b> — Je sais comparer deux sources IA et j'identifie les différences importantes.</span></label>
-          <label><input type="radio" name="cps" id="cps-4" value="4"><span><b>N4</b> — Je sais évaluer de façon autonome la fiabilité d'une réponse d'IA et je la justifie.</span></label>
-        </div>
       </div>
     </div>
   </article>
@@ -522,58 +541,61 @@ document.getElementById("navfiches").addEventListener("change", function(){
 var LOGO = "data:image/png;base64,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";
 
 var FICHE = {
-  id: "seq1-act3",
-  sequence: 1,
-  activite: 3,
-  titre: "L'IA dans notre poche : comment les assistants vocaux transforment notre quotidien ?",
-  thematique: "T1 - L'évolution des OST",
-  duree: "1h30",
+  id: "seq2-act1-p1",
+  ref: "Seq2-Act1-P1",
+  sequence: 2,
+  activite: 1,
+  titre: "Les chemins de l'information — partie 1 : comprendre",
+  thematique: "T10 - La circulation de l'information dans un réseau informatique",
+  duree: "3h",
   niveau: "3e",
   cps: {
-    intitule: "Exercer son esprit critique face à une réponse produite par une IA",
+    intitule: "Atteindre ses buts - maîtrise de soi",
     niveaux: [
-      "N1 — Je ne sais pas distinguer une information vraie d'une opinion.",
-      "N2 — Je sais, avec de l'aide, repérer un biais dans une réponse d'IA.",
-      "N3 — Je sais comparer deux sources IA et j'identifie les différences importantes.",
-      "N4 — Je sais évaluer de façon autonome la fiabilité d'une réponse d'IA et je la justifie."
+      "N1 — Je peux dire ce que je veux réussir.",
+      "N2 — Je peux décomposer un but en étapes.",
+      "N3 — Je prépare un plan pour y arriver.",
+      "N4 — Je vais jusqu'au bout de mes objectifs."
     ]
   },
-  /* Ce que le PDF reprend, dans l'ordre. Seules les productions de l'élève. */
   sortie: [
     { type:"texte", cle:"rep-constats", titre:"Mes constats, mes observations", duree:"5'" },
     { type:"texte", cle:"rep-probleme", titre:"Mon problème à résoudre", duree:"3'", min:3 },
     { type:"texte", cle:"rep-idees",    titre:"Mes idées pour le résoudre", duree:"5'" },
-    { type:"qcm",   cle:"n1a1" },
-    { type:"qcm",   cle:"n1a2" },
-    { type:"qcm",   cle:"n1a3" },
+    { type:"qcm",   cle:"n1a" },
     { type:"qcm",   cle:"n1b" },
-    { type:"texte", cle:"n2a", titre:"N2a — L'apprentissage supervisé dans LexIA" },
-    { type:"texte", cle:"n2b", titre:"N2b — Deux effets négatifs des biais" },
-    { type:"debat", titre:"N3 — Débat : les biais de l'IA, un mal nécessaire ?", duree:"20'" },
-    { type:"texte", cle:"n4a", titre:"N4a — Pourquoi un site de streaming utilise l'IA" },
-    { type:"texte", cle:"n4b", titre:"N4b — Reconnaissance faciale et biais" },
-    { type:"texte", cle:"rep-synthese", titre:"Ma synthèse", duree:"5'" },
-    { type:"cps" }
+    { type:"qcm",   cle:"n1c" },
+    { type:"assoc", titre:"N1d — Chaque terme et sa définition" },
+    { type:"texte", cle:"n2a", titre:"N2a — À quoi sert une table de routage" },
+    { type:"texte", cle:"n2b", titre:"N2b — Débit faible et temps de chargement" },
+    { type:"texte", cle:"n2c", titre:"N2c — Adresse IP privée et adresse IP publique" }
   ],
-  /* Éléments de réponse attendus, visibles seulement avec ?prof=1 */
   corrige: {
-    n1a: ["1 → b) la traduction.",
-          "2 → a) l'identification / la classification de contenus.",
-          "3 → d) toutes ces réponses : identification, géolocalisation et calcul sont trois usages courants de l'IA."],
-    n1b: ["Réponse b. Le biais est une déformation des résultats, le plus souvent héritée des données d'entraînement, et non une panne ou un bug."],
-    n2a: ["L'apprentissage supervisé entraîne l'IA sur des exemples déjà étiquetés par des humains.",
-          "Dans LexIA : le filtre a été entraîné sur des messages étiquetés « offensant » ou « acceptable » ; la traduction, sur des paires de phrases dans deux langues."],
-    n2b: ["Des traductions erronées qui changent le sens d'un message et créent des malentendus.",
-          "Des blocages injustifiés qui censurent certains utilisateurs, souvent les mêmes : langues peu représentées, expressions régionales, argot des jeunes.",
-          "Une perte de confiance dans l'application et un sentiment d'injustice."],
-    n3: ["Groupe A : aucune donnée n'est parfaitement neutre ; corriger tous les biais coûterait très cher ; un filtre imparfait vaut mieux que pas de filtre du tout.",
-         "Groupe B : les erreurs touchent toujours les mêmes personnes ; un blocage injustifié est une atteinte à la liberté d'expression ; l'utilisateur ne peut ni comprendre ni contester la décision.",
-         "Le débat doit faire émerger la responsabilité du concepteur : tester, documenter, permettre un recours humain."],
-    n4a: ["L'IA enregistre l'historique, les notes et le temps passé sur chaque contenu.",
-          "Elle compare ce profil à celui d'utilisateurs aux goûts proches et prédit ce qui a le plus de chances de plaire.",
-          "L'objectif du site est de garder l'utilisateur connecté le plus longtemps possible."],
-    n4b: ["Conséquence : un déverrouillage qui échoue, une identification erronée, un accès refusé — l'erreur retombe toujours sur le même groupe de personnes.",
-          "Solutions : équilibrer les données d'entraînement, tester séparément les performances par groupe, faire auditer le système et prévoir un recours humain."]
+    n1a: ["b) son adresse IP."],
+    n1b: ["a) une table de routage."],
+    n1c: ["a) bps, c) Mbps et d) Gb/s. Le Mo mesure une quantité de données, pas un débit."],
+    n1d: ["Adresse IP → numéro d'identification unique d'un appareil sur un réseau.",
+          "Débit → quantité de données transmises par seconde.",
+          "Table de routage → structure de données qui indique le chemin à suivre pour joindre une destination."],
+    n2a: ["La table de routage indique au routeur, pour chaque destination, vers quel voisin envoyer le paquet.",
+          "Sans elle, le routeur ne saurait pas quoi faire d'un paquet destiné à un réseau qu'il ne connaît pas directement."],
+    n2b: ["Le débit est la quantité de données transmises par seconde. Une vidéo représente beaucoup de données.",
+          "Si le débit est faible, il faut plus de temps pour transmettre la même quantité : la lecture attend que les données arrivent."],
+    n2c: ["L'adresse privée n'est valable qu'à l'intérieur du réseau local du collège ; plusieurs réseaux peuvent utiliser 192.168.1.25.",
+          "L'adresse publique est unique sur Internet et permet de joindre le serveur depuis n'importe où. Le passage de l'une à l'autre se fait par la Box."],
+    n4a: ["192.168.1.42 → réseau du collège.",
+          "203.0.113.200 → réseau du serveur vidéo.",
+          "198.51.100.9 → réseau du serveur Pronote.",
+          "192.168.2.25 → aucun des trois : le troisième nombre diffère, c'est un autre réseau.",
+          "203.0.113.300 → adresse impossible : un nombre d'une adresse IPv4 ne dépasse pas 255."],
+    n4b: ["Non. Les deux machines sont dans le même réseau 192.168.1.___, la livraison est directe via le switch.",
+          "La Box et le FAI ne servent qu'à sortir du réseau local."],
+    n4c: ["Non, le chemin le plus court n'est pas toujours retenu : le routage tient compte du débit disponible, pas seulement du nombre de sauts.",
+          "À trafic élevé, C est retenu malgré ses 4 sauts parce que son débit reste supérieur à celui de B, saturé.",
+          "En panne de R1, le chemin A disparaît et un autre chemin prend le relais : la redondance des routes assure la continuité du service."],
+    n4d: ["Table α → R5 : elle atteint le serveur via R6 et revient vers la source via R4, ce sont ses deux voisins sur le chemin C.",
+          "Table β → R2 : la source lui est directement reliée et il passe par R3 pour atteindre le serveur, c'est le chemin B.",
+          "Table γ → R6 : le serveur lui est directement relié et il revient vers la source par R5, fin du chemin C."]
   }
 };
 
@@ -620,7 +642,7 @@ function grandir(z){ z.style.height = "auto"; z.style.height = (z.scrollHeight +
 
 function majProgression(){
   var liens = tous("#chrono a");
-  var repere = ["situation","constats","probleme","idees","niveaux12","niveaux34","synthese","ressources"];
+  var repere = ["situation","constats","probleme","idees","niveaux12","ressources"];
   repere.forEach(function(id, i){
     var b = el(id);
     if(!b || !liens[i]) return;
@@ -667,10 +689,10 @@ el("effacer").addEventListener("click", function(){
 })();
 
 /* Vidéos : chargées seulement au clic, jamais à l'ouverture de la page. */
-tous(".video").forEach(function(v){
+tous(".video, .outil").forEach(function(v){
   v.querySelector(".vlire").addEventListener("click", function(){
     var c = document.createElement("div");
-    c.className = "cadre16";
+    c.className = v.classList.contains("outil") ? "cadreoutil" : "cadre16";
     var f = document.createElement("iframe");
     f.src = v.dataset.src;
     f.allowFullscreen = true;
@@ -689,8 +711,9 @@ majProgression();
    ============================================================ */
 if(new URLSearchParams(location.search).get("prof") === "1"){
   var cibles = {
-    n1a: '[data-qcm="n1a3"]', n1b: '[data-qcm="n1b"]',
-    n2a: "#n2a", n2b: "#n2b", n3: "#debat-3", n4a: "#n4a", n4b: "#n4b"
+    n1a: '[data-qcm="n1a"]', n1b: '[data-qcm="n1b"]', n1c: '[data-qcm="n1c"]',
+    n1d: ".assoc", n2a: "#n2a", n2b: "#n2b", n2c: "#n2c",
+    n4a: "#n4a", n4b: "#n4b", n4c: "#n4c3", n4d: "#n4d"
   };
   Object.keys(cibles).forEach(function(k){
     var liste = FICHE.corrige[k];
@@ -708,7 +731,7 @@ if(new URLSearchParams(location.search).get("prof") === "1"){
    4. LECTURE DES RÉPONSES
    ============================================================ */
 function lire(){
-  var d = { identite:{}, textes:{}, qcm:{}, debat:{ groupe:"", args:[] }, cps:null };
+  var d = { identite:{}, textes:{}, qcm:{}, assoc:[], filius:[], n4a:[], n4c:[], n4d:[], cps:null };
   champsId.forEach(function(k){ d.identite[k] = el(k).value.trim(); });
   tous("textarea[data-rep]").forEach(function(z){ d.textes[z.id] = z.value.trim(); });
 
@@ -722,10 +745,23 @@ function lire(){
     d.qcm[cle] = { titre: b.dataset.titre, reponses: choix };
   });
 
-  d.debat.groupe = el("debat-groupe").value;
-  ["debat-1","debat-2","debat-3"].forEach(function(id, i){
-    var v = el(id).value.trim();
-    if(v) d.debat.args.push((i + 1) + ". " + v);
+  tous("select[data-assoc]").forEach(function(s){ d.assoc.push([s.dataset.terme, s.value]); });
+
+  tous("#filius .cartefiche").forEach(function(c){
+    d.filius.push([c.dataset.etape, c.querySelector('input[type="checkbox"]').checked ? "Fait" : "-"]);
+  });
+
+  tous("#n4a .ligne").forEach(function(l){
+    d.n4a.push([l.dataset.adresse, l.querySelector("select").value]);
+  });
+
+  tous("#n4c .ligne").forEach(function(l){
+    var i = l.querySelectorAll("input");
+    d.n4c.push([l.dataset.volume, i[0].value.trim(), i[1].value.trim()]);
+  });
+
+  tous("#n4d .cartefiche").forEach(function(c){
+    d.n4d.push([c.dataset.table, c.querySelector("select").value, c.querySelector("textarea").value.trim()]);
   });
 
   var r = document.querySelector('input[name="cps"]:checked');
@@ -744,7 +780,8 @@ function propre(t){
   return String(t == null ? "" : t)
     .replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"')
     .replace(/\u2026/g, "...").replace(/[\u2013\u2014]/g, "-")
-    .replace(/\u00A0/g, " ").replace(/\u2192/g, "->");
+    .replace(/\u00A0/g, " ").replace(/\u2192/g, "->")
+    .replace(/\u03B1/g, "alpha").replace(/\u03B2/g, "beta").replace(/\u03B3/g, "gamma");
 }
 function dateFr(iso){
   if(!iso) return "";
@@ -898,12 +935,25 @@ function construirePDF(d){
       rubrique(q.titre, null);
       cadre(q.reponses.join("\n"), { min: 2 });
     }
-    else if(s.type === "debat"){
+    else if(s.type === "assoc"){
+      rubrique(s.titre, null);
+      tableau(["Terme", "Définition choisie"], d.assoc, [50, 132]);
+    }
+    else if(s.type === "filius"){
       rubrique(s.titre, s.duree);
-      var bloc = [];
-      if(d.debat.groupe) bloc.push(d.debat.groupe);
-      bloc = bloc.concat(d.debat.args);
-      cadre(bloc.join("\n"), { min: 5 });
+      tableau(["Étape", "Réalisée"], d.filius, [152, 30]);
+    }
+    else if(s.type === "n4a"){
+      rubrique(s.titre, s.duree);
+      tableau(["Adresse", "Réseau"], d.n4a, [60, 122]);
+    }
+    else if(s.type === "n4c"){
+      rubrique(s.titre, null);
+      tableau(["Volume de trafic", "Chemin retenu", "Débit du chemin"], d.n4c, [46, 68, 68]);
+    }
+    else if(s.type === "n4d"){
+      rubrique(s.titre, null);
+      tableau(["Table", "Routeur", "Justification"], d.n4d, [24, 26, 132]);
     }
     else if(s.type === "cps"){
       place(36);
@@ -946,7 +996,7 @@ function nomFichier(d){
     return propre(t).normalize("NFD").replace(/[\u0300-\u036f]/g, "")
       .replace(/[^A-Za-z0-9]+/g, "-").replace(/^-|-$/g, "");
   };
-  return ["Seq" + FICHE.sequence + "-Act" + FICHE.activite,
+  return [FICHE.ref || ("Seq" + FICHE.sequence + "-Act" + FICHE.activite),
           net(d.identite.nom).toUpperCase(), net(d.identite.prenom),
           net(d.identite.classe)].filter(Boolean).join("_") + ".pdf";
 }

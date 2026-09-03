@@ -21,6 +21,35 @@ body{margin:0;background:var(--papier);color:var(--encre);
 .page{max-width:820px;margin:0 auto;padding:0 20px 140px}
 
 /* En-tête */
+
+/* ---------- Barre de navigation ---------- */
+.navsite{
+  position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--trait);padding:9px 20px;
+}
+.navsite .dedans{max-width:820px;margin:0 auto;width:100%;display:flex;align-items:center;gap:16px}
+.navsite .accueil{
+  display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  font-family:"Archivo",sans-serif;font-weight:600;font-size:14.5px;color:var(--teal);
+  border:1px solid var(--trait);border-radius:8px;padding:7px 14px;background:#fff;
+}
+.navsite .accueil:hover{border-color:var(--teal);background:var(--teal-pale)}
+.navsite .accueil:focus-visible{outline:2px solid var(--magenta);outline-offset:2px}
+.navsite .saut{margin-left:auto;display:flex;align-items:center;gap:9px}
+.navsite .saut span{font-size:13.5px;color:var(--doux)}
+.navsite select{
+  font:inherit;font-size:14.5px;color:var(--encre);background:#fff;
+  border:1px solid var(--trait);border-radius:8px;padding:7px 10px;max-width:min(52vw,330px);
+}
+.navsite select:focus{outline:0;border-color:var(--teal)}
+@media(max-width:640px){
+  .navsite{padding:8px 14px;gap:10px}
+  .navsite .saut span{display:none}
+  .navsite select{max-width:none;flex:1}
+}
+@media print{.navsite{display:none}}
+
 .entete{position:relative;background:var(--carte);border:1px solid var(--trait);
   border-top:4px solid var(--teal);border-radius:var(--r);margin-top:26px;padding:26px 26px 0}
 .marque{display:flex;align-items:center;gap:13px;margin:0 0 14px}
@@ -196,6 +225,38 @@ textarea::placeholder{color:#9FB0B3}
 </style>
 </head>
 <body>
+
+<nav class="navsite" aria-label="Navigation du site">
+  <div class="dedans">
+    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
+    <label class="saut">
+      <span>Aller à</span>
+      <select id="navfiches" aria-label="Aller à une autre activité">
+        <optgroup label="Séquence 1">
+          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+          <option value="seq1-act2.html" selected>Activité 2 — Du téléphone au smartphone</option>
+          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+        </optgroup>
+        <optgroup label="Séquence 2">
+          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Comprendre</option>
+          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Filius</option>
+          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Analyser le routage</option>
+        </optgroup>
+        <optgroup label="Outils">
+          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+        </optgroup>
+      </select>
+    </label>
+  </div>
+</nav>
+<script>
+document.getElementById("navfiches").addEventListener("change", function(){
+  if(this.value) location.href = this.value;
+});
+</script>
+
 
 <main class="page">
 

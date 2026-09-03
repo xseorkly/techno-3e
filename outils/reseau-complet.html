@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Réseau virtuel — collège, FAI et trajet d'un paquet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EEF3F8; --grid:#D8E3EE; --surface:#FFFFFF;
+    --ink:#16232E; --ink-soft:#4A5C6B;
+    --accent:#2563A6; --accent-soft:#E4EDF6;
+    --ok:#1E7A52; --ok-soft:#E4F3EC;
+    --warn:#B5590F; --warn-soft:#FBEDDF;
+    --danger:#B3261E; --danger-soft:#FBE9E7;
+    --host:#5F5E5A; --host-soft:#EFEEEA;
+    --server:#993C1D; --server-soft:#FAECE7;
+    --switch:#5A6B7D; --switch-soft:#E7ECF1;
+    --radius:12px;
+    --fd:'Space Grotesk',sans-serif;
+    --fb:'IBM Plex Sans',sans-serif;
+    --fm:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; color:var(--ink); font-family:var(--fb); font-size:16px; line-height:1.55;
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/100% 34px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/34px 100%,
+      var(--bg);
+  }
+  .wrap{max-width:1040px; margin:0 auto; padding:28px 20px 60px;}
+
+  header .eyebrow{font-family:var(--fm); font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); margin:0 0 8px;}
+  header h1{font-family:var(--fd); font-weight:700; font-size:clamp(24px,3.6vw,34px); line-height:1.15; margin:0 0 14px;}
+  header p.lead{
+    color:var(--ink-soft); max-width:none; margin:0 0 22px;
+    background:var(--surface); border:1px solid var(--grid); border-left:3px solid var(--accent);
+    border-radius:var(--radius); padding:14px 18px;
+  }
+
+  .controls{
+    display:flex; flex-wrap:nowrap; align-items:center; justify-content:space-between; gap:16px;
+    background:var(--surface); border:1px solid var(--grid); border-radius:var(--radius);
+    padding:12px 16px; margin-bottom:18px;
+  }
+  .controls .group{display:flex; align-items:center; gap:8px; flex-wrap:nowrap;}
+  .controls .actions{padding-left:16px; border-left:1px solid var(--grid);}
+  .controls .label{font-family:var(--fm); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); white-space:nowrap;}
+  .dest-btn{font-family:var(--fb); font-size:13.5px; font-weight:500; white-space:nowrap; border:1px solid var(--grid); background:var(--surface); color:var(--ink); padding:7px 12px; border-radius:8px; cursor:pointer; transition:.15s;}
+  .dest-btn:hover{border-color:var(--accent);}
+  .dest-btn.active{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .send-btn{font-family:var(--fb); font-size:13.5px; font-weight:600; white-space:nowrap; background:var(--accent); color:#fff; border:none; border-radius:8px; padding:8px 15px; cursor:pointer; transition:.15s;}
+  .send-btn:hover{background:#1d5090;}
+  .send-btn:disabled{opacity:.5; cursor:default;}
+  .ghost-btn{font-family:var(--fb); font-size:13.5px; white-space:nowrap; background:transparent; color:var(--ink-soft); border:1px solid var(--grid); border-radius:8px; padding:7px 12px; cursor:pointer;}
+  .ghost-btn:hover{border-color:var(--ink-soft);}
+  .switch-ctl{display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; font-size:13px; white-space:nowrap;}
+  .switch-ctl input{position:absolute; opacity:0; width:0; height:0;}
+  .switch-track{width:38px; height:20px; border-radius:10px; background:var(--grid); position:relative; transition:.2s; flex-shrink:0;}
+  .switch-track::after{content:''; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff; transition:.2s;}
+  .switch-ctl input:checked + .switch-track{background:var(--danger);}
+  .switch-ctl input:checked + .switch-track::after{transform:translateX(18px);}
+
+  .stage{background:var(--surface); border:1px solid var(--grid); border-radius:var(--radius); padding:8px; margin-bottom:18px;}
+  svg{display:block; width:100%; height:auto;}
+
+  .zone{stroke-dasharray:6 6; stroke-width:1.6; rx:16;}
+  .zone-col{fill:rgba(37,99,166,0.06); stroke:var(--accent);}
+  .zone-net{fill:rgba(153,60,29,0.05); stroke:var(--server);}
+  .zone-title{font-family:var(--fd); font-weight:600; font-size:13px; letter-spacing:.04em;}
+  .zone-title.col{fill:var(--accent);}
+  .zone-title.net{fill:var(--server);}
+  .zone-sub{font-family:var(--fm); font-size:10.5px;}
+  .boundary{stroke:var(--ink-soft); stroke-width:2; stroke-dasharray:3 5; opacity:.85;}
+  .boundary-pill{fill:#fff; stroke:var(--ink-soft); stroke-width:1.2;}
+  .boundary-badge{font-family:var(--fd); font-weight:700; font-size:11px; letter-spacing:.16em; fill:var(--ink);}
+  .boundary-hint{font-family:var(--fm); font-size:9.5px; fill:var(--ink-soft);}
+
+  .link{stroke:#9DB4CB; stroke-width:3; stroke-linecap:round; transition:stroke .2s;}
+  .link.lit{stroke:var(--accent); stroke-width:4.5;}
+  .link.cut{stroke:var(--danger); stroke-width:3; stroke-dasharray:7 7;}
+  .node-box{stroke-width:1.5; transition:.2s;}
+  .node-box.arrived{stroke-width:3;}
+  .nlabel{font-family:var(--fb); font-weight:600; font-size:12.5px; fill:var(--ink);}
+  .nsub{font-family:var(--fm); font-size:10px; fill:var(--ink-soft);}
+  .net-tag{font-family:var(--fm); font-size:10px; fill:var(--ink-soft);}
+  #packet{fill:var(--accent); stroke:#fff; stroke-width:2; opacity:0;}
+  #packet.fail{fill:var(--danger);}
+  .cut-x{stroke:var(--danger); stroke-width:3; stroke-linecap:round; opacity:0;}
+  .cut-x.on{opacity:1;}
+
+  .narration{background:var(--surface); border:1px solid var(--grid); border-radius:var(--radius); padding:16px 18px; margin-bottom:24px; min-height:96px;}
+  .narration h2{font-family:var(--fd); font-size:14px; margin:0 0 10px; color:var(--accent);}
+  #log{margin:0; padding:0; list-style:none; font-size:14.5px;}
+  #log li{padding:5px 0 5px 24px; position:relative; color:var(--ink); opacity:0; animation:fade .3s forwards;}
+  #log li::before{content:'›'; position:absolute; left:6px; color:var(--accent); font-family:var(--fm); font-weight:600;}
+  #log li.ok::before{content:'✓'; color:var(--ok);}
+  #log li.fail::before{content:'✕'; color:var(--danger);}
+  #log li.cross::before{content:'⟶'; color:var(--server);}
+  #log li.ok{color:var(--ok);}
+  #log li.fail{color:var(--danger);}
+  #log li.cross{color:var(--server);}
+  @keyframes fade{to{opacity:1;}}
+
+  .tables-title{font-family:var(--fd); font-size:17px; margin:0 0 4px;}
+  .tables-sub{color:var(--ink-soft); font-size:14px; margin:0 0 16px;}
+  .tables{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  .rt{background:var(--surface); border:1px solid var(--grid); border-radius:var(--radius); overflow:hidden; transition:opacity .3s, transform .3s, box-shadow .3s, border-color .3s;}
+  /* pendant une animation, les tables non consultées s'estompent */
+  .tables.routing .rt{opacity:.3; filter:saturate(.4);}
+  .tables.routing .rt.active,
+  .tables.routing .rt.done{opacity:1; filter:none;}
+  .rt.active{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px var(--accent-soft), 0 6px 18px rgba(37,99,166,.18);
+    transform:translateY(-2px);
+  }
+  .rt.active .rt-head{background:var(--accent); border-bottom-color:var(--accent);}
+  .rt.active .rt-head .dot{background:#fff;}
+  .rt.active .rt-head strong{color:#fff;}
+  .rt.active .rt-head span{color:rgba(255,255,255,.8);}
+  .rt.done{border-color:var(--ok); box-shadow:inset 3px 0 0 var(--ok);}
+  .rt-head{display:flex; align-items:center; gap:8px; padding:10px 14px; background:var(--accent-soft); border-bottom:1px solid var(--grid); transition:background .25s;}
+  .rt-head .dot{width:9px; height:9px; border-radius:50%; background:var(--accent); flex-shrink:0;}
+  .rt-head strong{font-family:var(--fd); font-size:14px;}
+  .rt-head span{font-family:var(--fm); font-size:11px; color:var(--ink-soft); margin-left:auto;}
+  table.route{width:100%; border-collapse:collapse;}
+  table.route th, table.route td{text-align:left; padding:8px 14px; font-size:13px; border-bottom:1px solid var(--grid);}
+  table.route th{font-family:var(--fm); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); font-weight:500;}
+  table.route td{font-family:var(--fm); color:var(--ink);}
+  table.route tr:last-child td{border-bottom:none;}
+  table.route tr.hit td{background:var(--warn-soft); font-weight:700; box-shadow:inset 3px 0 0 var(--warn);}
+  .local{color:var(--ok)!important;}
+  .switch-note{margin:14px 0 0; font-size:13px; color:var(--ink-soft); background:var(--switch-soft); border:1px solid var(--grid); border-left:3px solid var(--switch); border-radius:8px; padding:10px 14px;}
+
+  .legend{display:flex; flex-wrap:wrap; gap:14px; margin:14px 0 0; font-size:12.5px; color:var(--ink-soft);}
+  .legend span{display:flex; align-items:center; gap:6px;}
+  .chip{width:13px; height:13px; border-radius:4px; flex-shrink:0;}
+
+  /* ---- Onglets ---- */
+  .tabs{display:flex; gap:6px; margin:0 0 18px; border-bottom:2px solid var(--grid);}
+  .tab{
+    font-family:var(--fd); font-size:14.5px; font-weight:600; color:var(--ink-soft);
+    background:transparent; border:none; border-bottom:3px solid transparent;
+    padding:10px 18px; margin-bottom:-2px; cursor:pointer; transition:.15s;
+  }
+  .tab:hover{color:var(--ink);}
+  .tab.active{color:var(--accent); border-bottom-color:var(--accent);}
+  .pane[hidden]{display:none;}
+
+  /* ---- Panneau Débit ---- */
+  .debit-grid{display:grid; grid-template-columns:1fr 320px; gap:18px; align-items:start;}
+  .debit-stage{background:var(--surface); border:1px solid var(--grid); border-radius:var(--radius); padding:18px;}
+  .debit-side{display:flex; flex-direction:column; gap:14px;}
+
+  .ctl-block{background:var(--surface); border:1px solid var(--grid); border-radius:var(--radius); padding:14px 16px;}
+  .ctl-block h3{font-family:var(--fm); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft); margin:0 0 10px;}
+  .opt-row{display:flex; flex-wrap:wrap; gap:7px;}
+  .opt{font-family:var(--fb); font-size:13px; font-weight:500; border:1px solid var(--grid); background:var(--surface); color:var(--ink); padding:7px 11px; border-radius:8px; cursor:pointer; transition:.15s; white-space:nowrap;}
+  .opt:hover{border-color:var(--accent);}
+  .opt.active{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .opt small{display:block; font-family:var(--fm); font-size:10px; opacity:.75; font-weight:400;}
+
+  /* lane / file d'attente animée */
+  .lane-wrap{margin-bottom:16px;}
+  .lane-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;}
+  .lane-head .name{font-family:var(--fd); font-weight:600; font-size:14px;}
+  .lane-head .cond{font-family:var(--fm); font-size:11.5px; color:var(--ink-soft);}
+  .lane{display:flex; align-items:center; gap:10px;}
+  .endpoint{width:56px; height:56px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0; border:1px solid var(--grid); background:var(--host-soft);}
+  .endpoint.server{background:var(--server-soft); border-color:var(--server);}
+  .lane-track{position:relative; flex:1; height:56px; border-radius:12px; background:linear-gradient(#F3F7FB,#E9F0F7); border:1px solid var(--grid); overflow:hidden;}
+  .lane-track .lanes{position:absolute; inset:0;}
+  .pkt{position:absolute; width:16px; height:12px; border-radius:3px; background:var(--accent); box-shadow:0 1px 2px rgba(0,0,0,.15); animation:flow var(--flow,3s) linear infinite; animation-delay:var(--delay,0s); opacity:0;}
+  @keyframes flow{
+    0%{left:-6%; opacity:0;}
+    6%{opacity:1;}
+    94%{opacity:1;}
+    100%{left:104%; opacity:0;}
+  }
+  .jam{position:absolute; top:0; bottom:0; width:34%; left:33%; background:repeating-linear-gradient(45deg, rgba(181,89,15,.16) 0 10px, rgba(181,89,15,.28) 10px 20px); border-left:2px solid var(--warn); border-right:2px solid var(--warn); opacity:0; transition:opacity .3s;}
+  .jam.on{opacity:1;}
+  .jam-tag{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:var(--fd); font-weight:700; font-size:11px; color:var(--warn); letter-spacing:.08em; white-space:nowrap; opacity:0; transition:opacity .3s;}
+  .jam-tag.on{opacity:1;}
+
+  /* résultats */
+  .result-main{background:var(--surface); border:1px solid var(--grid); border-radius:var(--radius); padding:16px 18px;}
+  .result-main .db-value{font-family:var(--fd); font-weight:700; font-size:30px; line-height:1; color:var(--accent);}
+  .result-main .db-unit{font-family:var(--fm); font-size:14px; color:var(--ink-soft); margin-left:4px;}
+  .db-badge{display:inline-block; font-family:var(--fb); font-size:12.5px; font-weight:600; padding:4px 10px; border-radius:20px; margin-top:10px;}
+  .db-time{margin-top:12px; font-size:14px; color:var(--ink);}
+  .db-time strong{font-family:var(--fm); color:var(--accent); font-size:16px;}
+
+  .scale{margin-top:14px;}
+  .scale-bar{position:relative; height:16px; border-radius:8px; overflow:hidden; display:flex;}
+  .scale-bar .seg{height:100%;}
+  .scale-marker{position:absolute; top:-4px; width:3px; height:24px; background:var(--ink); border-radius:2px; transition:left .35s ease;}
+  .scale-labels{display:flex; justify-content:space-between; font-family:var(--fm); font-size:9.5px; color:var(--ink-soft); margin-top:5px;}
+
+  .debit-note{font-size:14px; color:var(--ink); background:var(--surface); border:1px solid var(--grid); border-left:3px solid var(--accent); border-radius:var(--radius); padding:14px 16px; margin-top:16px;}
+  .fiche-quote{font-size:13.5px; color:var(--ink-soft); background:var(--accent-soft); border-radius:var(--radius); padding:14px 16px; margin-top:16px;}
+  .fiche-quote .src{display:block; font-family:var(--fm); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--accent); margin-bottom:6px;}
+
+  /* ---- Panneau Trafic ---- */
+  .traf-grid{display:grid; grid-template-columns:1fr 300px; gap:18px; align-items:start;}
+  .traf-stage{background:var(--surface); border:1px solid var(--grid); border-radius:var(--radius); padding:10px;}
+  .traf-side{display:flex; flex-direction:column; gap:12px;}
+  .p-link{fill:none; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; transition:stroke .25s, stroke-width .25s, opacity .25s;}
+  .p-link.chosen{stroke-width:5.5;}
+  .p-link.down{stroke-dasharray:8 8;}
+  .trouter rect{transition:.2s;}
+  .trlabel{font-family:var(--fm); font-size:10px; fill:var(--ink); font-weight:600;}
+  .tendpoint rect{stroke-width:1.5;}
+  .tendpoint text{font-family:var(--fb); font-weight:600; font-size:11px; fill:var(--ink);}
+  .path-card{border:1px solid var(--grid); border-radius:var(--radius); padding:11px 13px; background:var(--surface); transition:.2s;}
+  .path-card.chosen{border-color:var(--accent); box-shadow:0 0 0 2px var(--accent-soft);}
+  .path-card.down{opacity:.55;}
+  .path-card h4{display:flex; align-items:center; gap:8px; margin:0 0 5px; font-family:var(--fd); font-size:13.5px;}
+  .path-card h4 .swatch{width:11px; height:11px; border-radius:3px; flex-shrink:0;}
+  .path-card h4 .tag{margin-left:auto; font-family:var(--fm); font-size:9.5px; padding:2px 8px; border-radius:20px; letter-spacing:.04em;}
+  .path-card .meta{font-family:var(--fm); font-size:11px; color:var(--ink-soft); line-height:1.5;}
+  .path-card .state{font-weight:600;}
+  .path-card .dbline{display:flex; align-items:baseline; gap:8px; margin-top:7px;}
+  .path-card .db-big{font-family:var(--fd); font-weight:700; font-size:19px; line-height:1; color:var(--ink);}
+  .path-card .db-big .u{font-family:var(--fm); font-weight:500; font-size:11px; color:var(--ink-soft); margin-left:3px;}
+  .path-card .etat{font-family:var(--fm); font-size:11px; font-weight:600; margin-left:auto;}
+  .path-card .db-bar{margin-top:6px; height:8px; border-radius:5px; background:var(--grid); overflow:hidden;}
+  .path-card .db-fill{display:block; height:100%; border-radius:5px; width:0; transition:width .4s ease, background .3s;}
+
+  @media (max-width:920px){
+    .controls{flex-wrap:wrap; justify-content:flex-start;}
+    .controls .actions{padding-left:0; border-left:none; margin-left:auto;}
+    .debit-grid{grid-template-columns:1fr;}
+    .traf-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:680px){
+    .tables{grid-template-columns:1fr;}
+    .controls{flex-direction:column; align-items:stretch;}
+    .controls .group{flex-wrap:wrap;}
+    .controls .actions{margin-left:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Réseau virtuel interactif</p>
+    <h1>Du réseau du collège jusqu'à Internet</h1>
+    <p class="lead">Cette application explore comment une information circule dans un réseau, à travers trois angles complémentaires. <strong>Trajet &amp; routage</strong> : suivez un paquet du réseau du collège jusqu'à un serveur et voyez les tables de routage décider de son chemin. <strong>Débit</strong> : mesurez à quelle vitesse les données circulent selon la connexion et la congestion. <strong>Trafic</strong> : découvrez pourquoi, entre plusieurs chemins possibles, le routage choisit le plus rapide et s'adapte aux embouteillages. Choisissez un onglet pour commencer.</p>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-pane="routage" role="tab">Trajet &amp; routage</button>
+    <button class="tab" data-pane="debit" role="tab">Débit</button>
+    <button class="tab" data-pane="trafic" role="tab">Trafic</button>
+  </div>
+
+  <section id="pane-routage" class="pane">
+  <div class="controls">
+    <div class="group">
+      <span class="label">Destination</span>
+      <button class="dest-btn active" data-dest="serveurVideo">Serveur vidéo</button>
+      <button class="dest-btn" data-dest="serveurPronote">Serveur Pronote</button>
+      <button class="dest-btn" data-dest="pc2">PC 2 (collège)</button>
+    </div>
+    <div class="group">
+      <label class="switch-ctl">
+        <input type="checkbox" id="cutToggle">
+        <span class="switch-track"></span>
+        Couper la liaison collège ↔ FAI
+      </label>
+    </div>
+    <div class="group actions">
+      <button class="send-btn" id="sendBtn">Envoyer le paquet</button>
+      <button class="ghost-btn" id="resetBtn">Réinitialiser</button>
+    </div>
+  </div>
+
+  <div class="stage">
+    <svg viewBox="0 0 920 480" role="img" aria-label="Réseau du collège (trois PC, un switch, une box) séparé par une frontière de l'environnement extérieur (FAI, routeurs, serveurs).">
+
+      <!-- zones -->
+      <rect class="zone zone-col" x="30" y="70" width="350" height="370" rx="16"></rect>
+      <rect class="zone zone-net" x="410" y="70" width="480" height="370" rx="16"></rect>
+      <text class="zone-title col" x="205" y="92" text-anchor="middle">RÉSEAU DU COLLÈGE</text>
+      <text class="zone-sub" x="205" y="107" text-anchor="middle" fill="#4A5C6B">réseau local · 192.168.1.0/24</text>
+      <text class="zone-title net" x="650" y="92" text-anchor="middle">INTERNET / EXTÉRIEUR</text>
+      <text class="zone-sub" x="650" y="107" text-anchor="middle" fill="#4A5C6B">au-delà de la Box, via le FAI</text>
+
+      <!-- frontière -->
+      <line class="boundary" x1="395" y1="64" x2="395" y2="436"></line>
+      <g>
+        <rect class="boundary-pill" x="345" y="40" width="100" height="24" rx="12"></rect>
+        <text class="boundary-badge" x="395" y="56" text-anchor="middle">FRONTIÈRE</text>
+      </g>
+      <text class="boundary-hint" x="376" y="415" text-anchor="end">◄ réseau local</text>
+      <text class="boundary-hint" x="414" y="415" text-anchor="start">Internet ►</text>
+
+      <!-- net tags serveurs -->
+      <text class="net-tag" x="820" y="128" text-anchor="middle">réseau 203.0.113.0/24</text>
+      <text class="net-tag" x="820" y="390" text-anchor="middle">réseau 198.51.100.0/24</text>
+
+      <!-- liens -->
+      <line class="link" id="l-pclea-sw" x1="95" y1="140" x2="215" y2="250"></line>
+      <line class="link" id="l-pc2-sw"   x1="95" y1="250" x2="215" y2="250"></line>
+      <line class="link" id="l-pc3-sw"   x1="95" y1="355" x2="215" y2="250"></line>
+      <line class="link" id="l-sw-r1"    x1="215" y1="250" x2="330" y2="250"></line>
+      <line class="link" id="l-r1-r2"    x1="330" y1="250" x2="480" y2="250"></line>
+      <line class="link" id="l-r2-r3"    x1="480" y1="250" x2="640" y2="160"></line>
+      <line class="link" id="l-r2-r4"    x1="480" y1="250" x2="640" y2="340"></line>
+      <line class="link" id="l-r3-sv"    x1="640" y1="160" x2="820" y2="160"></line>
+      <line class="link" id="l-r4-sd"    x1="640" y1="340" x2="820" y2="340"></line>
+
+      <!-- croix câble coupé (liaison R1-R2) -->
+      <g id="cutMark">
+        <line class="cut-x" x1="398" y1="243" x2="412" y2="257"></line>
+        <line class="cut-x" x1="412" y1="243" x2="398" y2="257"></line>
+      </g>
+
+      <!-- PC Léa -->
+      <g id="n-pcLea">
+        <rect class="node-box" x="50" y="117" width="90" height="46" rx="9" fill="var(--host-soft)" stroke="var(--host)"></rect>
+        <text class="nlabel" x="95" y="136" text-anchor="middle">PC de Léa</text>
+        <text class="nsub" x="95" y="151" text-anchor="middle">192.168.1.25</text>
+      </g>
+      <!-- PC 2 -->
+      <g id="n-pc2">
+        <rect class="node-box" x="50" y="227" width="90" height="46" rx="9" fill="var(--host-soft)" stroke="var(--host)"></rect>
+        <text class="nlabel" x="95" y="246" text-anchor="middle">PC 2</text>
+        <text class="nsub" x="95" y="261" text-anchor="middle">192.168.1.26</text>
+      </g>
+      <!-- PC 3 -->
+      <g id="n-pc3">
+        <rect class="node-box" x="50" y="332" width="90" height="46" rx="9" fill="var(--host-soft)" stroke="var(--host)"></rect>
+        <text class="nlabel" x="95" y="351" text-anchor="middle">PC 3</text>
+        <text class="nsub" x="95" y="366" text-anchor="middle">192.168.1.27</text>
+      </g>
+      <!-- Switch -->
+      <g id="n-sw">
+        <rect class="node-box" x="170" y="227" width="90" height="46" rx="9" fill="var(--switch-soft)" stroke="var(--switch)"></rect>
+        <text class="nlabel" x="215" y="246" text-anchor="middle">Switch</text>
+        <text class="nsub" x="215" y="261" text-anchor="middle">commutateur</text>
+      </g>
+      <!-- R1 Box -->
+      <g id="n-r1">
+        <rect class="node-box" x="285" y="227" width="90" height="46" rx="9" fill="var(--accent-soft)" stroke="var(--accent)"></rect>
+        <text class="nlabel" x="330" y="246" text-anchor="middle">R1 · Box</text>
+        <text class="nsub" x="330" y="261" text-anchor="middle">192.168.1.1</text>
+      </g>
+      <!-- R2 FAI -->
+      <g id="n-r2">
+        <rect class="node-box" x="435" y="227" width="90" height="46" rx="9" fill="var(--accent-soft)" stroke="var(--accent)"></rect>
+        <text class="nlabel" x="480" y="246" text-anchor="middle">R2 · FAI</text>
+        <text class="nsub" x="480" y="261" text-anchor="middle">routeur</text>
+      </g>
+      <!-- R3 -->
+      <g id="n-r3">
+        <rect class="node-box" x="595" y="137" width="90" height="46" rx="9" fill="var(--accent-soft)" stroke="var(--accent)"></rect>
+        <text class="nlabel" x="640" y="156" text-anchor="middle">R3</text>
+        <text class="nsub" x="640" y="171" text-anchor="middle">routeur</text>
+      </g>
+      <!-- R4 -->
+      <g id="n-r4">
+        <rect class="node-box" x="595" y="317" width="90" height="46" rx="9" fill="var(--accent-soft)" stroke="var(--accent)"></rect>
+        <text class="nlabel" x="640" y="336" text-anchor="middle">R4</text>
+        <text class="nsub" x="640" y="351" text-anchor="middle">routeur</text>
+      </g>
+      <!-- Serveur vidéo -->
+      <g id="n-serveurVideo">
+        <rect class="node-box" x="772" y="137" width="96" height="46" rx="9" fill="var(--server-soft)" stroke="var(--server)"></rect>
+        <text class="nlabel" x="820" y="156" text-anchor="middle">Serveur vidéo</text>
+        <text class="nsub" x="820" y="171" text-anchor="middle">203.0.113.10</text>
+      </g>
+      <!-- Serveur Pronote -->
+      <g id="n-serveurPronote">
+        <rect class="node-box" x="772" y="317" width="96" height="46" rx="9" fill="var(--server-soft)" stroke="var(--server)"></rect>
+        <text class="nlabel" x="820" y="336" text-anchor="middle">Serveur Pronote</text>
+        <text class="nsub" x="820" y="351" text-anchor="middle">198.51.100.5</text>
+      </g>
+
+      <!-- paquet -->
+      <circle id="packet" cx="95" cy="140" r="9"></circle>
+    </svg>
+
+    <div class="legend">
+      <span><span class="chip" style="background:var(--host-soft); border:1px solid var(--host);"></span>Ordinateur</span>
+      <span><span class="chip" style="background:var(--switch-soft); border:1px solid var(--switch);"></span>Switch (commutateur)</span>
+      <span><span class="chip" style="background:var(--accent-soft); border:1px solid var(--accent);"></span>Routeur / Box</span>
+      <span><span class="chip" style="background:var(--server-soft); border:1px solid var(--server);"></span>Serveur</span>
+      <span><span class="chip" style="background:var(--accent);"></span>Lien actif</span>
+      <span><span class="chip" style="background:var(--danger);"></span>Liaison coupée</span>
+    </div>
+  </div>
+
+  <div class="narration">
+    <h2>Ce qui se passe</h2>
+    <ul id="log">
+      <li>Choisissez une destination puis cliquez sur « Envoyer le paquet ».</li>
+    </ul>
+  </div>
+
+  <h2 class="tables-title">Les tables de routage</h2>
+  <p class="tables-sub">Chaque routeur possède sa propre table. Pour un réseau de destination donné, elle indique vers quel voisin transmettre le paquet.</p>
+
+  <div class="tables">
+    <div class="rt" id="rt-r1">
+      <div class="rt-head"><span class="dot"></span><strong>R1 · Box du collège</strong><span>table de routage</span></div>
+      <table class="route">
+        <tr><th>Réseau de destination</th><th>Prochain saut</th></tr>
+        <tr data-net="N1"><td>192.168.1.0/24</td><td class="local">Livraison locale</td></tr>
+        <tr data-net="N4"><td>203.0.113.0/24</td><td>R2</td></tr>
+        <tr data-net="N5"><td>198.51.100.0/24</td><td>R2</td></tr>
+      </table>
+    </div>
+    <div class="rt" id="rt-r2">
+      <div class="rt-head"><span class="dot"></span><strong>R2 · FAI</strong><span>table de routage</span></div>
+      <table class="route">
+        <tr><th>Réseau de destination</th><th>Prochain saut</th></tr>
+        <tr data-net="N1"><td>192.168.1.0/24</td><td>R1</td></tr>
+        <tr data-net="N4"><td>203.0.113.0/24</td><td>R3</td></tr>
+        <tr data-net="N5"><td>198.51.100.0/24</td><td>R4</td></tr>
+      </table>
+    </div>
+    <div class="rt" id="rt-r3">
+      <div class="rt-head"><span class="dot"></span><strong>R3</strong><span>table de routage</span></div>
+      <table class="route">
+        <tr><th>Réseau de destination</th><th>Prochain saut</th></tr>
+        <tr data-net="N4"><td>203.0.113.0/24</td><td class="local">Livraison locale</td></tr>
+        <tr data-net="default"><td>(par défaut)</td><td>R2</td></tr>
+      </table>
+    </div>
+    <div class="rt" id="rt-r4">
+      <div class="rt-head"><span class="dot"></span><strong>R4</strong><span>table de routage</span></div>
+      <table class="route">
+        <tr><th>Réseau de destination</th><th>Prochain saut</th></tr>
+        <tr data-net="N5"><td>198.51.100.0/24</td><td class="local">Livraison locale</td></tr>
+        <tr data-net="default"><td>(par défaut)</td><td>R2</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <p class="switch-note"><strong>À noter :</strong> le switch (commutateur) n'a pas de table de routage. Il se contente de distribuer les paquets à l'intérieur du réseau local du collège. C'est la Box (R1), un routeur, qui décide d'envoyer ou non un paquet vers l'extérieur.</p>
+  </section>
+
+  <section id="pane-debit" class="pane" hidden>
+    <p class="lead" style="background:var(--surface); border:1px solid var(--grid); border-left:3px solid var(--accent); border-radius:var(--radius); padding:14px 18px; max-width:none; margin:0 0 18px;">
+      Le trajet dit <em>par où</em> passe l'information ; le <strong>débit</strong> dit <strong>à quelle vitesse</strong> elle circule. Choisissez une technologie de connexion, l'état du réseau et un fichier à transférer : observez la file de données accélérer, ralentir ou se bloquer dans un embouteillage.
+    </p>
+
+    <div class="debit-grid">
+      <div class="debit-stage">
+        <div class="lane-wrap">
+          <div class="lane-head">
+            <span class="name">Transfert en cours</span>
+            <span class="cond" id="laneCond">—</span>
+          </div>
+          <div class="lane">
+            <div class="endpoint">💻</div>
+            <div class="lane-track">
+              <div class="lanes" id="lanes"></div>
+              <div class="jam" id="jam"></div>
+              <div class="jam-tag" id="jamTag">EMBOUTEILLAGE</div>
+            </div>
+            <div class="endpoint server">🖥️</div>
+          </div>
+        </div>
+
+        <div class="ctl-block" style="margin-bottom:12px;">
+          <h3>Technologie de connexion</h3>
+          <div class="opt-row" id="techRow">
+            <button class="opt active" data-tech="fibre">Fibre optique <small>~1000 Mb/s</small></button>
+            <button class="opt" data-tech="wifi">Wi-Fi 5 <small>~300 Mb/s</small></button>
+            <button class="opt" data-tech="4g">4G <small>~50 Mb/s</small></button>
+            <button class="opt" data-tech="adsl">ADSL <small>~8 Mb/s</small></button>
+          </div>
+        </div>
+
+        <div class="ctl-block" style="margin-bottom:12px;">
+          <h3>État du réseau (congestion)</h3>
+          <div class="opt-row" id="loadRow">
+            <button class="opt active" data-load="1">Fluide <small>heure creuse</small></button>
+            <button class="opt" data-load="0.5">Chargé <small>trafic modéré</small></button>
+            <button class="opt" data-load="0.15">Saturé <small>heure de pointe</small></button>
+          </div>
+        </div>
+
+        <div class="ctl-block">
+          <h3>Fichier à transférer</h3>
+          <div class="opt-row" id="fileRow">
+            <button class="opt active" data-mo="5">Photo <small>5 Mo</small></button>
+            <button class="opt" data-mo="80">Musique (album) <small>80 Mo</small></button>
+            <button class="opt" data-mo="300">Vidéo HD <small>300 Mo</small></button>
+            <button class="opt" data-mo="15000">Jeu vidéo <small>15 Go</small></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="debit-side">
+        <div class="result-main">
+          <div><span class="db-value" id="dbValue">1000</span><span class="db-unit">Mb/s</span></div>
+          <span class="db-badge" id="dbBadge">Très haut débit</span>
+          <div class="db-time">Temps de transfert : <strong id="dbTime">—</strong></div>
+          <div class="scale">
+            <div class="scale-bar">
+              <div class="seg" style="width:20%; background:#C94F4F;"></div>
+              <div class="seg" style="width:20%; background:#D9922B;"></div>
+              <div class="seg" style="width:30%; background:#3E9E6A;"></div>
+              <div class="seg" style="width:30%; background:#2563A6;"></div>
+            </div>
+            <div class="scale-marker" id="scaleMarker" style="left:90%;"></div>
+            <div class="scale-labels">
+              <span>bas</span><span>moyen</span><span>haut</span><span>très haut</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="debit-note" id="dbNote">—</div>
+      </div>
+    </div>
+
+    <div class="fiche-quote">
+      <span class="src">Fiche connaissance SFC1q — le débit et les ordres de grandeur</span>
+      La vitesse de circulation des informations dépend du débit, mesuré en bits par seconde (bps) : plus le débit est élevé, plus les données circulent vite. Il varie selon plusieurs facteurs — la technologie de connexion, l'infrastructure du fournisseur d'accès (FAI), la congestion du réseau et la distance entre l'appareil et le routeur.
+    </div>
+  </section>
+
+  <section id="pane-trafic" class="pane" hidden>
+    <p class="lead" style="background:var(--surface); border:1px solid var(--grid); border-left:3px solid var(--accent); border-radius:var(--radius); padding:14px 18px; max-width:none; margin:0 0 18px;">
+      Entre deux points, il existe souvent <strong>plusieurs chemins</strong> passant par des routeurs différents. Le chemin retenu n'est pas toujours le plus court : selon le <strong>volume de trafic</strong> et l'<strong>état du réseau</strong>, un chemin rapide peut s'embouteiller et le routage bascule alors vers un autre. Faites varier le trafic et provoquez une panne pour voir le routage s'adapter.
+    </p>
+
+    <div class="traf-grid">
+      <div class="traf-stage">
+        <svg viewBox="0 0 800 380" role="img" aria-label="Réseau maillé avec une source, une destination et trois chemins possibles passant par des routeurs différents.">
+          <!-- liens (dessinés en premier) -->
+          <path class="p-link" id="tp-A" d="M55,190 L400,72 L745,190"></path>
+          <path class="p-link" id="tp-B" d="M55,190 L275,190 L525,190 L745,190"></path>
+          <path class="p-link" id="tp-C" d="M55,190 L225,312 L400,338 L575,312 L745,190"></path>
+
+          <!-- paquets -->
+          <g id="tpkts"></g>
+
+          <!-- routeurs -->
+          <g class="trouter"><rect x="382" y="56" width="36" height="30" rx="7" fill="var(--accent-soft)" stroke="var(--accent)"/><text class="trlabel" x="400" y="75" text-anchor="middle">R1</text></g>
+          <g class="trouter"><rect x="257" y="175" width="36" height="30" rx="7" fill="var(--accent-soft)" stroke="var(--accent)"/><text class="trlabel" x="275" y="194" text-anchor="middle">R2</text></g>
+          <g class="trouter"><rect x="507" y="175" width="36" height="30" rx="7" fill="var(--accent-soft)" stroke="var(--accent)"/><text class="trlabel" x="525" y="194" text-anchor="middle">R3</text></g>
+          <g class="trouter"><rect x="207" y="297" width="36" height="30" rx="7" fill="var(--accent-soft)" stroke="var(--accent)"/><text class="trlabel" x="225" y="316" text-anchor="middle">R4</text></g>
+          <g class="trouter"><rect x="382" y="323" width="36" height="30" rx="7" fill="var(--accent-soft)" stroke="var(--accent)"/><text class="trlabel" x="400" y="342" text-anchor="middle">R5</text></g>
+          <g class="trouter"><rect x="557" y="297" width="36" height="30" rx="7" fill="var(--accent-soft)" stroke="var(--accent)"/><text class="trlabel" x="575" y="316" text-anchor="middle">R6</text></g>
+
+          <!-- source / destination -->
+          <g class="tendpoint"><rect x="18" y="170" width="74" height="40" rx="9" fill="var(--host-soft)" stroke="var(--host)"/><text x="55" y="194" text-anchor="middle">Source</text></g>
+          <g class="tendpoint"><rect x="708" y="170" width="80" height="40" rx="9" fill="var(--server-soft)" stroke="var(--server)"/><text x="748" y="194" text-anchor="middle">Serveur</text></g>
+
+          <!-- badges chemin (nom + éventuel ✓ / ✗) -->
+          <text id="badge-A" class="trlabel" x="400" y="44" text-anchor="middle" font-size="11">Chemin A</text>
+          <text id="badge-B" class="trlabel" x="400" y="163" text-anchor="middle" font-size="11">Chemin B</text>
+          <text id="badge-C" class="trlabel" x="400" y="366" text-anchor="middle" font-size="11">Chemin C</text>
+        </svg>
+
+        <div class="ctl-block" style="margin-top:10px;">
+          <h3>Volume de trafic sur le réseau</h3>
+          <div class="opt-row" id="trafRow">
+            <button class="opt active" data-t="0.2">Faible <small>peu d'utilisateurs</small></button>
+            <button class="opt" data-t="0.55">Moyen <small>usage courant</small></button>
+            <button class="opt" data-t="0.9">Élevé <small>heure de pointe</small></button>
+          </div>
+          <label class="switch-ctl" style="margin-top:12px;">
+            <input type="checkbox" id="panneToggle">
+            <span class="switch-track"></span>
+            Panne du routeur R1 (chemin A hors service)
+          </label>
+        </div>
+      </div>
+
+      <div class="traf-side">
+        <div class="path-card" id="card-A">
+          <h4><span class="swatch" style="background:#2563A6;"></span>Chemin A <span class="tag"></span></h4>
+          <div class="meta">Route : Source → R1 → Serveur (2 sauts)</div>
+          <div class="dbline"><span class="db-big"></span><span class="etat"></span></div>
+          <div class="db-bar"><span class="db-fill"></span></div>
+        </div>
+        <div class="path-card" id="card-B">
+          <h4><span class="swatch" style="background:#3E9E6A;"></span>Chemin B <span class="tag"></span></h4>
+          <div class="meta">Route : Source → R2 → R3 → Serveur (3 sauts)</div>
+          <div class="dbline"><span class="db-big"></span><span class="etat"></span></div>
+          <div class="db-bar"><span class="db-fill"></span></div>
+        </div>
+        <div class="path-card" id="card-C">
+          <h4><span class="swatch" style="background:#8A5CB4;"></span>Chemin C <span class="tag"></span></h4>
+          <div class="meta">Route : Source → R4 → R5 → R6 → Serveur (4 sauts)</div>
+          <div class="dbline"><span class="db-big"></span><span class="etat"></span></div>
+          <div class="db-bar"><span class="db-fill"></span></div>
+        </div>
+        <div class="debit-note" id="trafNote">—</div>
+      </div>
+    </div>
+
+    <div class="fiche-quote">
+      <span class="src">Ce que montre cette simulation</span>
+      Le routage ne suit pas toujours le chemin le plus court. Un chemin très emprunté peut se congestionner : le routeur choisit alors la route dont le temps de traversée est le plus faible à cet instant. Si un routeur tombe en panne, le trafic est automatiquement redirigé vers un autre chemin disponible — c'est tout l'intérêt d'avoir plusieurs routes et un protocole de routage.
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  // ---- Onglets ----
+  const tabs = document.querySelectorAll('.tab');
+  const panes = { routage:document.getElementById('pane-routage'), debit:document.getElementById('pane-debit'), trafic:document.getElementById('pane-trafic') };
+  tabs.forEach(t=>t.addEventListener('click', ()=>{
+    tabs.forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    const key=t.dataset.pane;
+    Object.keys(panes).forEach(k=>{ panes[k].hidden = (k!==key); });
+  }));
+})();
+
+(function(){
+  // ---- Onglet Débit ----
+  const TECH = { fibre:{n:'Fibre optique', d:1000}, wifi:{n:'Wi-Fi 5', d:300}, '4g':{n:'4G', d:50}, adsl:{n:'ADSL', d:8} };
+  const LOAD = { '1':'réseau fluide', '0.5':'réseau chargé', '0.15':'réseau saturé (heure de pointe)' };
+
+  let tech='fibre', load=1, mo=5;
+
+  const dbValue=document.getElementById('dbValue');
+  const dbBadge=document.getElementById('dbBadge');
+  const dbTime=document.getElementById('dbTime');
+  const dbNote=document.getElementById('dbNote');
+  const marker=document.getElementById('scaleMarker');
+  const laneCond=document.getElementById('laneCond');
+  const lanesEl=document.getElementById('lanes');
+  const jamEl=document.getElementById('jam');
+  const jamTag=document.getElementById('jamTag');
+
+  const PKT=7;
+  for(let i=0;i<PKT;i++){
+    const p=document.createElement('span');
+    p.className='pkt';
+    p.style.top=(10+ (i%3)*14)+'px';
+    lanesEl.appendChild(p);
+  }
+  const pkts=lanesEl.querySelectorAll('.pkt');
+
+  function ordre(d){
+    if(d<1)   return {label:'Bas débit',        color:'#C94F4F', pos:10};
+    if(d<10)  return {label:'Débit moyen',      color:'#D9922B', pos:30};
+    if(d<100) return {label:'Haut débit',       color:'#3E9E6A', pos:55};
+    return          {label:'Très haut débit',  color:'#2563A6', pos:90};
+  }
+  function fmtTime(sec){
+    if(sec<1)   return Math.round(sec*1000)+' ms';
+    if(sec<60)  return (sec<10 ? sec.toFixed(1) : Math.round(sec))+' s';
+    if(sec<3600){const m=Math.floor(sec/60),s=Math.round(sec%60);return m+' min '+(s?s+' s':'');}
+    const h=Math.floor(sec/3600),m=Math.round((sec%3600)/60);return h+' h '+(m?m+' min':'');
+  }
+
+  function update(){
+    const base=TECH[tech].d;
+    const eff=base*load;                       // débit effectif (Mb/s)
+    const bits=mo*1e6*8;                        // Mo -> bits (1 Mo = 1 000 000 octets)
+    const sec=bits/(eff*1e6);                   // temps = bits / (bits/s)
+    const o=ordre(eff);
+
+    dbValue.textContent = eff>=1 ? (eff>=10?Math.round(eff):eff.toFixed(1)) : eff.toFixed(2);
+    dbBadge.textContent = o.label;
+    dbBadge.style.background = o.color+'22';
+    dbBadge.style.color = o.color;
+    marker.style.left = o.pos+'%';
+    dbTime.textContent = fmtTime(sec);
+
+    // condition affichée
+    const congested = load<1;
+    laneCond.textContent = TECH[tech].n+' · '+LOAD[String(load)];
+    jamEl.classList.toggle('on', congested);
+    jamTag.classList.toggle('on', load<=0.15);
+
+    // vitesse de la file : plus le débit est élevé, plus c'est rapide
+    const flow = Math.min(7, Math.max(0.7, 8 - 2*Math.log10(Math.max(eff,1))));
+    pkts.forEach((p,i)=>{
+      p.style.setProperty('--flow', flow+'s');
+      p.style.setProperty('--delay', (i*(flow/PKT)).toFixed(2)+'s');
+      p.style.background = congested ? 'var(--warn)' : 'var(--accent)';
+    });
+
+    // texte explicatif
+    let phrase = 'Connexion '+TECH[tech].n+' (~'+base+' Mb/s). ';
+    if(congested){
+      phrase += 'Le réseau est '+(load<=0.15?'saturé':'chargé')+' : le débit effectif chute à ~'+ (eff>=10?Math.round(eff):eff.toFixed(1)) +' Mb/s. ';
+    } else {
+      phrase += 'Réseau fluide : le débit reste proche du maximum. ';
+    }
+    phrase += 'Pour un fichier de '+(mo>=1000?(mo/1000)+' Go':mo+' Mo')+', le transfert prend ~'+fmtTime(sec)+'.';
+    dbNote.textContent = phrase;
+  }
+
+  function bindRow(id, attr, cast, set){
+    document.getElementById(id).querySelectorAll('.opt').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.getElementById(id).querySelectorAll('.opt').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        set(cast(btn.dataset[attr]));
+        update();
+      });
+    });
+  }
+  bindRow('techRow','tech', v=>v, v=>tech=v);
+  bindRow('loadRow','load', parseFloat, v=>load=v);
+  bindRow('fileRow','mo', parseFloat, v=>mo=v);
+
+  update();
+})();
+</script>
+
+<script>
+(function(){
+  const NODES = {
+    pcLea:        {x:95,  y:140, name:'PC de Léa',    ip:'192.168.1.25'},
+    pc2:          {x:95,  y:250, name:'PC 2',         ip:'192.168.1.26'},
+    pc3:          {x:95,  y:355, name:'PC 3',         ip:'192.168.1.27'},
+    sw:           {x:215, y:250, name:'Switch'},
+    r1:           {x:330, y:250, name:'R1'},
+    r2:           {x:480, y:250, name:'R2'},
+    r3:           {x:640, y:160, name:'R3'},
+    r4:           {x:640, y:340, name:'R4'},
+    serveurVideo: {x:820, y:160, name:'Serveur vidéo', ip:'203.0.113.10'},
+    serveurPronote:   {x:820, y:340, name:'Serveur Pronote',   ip:'198.51.100.5'}
+  };
+  const HOST_NET = { serveurVideo:'N4', serveurPronote:'N5', pcLea:'N1', pc2:'N1', pc3:'N1' };
+  const NET_ADDR = { N1:'192.168.1.0/24', N4:'203.0.113.0/24', N5:'198.51.100.0/24' };
+  const ROUTING = {
+    r1:{N1:'local', N4:'r2', N5:'r2'},
+    r2:{N1:'r1',    N4:'r3', N5:'r4'},
+    r3:{N4:'local', default:'r2'},
+    r4:{N5:'local', default:'r2'}
+  };
+  const LINK_ID = {
+    'pcLea-sw':'l-pclea-sw', 'pc2-sw':'l-pc2-sw', 'pc3-sw':'l-pc3-sw',
+    'sw-r1':'l-sw-r1', 'r1-r2':'l-r1-r2',
+    'r2-r3':'l-r2-r3', 'r2-r4':'l-r2-r4',
+    'r3-serveurVideo':'l-r3-sv', 'r4-serveurPronote':'l-r4-sd'
+  };
+
+  let dest = 'serveurVideo';
+  let busy = false;
+
+  const packet = document.getElementById('packet');
+  const logEl = document.getElementById('log');
+  const sendBtn = document.getElementById('sendBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const cutToggle = document.getElementById('cutToggle');
+  const cutMark = document.querySelectorAll('#cutMark .cut-x');
+  const tablesWrap = document.querySelector('.tables');
+
+  const sleep = ms => new Promise(r=>setTimeout(r,ms));
+
+  function clearHighlights(){
+    document.querySelectorAll('.link').forEach(l=>l.classList.remove('lit'));
+    document.querySelectorAll('.rt').forEach(t=>t.classList.remove('active','done'));
+    document.querySelectorAll('table.route tr').forEach(r=>r.classList.remove('hit'));
+    document.querySelectorAll('.node-box').forEach(n=>n.classList.remove('arrived'));
+    tablesWrap.classList.remove('routing');
+    packet.classList.remove('fail');
+  }
+  function logLine(text, cls){
+    const li = document.createElement('li');
+    if(cls) li.className = cls;
+    li.textContent = text;
+    logEl.appendChild(li);
+  }
+  function resetLog(){ logEl.innerHTML=''; }
+  function linkBetween(a,b){ return LINK_ID[a+'-'+b] || LINK_ID[b+'-'+a]; }
+  function litLink(a,b){ const id=linkBetween(a,b); if(id) document.getElementById(id).classList.add('lit'); }
+  function highlightRow(router, net){
+    // la table qui était active devient "consultée" (done)
+    document.querySelectorAll('.rt.active').forEach(t=>{ t.classList.remove('active'); t.classList.add('done'); });
+    const rt = document.getElementById('rt-'+router);
+    rt.classList.remove('done');
+    rt.classList.add('active');
+    let row = rt.querySelector('tr[data-net="'+net+'"]') || rt.querySelector('tr[data-net="default"]');
+    if(row) row.classList.add('hit');
+  }
+  function tween(x1,y1,x2,y2,dur){
+    return new Promise(res=>{
+      const t0=performance.now();
+      function frame(now){
+        let t=Math.min(1,(now-t0)/dur);
+        const e=t<0.5?2*t*t:-1+(4-2*t)*t;
+        packet.setAttribute('cx', x1+(x2-x1)*e);
+        packet.setAttribute('cy', y1+(y2-y1)*e);
+        if(t<1) requestAnimationFrame(frame); else res();
+      }
+      requestAnimationFrame(frame);
+    });
+  }
+
+  function computePath(destId){
+    const destNet = HOST_NET[destId];
+    if(destNet === 'N1'){
+      return {path:['pcLea','sw',destId], destNet, local:true};
+    }
+    const path=['pcLea','sw','r1'];
+    let current='r1', guard=0;
+    while(guard++<12){
+      const t=ROUTING[current];
+      const next=t[destNet]||t['default'];
+      if(next==='local'){ path.push(destId); break; }
+      path.push(next); current=next;
+    }
+    return {path, destNet, local:false};
+  }
+
+  async function send(){
+    if(busy) return;
+    busy=true; sendBtn.disabled=true;
+    clearHighlights(); resetLog();
+
+    const {path, destNet, local} = computePath(dest);
+    const destName = NODES[dest].name, destIP = NODES[dest].ip;
+    const cut = cutToggle.checked;
+
+    // estompe les tables : aucune n'est utilisée tant qu'un routeur n'est pas consulté
+    tablesWrap.classList.add('routing');
+
+    packet.setAttribute('cx', NODES.pcLea.x);
+    packet.setAttribute('cy', NODES.pcLea.y);
+    packet.style.opacity = 1;
+
+    logLine('Léa (192.168.1.25) prépare un paquet pour '+destName+' ('+destIP+').');
+    await sleep(500);
+
+    let hops=0;
+    for(let i=0;i<path.length-1;i++){
+      const from=path[i], to=path[i+1];
+
+      // décision au niveau du noeud "from"
+      if(from==='pcLea'){
+        logLine('Le paquet quitte le PC et arrive au switch du collège.');
+        await sleep(400);
+      } else if(from==='sw'){
+        if(local){
+          logLine('Le switch voit que la destination est dans le réseau du collège : il la distribue localement, sans routeur ni table de routage.');
+        } else {
+          logLine('La destination est hors du collège : le switch transmet le paquet à la Box R1, la passerelle vers l\'extérieur.');
+        }
+        await sleep(550);
+      } else { // routeur
+        highlightRow(from, destNet);
+        const routed = ROUTING[from][destNet];
+        if(routed==='local'){
+          logLine(from.toUpperCase()+' est connecté au réseau '+NET_ADDR[destNet]+' : livraison à '+destName+'.');
+        } else {
+          const nextName = (to==='serveurVideo'||to==='serveurPronote') ? destName : to.toUpperCase();
+          logLine(from.toUpperCase()+' consulte sa table : '+NET_ADDR[destNet]+' → transmettre à '+nextName+'.');
+        }
+        await sleep(650);
+      }
+
+      // panne : liaison collège <-> FAI (R1-R2) coupée
+      if(cut && ((from==='r1'&&to==='r2')||(from==='r2'&&to==='r1'))){
+        logLine('La Box R1 doit sortir vers le FAI (R2), mais la liaison collège ↔ Internet est coupée.', 'fail');
+        packet.classList.add('fail');
+        logLine('Timeout ! Aucun serveur extérieur n\'est joignable. (Le réseau local, lui, fonctionne toujours.)', 'fail');
+        busy=false; sendBtn.disabled=false;
+        return;
+      }
+
+      // franchissement de la frontière
+      if(from==='r1' && to==='r2'){
+        logLine('Le paquet franchit la frontière : il sort du réseau du collège et entre sur Internet via le FAI.', 'cross');
+        await sleep(300);
+      }
+
+      litLink(from,to);
+      await tween(NODES[from].x,NODES[from].y,NODES[to].x,NODES[to].y, 720);
+      hops++;
+    }
+
+    document.querySelector('#n-'+dest+' .node-box').classList.add('arrived');
+    logLine('Paquet arrivé à '+destName+' ! Trajet : '+path.map(p=>NODES[p].name||p.toUpperCase()).join(' → ')+'.', 'ok');
+    logLine('Nombre de liaisons traversées : '+hops+(local?' (le paquet n\'a jamais quitté le collège).':'.'), 'ok');
+
+    busy=false; sendBtn.disabled=false;
+  }
+
+  function resetAll(){
+    if(busy) return;
+    clearHighlights(); resetLog();
+    tablesWrap.classList.add('routing'); // tables estompées tant qu'aucun envoi n'a eu lieu
+    logLine('Choisissez une destination puis cliquez sur « Envoyer le paquet ».');
+    packet.style.opacity=0;
+    packet.setAttribute('cx', NODES.pcLea.x);
+    packet.setAttribute('cy', NODES.pcLea.y);
+  }
+
+  document.querySelectorAll('.dest-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(busy) return;
+      document.querySelectorAll('.dest-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      dest=btn.dataset.dest;
+      resetAll();
+    });
+  });
+  cutToggle.addEventListener('change', ()=>{
+    document.getElementById('l-r1-r2').classList.toggle('cut', cutToggle.checked);
+    cutMark.forEach(x=>x.classList.toggle('on', cutToggle.checked));
+    if(!busy) resetAll();
+  });
+  sendBtn.addEventListener('click', send);
+  resetBtn.addEventListener('click', resetAll);
+
+  // état initial : tables estompées
+  tablesWrap.classList.add('routing');
+})();
+</script>
+
+<script>
+(function(){
+  // ---- Onglet Trafic : plusieurs chemins, routage adaptatif ----
+  const PATHS = {
+    A:{ pts:[[55,190],[400,72],[745,190]],              cap:100, sens:1.2, hops:2, color:'#2563A6', route:'R1' },
+    B:{ pts:[[55,190],[275,190],[525,190],[745,190]],   cap:70,  sens:0.6, hops:3, color:'#3E9E6A', route:'R2 → R3' },
+    C:{ pts:[[55,190],[225,312],[400,338],[575,312],[745,190]], cap:45, sens:0.18, hops:4, color:'#8A5CB4', route:'R4 → R5 → R6' }
+  };
+  const KEYS = ['A','B','C'];
+  let traf = 0.2, panne = false;
+
+  // pré-calcul des longueurs de chaque chemin + paquets
+  const svgNS='http://www.w3.org/2000/svg';
+  const pktGroup=document.getElementById('tpkts');
+  const NP=4;
+  KEYS.forEach(k=>{
+    const p=PATHS[k];
+    p.segLen=[]; p.total=0;
+    for(let i=0;i<p.pts.length-1;i++){
+      const dx=p.pts[i+1][0]-p.pts[i][0], dy=p.pts[i+1][1]-p.pts[i][1];
+      const L=Math.hypot(dx,dy); p.segLen.push(L); p.total+=L;
+    }
+    p.pkts=[];
+    for(let j=0;j<NP;j++){
+      const c=document.createElementNS(svgNS,'rect');
+      c.setAttribute('width','11'); c.setAttribute('height','8'); c.setAttribute('rx','2');
+      pktGroup.appendChild(c);
+      p.pkts.push({el:c, prog:j/NP});
+    }
+  });
+
+  function pointAt(p, dist){
+    let d=dist*p.total, i=0;
+    while(i<p.segLen.length && d>p.segLen[i]){ d-=p.segLen[i]; i++; }
+    if(i>=p.segLen.length) i=p.segLen.length-1;
+    const a=p.pts[i], b=p.pts[i+1], f=p.segLen[i]?d/p.segLen[i]:0;
+    return [a[0]+(b[0]-a[0])*f, a[1]+(b[1]-a[1])*f];
+  }
+
+  function effOf(k){
+    const p=PATHS[k];
+    const cong=Math.min(0.92, traf*p.sens);
+    return { eff:p.cap*(1-cong), cong };
+  }
+  function costOf(k){
+    const p=PATHS[k]; const {eff}=effOf(k);
+    // le meilleur chemin = le plus rapide (débit effectif le plus élevé) ;
+    // le nombre de sauts n'intervient qu'en cas d'égalité (départage négligeable)
+    return 100/eff + p.hops*0.01;
+  }
+  function ordreLabel(d){
+    if(d<1) return 'bas débit'; if(d<10) return 'débit moyen';
+    if(d<100) return 'haut débit'; return 'très haut débit';
+  }
+
+  const cards={A:document.getElementById('card-A'),B:document.getElementById('card-B'),C:document.getElementById('card-C')};
+  const badges={A:document.getElementById('badge-A'),B:document.getElementById('badge-B'),C:document.getElementById('badge-C')};
+  const trafNote=document.getElementById('trafNote');
+
+  let chosen='A';
+
+  function update(){
+    // chemins disponibles (A coupé si panne)
+    const avail = KEYS.filter(k=> !(k==='A' && panne));
+    // meilleur = coût minimal
+    chosen = avail.reduce((best,k)=> costOf(k)<costOf(best)?k:best, avail[0]);
+
+    KEYS.forEach(k=>{
+      const p=PATHS[k]; const {eff,cong}=effOf(k);
+      const link=document.getElementById('tp-'+k);
+      const down = (k==='A' && panne);
+      const jam = cong>0.45;
+
+      // style du lien
+      link.classList.toggle('chosen', k===chosen);
+      link.classList.toggle('down', down);
+      if(down){ link.setAttribute('stroke', 'var(--danger)'); link.style.opacity=.45; }
+      else if(k===chosen){ link.setAttribute('stroke', p.color); link.style.opacity=1; }
+      else { link.setAttribute('stroke', jam? 'var(--warn)' : '#9DB4CB'); link.style.opacity=.5; }
+
+      // paquets
+      p.pkts.forEach(pk=>{
+        pk.el.style.display = down ? 'none' : 'block';
+        pk.el.setAttribute('fill', jam? 'var(--warn)' : (k===chosen? p.color : '#9DB4CB'));
+        pk.el.style.opacity = (k===chosen? 1 : .55);
+      });
+      p.speed = down ? 0 : Math.max(0.03, Math.min(0.5, eff/230));
+
+      // carte latérale
+      const card=cards[k];
+      card.classList.toggle('chosen', k===chosen);
+      card.classList.toggle('down', down);
+      const tag=card.querySelector('.tag');
+      if(down){ tag.textContent='HORS SERVICE'; tag.style.background='var(--danger-soft)'; tag.style.color='var(--danger)'; }
+      else if(k===chosen){ tag.textContent='RETENU'; tag.style.background='var(--accent-soft)'; tag.style.color='var(--accent)'; }
+      else { tag.textContent='disponible'; tag.style.background='var(--grid)'; tag.style.color='var(--ink-soft)'; }
+      card.querySelector('.db-big').innerHTML = (down?'—':Math.round(eff)) + '<span class="u">Mb/s</span>';
+      const etat=card.querySelector('.etat');
+      const fill=card.querySelector('.db-fill');
+      let col;
+      if(down){ etat.textContent='hors service'; col='var(--danger)'; }
+      else if(jam){ etat.textContent='embouteillé'; col='var(--danger)'; }
+      else if(cong>0.2){ etat.textContent='chargé'; col='var(--warn)'; }
+      else { etat.textContent='fluide'; col='var(--ok)'; }
+      etat.style.color = col;
+      // barre proportionnelle au débit (référence : 100 Mb/s) ; couleur = état
+      fill.style.width = down ? '0%' : Math.max(4, Math.min(100, eff)) + '%';
+      fill.style.background = col;
+      // le débit du chemin retenu est mis en avant en bleu
+      card.querySelector('.db-big').style.color = (k===chosen && !down) ? 'var(--accent)' : 'var(--ink)';
+
+      // badge sur le schéma
+      badges[k].textContent = 'Chemin '+k + (down?' ✗' : (k===chosen?' ✓':''));
+      badges[k].setAttribute('fill', down?'var(--danger)' : (k===chosen? p.color : 'var(--ink-soft)'));
+    });
+
+    // explication
+    const trafWord = traf<=0.2?'faible':(traf<=0.55?'moyen':'élevé');
+    let phrase='Trafic '+trafWord+'. ';
+    if(panne){
+      phrase += 'Le routeur R1 est en panne : le chemin A est hors service. ';
+    }
+    const cj = effOf(chosen).cong>0.45;
+    const effChosen = Math.round(effOf(chosen).eff);
+    phrase += 'Le routage retient le chemin '+chosen+' ('+PATHS[chosen].route+'), '
+           + (cj?'malgré une certaine congestion, ':'')
+           + 'car c\'est actuellement la route la plus rapide (débit le plus élevé : '+effChosen+' Mb/s).';
+    // mentionne un chemin embouteillé non retenu
+    const jammed = KEYS.filter(k=>k!==chosen && !(k==='A'&&panne) && effOf(k).cong>0.45);
+    if(jammed.length){
+      const pl = jammed.length>1;
+      phrase += ' Le'+(pl?'s':'')+' chemin'+(pl?'s':'')+' '+jammed.join(' et ')+(pl?' sont embouteillés':' est embouteillé')+' et évité'+(pl?'s':'')+'.';
+    }
+    trafNote.textContent = phrase;
+  }
+
+  // boucle d'animation continue
+  let last=performance.now();
+  function loop(now){
+    const dt=Math.min(0.05,(now-last)/1000); last=now;
+    KEYS.forEach(k=>{
+      const p=PATHS[k]; if(!p.speed) return;
+      p.pkts.forEach(pk=>{
+        pk.prog += p.speed*dt;
+        if(pk.prog>=1) pk.prog-=1;
+        const [x,y]=pointAt(p, pk.prog);
+        pk.el.setAttribute('x', (x-5.5).toFixed(1));
+        pk.el.setAttribute('y', (y-4).toFixed(1));
+      });
+    });
+    requestAnimationFrame(loop);
+  }
+
+  document.getElementById('trafRow').querySelectorAll('.opt').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.getElementById('trafRow').querySelectorAll('.opt').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active'); traf=parseFloat(btn.dataset.t); update();
+    });
+  });
+  document.getElementById('panneToggle').addEventListener('change', e=>{ panne=e.target.checked; update(); });
+
+  update();
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

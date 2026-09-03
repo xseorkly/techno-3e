@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aide : réseau, routage et débit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #EEF3F8;
+    --grid-line: #D8E3EE;
+    --surface: #FFFFFF;
+    --ink: #16232E;
+    --ink-soft: #4A5C6B;
+    --accent: #2563A6;
+    --accent-soft: #E4EDF6;
+    --warn: #B5590F;
+    --warn-soft: #FBEDDF;
+    --ok: #1E7A52;
+    --ok-soft: #E4F3EC;
+    --radius: 12px;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background:
+      linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0/100% 34px,
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0/34px 100%,
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  a{ color: var(--accent); }
+
+  .topbar{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 24px;
+    background: rgba(238,243,248,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--grid-line);
+  }
+
+  .topbar .brand{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+  }
+
+  .topbar .brand .node{
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+    flex-shrink: 0;
+  }
+
+  .topbar .meta{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  header.hero{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 8px;
+  }
+
+  header.hero .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin: 0 0 10px;
+  }
+
+  header.hero h1{
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 12px;
+  }
+
+  header.hero p{
+    color: var(--ink-soft);
+    font-size: 16px;
+    max-width: 60ch;
+    margin: 0;
+  }
+
+  main{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  .route{
+    position: relative;
+    padding-left: 44px;
+  }
+
+  .route::before{
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 8px;
+    bottom: 24px;
+    width: 2px;
+    background-image: linear-gradient(var(--accent) 60%, transparent 0%);
+    background-size: 2px 10px;
+    background-repeat: repeat-y;
+    opacity: 0.55;
+  }
+
+  .hop{
+    position: relative;
+    margin-bottom: 44px;
+  }
+
+  .hop:last-child{ margin-bottom: 0; }
+
+  .hop-marker{
+    position: absolute;
+    left: -44px;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hop h2{
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    margin: 4px 0 6px;
+  }
+
+  .hop .hop-sub{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 16px;
+  }
+
+  .card-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .card{
+    background: var(--surface);
+    border: 1px solid var(--grid-line);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+  }
+
+  .card h3{
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0 0 6px;
+  }
+
+  .card p{
+    margin: 0;
+    font-size: 14.5px;
+    color: var(--ink);
+  }
+
+  table.cmd{
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--grid-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  table.cmd th, table.cmd td{
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 14.5px;
+    border-bottom: 1px solid var(--grid-line);
+    vertical-align: top;
+  }
+
+  table.cmd th{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    background: var(--accent-soft);
+  }
+
+  table.cmd tr:last-child td{ border-bottom: none; }
+
+  code, .kbd{
+    font-family: var(--font-mono);
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 2px 7px;
+    border-radius: 6px;
+    font-size: 0.92em;
+    white-space: nowrap;
+  }
+
+  ol.steps{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+    display: grid;
+    gap: 10px;
+  }
+
+  ol.steps li{
+    counter-increment: step;
+    background: var(--surface);
+    border: 1px solid var(--grid-line);
+    border-radius: var(--radius);
+    padding: 14px 16px 14px 48px;
+    position: relative;
+    font-size: 14.5px;
+  }
+
+  ol.steps li::before{
+    content: counter(step);
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    width: 20px; height: 20px;
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .formula{
+    background: var(--surface);
+    border: 1px solid var(--grid-line);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  .formula .eq{
+    font-family: var(--font-mono);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  .formula .note{
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  table.units{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    background: var(--surface);
+    border: 1px solid var(--grid-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  table.units th, table.units td{
+    padding: 9px 12px;
+    text-align: center;
+    border-bottom: 1px solid var(--grid-line);
+    border-right: 1px solid var(--grid-line);
+  }
+
+  table.units th{
+    font-family: var(--font-mono);
+    background: var(--accent-soft);
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  table.units tr:last-child td{ border-bottom: none; }
+  table.units td:last-child, table.units th:last-child{ border-right: none; }
+
+  .calc{
+    background: var(--surface);
+    border: 1px solid var(--grid-line);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-top: 16px;
+  }
+
+  .calc h3{
+    font-family: var(--font-display);
+    font-size: 15px;
+    margin: 0 0 14px;
+  }
+
+  .calc-row{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .calc-field{
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .calc-field label{
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    margin-bottom: 5px;
+  }
+
+  .calc-field .input-pair{
+    display: flex;
+    border: 1px solid var(--grid-line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .calc-field input, .calc-field select{
+    border: none;
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    color: var(--ink);
+    padding: 9px 10px;
+  }
+
+  .calc-field input{ width: 100%; min-width: 0; }
+  .calc-field input:focus, .calc-field select:focus{
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+
+  .calc-field select{
+    border-left: 1px solid var(--grid-line);
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .calc-result{
+    margin-top: 4px;
+    padding: 14px 16px;
+    background: var(--ok-soft);
+    border: 1px solid var(--ok);
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 15px;
+    color: var(--ok);
+    font-weight: 600;
+  }
+
+  .warn-box{
+    background: var(--warn-soft);
+    border: 1px solid var(--warn);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+  }
+
+  .warn-box h3{
+    font-family: var(--font-display);
+    font-size: 14.5px;
+    color: var(--warn);
+    margin: 0 0 10px;
+  }
+
+  .warn-box ul{
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .warn-box li{
+    font-size: 14.5px;
+    margin-bottom: 8px;
+  }
+
+  .warn-box li:last-child{ margin-bottom: 0; }
+
+  footer{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px 48px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  @media (max-width: 640px){
+    .card-grid{ grid-template-columns: 1fr; }
+    .route{ padding-left: 36px; }
+    .hop-marker{ left: -36px; width: 26px; height: 26px; font-size: 11px; }
+    table.cmd th, table.cmd td{ padding: 10px 12px; font-size: 13.5px; }
+    .topbar{ flex-direction: column; align-items: flex-start; gap: 4px; }
+  }
+
+  @media print{
+    .topbar{ position: static; backdrop-filter: none; background: none; }
+    body{ background: #fff; }
+    .route::before{ background-image: none; border-left: 2px dashed var(--accent); }
+    .calc-result{ display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="node" aria-hidden="true"></span>Aide réseau · routage · débit</div>
+  <div class="meta">Séquence 2 · Activité 1 · Filius</div>
+</div>
+
+<header class="hero">
+  <p class="eyebrow">Fiche d'aide — à garder ouverte pendant l'activité</p>
+  <h1>Trouver son chemin dans le réseau</h1>
+  <p>Le vocabulaire, les commandes et les formules dont vous avez besoin pour relier le réseau du collège à Internet dans Filius, tracer le trajet d'une information et calculer un temps de transfert.</p>
+</header>
+
+<main>
+  <div class="route">
+
+    <section class="hop" id="vocabulaire">
+      <div class="hop-marker">1</div>
+      <p class="hop-sub">Avant de commencer</p>
+      <h2>Le vocabulaire à connaître</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Adresse IP</h3>
+          <p>Numéro d'identification unique d'un appareil sur un réseau. En IPv4 : 4 séries de chiffres de 0 à 255, séparées par des points.</p>
+        </div>
+        <div class="card">
+          <h3>Passerelle</h3>
+          <p>Adresse IP de l'équipement (souvent un routeur) par lequel un appareil doit passer pour sortir de son réseau local et joindre un autre réseau.</p>
+        </div>
+        <div class="card">
+          <h3>Table de routage</h3>
+          <p>Structure de données d'un routeur qui indique, pour un réseau de destination donné, vers quel prochain routeur envoyer l'information. Comparable à un plan de ville.</p>
+        </div>
+        <div class="card">
+          <h3>Débit</h3>
+          <p>Quantité de données transmises par seconde sur une liaison. S'exprime en bits par seconde : bps, kb/s, Mb/s, Gb/s, Tb/s.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="hop" id="commandes">
+      <div class="hop-marker">2</div>
+      <p class="hop-sub">Ligne de commande, dans Filius</p>
+      <h2>Les commandes utiles</h2>
+      <table class="cmd">
+        <tr><th>Commande</th><th>Ce qu'elle donne</th></tr>
+        <tr>
+          <td><code>ipconfig</code></td>
+          <td>Affiche la configuration réseau de la machine : son adresse IP, son masque, sa passerelle.</td>
+        </tr>
+        <tr>
+          <td><code>ping [adresse IP]</code></td>
+          <td>Envoie 4 paquets vers l'adresse indiquée et affiche le temps de réponse de chacun (en ms), ou <code>Timeout</code> si l'appareil est injoignable.</td>
+        </tr>
+        <tr>
+          <td><code>traceroute [adresse IP]</code></td>
+          <td>Affiche la liste des routeurs traversés (les « sauts ») pour atteindre l'adresse indiquée.</td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="hop" id="filius">
+      <div class="hop-marker">3</div>
+      <p class="hop-sub">Manipulations</p>
+      <h2>Dans Filius, comment...</h2>
+      <ol class="steps">
+        <li><strong>Ajouter une interface à un routeur</strong> — clic sur le routeur → onglet Général → bouton « Gérer les connexions » → ajouter une interface et lui donner une adresse IP.</li>
+        <li><strong>Configurer une adresse IP et une passerelle</strong> — double-clic sur l'appareil → renseigner adresse IP, masque et passerelle.</li>
+        <li><strong>Consulter ou compléter la table de routage</strong> — propriétés du routeur → onglet table de routage → cocher « routage automatique » si l'option existe, ou ajouter la ligne manquante (réseau de destination, prochain routeur).</li>
+        <li><strong>Simuler une panne</strong> — clic droit sur un câble → Supprimer. Pour rétablir la liaison, retracer le câble.</li>
+      </ol>
+    </section>
+
+    <section class="hop" id="debit">
+      <div class="hop-marker">4</div>
+      <p class="hop-sub">Calculer un temps de transfert</p>
+      <h2>Trajet + débit = temps</h2>
+      <div class="formula">
+        <div class="eq">Temps (s) = Taille (bits) ÷ Débit (bits/s)</div>
+        <p class="note">Rappel : 1 octet = 8 bits. Une taille donnée en Mo doit être multipliée par 8 pour obtenir des Mb si le débit est exprimé en Mb/s.</p>
+      </div>
+      <table class="units">
+        <tr><th>kb/s</th><th>Mb/s</th><th>Gb/s</th><th>Tb/s</th></tr>
+        <tr><td>1 000 bps</td><td>1 000 kb/s</td><td>1 000 Mb/s</td><td>1 000 Gb/s</td></tr>
+      </table>
+
+      <div class="calc">
+        <h3>Calculatrice de temps de transfert</h3>
+        <div class="calc-row">
+          <div class="calc-field">
+            <label for="taille">Taille du fichier</label>
+            <div class="input-pair">
+              <input type="number" id="taille" min="0" step="any" placeholder="25" inputmode="decimal">
+              <select id="taille-unite">
+                <option value="Mo">Mo</option>
+                <option value="Go">Go</option>
+                <option value="Ko">Ko</option>
+              </select>
+            </div>
+          </div>
+          <div class="calc-field">
+            <label for="debit">Débit</label>
+            <div class="input-pair">
+              <input type="number" id="debit" min="0" step="any" placeholder="100" inputmode="decimal">
+              <select id="debit-unite">
+                <option value="Mb/s">Mb/s</option>
+                <option value="kb/s">kb/s</option>
+                <option value="Gb/s">Gb/s</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="calc-result" id="resultat">Renseignez une taille et un débit pour voir le temps théorique.</div>
+      </div>
+    </section>
+
+    <section class="hop" id="depannage">
+      <div class="hop-marker">5</div>
+      <p class="hop-sub">Si ça bloque</p>
+      <h2>En cas de blocage</h2>
+      <div class="warn-box">
+        <h3>Checklist de dépannage</h3>
+        <ul>
+          <li><code>ping</code> répond « Timeout » → vérifier d'abord l'adresse IP et la passerelle de la machine avec <code>ipconfig</code>.</li>
+          <li>Impossible de joindre un autre réseau → vérifier la table de routage des routeurs traversés : la ligne vers le réseau de destination existe-t-elle ?</li>
+          <li>Après avoir modifié un câble ou une table de routage → attendre quelques secondes avant de retester, la mise à jour n'est pas immédiate.</li>
+          <li>Toujours bloqué → sauvegarder le fichier, comparer avec le schéma attendu, puis demander de l'aide.</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>Séquence 2 · Circulation de l'information dans un réseau informatique · Cycle 4 / 3e</footer>
+
+<script>
+  function convertTaille(valeur, unite){
+    const versOctets = { Ko: 1e3, Mo: 1e6, Go: 1e9 };
+    return valeur * versOctets[unite] * 8;
+  }
+  function convertDebit(valeur, unite){
+    const versBps = { 'kb/s': 1e3, 'Mb/s': 1e6, 'Gb/s': 1e9 };
+    return valeur * versBps[unite];
+  }
+  function formatTemps(sec){
+    if (sec < 1) return (sec * 1000).toFixed(0) + ' ms';
+    if (sec < 60) return sec.toFixed(2) + ' s';
+    if (sec < 3600){
+      const min = Math.floor(sec / 60);
+      const rest = Math.round(sec % 60);
+      return min + ' min ' + rest + ' s';
+    }
+    const h = Math.floor(sec / 3600);
+    const min = Math.round((sec % 3600) / 60);
+    return h + ' h ' + min + ' min';
+  }
+
+  const tailleInput = document.getElementById('taille');
+  const tailleUnite = document.getElementById('taille-unite');
+  const debitInput = document.getElementById('debit');
+  const debitUnite = document.getElementById('debit-unite');
+  const resultat = document.getElementById('resultat');
+
+  function calculer(){
+    const t = parseFloat(tailleInput.value);
+    const d = parseFloat(debitInput.value);
+    if (!t || !d || t <= 0 || d <= 0){
+      resultat.textContent = 'Renseignez une taille et un débit pour voir le temps théorique.';
+      return;
+    }
+    const bits = convertTaille(t, tailleUnite.value);
+    const bps = convertDebit(d, debitUnite.value);
+    const temps = bits / bps;
+    resultat.textContent = 'Temps théorique : ' + formatTemps(temps);
+  }
+
+  [tailleInput, tailleUnite, debitInput, debitUnite].forEach(el => {
+    el.addEventListener('input', calculer);
+    el.addEventListener('change', calculer);
+  });
+</script>
+
+</body>
+</html>

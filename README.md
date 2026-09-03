@@ -9,7 +9,13 @@ techno-3e/
 ├── seq1-act1.html    ← Séquence 1 · Activité 1
 ├── seq1-act2.html    ← Séquence 1 · Activité 2
 ├── seq1-act3.html    ← Séquence 1 · Activité 3
-├── seq2-act1.html    ← Séquence 2 · Activité 1
+├── seq2-act1-p1.html ← Séquence 2 · Activité 1, partie 1
+├── seq2-act1-p2.html ← Séquence 2 · Activité 1, partie 2
+├── seq2-act1-p3.html ← Séquence 2 · Activité 1, partie 3
+├── outils/
+│   ├── aide-reseau.html    ← fiche d'aide réseau (vocabulaire, Filius, calculs)
+│   ├── reseau-simple.html  ← trajet d'un paquet et tables de routage
+│   └── reseau-complet.html ← trajet, débit et trafic
 ├── img/
 │   ├── seq1-act1.jpg ← photo de la situation déclenchante (activité 1)
 │   ├── seq1-act2.jpg ← illustration de l'exposition (activité 2)
@@ -101,6 +107,34 @@ Les quatre vidéos Filius sont hébergées sur YouTube : elles sont chargées un
 L'activité de niveau 3 se déroule dans le logiciel Filius, hors du site : la page propose une case à cocher par étape, qui ressort dans le PDF sous forme de relevé d'avancement. C'est un ajout de ma part, ta trame n'avait pas de champ à cet endroit.
 
 Les tables mystères s'affichent en α, β, γ sur la page ; le PDF les écrit « alpha », « beta », « gamma », car la police du PDF ne contient pas l'alphabet grec.
+
+## Découpe en trois séances
+
+L'activité 1 de la séquence 2 dure 3 h : elle est découpée en trois pages d'environ 55 minutes, chacune avec son propre bouton « Générer le PDF ». L'élève rend donc trois copies : `Seq2-Act1-P1_NOM_Prenom_classe.pdf`, `-P2`, `-P3`.
+
+- Partie 1 : situation, constats, problème, idées, niveaux 1 et 2, fiches et quiz.
+- Partie 2 : configuration du réseau dans Filius, avec les cinq étapes cochables. J'y ai ajouté un champ « ce qui a marché, ce qui a bloqué » : sans lui, une séance entière ne laisserait aucune trace écrite.
+- Partie 3 : niveau 4 complet, synthèse et positionnement CPS.
+
+Les réponses sont enregistrées séparément pour chaque partie : remplir la partie 2 n'écrase rien de la partie 1.
+
+**Si tu déploies par-dessus une version précédente, supprime `seq2-act1.html` de ton dossier** : la copie n'efface pas les fichiers disparus, et l'ancienne version en un seul morceau resterait en ligne.
+
+## Navigation
+
+Chaque fiche porte en haut une barre avec un bouton **Accueil** et un menu déroulant listant toutes les activités et les trois outils réseau. La barre reste visible au défilement et n'apparaît pas à l'impression.
+
+## Les trois outils réseau
+
+Ils sont hébergés sur le site, plus sur `edurl.fr` : ils chargent plus vite en classe et ne dépendent plus d'un raccourcisseur. Ils sont autonomes, à une exception près : comme les fiches, ils appellent les polices Google. Sur un réseau qui filtre `fonts.googleapis.com`, ils restent utilisables avec des polices de substitution.
+
+Où ils apparaissent dans l'activité :
+
+- le réseau simplifié s'ouvre dans la page, juste avant la réponse N2a ;
+- l'onglet Débit du réseau complet est signalé au-dessus de N2b, et l'application entière sert de support à tout le niveau 4 ;
+- la fiche d'aide est mise en avant au début de l'activité Filius et rappelée dans les ressources.
+
+Le bandeau de la fiche d'aide indiquait « Séquence 1 · Séance 6 », je l'ai passé en séquence 2 activité 1.
 
 ## Ajouter une fiche
 

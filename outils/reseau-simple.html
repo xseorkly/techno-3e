@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Réseau virtuel — trajet et table de routage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EEF3F8; --grid:#D8E3EE; --surface:#FFFFFF;
+    --ink:#16232E; --ink-soft:#4A5C6B;
+    --accent:#2563A6; --accent-soft:#E4EDF6;
+    --ok:#1E7A52; --ok-soft:#E4F3EC;
+    --warn:#B5590F; --warn-soft:#FBEDDF;
+    --danger:#B3261E; --danger-soft:#FBE9E7;
+    --host:#5F5E5A; --host-soft:#EFEEEA;
+    --server:#993C1D; --server-soft:#FAECE7;
+    --radius:12px;
+    --fd:'Space Grotesk',sans-serif;
+    --fb:'IBM Plex Sans',sans-serif;
+    --fm:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; color:var(--ink); font-family:var(--fb); font-size:16px; line-height:1.55;
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/100% 34px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/34px 100%,
+      var(--bg);
+  }
+  .wrap{max-width:1000px; margin:0 auto; padding:28px 20px 60px;}
+
+  header .eyebrow{
+    font-family:var(--fm); font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 8px;
+  }
+  header h1{
+    font-family:var(--fd); font-weight:700; font-size:clamp(24px,3.6vw,34px);
+    line-height:1.15; margin:0 0 8px;
+  }
+  header p.lead{color:var(--ink-soft); max-width:64ch; margin:0 0 22px;}
+
+  .controls{
+    display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px;
+    background:var(--surface); border:1px solid var(--grid); border-radius:var(--radius);
+    padding:14px 16px; margin-bottom:18px;
+  }
+  .controls .group{display:flex; align-items:center; gap:8px;}
+  .controls .label{
+    font-family:var(--fm); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--ink-soft);
+  }
+  .dest-btn{
+    font-family:var(--fb); font-size:14px; font-weight:500;
+    border:1px solid var(--grid); background:var(--surface); color:var(--ink);
+    padding:8px 14px; border-radius:8px; cursor:pointer; transition:.15s;
+  }
+  .dest-btn:hover{border-color:var(--accent);}
+  .dest-btn.active{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .send-btn{
+    font-family:var(--fb); font-size:14.5px; font-weight:600;
+    background:var(--accent); color:#fff; border:none; border-radius:8px;
+    padding:9px 18px; cursor:pointer; transition:.15s;
+  }
+  .send-btn:hover{background:#1d5090;}
+  .send-btn:disabled{opacity:.5; cursor:default;}
+  .ghost-btn{
+    font-family:var(--fb); font-size:14px; background:transparent; color:var(--ink-soft);
+    border:1px solid var(--grid); border-radius:8px; padding:8px 14px; cursor:pointer;
+  }
+  .ghost-btn:hover{border-color:var(--ink-soft);}
+  .switch{display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; font-size:14px;}
+  .switch input{position:absolute; opacity:0; width:0; height:0;}
+  .track{width:38px; height:20px; border-radius:10px; background:var(--grid); position:relative; transition:.2s; flex-shrink:0;}
+  .track::after{content:''; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff; transition:.2s;}
+  .switch input:checked + .track{background:var(--danger);}
+  .switch input:checked + .track::after{transform:translateX(18px);}
+
+  .stage{
+    background:var(--surface); border:1px solid var(--grid); border-radius:var(--radius);
+    padding:8px; margin-bottom:18px;
+  }
+  svg{display:block; width:100%; height:auto;}
+
+  .link{stroke:#9DB4CB; stroke-width:3; stroke-linecap:round; transition:stroke .2s;}
+  .link.lit{stroke:var(--accent); stroke-width:4.5;}
+  .link.cut{stroke:var(--danger); stroke-width:3; stroke-dasharray:7 7;}
+  .node-box{stroke-width:1.5; transition:.2s;}
+  .node-box.arrived{stroke-width:3;}
+  .nlabel{font-family:var(--fb); font-weight:600; font-size:13px; fill:var(--ink);}
+  .nsub{font-family:var(--fm); font-size:10.5px; fill:var(--ink-soft);}
+  .net-tag{font-family:var(--fm); font-size:10px; fill:var(--ink-soft);}
+  #packet{fill:var(--accent); stroke:#fff; stroke-width:2; opacity:0;}
+  #packet.fail{fill:var(--danger);}
+  .cut-x{stroke:var(--danger); stroke-width:3; stroke-linecap:round; opacity:0;}
+  .cut-x.on{opacity:1;}
+
+  .narration{
+    background:var(--surface); border:1px solid var(--grid); border-radius:var(--radius);
+    padding:16px 18px; margin-bottom:24px; min-height:96px;
+  }
+  .narration h2{font-family:var(--fd); font-size:14px; margin:0 0 10px; color:var(--accent);}
+  #log{margin:0; padding:0; list-style:none; font-size:14.5px;}
+  #log li{padding:5px 0 5px 24px; position:relative; color:var(--ink); opacity:0; animation:fade .3s forwards;}
+  #log li::before{content:'›'; position:absolute; left:6px; color:var(--accent); font-family:var(--fm); font-weight:600;}
+  #log li.ok::before{content:'✓'; color:var(--ok);}
+  #log li.fail::before{content:'✕'; color:var(--danger);}
+  #log li.ok{color:var(--ok);}
+  #log li.fail{color:var(--danger);}
+  @keyframes fade{to{opacity:1;}}
+
+  .tables-title{font-family:var(--fd); font-size:17px; margin:0 0 4px;}
+  .tables-sub{color:var(--ink-soft); font-size:14px; margin:0 0 16px;}
+  .tables{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  .rt{background:var(--surface); border:1px solid var(--grid); border-radius:var(--radius); overflow:hidden;}
+  .rt.active{border-color:var(--accent); box-shadow:0 0 0 2px var(--accent-soft);}
+  .rt-head{
+    display:flex; align-items:center; gap:8px;
+    padding:10px 14px; background:var(--accent-soft); border-bottom:1px solid var(--grid);
+  }
+  .rt-head .dot{width:9px; height:9px; border-radius:50%; background:var(--accent); flex-shrink:0;}
+  .rt-head strong{font-family:var(--fd); font-size:14px;}
+  .rt-head span{font-family:var(--fm); font-size:11px; color:var(--ink-soft); margin-left:auto;}
+  table.route{width:100%; border-collapse:collapse;}
+  table.route th, table.route td{
+    text-align:left; padding:8px 14px; font-size:13px; border-bottom:1px solid var(--grid);
+  }
+  table.route th{
+    font-family:var(--fm); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+    color:var(--ink-soft); font-weight:500;
+  }
+  table.route td{font-family:var(--fm); color:var(--ink);}
+  table.route tr:last-child td{border-bottom:none;}
+  table.route tr.hit td{background:var(--accent-soft); color:var(--accent); font-weight:600;}
+  .local{color:var(--ok)!important;}
+
+  .legend{display:flex; flex-wrap:wrap; gap:14px; margin:14px 0 0; font-size:12.5px; color:var(--ink-soft);}
+  .legend span{display:flex; align-items:center; gap:6px;}
+  .chip{width:13px; height:13px; border-radius:4px; flex-shrink:0;}
+
+  @media (max-width:680px){
+    .tables{grid-template-columns:1fr;}
+    .controls{flex-direction:column; align-items:stretch;}
+    .controls .group{flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Réseau virtuel interactif</p>
+    <h1>Suivre le trajet d'un paquet</h1>
+    <p class="lead">Léa envoie un paquet depuis son PC. Choisissez la destination, lancez l'envoi, et observez le paquet suivre le chemin décidé par les tables de routage : à chaque routeur, la ligne consultée s'allume.</p>
+  </header>
+
+  <div class="controls">
+    <div class="group">
+      <span class="label">Destination</span>
+      <button class="dest-btn active" data-dest="serveurVideo">Serveur vidéo</button>
+      <button class="dest-btn" data-dest="serveurDNS">Serveur DNS</button>
+    </div>
+    <div class="group" style="margin-left:auto;">
+      <label class="switch">
+        <input type="checkbox" id="cutToggle">
+        <span class="track"></span>
+        Couper le câble R2–R3
+      </label>
+    </div>
+    <div class="group">
+      <button class="send-btn" id="sendBtn">Envoyer le paquet</button>
+      <button class="ghost-btn" id="resetBtn">Réinitialiser</button>
+    </div>
+  </div>
+
+  <div class="stage">
+    <svg viewBox="0 0 880 430" role="img" aria-label="Schéma d'un réseau virtuel avec le PC de Léa, trois routeurs et deux serveurs.">
+      <!-- réseau tags -->
+      <text class="net-tag" x="70" y="150" text-anchor="middle">réseau 192.168.1.0/24</text>
+      <text class="net-tag" x="790" y="88" text-anchor="middle">réseau 203.0.113.0/24</text>
+      <text class="net-tag" x="790" y="335" text-anchor="middle">réseau 198.51.100.0/24</text>
+
+      <!-- liens -->
+      <line class="link" id="l-pc-r1" x1="70" y1="210" x2="230" y2="210"></line>
+      <line class="link" id="l-r1-r2" x1="230" y1="210" x2="410" y2="210"></line>
+      <line class="link" id="l-r2-r3" x1="410" y1="210" x2="600" y2="130"></line>
+      <line class="link" id="l-r2-r4" x1="410" y1="210" x2="600" y2="290"></line>
+      <line class="link" id="l-r3-sv" x1="600" y1="130" x2="790" y2="130"></line>
+      <line class="link" id="l-r4-sd" x1="600" y1="290" x2="790" y2="290"></line>
+
+      <!-- croix câble coupé -->
+      <g id="cutMark">
+        <line class="cut-x" x1="497" y1="160" x2="513" y2="176"></line>
+        <line class="cut-x" x1="513" y1="160" x2="497" y2="176"></line>
+      </g>
+
+      <!-- PC Léa -->
+      <g id="n-pcLea">
+        <rect class="node-box" x="25" y="187" width="90" height="46" rx="9" fill="var(--host-soft)" stroke="var(--host)"></rect>
+        <text class="nlabel" x="70" y="206" text-anchor="middle">PC de Léa</text>
+        <text class="nsub" x="70" y="221" text-anchor="middle">192.168.1.25</text>
+      </g>
+      <!-- R1 -->
+      <g id="n-r1">
+        <rect class="node-box" x="185" y="187" width="90" height="46" rx="9" fill="var(--accent-soft)" stroke="var(--accent)"></rect>
+        <text class="nlabel" x="230" y="206" text-anchor="middle">R1 · Box</text>
+        <text class="nsub" x="230" y="221" text-anchor="middle">collège</text>
+      </g>
+      <!-- R2 -->
+      <g id="n-r2">
+        <rect class="node-box" x="365" y="187" width="90" height="46" rx="9" fill="var(--accent-soft)" stroke="var(--accent)"></rect>
+        <text class="nlabel" x="410" y="206" text-anchor="middle">R2 · FAI</text>
+        <text class="nsub" x="410" y="221" text-anchor="middle">routeur</text>
+      </g>
+      <!-- R3 -->
+      <g id="n-r3">
+        <rect class="node-box" x="555" y="107" width="90" height="46" rx="9" fill="var(--accent-soft)" stroke="var(--accent)"></rect>
+        <text class="nlabel" x="600" y="126" text-anchor="middle">R3</text>
+        <text class="nsub" x="600" y="141" text-anchor="middle">routeur</text>
+      </g>
+      <!-- R4 -->
+      <g id="n-r4">
+        <rect class="node-box" x="555" y="267" width="90" height="46" rx="9" fill="var(--accent-soft)" stroke="var(--accent)"></rect>
+        <text class="nlabel" x="600" y="286" text-anchor="middle">R4</text>
+        <text class="nsub" x="600" y="301" text-anchor="middle">routeur</text>
+      </g>
+      <!-- serveur vidéo -->
+      <g id="n-serveurVideo">
+        <rect class="node-box" x="742" y="107" width="96" height="46" rx="9" fill="var(--server-soft)" stroke="var(--server)"></rect>
+        <text class="nlabel" x="790" y="126" text-anchor="middle">Serveur vidéo</text>
+        <text class="nsub" x="790" y="141" text-anchor="middle">203.0.113.10</text>
+      </g>
+      <!-- serveur DNS -->
+      <g id="n-serveurDNS">
+        <rect class="node-box" x="742" y="267" width="96" height="46" rx="9" fill="var(--server-soft)" stroke="var(--server)"></rect>
+        <text class="nlabel" x="790" y="286" text-anchor="middle">Serveur DNS</text>
+        <text class="nsub" x="790" y="301" text-anchor="middle">198.51.100.5</text>
+      </g>
+
+      <!-- paquet -->
+      <circle id="packet" cx="70" cy="210" r="9"></circle>
+    </svg>
+
+    <div class="legend">
+      <span><span class="chip" style="background:var(--host-soft); border:1px solid var(--host);"></span>Ordinateur</span>
+      <span><span class="chip" style="background:var(--accent-soft); border:1px solid var(--accent);"></span>Routeur</span>
+      <span><span class="chip" style="background:var(--server-soft); border:1px solid var(--server);"></span>Serveur</span>
+      <span><span class="chip" style="background:var(--accent);"></span>Lien actif</span>
+      <span><span class="chip" style="background:var(--danger);"></span>Câble coupé</span>
+    </div>
+  </div>
+
+  <div class="narration">
+    <h2>Ce qui se passe</h2>
+    <ul id="log">
+      <li>Choisissez une destination puis cliquez sur « Envoyer le paquet ».</li>
+    </ul>
+  </div>
+
+  <h2 class="tables-title">Les tables de routage</h2>
+  <p class="tables-sub">Chaque routeur possède sa propre table. Pour un réseau de destination donné, elle indique vers quel voisin transmettre le paquet.</p>
+
+  <div class="tables">
+    <div class="rt" id="rt-r1">
+      <div class="rt-head"><span class="dot"></span><strong>R1 · Box du collège</strong><span>table de routage</span></div>
+      <table class="route">
+        <tr><th>Réseau de destination</th><th>Prochain saut</th></tr>
+        <tr data-net="N1"><td>192.168.1.0/24</td><td class="local">Livraison locale</td></tr>
+        <tr data-net="N4"><td>203.0.113.0/24</td><td>R2</td></tr>
+        <tr data-net="N5"><td>198.51.100.0/24</td><td>R2</td></tr>
+      </table>
+    </div>
+
+    <div class="rt" id="rt-r2">
+      <div class="rt-head"><span class="dot"></span><strong>R2 · FAI</strong><span>table de routage</span></div>
+      <table class="route">
+        <tr><th>Réseau de destination</th><th>Prochain saut</th></tr>
+        <tr data-net="N1"><td>192.168.1.0/24</td><td>R1</td></tr>
+        <tr data-net="N4"><td>203.0.113.0/24</td><td>R3</td></tr>
+        <tr data-net="N5"><td>198.51.100.0/24</td><td>R4</td></tr>
+      </table>
+    </div>
+
+    <div class="rt" id="rt-r3">
+      <div class="rt-head"><span class="dot"></span><strong>R3</strong><span>table de routage</span></div>
+      <table class="route">
+        <tr><th>Réseau de destination</th><th>Prochain saut</th></tr>
+        <tr data-net="N4"><td>203.0.113.0/24</td><td class="local">Livraison locale</td></tr>
+        <tr data-net="default"><td>(par défaut)</td><td>R2</td></tr>
+      </table>
+    </div>
+
+    <div class="rt" id="rt-r4">
+      <div class="rt-head"><span class="dot"></span><strong>R4</strong><span>table de routage</span></div>
+      <table class="route">
+        <tr><th>Réseau de destination</th><th>Prochain saut</th></tr>
+        <tr data-net="N5"><td>198.51.100.0/24</td><td class="local">Livraison locale</td></tr>
+        <tr data-net="default"><td>(par défaut)</td><td>R2</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  const NODES = {
+    pcLea:        {x:70,  y:210, name:'PC de Léa',    ip:'192.168.1.25'},
+    r1:           {x:230, y:210, name:'R1'},
+    r2:           {x:410, y:210, name:'R2'},
+    r3:           {x:600, y:130, name:'R3'},
+    r4:           {x:600, y:290, name:'R4'},
+    serveurVideo: {x:790, y:130, name:'Serveur vidéo', ip:'203.0.113.10'},
+    serveurDNS:   {x:790, y:290, name:'Serveur DNS',   ip:'198.51.100.5'}
+  };
+  const HOST_NET = { serveurVideo:'N4', serveurDNS:'N5', pcLea:'N1' };
+  const NET_ADDR = { N1:'192.168.1.0/24', N4:'203.0.113.0/24', N5:'198.51.100.0/24' };
+  const ROUTING = {
+    r1:{N1:'local', N4:'r2', N5:'r2'},
+    r2:{N1:'r1',    N4:'r3', N5:'r4'},
+    r3:{N4:'local', default:'r2'},
+    r4:{N5:'local', default:'r2'}
+  };
+  // lien SVG entre deux noeuds
+  const LINK_ID = {
+    'pcLea-r1':'l-pc-r1', 'r1-r2':'l-r1-r2',
+    'r2-r3':'l-r2-r3', 'r2-r4':'l-r2-r4',
+    'r3-serveurVideo':'l-r3-sv', 'r4-serveurDNS':'l-r4-sd'
+  };
+
+  let dest = 'serveurVideo';
+  let busy = false;
+
+  const packet = document.getElementById('packet');
+  const logEl = document.getElementById('log');
+  const sendBtn = document.getElementById('sendBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const cutToggle = document.getElementById('cutToggle');
+  const cutMark = document.querySelectorAll('#cutMark .cut-x');
+
+  const sleep = ms => new Promise(r=>setTimeout(r,ms));
+
+  function clearHighlights(){
+    document.querySelectorAll('.link').forEach(l=>l.classList.remove('lit'));
+    document.querySelectorAll('.rt').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('table.route tr').forEach(r=>r.classList.remove('hit'));
+    document.querySelectorAll('.node-box').forEach(n=>n.classList.remove('arrived'));
+    packet.classList.remove('fail');
+  }
+
+  function logLine(text, cls){
+    const li = document.createElement('li');
+    if(cls) li.className = cls;
+    li.textContent = text;
+    logEl.appendChild(li);
+  }
+
+  function resetLog(){ logEl.innerHTML=''; }
+
+  function linkBetween(a,b){
+    return LINK_ID[a+'-'+b] || LINK_ID[b+'-'+a];
+  }
+
+  function litLink(a,b){
+    const id = linkBetween(a,b);
+    if(id) document.getElementById(id).classList.add('lit');
+  }
+
+  function highlightRow(router, net){
+    const rt = document.getElementById('rt-'+router);
+    rt.classList.add('active');
+    let row = rt.querySelector('tr[data-net="'+net+'"]');
+    if(!row) row = rt.querySelector('tr[data-net="default"]');
+    if(row) row.classList.add('hit');
+  }
+
+  function tween(x1,y1,x2,y2,dur){
+    return new Promise(res=>{
+      const t0 = performance.now();
+      function frame(now){
+        let t = Math.min(1,(now-t0)/dur);
+        const e = t<0.5 ? 2*t*t : -1+(4-2*t)*t;
+        packet.setAttribute('cx', x1+(x2-x1)*e);
+        packet.setAttribute('cy', y1+(y2-y1)*e);
+        if(t<1) requestAnimationFrame(frame); else res();
+      }
+      requestAnimationFrame(frame);
+    });
+  }
+
+  // construit la liste ordonnée des noeuds selon les tables de routage
+  function computePath(destId){
+    const destNet = HOST_NET[destId];
+    const path = ['pcLea','r1'];
+    let current = 'r1', guard=0;
+    while(guard++ < 12){
+      const table = ROUTING[current];
+      const next = table[destNet] || table['default'];
+      if(next === 'local'){ path.push(destId); break; }
+      path.push(next);
+      current = next;
+    }
+    return {path, destNet};
+  }
+
+  async function send(){
+    if(busy) return;
+    busy = true;
+    sendBtn.disabled = true;
+    clearHighlights();
+    resetLog();
+
+    const {path, destNet} = computePath(dest);
+    const destName = NODES[dest].name, destIP = NODES[dest].ip;
+    const cut = cutToggle.checked;
+
+    packet.setAttribute('cx', NODES.pcLea.x);
+    packet.setAttribute('cy', NODES.pcLea.y);
+    packet.style.opacity = 1;
+
+    logLine('Léa (192.168.1.25) prépare un paquet pour '+destName+' ('+destIP+').');
+    await sleep(500);
+
+    let hops = 0;
+    for(let i=0;i<path.length-1;i++){
+      const from = path[i], to = path[i+1];
+
+      // décision de routage au niveau d'un routeur (pas au niveau du PC de départ)
+      if(from !== 'pcLea'){
+        const nextName = (to==='serveurVideo'||to==='serveurDNS') ? destName : to.toUpperCase();
+        highlightRow(from, destNet);
+        if(ROUTING[from][destNet]==='local' || (!ROUTING[from][destNet] && ROUTING[from]['default'] && to===dest)){
+          logLine(from.toUpperCase()+' est connecté au réseau '+NET_ADDR[destNet]+' : livraison à '+destName+'.');
+        } else {
+          logLine(from.toUpperCase()+' consulte sa table : '+NET_ADDR[destNet]+' → transmettre à '+nextName+'.');
+        }
+        await sleep(650);
+      } else {
+        logLine('Le paquet quitte le PC vers sa passerelle R1.');
+        await sleep(450);
+      }
+
+      // panne : câble R2-R3 coupé
+      if(cut && ((from==='r2'&&to==='r3')||(from==='r3'&&to==='r2'))){
+        logLine('R2 doit transmettre à R3, mais le câble est coupé. Aucune route disponible.', 'fail');
+        packet.classList.add('fail');
+        logLine('Timeout ! Le paquet n\'atteint pas '+destName+'.', 'fail');
+        busy=false; sendBtn.disabled=false;
+        return;
+      }
+
+      litLink(from,to);
+      await tween(NODES[from].x,NODES[from].y,NODES[to].x,NODES[to].y, 750);
+      hops++;
+    }
+
+    document.querySelector('#n-'+dest+' .node-box').classList.add('arrived');
+    logLine('Paquet arrivé à '+destName+' ! Trajet : '+path.map(p=>NODES[p].name||p.toUpperCase()).join(' → ')+'.', 'ok');
+    logLine('Nombre de liaisons traversées : '+hops+'.', 'ok');
+
+    busy=false; sendBtn.disabled=false;
+  }
+
+  function resetAll(){
+    if(busy) return;
+    clearHighlights();
+    resetLog();
+    logLine('Choisissez une destination puis cliquez sur « Envoyer le paquet ».');
+    packet.style.opacity = 0;
+    packet.setAttribute('cx', NODES.pcLea.x);
+    packet.setAttribute('cy', NODES.pcLea.y);
+  }
+
+  document.querySelectorAll('.dest-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(busy) return;
+      document.querySelectorAll('.dest-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      dest = btn.dataset.dest;
+      resetAll();
+    });
+  });
+
+  cutToggle.addEventListener('change', ()=>{
+    document.getElementById('l-r2-r3').classList.toggle('cut', cutToggle.checked);
+    cutMark.forEach(x=>x.classList.toggle('on', cutToggle.checked));
+    if(!busy) resetAll();
+  });
+
+  sendBtn.addEventListener('click', send);
+  resetBtn.addEventListener('click', resetAll);
+})();
+</script>
+</body>
+</html>
