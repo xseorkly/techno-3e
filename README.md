@@ -9,10 +9,13 @@ techno-3e/
 ├── seq1-act1.html    ← Séquence 1 · Activité 1
 ├── seq1-act2.html    ← Séquence 1 · Activité 2
 ├── seq1-act3.html    ← Séquence 1 · Activité 3
+├── seq2-act1.html    ← Séquence 2 · Activité 1
 ├── img/
 │   ├── seq1-act1.jpg ← photo de la situation déclenchante (activité 1)
 │   ├── seq1-act2.jpg ← illustration de l'exposition (activité 2)
 │   ├── seq1-act3.jpg ← illustration LexIA (activité 3)
+│   ├── seq2-act1-situation.jpg, seq2-act1-schema.jpg,
+│   │   seq2-act1-app.png, seq2-act1-filius.jpg
 │   ├── tel-cadran.png, tel-touches.png, tel-tactile.png, tel-pliable.png
 │   └── logo-lfv.png  ← logo affiché en tête des pages
 └── README.md
@@ -90,6 +93,14 @@ Les liens ont été extraits directement de ta trame. Deux points à vérifier :
 - l'intitulé de la compétence CPS était vide dans les deux trames ; j'ai mis « Se fixer un objectif et le mener à son terme » pour l'activité 2 et « Exercer son esprit critique face à une réponse produite par une IA » pour l'activité 3.
 
 Pour l'activité 3, les liens ne posaient aucune ambiguïté : chaque archive et chaque quiz porte le code OST correspondant dans son adresse.
+
+## Particularités de la séquence 2, activité 1
+
+Les quatre vidéos Filius sont hébergées sur YouTube : elles sont chargées uniquement au clic, depuis le domaine sans cookie `youtube-nocookie.com`. Les deux vidéos PodEduc fonctionnent de la même façon.
+
+L'activité de niveau 3 se déroule dans le logiciel Filius, hors du site : la page propose une case à cocher par étape, qui ressort dans le PDF sous forme de relevé d'avancement. C'est un ajout de ma part, ta trame n'avait pas de champ à cet endroit.
+
+Les tables mystères s'affichent en α, β, γ sur la page ; le PDF les écrit « alpha », « beta », « gamma », car la police du PDF ne contient pas l'alphabet grec.
 
 ## Ajouter une fiche
 
