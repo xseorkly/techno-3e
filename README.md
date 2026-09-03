@@ -14,6 +14,9 @@ techno-3e/
 ├── seq2-act1-p3.html ← Séquence 2 · Activité 1, partie 3
 ├── seq3-act1-p1.html ← Séquence 3 · Activité 1, partie 1 (micro:bit)
 ├── seq3-act1-p2.html ← Séquence 3 · Activité 1, partie 2 (micro:bit)
+├── seq3-act2-p1.html ← Séquence 3 · Activité 2, partie 1 (IA et images)
+├── seq3-act2-p2.html ← Séquence 3 · Activité 2, partie 2 (Teachable Machine)
+├── seq3-act2-p3.html ← Séquence 3 · Activité 2, partie 3 (biais et limites)
 ├── outils/
 │   ├── aide-reseau.html    ← fiche d'aide réseau (vocabulaire, Filius, calculs)
 │   ├── reseau-simple.html  ← trajet d'un paquet et tables de routage
@@ -133,6 +136,18 @@ Programmation **par blocs uniquement**, dans MakeCode. Aucun lien vers l'éditeu
 Le logigramme est **dessiné dans le PDF** avec les symboles normalisés : ovale pour début et fin, parallélogramme pour les entrées et sorties, rectangle pour les traitements, losange pour les tests, reliés par des flèches. L'élève choisit la forme de chaque étape dans une liste, le PDF s'occupe du tracé.
 
 Adapté du projet « Pierre, feuille, ciseaux » de la Micro:bit Educational Foundation, sous licence CC BY-SA 4.0.
+
+## Séquence 3, activité 2 — l'IA et la reconnaissance d'images
+
+Trois séances de 55 minutes, chacune avec son PDF.
+
+**Partie 1** — trois cas réels documentés : les caméras LAPI d'un parking, les sas PARAFE d'un aéroport, la détection de gestes de Veesion en magasin. Une vidéo par cas, un tableau comparatif à remplir, l'association des trois étapes de l'IA, puis un débat sur la caméra du magasin. Les deux camps du débat sont réels et sourcés : les chiffres de l'entreprise d'un côté, la position de La Quadrature du Net de l'autre.
+
+**Partie 2** — le TP main ouverte / main fermée : Teachable Machine pour la base et l'entraînement, Vittascience Adacraft avec les extensions IA Image et micro:bit pour l'utilisation. Douze étapes cochables, relevé du nombre d'images par classe et des taux de confiance observés.
+
+**Partie 3** — le TP stylos sur adacraft.org avec l'extension TM2Scratch, puis six essais destinés à faire échouer le modèle : lumière changée, fond différent, couleur jamais montrée, objet inconnu, caméra vide. C'est la partie que les TP d'origine n'avaient pas, et c'est là que le biais devient concret.
+
+Adapté des deux TP de Philippe Perennes (académie de Normandie). Attention : **MakeCode ne peut pas exploiter un modèle Teachable Machine**, seul l'univers Scratch le permet — d'où le passage par Adacraft.
 
 ## Navigation
 

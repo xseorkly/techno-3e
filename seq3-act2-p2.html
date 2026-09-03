@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Séquence 2 · Activité 1 — Les chemins de l'information</title>
+<title>Séquence 3 · Activité 2, partie 2 — J'entraîne ma propre IA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -21,6 +21,35 @@ body{margin:0;background:var(--papier);color:var(--encre);
 .page{max-width:820px;margin:0 auto;padding:0 20px 140px}
 
 /* En-tête */
+
+/* ---------- Barre de navigation ---------- */
+.navsite{
+  position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--trait);padding:9px 20px;
+}
+.navsite .dedans{max-width:820px;margin:0 auto;width:100%;display:flex;align-items:center;gap:16px}
+.navsite .accueil{
+  display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  font-family:"Archivo",sans-serif;font-weight:600;font-size:14.5px;color:var(--teal);
+  border:1px solid var(--trait);border-radius:8px;padding:7px 14px;background:#fff;
+}
+.navsite .accueil:hover{border-color:var(--teal);background:var(--teal-pale)}
+.navsite .accueil:focus-visible{outline:2px solid var(--magenta);outline-offset:2px}
+.navsite .saut{margin-left:auto;display:flex;align-items:center;gap:9px}
+.navsite .saut span{font-size:13.5px;color:var(--doux)}
+.navsite select{
+  font:inherit;font-size:14.5px;color:var(--encre);background:#fff;
+  border:1px solid var(--trait);border-radius:8px;padding:7px 10px;max-width:min(52vw,330px);
+}
+.navsite select:focus{outline:0;border-color:var(--teal)}
+@media(max-width:640px){
+  .navsite{padding:8px 14px;gap:10px}
+  .navsite .saut span{display:none}
+  .navsite select{max-width:none;flex:1}
+}
+@media print{.navsite{display:none}}
+
 .entete{position:relative;background:var(--carte);border:1px solid var(--trait);
   border-top:4px solid var(--teal);border-radius:var(--r);margin-top:26px;padding:26px 26px 0}
 .marque{display:flex;align-items:center;gap:13px;margin:0 0 14px}
@@ -146,6 +175,52 @@ textarea::placeholder{color:#9FB0B3}
 .cadre16{position:relative;padding-top:56.25%;border-radius:8px;overflow:hidden;background:#000}
 .cadre16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
+/* Outils intégrés */
+.outil{background:var(--carte);border:1px solid var(--teal);border-radius:var(--r);
+  padding:16px 18px;margin:14px 0}
+.outil .vt{font-weight:600;margin:0 0 3px}
+.outil .vs{color:var(--doux);font-size:14.5px;margin:0 0 12px}
+.outil .actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.outil a{color:var(--doux);font-size:14.5px}
+.cadreoutil{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--trait)}
+.cadreoutil iframe{width:100%;height:820px;border:0;display:block;background:#fff}
+@media(max-width:640px){.cadreoutil iframe{height:640px}}
+.bandeau{display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+  background:var(--teal-pale);border-radius:var(--r);padding:16px 18px;margin:0 0 20px}
+.bandeau p{margin:0;flex:1;min-width:220px;font-size:15.5px}
+.bandeau a{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;
+  background:var(--teal);color:#fff;border-radius:8px;padding:10px 18px;text-decoration:none}
+.bandeau a:hover{background:#0b5a58}
+
+
+/* Tableau des composants */
+table.composants{width:100%;border-collapse:collapse;font-size:15px;margin:18px 0 4px;background:var(--carte)}
+table.composants th,table.composants td{border:1px solid var(--trait);padding:9px 12px;text-align:left;vertical-align:top}
+table.composants th{background:var(--teal-pale);color:var(--teal);
+  font-family:"Archivo",sans-serif;font-weight:600;font-size:13px}
+table.composants td:last-child{white-space:nowrap;color:var(--doux);font-size:14px}
+@media(max-width:640px){
+  table.composants td:last-child{white-space:normal}
+  table.composants th,table.composants td{padding:7px 8px;font-size:14px}
+}
+/* Grille des dix lancers */
+.tirages{display:flex;gap:8px;flex-wrap:wrap}
+.tirages input{width:52px;text-align:center;font:inherit;font-size:17px;padding:10px 4px;
+  border:1px solid var(--trait);border-radius:8px;background:#fff;color:var(--encre)}
+.tirages input:focus{outline:0;border-color:var(--teal)}
+/* Exemple d'algorithme */
+.exemple{background:var(--teal-pale);border-radius:var(--r);padding:14px 18px;margin:0 0 14px}
+.exemple .titre-ex{margin:0 0 4px;font-family:"Archivo",sans-serif;font-weight:600;
+  font-size:13px;color:var(--teal)}
+.exemple p{margin:0;font-size:15.5px}
+/* Légende du logigramme */
+.legende{display:flex;gap:20px;flex-wrap:wrap;background:var(--carte);border:1px solid var(--trait);
+  border-radius:var(--r);padding:14px 18px;margin:0 0 16px}
+.legende div{display:flex;align-items:center;gap:9px;font-size:14.5px;color:var(--doux)}
+.legende svg{width:64px;height:29px;flex:none}
+#logi .ligne select{flex:0 0 168px}
+#logi .ligne input{flex:1}
+
 /* Ressources */
 .ressources{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:18px 20px}
 .ressources ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
@@ -213,6 +288,45 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
 </head>
 <body>
 
+<nav class="navsite" aria-label="Navigation du site">
+  <div class="dedans">
+    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
+    <label class="saut">
+      <span>Aller à</span>
+      <select id="navfiches" aria-label="Aller à une autre activité">
+        <optgroup label="Séquence 1">
+          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+          <option value="seq1-act2.html">Activité 2 — Du téléphone au smartphone</option>
+          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+        </optgroup>
+        <optgroup label="Séquence 2">
+          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Comprendre</option>
+          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Filius</option>
+          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Analyser le routage</option>
+        </optgroup>
+        <optgroup label="Séquence 3">
+          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+          <option value="seq3-act2-p2.html" selected>Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+        </optgroup>
+        <optgroup label="Outils">
+          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+        </optgroup>
+      </select>
+    </label>
+  </div>
+</nav>
+<script>
+document.getElementById("navfiches").addEventListener("change", function(){
+  if(this.value) location.href = this.value;
+});
+</script>
+
+
 <main class="page">
 
   <header class="entete">
@@ -222,20 +336,16 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
     </div>
     <div class="marque">
       <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
-      <p class="fil">Technologie · Séquence 2 · Activité 1</p>
+      <p class="fil">Technologie · Séquence 3 · Activité 2</p>
     </div>
-    <h1 class="titre">Les chemins de l'information</h1>
-    <p class="sous">T10 — La circulation de l'information dans un réseau informatique · 3 h</p>
+    <h1 class="titre">L'IA qui reconnaît — partie 2 : j'entraîne ma propre IA</h1>
+    <p class="sous">Main ouverte, main fermée : allumer et éteindre la micro:bit · 55 min</p>
     <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
-      <a href="#situation"><b>2′</b>Situation</a>
-      <a href="#constats"><b>5′</b>Constats</a>
-      <a href="#probleme"><b>3′</b>Problème</a>
-      <a href="#idees"><b>5′</b>Idées</a>
-      <a href="#niveaux12"><b>35′</b>Niveaux 1-2</a>
-      <a href="#niveau3"><b>55′</b>Filius</a>
-      <a href="#niveau4"><b>55′</b>Niveau 4</a>
-      <a href="#synthese"><b>10′</b>Synthèse</a>
-      <a href="#ressources"><b>10′</b>Ressources</a>
+      <a href="#materiel"><b>3′</b>Matériel</a>
+      <a href="#base"><b>20′</b>Base de données</a>
+      <a href="#modele"><b>10′</b>Entraînement</a>
+      <a href="#usage"><b>17′</b>Utilisation</a>
+      <a href="#synthese"><b>5′</b>Synthèse</a>
     </nav>
   </header>
 
@@ -252,416 +362,166 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
     <summary>Ce que je travaille dans cette activité</summary>
     <div class="dedans">
       <dl>
-        <dt>Thème</dt><dd>Structure, fonctionnement, comportement : des objets et des systèmes techniques à comprendre</dd>
-        <dt>Attendu</dt><dd>SFC1 — Décrire et caractériser l'organisation interne d'un objet ou d'un système technique et ses échanges avec son environnement (énergies, données)</dd>
-        <dt>SFC17</dt><dd>Identifier et représenter la circulation d'une information dans le réseau Internet</dd>
-        <dt>SFC18</dt><dd>Justifier la nécessité d'un protocole de routage pour faire communiquer plusieurs réseaux</dd>
-        <dt>SFC1p</dt><dd>Le rôle et la structure d'une adresse IP, des tables de routage</dd>
-        <dt>SFC1q</dt><dd>Le débit et les ordres de grandeur associés</dd>
+        <dt>Compétences</dt><dd>Constituer une base de données d'images étiquetées, entraîner un modèle et l'utiliser pour commander un objet programmable</dd>
+        <dt>Connaissances</dt><dd>Apprentissage supervisé ; classe et échantillon ; modèle entraîné ; programmation par blocs d'un système embarqué</dd>
       </dl>
       <ul>
-        <li>N1 — Je sais qu'une information est acheminée entre réseaux grâce à son adresse IP et à des tables de routage, et que la quantité de données transmise par seconde s'appelle le débit</li>
-        <li>N2 — et je sais expliquer, avec mes mots, le rôle d'une table de routage, l'effet du débit sur la vitesse de circulation d'une information, et la différence entre une adresse IP privée et une adresse IP publique</li>
-        <li>N3 — et je sais configurer et tester, sur un réseau simulé, les adresses IP et les passerelles permettant à plusieurs réseaux de communiquer entre eux</li>
-        <li>N4 — et je sais expliquer, adresses IP, tables de routage et débits à l'appui, comment une information est acheminée entre plusieurs réseaux et pourquoi le chemin choisi dépend à la fois du routage et de l'état du trafic</li>
+        <li>N1 — Je sais nommer les trois étapes que je viens de réaliser</li>
+        <li>N2 — et je sais expliquer le rôle du nombre et de la variété des images dans la qualité du modèle</li>
+        <li>N3 — et je sais utiliser le modèle dans un programme par blocs pour commander la carte</li>
+        <li>N4 — et je sais expliquer ce qui limite la fiabilité de mon modèle</li>
       </ul>
     </div>
   </details>
 
-  <article class="bloc" id="situation">
-    <div class="marge"><span class="duree">2′</span></div>
-    <div class="corps">
-      <h2>Situation déclenchante</h2>
-      <div class="situation">
-        <p>Le collège vient de recevoir une nouvelle salle informatique et tous les ordinateurs sont bien reliés au réseau. Pourtant, certains élèves arrivent à ouvrir Pronote, à accéder à leur espace de travail ou au serveur vidéo, alors que d'autres obtiennent un message d'erreur. Parfois, Internet fonctionne mais les pages mettent beaucoup de temps à s'afficher.</p>
-        <img class="illus" style="margin:18px auto" src="img/seq2-act1-situation.jpg"
-             alt="Le réseau du collège relié à Internet : plusieurs chemins possibles, certains bloqués."
-             onerror="this.remove()">
-        <p>Le chef d'établissement demande au professeur de technologie et à ses élèves de comprendre pourquoi les informations n'arrivent pas toujours à destination.</p>
-      </div>
-    </div>
-  </article>
-
-  <article class="bloc" id="constats">
-    <div class="marge"><span class="duree">5′</span></div>
-    <div class="corps">
-      <h2>Mes constats, mes observations</h2>
-      <textarea id="rep-constats" data-rep placeholder="J'observe que…"></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="probleme">
+  <article class="bloc" id="materiel">
     <div class="marge"><span class="duree">3′</span></div>
     <div class="corps">
-      <h2>Mon problème à résoudre</h2>
-      <textarea id="rep-probleme" data-rep placeholder="Comment… ?" style="min-height:100px"></textarea>
+      <h2>Le matériel</h2>
+      <div class="situation">
+        <p>Un ordinateur, une webcam, la connexion Internet, une carte micro:bit et son câble USB. Rien à installer : tout se passe dans le navigateur.</p>
+        <p style="margin-top:14px">Objectif de la séance : la caméra reconnaît ta main ouverte ou ta main fermée, et la micro:bit allume ou éteint son écran en conséquence.</p>
+      </div>
     </div>
   </article>
 
-  <article class="bloc" id="idees">
-    <div class="marge"><span class="duree">5′</span></div>
+  <article class="bloc" id="base">
+    <div class="marge"><span class="duree">20′</span></div>
     <div class="corps">
-      <h2>Mes idées pour le résoudre</h2>
-      <textarea id="rep-idees" data-rep placeholder="Peut-être que…"></textarea>
+      <h2>Étape 1 — Je constitue la base de données</h2>
+      <p class="amorce">Une IA n'apprend rien toute seule : il faut lui montrer des exemples déjà classés. C'est le travail le plus long, et c'est lui qui décide de la qualité du résultat.</p>
+
+      <div class="bandeau">
+        <p>L'outil de Google, gratuit et sans compte. Choisis <em>Get Started</em>, puis <em>Image Project</em>, puis <em>Standard image model</em>.</p>
+        <a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener">Ouvrir Teachable Machine</a>
+      </div>
+
+      <div class="cartes" id="etapes">
+        <div class="cartefiche" data-etape="Ouvrir Teachable Machine en mode Image Project">
+          <label class="etape"><input type="checkbox" id="et-1"><span><b>1.</b> Ouvrir Teachable Machine, cliquer sur <em>Get Started</em>, puis choisir <em>Image Project</em>.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Autoriser la webcam">
+          <label class="etape"><input type="checkbox" id="et-2"><span><b>2.</b> Cliquer sur <em>Webcam</em> dans la première classe et autoriser le navigateur à utiliser la caméra.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Renommer les deux classes">
+          <label class="etape"><input type="checkbox" id="et-3"><span><b>3.</b> Renommer <em>Class 1</em> en <strong>MAIN OUVERTE</strong> et <em>Class 2</em> en <strong>MAIN FERMEE</strong>. Écris-les en majuscules sans accent : tu devras les retaper à l'identique dans le programme.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Photographier la main ouverte">
+          <label class="etape"><input type="checkbox" id="et-4"><span><b>4.</b> Maintenir le bouton d'enregistrement enfoncé pour capturer une cinquantaine d'images de la main ouverte, en bougeant un peu la main.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Photographier la main fermée">
+          <label class="etape"><input type="checkbox" id="et-5"><span><b>5.</b> Faire de même pour la main fermée, avec autant d'images environ.</span></label>
+        </div>
+      </div>
+
+      <h3>Mon relevé</h3>
+      <div class="cartes" data-tab="releve" id="tabreleve">
+        <div class="ligne" data-cle="MAIN OUVERTE">
+          <span class="cle">MAIN OUVERTE</span>
+          <input id="r1a" inputmode="numeric" placeholder="nombre d'images" aria-label="Nombre d'images de la main ouverte">
+        </div>
+        <div class="ligne" data-cle="MAIN FERMEE">
+          <span class="cle">MAIN FERMEE</span>
+          <input id="r2a" inputmode="numeric" placeholder="nombre d'images" aria-label="Nombre d'images de la main fermée">
+        </div>
+      </div>
+
+      <h3>N1a — Pourquoi étiqueter</h3>
+      <div class="qcm" data-qcm="n1a" data-titre="N1a — Le rôle des étiquettes">
+        <p class="enonce">Pourquoi faut-il ranger les images dans deux classes nommées, au lieu de tout mettre ensemble ?</p>
+        <div class="choix">
+          <label><input type="radio" name="n1a" id="n1a-a" value="a"><span class="lt">a</span><span>Pour que les images se chargent plus vite</span></label>
+          <label><input type="radio" name="n1a" id="n1a-b" value="b"><span class="lt">b</span><span>Parce que la machine apprend en comparant des exemples dont on lui a donné la réponse</span></label>
+          <label><input type="radio" name="n1a" id="n1a-c" value="c"><span class="lt">c</span><span>Pour économiser de la mémoire</span></label>
+          <label><input type="radio" name="n1a" id="n1a-d" value="d"><span class="lt">d</span><span>Ce n'est pas obligatoire, c'est juste plus joli</span></label>
+        </div>
+      </div>
     </div>
   </article>
 
-  <article class="bloc" id="niveaux12">
-    <div class="marge"><span class="duree">35′</span></div>
+  <article class="bloc" id="modele">
+    <div class="marge"><span class="duree">10′</span></div>
     <div class="corps">
-      <h2>Activités — niveaux 1 et 2</h2>
-      <p class="amorce">Pour résoudre ce problème, nous allons d'abord identifier les éléments qui permettent de comprendre comment une information circule dans un réseau, puis comprendre comment se déterminent le chemin et la vitesse de son trajet.</p>
-      <img class="illus" src="img/seq2-act1-schema.jpg"
-           alt="Le PC de Léa envoie un paquet vers le serveur Pronote : plusieurs chemins traversent Internet."
-           onerror="this.remove()">
-
-      <h3>N1a — Identifier un ordinateur sur le réseau</h3>
-      <div class="qcm" data-qcm="n1a" data-titre="N1a — Le numéro qui identifie l'ordinateur de Léa">
-        <p class="enonce">Comment appelle-t-on le numéro qui identifie de façon unique l'ordinateur de Léa sur le réseau ?</p>
-        <div class="choix">
-          <label><input type="radio" name="n1a" id="n1a-a" value="a"><span class="lt">a</span><span>Son mot de passe</span></label>
-          <label><input type="radio" name="n1a" id="n1a-b" value="b"><span class="lt">b</span><span>Son adresse IP</span></label>
-          <label><input type="radio" name="n1a" id="n1a-c" value="c"><span class="lt">c</span><span>Son nom d'utilisateur</span></label>
-          <label><input type="radio" name="n1a" id="n1a-d" value="d"><span class="lt">d</span><span>Sa clé Wi-Fi</span></label>
+      <h2>Étape 2 — J'entraîne le modèle</h2>
+      <div class="cartes" id="etapes2">
+        <div class="cartefiche" data-etape="Lancer l'entraînement">
+          <label class="etape"><input type="checkbox" id="et-6"><span><b>6.</b> Cliquer sur <em>Train Model</em> et laisser l'onglet ouvert pendant tout le calcul.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Tester dans l'aperçu">
+          <label class="etape"><input type="checkbox" id="et-7"><span><b>7.</b> Dans <em>Preview</em>, montrer la main ouverte puis la main fermée. Les barres indiquent le pourcentage de confiance du modèle.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Exporter et récupérer le lien du modèle">
+          <label class="etape"><input type="checkbox" id="et-8"><span><b>8.</b> Cliquer sur <em>Export Model</em>, onglet <em>Tensorflow.js</em>, cocher <em>Upload (shareable link)</em>, cliquer sur <em>Upload my model</em>, puis copier le lien obtenu.</span></label>
         </div>
       </div>
 
-      <h3>N1b — Choisir le prochain routeur</h3>
-      <div class="qcm" data-qcm="n1b" data-titre="N1b — La structure utilisée par un routeur">
-        <p class="enonce">Quelle structure utilise un routeur pour savoir vers quel prochain routeur envoyer une information ?</p>
-        <div class="choix">
-          <label><input type="radio" name="n1b" id="n1b-a" value="a"><span class="lt">a</span><span>Une table de routage</span></label>
-          <label><input type="radio" name="n1b" id="n1b-b" value="b"><span class="lt">b</span><span>Un tableur</span></label>
-          <label><input type="radio" name="n1b" id="n1b-c" value="c"><span class="lt">c</span><span>Un antivirus</span></label>
-          <label><input type="radio" name="n1b" id="n1b-d" value="d"><span class="lt">d</span><span>Un moteur de recherche</span></label>
+      <div class="ligne" style="margin-top:16px">
+        <span class="cle">Lien de mon modèle</span>
+        <input id="lien-modele" placeholder="https://teachablemachine.withgoogle.com/models/…" aria-label="Lien du modèle entraîné">
+      </div>
+
+      <h3>Ce que j'observe dans l'aperçu</h3>
+      <div class="cartes" data-tab="mesures" id="tabmesures">
+        <div class="ligne" data-cle="Main ouverte, bien en face">
+          <span class="cle">Main ouverte, en face</span>
+          <input id="m1a" placeholder="classe annoncée" aria-label="Classe annoncée, main ouverte en face">
+          <input id="m1b" placeholder="confiance en %" aria-label="Confiance, main ouverte en face">
+        </div>
+        <div class="ligne" data-cle="Main fermée, bien en face">
+          <span class="cle">Main fermée, en face</span>
+          <input id="m2a" placeholder="classe annoncée" aria-label="Classe annoncée, main fermée en face">
+          <input id="m2b" placeholder="confiance en %" aria-label="Confiance, main fermée en face">
+        </div>
+        <div class="ligne" data-cle="Main de profil">
+          <span class="cle">Main de profil</span>
+          <input id="m3a" placeholder="classe annoncée" aria-label="Classe annoncée, main de profil">
+          <input id="m3b" placeholder="confiance en %" aria-label="Confiance, main de profil">
         </div>
       </div>
 
-      <h3>N1c — Les unités de débit</h3>
-      <div class="qcm" data-qcm="n1c" data-titre="N1c — Les unités qui expriment un débit">
-        <p class="enonce">Parmi ces unités, lesquelles servent à exprimer un débit ?</p>
-        <p class="note">Plusieurs réponses possibles.</p>
-        <div class="choix">
-          <label><input type="checkbox" name="n1c" id="n1c-a" value="a"><span class="lt">a</span><span>bps</span></label>
-          <label><input type="checkbox" name="n1c" id="n1c-b" value="b"><span class="lt">b</span><span>Mo</span></label>
-          <label><input type="checkbox" name="n1c" id="n1c-c" value="c"><span class="lt">c</span><span>Mbps</span></label>
-          <label><input type="checkbox" name="n1c" id="n1c-d" value="d"><span class="lt">d</span><span>Gb/s</span></label>
-        </div>
-      </div>
-
-      <h3>N1d — Chaque terme et sa définition</h3>
-      <div class="assoc">
-        <div class="paire">
-          <span class="nom">Adresse IP</span>
-          <select id="n1d-1" data-assoc data-terme="Adresse IP" aria-label="Définition de l'adresse IP">
-            <option value="">Choisir une définition…</option>
-            <option>Quantité de données transmises par seconde</option>
-            <option>Numéro d'identification unique d'un appareil sur un réseau</option>
-            <option>Structure de données qui indique le chemin à suivre pour joindre une destination</option>
-          </select>
-        </div>
-        <div class="paire">
-          <span class="nom">Débit</span>
-          <select id="n1d-2" data-assoc data-terme="Débit" aria-label="Définition du débit">
-            <option value="">Choisir une définition…</option>
-            <option>Quantité de données transmises par seconde</option>
-            <option>Numéro d'identification unique d'un appareil sur un réseau</option>
-            <option>Structure de données qui indique le chemin à suivre pour joindre une destination</option>
-          </select>
-        </div>
-        <div class="paire">
-          <span class="nom">Table de routage</span>
-          <select id="n1d-3" data-assoc data-terme="Table de routage" aria-label="Définition de la table de routage">
-            <option value="">Choisir une définition…</option>
-            <option>Quantité de données transmises par seconde</option>
-            <option>Numéro d'identification unique d'un appareil sur un réseau</option>
-            <option>Structure de données qui indique le chemin à suivre pour joindre une destination</option>
-          </select>
-        </div>
-      </div>
-
-      <h3>N2 — Comprendre le routage</h3>
-      <div class="video" data-src="https://podeduc.apps.education.fr/video/113089-sfc1p-le-role-et-la-structure-dune-adresse-ip-le-role-des-tables-de-routage/?is_iframe=true">
-        <p class="vt">Vidéo 1 · SFC1p — Le rôle et la structure d'une adresse IP, le rôle des tables de routage</p>
-        <p class="vs">PodEduc</p>
-        <div class="actions">
-          <button class="vlire" type="button">Lire la vidéo</button>
-          <a href="https://podeduc.apps.education.fr/video/113089-sfc1p-le-role-et-la-structure-dune-adresse-ip-le-role-des-tables-de-routage/" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
-        </div>
-      </div>
-      <p class="consigne" style="margin-top:16px">N2a — En t'appuyant sur la vidéo 1, explique avec tes mots à quoi sert une table de routage pour un routeur.</p>
+      <p class="consigne" style="margin-top:18px">N2a — Que se passe-t-il quand tu montres ta main de profil, une position que le modèle n'a jamais vue ? Explique pourquoi.</p>
       <textarea id="n2a" data-rep></textarea>
-
-      <div class="video" data-src="https://podeduc.apps.education.fr/video/113086-sfc1q-le-debit-et-les-ordres-de-grandeur-associes/?is_iframe=true">
-        <p class="vt">Vidéo 2 · SFC1q — Le débit et les ordres de grandeur associés</p>
-        <p class="vs">PodEduc</p>
-        <div class="actions">
-          <button class="vlire" type="button">Lire la vidéo</button>
-          <a href="https://podeduc.apps.education.fr/video/113086-sfc1q-le-debit-et-les-ordres-de-grandeur-associes/" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
-        </div>
-      </div>
-      <p class="consigne" style="margin-top:16px">N2b — En t'appuyant sur la vidéo 2, explique pourquoi une vidéo peut mettre du temps à se charger si le débit d'une connexion est faible.</p>
-      <textarea id="n2b" data-rep></textarea>
-
-      <p class="consigne" style="margin-top:22px">N2c — Explique la différence entre l'adresse IP privée du PC de Léa (192.168.1.25) et l'adresse IP publique du serveur vidéo (203.0.113.10).</p>
-      <textarea id="n2c" data-rep></textarea>
     </div>
   </article>
 
-  <article class="bloc" id="niveau3">
-    <div class="marge"><span class="duree">55′</span></div>
+  <article class="bloc" id="usage">
+    <div class="marge"><span class="duree">17′</span></div>
     <div class="corps">
-      <h2>Activité — niveau 3 : configurer un réseau avec Filius</h2>
-      <p class="amorce">Maintenant que vous connaissez le rôle de l'adresse IP, de la table de routage et du débit, vous allez configurer un vrai réseau avec le logiciel Filius pour observer concrètement comment une information y circule.</p>
-      <p class="consigne">Coche chaque étape au fur et à mesure. Chaque vidéo se lance dans la page.</p>
+      <h2>Étape 3 — J'utilise le modèle pour commander la carte</h2>
+      <p class="amorce">Le modèle est en ligne, à son adresse. Il reste à le brancher dans un programme par blocs qui pilote la micro:bit.</p>
 
-      <div class="cartes" id="filius">
-        <div class="cartefiche" data-etape="Lancer Filius et choisir le français">
-          <label class="etape"><input type="checkbox" id="fil-1"><span><b>1.</b> Lancer le logiciel Filius, outil de virtualisation de réseau permettant de créer, configurer et tester des réseaux locaux et étendus. À la première installation, choisis la langue française.</span></label>
-          <img class="apercu" src="img/seq2-act1-filius.jpg" alt="L'interface du logiciel Filius." onerror="this.remove()">
-        </div>
-
-        <div class="cartefiche" data-etape="Créer l'architecture du réseau">
-          <label class="etape"><input type="checkbox" id="fil-2"><span><b>2.</b> Créer l'architecture simplifiée de la salle de technologie du réseau du collège.</span></label>
-          <div class="video" data-src="https://www.youtube-nocookie.com/embed/IbsJYp71-jU">
-            <p class="vt">Filius : créer l'architecture d'un réseau</p>
-            <div class="actions">
-              <button class="vlire" type="button">Lire la vidéo</button>
-              <a href="https://youtu.be/IbsJYp71-jU" target="_blank" rel="noopener">Ouvrir sur YouTube</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="cartefiche" data-etape="Configurer les adresses IP">
-          <label class="etape"><input type="checkbox" id="fil-3"><span><b>3.</b> Configurer les adresses IP des ordinateurs des salles de technologie multimédia et classe mobile, ainsi que des serveurs.</span></label>
-          <div class="video" data-src="https://www.youtube-nocookie.com/embed/1blgUDkNktg">
-            <p class="vt">Filius : configurer des adresses IP</p>
-            <div class="actions">
-              <button class="vlire" type="button">Lire la vidéo</button>
-              <a href="https://youtu.be/1blgUDkNktg" target="_blank" rel="noopener">Ouvrir sur YouTube</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="cartefiche" data-etape="Configurer les passerelles">
-          <label class="etape"><input type="checkbox" id="fil-4"><span><b>4.</b> Configurer les passerelles des ordinateurs et des serveurs, ainsi que celle du routeur.</span></label>
-          <div class="video" data-src="https://www.youtube-nocookie.com/embed/8fQxqCC9mG4">
-            <p class="vt">Filius : configurer les passerelles sur le réseau</p>
-            <div class="actions">
-              <button class="vlire" type="button">Lire la vidéo</button>
-              <a href="https://youtu.be/8fQxqCC9mG4" target="_blank" rel="noopener">Ouvrir sur YouTube</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="cartefiche" data-etape="Tester la configuration">
-          <label class="etape"><input type="checkbox" id="fil-5"><span><b>5.</b> Tester la configuration et la communication du réseau, en suivant la vidéo jusqu'à 3:10.</span></label>
-          <div class="video" data-src="https://www.youtube-nocookie.com/embed/1FgrXbeeACI">
-            <p class="vt">Filius : tester la configuration du réseau</p>
-            <div class="actions">
-              <button class="vlire" type="button">Lire la vidéo</button>
-              <a href="https://youtu.be/1FgrXbeeACI" target="_blank" rel="noopener">Ouvrir sur YouTube</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <article class="bloc" id="niveau4">
-    <div class="marge"><span class="duree">55′</span></div>
-    <div class="corps">
-      <h2>Activité — niveau 4 : lire le routage</h2>
-      <p class="amorce">Maintenant que vous avez configuré et testé votre réseau dans Filius, vous allez analyser plus finement comment le routage choisit un chemin et comment se lit une table de routage.</p>
-
-      <div class="ressources" style="margin-bottom:22px">
-        <p class="appli" style="margin-bottom:10px">Toute cette partie s'appuie sur l'application « Du réseau du collège jusqu'à Internet », avec ses onglets <em>Trajet &amp; routage</em>, <em>Débit</em> et <em>Trafic</em>.</p>
-        <p style="margin:0"><a href="https://edurl.fr/FDewHUNM" target="_blank" rel="noopener"><strong>Ouvrir l'application dans un nouvel onglet</strong></a></p>
-        <img class="apercu" style="margin-top:14px" src="img/seq2-act1-app.png" alt="Aperçu de l'application : le réseau du collège relié à Internet." onerror="this.remove()">
+      <div class="bandeau">
+        <p>Programmation par blocs. Ajoute les extensions <em>IA Image</em> et <em>micro:bit</em> dans le menu <em>Extensions</em>, en bas à gauche.</p>
+        <a href="https://fr.vittascience.com/adacraft/?mode=mixed" target="_blank" rel="noopener">Ouvrir Vittascience Adacraft</a>
       </div>
 
-      <h3>N4a — À quel réseau appartient chaque adresse ?</h3>
-      <p class="consigne">Chaque réseau a sa plage d'adresses : les trois premiers nombres sont communs à un même réseau. Collège → 192.168.1.___ , serveur vidéo → 203.0.113.___ , serveur Pronote → 198.51.100.___ . Repères visibles dans l'application : PC de Léa 192.168.1.25, serveur vidéo 203.0.113.10, serveur Pronote 198.51.100.5.</p>
-      <div class="cartes" id="n4a">
-        <div class="ligne" data-adresse="192.168.1.42">
-          <span class="cle">192.168.1.42</span>
-          <select id="n4a-1" aria-label="Réseau de 192.168.1.42">
-            <option value="">Choisir…</option>
-            <option>Réseau du collège</option>
-            <option>Réseau du serveur vidéo</option>
-            <option>Réseau du serveur Pronote</option>
-            <option>Adresse impossible</option>
-          </select>
+      <div class="cartes" id="etapes3">
+        <div class="cartefiche" data-etape="Ajouter les extensions IA Image et micro:bit">
+          <label class="etape"><input type="checkbox" id="et-9"><span><b>9.</b> Ouvrir Vittascience Adacraft et ajouter les extensions <em>IA Image</em> et <em>micro:bit</em>.</span></label>
         </div>
-        <div class="ligne" data-adresse="203.0.113.200">
-          <span class="cle">203.0.113.200</span>
-          <select id="n4a-2" aria-label="Réseau de 203.0.113.200">
-            <option value="">Choisir…</option>
-            <option>Réseau du collège</option>
-            <option>Réseau du serveur vidéo</option>
-            <option>Réseau du serveur Pronote</option>
-            <option>Adresse impossible</option>
-          </select>
+        <div class="cartefiche" data-etape="Charger le modèle et lancer la webcam">
+          <label class="etape"><input type="checkbox" id="et-10"><span><b>10.</b> Dans <em>quand drapeau cliqué</em> : effacer l'écran, sélectionner et initialiser le modèle en collant son URL, puis activer la webcam et lancer la détection.</span></label>
         </div>
-        <div class="ligne" data-adresse="198.51.100.9">
-          <span class="cle">198.51.100.9</span>
-          <select id="n4a-3" aria-label="Réseau de 198.51.100.9">
-            <option value="">Choisir…</option>
-            <option>Réseau du collège</option>
-            <option>Réseau du serveur vidéo</option>
-            <option>Réseau du serveur Pronote</option>
-            <option>Adresse impossible</option>
-          </select>
+        <div class="cartefiche" data-etape="Écrire la sélection sur la classe détectée">
+          <label class="etape"><input type="checkbox" id="et-11"><span><b>11.</b> Dans <em>répéter indéfiniment</em> : si la classe détectée est <strong>MAIN OUVERTE</strong>, dire « allume » et afficher une image sur la carte ; sinon si c'est <strong>MAIN FERMEE</strong>, dire « éteint » et effacer l'écran.</span></label>
         </div>
-        <div class="ligne" data-adresse="192.168.2.25">
-          <span class="cle">192.168.2.25</span>
-          <select id="n4a-4" aria-label="Réseau de 192.168.2.25">
-            <option value="">Choisir…</option>
-            <option>Réseau du collège</option>
-            <option>Réseau du serveur vidéo</option>
-            <option>Réseau du serveur Pronote</option>
-            <option>Adresse impossible</option>
-          </select>
-        </div>
-        <div class="ligne" data-adresse="203.0.113.300">
-          <span class="cle">203.0.113.300</span>
-          <select id="n4a-5" aria-label="Réseau de 203.0.113.300">
-            <option value="">Choisir…</option>
-            <option>Réseau du collège</option>
-            <option>Réseau du serveur vidéo</option>
-            <option>Réseau du serveur Pronote</option>
-            <option>Adresse impossible</option>
-          </select>
+        <div class="cartefiche" data-etape="Connecter la carte et exécuter">
+          <label class="etape"><input type="checkbox" id="et-12"><span><b>12.</b> Brancher la micro:bit, la connecter depuis Vittascience, puis cliquer sur <em>Exécuter</em> et tester devant la caméra.</span></label>
         </div>
       </div>
 
-      <h3>N4b — Rester dans le réseau local</h3>
-      <p class="consigne">Un nouvel ordinateur reçoit l'adresse 192.168.1.10. Léa (192.168.1.25) veut lui envoyer un fichier. En observant l'onglet <em>Trajet &amp; routage</em>, explique si l'information devra ou non passer par la Box et le FAI, et pourquoi.</p>
-      <textarea id="n4b" data-rep></textarea>
-
-      <h3>N4c — Le chemin dépend du trafic</h3>
-      <p class="consigne">Dans l'onglet <em>Trafic</em>, trois chemins relient la source au serveur : A (source → R1 → serveur, 2 sauts), B (source → R2 → R3 → serveur, 3 sauts), C (source → R4 → R5 → R6 → serveur, 4 sauts). Fais varier le volume de trafic et note à chaque fois le chemin retenu.</p>
-      <div class="cartes" id="n4c">
-        <div class="ligne" data-volume="Faible">
-          <span class="cle">Faible</span>
-          <input id="n4c-1a" placeholder="Chemin retenu" aria-label="Chemin retenu à trafic faible">
-          <input id="n4c-1b" placeholder="Débit du chemin" aria-label="Débit du chemin à trafic faible">
-        </div>
-        <div class="ligne" data-volume="Moyen">
-          <span class="cle">Moyen</span>
-          <input id="n4c-2a" placeholder="Chemin retenu" aria-label="Chemin retenu à trafic moyen">
-          <input id="n4c-2b" placeholder="Débit du chemin" aria-label="Débit du chemin à trafic moyen">
-        </div>
-        <div class="ligne" data-volume="Élevé">
-          <span class="cle">Élevé</span>
-          <input id="n4c-3a" placeholder="Chemin retenu" aria-label="Chemin retenu à trafic élevé">
-          <input id="n4c-3b" placeholder="Débit du chemin" aria-label="Débit du chemin à trafic élevé">
-        </div>
-      </div>
-
-      <p class="consigne" style="margin-top:20px">Le chemin le plus court (A, 2 sauts) est-il toujours celui qui est choisi ? Justifie avec ce que tu observes.</p>
-      <textarea id="n4c1" data-rep></textarea>
-
-      <p class="consigne" style="margin-top:20px">À trafic élevé, le chemin B affiche un meilleur nombre de sauts que C mais n'est pas retenu. Pourquoi le routage choisit-il quand même C ? Appuie-toi sur les débits affichés.</p>
-      <textarea id="n4c2" data-rep></textarea>
-
-      <p class="consigne" style="margin-top:20px">Active l'interrupteur « Panne du routeur R1 » à trafic faible. Que se passe-t-il pour le chemin A, et quel chemin prend alors le relais ? Que démontre cette expérience sur l'utilité d'avoir plusieurs routes ?</p>
-      <textarea id="n4c3" data-rep></textarea>
-
-      <h3>N4d — Les tables mystères</h3>
-      <p class="consigne">Observe le schéma de l'onglet <em>Trafic</em> et relève les voisins directs de chaque routeur. Retrouve ensuite de quel routeur il s'agit, de R1 à R6. Rappel : le prochain saut est le voisin vers qui envoyer l'information ; quand la destination est directement reliée au routeur, on écrit « livraison directe ».</p>
-      <div class="cartes" id="n4d">
-        <div class="cartefiche" data-table="Table α">
-          <p class="chapeau">Table α</p>
-          <table class="routage">
-            <tr><th>Destination</th><th>Prochain saut</th></tr>
-            <tr><td>Serveur</td><td>R6</td></tr>
-            <tr><td>Source</td><td>R4</td></tr>
-          </table>
-          <div class="grille deuxtiers" style="margin-top:12px">
-            <div class="mini"><label for="n4d-1r">Routeur</label>
-              <select id="n4d-1r"><option value="">Choisir…</option><option>R1</option><option>R2</option><option>R3</option><option>R4</option><option>R5</option><option>R6</option></select>
-            </div>
-            <div class="mini"><label for="n4d-1j">Justification</label><textarea id="n4d-1j"></textarea></div>
-          </div>
-        </div>
-
-        <div class="cartefiche" data-table="Table β">
-          <p class="chapeau">Table β</p>
-          <table class="routage">
-            <tr><th>Destination</th><th>Prochain saut</th></tr>
-            <tr><td>Serveur</td><td>R3</td></tr>
-            <tr><td>Source</td><td>livraison directe</td></tr>
-          </table>
-          <div class="grille deuxtiers" style="margin-top:12px">
-            <div class="mini"><label for="n4d-2r">Routeur</label>
-              <select id="n4d-2r"><option value="">Choisir…</option><option>R1</option><option>R2</option><option>R3</option><option>R4</option><option>R5</option><option>R6</option></select>
-            </div>
-            <div class="mini"><label for="n4d-2j">Justification</label><textarea id="n4d-2j"></textarea></div>
-          </div>
-        </div>
-
-        <div class="cartefiche" data-table="Table γ">
-          <p class="chapeau">Table γ</p>
-          <table class="routage">
-            <tr><th>Destination</th><th>Prochain saut</th></tr>
-            <tr><td>Serveur</td><td>livraison directe</td></tr>
-            <tr><td>Source</td><td>R5</td></tr>
-          </table>
-          <div class="grille deuxtiers" style="margin-top:12px">
-            <div class="mini"><label for="n4d-3r">Routeur</label>
-              <select id="n4d-3r"><option value="">Choisir…</option><option>R1</option><option>R2</option><option>R3</option><option>R4</option><option>R5</option><option>R6</option></select>
-            </div>
-            <div class="mini"><label for="n4d-3j">Justification</label><textarea id="n4d-3j"></textarea></div>
-          </div>
-        </div>
-      </div>
+      <h3>Bilan de la séance</h3>
+      <p class="consigne">Qu'est-ce qui a marché du premier coup, et sur quoi as-tu buté ?</p>
+      <textarea id="bilan" data-rep placeholder="J'ai réussi à…  J'ai buté sur…"></textarea>
     </div>
   </article>
 
   <article class="bloc" id="synthese">
-    <div class="marge"><span class="duree">10′</span></div>
+    <div class="marge"><span class="duree">5′</span></div>
     <div class="corps">
       <h2>Ma synthèse</h2>
-      <p class="consigne">Comment une information trouve-t-elle son chemin entre le collège et un serveur sur Internet ?</p>
-      <textarea id="rep-synthese1" data-rep></textarea>
-      <p class="consigne" style="margin-top:20px">Qu'est-ce que le débit et de quoi dépend-il ?</p>
-      <textarea id="rep-synthese2" data-rep></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="ressources">
-    <div class="marge"><span class="duree">10′</span></div>
-    <div class="corps">
-      <h2>Fiches de connaissances et quiz</h2>
-      <div class="ressources">
-        <h3 style="margin-top:0">Fiches de connaissances <span style="color:var(--doux);font-weight:400;font-size:15px">(5′)</span></h3>
-        <ul>
-          <li><span class="code">SFC1p</span><a href="https://edurl.fr/GXcP5jen" target="_blank" rel="noopener">Le rôle et la structure d'une adresse IP, des tables de routage</a></li>
-          <li><span class="code">SFC1q</span><a href="https://edurl.fr/gIOgcXl7" target="_blank" rel="noopener">Le débit et les ordres de grandeur associés</a></li>
-        </ul>
-        <h3>Quiz auto-correctifs <span style="color:var(--doux);font-weight:400;font-size:15px">(5′)</span></h3>
-        <ul>
-          <li><span class="code">SFC1p</span><a href="https://edurl.fr/kA8KRUvy" target="_blank" rel="noopener">Quiz — Adresse IP et tables de routage</a></li>
-          <li><span class="code">SFC1q</span><a href="https://edurl.fr/v7rvRP5L" target="_blank" rel="noopener">Quiz — Le débit et les ordres de grandeur</a></li>
-        </ul>
-      </div>
-    </div>
-  </article>
-
-  <article class="bloc" id="cps">
-    <div class="marge"><span class="duree">CPS</span></div>
-    <div class="corps">
-      <h2>Je développe mes compétences psychosociales</h2>
-      <div class="cps">
-        <p>Atteindre ses buts — maîtrise de soi. Où est-ce que je me situe aujourd'hui ?</p>
-        <div class="niveaux">
-          <label><input type="radio" name="cps" id="cps-1" value="1"><span><b>N1</b> — Je peux dire ce que je veux réussir.</span></label>
-          <label><input type="radio" name="cps" id="cps-2" value="2"><span><b>N2</b> — Je peux décomposer un but en étapes.</span></label>
-          <label><input type="radio" name="cps" id="cps-3" value="3"><span><b>N3</b> — Je prépare un plan pour y arriver.</span></label>
-          <label><input type="radio" name="cps" id="cps-4" value="4"><span><b>N4</b> — Je vais jusqu'au bout de mes objectifs.</span></label>
-        </div>
-      </div>
+      <p class="consigne">Retrouve les trois étapes de la partie 1 dans ce que tu viens de faire, et dis ce que tu as fabriqué à chacune.</p>
+      <textarea id="rep-synthese" data-rep></textarea>
     </div>
   </article>
 
@@ -686,71 +546,34 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
 var LOGO = "data:image/png;base64,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";
 
 var FICHE = {
-  id: "seq2-act1",
-  sequence: 2,
-  activite: 1,
-  titre: "Les chemins de l'information",
-  thematique: "T10 - La circulation de l'information dans un réseau informatique",
-  duree: "3h",
+  id: "seq3-act2-p2",
+  ref: "Seq3-Act2-P2",
+  sequence: 3,
+  activite: 2,
+  titre: "L'IA qui reconnaît - partie 2 : j'entraîne ma propre IA",
+  thematique: "Teachable Machine et Vittascience, main ouverte et main fermée",
+  duree: "55 min",
   niveau: "3e",
-  cps: {
-    intitule: "Atteindre ses buts - maîtrise de soi",
-    niveaux: [
-      "N1 — Je peux dire ce que je veux réussir.",
-      "N2 — Je peux décomposer un but en étapes.",
-      "N3 — Je prépare un plan pour y arriver.",
-      "N4 — Je vais jusqu'au bout de mes objectifs."
-    ]
-  },
+  cps: { intitule: "", niveaux: [] },
   sortie: [
-    { type:"texte", cle:"rep-constats", titre:"Mes constats, mes observations", duree:"5'" },
-    { type:"texte", cle:"rep-probleme", titre:"Mon problème à résoudre", duree:"3'", min:3 },
-    { type:"texte", cle:"rep-idees",    titre:"Mes idées pour le résoudre", duree:"5'" },
+    { type:"etapes", titre:"Les douze étapes du TP", duree:"50'" },
+    { type:"tab",   cle:"releve", titre:"Ma base de données", duree:"20'",
+      entetes:["Classe", "Nombre d'images"], largeurs:[70, 112] },
     { type:"qcm",   cle:"n1a" },
-    { type:"qcm",   cle:"n1b" },
-    { type:"qcm",   cle:"n1c" },
-    { type:"assoc", titre:"N1d — Chaque terme et sa définition" },
-    { type:"texte", cle:"n2a", titre:"N2a — À quoi sert une table de routage" },
-    { type:"texte", cle:"n2b", titre:"N2b — Débit faible et temps de chargement" },
-    { type:"texte", cle:"n2c", titre:"N2c — Adresse IP privée et adresse IP publique" },
-    { type:"filius", titre:"N3 — Configuration du réseau dans Filius", duree:"55'" },
-    { type:"n4a",   titre:"N4a — À quel réseau appartient chaque adresse ?", duree:"55'" },
-    { type:"texte", cle:"n4b", titre:"N4b — Rester dans le réseau local" },
-    { type:"n4c",   titre:"N4c — Chemin retenu selon le volume de trafic" },
-    { type:"texte", cle:"n4c1", titre:"Le chemin le plus court est-il toujours choisi ?" },
-    { type:"texte", cle:"n4c2", titre:"Pourquoi le chemin C plutôt que le chemin B ?" },
-    { type:"texte", cle:"n4c3", titre:"Panne du routeur R1 : que se passe-t-il ?" },
-    { type:"n4d",   titre:"N4d — Les tables mystères" },
-    { type:"texte", cle:"rep-synthese1", titre:"Ma synthèse — le chemin de l'information", duree:"10'" },
-    { type:"texte", cle:"rep-synthese2", titre:"Ma synthèse — le débit" },
-    { type:"cps" }
+    { type:"champ", cle:"lien-modele", titre:"Le lien de mon modèle entraîné" },
+    { type:"tab",   cle:"mesures", titre:"Ce que j'observe dans l'aperçu", duree:"10'",
+      entetes:["Essai", "Classe annoncée", "Confiance"], largeurs:[62, 62, 58] },
+    { type:"texte", cle:"n2a", titre:"N2a — La main de profil" },
+    { type:"texte", cle:"bilan", titre:"Bilan de la séance" },
+    { type:"texte", cle:"rep-synthese", titre:"Ma synthèse — les trois étapes", duree:"5'" }
   ],
   corrige: {
-    n1a: ["b) son adresse IP."],
-    n1b: ["a) une table de routage."],
-    n1c: ["a) bps, c) Mbps et d) Gb/s. Le Mo mesure une quantité de données, pas un débit."],
-    n1d: ["Adresse IP → numéro d'identification unique d'un appareil sur un réseau.",
-          "Débit → quantité de données transmises par seconde.",
-          "Table de routage → structure de données qui indique le chemin à suivre pour joindre une destination."],
-    n2a: ["La table de routage indique au routeur, pour chaque destination, vers quel voisin envoyer le paquet.",
-          "Sans elle, le routeur ne saurait pas quoi faire d'un paquet destiné à un réseau qu'il ne connaît pas directement."],
-    n2b: ["Le débit est la quantité de données transmises par seconde. Une vidéo représente beaucoup de données.",
-          "Si le débit est faible, il faut plus de temps pour transmettre la même quantité : la lecture attend que les données arrivent."],
-    n2c: ["L'adresse privée n'est valable qu'à l'intérieur du réseau local du collège ; plusieurs réseaux peuvent utiliser 192.168.1.25.",
-          "L'adresse publique est unique sur Internet et permet de joindre le serveur depuis n'importe où. Le passage de l'une à l'autre se fait par la Box."],
-    n4a: ["192.168.1.42 → réseau du collège.",
-          "203.0.113.200 → réseau du serveur vidéo.",
-          "198.51.100.9 → réseau du serveur Pronote.",
-          "192.168.2.25 → aucun des trois : le troisième nombre diffère, c'est un autre réseau.",
-          "203.0.113.300 → adresse impossible : un nombre d'une adresse IPv4 ne dépasse pas 255."],
-    n4b: ["Non. Les deux machines sont dans le même réseau 192.168.1.___, la livraison est directe via le switch.",
-          "La Box et le FAI ne servent qu'à sortir du réseau local."],
-    n4c: ["Non, le chemin le plus court n'est pas toujours retenu : le routage tient compte du débit disponible, pas seulement du nombre de sauts.",
-          "À trafic élevé, C est retenu malgré ses 4 sauts parce que son débit reste supérieur à celui de B, saturé.",
-          "En panne de R1, le chemin A disparaît et un autre chemin prend le relais : la redondance des routes assure la continuité du service."],
-    n4d: ["Table α → R5 : elle atteint le serveur via R6 et revient vers la source via R4, ce sont ses deux voisins sur le chemin C.",
-          "Table β → R2 : la source lui est directement reliée et il passe par R3 pour atteindre le serveur, c'est le chemin B.",
-          "Table γ → R6 : le serveur lui est directement relié et il revient vers la source par R5, fin du chemin C."]
+    n1a: ["b) la machine apprend en comparant des exemples dont on lui a donné la réponse : c'est l'apprentissage supervisé. Sans étiquette, elle n'a aucun moyen de savoir ce qu'elle doit distinguer."],
+    n2a: ["Le modèle annonce quand même une des deux classes, souvent avec une confiance plus basse.",
+          "Il n'a jamais vu cette position : il choisit celle dont l'image se rapproche le plus, sans pouvoir répondre « je ne sais pas »."],
+    synthese: ["Étape 1 : les images de main ouverte et de main fermée capturées à la webcam, c'est la base de données.",
+               "Étape 2 : le calcul lancé par Train Model, qui produit le modèle.",
+               "Étape 3 : le programme Vittascience qui interroge le modèle en direct et commande l'écran de la carte."]
   }
 };
 
@@ -797,7 +620,7 @@ function grandir(z){ z.style.height = "auto"; z.style.height = (z.scrollHeight +
 
 function majProgression(){
   var liens = tous("#chrono a");
-  var repere = ["situation","constats","probleme","idees","niveaux12","niveau3","niveau4","synthese","ressources"];
+  var repere = ["materiel","base","modele","usage","synthese"];
   repere.forEach(function(id, i){
     var b = el(id);
     if(!b || !liens[i]) return;
@@ -844,10 +667,10 @@ el("effacer").addEventListener("click", function(){
 })();
 
 /* Vidéos : chargées seulement au clic, jamais à l'ouverture de la page. */
-tous(".video").forEach(function(v){
+tous(".video, .outil").forEach(function(v){
   v.querySelector(".vlire").addEventListener("click", function(){
     var c = document.createElement("div");
-    c.className = "cadre16";
+    c.className = v.classList.contains("outil") ? "cadreoutil" : "cadre16";
     var f = document.createElement("iframe");
     f.src = v.dataset.src;
     f.allowFullscreen = true;
@@ -866,9 +689,9 @@ majProgression();
    ============================================================ */
 if(new URLSearchParams(location.search).get("prof") === "1"){
   var cibles = {
-    n1a: '[data-qcm="n1a"]', n1b: '[data-qcm="n1b"]', n1c: '[data-qcm="n1c"]',
-    n1d: ".assoc", n2a: "#n2a", n2b: "#n2b", n2c: "#n2c",
-    n4a: "#n4a", n4b: "#n4b", n4c: "#n4c3", n4d: "#n4d"
+    n1a: '[data-qcm="n1a"]', n2a: '[data-qcm="n2a"]',
+    assoc: ".assoc", n2: "#n2", n2b: "#n2b", n3: "#n3", n4: "#n4",
+    debat: "#debat-3", synthese: "#rep-synthese"
   };
   Object.keys(cibles).forEach(function(k){
     var liste = FICHE.corrige[k];
@@ -886,7 +709,8 @@ if(new URLSearchParams(location.search).get("prof") === "1"){
    4. LECTURE DES RÉPONSES
    ============================================================ */
 function lire(){
-  var d = { identite:{}, textes:{}, qcm:{}, assoc:[], filius:[], n4a:[], n4c:[], n4d:[], cps:null };
+  var d = { identite:{}, textes:{}, qcm:{}, assoc:[], etapes:[], tables:{},
+            debat:{ groupe:"", args:[] }, champs:{}, cps:null };
   champsId.forEach(function(k){ d.identite[k] = el(k).value.trim(); });
   tous("textarea[data-rep]").forEach(function(z){ d.textes[z.id] = z.value.trim(); });
 
@@ -902,22 +726,31 @@ function lire(){
 
   tous("select[data-assoc]").forEach(function(s){ d.assoc.push([s.dataset.terme, s.value]); });
 
-  tous("#filius .cartefiche").forEach(function(c){
-    d.filius.push([c.dataset.etape, c.querySelector('input[type="checkbox"]').checked ? "Fait" : "-"]);
+  /* Toutes les étapes cochables de la page, dans l'ordre d'apparition. */
+  tous('.cartefiche[data-etape]').forEach(function(c){
+    var b = c.querySelector('input[type="checkbox"]');
+    if(b) d.etapes.push([c.dataset.etape, b.checked ? "Fait" : "-"]);
   });
 
-  tous("#n4a .ligne").forEach(function(l){
-    d.n4a.push([l.dataset.adresse, l.querySelector("select").value]);
+  /* Tableaux : chaque conteneur [data-tab] contient des lignes [data-cle]. */
+  tous("[data-tab]").forEach(function(t){
+    d.tables[t.dataset.tab] = tous('#' + t.id + ' [data-cle]').map(function(l){
+      var vals = Array.prototype.slice.call(l.querySelectorAll("input, select, textarea"))
+        .map(function(c){ return c.value.trim(); });
+      return [l.dataset.cle].concat(vals);
+    });
   });
 
-  tous("#n4c .ligne").forEach(function(l){
-    var i = l.querySelectorAll("input");
-    d.n4c.push([l.dataset.volume, i[0].value.trim(), i[1].value.trim()]);
-  });
+  var g = el("debat-groupe");
+  if(g){
+    d.debat.groupe = g.value;
+    ["debat-1","debat-2","debat-3"].forEach(function(id, i){
+      var v = el(id) ? el(id).value.trim() : "";
+      if(v) d.debat.args.push((i + 1) + ". " + v);
+    });
+  }
 
-  tous("#n4d .cartefiche").forEach(function(c){
-    d.n4d.push([c.dataset.table, c.querySelector("select").value, c.querySelector("textarea").value.trim()]);
-  });
+  ["lien-modele"].forEach(function(id){ if(el(id)) d.champs[id] = el(id).value.trim(); });
 
   var r = document.querySelector('input[name="cps"]:checked');
   d.cps = r ? Number(r.value) : null;
@@ -1092,23 +925,25 @@ function construirePDF(d){
     }
     else if(s.type === "assoc"){
       rubrique(s.titre, null);
-      tableau(["Terme", "Définition choisie"], d.assoc, [50, 132]);
+      tableau(s.entetes, d.assoc, s.largeurs);
     }
-    else if(s.type === "filius"){
+    else if(s.type === "etapes"){
       rubrique(s.titre, s.duree);
-      tableau(["Étape", "Réalisée"], d.filius, [152, 30]);
+      tableau(["Étape", "Réalisée"], d.etapes, [152, 30]);
     }
-    else if(s.type === "n4a"){
+    else if(s.type === "tab"){
       rubrique(s.titre, s.duree);
-      tableau(["Adresse", "Réseau"], d.n4a, [60, 122]);
+      tableau(s.entetes, d.tables[s.cle] || [], s.largeurs);
     }
-    else if(s.type === "n4c"){
+    else if(s.type === "champ"){
       rubrique(s.titre, null);
-      tableau(["Volume de trafic", "Chemin retenu", "Débit du chemin"], d.n4c, [46, 68, 68]);
+      cadre(d.champs[s.cle], { min: 1 });
     }
-    else if(s.type === "n4d"){
-      rubrique(s.titre, null);
-      tableau(["Table", "Routeur", "Justification"], d.n4d, [24, 26, 132]);
+    else if(s.type === "debat"){
+      rubrique(s.titre, s.duree);
+      var b = [];
+      if(d.debat.groupe) b.push(d.debat.groupe);
+      cadre(b.concat(d.debat.args).join("\n"), { min: 5 });
     }
     else if(s.type === "cps"){
       place(36);
@@ -1151,7 +986,7 @@ function nomFichier(d){
     return propre(t).normalize("NFD").replace(/[\u0300-\u036f]/g, "")
       .replace(/[^A-Za-z0-9]+/g, "-").replace(/^-|-$/g, "");
   };
-  return ["Seq" + FICHE.sequence + "-Act" + FICHE.activite,
+  return [FICHE.ref || ("Seq" + FICHE.sequence + "-Act" + FICHE.activite),
           net(d.identite.nom).toUpperCase(), net(d.identite.prenom),
           net(d.identite.classe)].filter(Boolean).join("_") + ".pdf";
 }
