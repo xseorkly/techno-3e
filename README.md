@@ -16,7 +16,9 @@ techno-3e/
 ├── seq3-act1-p2.html ← Séquence 3 · Activité 1, partie 2 (micro:bit)
 ├── seq3-act2-p1.html ← Séquence 3 · Activité 2, partie 1 (IA et images)
 ├── seq3-act2-p2.html ← Séquence 3 · Activité 2, partie 2 (Teachable Machine)
-├── seq3-act2-p3.html ← Séquence 3 · Activité 2, partie 3 (biais et limites)
+├── seq3-act2-p3.html ← Séquence 3 · Activité 2, partie 3
+├── seq3-act3-p1.html ← Séquence 3 · Activité 3, partie 1 (conception)
+├── seq3-act3-p2.html ← Séquence 3 · Activité 3, partie 2 (réalisation) (biais et limites)
 ├── outils/
 │   ├── aide-reseau.html    ← fiche d'aide réseau (vocabulaire, Filius, calculs)
 │   ├── reseau-simple.html  ← trajet d'un paquet et tables de routage
@@ -148,6 +150,16 @@ Trois séances de 55 minutes, chacune avec son PDF.
 **Partie 3** — le TP stylos sur adacraft.org avec l'extension TM2Scratch, puis six essais destinés à faire échouer le modèle : lumière changée, fond différent, couleur jamais montrée, objet inconnu, caméra vide. C'est la partie que les TP d'origine n'avaient pas, et c'est là que le biais devient concret.
 
 Adapté des deux TP de Philippe Perennes (académie de Normandie). Attention : **MakeCode ne peut pas exploiter un modèle Teachable Machine**, seul l'univers Scratch le permet — d'où le passage par Adacraft.
+
+## Séquence 3, activité 3 — jouer contre la machine
+
+Séance de synthèse en deux parties. Aucune marche à suivre : l'élève réinvestit seul les cinq séances précédentes pour faire jouer la micro:bit contre lui à pierre, feuille, ciseaux, avec une webcam.
+
+**Partie 1, conception.** Une boîte à outils de dix solutions déjà étudiées, à trier en indispensable, peut servir, ou inutile ici — avec trois intrus volontaires : la radio, la table de routage et le débit. Puis l'algorithme en français sans exemple donné, le logigramme en douze lignes, et la préparation de la base d'images. Un coup de pouce replié propose trois indices progressifs, à n'ouvrir qu'en cas de blocage réel.
+
+**Partie 2, réalisation.** Entraînement du modèle à trois classes, mesure de la reconnaissance signe par signe sur cinq essais, construction du programme sans pas-à-pas, puis cinq parties jouées et vérifiées. La dernière question fait isoler l'origine d'une erreur : la reconnaissance ou le calcul du gagnant.
+
+Point de vigilance : distinguer trois signes est nettement plus difficile que deux. La pierre et les ciseaux se confondent vite de biais. C'est traité dans les questions plutôt que laissé en surprise.
 
 ## Navigation
 

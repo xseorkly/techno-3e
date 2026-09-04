@@ -310,6 +310,8 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
           <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
           <option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
           <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+          <option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+          <option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
         </optgroup>
         <optgroup label="Outils">
           <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
@@ -929,7 +931,18 @@ function construirePDF(d){
       doc.setLineHeightFactor(lh * 2.83465 / taille);
       var lignes = doc.splitTextToSize(texte, larg - (forme === "Test" ? 34 : 12));
       var h = Math.max(lignes.length * lh + 7, forme === "Test" ? 20 : 12);
-      place(h + saut + 4);
+      /* La flèche se trace avant la forme suivante, jamais en bas de page dans le vide. */
+      var besoin = h + (i > 0 ? saut : 0) + 4;
+      var change = (y + besoin > BAS);
+      place(besoin);
+      if(i > 0 && !change){
+        var ca = x0 + larg / 2;
+        doc.setDrawColor(DOUX[0],DOUX[1],DOUX[2]); doc.setLineWidth(0.35);
+        doc.line(ca, y, ca, y + saut);
+        doc.line(ca - 1.5, y + saut - 2.2, ca, y + saut);
+        doc.line(ca + 1.5, y + saut - 2.2, ca, y + saut);
+        y += saut;
+      }
       doc.setDrawColor(TEAL[0],TEAL[1],TEAL[2]); doc.setLineWidth(0.45);
       if(forme === "Début ou fin"){
         doc.roundedRect(x0, y, larg, h, h / 2, h / 2);
@@ -945,14 +958,6 @@ function construirePDF(d){
       doc.setTextColor(ENCRE[0],ENCRE[1],ENCRE[2]);
       doc.text(lignes, x0 + larg / 2, y + (h - lignes.length * lh) / 2 + lh * 0.82, { align:"center" });
       y += h;
-      if(i < etapes.length - 1){
-        var cx = x0 + larg / 2;
-        doc.setDrawColor(DOUX[0],DOUX[1],DOUX[2]); doc.setLineWidth(0.35);
-        doc.line(cx, y, cx, y + saut);
-        doc.line(cx - 1.5, y + saut - 2.2, cx, y + saut);
-        doc.line(cx + 1.5, y + saut - 2.2, cx, y + saut);
-        y += saut;
-      }
     });
     y += 7;
     doc.setLineHeightFactor(1.15);
