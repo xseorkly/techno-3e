@@ -18,7 +18,13 @@ techno-3e/
 ├── seq3-act2-p2.html ← Séquence 3 · Activité 2, partie 2 (Teachable Machine)
 ├── seq3-act2-p3.html ← Séquence 3 · Activité 2, partie 3
 ├── seq3-act3-p1.html ← Séquence 3 · Activité 3, partie 1 (conception)
-├── seq3-act3-p2.html ← Séquence 3 · Activité 3, partie 2 (réalisation) (biais et limites)
+├── seq3-act3-p2.html ← Séquence 3 · Activité 3, partie 2 (réalisation)
+├── seq4-act1.html … seq4-act6.html ← Séquence 4 (arrosage automatique, 6 séances)
+├── ressources/
+│   ├── arrosage-humidite.hex, arrosage-humidite-et-temperature.hex,
+│   │   arrosage-capteur-niveau-eau.hex, enregistrer-des-donnees.hex
+│   ├── MY_DATA.csv        ← 48 h de relevés, séance 5
+│   └── montre-connectee.csv (biais et limites)
 ├── outils/
 │   ├── aide-reseau.html    ← fiche d'aide réseau (vocabulaire, Filius, calculs)
 │   ├── reseau-simple.html  ← trajet d'un paquet et tables de routage
@@ -160,6 +166,24 @@ Séance de synthèse en deux parties. Aucune marche à suivre : l'élève réinv
 **Partie 2, réalisation.** Entraînement du modèle à trois classes, mesure de la reconnaissance signe par signe sur cinq essais, construction du programme sans pas-à-pas, puis cinq parties jouées et vérifiées. La dernière question fait isoler l'origine d'une erreur : la reconnaissance ou le calcul du gagnant.
 
 Point de vigilance : distinguer trois signes est nettement plus difficile que deux. La pierre et les ciseaux se confondent vite de biais. C'est traité dans les questions plutôt que laissé en surprise.
+
+## Séquence 4 — l'arrosage automatique et ses données
+
+Six séances de 55 minutes, transposées en 3e à partir de la séquence 4e de l'académie de Besançon publiée sur éduscol STI. Programmation en blocs dans MakeCode, conformément au dossier d'origine.
+
+La séquence est ancrée sur un contexte réel plutôt que sur le pot de fleurs : restrictions d'eau sur près de 70 % du territoire, répartition chiffrée de la consommation d'eau en France, arrêtés préfectoraux interdisant l'arrosage aux heures chaudes, sondes connectées des exploitations agricoles, réutilisation des eaux usées dans les Pyrénées-Orientales. Deux reportages sont intégrés au clic (France 24 en séance 1, TF1 en séance 4). Les chiffres proviennent du service statistique du ministère de la Transition écologique, bilan environnemental 2024, et de France Stratégie.
+
+Chaque fiche porte en tête le référentiel officiel, avec les repères de progressivité **classe de 3e** du BO du 29 février 2024. La montée en exigence par rapport à la version 4e porte sur trois points :
+
+- la programmation : le programme n'est plus fourni à compléter, l'élève détermine les données, conçoit l'algorithme, dessine le logigramme et programme (séance 3) ;
+- le diagnostic : au lieu de trois questions ouvertes, l'élève formule trois hypothèses distinctes puis propose un protocole pour trancher entre elles (séance 6) ;
+- l'interfaçage : ajout d'une alerte radio vers une seconde carte, qui réinvestit la séquence 3 (séance 6).
+
+Le calibrage du capteur (séance 2) correspond déjà à un repère 3e : associer des grandeurs analogiques issues d'un OST à des données exploitables.
+
+Le travail sur tableur de la séance 5 se fait hors du site, comme le veut la compétence. La fiche recueille les formules écrites, les moyennes obtenues et l'analyse ; le fichier tableur se rend séparément.
+
+Matériel par groupe : carte micro:bit et carte d'extension, capteur d'humidité, relais, pompe, module de détection de liquide, récipient étanche, terreau, pipette de 2 ml, et une seconde carte pour l'alerte radio.
 
 ## Navigation
 
