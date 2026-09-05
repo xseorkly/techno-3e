@@ -561,6 +561,31 @@ document.getElementById("navfiches").addEventListener("change", function(){
         </div>
       </div>
       <p class="consigne">Enregistre ton fichier dans ton espace personnel : tu en auras besoin la séance prochaine.</p>
+      <h3>Je m'entraîne — la montre connectée</h3>
+      <p class="consigne">Même travail, autre système. Une montre connectée a enregistré une séance de sport minute par minute : l'heure, la durée de l'activité, la distance parcourue en mètres et la fréquence cardiaque. Deux colonnes sont vides, à toi de les calculer.</p>
+      <div class="bandeau">
+        <p>Le relevé de la montre, à ouvrir dans le tableur.</p>
+        <a href="ressources/montre-connectee.csv" target="_blank" rel="noopener">Télécharger le fichier</a>
+      </div>
+      <div class="cartes" data-tab="montre" id="tabmontre">
+        <div class="ligne" data-cle="Vitesse moyenne en m/s">
+          <span class="cle">Vitesse moyenne en m/s</span>
+          <input id="s1" placeholder="la formule" aria-label="la formule pour Vitesse moyenne en m/s">
+        </div>
+        <div class="ligne" data-cle="Vitesse moyenne en km/h">
+          <span class="cle">Vitesse moyenne en km/h</span>
+          <input id="s2" placeholder="la formule" aria-label="la formule pour Vitesse moyenne en km/h">
+        </div>
+        <div class="ligne" data-cle="Distance totale en km">
+          <span class="cle">Distance totale en km</span>
+          <input id="s3" placeholder="le résultat" aria-label="le résultat pour Distance totale en km">
+        </div>
+        <div class="ligne" data-cle="Fréquence cardiaque moyenne">
+          <span class="cle">Fréquence cardiaque moyenne</span>
+          <input id="s4" placeholder="le résultat" aria-label="le résultat pour Fréquence cardiaque moyenne">
+        </div>
+      </div>
+      <p class="consigne">À faire en classe s'il te reste du temps, sinon à la maison.</p>
 
     </div>
   </article>
@@ -616,6 +641,8 @@ var FICHE = {
       entetes:["Colonne ou calcul", "Formule écrite"], largeurs:[72, 110] },
     { type:"tab",   cle:"resultats", titre:"Mes résultats",
       entetes:["Grandeur", "Valeur obtenue"], largeurs:[72, 110] },
+    { type:"tab",   cle:"montre", titre:"Je m'entraîne — la montre connectée",
+      entetes:["Ce que je cherche", "Ma formule ou mon résultat"], largeurs:[76, 106] },
     { type:"texte", cle:"rep-synthese", titre:"Ma synthèse", duree:"5'" }
   ],
   corrige: {
@@ -631,7 +658,12 @@ var FICHE = {
       "Taux d'humidité en % : =ARRONDI(C2/10,23;2) — on applique le coefficient trouvé en séance 2, avec deux décimales.",
       "Moyenne des températures : =MOYENNE(F2:F49).",
       "Moyenne du taux d'humidité : =MOYENNE(G2:G49)."],
-    resultats: ["Sur le jeu de données fourni : température moyenne 23,33 °C, taux d'humidité moyen 68,1 %."]
+    resultats: ["Sur le jeu de données fourni : température moyenne 23,33 °C, taux d'humidité moyen 68,1 %."],
+    montre: ["Vitesse en m/s : =C4/B4, la distance divisée par la durée.",
+      "Vitesse en km/h : =E4*3,6, ou directement =C4/B4*3,6.",
+      "Distance totale en km : =SOMME(C4:C30)/1000.",
+      "Fréquence cardiaque moyenne : =MOYENNE(D4:D30).",
+      "Adapter les numéros de lignes selon l'endroit où le tableau commence après l'import."]
   }
 };
 
@@ -753,7 +785,8 @@ if(new URLSearchParams(location.search).get("prof") === "1"){
     monfichier: "#tabmonfichier",
     n3: "[data-qcm=\"n3\"]",
     formules: "#tabformules",
-    resultats: "#tabresultats"
+    resultats: "#tabresultats",
+    montre: "#tabmontre"
   };
   Object.keys(cibles).forEach(function(k){
     var liste = FICHE.corrige[k];
