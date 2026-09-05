@@ -228,6 +228,24 @@ table.composants td:last-child{white-space:nowrap;color:var(--doux);font-size:14
 .chiffres span{display:block;font-size:13.5px;color:var(--doux);line-height:1.35;margin-top:6px}
 @media(max-width:640px){.chiffres{grid-template-columns:1fr 1fr}}
 
+.corrbloc{background:var(--carte);border:1px solid var(--trait);border-left:4px solid var(--magenta);
+  border-radius:var(--r);padding:20px 22px;margin-top:34px}
+.corrbloc h2{font-family:"Archivo",sans-serif;font-weight:600;font-size:19px;margin:0 0 6px}
+.corrbloc p.intro{color:var(--doux);font-size:15px;margin:0 0 14px}
+.corrbloc .saisie{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.corrbloc input{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--trait);
+  border-radius:8px;background:#fff;color:var(--encre);min-width:190px}
+.corrbloc input:focus{outline:0;border-color:var(--magenta)}
+.corrbloc button{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;background:var(--magenta);
+  color:#fff;border:0;border-radius:8px;padding:11px 20px;cursor:pointer}
+.corrbloc button:hover{background:#a0154c}
+.corrbloc .refus{color:var(--magenta);font-size:14.5px;margin:10px 0 0}
+.corr h3{font-family:"Archivo",sans-serif;font-weight:600;font-size:16.5px;color:var(--magenta);
+  margin:22px 0 6px}
+.corr ul{margin:0;padding-left:20px}
+.corr li{margin-bottom:6px;font-size:15.5px;line-height:1.55}
+@media print{.corrbloc{display:none}}
+
 /* Ressources */
 .ressources{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:18px 20px}
 .ressources ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
@@ -537,6 +555,19 @@ document.getElementById("navfiches").addEventListener("change", function(){
     </div>
   </article>
 
+
+  <section class="corrbloc" id="correction">
+    <h2>Correction de l'activité</h2>
+    <p class="intro">Réservée au professeur. Saisis le mot de passe pour afficher la correction commentée.</p>
+    <div class="saisie">
+      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction"
+             autocomplete="off" spellcheck="false">
+      <button type="button" id="corr-btn">Afficher</button>
+    </div>
+    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
+    <div class="corr" id="corr-contenu" hidden></div>
+  </section>
+
   <div id="alerte" class="alerte" hidden></div>
 
 </main>
@@ -729,6 +760,38 @@ if(new URLSearchParams(location.search).get("prof") === "1"){
     ancre.insertAdjacentElement("afterend", d);
   });
 }
+
+/* ============================================================
+   3 bis. CORRECTION PROTÉGÉE
+   Le texte est encodé et l'empreinte du mot de passe comparée :
+   cela dissuade la curiosité, sans constituer une vraie sécurité.
+   ============================================================ */
+(function(){
+  var COFFRE = "W1siRXhlcmNpY2UgMSDigJQgTGUgc3lzdMOobWUgZCdhbGFybWUiLCBbIkxpZ25lIDEgOiBPVS4gVW5lIHNldWxlIG91dmVydHVyZSBzdWZmaXQgw6AgZMOpY2xlbmNoZXIgbCdhbGFybWUuIiwgIkxpZ25lIDIgOiBFVC4gSWwgZmF1dCBxdWUgbGEgZmVuw6p0cmUgZXQgbGEgcG9ydGUgc29pZW50IHRvdXRlcyBkZXV4IGZlcm3DqWVzIHBvdXIgcXVlIGwnYWxhcm1lIHJlc3RlIHNpbGVuY2lldXNlLiIsICJMaWduZSAzIDogTk9OLCBwdWlzIE9VLiBMJ2FsYXJtZSBuZSBzb25uZSBxdWUgc2kgTk9OIGZlbsOqdHJlIGZlcm3DqWUgT1UgTk9OIHBvcnRlIGZlcm3DqWUuIiwgIkwnaW50w6lyw6p0IGRlIGxhIHRyb2lzacOobWUgbGlnbmUgZXN0IGRlIG1vbnRyZXIgcXUndW5lIG3Dqm1lIHNpdHVhdGlvbiBzJ8OpY3JpdCBkZSBwbHVzaWV1cnMgZmHDp29ucy4gQydlc3QgbGUgZMOpYnV0IGRlIGxhIGxvZ2lxdWUgYm9vbMOpZW5uZS4iXV0sIFsiRXhlcmNpY2UgMiDigJQgTCdhZG1pc3Npb24gYXUgY29uY291cnMiLCBbIlNJIMOiZ2Ugc3Vww6lyaWV1ciDDoCAxMiBFVCBzY29yZSBzdXDDqXJpZXVyIMOgIDgwLCBPVSBOT04gw6JnZSBzdXDDqXJpZXVyIMOgIDEyIEVUIHNjb3JlIHN1cMOpcmlldXIgw6AgOTAsIEFMT1JTIGFmZmljaGVyIEFkbWlzLCBTSU5PTiBhZmZpY2hlciBOb24gYWRtaXMuIiwgIlByb2ZpdGVyIGRlIGwnZXhlcmNpY2UgcG91ciBtb250cmVyIHF1ZSBsJ29yZHJlIGRlcyBvcMOpcmF0ZXVycyBjaGFuZ2UgbGUgcsOpc3VsdGF0LCBldCBxdWUgZGVzIHBhcmVudGjDqHNlcyBsw6h2ZW50IGwnYW1iaWd1w690w6kuIiwgIlVuIMOpbMOodmUgcXVpIMOpY3JpdCBkZXV4IGNvbmRpdGlvbnMgc8OpcGFyw6llcywgbCd1bmUgcG91ciBsZXMgcGx1cyBkZSAxMiBhbnMgZXQgbCdhdXRyZSBwb3VyIGxlcyBtb2lucyBkZSAxMiBhbnMsIGEgcmFpc29uIGF1c3NpIDogYydlc3QgdW5lIGF1dHJlIMOpY3JpdHVyZSBjb3JyZWN0ZS4iXV0sIFsiTGUgcsO0bGUgZGUgY2hhcXVlIG9ww6lyYXRldXIiLCBbIkVUIDogbCdhY3Rpb24gbmUgc2UgZmFpdCBxdWUgc2kgbGVzIGRldXggY29uZGl0aW9ucyBzb250IHZyYWllcyBlbiBtw6ptZSB0ZW1wcy4iLCAiT1UgOiBsJ2FjdGlvbiBzZSBmYWl0IGTDqHMgcXUndW5lIHNldWxlIGRlcyBkZXV4IGNvbmRpdGlvbnMgZXN0IHZyYWllLiIsICJOT04gOiBsJ2FjdGlvbiBzZSBmYWl0IHF1YW5kIGxhIGNvbmRpdGlvbiBkZSBkw6lwYXJ0IGVzdCBmYXVzc2UgOyBsJ29ww6lyYXRldXIgaW52ZXJzZSBsZSByw6lzdWx0YXQuIiwgIkZhaXJlIHRlc3RlciByw6llbGxlbWVudCBsZXMgdHJvaXMgcHJvZ3JhbW1lcy4gVW5lIHRhYmxlIGRlIHbDqXJpdMOpIMOpY3JpdGUgYXUgdGFibGVhdSBuJ2EgcGFzIGxlIG3Dqm1lIGVmZmV0IHF1J3VuZSBERUwgcXVpIHMnYWxsdW1lIGF1IG1hdXZhaXMgbW9tZW50LiJdXSwgWyJOMiDigJQgTCdvcMOpcmF0ZXVyIGFkYXB0w6kgw6AgbCdhcnJvc2FnZSIsIFsiUsOpcG9uc2UgYiA6IEVULiBMZXMgZGV1eCBjb25kaXRpb25zIGRvaXZlbnQgw6p0cmUgcsOpdW5pZXMsIHNvbCBzZWMgRVQgdGVtcMOpcmF0dXJlIGluZsOpcmlldXJlIMOgIDI1IMKwQy4iLCAiQXZlYyBPVSwgbCdhcnJvc2FnZSBwYXJ0aXJhaXQgZMOocyBxdSd1bmUgc2V1bGUgY29uZGl0aW9uIHNlcmFpdCB2cmFpZSA6IGxhIHBvbXBlIHNlIGTDqWNsZW5jaGVyYWl0IHN1ciB1biBzb2wgZMOpasOgIGh1bWlkZSBzaW1wbGVtZW50IHBhcmNlIHF1J2lsIGZhaXQgZnJhaXMuIExlIGdhc3BpbGxhZ2Ugc2VyYWl0IGFnZ3JhdsOpLCBwYXMgY29ycmlnw6kuIiwgIkMnZXN0IHVuIGJvbiBtb21lbnQgcG91ciBmYWlyZSDDqW51bcOpcmVyIGxlcyBxdWF0cmUgY2FzIHBvc3NpYmxlcyA6IHNvbCBzZWMgZXQgZnJhaXMsIHNvbCBzZWMgZXQgY2hhdWQsIHNvbCBodW1pZGUgZXQgZnJhaXMsIHNvbCBodW1pZGUgZXQgY2hhdWQuIFVuIHNldWwgZMOpY2xlbmNoZSBsJ2Fycm9zYWdlLiJdXSwgWyJMZSBmb25jdGlvbm5lbWVudCBhdHRlbmR1IGVuIGxhbmdhZ2UgbmF0dXJlbCIsIFsiU2kgbGUgdGF1eCBkJ2h1bWlkaXTDqSBlc3QgaW5mw6lyaWV1ciDDoCA1MCAlIEVUIHNpIGxhIHRlbXDDqXJhdHVyZSBlc3QgaW5mw6lyaWV1cmUgw6AgMjUgwrBDLCBhbG9ycyBsYSBwb21wZSBzZSBkw6ljbGVuY2hlLCBzaW5vbiBsYSBwb21wZSByZXN0ZSDDqXRlaW50ZS4iXV0sIFsiTGUgdGVzdCBzdXIgbGUgbW9udGFnZSByw6llbCIsIFsiRGlmZsOpcmVuY2VzIGF0dGVuZHVlcyBhdmVjIGxlIHNpbXVsYXRldXIgOiBsYSB0ZW1ww6lyYXR1cmUgbHVlIGVzdCBjZWxsZSBkdSBwcm9jZXNzZXVyIGRlIGxhIGNhcnRlLCBsw6lnw6hyZW1lbnQgc3Vww6lyaWV1cmUgw6AgY2VsbGUgZGUgbCdhaXIgOyBsYSBwb21wZSBtZXQgdW4gaW5zdGFudCDDoCBhbW9yY2VyIDsgbGUgc29sIG1ldCBwbHVzaWV1cnMgbWludXRlcyDDoCByw6lhZ2lyIMOgIGwnYXJyb3NhZ2UuIiwgIkNlIGTDqWNhbGFnZSBlbnRyZSBsZSBtb2TDqGxlIGV0IGxlIHLDqWVsIGVzdCB1biBhcHByZW50aXNzYWdlIGVuIHNvaSA6IHVuIHByb2dyYW1tZSB2YWxpZMOpIGF1IHNpbXVsYXRldXIgbidlc3QgcGFzIHVuIHN5c3TDqG1lIHZhbGlkw6kuIl1dLCBbIk4zIOKAlCBMZXMgbGltaXRlcyBkZSBtb24gc3lzdMOobWUiLCBbIk5vbiwgbCdhcHByb3hpbWF0aW9uIGVzdCBpbnN1ZmZpc2FudGUuIFVuZSBqb3VybsOpZSBkZSBwcmludGVtcHMgw6AgMTUgwrBDIGVuIHBsZWluIG1pZGkgcGFzc2VyYWl0IGxlIHRlc3QgYWxvcnMgcXVlIGwnYXJyw6p0w6kgcHLDqWZlY3RvcmFsIGludGVyZGl0IGQnYXJyb3NlciA7IHVuZSBudWl0IGQnw6l0w6kgw6AgMjYgwrBDIGJsb3F1ZXJhaXQgbCdhcnJvc2FnZSBhbG9ycyBxdSdpbCBzZXJhaXQgYXV0b3Jpc8OpLiIsICJMYSBkb25uw6llIG1hbnF1YW50ZSBlc3QgbCdoZXVyZS4gTGEgbWljcm86Yml0IG4nYSBwYXMgZCdob3Jsb2dlIHRlbXBzIHLDqWVsIDogaWwgZmF1ZHJhaXQgdW4gbW9kdWxlIGV4dGVybmUsIG91IGNvbXB0ZXIgbGUgdGVtcHMgZGVwdWlzIGxlIGTDqW1hcnJhZ2UsIGNlIHF1aSBlc3QgcGV1IGZpYWJsZS4iLCAiQydlc3QgZXhhY3RlbWVudCBjZSBxdWUgZm9udCBsZXMgcHJvZ3JhbW1hdGV1cnMgZCdhcnJvc2FnZSBkdSBjb21tZXJjZSA6IGlscyByYWlzb25uZW50IHN1ciBsJ2hldXJlLCBwYXMgc3VyIGxhIHRlbXDDqXJhdHVyZS4iXV1d";
+  var EMPREINTE = 3677139081;
+  function empreinte(t){
+    var h = 5381;
+    for(var i = 0; i < t.length; i++){ h = ((h * 33) ^ t.charCodeAt(i)) >>> 0; }
+    return h;
+  }
+  var btn = el("corr-btn"), champ = el("corr-mdp"), refus = el("corr-refus"), cible = el("corr-contenu");
+  if(!btn) return;
+  function ouvrir(){
+    if(empreinte(champ.value.trim()) !== EMPREINTE){
+      refus.hidden = false; champ.value = ""; champ.focus(); return;
+    }
+    refus.hidden = true;
+    var texte = decodeURIComponent(escape(atob(COFFRE)));
+    var sections = JSON.parse(texte);
+    cible.innerHTML = sections.map(function(s){
+      return "<h3>" + s[0] + "</h3><ul>" + s[1].map(function(l){ return "<li>" + l + "</li>"; }).join("") + "</ul>";
+    }).join("");
+    cible.hidden = false;
+    champ.closest(".saisie").hidden = true;
+  }
+  btn.addEventListener("click", ouvrir);
+  champ.addEventListener("keydown", function(e){ if(e.key === "Enter") ouvrir(); });
+})();
 
 /* ============================================================
    4. LECTURE DES RÉPONSES

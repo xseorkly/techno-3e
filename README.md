@@ -185,6 +185,18 @@ Le travail sur tableur de la séance 5 se fait hors du site, comme le veut la co
 
 Matériel par groupe : carte micro:bit et carte d'extension, capteur d'humidité, relais, pompe, module de détection de liquide, récipient étanche, terreau, pipette de 2 ml, et une seconde carte pour l'alerte radio.
 
+## Les corrections protégées (séquences 2 et 4)
+
+Les trois fiches de la séquence 2 et les six séances de la séquence 4 portent en bas un bloc **Correction de l'activité**, ouvert par le même mot de passe : `CorrEq4`. La correction est commentée : pour chaque question, la réponse attendue, l'explication, et les erreurs fréquentes à guetter.
+
+Le texte de la correction est encodé dans la page et le mot de passe n'y figure pas en clair, seule son empreinte est comparée. **Ce n'est pas une vraie sécurité** : un élève qui sait lire le code source d'une page peut le contourner. C'est un verrou contre la curiosité, pas un coffre-fort. Pour une étanchéité réelle, il faudrait un espace protégé sur l'ENT.
+
+Le bloc n'apparaît ni dans le PDF de l'élève, ni à l'impression.
+
+Les corrections de la séquence 2 sont écrites pour être lues à voix haute : chaque notion y est reprise par une analogie tenue d'un bout à l'autre — le colis et son adresse, le centre de tri et son tableau au mur, la largeur de la route pour le débit, le quartier et ses numéros de maison pour Filius. Les pièges des exercices y sont signalés, notamment le 192.168.2.25 que beaucoup rangent à tort dans le réseau du collège.
+
+Le mode `?prof=1` reste disponible sur toutes les fiches du site : il affiche les éléments de réponse directement sous chaque exercice, sans mot de passe. À réserver à ton propre écran.
+
 ## Navigation
 
 Chaque fiche porte en haut une barre avec un bouton **Accueil** et un menu déroulant listant toutes les activités et les trois outils réseau. La barre reste visible au défilement et n'apparaît pas à l'impression.
