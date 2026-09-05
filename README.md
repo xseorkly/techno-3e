@@ -185,15 +185,21 @@ Le travail sur tableur de la séance 5 se fait hors du site, comme le veut la co
 
 Matériel par groupe : carte micro:bit et carte d'extension, capteur d'humidité, relais, pompe, module de détection de liquide, récipient étanche, terreau, pipette de 2 ml, et une seconde carte pour l'alerte radio.
 
-## Les corrections protégées (séquences 2 et 4)
+## Les corrections expliquées
 
-Les trois fiches de la séquence 2 et les six séances de la séquence 4 portent en bas un bloc **Correction de l'activité**, ouvert par le même mot de passe : `CorrEq4`. La correction est commentée : pour chaque question, la réponse attendue, l'explication, et les erreurs fréquentes à guetter.
+Les trois fiches de la séquence 2 et les six séances de la séquence 4 portent en bas un bloc **La correction expliquée**, ouvert par un mot de passe **différent pour chaque activité**.
 
-Le texte de la correction est encodé dans la page et le mot de passe n'y figure pas en clair, seule son empreinte est comparée. **Ce n'est pas une vraie sécurité** : un élève qui sait lire le code source d'une page peut le contourner. C'est un verrou contre la curiosité, pas un coffre-fort. Pour une étanchéité réelle, il faudrait un espace protégé sur l'ENT.
+Ces corrections sont écrites **pour l'élève**, pas pour l'enseignant : elles reprennent la théorie, expliquent pourquoi les mauvaises réponses étaient fausses, et s'appuient sur des schémas dessinés et des analogies tenues d'une fiche à l'autre — le colis et le centre de tri pour le routage, le robinet et la baignoire pour le débit, le quartier et ses numéros de maison pour Filius, l'interrupteur qui commande une pièce entière pour le relais.
+
+Tous les mots de passe sont regroupés sur une page privée, **non reliée depuis le site** :
+
+```
+https://xseorkly.github.io/techno-3e/mdp/
+```
+
+Elle porte une balise `noindex` et n'apparaît dans aucun menu, mais elle reste accessible à qui connaît son adresse. De même, le verrou des corrections décourage la curiosité sans constituer une véritable protection : le texte est encodé et le mot de passe n'y figure pas en clair, mais quelqu'un qui sait lire le code source d'une page peut le contourner. Pour une étanchéité réelle, il faudrait un espace protégé sur l'ENT.
 
 Le bloc n'apparaît ni dans le PDF de l'élève, ni à l'impression.
-
-Les corrections de la séquence 2 sont écrites pour être lues à voix haute : chaque notion y est reprise par une analogie tenue d'un bout à l'autre — le colis et son adresse, le centre de tri et son tableau au mur, la largeur de la route pour le débit, le quartier et ses numéros de maison pour Filius. Les pièges des exercices y sont signalés, notamment le 192.168.2.25 que beaucoup rangent à tort dans le réseau du collège.
 
 Le mode `?prof=1` reste disponible sur toutes les fiches du site : il affiche les éléments de réponse directement sous chaque exercice, sans mot de passe. À réserver à ton propre écran.
 
