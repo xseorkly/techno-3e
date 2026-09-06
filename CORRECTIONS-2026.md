@@ -24,3 +24,15 @@ Les mots de passe historiques des séquences 2 et 4 sont inchangés. Les nouveau
 - **Élision fautive** dans `seq1-act3` : « une IA n'« comprend » pas » devient « ne « comprend » pas », puisque le mot commence par une consonne.
 - **Vocabulaire de la séance 4-2 harmonisé.** Le calibrage a été refait avec l'indice relatif Vsec/Vhumide, mais le mot « coefficient » subsistait à cinq endroits : onglet de la chronologie, critère du référentiel, titre du tableau sur la page et dans le PDF, identifiant d'ancre et repère de la barre de progression. Tout est passé à « indice ».
 - **Détail réinjecté dans les séquences 2 et 4.** Les nouvelles corrections expliquaient la théorie mais ne corrigeaient plus les exercices question par question. Une à deux sections ont été ajoutées à chacune des neuf fiches, avant le bilan : réponses détaillées, erreurs fréquentes, analogies filées. Ces ajouts respectent la méthode d'étalonnage retenue et ne mentionnent plus de division par un nombre fixe.
+
+## Séquence 1 — corrigés officiels et évaluations
+
+**Corrections enrichies.** Les corrigés des documents professeur (TRAME1, TRAME2, TRAME3) ont été versés dans les corrections des trois activités : constats et idées attendus de l'activité 1 avec les quatre questions retenues, réponses détaillées des QCM et de la frise de l'activité 2, arguments des deux camps du débat et analyse du streaming pour l'activité 3, ainsi que les trois synthèses telles qu'elles figurent dans les trames. Les trois fiches passent à 6 ou 8 sections.
+
+**Évaluations de compétence.** Les évaluations des activités 2 et 3, tirées des documents `Evaluation-Activité_2.docx` et `Evaluation-Activité_3.docx`, sont intégrées en bas des fiches `seq1-act2.html` et `seq1-act3.html`, derrière leur propre mot de passe : `Eval1B` et `Eval1C`, distincts de ceux des corrections.
+
+Une fois déverrouillée, l'évaluation s'affiche en formulaire complet — identité, QCM, tableaux à compléter, questions ouvertes — avec deux boutons : « Générer le PDF de l'évaluation », qui produit `Eval-Seq1-Act2_NOM_Prenom_classe.pdf`, et « Imprimer » pour une passation papier. Le nom, le prénom et la classe sont obligatoires avant génération.
+
+Le barème n'apparaît jamais pour l'élève. Il s'affiche sous chaque question uniquement en ajoutant `?prof=1` à l'adresse de la page, comme partout ailleurs sur le site.
+
+Moteur : `assets/evaluation.js`, styles dans `assets/site-addons.css`.
