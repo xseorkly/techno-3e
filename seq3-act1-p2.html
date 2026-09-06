@@ -285,6 +285,7 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
+<link rel="stylesheet" href="assets/site-addons.css">
 </head>
 <body>
 
@@ -373,7 +374,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="dedans">
       <dl>
         <dt>Compétences</dt><dd>Décrire un algorithme en langage courant puis le représenter par un logigramme ; écrire, tester et mettre au point un programme par blocs ; faire communiquer deux objets connectés</dd>
-        <dt>Connaissances</dt><dd>Algorithme ; symboles du logigramme ; structure de sélection ; émission et réception radio ; groupe radio et appairage</dd>
+        <dt>Connaissances</dt><dd>Algorithme ; symboles du logigramme ; structure de sélection ; émission et réception radio ; groupe radio et communication sur un canal logique</dd>
       </dl>
       <ul>
         <li>N1 — Je sais expliquer comment deux cartes échangent une information et à quoi sert le numéro de groupe</li>
@@ -388,7 +389,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="marge"><span class="duree">10′</span></div>
     <div class="corps">
       <h2>Comment deux cartes se parlent</h2>
-      <p class="amorce">Chaque micro:bit possède une antenne radio. Elle envoie des messages dans les airs, et toutes les cartes autour peuvent les entendre. Pour que seules deux cartes s'entendent, elles doivent être réglées sur le même numéro de groupe : c'est l'appairage.</p>
+      <p class="amorce">Chaque micro:bit possède une antenne radio. Les cartes réglées sur le même numéro de groupe utilisent le même canal logique et peuvent recevoir les messages de ce groupe. Il ne s’agit pas d’un appairage exclusif : si plusieurs cartes partagent le même groupe, elles peuvent toutes recevoir les messages. En classe, chaque binôme choisit donc un groupe différent pour limiter les interférences.</p>
 
       <svg class="illus" style="max-width:600px" viewBox="0 0 600 220" role="img"
            aria-label="Deux cartes réglées sur le même groupe radio échangent un message ; une carte réglée sur un autre groupe ne reçoit rien.">
@@ -452,7 +453,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
         <p class="titre-ex">Exemple pour le dé de la séance précédente</p>
         <p>Début · Quand la carte est secouée · Mettre dans <em>dé</em> un nombre au hasard entre 1 et 6 · Afficher <em>dé</em> · Fin</p>
       </div>
-      <textarea id="rep-algo" data-rep style="min-height:230px" placeholder="Début&#10;Quand la carte est secouée…"></textarea>
+      <textarea id="rep-algo" data-rep style="min-height:230px" placeholder="Début&#10;Quand la carte est secouée…" aria-label="Début · Quand la carte est secouée · Mettre dans dé un nombre au hasard entre 1 et 6 · Afficher dé · Fin"></textarea>
     </div>
   </article>
 
@@ -522,7 +523,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
 
       <h3>Ce qui a marché, ce qui a bloqué</h3>
       <p class="consigne">Note le point qui vous a retenus le plus longtemps, et comment vous vous en êtes sortis.</p>
-      <textarea id="bilan" data-rep placeholder="Nous avons réussi à…  Nous sommes restés bloqués sur…"></textarea>
+      <textarea id="bilan" data-rep placeholder="Nous avons réussi à…  Nous sommes restés bloqués sur…" aria-label="Note le point qui vous a retenus le plus longtemps, et comment vous vous en êtes sortis."></textarea>
     </div>
   </article>
 
@@ -531,9 +532,9 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="corps">
       <h2>Ma synthèse</h2>
       <p class="consigne">À quoi sert d'écrire l'algorithme et de dessiner le logigramme avant de programmer ?</p>
-      <textarea id="rep-synthese1" data-rep></textarea>
+      <textarea id="rep-synthese1" data-rep aria-label="À quoi sert d&#x27;écrire l&#x27;algorithme et de dessiner le logigramme avant de programmer ?"></textarea>
       <p class="consigne" style="margin-top:20px">Explique comment les deux cartes savent qu'elles jouent l'une avec l'autre, et pas avec celles du binôme voisin.</p>
-      <textarea id="rep-synthese2" data-rep></textarea>
+      <textarea id="rep-synthese2" data-rep aria-label="Explique comment les deux cartes savent qu&#x27;elles jouent l&#x27;une avec l&#x27;autre, et pas avec celles du binôme voisi"></textarea>
     </div>
   </article>
 
@@ -552,6 +553,17 @@ document.getElementById("navfiches").addEventListener("change", function(){
       </div>
     </div>
   </article>
+
+  <section class="corrbloc" id="correction" data-addon="1">
+    <h2>Correction expliquée et bilan de l’activité</h2>
+    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+    <div class="saisie">
+      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction" autocomplete="off" spellcheck="false">
+      <button type="button" id="corr-btn">Afficher</button>
+    </div>
+    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
+    <div class="corr" id="corr-contenu" hidden></div>
+  </section>
 
   <div id="alerte" class="alerte" hidden></div>
 
@@ -600,11 +612,11 @@ var FICHE = {
     { type:"etapes", titre:"Le programme, étape par étape", duree:"15'" },
     { type:"texte", cle:"bilan", titre:"Ce qui a marché, ce qui a bloqué" },
     { type:"texte", cle:"rep-synthese1", titre:"Ma synthèse — pourquoi écrire avant de programmer", duree:"5'" },
-    { type:"texte", cle:"rep-synthese2", titre:"Ma synthèse — l'appairage des deux cartes" },
+    { type:"texte", cle:"rep-synthese2", titre:"Ma synthèse — le groupe radio des deux cartes" },
     { type:"cps" }
   ],
   corrige: {
-    n1a: ["b) pour que les deux cartes n'entendent que les messages de leur binôme. Toutes les cartes réglées sur le même numéro forment un canal séparé des autres."],
+    n1a: ["b) pour que les deux cartes utilisent le même canal logique. Toutes les cartes réglées sur ce même groupe peuvent recevoir les messages ; on attribue donc un groupe différent à chaque binôme pour limiter les interférences."],
     n1b: ["b) les deux cartes portent le même programme : chacune émet son signe et reçoit celui de l'autre."],
     algo: ["Début. Au démarrage, régler le groupe radio sur le numéro convenu.",
            "Quand la carte est secouée : mettre dans monSigne un nombre au hasard entre 0 et 2.",
@@ -614,7 +626,7 @@ var FICHE = {
     logi: ["Attendu : un ovale Début, une entrée pour la secousse, un traitement pour le tirage, un test pour la comparaison, des sorties pour l'affichage et l'envoi, un ovale Fin.",
            "Vérifier surtout que le test est bien un losange et que l'affichage est bien une sortie."],
     synthese: ["Écrire l'algorithme oblige à décider de l'ordre des actions avant de chercher les blocs ; le logigramme rend visibles les tests et leurs deux issues.",
-               "Les deux cartes sont réglées sur le même numéro de groupe radio : elles s'ignorent mutuellement avec les autres binômes."]
+               "Les deux cartes sont réglées sur le même numéro de groupe radio. Les autres binômes choisissent d'autres groupes afin de limiter les messages reçus par erreur."]
   }
 };
 
@@ -795,6 +807,7 @@ function dateFr(iso){
 }
 
 function construirePDF(d){
+  if(!window.jspdf || !window.jspdf.jsPDF){ window.print(); return; }
   var doc = new window.jspdf.jsPDF({ unit:"mm", format:"a4" });
   var y = 0, page = 1;
   var nomComplet = propre((d.identite.nom + " " + d.identite.prenom).trim());
@@ -1072,5 +1085,7 @@ el("pdf").addEventListener("click", function(){
 
 })();
 </script>
+<script>window.CORRECTION_BILAN={coffre:"W1siVW4gZ3JvdXBlIHJhZGlvIG7igJllc3QgcGFzIHVuIGFwcGFpcmFnZSIsWyI8cD5MZSBudW3DqXJvIGRlIGdyb3VwZSByYWRpbyBzZXJ0IGNvbW1lIHVuIDxzdHJvbmc+Y2FuYWwgbG9naXF1ZTwvc3Ryb25nPi4gVG91dGVzIGxlcyBtaWNybzpiaXQgcsOpZ2zDqWVzIHN1ciBsZSBtw6ptZSBncm91cGUgcGV1dmVudCByZWNldm9pciBsZXMgbWVzc2FnZXMgZGUgY2UgZ3JvdXBlLiBJbCBu4oCZZXhpc3RlIGRvbmMgcGFzIGTigJlhcHBhaXJhZ2UgZXhjbHVzaWYgZW50cmUgc2V1bGVtZW50IGRldXggY2FydGVzLjwvcD4iLCI8cD5FbiBjbGFzc2UsIGRvbm5lciB1biBncm91cGUgZGlmZsOpcmVudCDDoCBjaGFxdWUgYmluw7RtZSByw6lkdWl0IGxlcyBpbnRlcmbDqXJlbmNlcy4gU2kgcXVhdHJlIGNhcnRlcyB1dGlsaXNlbnQgbGUgZ3JvdXBlIDEyLCBsZXMgcXVhdHJlIHBldXZlbnQgZW50ZW5kcmUgbGVzIG1lc3NhZ2VzIGR1IGdyb3VwZSAxMi48L3A+IiwiPGEgY2xhc3M9XCJyZXNzb3VyY2UtY29yclwiIGhyZWY9XCJodHRwczovL21ha2Vjb2RlLm1pY3JvYml0Lm9yZy9yZWZlcmVuY2UvcmFkaW8vc2V0LWdyb3VwXCIgdGFyZ2V0PVwiX2JsYW5rXCIgcmVsPVwibm9vcGVuZXJcIj48Yj5NYWtlQ29kZSDigJQgcmFkaW8uc2V0R3JvdXA8L2I+PHNwYW4+RG9jdW1lbnRhdGlvbiBvZmZpY2llbGxlIDogdW4gZ3JvdXBlIGVzdCBjb21wYXJhYmxlIMOgIHVuIGNhbmFsIDsgaWRlbnRpZmlhbnQgZGUgMCDDoCAyNTUuPC9zcGFuPjwvYT4iLCI8ZGl2IGNsYXNzPVwicmV0ZW5pclwiPjxiPsOAIHJldGVuaXI8L2I+TcOqbWUgZ3JvdXBlID0gbcOqbWUgY2FuYWwgZGUgY29tbXVuaWNhdGlvbiA7IGNlIG7igJllc3QgcGFzIMKrIGRldXggY2FydGVzIHNldWxlbWVudCDCuy48L2Rpdj4iXV0sWyJBbGdvcml0aG1lIGRlIGNvbW11bmljYXRpb24iLFsiPHA+TOKAmcOpbWV0dGV1ciBjaG9pc2l0IHVuZSBpbmZvcm1hdGlvbiwgbOKAmWVuY29kZSBlbiBub21icmUgb3UgbWVzc2FnZSBldCBs4oCZZW52b2llLiBMZSByw6ljZXB0ZXVyIHLDqWFnaXQgw6AgbOKAmcOpdsOpbmVtZW50IMKrIHJhZGlvIHJlw6d1ZSDCuywgbGl0IGxhIHZhbGV1ciBwdWlzIHBvdXJzdWl0IHNvbiBhbGdvcml0aG1lLjwvcD4iLCI8c3ZnIGNsYXNzPVwic2NoZW1hXCIgdmlld0JveD1cIjAgMCA3MDAgMTUwXCIgeG1sbnM9XCJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Z1wiIHJvbGU9XCJpbWdcIiBhcmlhLWxhYmVsPVwiRGV1eCBjYXJ0ZXMgY29tbXVuaXF1ZW50XCI+PHRleHQgeD1cIjM1MC4wXCIgeT1cIjIwXCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxNFwiIGZvbnQtd2VpZ2h0PVwiNzAwXCIgZmlsbD1cIiMxNDI2MkJcIj5EZXV4IGNhcnRlcyBjb21tdW5pcXVlbnQ8L3RleHQ+PGRlZnM+PG1hcmtlciBpZD1cImZsXCIgbWFya2VyV2lkdGg9XCI3XCIgbWFya2VySGVpZ2h0PVwiN1wiIHJlZlg9XCI2XCIgcmVmWT1cIjMuNVwiIG9yaWVudD1cImF1dG9cIj48cGF0aCBkPVwiTTAgMCBMNyAzLjUgTDAgNyB6XCIgZmlsbD1cIiM1QTZDNzFcIi8+PC9tYXJrZXI+PC9kZWZzPjxyZWN0IHg9XCIxNC4wXCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNzUuNlwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5DaG9pc2lyIGxlIGdyb3VwZTwvdGV4dD48cGF0aCBkPVwiTTE0MC4yIDgxIEwxNDguMiA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCIxNTEuMlwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRkRFQ0YyXCIgc3Ryb2tlPVwiI0MyMTg1QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjIxMi44XCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPsOJbWV0dHJlIHVuIG1lc3NhZ2U8L3RleHQ+PHBhdGggZD1cIk0yNzcuNCA4MSBMMjg1LjQgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiMjg4LjRcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0UyRUZFRVwiIHN0cm9rZT1cIiMwRTZFNkJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCIzNTAuMFwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5Sw6ljZXB0aW9uIHJhZGlvPC90ZXh0PjxwYXRoIGQ9XCJNNDE0LjYgODEgTDQyMi42IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjQyNS42XCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNGREVDRjJcIiBzdHJva2U9XCIjQzIxODVCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNDg3LjJcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+VHJhaXRlciBsZSBtZXNzYWdlPC90ZXh0PjxwYXRoIGQ9XCJNNTUxLjggODEgTDU1OS44IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjU2Mi44XCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNjI0LjRcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+QWZmaWNoZXIgLyBhZ2lyPC90ZXh0Pjwvc3ZnPiJdXSxbIkxvZ2lncmFtbWUgOiBsaXJlIGxhIHN0cnVjdHVyZSIsWyI8cD5VbiBsb3NhbmdlIHJlcHLDqXNlbnRlIHVuIHRlc3QuIFNlbG9uIGxhIGNvbmRpdGlvbiwgbGUgcHJvZ3JhbW1lIGVtcHJ1bnRlIHVuZSBicmFuY2hlLiBEYW5zIHVuIGpldSDDoCBkZXV4IGNhcnRlcywgaWwgZmF1dCBkaXN0aW5ndWVyIGzigJnDqXbDqW5lbWVudCBsb2NhbCAoYm91dG9uLCBnZXN0ZeKApikgZXQgbOKAmWluZm9ybWF0aW9uIHJlw6d1ZSBkZSBs4oCZYXV0cmUgY2FydGUuPC9wPiIsIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+w4AgcmV0ZW5pcjwvYj5VbiBib24gbG9naWdyYW1tZSBwZXJtZXQgZGUgc3VpdnJlIGxlIHByb2dyYW1tZSBzYW5zIGNvbm5hw650cmUgbGVzIGJsb2NzIE1ha2VDb2RlIGV4YWN0cy48L2Rpdj4iXV0sWyJCaWxhbiBkZSBs4oCZYWN0aXZpdMOpIOKAlCBjZSBxdWUgdHUgZG9pcyByZXRlbmlyIixbIjxwPjxzdHJvbmc+VHUgYXMgZmFpdCBwYXNzZXIgdW4gamV1IGTigJl1bmUgc2V1bGUgY2FydGUgw6AgdW4gc3lzdMOobWUgZGlzdHJpYnXDqSBzdXIgZGV1eCBjYXJ0ZXMuPC9zdHJvbmc+PC9wPiIsIjxzdmcgY2xhc3M9XCJzY2hlbWFcIiB2aWV3Qm94PVwiMCAwIDcwMCAxNTBcIiB4bWxucz1cImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnXCIgcm9sZT1cImltZ1wiIGFyaWEtbGFiZWw9XCJDb21tdW5pcXVlciBlbnRyZSBkZXV4IGNhcnRlc1wiPjx0ZXh0IHg9XCIzNTAuMFwiIHk9XCIyMFwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTRcIiBmb250LXdlaWdodD1cIjcwMFwiIGZpbGw9XCIjMTQyNjJCXCI+Q29tbXVuaXF1ZXIgZW50cmUgZGV1eCBjYXJ0ZXM8L3RleHQ+PGRlZnM+PG1hcmtlciBpZD1cImZsXCIgbWFya2VyV2lkdGg9XCI3XCIgbWFya2VySGVpZ2h0PVwiN1wiIHJlZlg9XCI2XCIgcmVmWT1cIjMuNVwiIG9yaWVudD1cImF1dG9cIj48cGF0aCBkPVwiTTAgMCBMNyAzLjUgTDAgNyB6XCIgZmlsbD1cIiM1QTZDNzFcIi8+PC9tYXJrZXI+PC9kZWZzPjxyZWN0IHg9XCIxNC4wXCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNzUuNlwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj7DiXbDqW5lbWVudCBsb2NhbDwvdGV4dD48cGF0aCBkPVwiTTE0MC4yIDgxIEwxNDguMiA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCIxNTEuMlwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRkRFQ0YyXCIgc3Ryb2tlPVwiI0MyMTg1QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjIxMi44XCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPk1lc3NhZ2UgcmFkaW88L3RleHQ+PHBhdGggZD1cIk0yNzcuNCA4MSBMMjg1LjQgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiMjg4LjRcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0UyRUZFRVwiIHN0cm9rZT1cIiMwRTZFNkJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCIzNTAuMFwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5Sw6ljZXB0aW9uPC90ZXh0PjxwYXRoIGQ9XCJNNDE0LjYgODEgTDQyMi42IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjQyNS42XCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNGREVDRjJcIiBzdHJva2U9XCIjQzIxODVCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNDg3LjJcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+RMOpY2lzaW9uPC90ZXh0PjxwYXRoIGQ9XCJNNTUxLjggODEgTDU1OS44IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjU2Mi44XCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNjI0LjRcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+QWN0aW9uPC90ZXh0Pjwvc3ZnPiIsIjx1bD48bGk+TGVzIGNhcnRlcyBkb2l2ZW50IHV0aWxpc2VyIGxlIG3Dqm1lIGdyb3VwZSByYWRpbyBwb3VyIMOpY2hhbmdlciBzdXIgbGUgbcOqbWUgY2FuYWwgbG9naXF1ZS48L2xpPjxsaT5VbiBtZXNzYWdlIHJhZGlvIHBldXQgw6p0cmUgcmXDp3UgcGFyIHBsdXNpZXVycyBjYXJ0ZXMgZHUgbcOqbWUgZ3JvdXBlLjwvbGk+PGxpPlVuIGFsZ29yaXRobWUgw6l2w6luZW1lbnRpZWwgcsOpYWdpdCDDoCBkZXMgw6l2w6luZW1lbnRzIGxvY2F1eCBldCDDoCBkZXMgbWVzc2FnZXMgcmXDp3VzLjwvbGk+PGxpPkxlIGxvZ2lncmFtbWUgcmVuZCB2aXNpYmxlcyBsZXMgdGVzdHMgZXQgbGVzIGJyYW5jaGVzIGRlIGTDqWNpc2lvbi48L2xpPjwvdWw+IiwiPHA+PHN0cm9uZz5Wb2NhYnVsYWlyZSBlc3NlbnRpZWwgOjwvc3Ryb25nPiBncm91cGUgcmFkaW8gwrcgbWVzc2FnZSDCtyDDqXbDqW5lbWVudCDCtyBjb25kaXRpb24gwrcgbG9naWdyYW1tZS48L3A+IiwiPGRpdiBjbGFzcz1cInJldGVuaXJcIj48Yj7DgCByZXRlbmlyPC9iPlNpIHR1IHBldXggZXhwbGlxdWVyIGxlIHNjaMOpbWEgYXZlYyB0ZXMgcHJvcHJlcyBtb3RzIGV0IGRvbm5lciB1biBleGVtcGxlLCBs4oCZZXNzZW50aWVsIGRlIGzigJlhY3Rpdml0w6kgZXN0IGFjcXVpcy48L2Rpdj4iXV1d",empreinte:1473256549};</script>
+<script src="assets/correction-bilan.js"></script>
 </body>
 </html>

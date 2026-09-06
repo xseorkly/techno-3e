@@ -285,6 +285,7 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
+<link rel="stylesheet" href="assets/site-addons.css">
 </head>
 <body>
 
@@ -458,7 +459,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
           <label class="etape"><input type="checkbox" id="et-6"><span><b>6.</b> Cliquer sur <em>Train Model</em> et laisser l'onglet ouvert pendant tout le calcul.</span></label>
         </div>
         <div class="cartefiche" data-etape="Tester dans l'aperçu">
-          <label class="etape"><input type="checkbox" id="et-7"><span><b>7.</b> Dans <em>Preview</em>, montrer la main ouverte puis la main fermée. Les barres indiquent le pourcentage de confiance du modèle.</span></label>
+          <label class="etape"><input type="checkbox" id="et-7"><span><b>7.</b> Dans <em>Preview</em>, montrer la main ouverte puis la main fermée. Les barres indiquent les scores de confiance produits par le modèle pour les classes apprises. Un score élevé n’est pas une certitude absolue : il faut tester sur des exemples nouveaux.</span></label>
         </div>
         <div class="cartefiche" data-etape="Exporter et récupérer le lien du modèle">
           <label class="etape"><input type="checkbox" id="et-8"><span><b>8.</b> Cliquer sur <em>Export Model</em>, onglet <em>Tensorflow.js</em>, cocher <em>Upload (shareable link)</em>, cliquer sur <em>Upload my model</em>, puis copier le lien obtenu.</span></label>
@@ -475,22 +476,22 @@ document.getElementById("navfiches").addEventListener("change", function(){
         <div class="ligne" data-cle="Main ouverte, bien en face">
           <span class="cle">Main ouverte, en face</span>
           <input id="m1a" placeholder="classe annoncée" aria-label="Classe annoncée, main ouverte en face">
-          <input id="m1b" placeholder="confiance en %" aria-label="Confiance, main ouverte en face">
+          <input id="m1b" placeholder="score du modèle en %" aria-label="Score du modèle, main ouverte en face">
         </div>
         <div class="ligne" data-cle="Main fermée, bien en face">
           <span class="cle">Main fermée, en face</span>
           <input id="m2a" placeholder="classe annoncée" aria-label="Classe annoncée, main fermée en face">
-          <input id="m2b" placeholder="confiance en %" aria-label="Confiance, main fermée en face">
+          <input id="m2b" placeholder="score du modèle en %" aria-label="Score du modèle, main fermée en face">
         </div>
         <div class="ligne" data-cle="Main de profil">
           <span class="cle">Main de profil</span>
           <input id="m3a" placeholder="classe annoncée" aria-label="Classe annoncée, main de profil">
-          <input id="m3b" placeholder="confiance en %" aria-label="Confiance, main de profil">
+          <input id="m3b" placeholder="score du modèle en %" aria-label="Score du modèle, main de profil">
         </div>
       </div>
 
       <p class="consigne" style="margin-top:18px">N2a — Que se passe-t-il quand tu montres ta main de profil, une position que le modèle n'a jamais vue ? Explique pourquoi.</p>
-      <textarea id="n2a" data-rep></textarea>
+      <textarea id="n2a" data-rep aria-label="N2a — Que se passe-t-il quand tu montres ta main de profil, une position que le modèle n&#x27;a jamais vue ? Expliq"></textarea>
     </div>
   </article>
 
@@ -522,18 +523,30 @@ document.getElementById("navfiches").addEventListener("change", function(){
 
       <h3>Bilan de la séance</h3>
       <p class="consigne">Qu'est-ce qui a marché du premier coup, et sur quoi as-tu buté ?</p>
-      <textarea id="bilan" data-rep placeholder="J'ai réussi à…  J'ai buté sur…"></textarea>
+      <textarea id="bilan" data-rep placeholder="J'ai réussi à…  J'ai buté sur…" aria-label="Qu&#x27;est-ce qui a marché du premier coup, et sur quoi as-tu buté ?"></textarea>
     </div>
   </article>
 
-  <article class="bloc" id="synthese">
+  <div class="cadre-pedago"><div><b>Minimum attendu aujourd’hui</b><p>Deux classes correctement entraînées, trois tests dont au moins un exemple nouveau, et une observation argumentée sur les scores.</p></div><div><b>Pour aller plus loin</b><p>Tester une autre personne, changer le fond ou la lumière et comparer le taux de réussite.</p></div></div>
+<article class="bloc" id="synthese">
     <div class="marge"><span class="duree">5′</span></div>
     <div class="corps">
       <h2>Ma synthèse</h2>
       <p class="consigne">Retrouve les trois étapes de la partie 1 dans ce que tu viens de faire, et dis ce que tu as fabriqué à chacune.</p>
-      <textarea id="rep-synthese" data-rep></textarea>
+      <textarea id="rep-synthese" data-rep aria-label="Retrouve les trois étapes de la partie 1 dans ce que tu viens de faire, et dis ce que tu as fabriqué à chacune"></textarea>
     </div>
   </article>
+
+  <section class="corrbloc" id="correction" data-addon="1">
+    <h2>Correction expliquée et bilan de l’activité</h2>
+    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+    <div class="saisie">
+      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction" autocomplete="off" spellcheck="false">
+      <button type="button" id="corr-btn">Afficher</button>
+    </div>
+    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
+    <div class="corr" id="corr-contenu" hidden></div>
+  </section>
 
   <div id="alerte" class="alerte" hidden></div>
 
@@ -579,7 +592,7 @@ var FICHE = {
   ],
   corrige: {
     n1a: ["b) la machine apprend en comparant des exemples dont on lui a donné la réponse : c'est l'apprentissage supervisé. Sans étiquette, elle n'a aucun moyen de savoir ce qu'elle doit distinguer."],
-    n2a: ["Le modèle annonce quand même une des deux classes, souvent avec une confiance plus basse.",
+    n2a: ["Le modèle annonce quand même une des deux classes, souvent avec un score moins marqué ; ce score doit être interprété comme une sortie du modèle, pas comme une certitude sur la vérité.",
           "Il n'a jamais vu cette position : il choisit celle dont l'image se rapproche le plus, sans pouvoir répondre « je ne sais pas »."],
     synthese: ["Étape 1 : les images de main ouverte et de main fermée capturées à la webcam, c'est la base de données.",
                "Étape 2 : le calcul lancé par Train Model, qui produit le modèle.",
@@ -788,6 +801,7 @@ function dateFr(iso){
 }
 
 function construirePDF(d){
+  if(!window.jspdf || !window.jspdf.jsPDF){ window.print(); return; }
   var doc = new window.jspdf.jsPDF({ unit:"mm", format:"a4" });
   var y = 0, page = 1;
   var nomComplet = propre((d.identite.nom + " " + d.identite.prenom).trim());
@@ -1028,5 +1042,7 @@ el("pdf").addEventListener("click", function(){
 
 })();
 </script>
+<script>window.CORRECTION_BILAN={coffre:"W1siQ3LDqWVyIGRlcyBkb25uw6llcyB1dGlsZXMiLFsiPHA+RGV1eCBjbGFzc2VzIMKrIG1haW4gb3V2ZXJ0ZSDCuyBldCDCqyBtYWluIGZlcm3DqWUgwrsgZG9pdmVudCBjb250ZW5pciBkZXMgZXhlbXBsZXMgdmFyacOpcyA6IGRpc3RhbmNlLCBvcmllbnRhdGlvbiwgYXJyacOocmUtcGxhbiwgbHVtacOocmUsIHBlcnNvbm5lcyBkaWZmw6lyZW50ZXMgc2kgcG9zc2libGUuIERlcyBjZW50YWluZXMgZOKAmWltYWdlcyBxdWFzaSBpZGVudGlxdWVzIGFwcG9ydGVudCBtb2lucyBk4oCZaW5mb3JtYXRpb24gcXVlIGRlcyBleGVtcGxlcyBkaXZlcnNpZmnDqXMuPC9wPiIsIjxkaXYgY2xhc3M9XCJ0eXBlaW5mb1wiPjxzdHJvbmc+Q2hvaXggZGUgY29uY2VwdGlvbjwvc3Ryb25nPjxzcGFuPlR1IGTDqWNpZGVzIGNlIHF1ZSBzaWduaWZpZSBjaGFxdWUgY2xhc3NlIGV0IHF1ZWxsZXMgdmFyaWF0aW9ucyBsZSBtb2TDqGxlIGRvaXQgc2F2b2lyIHJlY29ubmHDrnRyZS48L3NwYW4+PC9kaXY+Il1dLFsiTGUgc2NvcmUgZGUgY29uZmlhbmNlIDogY29tbWVudCBsZSBsaXJlIixbIjxwPkxlcyBiYXJyZXMgZGUgVGVhY2hhYmxlIE1hY2hpbmUgc29udCBkZXMgPHN0cm9uZz5zY29yZXMgcHJvZHVpdHMgcGFyIGxlIG1vZMOobGUgcG91ciBsZXMgY2xhc3NlcyBjb25udWVzPC9zdHJvbmc+LiBVbiBhZmZpY2hhZ2Ugw6AgOTcgJSBuZSBzaWduaWZpZSBwYXMgYXV0b21hdGlxdWVtZW50IMKrIDk3ICUgZGUgcHJvYmFiaWxpdMOpIHF1ZSBsYSB2w6lyaXTDqSBzb2l0IGNlbGxlLWNpIMK7LjwvcD4iLCI8cD5Db21wYXJlIHBsdXTDtHQgbGVzIHNjb3JlcyBlbnRyZSBlc3NhaXMgZXQgZGVtYW5kZS10b2kgc2kgbGUgbW9kw6hsZSByZXN0ZSBjb3JyZWN0IHN1ciBkZXMgZXhlbXBsZXMgbm91dmVhdXggZXQgZGlmZmljaWxlcy48L3A+IiwiPGRpdiBjbGFzcz1cInJldGVuaXJcIj48Yj7DgCByZXRlbmlyPC9iPlNjb3JlIMOpbGV2w6kg4omgIGNlcnRpdHVkZSBhYnNvbHVlLiBVbmUgYm9ubmUgw6l2YWx1YXRpb24gdXRpbGlzZSBwbHVzaWV1cnMgZXNzYWlzIGV0IG5vdGUgbGVzIGVycmV1cnMuPC9kaXY+Il1dLFsiRW50cmHDrm5lciBwdWlzIHRlc3RlciIsWyI8cD5BcHLDqHMgbOKAmWVudHJhw65uZW1lbnQsIGdhcmRlIHZvbG9udGFpcmVtZW50IGRlcyBnZXN0ZXMgcXVlIGxlIG1vZMOobGUgbuKAmWEgcGFzIHZ1cyA6IG1haW4gZGUgcHJvZmlsLCBhdXRyZSBwZXJzb25uZSwgYXV0cmUgZm9uZC4gQ+KAmWVzdCBjZXR0ZSBwaGFzZSBxdWkgcGVybWV0IGRlIHbDqXJpZmllciBsYSA8c3Ryb25nPmfDqW7DqXJhbGlzYXRpb248L3N0cm9uZz4uPC9wPiIsIjxzdmcgY2xhc3M9XCJzY2hlbWFcIiB2aWV3Qm94PVwiMCAwIDcwMCAxNTBcIiB4bWxucz1cImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnXCIgcm9sZT1cImltZ1wiIGFyaWEtbGFiZWw9XCJUb24gcHJvdG9jb2xlIGRlIHRlc3RcIj48dGV4dCB4PVwiMzUwLjBcIiB5PVwiMjBcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjE0XCIgZm9udC13ZWlnaHQ9XCI3MDBcIiBmaWxsPVwiIzE0MjYyQlwiPlRvbiBwcm90b2NvbGUgZGUgdGVzdDwvdGV4dD48ZGVmcz48bWFya2VyIGlkPVwiZmxcIiBtYXJrZXJXaWR0aD1cIjdcIiBtYXJrZXJIZWlnaHQ9XCI3XCIgcmVmWD1cIjZcIiByZWZZPVwiMy41XCIgb3JpZW50PVwiYXV0b1wiPjxwYXRoIGQ9XCJNMCAwIEw3IDMuNSBMMCA3IHpcIiBmaWxsPVwiIzVBNkM3MVwiLz48L21hcmtlcj48L2RlZnM+PHJlY3QgeD1cIjE0LjBcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0UyRUZFRVwiIHN0cm9rZT1cIiMwRTZFNkJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCI3NS42XCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPkVudHJhw65uZXIgc3VyIEE8L3RleHQ+PHBhdGggZD1cIk0xNDAuMiA4MSBMMTQ4LjIgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiMTUxLjJcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0ZERUNGMlwiIHN0cm9rZT1cIiNDMjE4NUJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCIyMTIuOFwiIHk9XCI2OVwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5HYXJkZXIgZGVzPC90ZXh0Pjx0ZXh0IHg9XCIyMTIuOFwiIHk9XCI4NFwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5leGVtcGxlcyBCPC90ZXh0PjxwYXRoIGQ9XCJNMjc3LjQgODEgTDI4NS40IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjI4OC40XCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiMzUwLjBcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+VGVzdGVyIEI8L3RleHQ+PHBhdGggZD1cIk00MTQuNiA4MSBMNDIyLjYgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiNDI1LjZcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0ZERUNGMlwiIHN0cm9rZT1cIiNDMjE4NUJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCI0ODcuMlwiIHk9XCI2OVwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5Ob3RlciByw6l1c3NpdGVzIC88L3RleHQ+PHRleHQgeD1cIjQ4Ny4yXCIgeT1cIjg0XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPmVycmV1cnM8L3RleHQ+PHBhdGggZD1cIk01NTEuOCA4MSBMNTU5LjggODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiNTYyLjhcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0UyRUZFRVwiIHN0cm9rZT1cIiMwRTZFNkJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCI2MjQuNFwiIHk9XCI2OVwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5BbcOpbGlvcmVyIGxlczwvdGV4dD48dGV4dCB4PVwiNjI0LjRcIiB5PVwiODRcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+ZG9ubsOpZXM8L3RleHQ+PC9zdmc+Il1dLFsiVHV0b3JpZWxzIHZpZMOpbyBpbnTDqWdyw6lzIixbIjxhIGNsYXNzPVwicmVzc291cmNlLWNvcnJcIiBocmVmPVwiaHR0cHM6Ly90ZWFjaGFibGVtYWNoaW5lLndpdGhnb29nbGUuY29tL1wiIHRhcmdldD1cIl9ibGFua1wiIHJlbD1cIm5vb3BlbmVyXCI+PGI+VGVhY2hhYmxlIE1hY2hpbmUg4oCUIEdhdGhlciwgVHJhaW4sIEV4cG9ydDwvYj48c3Bhbj5MYSBwYWdlIG9mZmljaWVsbGUgY29udGllbnQgZGUgY291cnRlcyB2aWTDqW9zIGRlIHByaXNlIGVuIG1haW4gZXQgcGVybWV0IGRlIHRlc3RlciBkaXJlY3RlbWVudC48L3NwYW4+PC9hPiJdXSxbIkJpbGFuIGRlIGzigJlhY3Rpdml0w6kg4oCUIGNlIHF1ZSB0dSBkb2lzIHJldGVuaXIiLFsiPHA+PHN0cm9uZz5UdSBu4oCZYXMgcGFzIHNldWxlbWVudCDCqyB1dGlsaXPDqSB1biBzaXRlIMK7IDogdHUgYXMgY29uc3RydWl0IHVuIHBldGl0IHByb3RvY29sZSBleHDDqXJpbWVudGFsIGTigJlhcHByZW50aXNzYWdlIGF1dG9tYXRpcXVlLjwvc3Ryb25nPjwvcD4iLCI8c3ZnIGNsYXNzPVwic2NoZW1hXCIgdmlld0JveD1cIjAgMCA3MDAgMTUwXCIgeG1sbnM9XCJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Z1wiIHJvbGU9XCJpbWdcIiBhcmlhLWxhYmVsPVwiRW50cmHDrm5lciBzYW5zIHNlIHRyb21wZXIgZOKAmW9iamVjdGlmXCI+PHRleHQgeD1cIjM1MC4wXCIgeT1cIjIwXCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxNFwiIGZvbnQtd2VpZ2h0PVwiNzAwXCIgZmlsbD1cIiMxNDI2MkJcIj5FbnRyYcOubmVyIHNhbnMgc2UgdHJvbXBlciBk4oCZb2JqZWN0aWY8L3RleHQ+PGRlZnM+PG1hcmtlciBpZD1cImZsXCIgbWFya2VyV2lkdGg9XCI3XCIgbWFya2VySGVpZ2h0PVwiN1wiIHJlZlg9XCI2XCIgcmVmWT1cIjMuNVwiIG9yaWVudD1cImF1dG9cIj48cGF0aCBkPVwiTTAgMCBMNyAzLjUgTDAgNyB6XCIgZmlsbD1cIiM1QTZDNzFcIi8+PC9tYXJrZXI+PC9kZWZzPjxyZWN0IHg9XCIxNC4wXCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNzUuNlwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5Db2xsZWN0ZXI8L3RleHQ+PHBhdGggZD1cIk0xNDAuMiA4MSBMMTQ4LjIgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiMTUxLjJcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0ZERUNGMlwiIHN0cm9rZT1cIiNDMjE4NUJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCIyMTIuOFwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj7DiXRpcXVldGVyPC90ZXh0PjxwYXRoIGQ9XCJNMjc3LjQgODEgTDI4NS40IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjI4OC40XCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiMzUwLjBcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+RW50cmHDrm5lcjwvdGV4dD48cGF0aCBkPVwiTTQxNC42IDgxIEw0MjIuNiA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCI0MjUuNlwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRkRFQ0YyXCIgc3Ryb2tlPVwiI0MyMTg1QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjQ4Ny4yXCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPlRlc3RlcjwvdGV4dD48cGF0aCBkPVwiTTU1MS44IDgxIEw1NTkuOCA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCI1NjIuOFwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRTJFRkVFXCIgc3Ryb2tlPVwiIzBFNkU2QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjYyNC40XCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPkFtw6lsaW9yZXI8L3RleHQ+PC9zdmc+IiwiPHVsPjxsaT5VbmUgY2xhc3NlIGRvaXQgw6p0cmUgZMOpZmluaWUgY2xhaXJlbWVudC48L2xpPjxsaT5MZXMgZXhlbXBsZXMgZOKAmWVudHJhw65uZW1lbnQgZG9pdmVudCDDqnRyZSB2YXJpw6lzIGV0IHJlcHLDqXNlbnRhdGlmcyBkZSBs4oCZdXNhZ2UgcHLDqXZ1LjwvbGk+PGxpPlVuIHRlc3QgcGVydGluZW50IHV0aWxpc2UgZGVzIHNpdHVhdGlvbnMgbm91dmVsbGVzLjwvbGk+PGxpPkxlcyBzY29yZXMgZHUgbW9kw6hsZSBhaWRlbnQgw6AgY29tcGFyZXIgbGVzIHLDqXBvbnNlcywgbWFpcyBpbHMgbmUgdHJhbnNmb3JtZW50IHBhcyB1bmUgcHLDqWRpY3Rpb24gZW4gdsOpcml0w6kuPC9saT48L3VsPiIsIjxwPjxzdHJvbmc+Vm9jYWJ1bGFpcmUgZXNzZW50aWVsIDo8L3N0cm9uZz4gY2xhc3NlIMK3IGRpdmVyc2l0w6kgwrcgc2NvcmUgwrcgZ8OpbsOpcmFsaXNhdGlvbiDCtyB0ZXN0LjwvcD4iLCI8ZGl2IGNsYXNzPVwicmV0ZW5pclwiPjxiPsOAIHJldGVuaXI8L2I+U2kgdHUgcGV1eCBleHBsaXF1ZXIgbGUgc2Now6ltYSBhdmVjIHRlcyBwcm9wcmVzIG1vdHMgZXQgZG9ubmVyIHVuIGV4ZW1wbGUsIGzigJllc3NlbnRpZWwgZGUgbOKAmWFjdGl2aXTDqSBlc3QgYWNxdWlzLjwvZGl2PiJdXV0=",empreinte:2596935826};</script>
+<script src="assets/correction-bilan.js"></script>
 </body>
 </html>

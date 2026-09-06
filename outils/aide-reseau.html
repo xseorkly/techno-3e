@@ -531,7 +531,7 @@
       </ol>
     </section>
 
-    <section class="hop" id="debit">
+    <section class="hop" id="section-debit">
       <div class="hop-marker">4</div>
       <p class="hop-sub">Calculer un temps de transfert</p>
       <h2>Trajet + débit = temps</h2>
@@ -551,7 +551,7 @@
             <label for="taille">Taille du fichier</label>
             <div class="input-pair">
               <input type="number" id="taille" min="0" step="any" placeholder="25" inputmode="decimal">
-              <select id="taille-unite">
+              <select id="taille-unite" aria-label="Unité de taille du fichier">
                 <option value="Mo">Mo</option>
                 <option value="Go">Go</option>
                 <option value="Ko">Ko</option>
@@ -562,7 +562,7 @@
             <label for="debit">Débit</label>
             <div class="input-pair">
               <input type="number" id="debit" min="0" step="any" placeholder="100" inputmode="decimal">
-              <select id="debit-unite">
+              <select id="debit-unite" aria-label="Unité du débit">
                 <option value="Mb/s">Mb/s</option>
                 <option value="kb/s">kb/s</option>
                 <option value="Gb/s">Gb/s</option>

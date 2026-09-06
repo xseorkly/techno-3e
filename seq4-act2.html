@@ -321,6 +321,7 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
+<link rel="stylesheet" href="assets/site-addons.css">
 </head>
 <body>
 
@@ -390,7 +391,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
       <a href="#materiel"><b>5′</b>Matériel</a>
       <a href="#mesures"><b>15′</b>Mesures</a>
       <a href="#type"><b>8′</b>Type de données</a>
-      <a href="#coefficient"><b>15′</b>Coefficient</a>
+      <a href="#indice"><b>15′</b>Indice</a>
       <a href="#programme"><b>7′</b>Programme</a>
       <a href="#synthese"><b>5′</b>Synthèse</a>
     </nav>
@@ -423,7 +424,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
       <ul>
         <li>N1 — Je sais mettre en œuvre un protocole de mesure et relever des valeurs</li>
         <li>N2 — et je sais reconnaître le type et l'étendue des valeurs fournies par un capteur analogique</li>
-        <li>N3 — et je sais calculer le coefficient qui convertit ces valeurs en pourcentage</li>
+        <li>N3 — et je sais construire l’indice relatif qui traduit ces valeurs en pourcentage</li>
         <li>N4 — et je sais modifier le programme pour afficher une donnée exploitable</li>
       </ul>
     </div>
@@ -507,35 +508,35 @@ document.getElementById("navfiches").addEventListener("change", function(){
       </div>
       <h3>N2 — Sont-elles exploitables ?</h3>
       <p class="consigne">Ces valeurs sont-elles directement utilisables par un jardinier ? Justifie ta réponse.</p>
-      <textarea id="n2" data-rep placeholder=""></textarea>
+      <textarea id="n2" data-rep placeholder="" aria-label="Ces valeurs sont-elles directement utilisables par un jardinier ? Justifie ta réponse."></textarea>
 
     </div>
   </article>
-  <article class="bloc" id="coefficient">
+  <article class="bloc" id="indice">
     <div class="marge"><span class="duree">15′</span></div>
     <div class="corps">
-      <h2>Du nombre brut au pourcentage</h2>
-      <p class="consigne">L'entrée analogique de la carte convertit la tension du capteur en un nombre entier compris entre <strong>0 et 1023</strong>. La majorité des plantes se développent mieux au-dessus de 50 % d'humidité ; seules celles des régions arides supportent moins de 25 %. Il faut donc exprimer la mesure en pourcentage.</p>
-      <h3>N3 — Le calcul du coefficient</h3>
-      <p class="consigne">Quel coefficient de proportionnalité faut-il appliquer pour convertir une valeur analogique en pourcentage ? Détaille ton calcul.</p>
-      <textarea id="n3" data-rep placeholder="Si 1023 correspond à 100 %, alors…" style="min-height:110px"></textarea>
-      <h3>Je vérifie mon coefficient</h3>
+      <h2>Du nombre brut à un indice relatif</h2>
+      <p class="consigne">L’entrée analogique de la carte convertit la tension du capteur en un nombre entier compris entre <strong>0 et 1023</strong>. Ce nombre n’est pas directement un « pourcentage d’humidité ». Nous allons l’<strong>étalonner</strong> avec deux références mesurées sur notre montage : <strong>Vsec</strong> pour l’état de référence sec et <strong>Vhumide</strong> pour l’état de référence très humide.</p>
+      <h3>N3 — Construire l’indice relatif</h3>
+      <p class="consigne">Écris une formule qui donne 0 % pour Vsec et 100 % pour Vhumide. Puis applique-la à une valeur située entre les deux références.</p>
+      <textarea id="n3" data-rep placeholder="Indice = (mesure − Vsec) / (Vhumide − Vsec) × 100…" style="min-height:110px" aria-label="Écris une formule qui donne 0 % pour Vsec et 100 % pour Vhumide. Puis applique-la à une valeur située entre le"></textarea>
+      <h3>Je vérifie mon indice</h3>
       <div class="cartes" data-tab="conversion" id="tabconversion">
-        <div class="ligne" data-cle="Valeur 1023">
-          <span class="cle">Valeur 1023</span>
-          <input id="v1" placeholder="pourcentage obtenu" aria-label="pourcentage obtenu pour Valeur 1023">
+        <div class="ligne" data-cle="Référence sèche Vsec">
+          <span class="cle">Référence sèche Vsec</span>
+          <input id="v1" placeholder="indice relatif obtenu" aria-label="indice relatif obtenu pour la référence sèche">
         </div>
-        <div class="ligne" data-cle="Valeur 512">
-          <span class="cle">Valeur 512</span>
-          <input id="v2" placeholder="pourcentage obtenu" aria-label="pourcentage obtenu pour Valeur 512">
+        <div class="ligne" data-cle="Valeur intermédiaire">
+          <span class="cle">Valeur intermédiaire</span>
+          <input id="v2" placeholder="indice relatif obtenu" aria-label="indice relatif obtenu pour une valeur intermédiaire">
         </div>
-        <div class="ligne" data-cle="Ma mesure sur terre sèche">
-          <span class="cle">Ma mesure sur terre sèche</span>
-          <input id="v3" placeholder="pourcentage obtenu" aria-label="pourcentage obtenu pour Ma mesure sur terre sèche">
+        <div class="ligne" data-cle="Ma mesure sur l’état sec">
+          <span class="cle">Ma mesure sur l’état sec</span>
+          <input id="v3" placeholder="indice relatif obtenu" aria-label="pourcentage obtenu pour Ma mesure sur l’état sec">
         </div>
-        <div class="ligne" data-cle="Ma mesure sur terre humide">
-          <span class="cle">Ma mesure sur terre humide</span>
-          <input id="v4" placeholder="pourcentage obtenu" aria-label="pourcentage obtenu pour Ma mesure sur terre humide">
+        <div class="ligne" data-cle="Ma mesure sur l’état humide">
+          <span class="cle">Ma mesure sur l’état humide</span>
+          <input id="v4" placeholder="indice relatif obtenu" aria-label="pourcentage obtenu pour Ma mesure sur l’état humide">
         </div>
       </div>
 
@@ -545,13 +546,13 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="marge"><span class="duree">7′</span></div>
     <div class="corps">
       <h2>Je modifie le programme</h2>
-      <p class="consigne">Le programme affiche pour l'instant la valeur brute. Modifie-le pour qu'il affiche le taux d'humidité en pourcentage, puis vérifie sur le montage.</p>
+      <p class="consigne">Le programme affiche pour l’instant la valeur brute. Modifie-le pour qu’il calcule et affiche l’indice relatif d’humidité à partir de Vsec et Vhumide, puis vérifie sur le montage.</p>
       <div class="cartes" id="etapes">
         <div class="cartefiche" data-etape="Ouvrir le programme dans MakeCode">
           <label class="etape"><input type="checkbox" id="et-1"><span><b>1.</b> Ouvrir le programme téléversé plus haut dans MakeCode.</span></label>
         </div>
-        <div class="cartefiche" data-etape="Insérer la division par le coefficient">
-          <label class="etape"><input type="checkbox" id="et-2"><span><b>2.</b> Insérer le calcul qui convertit la valeur analogique en pourcentage.</span></label>
+        <div class="cartefiche" data-etape="Insérer la formule d’étalonnage">
+          <label class="etape"><input type="checkbox" id="et-2"><span><b>2.</b> Insérer le calcul qui transforme la valeur brute en indice relatif à partir de Vsec et Vhumide, puis borner le résultat entre 0 et 100.</span></label>
         </div>
         <div class="cartefiche" data-etape="Tester sur les quatre états de terre">
           <label class="etape"><input type="checkbox" id="et-3"><span><b>3.</b> Tester sur la terre sèche puis humide et vérifier que l'affichage est cohérent.</span></label>
@@ -568,16 +569,16 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="marge"><span class="duree">5′</span></div>
     <div class="corps">
       <h2>Ma synthèse</h2>
-      <p class="consigne">Explique pourquoi une mesure brute issue d'un capteur doit souvent être transformée avant d'être utilisée.</p>
-      <textarea id="rep-synthese" data-rep placeholder=""></textarea>
+      <p class="consigne">Explique pourquoi une mesure brute issue d’un capteur doit souvent être étalonnée avant d’être utilisée pour décider.</p>
+      <textarea id="rep-synthese" data-rep placeholder="" aria-label="Explique pourquoi une mesure brute issue d’un capteur doit souvent être étalonnée avant d’être utilisée pour d"></textarea>
 
     </div>
   </article>
 
 
   <section class="corrbloc" id="correction">
-    <h2>La correction expliquée</h2>
-    <p class="intro">La correction expliquée, avec les schémas. Ton professeur te donnera le mot de passe.</p>
+    <h2>Correction expliquée et bilan de l’activité</h2>
+    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
     <div class="saisie">
       <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction"
              autocomplete="off" spellcheck="false">
@@ -613,7 +614,7 @@ var FICHE = {
   sequence: 4,
   activite: 2,
   titre: "L'arrosage automatique - séance 2 : calibrer le capteur",
-  thematique: "Des valeurs analogiques aux pourcentages",
+  thematique: "Des valeurs analogiques à un indice relatif étalonné",
   duree: "55 min",
   niveau: "3e",
   cps: { intitule: "", niveaux: [] },
@@ -623,9 +624,9 @@ var FICHE = {
       entetes:["État de la terre", "Eau ajoutée", "Valeur du capteur"], largeurs:[70, 56, 56] },
     { type:"qcm",   cle:"n1" },
     { type:"texte", cle:"n2", titre:"N2 — Ces valeurs sont-elles exploitables ?" },
-    { type:"texte", cle:"n3", titre:"N3 — Le calcul du coefficient", duree:"15'", min:4 },
-    { type:"tab",   cle:"conversion", titre:"Je vérifie mon coefficient",
-      entetes:["Valeur analogique", "Pourcentage obtenu"], largeurs:[92, 90] },
+    { type:"texte", cle:"n3", titre:"N3 — Construire l’indice relatif", duree:"15'", min:4 },
+    { type:"tab",   cle:"conversion", titre:"Je vérifie mon indice",
+      entetes:["Valeur analogique", "Indice relatif obtenu"], largeurs:[92, 90] },
     { type:"etapes", titre:"La modification du programme", duree:"7'" },
     { type:"texte", cle:"rep-synthese", titre:"Ma synthèse", duree:"5'" }
   ],
@@ -633,10 +634,10 @@ var FICHE = {
     n0: ["b) la même quantité d'eau ne donne pas la même mesure selon le sol. Un sol argileux retient l'eau autrement qu'un sol sableux : sans recalibrage, les valeurs restent précises mais ne veulent plus rien dire."],
     n1: ["c) un nombre. Le capteur produit une grandeur analogique que la carte convertit en un entier compris entre 0 et 1023."],
     n2: ["Non. 720 ne veut rien dire pour un jardinier : ce nombre ne correspond à aucune unité connue et ne se compare à aucun seuil de la vie courante.",
-      "Il faut le convertir en pourcentage pour pouvoir le comparer au seuil de 50 % utilisé en jardinage."],
-    n3: ["Si 1023 correspond à 100 %, le coefficient est 1023 / 100 = 10,23.",
-      "On divise donc la valeur analogique par 10,23 pour obtenir le pourcentage. Exemple : 512 / 10,23 = 50 % environ.",
-      "Attendu au tableau de vérification : 1023 donne 100 %, 512 donne 50 %."]
+      "Il faut définir des références expérimentales puis calculer un indice relatif ; le nombre brut n’est pas un pourcentage d’humidité universel."],
+    n3: ["On relève Vsec et Vhumide avec le montage. On définit ensuite 0 % pour Vsec et 100 % pour Vhumide.",
+      "Formule : indice = (mesure − Vsec) / (Vhumide − Vsec) × 100. Exemple pédagogique : Vsec = 500, Vhumide = 900, mesure = 700 → 50 %.",
+      "Attendu : Vsec donne 0 %, Vhumide donne 100 %, et une valeur située exactement au milieu donne 50 % de l’indice relatif."]
   }
 };
 
@@ -683,7 +684,7 @@ function grandir(z){ z.style.height = "auto"; z.style.height = (z.scrollHeight +
 
 function majProgression(){
   var liens = tous("#chrono a");
-  var repere = ["materiel","mesures","type","coefficient","programme","synthese"];
+  var repere = ["materiel","mesures","type","indice","programme","synthese"];
   repere.forEach(function(id, i){
     var b = el(id);
     if(!b || !liens[i]) return;
@@ -775,8 +776,24 @@ if(new URLSearchParams(location.search).get("prof") === "1"){
    cela dissuade la curiosité, sans constituer une vraie sécurité.
    ============================================================ */
 (function(){
-  var COFFRE = "W1siUG91cnF1b2kgaWwgZmFsbGFpdCBjYWxpYnJlciIsIFsiPHA+TGUgY2FwdGV1ciB0ZSByZW52b2llIHVuIG5vbWJyZSBlbnRyZSAwIGV0IDEwMjMuIE1haXMgNzIwLCBlc3QtY2Ugc2VjIG91IGh1bWlkZSA/IEltcG9zc2libGUgZGUgcsOpcG9uZHJlIHNhbnMgcG9pbnQgZGUgY29tcGFyYWlzb24uIDxzdHJvbmc+Q2FsaWJyZXI8L3N0cm9uZz4sIGMnZXN0IGp1c3RlbWVudCDDqXRhYmxpciBjZXMgcG9pbnRzIGRlIGNvbXBhcmFpc29uIGVuIG1lc3VyYW50IGRlcyDDqXRhdHMgY29ubnVzLjwvcD4iLCAiPHN2ZyBjbGFzcz1cInNjaGVtYVwiIHZpZXdCb3g9XCIwIDAgNjIwIDE1MFwiIHhtbG5zPVwiaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmdcIiByb2xlPVwiaW1nXCI+XG48dGV4dCB4PVwiMTBcIiB5PVwiMThcIiBmb250LWZhbWlseT1cIkFyY2hpdm8sc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjEzXCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPlRyYWR1aXJlIGNlIHF1ZSBkaXQgbGUgY2FwdGV1cjwvdGV4dD5cbjxyZWN0IHg9XCI0MFwiIHk9XCI0MlwiIHdpZHRoPVwiNTQwXCIgaGVpZ2h0PVwiMjZcIiByeD1cIjZcIiBmaWxsPVwiI0UyRUZFRVwiIHN0cm9rZT1cIiMwRTZFNkJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPlxuPGcgZm9udC1mYW1pbHk9XCJTb3VyY2UgU2FucyAzLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZmlsbD1cIiMxNDI2MkJcIj5cbjx0ZXh0IHg9XCI0MFwiIHk9XCI4NFwiPjA8L3RleHQ+PHRleHQgeD1cIjMxMFwiIHk9XCI4NFwiPjUxMjwvdGV4dD48dGV4dCB4PVwiNTgwXCIgeT1cIjg0XCI+MTAyMzwvdGV4dD5cbjx0ZXh0IHg9XCIzMTBcIiB5PVwiMzRcIiBmaWxsPVwiIzBFNkU2QlwiIGZvbnQtd2VpZ2h0PVwiNjAwXCI+Y2UgcXVlIGxhIGNhcnRlIGxpdDwvdGV4dD5cbjwvZz5cbjxwYXRoIGQ9XCJNNDAgOTIgdjE0IE0zMTAgOTIgdjE0IE01ODAgOTIgdjE0XCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjEuNFwiIHN0cm9rZS1kYXNoYXJyYXk9XCIzIDNcIi8+XG48cmVjdCB4PVwiNDBcIiB5PVwiMTA4XCIgd2lkdGg9XCI1NDBcIiBoZWlnaHQ9XCIyNlwiIHJ4PVwiNlwiIGZpbGw9XCIjRkRFQ0YyXCIgc3Ryb2tlPVwiI0MyMTg1QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+XG48ZyBmb250LWZhbWlseT1cIkFyY2hpdm8sc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjEyLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZmlsbD1cIiNDMjE4NUJcIj5cbjx0ZXh0IHg9XCI3MFwiIHk9XCIxMjZcIj4wICU8L3RleHQ+PHRleHQgeD1cIjMxMFwiIHk9XCIxMjZcIj41MCAlPC90ZXh0Pjx0ZXh0IHg9XCI1NDhcIiB5PVwiMTI2XCI+MTAwICU8L3RleHQ+XG48L2c+XG48dGV4dCB4PVwiMzEwXCIgeT1cIjEwMFwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJTb3VyY2UgU2FucyAzLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZmlsbD1cIiM1QTZDNzFcIj5vbiBkaXZpc2UgcGFyIDEwLDIzPC90ZXh0PlxuPC9zdmc+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+w4AgcmV0ZW5pcjwvYj5DYWxpYnJlciA9IGNvbXBhcmVyIGxlcyB2YWxldXJzIGR1IGNhcHRldXIgw6AgZGVzIMOpdGF0cyBxdWUgbCdvbiBjb25uYcOudCwgcG91ciBwb3V2b2lyIGxlcyB0cmFkdWlyZS48L2Rpdj4iXV0sIFsiTjFhIOKAlCBQb3VycXVvaSByZWNhbGlicmVyIHF1YW5kIG9uIGNoYW5nZSBkZSBzb2wiLCBbIjxwPjxzdHJvbmc+UGFyY2UgcXVlIGxhIG3Dqm1lIHF1YW50aXTDqSBkJ2VhdSBuZSBkb25uZSBwYXMgbGEgbcOqbWUgbWVzdXJlIHNlbG9uIGxhIG5hdHVyZSBkdSBzb2wuPC9zdHJvbmc+PC9wPiIsICI8cD5VbiBzb2wgYXJnaWxldXggcmV0aWVudCBsJ2VhdSwgdW4gc29sIHNhYmxldXggbGEgbGFpc3NlIGZpbGVyLiBQb3VyIHVuIG3Dqm1lIHBvdXJjZW50YWdlIGQnZWF1IHLDqWVsLCBsZSBjYXB0ZXVyIG5lIHZlcnJhIHBhcyBsYSBtw6ptZSBjaG9zZSBkYW5zIGxlcyBkZXV4LjwvcD4iLCAiPHA+RXQgdm9pY2kgbCdpZMOpZSBpbXBvcnRhbnRlIDogdW4gY2FwdGV1ciBtYWwgY2FsaWJyw6kgY29udGludWUgZCdhZmZpY2hlciBkZXMgdmFsZXVycyA8ZW0+cHLDqWNpc2VzPC9lbT7igKYgbWFpcyA8ZW0+ZmF1c3NlczwvZW0+LiBVbmUgYmFsYW5jZSBkw6lyw6lnbMOpZSBhZmZpY2hlIDcyLDQga2cgYXZlYyBkZXV4IGTDqWNpbWFsZXMsIGNlIHF1aSBmYWl0IHRyw6hzIHPDqXJpZXV4LCBhbG9ycyBxdWUgdHUgZW4gcMOoc2VzIDcwLjwvcD4iLCAiPGRpdiBjbGFzcz1cInJldGVuaXJcIj48Yj7DgCByZXRlbmlyPC9iPlByw6ljaXMgZXQganVzdGUsIGNlIG4nZXN0IHBhcyBsYSBtw6ptZSBjaG9zZS4gVW4gYXBwYXJlaWwgcGV1dCDDqnRyZSB0csOocyBwcsOpY2lzIGV0IGNvbXBsw6h0ZW1lbnQgZmF1eC48L2Rpdj4iXV0sIFsiTjEg4oCUIExlIHR5cGUgZGVzIHZhbGV1cnMgZHUgY2FwdGV1ciIsIFsiPHA+PHN0cm9uZz5DJ2VzdCB1biBub21icmUuPC9zdHJvbmc+IExlIGNhcHRldXIgcHJvZHVpdCB1bmUgZ3JhbmRldXIgYW5hbG9naXF1ZSwgcXVlIGwnZW50csOpZSBkZSBsYSBjYXJ0ZSBjb252ZXJ0aXQgZW4gdW4gZW50aWVyIGNvbXByaXMgZW50cmUgMCBldCAxMDIzLjwvcD4iLCAiPHA+UG91cnF1b2kgMTAyMyBldCBwYXMgMTAwMCA/IFBhcmNlIHF1ZSBsZSBjb252ZXJ0aXNzZXVyIHRyYXZhaWxsZSBzdXIgMTAgYml0cywgY2UgcXVpIGRvbm5lIDEwMjQgdmFsZXVycyBwb3NzaWJsZXMgOiBkZSAwIMOgIDEwMjMuIENvbW1lIHVuIGNvbXB0ZXVyIMOgIDEwIHJvdWVzIHF1aSBuZSBwZXV2ZW50IGFmZmljaGVyIHF1ZSAwIG91IDEuPC9wPiJdXSwgWyJOMiDigJQgQ2VzIHZhbGV1cnMgc29udC1lbGxlcyB1dGlsaXNhYmxlcyA/IiwgWyI8cD48c3Ryb25nPk5vbi48L3N0cm9uZz4gNzIwIG5lIGNvcnJlc3BvbmQgw6AgYXVjdW5lIHVuaXTDqSBjb25udWUgZXQgbmUgc2UgY29tcGFyZSDDoCBhdWN1biByZXDDqHJlIGRlIGphcmRpbmFnZS48L3A+IiwgIjxwPlVuIGphcmRpbmllciByYWlzb25uZSBlbiBwb3VyY2VudGFnZSA6IGlsIHNhaXQgcXUnZW4gZGVzc291cyBkZSA1MCAlLCBsYSBwbHVwYXJ0IGRlcyBwbGFudGVzIHNvdWZmcmVudC4gQ2UgbGFuZ2FnZS1sw6AsIGxhIG1hY2hpbmUgbmUgbGUgcGFybGUgcGFzIGVuY29yZS48L3A+IiwgIjxwPlJlbWFycXVlIGF1IHBhc3NhZ2UgOiBsYSB2YWxldXIgYnJ1dGUgZXN0IHBhcmZhaXRlbWVudCB1dGlsaXNhYmxlIDxlbT5wYXIgbGEgbWFjaGluZTwvZW0+LiBDZSBxdSdvbiBham91dGUsIGMnZXN0IHVuZSB0cmFkdWN0aW9uIDxlbT5wb3VyIGwnaHVtYWluPC9lbT4uIEMnZXN0IHRyw6hzIGV4YWN0ZW1lbnQgbGUgcsO0bGUgZCd1bmUgaW50ZXJmYWNlLjwvcD4iXV0sIFsiTjMg4oCUIExlIGNhbGN1bCBkdSBjb2VmZmljaWVudCwgw6l0YXBlIHBhciDDqXRhcGUiLCBbIjxwPk9uIHNhaXQgZGV1eCBjaG9zZXMgOiBjYXB0ZXVyIHBsb25nw6kgZGFucyBsJ2VhdSwgb24gbGl0IDxzdHJvbmc+MTAyMzwvc3Ryb25nPiwgZXQgY2VsYSBjb3JyZXNwb25kIMOgIDxzdHJvbmc+MTAwICU8L3N0cm9uZz4uPC9wPiIsICI8cD5Eb25jIDEgJSBjb3JyZXNwb25kIMOgIDEwMjMgw7cgMTAwID0gPHN0cm9uZz4xMCwyMzwvc3Ryb25nPi48L3A+IiwgIjxwPlBvdXIgY29udmVydGlyIHVuZSBtZXN1cmUgZW4gcG91cmNlbnRhZ2UsIG9uIGRpdmlzZSBkb25jIHBhciAxMCwyMy48L3A+IiwgIjx1bD48bGk+MTAyMyDDtyAxMCwyMyA9IDEwMCAlLiBDb2jDqXJlbnQuPC9saT48bGk+NTEyIMO3IDEwLDIzID0gNTAgJSBlbnZpcm9uLiBDb2jDqXJlbnQgOiBjJ2VzdCBiaWVuIGxhIG1vaXRpw6kuPC9saT48L3VsPiIsICI8cD48c3Ryb25nPkVycmV1ciBjbGFzc2lxdWUgOjwvc3Ryb25nPiBtdWx0aXBsaWVyIGF1IGxpZXUgZGUgZGl2aXNlci4gVsOpcmlmaWUgdG91am91cnMgdG9uIGNhbGN1bCBzdXIgbGEgdmFsZXVyIG1heGltYWxlIDogc2kgMTAyMyBuZSB0ZSBkb25uZSBwYXMgMTAwLCBjJ2VzdCBmYXV4LjwvcD4iLCAiPHA+PHN0cm9uZz5FdCBzaSB0b24gZ3JvdXBlIGEgbWVzdXLDqSA4NTAgYXUgbWF4aW11bSA/PC9zdHJvbmc+IEFsb3JzIHRvbiBjb2VmZmljaWVudCBlc3QgODUwIMO3IDEwMCA9IDgsNS4gQ2Ugbidlc3QgcGFzIHVuZSBlcnJldXIsIGMnZXN0IHRvbiBjYXB0ZXVyLCB0b24gdGVycmVhdS4gQydlc3Qgw6dhLCBsZSBjYWxpYnJhZ2UgOiBpbCBlc3QgcHJvcHJlIMOgIGNoYXF1ZSBpbnN0YWxsYXRpb24uPC9wPiJdXV0=";
+  var COFFRE = "W1siUG91cnF1b2kgY2FsaWJyZXIgbGUgY2FwdGV1ciIsIFsiPHA+TGUgbm9tYnJlIGJydXQgdmFyaWUgc2Vsb24gbGUgY2FwdGV1ciwgbGUgc29sLCBsYSBwb3NpdGlvbiBkZXMgw6lsZWN0cm9kZXMsIGxhIHRlbXDDqXJhdHVyZSBldCBsZSBtb250YWdlLiBPbiBuZSBwZXV0IGRvbmMgcGFzIGRpcmUgwqsgNTEyID0gNTAgJSBk4oCZaHVtaWRpdMOpIMK7IHNhbnMgYXZvaXIgZMOpZmluaSBkZXMgcsOpZsOpcmVuY2VzIGV4cMOpcmltZW50YWxlcy48L3A+IiwgIjxkaXYgY2xhc3M9XCJ0eXBlaW5mb1wiPjxzdHJvbmc+RG9ubsOpZSBtZXN1csOpZTwvc3Ryb25nPjxzcGFuPkNoYXF1ZSBncm91cGUgcmVsw6h2ZSBkZXV4IHLDqWbDqXJlbmNlcyBhdmVjIHNvbiBwcm9wcmUgbW9udGFnZSA6IDxzdHJvbmc+VnNlYzwvc3Ryb25nPiBkYW5zIGzigJnDqXRhdCBkZSByw6lmw6lyZW5jZSBzZWMgZXQgPHN0cm9uZz5WaHVtaWRlPC9zdHJvbmc+IGRhbnMgbOKAmcOpdGF0IGRlIHLDqWbDqXJlbmNlIHRyw6hzIGh1bWlkZS48L3NwYW4+PC9kaXY+Il1dLCBbIkNvbnN0cnVpcmUgdW4gaW5kaWNlIHJlbGF0aWYiLCBbIjxwPk9uIHRyYW5zZm9ybWUgZW5zdWl0ZSBsYSBtZXN1cmUgZW4gPHN0cm9uZz5pbmRpY2UgcmVsYXRpZiBk4oCZaHVtaWRpdMOpPC9zdHJvbmc+IDo8L3A+PHA+PGNvZGU+aW5kaWNlID0gKG1lc3VyZSDiiJIgVnNlYykgLyAoVmh1bWlkZSDiiJIgVnNlYykgw5cgMTAwPC9jb2RlPjwvcD48cD5DZXR0ZSBmb3JtdWxlIGZvbmN0aW9ubmUgYXVzc2kgc2kgbGUgY2FwdGV1ciDDqXZvbHVlIGRhbnMgbGUgc2VucyBpbnZlcnNlIDogbGUgc2lnbmUgZHUgZMOpbm9taW5hdGV1ciBz4oCZYWRhcHRlLiBPbiBib3JuZSBlbnN1aXRlIGxlIHLDqXN1bHRhdCBlbnRyZSAwIGV0IDEwMC48L3A+IiwgIjxwPjxzdHJvbmc+RXhlbXBsZSBww6lkYWdvZ2lxdWUgOjwvc3Ryb25nPiBzaSBWc2VjID0gMTEwIGV0IFZodW1pZGUgPSA5MTQsIHVuZSBtZXN1cmUgZGUgNTEyIGRvbm5lICg1MTLiiJIxMTApLyg5MTTiiJIxMTApw5cxMDAgPSA8c3Ryb25nPjUwICUgZGUgbOKAmWluZGljZSByZWxhdGlmPC9zdHJvbmc+LjwvcD4iLCAiPGRpdiBjbGFzcz1cInJldGVuaXJcIj48Yj7DgCByZXRlbmlyPC9iPkNldCBpbmRpY2UgY29tcGFyZSBsYSBtZXN1cmUgw6AgZGV1eCDDqXRhdHMgZGUgcsOpZsOpcmVuY2UuIENlIG7igJllc3QgcGFzIHVuZSBtZXN1cmUgc2NpZW50aWZpcXVlIHVuaXZlcnNlbGxlIGRlIGxhIHRlbmV1ciB2b2x1bWlxdWUgZW4gZWF1IGR1IHNvbC48L2Rpdj4iXV0sIFsiVW4gc2V1aWwgZXN0IHVuIGNob2l4IGRlIGNvbmNlcHRpb24iLCBbIjxwPkFwcsOocyDDqXRhbG9ubmFnZSwgb24gcGV1dCBjaG9pc2lyIDUwICUgZGUgbOKAmWluZGljZSBjb21tZSBzZXVpbCBkdSA8c3Ryb25nPnByb3RvdHlwZTwvc3Ryb25nPi4gQ2Ugbm9tYnJlIHNlcnQgw6AgdGVzdGVyIGzigJlhbGdvcml0aG1lIDsgaWwgbmUgcHLDqXRlbmQgcGFzIGNvbnZlbmlyIMOgIHRvdXRlcyBsZXMgcGxhbnRlcyBuaSDDoCB0b3VzIGxlcyBzb2xzLjwvcD4iLCAiPGRpdiBjbGFzcz1cInR5cGVpbmZvXCI+PHN0cm9uZz5DaG9peCBkZSBjb25jZXB0aW9uPC9zdHJvbmc+PHNwYW4+U2V1aWwgZHUgcHJvdG90eXBlID0gdmFsZXVyIGTDqWNpZMOpZSBwb3VyIGzigJlhY3Rpdml0w6kgYXByw6hzIGVzc2Fpcy4gQmVzb2luIGFncm9ub21pcXVlIHLDqWVsID0gdmFsZXVyIHF1aSBkw6lwZW5kIGRlIGzigJllc3DDqGNlLCBkdSBzb2wsIGR1IGNsaW1hdCBldCBkZSBsYSBtw6l0aG9kZSBkZSBtZXN1cmUuPC9zcGFuPjwvZGl2PiJdXSwgWyJTY2jDqW1hIGRlIGxhIHRyYW5zZm9ybWF0aW9uIiwgWyI8c3ZnIGNsYXNzPVwic2NoZW1hXCIgdmlld0JveD1cIjAgMCA3MDAgMTUwXCIgeG1sbnM9XCJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Z1wiIHJvbGU9XCJpbWdcIiBhcmlhLWxhYmVsPVwiw4l0YWxvbm5lciBhdmFudCBkZSBkw6ljaWRlclwiPjx0ZXh0IHg9XCIzNTAuMFwiIHk9XCIyMFwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTRcIiBmb250LXdlaWdodD1cIjcwMFwiIGZpbGw9XCIjMTQyNjJCXCI+w4l0YWxvbm5lciBhdmFudCBkZSBkw6ljaWRlcjwvdGV4dD48ZGVmcz48bWFya2VyIGlkPVwiZmxcIiBtYXJrZXJXaWR0aD1cIjdcIiBtYXJrZXJIZWlnaHQ9XCI3XCIgcmVmWD1cIjZcIiByZWZZPVwiMy41XCIgb3JpZW50PVwiYXV0b1wiPjxwYXRoIGQ9XCJNMCAwIEw3IDMuNSBMMCA3IHpcIiBmaWxsPVwiIzVBNkM3MVwiLz48L21hcmtlcj48L2RlZnM+PHJlY3QgeD1cIjE0LjBcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0UyRUZFRVwiIHN0cm9rZT1cIiMwRTZFNkJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCI3NS42XCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPlZhbGV1ciBicnV0ZTwvdGV4dD48cGF0aCBkPVwiTTE0MC4yIDgxIEwxNDguMiA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCIxNTEuMlwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRkRFQ0YyXCIgc3Ryb2tlPVwiI0MyMTg1QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjIxMi44XCIgeT1cIjY5XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPlLDqWbDqXJlbmNlIHPDqGNoZSAvPC90ZXh0Pjx0ZXh0IHg9XCIyMTIuOFwiIHk9XCI4NFwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5odW1pZGU8L3RleHQ+PHBhdGggZD1cIk0yNzcuNCA4MSBMMjg1LjQgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiMjg4LjRcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0UyRUZFRVwiIHN0cm9rZT1cIiMwRTZFNkJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCIzNTAuMFwiIHk9XCI2OVwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5JbmRpY2UgcmVsYXRpZjwvdGV4dD48dGV4dCB4PVwiMzUwLjBcIiB5PVwiODRcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+MOKAkzEwMDwvdGV4dD48cGF0aCBkPVwiTTQxNC42IDgxIEw0MjIuNiA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCI0MjUuNlwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRkRFQ0YyXCIgc3Ryb2tlPVwiI0MyMTg1QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjQ4Ny4yXCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPkNvbXBhcmVyIGF1IHNldWlsPC90ZXh0PjxwYXRoIGQ9XCJNNTUxLjggODEgTDU1OS44IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjU2Mi44XCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNjI0LjRcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+RMOpY2lzaW9uPC90ZXh0Pjwvc3ZnPiJdXSwgWyJMZXMgcsOpcG9uc2VzIGF1eCBleGVyY2ljZXMiLCBbIjxwPjxzdHJvbmc+TjFhIOKAlCBQb3VycXVvaSByZWNhbGlicmVyIGVuIGNoYW5nZWFudCBkZSBzb2wuPC9zdHJvbmc+IFBhcmNlIHF1ZSBsYSBtw6ptZSBxdWFudGl0w6kgZCdlYXUgbmUgZG9ubmUgcGFzIGxhIG3Dqm1lIG1lc3VyZSA6IHVuIHNvbCBhcmdpbGV1eCByZXRpZW50IGwnZWF1LCB1biBzb2wgc2FibGV1eCBsYSBsYWlzc2UgZmlsZXIuIFVuIGNhcHRldXIgbWFsIMOpdGFsb25uw6kgY29udGludWUgZCdhZmZpY2hlciBkZXMgdmFsZXVycyA8ZW0+cHLDqWNpc2VzPC9lbT7igKYgbWFpcyA8ZW0+ZmF1c3NlczwvZW0+LiBVbmUgYmFsYW5jZSBkw6lyw6lnbMOpZSBhZmZpY2hlIDcyLDQga2cgYXZlYyBkZXV4IGTDqWNpbWFsZXMsIGNlIHF1aSBmYWl0IHRyw6hzIHPDqXJpZXV4LCBhbG9ycyBxdWUgdHUgZW4gcMOoc2VzIDcwLjwvcD4iLCAiPHA+PHN0cm9uZz5OMSDigJQgTGUgdHlwZSBkZXMgdmFsZXVycyA6IHVuIG5vbWJyZS48L3N0cm9uZz4gTGUgY2FwdGV1ciBwcm9kdWl0IHVuZSBncmFuZGV1ciBhbmFsb2dpcXVlIHF1ZSBsYSBjYXJ0ZSBjb252ZXJ0aXQgZW4gdW4gZW50aWVyIGRlIDAgw6AgMTAyMy4gUG91cnF1b2kgMTAyMyA/IFBhcmNlIHF1ZSBsZSBjb252ZXJ0aXNzZXVyIHRyYXZhaWxsZSBzdXIgMTAgYml0cywgc29pdCAxMDI0IHZhbGV1cnMgcG9zc2libGVzLCBkZSAwIMOgIDEwMjMuPC9wPiIsICI8cD48c3Ryb25nPk4yIOKAlCBDZXMgdmFsZXVycyBuZSBzb250IHBhcyB1dGlsaXNhYmxlcyB0ZWxsZXMgcXVlbGxlcy48L3N0cm9uZz4gNzIwIG5lIGNvcnJlc3BvbmQgw6AgYXVjdW5lIHVuaXTDqSBjb25udWUuIFJlbWFycXVlIGF1IHBhc3NhZ2UgOiBsYSB2YWxldXIgYnJ1dGUgY29udmllbnQgcGFyZmFpdGVtZW50IDxlbT7DoCBsYSBtYWNoaW5lPC9lbT4gOyBjZSBxdWUgdHUgYWpvdXRlcywgYydlc3QgdW5lIHRyYWR1Y3Rpb24gPGVtPnBvdXIgbCdodW1haW48L2VtPi4gQydlc3QgZXhhY3RlbWVudCBsZSByw7RsZSBkJ3VuZSBpbnRlcmZhY2UuPC9wPiIsICI8ZGl2IGNsYXNzPVwicmV0ZW5pclwiPjxiPsOAIHJldGVuaXI8L2I+UHLDqWNpcyBldCBqdXN0ZSBuZSB2ZXVsZW50IHBhcyBkaXJlIGxhIG3Dqm1lIGNob3NlLiBVbiBhcHBhcmVpbCBwZXV0IMOqdHJlIHRyw6hzIHByw6ljaXMgZXQgY29tcGzDqHRlbWVudCBmYXV4LjwvZGl2PiJdXSwgWyJWw6lyaWZpZXIgdG9uIGluZGljZSwgZXQgbCdlcnJldXIgY2xhc3NpcXVlIiwgWyI8cD5BcHBsaXF1ZSB0YSBmb3JtdWxlIGF1eCBkZXV4IHLDqWbDqXJlbmNlcyA6IDxzdHJvbmc+VnNlYyBkb2l0IGRvbm5lciAwICU8L3N0cm9uZz4gZXQgPHN0cm9uZz5WaHVtaWRlIGRvaXQgZG9ubmVyIDEwMCAlPC9zdHJvbmc+LiBTaSBjZSBuJ2VzdCBwYXMgbGUgY2FzLCBsYSBmb3JtdWxlIGVzdCBmYXVzc2Ug4oCUIGludXRpbGUgZCdhbGxlciBwbHVzIGxvaW4uPC9wPiIsICI8cD5FbnN1aXRlIHNldWxlbWVudCwgdGVzdGUgdW5lIHZhbGV1ciBpbnRlcm3DqWRpYWlyZSA6IGVsbGUgZG9pdCB0b21iZXIgZW50cmUgbGVzIGRldXgsIHNhbnMgamFtYWlzIHNvcnRpciBkZSBsJ2ludGVydmFsbGUgMC0xMDAuPC9wPiIsICI8cD48c3Ryb25nPkwnZXJyZXVyIGNsYXNzaXF1ZTwvc3Ryb25nPiBlc3QgZGUgdm91bG9pciBkaXZpc2VyIGRpcmVjdGVtZW50IHBhciB1biBub21icmUgZml4ZSwgc2FucyBwYXNzZXIgcGFyIGxlcyBkZXV4IHLDqWbDqXJlbmNlcy4gQ2VsYSByZXZpZW5kcmFpdCDDoCBzdXBwb3NlciBxdWUgdG9uIGNhcHRldXIsIGRhbnMgdG9uIHRlcnJlYXUsIGF0dGVpbnQgZXhhY3RlbWVudCAxMDIzIGRhbnMgbCdlYXUgZXQgMCDDoCBzZWMg4oCUIGNlIHF1aSBuJ2Fycml2ZSBwcmVzcXVlIGphbWFpcy48L3A+IiwgIjxwPjxzdHJvbmc+RXQgc2kgdG9uIGdyb3VwZSB0cm91dmUgZGVzIHLDqWbDqXJlbmNlcyBkaWZmw6lyZW50ZXMgZHUgdm9pc2luID88L3N0cm9uZz4gQydlc3Qgbm9ybWFsLCBldCBjJ2VzdCBtw6ptZSB0b3V0IGwnaW50w6lyw6p0IDogbCfDqXRhbG9ubmFnZSBlc3QgcHJvcHJlIMOgIGNoYXF1ZSBjYXB0ZXVyIGV0IMOgIGNoYXF1ZSBtb250YWdlLjwvcD4iXV0sIFsiQmlsYW4gZGUgbOKAmWFjdGl2aXTDqSDigJQgY2UgcXVlIHR1IGRvaXMgcmV0ZW5pciIsIFsiPHA+PHN0cm9uZz5UdSBhcyBhcHByaXMgY2UgcXVlIHNpZ25pZmllIHLDqWVsbGVtZW50IMKrIGNhbGlicmVyIMK7IHVuIGNhcHRldXIuPC9zdHJvbmc+PC9wPiIsICI8c3ZnIGNsYXNzPVwic2NoZW1hXCIgdmlld0JveD1cIjAgMCA3MDAgMTUwXCIgeG1sbnM9XCJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Z1wiIHJvbGU9XCJpbWdcIiBhcmlhLWxhYmVsPVwiRGUgbGEgbWVzdXJlIGJydXRlIMOgIHVuZSBkb25uw6llIGludGVycHLDqXRhYmxlXCI+PHRleHQgeD1cIjM1MC4wXCIgeT1cIjIwXCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxNFwiIGZvbnQtd2VpZ2h0PVwiNzAwXCIgZmlsbD1cIiMxNDI2MkJcIj5EZSBsYSBtZXN1cmUgYnJ1dGUgw6AgdW5lIGRvbm7DqWUgaW50ZXJwcsOpdGFibGU8L3RleHQ+PGRlZnM+PG1hcmtlciBpZD1cImZsXCIgbWFya2VyV2lkdGg9XCI3XCIgbWFya2VySGVpZ2h0PVwiN1wiIHJlZlg9XCI2XCIgcmVmWT1cIjMuNVwiIG9yaWVudD1cImF1dG9cIj48cGF0aCBkPVwiTTAgMCBMNyAzLjUgTDAgNyB6XCIgZmlsbD1cIiM1QTZDNzFcIi8+PC9tYXJrZXI+PC9kZWZzPjxyZWN0IHg9XCIxNC4wXCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNzUuNlwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5Wc2VjIC8gVmh1bWlkZTwvdGV4dD48cGF0aCBkPVwiTTE0MC4yIDgxIEwxNDguMiA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCIxNTEuMlwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRkRFQ0YyXCIgc3Ryb2tlPVwiI0MyMTg1QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjIxMi44XCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPk1lc3VyZSBicnV0ZTwvdGV4dD48cGF0aCBkPVwiTTI3Ny40IDgxIEwyODUuNCA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCIyODguNFwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRTJFRkVFXCIgc3Ryb2tlPVwiIzBFNkU2QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjM1MC4wXCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPkNhbGN1bDwvdGV4dD48cGF0aCBkPVwiTTQxNC42IDgxIEw0MjIuNiA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCI0MjUuNlwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRkRFQ0YyXCIgc3Ryb2tlPVwiI0MyMTg1QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjQ4Ny4yXCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPkluZGljZSByZWxhdGlmPC90ZXh0PjxwYXRoIGQ9XCJNNTUxLjggODEgTDU1OS44IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjU2Mi44XCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNjI0LjRcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+U2V1aWw8L3RleHQ+PC9zdmc+IiwgIjx1bD48bGk+VW5lIHZhbGV1ciBicnV0ZSBu4oCZYSBwYXMgZm9yY8OpbWVudCBk4oCZdW5pdMOpIGRpcmVjdGVtZW50IGNvbXByw6loZW5zaWJsZS48L2xpPjxsaT5M4oCZw6l0YWxvbm5hZ2UgYXNzb2NpZSBkZXMgdmFsZXVycyBtZXN1csOpZXMgw6AgZGVzIMOpdGF0cyBkZSByw6lmw6lyZW5jZS48L2xpPjxsaT5M4oCZaW5kaWNlIHJlbGF0aWYgcGVybWV0IGRlIGNvbXBhcmVyIHBsdXMgZmFjaWxlbWVudCBkZXMgbWVzdXJlcyBmYWl0ZXMgYXZlYyBsZSBtw6ptZSBwcm90b2NvbGUuPC9saT48bGk+TGUgc2V1aWwgZGUgZMOpY2xlbmNoZW1lbnQgZXN0IHVuIGNob2l4IGRlIGNvbmNlcHRpb24gw6AganVzdGlmaWVyIGV0IMOgIHRlc3Rlci48L2xpPjwvdWw+IiwgIjxwPjxzdHJvbmc+Vm9jYWJ1bGFpcmUgZXNzZW50aWVsIDo8L3N0cm9uZz4gw6l0YWxvbm5hZ2UgwrcgcsOpZsOpcmVuY2UgwrcgaW5kaWNlIHJlbGF0aWYgwrcgc2V1aWwgwrcgbWVzdXJlLjwvcD4iLCAiPGRpdiBjbGFzcz1cInJldGVuaXJcIj48Yj7DgCByZXRlbmlyPC9iPlNpIHR1IHBldXggZXhwbGlxdWVyIGxlIHNjaMOpbWEgYXZlYyB0ZXMgcHJvcHJlcyBtb3RzIGV0IGRvbm5lciB1biBleGVtcGxlLCBs4oCZZXNzZW50aWVsIGRlIGzigJlhY3Rpdml0w6kgZXN0IGFjcXVpcy48L2Rpdj4iXV1d";
   var EMPREINTE = 159557441;
+  function rendreLignes(lignes){
+    var html = "", tampon = [];
+    function vider(){
+      if(tampon.length){
+        html += "<ul>" + tampon.map(function(x){ return "<li>" + x + "</li>"; }).join("") + "</ul>";
+        tampon = [];
+      }
+    }
+    lignes.forEach(function(x){
+      if(/^\s*<(ul|ol|div|svg|p|a|table|figure|img|h[1-6]|blockquote)\b/i.test(x)){ vider(); html += x; }
+      else tampon.push(x);
+    });
+    vider();
+    return html;
+  }
+  
   function empreinte(t){
     var h = 5381;
     for(var i = 0; i < t.length; i++){ h = ((h * 33) ^ t.charCodeAt(i)) >>> 0; }
@@ -792,7 +809,7 @@ if(new URLSearchParams(location.search).get("prof") === "1"){
     var texte = decodeURIComponent(escape(atob(COFFRE)));
     var sections = JSON.parse(texte);
     cible.innerHTML = sections.map(function(s){
-      return "<h3>" + s[0] + "</h3><ul>" + s[1].map(function(l){ return "<li>" + l + "</li>"; }).join("") + "</ul>";
+      return "<h3>" + s[0] + "</h3>" + rendreLignes(s[1]);
     }).join("");
 
     /* les vidéos insérées dans la correction se chargent aussi au clic */
@@ -889,6 +906,7 @@ function dateFr(iso){
 }
 
 function construirePDF(d){
+  if(!window.jspdf || !window.jspdf.jsPDF){ window.print(); return; }
   var doc = new window.jspdf.jsPDF({ unit:"mm", format:"a4" });
   var y = 0, page = 1;
   var nomComplet = propre((d.identite.nom + " " + d.identite.prenom).trim());
@@ -1129,5 +1147,6 @@ el("pdf").addEventListener("click", function(){
 
 })();
 </script>
+<script src="assets/correction-bilan.js"></script>
 </body>
 </html>

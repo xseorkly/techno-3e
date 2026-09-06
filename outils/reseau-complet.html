@@ -250,7 +250,7 @@
   <header>
     <p class="eyebrow">Réseau virtuel interactif</p>
     <h1>Du réseau du collège jusqu'à Internet</h1>
-    <p class="lead">Cette application explore comment une information circule dans un réseau, à travers trois angles complémentaires. <strong>Trajet &amp; routage</strong> : suivez un paquet du réseau du collège jusqu'à un serveur et voyez les tables de routage décider de son chemin. <strong>Débit</strong> : mesurez à quelle vitesse les données circulent selon la connexion et la congestion. <strong>Trafic</strong> : découvrez pourquoi, entre plusieurs chemins possibles, le routage choisit le plus rapide et s'adapte aux embouteillages. Choisissez un onglet pour commencer.</p>
+    <p class="lead">Cette application explore comment une information circule dans un réseau, à travers trois angles complémentaires. <strong>Trajet &amp; routage</strong> : suivez un paquet du réseau du collège jusqu'à un serveur et voyez les tables de routage décider de son chemin. <strong>Débit</strong> : mesurez la quantité de données transmise par seconde selon la connexion et la charge simulée. <strong>Trafic</strong> : comparez plusieurs chemins auxquels l'application attribue un coût de traversée variable. Ce modèle pédagogique rend visible le choix d'une route sans prétendre reproduire tous les protocoles d'Internet. Choisissez un onglet pour commencer.</p>
   </header>
 
   <div class="tabs" role="tablist">
@@ -448,7 +448,7 @@
 
   <section id="pane-debit" class="pane" hidden>
     <p class="lead" style="background:var(--surface); border:1px solid var(--grid); border-left:3px solid var(--accent); border-radius:var(--radius); padding:14px 18px; max-width:none; margin:0 0 18px;">
-      Le trajet dit <em>par où</em> passe l'information ; le <strong>débit</strong> dit <strong>à quelle vitesse</strong> elle circule. Choisissez une technologie de connexion, l'état du réseau et un fichier à transférer : observez la file de données accélérer, ralentir ou se bloquer dans un embouteillage.
+      Le trajet dit <em>par où</em> passe l'information ; le <strong>débit</strong> indique <strong>quelle quantité de données est transmise par seconde</strong>. Choisissez une technologie de connexion, l'état du réseau et un fichier à transférer : observez la file de données accélérer, ralentir ou se bloquer dans un embouteillage.
     </p>
 
     <div class="debit-grid">
@@ -530,7 +530,7 @@
 
   <section id="pane-trafic" class="pane" hidden>
     <p class="lead" style="background:var(--surface); border:1px solid var(--grid); border-left:3px solid var(--accent); border-radius:var(--radius); padding:14px 18px; max-width:none; margin:0 0 18px;">
-      Entre deux points, il existe souvent <strong>plusieurs chemins</strong> passant par des routeurs différents. Le chemin retenu n'est pas toujours le plus court : selon le <strong>volume de trafic</strong> et l'<strong>état du réseau</strong>, un chemin rapide peut s'embouteiller et le routage bascule alors vers un autre. Faites varier le trafic et provoquez une panne pour voir le routage s'adapter.
+      Entre deux points, il existe souvent <strong>plusieurs chemins</strong> passant par des routeurs différents. Dans cette <strong>simulation</strong>, nous faisons varier artificiellement le coût de ces chemins en fonction de la charge et de l'état des liens : la route de plus faible coût peut alors changer. Dans un réseau réel, les protocoles utilisent différentes métriques et politiques ; ils ne fonctionnent pas simplement comme un GPS regardant les embouteillages instantanés. Faites varier la charge puis provoquez une panne pour comparer les choix.
     </p>
 
     <div class="traf-grid">

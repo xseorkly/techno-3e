@@ -223,6 +223,7 @@ textarea::placeholder{color:#9FB0B3}
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
+<link rel="stylesheet" href="assets/site-addons.css">
 </head>
 <body>
 
@@ -349,7 +350,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="corps">
       <h2>Mes constats, mes observations</h2>
       <p class="consigne">Que remarques-tu sur les objets présentés dans l'exposition ?</p>
-      <textarea id="rep-constats" data-rep placeholder="J'observe que…"></textarea>
+      <textarea id="rep-constats" data-rep placeholder="J'observe que…" aria-label="Que remarques-tu sur les objets présentés dans l&#x27;exposition ?"></textarea>
     </div>
   </article>
 
@@ -358,7 +359,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="corps">
       <h2>Mon problème à résoudre</h2>
       <p class="consigne">Formule une seule question, celle que l'exposition doit permettre d'expliquer.</p>
-      <textarea id="rep-probleme" data-rep placeholder="Comment… ?" style="min-height:100px"></textarea>
+      <textarea id="rep-probleme" data-rep placeholder="Comment… ?" style="min-height:100px" aria-label="Formule une seule question, celle que l&#x27;exposition doit permettre d&#x27;expliquer."></textarea>
     </div>
   </article>
 
@@ -366,7 +367,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="marge"><span class="duree">5′</span></div>
     <div class="corps">
       <h2>Mes idées pour le résoudre</h2>
-      <textarea id="rep-idees" data-rep placeholder="Peut-être que…"></textarea>
+      <textarea id="rep-idees" data-rep placeholder="Peut-être que…" aria-label="Mes idées pour le résoudre — Peut-être que…"></textarea>
     </div>
   </article>
 
@@ -404,7 +405,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
       <p class="consigne">Associe chaque étape de la lignée à sa description.</p>
       <div class="assoc">
         <div class="paire">
-          <img src="img/tel-cadran.png" alt="" onerror="this.remove()">
+          <img src="img/tel-cadran.png" alt="Téléphone à cadran" onerror="this.remove()">
           <span class="nom">Téléphone fixe à cadran</span>
           <select id="n1c-1" data-assoc data-objet="Téléphone fixe à cadran" aria-label="Description du téléphone fixe à cadran">
             <option value="">Choisir une description…</option>
@@ -415,7 +416,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
           </select>
         </div>
         <div class="paire">
-          <img src="img/tel-touches.png" alt="" onerror="this.remove()">
+          <img src="img/tel-touches.png" alt="Téléphone à touches" onerror="this.remove()">
           <span class="nom">Téléphone mobile à touches</span>
           <select id="n1c-2" data-assoc data-objet="Téléphone mobile à touches" aria-label="Description du téléphone mobile à touches">
             <option value="">Choisir une description…</option>
@@ -426,9 +427,9 @@ document.getElementById("navfiches").addEventListener("change", function(){
           </select>
         </div>
         <div class="paire">
-          <img src="img/tel-tactile.png" alt="" onerror="this.remove()">
-          <span class="nom">Premier smartphone à écran tactile</span>
-          <select id="n1c-3" data-assoc data-objet="Premier smartphone à écran tactile" aria-label="Description du premier smartphone à écran tactile">
+          <img src="img/tel-tactile.png" alt="Smartphone à écran tactile" onerror="this.remove()">
+          <span class="nom">Popularisation du smartphone tactile multipoint</span>
+          <select id="n1c-3" data-assoc data-objet="Popularisation du smartphone tactile multipoint" aria-label="Description de la popularisation du smartphone tactile multipoint">
             <option value="">Choisir une description…</option>
             <option>Permet d'appeler sans être relié par un fil, depuis n'importe quel lieu.</option>
             <option>Introduit la commande par le doigt sur un écran, remplaçant les touches physiques.</option>
@@ -437,7 +438,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
           </select>
         </div>
         <div class="paire">
-          <img src="img/tel-pliable.png" alt="" onerror="this.remove()">
+          <img src="img/tel-pliable.png" alt="Smartphone à écran pliable" onerror="this.remove()">
           <span class="nom">Smartphone pliable actuel</span>
           <select id="n1c-4" data-assoc data-objet="Smartphone pliable actuel" aria-label="Description du smartphone pliable actuel">
             <option value="">Choisir une description…</option>
@@ -479,10 +480,10 @@ document.getElementById("navfiches").addEventListener("change", function(){
           <a href="https://podeduc.apps.education.fr/video/113251-ost1a-les-elements-qui-participent-a-levolution-des-besoins-invention-innovation-developpement-durable" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
         </div>
       </div>
-      <textarea id="n2a" data-rep placeholder="Une invention, c'est… alors qu'une innovation…"></textarea>
+      <textarea id="n2a" data-rep placeholder="Une invention, c'est… alors qu'une innovation…" aria-label="Vidéo PodEduc · code application élève : VOST1a — Une invention, c&#x27;est… alors qu&#x27;une innovation…"></textarea>
 
       <h3>N2b — La lignée d'OST</h3>
-      <p class="consigne">En t'appuyant sur la vidéo OST1c, explique ce qu'est une « lignée d'OST ». Montre en quoi le smartphone appartient à la même famille d'objets que le téléphone fixe et le talkie-walkie.</p>
+      <p class="consigne">En t'appuyant sur la vidéo OST1c, explique ce qu'est une « lignée d'OST ». Montre pourquoi le smartphone, le téléphone fixe et le talkie-walkie peuvent appartenir à une même famille par leur besoin de communication, puis explique pourquoi cela ne suffit pas à prouver qu'ils appartiennent à une seule lignée technique.</p>
       <div class="video" data-src="https://podeduc.apps.education.fr/video/113247-ost1c-la-famille-et-la-lignee-dost/?is_iframe=true">
         <p class="vt">OST1c — La famille et la lignée d'OST</p>
         <p class="vs">Vidéo PodEduc · code application élève : VOST1c</p>
@@ -491,7 +492,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
           <a href="https://podeduc.apps.education.fr/video/113247-ost1c-la-famille-et-la-lignee-dost" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
         </div>
       </div>
-      <textarea id="n2b" data-rep placeholder="Une lignée d'OST, c'est…"></textarea>
+      <textarea id="n2b" data-rep placeholder="Une lignée d'OST, c'est…" aria-label="Vidéo PodEduc · code application élève : VOST1c — Une lignée d&#x27;OST, c&#x27;est…"></textarea>
     </div>
   </article>
 
@@ -512,7 +513,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
               <div class="mini"><label for="fr1-inno">Innovation majeure</label>
                 <select id="fr1-inno" data-frise="innovation">
                   <option value="">Choisir…</option>
-                  <option>numérisation des documents</option>
+                  <option>balayage et transmission de l’image d’un document</option>
                   <option>transmission électrique</option>
                   <option>miniaturisation et ondes radio</option>
                   <option>transmission vocale analogique</option>
@@ -541,7 +542,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
               <div class="mini"><label for="fr2-inno">Innovation majeure</label>
                 <select id="fr2-inno" data-frise="innovation">
                   <option value="">Choisir…</option>
-                  <option>numérisation des documents</option>
+                  <option>balayage et transmission de l’image d’un document</option>
                   <option>transmission électrique</option>
                   <option>miniaturisation et ondes radio</option>
                   <option>transmission vocale analogique</option>
@@ -570,7 +571,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
               <div class="mini"><label for="fr3-inno">Innovation majeure</label>
                 <select id="fr3-inno" data-frise="innovation">
                   <option value="">Choisir…</option>
-                  <option>numérisation des documents</option>
+                  <option>balayage et transmission de l’image d’un document</option>
                   <option>transmission électrique</option>
                   <option>miniaturisation et ondes radio</option>
                   <option>transmission vocale analogique</option>
@@ -599,7 +600,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
               <div class="mini"><label for="fr4-inno">Innovation majeure</label>
                 <select id="fr4-inno" data-frise="innovation">
                   <option value="">Choisir…</option>
-                  <option>numérisation des documents</option>
+                  <option>balayage et transmission de l’image d’un document</option>
                   <option>transmission électrique</option>
                   <option>miniaturisation et ondes radio</option>
                   <option>transmission vocale analogique</option>
@@ -628,7 +629,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
               <div class="mini"><label for="fr5-inno">Innovation majeure</label>
                 <select id="fr5-inno" data-frise="innovation">
                   <option value="">Choisir…</option>
-                  <option>numérisation des documents</option>
+                  <option>balayage et transmission de l’image d’un document</option>
                   <option>transmission électrique</option>
                   <option>miniaturisation et ondes radio</option>
                   <option>transmission vocale analogique</option>
@@ -691,7 +692,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="corps">
       <h2>Ma synthèse</h2>
       <p class="consigne">En quelques lignes : pourquoi les moyens de communication ont-ils autant changé ?</p>
-      <textarea id="rep-synthese" data-rep></textarea>
+      <textarea id="rep-synthese" data-rep aria-label="En quelques lignes : pourquoi les moyens de communication ont-ils autant changé ?"></textarea>
     </div>
   </article>
 
@@ -732,6 +733,17 @@ document.getElementById("navfiches").addEventListener("change", function(){
       </div>
     </div>
   </article>
+
+  <section class="corrbloc" id="correction" data-addon="1">
+    <h2>Correction expliquée et bilan de l’activité</h2>
+    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+    <div class="saisie">
+      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction" autocomplete="off" spellcheck="false">
+      <button type="button" id="corr-btn">Afficher</button>
+    </div>
+    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
+    <div class="corr" id="corr-contenu" hidden></div>
+  </section>
 
   <div id="alerte" class="alerte" hidden></div>
 
@@ -793,17 +805,17 @@ var FICHE = {
           "B et D améliorent les performances, sans effet sur la durabilité."],
     n1c: ["Téléphone fixe à cadran → fonctionne uniquement branché à une ligne téléphonique filaire.",
           "Téléphone mobile à touches → permet d'appeler sans être relié par un fil, depuis n'importe quel lieu.",
-          "Premier smartphone à écran tactile → introduit la commande par le doigt sur un écran.",
+          "Popularisation du smartphone tactile multipoint → introduit la commande par le doigt sur un écran.",
           "Smartphone pliable actuel → combine un grand écran et un format compact grâce à un écran flexible."],
     n1d: ["Réponses A et D. L'accessibilité et la réglementation sur le recyclage s'imposent au concepteur au nom de la société.",
           "C relève d'un goût personnel. B est une contrainte économique : à discuter en classe selon ce que tu attends."],
     n2a: ["L'invention est une idée ou un principe technique nouveau ; l'innovation est sa diffusion réussie auprès des utilisateurs.",
           "Exemple : l'écran tactile capacitif existait avant l'iPhone (invention) ; son association aux applications en a fait une innovation."],
-    n2b: ["Une lignée d'OST regroupe les objets qui répondent à la même fonction d'usage et se succèdent par ruptures techniques.",
-          "Téléphone fixe, talkie-walkie et smartphone servent tous à communiquer à distance : même famille, même lignée."],
+    n2b: ["Une lignée d'OST met en évidence la continuité et l'évolution d'objets reposant sur des principes techniques apparentés.",
+          "Téléphone fixe, talkie-walkie et smartphone répondent tous au besoin de communiquer à distance : ils peuvent être rapprochés dans une même famille. Cela ne suffit pas à les placer dans une seule lignée, car leurs principes techniques de transmission peuvent différer."],
     n3: ["Télégraphe — vers 1840 — transmission électrique — communiquer rapidement sur de longues distances.",
          "Téléphone fixe — 1876 — transmission vocale analogique — discuter en temps réel sans se déplacer.",
-         "Fax — années 1970 — numérisation des documents — transmettre des documents rapidement.",
+         "Fax — diffusion au XXe siècle — balayage et transmission à distance de l’image d’un document — transmettre des documents rapidement.",
          "Téléphone mobile — années 1980 — miniaturisation et ondes radio — communiquer en se déplaçant.",
          "Smartphone — 2007 — écran tactile et applications — accéder à internet et aux services numériques."]
   }
@@ -1002,6 +1014,7 @@ function dateFr(iso){
 }
 
 function construirePDF(d){
+  if(!window.jspdf || !window.jspdf.jsPDF){ window.print(); return; }
   var doc = new window.jspdf.jsPDF({ unit:"mm", format:"a4" });
   var y = 0, page = 1;
   var nomComplet = propre((d.identite.nom + " " + d.identite.prenom).trim());
@@ -1239,5 +1252,7 @@ el("pdf").addEventListener("click", function(){
 
 })();
 </script>
+<script>window.CORRECTION_BILAN={coffre:"W1siSW52ZW50aW9uLCBpbm5vdmF0aW9uIGV0IHJ1cHR1cmVzIixbIjxwPlVuZSA8c3Ryb25nPmludmVudGlvbjwvc3Ryb25nPiBlc3QgdW5lIGNyw6lhdGlvbiBub3V2ZWxsZSA7IHVuZSA8c3Ryb25nPmlubm92YXRpb248L3N0cm9uZz4gZXN0IHVuZSBub3V2ZWF1dMOpIG91IGFtw6lsaW9yYXRpb24gZWZmZWN0aXZlbWVudCBhZG9wdMOpZSBkYW5zIHVuIHByb2R1aXQsIHVuIHNlcnZpY2Ugb3UgdW4gdXNhZ2UuIFVuZSBydXB0dXJlIHRlY2hub2xvZ2lxdWUgY29ycmVzcG9uZCDDoCB1biBjaGFuZ2VtZW50IGltcG9ydGFudCBkZSBwcmluY2lwZSwgZOKAmWFyY2hpdGVjdHVyZSBvdSBk4oCZdXNhZ2UuPC9wPiIsIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+w4AgcmV0ZW5pcjwvYj4yMDA3IGVzdCB1bmUgZGF0ZSB1dGlsZSBwb3VyIGxhIHBvcHVsYXJpc2F0aW9uIGR1IHNtYXJ0cGhvbmUgdGFjdGlsZSBtdWx0aXBvaW50IG1vZGVybmUgOyBjZSBu4oCZZXN0IHBhcyBsYSBkYXRlIGR1IHRvdXQgcHJlbWllciBzbWFydHBob25lIHRhY3RpbGUuPC9kaXY+Il1dLFsiRmFtaWxsZSBk4oCZT1NUIGV0IGxpZ27DqWUgZOKAmU9TVCIsWyI8cD5EZXMgb2JqZXRzIGFwcGFydGllbm5lbnQgw6AgdW5lIG3Dqm1lIDxzdHJvbmc+ZmFtaWxsZTwvc3Ryb25nPiBsb3JzcXXigJlpbHMgcsOpcG9uZGVudCDDoCB1biBtw6ptZSBiZXNvaW4gb3UgYXNzdXJlbnQgdW5lIGZvbmN0aW9uIGTigJl1c2FnZSBwcm9jaGUuIFVuZSA8c3Ryb25nPmxpZ27DqWU8L3N0cm9uZz4gbWV0IGVuIMOpdmlkZW5jZSBsYSBjb250aW51aXTDqSBldCBs4oCZw6l2b2x1dGlvbiBkZSBzb2x1dGlvbnMgcmVwb3NhbnQgc3VyIGRlcyBwcmluY2lwZXMgdGVjaG5pcXVlcyBhcHBhcmVudMOpcy48L3A+IiwiPHA+TGUgdMOpbMOpcGhvbmUgZml4ZSwgbGUgdGFsa2llLXdhbGtpZSBldCBsZSBzbWFydHBob25lIHBldXZlbnQgZG9uYyDDqnRyZSByYXBwcm9jaMOpcyBkYW5zIGxhIGZhbWlsbGUgZGVzIG9iamV0cyBwZXJtZXR0YW50IGRlIGNvbW11bmlxdWVyIMOgIGRpc3RhbmNlLCBtYWlzIGlscyBuZSBjb25zdGl0dWVudCBwYXMgYXV0b21hdGlxdWVtZW50IHVuZSBzZXVsZSBldCBtw6ptZSBsaWduw6llIDogbGV1cnMgcHJpbmNpcGVzIGRlIHRyYW5zbWlzc2lvbiBldCBsZXVycyBhcmNoaXRlY3R1cmVzIGRpZmbDqHJlbnQuPC9wPiIsIjxzdmcgY2xhc3M9XCJzY2hlbWFcIiB2aWV3Qm94PVwiMCAwIDcwMCAxNTBcIiB4bWxucz1cImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnXCIgcm9sZT1cImltZ1wiIGFyaWEtbGFiZWw9XCJGYW1pbGxlIOKJoCBsaWduw6llXCI+PHRleHQgeD1cIjM1MC4wXCIgeT1cIjIwXCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxNFwiIGZvbnQtd2VpZ2h0PVwiNzAwXCIgZmlsbD1cIiMxNDI2MkJcIj5GYW1pbGxlIOKJoCBsaWduw6llPC90ZXh0PjxkZWZzPjxtYXJrZXIgaWQ9XCJmbFwiIG1hcmtlcldpZHRoPVwiN1wiIG1hcmtlckhlaWdodD1cIjdcIiByZWZYPVwiNlwiIHJlZlk9XCIzLjVcIiBvcmllbnQ9XCJhdXRvXCI+PHBhdGggZD1cIk0wIDAgTDcgMy41IEwwIDcgelwiIGZpbGw9XCIjNUE2QzcxXCIvPjwvbWFya2VyPjwvZGVmcz48cmVjdCB4PVwiMTQuMFwiIHk9XCI1MlwiIHdpZHRoPVwiMTU3LjVcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRTJFRkVFXCIgc3Ryb2tlPVwiIzBFNkU2QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjkyLjhcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+TcOqbWUgYmVzb2luPC90ZXh0PjxwYXRoIGQ9XCJNMTc0LjUgODEgTDE4Mi41IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjE4NS41XCIgeT1cIjUyXCIgd2lkdGg9XCIxNTcuNVwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNGREVDRjJcIiBzdHJva2U9XCIjQzIxODVCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiMjY0LjJcIiB5PVwiNjlcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+Q29tcGFyZXIgbGVzPC90ZXh0Pjx0ZXh0IHg9XCIyNjQuMlwiIHk9XCI4NFwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5mb25jdGlvbnM8L3RleHQ+PHBhdGggZD1cIk0zNDYuMCA4MSBMMzU0LjAgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiMzU3LjBcIiB5PVwiNTJcIiB3aWR0aD1cIjE1Ny41XCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0UyRUZFRVwiIHN0cm9rZT1cIiMwRTZFNkJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCI0MzUuOFwiIHk9XCI2MlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5Db21wYXJlciBsZXM8L3RleHQ+PHRleHQgeD1cIjQzNS44XCIgeT1cIjc3XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPnByaW5jaXBlczwvdGV4dD48dGV4dCB4PVwiNDM1LjhcIiB5PVwiOTJcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+dGVjaG5pcXVlczwvdGV4dD48cGF0aCBkPVwiTTUxNy41IDgxIEw1MjUuNSA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCI1MjguNVwiIHk9XCI1MlwiIHdpZHRoPVwiMTU3LjVcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRkRFQ0YyXCIgc3Ryb2tlPVwiI0MyMTg1QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjYwNy4yXCIgeT1cIjY5XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPklkZW50aWZpZXIgdW5lIG91PC90ZXh0Pjx0ZXh0IHg9XCI2MDcuMlwiIHk9XCI4NFwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5wbHVzaWV1cnMgbGlnbsOpZXM8L3RleHQ+PC9zdmc+IiwiPGRpdiBjbGFzcz1cInJldGVuaXJcIj48Yj7DgCByZXRlbmlyPC9iPk5lIGNvbmZvbmRzIHBhcyDCqyBtw6ptZSBiZXNvaW4gwrsgZXQgwqsgbcOqbWUgcHJpbmNpcGUgdGVjaG5pcXVlIMK7LjwvZGl2PiJdXSxbIlJlcMOocmVzIHBvdXIgbGEgZnJpc2UiLFsiPHVsPjxsaT48c3Ryb25nPlTDqWzDqXBob25lIGZpbGFpcmU8L3N0cm9uZz4gOiB0cmFuc21pc3Npb24gZGUgbGEgdm9peCBwYXIgdW4gcsOpc2VhdSBjw6JibMOpLjwvbGk+PGxpPjxzdHJvbmc+RmF4PC9zdHJvbmc+IDogYmFsYXlhZ2UgcHVpcyB0cmFuc21pc3Npb24gw6AgZGlzdGFuY2UgZGUgbOKAmWltYWdlIGTigJl1biBkb2N1bWVudCA7IHNhIGRpZmZ1c2lvbiBlc3QgYmllbiBhbnTDqXJpZXVyZSBhdSBudW3DqXJpcXVlIGdyYW5kIHB1YmxpYy48L2xpPjxsaT48c3Ryb25nPlTDqWzDqXBob25pZSBtb2JpbGU8L3N0cm9uZz4gOiBjb21tdW5pY2F0aW9uIHBhciByw6lzZWF1IGNlbGx1bGFpcmUuPC9saT48bGk+PHN0cm9uZz5TbWFydHBob25lIG1vZGVybmU8L3N0cm9uZz4gOiBjb252ZXJnZW5jZSB0w6lsw6lwaG9uZSArIGluZm9ybWF0aXF1ZSArIGNhcHRldXJzICsgSW50ZXJuZXQsIGF2ZWMgZm9ydGUgcG9wdWxhcmlzYXRpb24gZGUgbOKAmWludGVyZmFjZSB0YWN0aWxlIG11bHRpcG9pbnQgw6AgcGFydGlyIGRlIDIwMDcuPC9saT48L3VsPiIsIjxkaXYgY2xhc3M9XCJ0eXBlaW5mb1wiPjxzdHJvbmc+UmVww6hyZSBoaXN0b3JpcXVlPC9zdHJvbmc+PHNwYW4+VW5lIGRhdGUgc3VyIHVuZSBmcmlzZSBkb2l0IMOqdHJlIGFjY29tcGFnbsOpZSBkZSBjZSBxdeKAmWVsbGUgcmVwcsOpc2VudGUgZXhhY3RlbWVudCA6IGludmVudGlvbiwgcHJlbWnDqHJlIGNvbW1lcmNpYWxpc2F0aW9uLCBkaWZmdXNpb24gbWFzc2l2ZSBvdSBydXB0dXJlIGTigJl1c2FnZS48L3NwYW4+PC9kaXY+Il1dLFsiQ29udHJhaW50ZXMgZXQgZMOpdmVsb3BwZW1lbnQgZHVyYWJsZSIsWyI8cD5MZXMgw6l2b2x1dGlvbnMgbmUgc29udCBwYXMgZGljdMOpZXMgdW5pcXVlbWVudCBwYXIgbGEgcGVyZm9ybWFuY2UuIExlcyBmYWJyaWNhbnRzIGRvaXZlbnQgYXVzc2kgY29tcG9zZXIgYXZlYyBsZSBjb8O7dCwgbGEgc8OpY3VyaXTDqSwgbGVzIG5vcm1lcywgbOKAmcOpbmVyZ2llLCBsYSByw6lwYXJhYmlsaXTDqSwgbOKAmWFjY2Vzc2liaWxpdMOpIGV0IGxlcyBhdHRlbnRlcyBkZXMgdXRpbGlzYXRldXJzLjwvcD4iLCI8YSBjbGFzcz1cInJlc3NvdXJjZS1jb3JyXCIgaHJlZj1cImh0dHBzOi8vYWdpcnBvdXJsYXRyYW5zaXRpb24uYWRlbWUuZnIvYWN0ZXVycy1lZHVjYXRpb24vZW5zZWlnbmVyL2NhdGFsb2d1ZS9pbXBhY3RzLXNtYXJ0cGhvbmVcIiB0YXJnZXQ9XCJfYmxhbmtcIiByZWw9XCJub29wZW5lclwiPjxiPkFERU1FIOKAlCBsZSBudW3DqXJpcXVlIGV0IHNlcyBpbXBhY3RzPC9iPjxzcGFuPlBvdXIgcHJvbG9uZ2VyIGxhIHLDqWZsZXhpb24gc3VyIGxhIGZhYnJpY2F0aW9uIGV0IGxhIGR1csOpZSBkZSB2aWUuPC9zcGFuPjwvYT4iXV0sWyJCaWxhbiBkZSBs4oCZYWN0aXZpdMOpIOKAlCBjZSBxdWUgdHUgZG9pcyByZXRlbmlyIixbIjxwPjxzdHJvbmc+VHUgYXMgcmVjb25zdHJ1aXQgbOKAmcOpdm9sdXRpb24gZGVzIG1veWVucyBkZSBjb21tdW5pY2F0aW9uIGVuIGRpc3Rpbmd1YW50IGNlIHF1aSBjaGFuZ2UgZXQgY2UgcXVpIHJlc3RlIHN0YWJsZS48L3N0cm9uZz48L3A+IiwiPHN2ZyBjbGFzcz1cInNjaGVtYVwiIHZpZXdCb3g9XCIwIDAgNzAwIDE1MFwiIHhtbG5zPVwiaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmdcIiByb2xlPVwiaW1nXCIgYXJpYS1sYWJlbD1cIkxpcmUgdW5lIMOpdm9sdXRpb24gdGVjaG5vbG9naXF1ZVwiPjx0ZXh0IHg9XCIzNTAuMFwiIHk9XCIyMFwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTRcIiBmb250LXdlaWdodD1cIjcwMFwiIGZpbGw9XCIjMTQyNjJCXCI+TGlyZSB1bmUgw6l2b2x1dGlvbiB0ZWNobm9sb2dpcXVlPC90ZXh0PjxkZWZzPjxtYXJrZXIgaWQ9XCJmbFwiIG1hcmtlcldpZHRoPVwiN1wiIG1hcmtlckhlaWdodD1cIjdcIiByZWZYPVwiNlwiIHJlZlk9XCIzLjVcIiBvcmllbnQ9XCJhdXRvXCI+PHBhdGggZD1cIk0wIDAgTDcgMy41IEwwIDcgelwiIGZpbGw9XCIjNUE2QzcxXCIvPjwvbWFya2VyPjwvZGVmcz48cmVjdCB4PVwiMTQuMFwiIHk9XCI1MlwiIHdpZHRoPVwiMTU3LjVcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRTJFRkVFXCIgc3Ryb2tlPVwiIzBFNkU2QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjkyLjhcIiB5PVwiNjlcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+QmVzb2luIGRlPC90ZXh0Pjx0ZXh0IHg9XCI5Mi44XCIgeT1cIjg0XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPmNvbW11bmlxdWVyPC90ZXh0PjxwYXRoIGQ9XCJNMTc0LjUgODEgTDE4Mi41IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjE4NS41XCIgeT1cIjUyXCIgd2lkdGg9XCIxNTcuNVwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNGREVDRjJcIiBzdHJva2U9XCIjQzIxODVCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiMjY0LjJcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+RmFtaWxsZSBk4oCZT1NUPC90ZXh0PjxwYXRoIGQ9XCJNMzQ2LjAgODEgTDM1NC4wIDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjM1Ny4wXCIgeT1cIjUyXCIgd2lkdGg9XCIxNTcuNVwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNDM1LjhcIiB5PVwiNjlcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+UHJpbmNpcGVzPC90ZXh0Pjx0ZXh0IHg9XCI0MzUuOFwiIHk9XCI4NFwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj50ZWNobmlxdWVzPC90ZXh0PjxwYXRoIGQ9XCJNNTE3LjUgODEgTDUyNS41IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjUyOC41XCIgeT1cIjUyXCIgd2lkdGg9XCIxNTcuNVwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNGREVDRjJcIiBzdHJva2U9XCIjQzIxODVCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNjA3LjJcIiB5PVwiNjlcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+UnVwdHVyZXMgLzwvdGV4dD48dGV4dCB4PVwiNjA3LjJcIiB5PVwiODRcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+aW5ub3ZhdGlvbnM8L3RleHQ+PC9zdmc+IiwiPHVsPjxsaT5VbmUgZmFtaWxsZSByZWdyb3VwZSBkZXMgT1NUIHBhciBsZXVyIGJlc29pbi9mb25jdGlvbiBk4oCZdXNhZ2UgOyB1bmUgbGlnbsOpZSBz4oCZaW50w6lyZXNzZSDDoCBsYSBjb250aW51aXTDqSBk4oCZdW4gcHJpbmNpcGUgb3UgZOKAmXVuZSBzb2x1dGlvbiB0ZWNobmlxdWUuPC9saT48bGk+VW5lIGlubm92YXRpb24gcGV1dCBtb2RpZmllciBs4oCZdXNhZ2Ugc2FucyDDqnRyZSBsYSBwcmVtacOocmUgaW52ZW50aW9uIGR1IGNvbXBvc2FudCB1dGlsaXPDqS48L2xpPjxsaT5VbmUgZnJpc2UgdGVjaG5vbG9naXF1ZSBkb2l0IHByw6ljaXNlciBsYSBuYXR1cmUgZGUgY2hhcXVlIGRhdGUgZXQgbGEgcnVwdHVyZSBhc3NvY2nDqWUuPC9saT48bGk+TGVzIGNvbnRyYWludGVzIHNvY2nDqXRhbGVzIGV0IGVudmlyb25uZW1lbnRhbGVzIG9yaWVudGVudCBsZXMgY2hvaXggdGVjaG5pcXVlcy48L2xpPjwvdWw+IiwiPHA+PHN0cm9uZz5Wb2NhYnVsYWlyZSBlc3NlbnRpZWwgOjwvc3Ryb25nPiBmYW1pbGxlIMK3IGxpZ27DqWUgwrcgcnVwdHVyZSDCtyBpbm5vdmF0aW9uIMK3IGNvbnRyYWludGUuPC9wPiIsIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+w4AgcmV0ZW5pcjwvYj5TaSB0dSBwZXV4IGV4cGxpcXVlciBsZSBzY2jDqW1hIGF2ZWMgdGVzIHByb3ByZXMgbW90cyBldCBkb25uZXIgdW4gZXhlbXBsZSwgbOKAmWVzc2VudGllbCBkZSBs4oCZYWN0aXZpdMOpIGVzdCBhY3F1aXMuPC9kaXY+Il1dXQ==",empreinte:2416770618};</script>
+<script src="assets/correction-bilan.js"></script>
 </body>
 </html>

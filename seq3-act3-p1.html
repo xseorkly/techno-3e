@@ -285,6 +285,7 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
+<link rel="stylesheet" href="assets/site-addons.css">
 </head>
 <body>
 
@@ -405,7 +406,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="corps">
       <h2>Mes constats, mes observations</h2>
       <p class="consigne">Décompose la partie : que se passe-t-il, dans l'ordre, entre le moment où tu montres ton signe et celui où le résultat s'affiche ?</p>
-      <textarea id="rep-constats" data-rep placeholder="D'abord…, ensuite…, enfin…"></textarea>
+      <textarea id="rep-constats" data-rep placeholder="D'abord…, ensuite…, enfin…" aria-label="Décompose la partie : que se passe-t-il, dans l&#x27;ordre, entre le moment où tu montres ton signe et celui où le "></textarea>
     </div>
   </article>
 
@@ -413,7 +414,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="marge"><span class="duree">3′</span></div>
     <div class="corps">
       <h2>Mon problème à résoudre</h2>
-      <textarea id="rep-probleme" data-rep placeholder="Comment… ?" style="min-height:100px"></textarea>
+      <textarea id="rep-probleme" data-rep placeholder="Comment… ?" style="min-height:100px" aria-label="Mon problème à résoudre — Comment… ?"></textarea>
     </div>
   </article>
 
@@ -422,7 +423,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="corps">
       <h2>Mes idées pour le résoudre</h2>
       <p class="consigne">Note toutes les pistes du groupe, même celles dont tu n'es pas sûr.</p>
-      <textarea id="rep-idees" data-rep placeholder="Peut-être que…"></textarea>
+      <textarea id="rep-idees" data-rep placeholder="Peut-être que…" aria-label="Note toutes les pistes du groupe, même celles dont tu n&#x27;es pas sûr."></textarea>
     </div>
   </article>
 
@@ -502,7 +503,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="corps">
       <h2>J'écris l'algorithme en français</h2>
       <p class="consigne">Décris, phrase par phrase et dans l'ordre, ce que le système doit faire. N'oublie ni le cas de l'égalité, ni le moment où la machine tire son signe. Cette fois, aucun exemple n'est donné.</p>
-      <textarea id="rep-algo" data-rep style="min-height:240px" placeholder="Début&#10;…"></textarea>
+      <textarea id="rep-algo" data-rep style="min-height:240px" placeholder="Début&#10;…" aria-label="Décris, phrase par phrase et dans l&#x27;ordre, ce que le système doit faire. N&#x27;oublie ni le cas de l&#x27;égalité, ni l"></textarea>
     </div>
   </article>
 
@@ -563,7 +564,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
 
       <h3>N2 — Trois signes au lieu de deux</h3>
       <p class="consigne">La séance précédente, le modèle distinguait une main ouverte d'une main fermée. Ici, il devra distinguer trois signes, dont deux qui se ressemblent beaucoup selon l'angle de la main. Lesquels, et que comptes-tu faire pour limiter les confusions ?</p>
-      <textarea id="n2" data-rep></textarea>
+      <textarea id="n2" data-rep aria-label="La séance précédente, le modèle distinguait une main ouverte d&#x27;une main fermée. Ici, il devra distinguer trois"></textarea>
     </div>
   </article>
 
@@ -572,7 +573,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="corps">
       <h2>Ce que je n'ai pas encore résolu</h2>
       <p class="consigne">Sois honnête : ce que tu notes ici sera repris au début de la séance suivante.</p>
-      <textarea id="rep-reste" data-rep placeholder="Je ne sais pas encore comment…"></textarea>
+      <textarea id="rep-reste" data-rep placeholder="Je ne sais pas encore comment…" aria-label="Sois honnête : ce que tu notes ici sera repris au début de la séance suivante."></textarea>
 
       <details class="ref" style="margin-top:22px">
         <summary>Coup de pouce — à n'ouvrir qu'en cas de blocage réel</summary>
@@ -584,6 +585,17 @@ document.getElementById("navfiches").addEventListener("change", function(){
       </details>
     </div>
   </article>
+
+  <section class="corrbloc" id="correction" data-addon="1">
+    <h2>Correction expliquée et bilan de l’activité</h2>
+    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+    <div class="saisie">
+      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction" autocomplete="off" spellcheck="false">
+      <button type="button" id="corr-btn">Afficher</button>
+    </div>
+    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
+    <div class="corr" id="corr-contenu" hidden></div>
+  </section>
 
   <div id="alerte" class="alerte" hidden></div>
 
@@ -849,6 +861,7 @@ function dateFr(iso){
 }
 
 function construirePDF(d){
+  if(!window.jspdf || !window.jspdf.jsPDF){ window.print(); return; }
   var doc = new window.jspdf.jsPDF({ unit:"mm", format:"a4" });
   var y = 0, page = 1;
   var nomComplet = propre((d.identite.nom + " " + d.identite.prenom).trim());
@@ -1135,5 +1148,7 @@ el("pdf").addEventListener("click", function(){
 
 })();
 </script>
+<script>window.CORRECTION_BILAN={coffre:"W1siUGFzc2VyIGTigJl1bmUgaWTDqWUgw6AgdW5lIGFyY2hpdGVjdHVyZSIsWyI8cD5Db25jZXZvaXIgbGUgamV1IGRlbWFuZGUgZGUgc8OpcGFyZXIgbGVzIGZvbmN0aW9ucyA6IHJlY29ubmHDrnRyZSBsZSBnZXN0ZSwgw6ljaGFuZ2VyIGxlcyBjaG9peCwgZMOpdGVybWluZXIgbGUgZ2FnbmFudCwgYWZmaWNoZXIgbGUgcsOpc3VsdGF0LiBDaGFxdWUgZm9uY3Rpb24gcGV1dCDDqnRyZSB0ZXN0w6llIGluZMOpcGVuZGFtbWVudCBhdmFudCBs4oCZaW50w6lncmF0aW9uLjwvcD4iLCI8c3ZnIGNsYXNzPVwic2NoZW1hXCIgdmlld0JveD1cIjAgMCA3MDAgMTUwXCIgeG1sbnM9XCJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Z1wiIHJvbGU9XCJpbWdcIiBhcmlhLWxhYmVsPVwiQXJjaGl0ZWN0dXJlIGZvbmN0aW9ubmVsbGUgZHUgamV1XCI+PHRleHQgeD1cIjM1MC4wXCIgeT1cIjIwXCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxNFwiIGZvbnQtd2VpZ2h0PVwiNzAwXCIgZmlsbD1cIiMxNDI2MkJcIj5BcmNoaXRlY3R1cmUgZm9uY3Rpb25uZWxsZSBkdSBqZXU8L3RleHQ+PGRlZnM+PG1hcmtlciBpZD1cImZsXCIgbWFya2VyV2lkdGg9XCI3XCIgbWFya2VySGVpZ2h0PVwiN1wiIHJlZlg9XCI2XCIgcmVmWT1cIjMuNVwiIG9yaWVudD1cImF1dG9cIj48cGF0aCBkPVwiTTAgMCBMNyAzLjUgTDAgNyB6XCIgZmlsbD1cIiM1QTZDNzFcIi8+PC9tYXJrZXI+PC9kZWZzPjxyZWN0IHg9XCIxNC4wXCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNzUuNlwiIHk9XCI2OVwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5BY3F1w6lyaXIgLzwvdGV4dD48dGV4dCB4PVwiNzUuNlwiIHk9XCI4NFwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5yZWNvbm5hw650cmU8L3RleHQ+PHBhdGggZD1cIk0xNDAuMiA4MSBMMTQ4LjIgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiMTUxLjJcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0ZERUNGMlwiIHN0cm9rZT1cIiNDMjE4NUJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCIyMTIuOFwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5Db2RlciBsZSBjaG9peDwvdGV4dD48cGF0aCBkPVwiTTI3Ny40IDgxIEwyODUuNCA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCIyODguNFwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRTJFRkVFXCIgc3Ryb2tlPVwiIzBFNkU2QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjM1MC4wXCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPsOJY2hhbmdlciBwYXIgcmFkaW88L3RleHQ+PHBhdGggZD1cIk00MTQuNiA4MSBMNDIyLjYgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiNDI1LjZcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0ZERUNGMlwiIHN0cm9rZT1cIiNDMjE4NUJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCI0ODcuMlwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5Db21wYXJlcjwvdGV4dD48cGF0aCBkPVwiTTU1MS44IDgxIEw1NTkuOCA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCI1NjIuOFwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRTJFRkVFXCIgc3Ryb2tlPVwiIzBFNkU2QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjYyNC40XCIgeT1cIjY5XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPkFmZmljaGVyIGxlPC90ZXh0Pjx0ZXh0IHg9XCI2MjQuNFwiIHk9XCI4NFwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5yw6lzdWx0YXQ8L3RleHQ+PC9zdmc+Il1dLFsiQ2hvaXNpciBsZXMgaW5mb3JtYXRpb25zIMOgIMOpY2hhbmdlciIsWyI8cD5MYSByYWRpbyBu4oCZYSBwYXMgYmVzb2luIGTigJllbnZveWVyIHVuZSBpbWFnZS4gSWwgc3VmZml0IGTigJllbnZveWVyIHVuZSBkb25uw6llIGNvbXBhY3RlIHJlcHLDqXNlbnRhbnQgbGUgY2hvaXggOiBwYXIgZXhlbXBsZSAwLCAxIG91IDIuIExlIHLDqWNlcHRldXIgaW50ZXJwcsOodGUgZW5zdWl0ZSBjZSBjb2RlIGF2ZWMgbGEgbcOqbWUgY29udmVudGlvbi48L3A+IiwiPGRpdiBjbGFzcz1cInJldGVuaXJcIj48Yj7DgCByZXRlbmlyPC9iPlVuIHByb3RvY29sZSBkZSBjb21tdW5pY2F0aW9uLCBtw6ptZSB0csOocyBzaW1wbGUsIGRvaXQgw6p0cmUgZMOpZmluaSBkZSBsYSBtw6ptZSBmYcOnb24gc3VyIGxlcyBkZXV4IGNhcnRlcy48L2Rpdj4iXV0sWyJQcsOpcGFyZXIgbGVzIHRlc3RzIGTDqHMgbGEgY29uY2VwdGlvbiIsWyI8cD5BdmFudCBkZSBwcm9ncmFtbWVyLCDDqWNyaXMgdW5lIHRhYmxlIGRlIGNhcyA6IHBpZXJyZS9waWVycmUgPSDDqWdhbGl0w6ksIHBpZXJyZS9jaXNlYXV4ID0gdmljdG9pcmUsIGV0Yy4gQ2V0dGUgdGFibGUgZGV2aWVuZHJhIHRvbiBvcmFjbGUgZGUgdGVzdCA6IGVsbGUgaW5kaXF1ZSBsZSByw6lzdWx0YXQgYXR0ZW5kdSBwb3VyIGNoYXF1ZSBjb21iaW5haXNvbi48L3A+IiwiPGRpdiBjbGFzcz1cInR5cGVpbmZvXCI+PHN0cm9uZz5DaG9peCBkZSBjb25jZXB0aW9uPC9zdHJvbmc+PHNwYW4+TGUgY29kYWdlIDAvMS8yIG7igJllc3QgcGFzIHVuZSB2w6lyaXTDqSBzY2llbnRpZmlxdWUgOyBj4oCZZXN0IHVuZSBjb252ZW50aW9uIGNob2lzaWUgcGFyIGzigJnDqXF1aXBlIGV0IGRvY3VtZW50w6llLjwvc3Bhbj48L2Rpdj4iXV0sWyJCaWxhbiBkZSBs4oCZYWN0aXZpdMOpIOKAlCBjZSBxdWUgdHUgZG9pcyByZXRlbmlyIixbIjxwPjxzdHJvbmc+VHUgYXMgYXBwcmlzIMOgIGNvbmNldm9pciB1biBzeXN0w6htZSBhdmFudCBkZSB0ZSBwcsOpY2lwaXRlciBkYW5zIGxlcyBibG9jcyBkZSBjb2RlLjwvc3Ryb25nPjwvcD4iLCI8c3ZnIGNsYXNzPVwic2NoZW1hXCIgdmlld0JveD1cIjAgMCA3MDAgMTUwXCIgeG1sbnM9XCJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Z1wiIHJvbGU9XCJpbWdcIiBhcmlhLWxhYmVsPVwiQ29uY2V2b2lyIGF2YW50IGRlIHByb2dyYW1tZXJcIj48dGV4dCB4PVwiMzUwLjBcIiB5PVwiMjBcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjE0XCIgZm9udC13ZWlnaHQ9XCI3MDBcIiBmaWxsPVwiIzE0MjYyQlwiPkNvbmNldm9pciBhdmFudCBkZSBwcm9ncmFtbWVyPC90ZXh0PjxkZWZzPjxtYXJrZXIgaWQ9XCJmbFwiIG1hcmtlcldpZHRoPVwiN1wiIG1hcmtlckhlaWdodD1cIjdcIiByZWZYPVwiNlwiIHJlZlk9XCIzLjVcIiBvcmllbnQ9XCJhdXRvXCI+PHBhdGggZD1cIk0wIDAgTDcgMy41IEwwIDcgelwiIGZpbGw9XCIjNUE2QzcxXCIvPjwvbWFya2VyPjwvZGVmcz48cmVjdCB4PVwiMTQuMFwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRTJFRkVFXCIgc3Ryb2tlPVwiIzBFNkU2QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjc1LjZcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+QmVzb2luPC90ZXh0PjxwYXRoIGQ9XCJNMTQwLjIgODEgTDE0OC4yIDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjE1MS4yXCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNGREVDRjJcIiBzdHJva2U9XCIjQzIxODVCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiMjEyLjhcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+Rm9uY3Rpb25zPC90ZXh0PjxwYXRoIGQ9XCJNMjc3LjQgODEgTDI4NS40IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjI4OC40XCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiMzUwLjBcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+RG9ubsOpZXMgw6ljaGFuZ8OpZXM8L3RleHQ+PHBhdGggZD1cIk00MTQuNiA4MSBMNDIyLjYgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiNDI1LjZcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0ZERUNGMlwiIHN0cm9rZT1cIiNDMjE4NUJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCI0ODcuMlwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5BbGdvcml0aG1lPC90ZXh0PjxwYXRoIGQ9XCJNNTUxLjggODEgTDU1OS44IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjU2Mi44XCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNjI0LjRcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+UGxhbiBkZSB0ZXN0czwvdGV4dD48L3N2Zz4iLCI8dWw+PGxpPk9uIGTDqWNvbXBvc2UgdW4gcHJvYmzDqG1lIGNvbXBsZXhlIGVuIGZvbmN0aW9ucyBwbHVzIHBldGl0ZXMuPC9saT48bGk+TGVzIGludGVyZmFjZXMgZW50cmUgbW9kdWxlcyBkb2l2ZW50IMOqdHJlIGV4cGxpY2l0ZXMgOiBxdWVsbGVzIGRvbm7DqWVzIGVudHJlbnQgZXQgc29ydGVudCA/PC9saT48bGk+VW5lIGNvbnZlbnRpb24gZGUgY29kYWdlIGRvaXQgw6p0cmUgaWRlbnRpcXVlIGNoZXogbOKAmcOpbWV0dGV1ciBldCBsZSByw6ljZXB0ZXVyLjwvbGk+PGxpPkxlcyBjYXMgZGUgdGVzdCBzZSBwcsOpcGFyZW50IGF2YW50IGxhIHLDqWFsaXNhdGlvbi48L2xpPjwvdWw+IiwiPHA+PHN0cm9uZz5Wb2NhYnVsYWlyZSBlc3NlbnRpZWwgOjwvc3Ryb25nPiBmb25jdGlvbiDCtyBhcmNoaXRlY3R1cmUgwrcgcHJvdG9jb2xlIMK3IGNvZGFnZSDCtyB0ZXN0LjwvcD4iLCI8ZGl2IGNsYXNzPVwicmV0ZW5pclwiPjxiPsOAIHJldGVuaXI8L2I+U2kgdHUgcGV1eCBleHBsaXF1ZXIgbGUgc2Now6ltYSBhdmVjIHRlcyBwcm9wcmVzIG1vdHMgZXQgZG9ubmVyIHVuIGV4ZW1wbGUsIGzigJllc3NlbnRpZWwgZGUgbOKAmWFjdGl2aXTDqSBlc3QgYWNxdWlzLjwvZGl2PiJdXV0=",empreinte:1750123286};</script>
+<script src="assets/correction-bilan.js"></script>
 </body>
 </html>

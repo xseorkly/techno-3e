@@ -1,0 +1,26 @@
+# Révision pédagogique et technique — septembre 2026
+
+Cette version ajoute une correction expliquée et un bilan protégé par mot de passe à chacune des 19 pages d’activité/séance.
+
+Principales révisions :
+- famille/lignée d’OST et repères historiques du smartphone/fax ;
+- adresse IP, masque /24, débit/latence et modèle de routage ;
+- groupe radio micro:bit (pas d’appairage exclusif) ;
+- rôle contextuel de la matrice LED ;
+- apprentissage supervisé : entraînement + test sur données nouvelles ;
+- interprétation prudente des scores de confiance ;
+- étalonnage réel du capteur d’humidité par Vsec/Vhumide et indice relatif ;
+- seuil de 50 % clairement présenté comme choix de conception du prototype ;
+- journalisation micro:bit V2 via MY_DATA puis exploitation tableur ;
+- données sur l’eau reformulées avec périodes et définitions ;
+- accessibilité améliorée (aria-label, textes alternatifs, identifiant HTML dupliqué corrigé) ;
+- bouton d’impression/PDF navigateur ajouté ; si jsPDF n’est pas disponible, le bouton PDF bascule aussi vers l’impression navigateur.
+
+Les mots de passe historiques des séquences 2 et 4 sont inchangés. Les nouveaux mots de passe des séquences 1 et 3 figurent dans `mdp/index.html`.
+
+## Relecture — corrections apportées
+
+- **Puces parasites supprimées.** Le moteur d'affichage enfermait chaque ligne dans un `<li>`, y compris les schémas, les encadrés « À retenir » et les liens de ressources : une puce vide apparaissait devant chacun, sur les 19 pages (130 occurrences). Les lignes de type bloc sortent désormais de la liste à puces. Les deux moteurs sont corrigés : `assets/correction-bilan.js` pour les séquences 1 et 3, le script intégré pour les séquences 2 et 4.
+- **Élision fautive** dans `seq1-act3` : « une IA n'« comprend » pas » devient « ne « comprend » pas », puisque le mot commence par une consonne.
+- **Vocabulaire de la séance 4-2 harmonisé.** Le calibrage a été refait avec l'indice relatif Vsec/Vhumide, mais le mot « coefficient » subsistait à cinq endroits : onglet de la chronologie, critère du référentiel, titre du tableau sur la page et dans le PDF, identifiant d'ancre et repère de la barre de progression. Tout est passé à « indice ».
+- **Détail réinjecté dans les séquences 2 et 4.** Les nouvelles corrections expliquaient la théorie mais ne corrigeaient plus les exercices question par question. Une à deux sections ont été ajoutées à chacune des neuf fiches, avant le bilan : réponses détaillées, erreurs fréquentes, analogies filées. Ces ajouts respectent la méthode d'étalonnage retenue et ne mentionnent plus de division par un nombre fixe.

@@ -321,6 +321,7 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
+<link rel="stylesheet" href="assets/site-addons.css">
 </head>
 <body>
 
@@ -435,13 +436,13 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="corps">
       <h2>Le problème à résoudre</h2>
       <div class="situation">
-        <p>Le capteur est calibré : la carte connaît maintenant le taux d'humidité en pourcentage. Il reste à automatiser l'arrosage.</p>
-        <p style="margin-top:14px"><strong>Fonctionnement attendu :</strong> le capteur mesure en permanence l'humidité du sol, la valeur s'affiche sur l'écran, et l'arrosage se déclenche dès que l'humidité descend sous 50 %. L'arrosage sera simulé par une DEL branchée sur la broche P2.</p>
+        <p>Le capteur est étalonné : le programme peut maintenant transformer la valeur brute en indice d'humidité relatif. Il reste à automatiser l'arrosage.</p>
+        <p style="margin-top:14px"><strong>Fonctionnement attendu :</strong> le capteur mesure en permanence une valeur brute, le programme la transforme grâce à l’étalonnage en indice relatif, puis l’arrosage se déclenche lorsque cet indice passe sous le seuil de 50 % choisi pour le prototype. L'arrosage sera simulé par une DEL branchée sur la broche P2.</p>
       </div>
       <h3>D'où vient ce seuil de 50 % ?</h3>
-      <p class="consigne">La majorité des plantes se développent mieux au-dessus de 50 % d'humidité. Mais une salade, un plant de tomate et un olivier n'ont pas les mêmes besoins : les plantes des régions arides supportent des taux inférieurs à 25 %. Le seuil n'est donc pas une donnée technique, c'est une <strong>décision</strong>, prise en fonction de la culture.</p>
+      <p class="consigne">Dans notre maquette, <strong>50 % correspond à la moitié de l’indice relatif défini par Vsec et Vhumide</strong>. Nous le choisissons comme seuil de conception pour tester l’algorithme. Dans une installation réelle, le seuil serait déterminé selon la plante, le sol, le climat et la méthode de mesure.</p>
       <p class="consigne">Le collège veut installer ton système sur son potager. Quel seuil choisirais-tu, et de quoi as-tu besoin pour le décider ?</p>
-      <textarea id="n0" data-rep placeholder="" style="min-height:90px"></textarea>
+      <textarea id="n0" data-rep placeholder="" style="min-height:90px" aria-label="Le collège veut installer ton système sur son potager. Quel seuil choisirais-tu, et de quoi as-tu besoin pour "></textarea>
       <p class="amorce">Cette fois, aucun bloc ne t'est donné. Tu conçois, puis tu programmes.</p>
 
     </div>
@@ -480,7 +481,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
       <h2>J'écris l'algorithme en français</h2>
       <p class="consigne">Décris, phrase par phrase et dans l'ordre, ce que le programme doit faire. Utilise les mots : <em>répéter indéfiniment</em>, <em>mettre dans</em>, <em>si</em>, <em>alors</em>, <em>sinon</em>, <em>afficher</em>.</p>
       <textarea id="rep-algo" data-rep placeholder="Répéter indéfiniment
-…" style="min-height:230px"></textarea>
+…" style="min-height:230px" aria-label="Décris, phrase par phrase et dans l&#x27;ordre, ce que le programme doit faire. Utilise les mots : répéter indéfini"></textarea>
 
     </div>
   </article>
@@ -524,10 +525,10 @@ document.getElementById("navfiches").addEventListener("change", function(){
           <label class="etape"><input type="checkbox" id="et-1"><span><b>1.</b> Faire lire la broche analogique en continu et ranger la valeur convertie dans une variable.</span></label>
         </div>
         <div class="cartefiche" data-etape="Afficher le taux à l'écran">
-          <label class="etape"><input type="checkbox" id="et-2"><span><b>2.</b> Afficher le taux d'humidité sur l'écran à LED.</span></label>
+          <label class="etape"><input type="checkbox" id="et-2"><span><b>2.</b> Afficher l'indice d'humidité relatif sur l'écran à LED.</span></label>
         </div>
         <div class="cartefiche" data-etape="Écrire le test du seuil">
-          <label class="etape"><input type="checkbox" id="et-3"><span><b>3.</b> Déclencher la sortie P2 quand l'humidité passe sous 50 %, et l'éteindre sinon.</span></label>
+          <label class="etape"><input type="checkbox" id="et-3"><span><b>3.</b> Déclencher la sortie P2 quand l’indice relatif passe sous le seuil de 50 %, et l'éteindre sinon.</span></label>
         </div>
         <div class="cartefiche" data-etape="Tester dans le simulateur">
           <label class="etape"><input type="checkbox" id="et-4"><span><b>4.</b> Vérifier le comportement dans le simulateur en faisant varier la valeur.</span></label>
@@ -544,7 +545,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
         </div>
       </details>
       <h3>Ce qui a marché, ce qui a bloqué</h3>
-      <textarea id="bilan" data-rep placeholder="J'ai réussi à…  J'ai buté sur…"></textarea>
+      <textarea id="bilan" data-rep placeholder="J'ai réussi à…  J'ai buté sur…" aria-label="Ce qui a marché, ce qui a bloqué — J&#x27;ai réussi à…  J&#x27;ai buté sur…"></textarea>
 
     </div>
   </article>
@@ -553,15 +554,15 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="corps">
       <h2>Ma synthèse</h2>
       <p class="consigne">À quoi sert d'écrire l'algorithme et le logigramme avant de programmer ?</p>
-      <textarea id="rep-synthese" data-rep placeholder=""></textarea>
+      <textarea id="rep-synthese" data-rep placeholder="" aria-label="À quoi sert d&#x27;écrire l&#x27;algorithme et le logigramme avant de programmer ?"></textarea>
 
     </div>
   </article>
 
 
   <section class="corrbloc" id="correction">
-    <h2>La correction expliquée</h2>
-    <p class="intro">La correction expliquée, avec les schémas. Ton professeur te donnera le mot de passe.</p>
+    <h2>Correction expliquée et bilan de l’activité</h2>
+    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
     <div class="saisie">
       <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction"
              autocomplete="off" spellcheck="false">
@@ -615,9 +616,9 @@ var FICHE = {
     n0: ["Attendu : l'élève doit voir que le seuil dépend de la plante cultivée, et qu'il lui faut donc savoir ce qui pousse dans le potager.",
       "Accepter aussi : consulter un jardinier, chercher les besoins de la culture, ou faire un essai et observer la plante."],
     donnees: ["Entrée : la valeur analogique de la broche P1, de type nombre, issue du capteur d'humidité.",
-      "Calculée : le taux d'humidité en pourcentage, de type nombre, obtenu en divisant la valeur par 10,23.",
+      "Calculée : l’indice relatif d’humidité, de type nombre, obtenu avec les références Vsec et Vhumide mesurées en séance 2.",
       "Sortie : l'état de la broche P2, de type booléen (0 ou 1), envoyé au relais qui commande la pompe. L'affichage à l'écran est une seconde sortie."],
-    algo: ["Attendu : répéter indéfiniment ; mettre dans humidité la valeur de la broche analogique P1 divisée par 10,23 ; afficher humidité ; si humidité est inférieure à 50 alors écrire 1 sur P2, sinon écrire 0 sur P2.",
+    algo: ["Attendu : répéter indéfiniment ; lire la broche analogique P1 ; calculer indiceHumidite = (valeurBrute − Vsec) / (Vhumide − Vsec) × 100 ; borner entre 0 et 100 ; afficher indiceHumidite ; si indiceHumidite est inférieur à 50 alors écrire 1 sur P2, sinon écrire 0 sur P2.",
       "Vérifier surtout que la lecture est bien dans une boucle infinie, et que le cas sinon éteint la pompe au lieu de la laisser en marche."],
     logi: ["Attendu : un ovale Début, un traitement pour la lecture et la conversion, une sortie pour l'affichage, un losange pour le test humidité < 50, deux sorties pour allumer et éteindre P2.",
       "Le retour de boucle ne peut pas être représenté par le constructeur en ligne : accepter que l'élève écrive « retour au début » dans la dernière case."]
@@ -759,8 +760,24 @@ if(new URLSearchParams(location.search).get("prof") === "1"){
    cela dissuade la curiosité, sans constituer une vraie sécurité.
    ============================================================ */
 (function(){
-  var COFFRE = "W1siTGUgc2V1aWwgZGUgNTAgJSwgZCdvw7kgc29ydC1pbCA/IiwgWyI8cD5DJ2VzdCBsYSBxdWVzdGlvbiBxdWkgb3V2cmFpdCBsYSBzw6lhbmNlLCBldCBsYSByw6lwb25zZSBzdXJwcmVuZCA6IDxzdHJvbmc+ZGUgbnVsbGUgcGFydC4gQydlc3QgdW5lIGTDqWNpc2lvbi48L3N0cm9uZz48L3A+IiwgIjxwPkxhIHBsdXBhcnQgZGVzIHBsYW50ZXMgc2UgZMOpdmVsb3BwZW50IG1pZXV4IGF1LWRlc3N1cyBkZSA1MCAlIGQnaHVtaWRpdMOpLiBNYWlzIHVuZSBzYWxhZGUsIHVuIHBsYW50IGRlIHRvbWF0ZSBldCB1biBvbGl2aWVyIG4nb250IHBhcyBsZXMgbcOqbWVzIGJlc29pbnMsIGV0IGxlcyBwbGFudGVzIGRlcyByw6lnaW9ucyBhcmlkZXMgc3VwcG9ydGVudCBkZXMgdGF1eCBpbmbDqXJpZXVycyDDoCAyNSAlLjwvcD4iLCAiPHA+UG91ciBjaG9pc2lyIGxlIHNldWlsIGR1IHBvdGFnZXIgZHUgY29sbMOoZ2UsIGlsIHRlIGZhbGxhaXQgZG9uYyB1bmUgaW5mb3JtYXRpb24gcXUnb24gbmUgdCdhdmFpdCBwYXMgZG9ubsOpZSA6IDxlbT5xdSdlc3QtY2UgcXVpIHkgcG91c3NlID88L2VtPiBSw6lwb25kcmUgwqsgaWwgbWUgbWFucXVlIHVuZSBkb25uw6llIMK7IMOpdGFpdCBsYSBtZWlsbGV1cmUgcsOpcG9uc2UgcG9zc2libGUuPC9wPiIsICI8ZGl2IGNsYXNzPVwicmV0ZW5pclwiPjxiPsOAIHJldGVuaXI8L2I+TGEgbWFjaGluZSBhcHBsaXF1ZSB1biBzZXVpbC4gQydlc3QgdW4gaHVtYWluIHF1aSBsZSBjaG9pc2l0LiBVbiBwcm9ncmFtbWUgbidlc3QgamFtYWlzIG5ldXRyZSA6IGlsIGNvbnRpZW50IGRlcyBkw6ljaXNpb25zLjwvZGl2PiJdXSwgWyJMZXMgZG9ubsOpZXMgZHUgcHJvZ3JhbW1lIDogZCdvw7kgw6dhIHZpZW50LCBvw7kgw6dhIHZhIiwgWyI8cD5BdmFudCBkJ8OpY3JpcmUgdW4gcHJvZ3JhbW1lLCBvbiBsaXN0ZSB0b3Vqb3VycyBjZSBxdWkgZW50cmUgZXQgY2UgcXVpIHNvcnQuIFZvaWNpIGxhIHLDqXBvbnNlIDo8L3A+IiwgIjx1bD48bGk+PHN0cm9uZz5FbiBlbnRyw6llPC9zdHJvbmc+IDogbGEgdmFsZXVyIGFuYWxvZ2lxdWUgZGUgbGEgYnJvY2hlIFAxLCB1biA8ZW0+bm9tYnJlPC9lbT4sIHF1aSB2aWVudCBkdSBjYXB0ZXVyIGQnaHVtaWRpdMOpLjwvbGk+PGxpPjxzdHJvbmc+Q2FsY3Vsw6llPC9zdHJvbmc+IDogbGUgdGF1eCBkJ2h1bWlkaXTDqSBlbiBwb3VyY2VudGFnZSwgdW4gPGVtPm5vbWJyZTwvZW0+LCBvYnRlbnUgZW4gZGl2aXNhbnQgcGFyIDEwLDIzLjwvbGk+PGxpPjxzdHJvbmc+RW4gc29ydGllPC9zdHJvbmc+IDogbCfDqXRhdCBkZSBsYSBicm9jaGUgUDIsIHVuIDxlbT5ib29sw6llbjwvZW0+IHZhbGFudCAwIG91IDEsIGVudm95w6kgYXUgcmVsYWlzLiBMJ2FmZmljaGFnZSDDoCBsJ8OpY3JhbiBlc3QgdW5lIGRldXhpw6htZSBzb3J0aWUuPC9saT48L3VsPiIsICI8cD5TaSBjZSB0YWJsZWF1IGVzdCBmYXV4LCBsJ2FsZ29yaXRobWUgc2VyYSBmYXV4LiBDJ2VzdCBwb3VyIMOnYSBxdSdvbiBjb21tZW5jZSBwYXIgbMOgLjwvcD4iXV0sIFsiTCdhbGdvcml0aG1lIGF0dGVuZHUsIGV0IGxlcyBkZXV4IGVycmV1cnMgw6Agw6l2aXRlciIsIFsiPHA+Vm9pY2kgdW5lIMOpY3JpdHVyZSBjb3JyZWN0ZSA6PC9wPiIsICI8ZGl2IGNsYXNzPVwiZXhlbXBsZVwiPjxwPlLDqXDDqXRlciBpbmTDqWZpbmltZW50PGJyPiZuYnNwOyZuYnNwO01ldHRyZSBkYW5zIGh1bWlkaXTDqSBsYSB2YWxldXIgZGUgUDEgZGl2aXPDqWUgcGFyIDEwLDIzPGJyPiZuYnNwOyZuYnNwO0FmZmljaGVyIGh1bWlkaXTDqTxicj4mbmJzcDsmbmJzcDtTaSBodW1pZGl0w6kgJmx0OyA1MCBhbG9ycyDDqWNyaXJlIDEgc3VyIFAyPGJyPiZuYnNwOyZuYnNwO1Npbm9uIMOpY3JpcmUgMCBzdXIgUDI8L3A+PC9kaXY+IiwgIjxwPjxzdHJvbmc+UHJlbWnDqHJlIGVycmV1ciBjbGFzc2lxdWUgOiBvdWJsaWVyIGxhIGJvdWNsZS48L3N0cm9uZz4gU2FucyDCqyByw6lww6l0ZXIgaW5kw6lmaW5pbWVudCDCuywgbGUgcHJvZ3JhbW1lIG1lc3VyZSB1bmUgc2V1bGUgZm9pcywgYXUgZMOpbWFycmFnZSwgcHVpcyBuZSBmYWl0IHBsdXMgcmllbi4gTGEgcGxhbnRlIHBldXQgc8OpY2hlciwgaWwgbmUgcydlbiBhcGVyY2V2cmEgamFtYWlzLjwvcD4iLCAiPHA+PHN0cm9uZz5EZXV4acOobWUgZXJyZXVyIGNsYXNzaXF1ZSA6IG91YmxpZXIgbGUgwqsgc2lub24gwrsuPC9zdHJvbmc+IExhIHBvbXBlIHMnYWxsdW1l4oCmIGV0IG5lIHMnw6l0ZWludCBwbHVzIGphbWFpcy4gQydlc3QgbCdlcnJldXIgbGEgcGx1cyBmcsOpcXVlbnRlLCBldCBsYSBwbHVzIGZhY2lsZSDDoCByZXDDqXJlciA6IGF1IHRlc3QsIMOnYSBkw6lib3JkZS48L3A+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+w4AgcmV0ZW5pcjwvYj5VbiDCqyBzaSDCuyBzYW5zIMKrIHNpbm9uIMK7LCBjJ2VzdCB1bmUgYWN0aW9uIHF1J29uIGTDqWNsZW5jaGUgc2FucyBqYW1haXMgbCdhcnLDqnRlci48L2Rpdj4iXV0sIFsiTGUgbG9naWdyYW1tZSA6IMOgIHF1b2kgc2VydCBjaGFxdWUgZm9ybWUiLCBbIjxwPkxlcyBzeW1ib2xlcyBuZSBzb250IHBhcyBkw6ljb3JhdGlmcywgY2hhY3VuIGEgdW4gc2VucyBwcsOpY2lzIDo8L3A+IiwgIjx1bD48bGk+PHN0cm9uZz5PdmFsZTwvc3Ryb25nPiA6IGxlIGTDqWJ1dCBvdSBsYSBmaW4uPC9saT48bGk+PHN0cm9uZz5QYXJhbGzDqWxvZ3JhbW1lPC9zdHJvbmc+IDogdW5lIGVudHLDqWUgb3UgdW5lIHNvcnRpZSwgYydlc3Qtw6AtZGlyZSB1biDDqWNoYW5nZSBhdmVjIGwnZXh0w6lyaWV1ciDigJQgbGlyZSB1biBjYXB0ZXVyLCBhZmZpY2hlciBxdWVscXVlIGNob3NlLjwvbGk+PGxpPjxzdHJvbmc+UmVjdGFuZ2xlPC9zdHJvbmc+IDogdW4gdHJhaXRlbWVudCwgdW4gY2FsY3VsIGludGVybmUuPC9saT48bGk+PHN0cm9uZz5Mb3NhbmdlPC9zdHJvbmc+IDogdW4gdGVzdCwgdW5lIHF1ZXN0aW9uIMOgIGxhcXVlbGxlIG9uIHLDqXBvbmQgcGFyIG91aSBvdSBub24uIEMnZXN0IGxlIHNldWwgc3ltYm9sZSBkJ2/DuSBwYXJ0ZW50IGRldXggZmzDqGNoZXMuPC9saT48L3VsPiIsICI8cD5MJ2VycmV1ciBsYSBwbHVzIGZyw6lxdWVudGUgZXN0IGRlIG1ldHRyZSBsJ2FmZmljaGFnZSBkYW5zIHVuIHJlY3RhbmdsZS4gQWZmaWNoZXIsIGMnZXN0IDxlbT5zb3J0aXI8L2VtPiB1bmUgaW5mb3JtYXRpb24gdmVycyBsJ3V0aWxpc2F0ZXVyIDogYydlc3QgdW4gcGFyYWxsw6lsb2dyYW1tZS48L3A+IiwgIjxwPlBldGl0ZSBsaW1pdGUgZGUgbCdvdXRpbCBlbiBsaWduZSA6IGlsIGRlc3NpbmUgZW4gY29sb25uZSwgZG9uYyBsYSBib3VjbGUgZGUgcmV0b3VyIG5lIHBldXQgcGFzIMOqdHJlIHRyYWPDqWUuIMOJY3JpcmUgwqsgcmV0b3VyIGF1IGTDqWJ1dCDCuyBkYW5zIGxhIGRlcm5pw6hyZSBjYXNlIMOpdGFpdCBsYSBib25uZSBzb2x1dGlvbi48L3A+Il1dXQ==";
+  var COFFRE = "W1siVmFyaWFibGVzIGR1IHByb2dyYW1tZSIsIFsiPHA+TGUgcHJvZ3JhbW1lIG3DqW1vcmlzZSBsYSB2YWxldXIgYnJ1dGUgZXQvb3UgbOKAmWluZGljZSByZWxhdGlmIGNhbGN1bMOpLiBVbmUgdmFyaWFibGUgcG9zc8OoZGUgdW4gbm9tLCB1bmUgdmFsZXVyIGV0IHVuIHR5cGUuIElsIGVzdCB1dGlsZSBkZSBjaG9pc2lyIGRlcyBub21zIGV4cGxpY2l0ZXMgOiA8Y29kZT52YWxldXJCcnV0ZTwvY29kZT4sIDxjb2RlPmluZGljZUh1bWlkaXRlPC9jb2RlPiwgPGNvZGU+cG9tcGVBY3RpdmU8L2NvZGU+LjwvcD4iLCAiPGRpdiBjbGFzcz1cInJldGVuaXJcIj48Yj7DgCByZXRlbmlyPC9iPlVuZSB2YXJpYWJsZSBjYWxjdWzDqWUgbuKAmWVzdCBwYXMgdW4gbm91dmVhdSBjYXB0ZXVyIDogY+KAmWVzdCB1bmUgZG9ubsOpZSBwcm9kdWl0ZSBwYXIgbGUgcHJvZ3JhbW1lIMOgIHBhcnRpciBk4oCZdW5lIG1lc3VyZS48L2Rpdj4iXV0sIFsiQWxnb3JpdGhtZSBkZSBiYXNlIGNvcnJpZ8OpIiwgWyI8b2w+PGxpPkxpcmUgbGEgdmFsZXVyIGFuYWxvZ2lxdWUgZHUgY2FwdGV1ci48L2xpPjxsaT5DYWxjdWxlciBs4oCZaW5kaWNlIHJlbGF0aWYgYXZlYyBWc2VjIGV0IFZodW1pZGUgZMOpdGVybWluw6lzIGVuIHPDqWFuY2UgMi48L2xpPjxsaT5BZmZpY2hlciBs4oCZaW5kaWNlLjwvbGk+PGxpPlNpIGzigJlpbmRpY2UgZXN0IGluZsOpcmlldXIgYXUgc2V1aWwgY2hvaXNpIHBvdXIgbGUgcHJvdG90eXBlLCBhY3RpdmVyIFAyIDsgc2lub24gZMOpc2FjdGl2ZXIgUDIuPC9saT48L29sPiIsICI8c3ZnIGNsYXNzPVwic2NoZW1hXCIgdmlld0JveD1cIjAgMCA3MDAgMTUwXCIgeG1sbnM9XCJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Z1wiIHJvbGU9XCJpbWdcIiBhcmlhLWxhYmVsPVwiQm91Y2xlIGRlIGNvbW1hbmRlXCI+PHRleHQgeD1cIjM1MC4wXCIgeT1cIjIwXCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxNFwiIGZvbnQtd2VpZ2h0PVwiNzAwXCIgZmlsbD1cIiMxNDI2MkJcIj5Cb3VjbGUgZGUgY29tbWFuZGU8L3RleHQ+PGRlZnM+PG1hcmtlciBpZD1cImZsXCIgbWFya2VyV2lkdGg9XCI3XCIgbWFya2VySGVpZ2h0PVwiN1wiIHJlZlg9XCI2XCIgcmVmWT1cIjMuNVwiIG9yaWVudD1cImF1dG9cIj48cGF0aCBkPVwiTTAgMCBMNyAzLjUgTDAgNyB6XCIgZmlsbD1cIiM1QTZDNzFcIi8+PC9tYXJrZXI+PC9kZWZzPjxyZWN0IHg9XCIxNC4wXCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNzUuNlwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5NZXN1cmVyPC90ZXh0PjxwYXRoIGQ9XCJNMTQwLjIgODEgTDE0OC4yIDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjE1MS4yXCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNGREVDRjJcIiBzdHJva2U9XCIjQzIxODVCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiMjEyLjhcIiB5PVwiNjlcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+Q2FsaWJyZXIgLzwvdGV4dD48dGV4dCB4PVwiMjEyLjhcIiB5PVwiODRcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+Y29udmVydGlyPC90ZXh0PjxwYXRoIGQ9XCJNMjc3LjQgODEgTDI4NS40IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjI4OC40XCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiMzUwLjBcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+Q29tcGFyZXIgYXUgc2V1aWw8L3RleHQ+PHBhdGggZD1cIk00MTQuNiA4MSBMNDIyLjYgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiNDI1LjZcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0ZERUNGMlwiIHN0cm9rZT1cIiNDMjE4NUJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCI0ODcuMlwiIHk9XCI2OVwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5BcnJvc2VyIG91PC90ZXh0Pjx0ZXh0IHg9XCI0ODcuMlwiIHk9XCI4NFwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5hdHRlbmRyZTwvdGV4dD48cGF0aCBkPVwiTTU1MS44IDgxIEw1NTkuOCA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCI1NjIuOFwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRTJFRkVFXCIgc3Ryb2tlPVwiIzBFNkU2QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjYyNC40XCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPlJlY29tbWVuY2VyPC90ZXh0Pjwvc3ZnPiJdXSwgWyJE4oCZb8O5IHZpZW50IDUwICUgPyIsIFsiPHA+RGFucyBjZSBwcm90b3R5cGUsIDUwICUgZXN0IHVuIDxzdHJvbmc+c2V1aWwgZGUgY29uY2VwdGlvbiBkZSBs4oCZaW5kaWNlIHJlbGF0aWY8L3N0cm9uZz4sIGNob2lzaSBwb3VyIGRpc3Bvc2VyIGTigJl1biBjYXMgc2ltcGxlIMOgIHByb2dyYW1tZXIgZXQgw6AgdGVzdGVyLiBJbCBuZSBzaWduaWZpZSBwYXMgwqsgdG91dGVzIGxlcyBwbGFudGVzIG9udCBiZXNvaW4gZGUgNTAgJSBk4oCZZWF1IGRhbnMgbGUgc29sIMK7LjwvcD4iLCAiPGRpdiBjbGFzcz1cInR5cGVpbmZvXCI+PHN0cm9uZz5DaG9peCBkZSBjb25jZXB0aW9uPC9zdHJvbmc+PHNwYW4+TGUgc2V1aWwgcGV1dCDDqnRyZSBtb2RpZmnDqSBhcHLDqHMgb2JzZXJ2YXRpb24gZGVzIGRvbm7DqWVzLCBzZWxvbiBs4oCZb2JqZWN0aWYgZHUgc3lzdMOobWUgZXQgbGVzIGJlc29pbnMgcsOpZWxzLjwvc3Bhbj48L2Rpdj4iXV0sIFsiTCdhbGdvcml0aG1lIGF0dGVuZHUsIGV0IGxlcyBkZXV4IGVycmV1cnMgcXVpIHJldmllbm5lbnQiLCBbIjxkaXYgY2xhc3M9XCJleGVtcGxlXCI+PHA+UsOpcMOpdGVyIGluZMOpZmluaW1lbnQ8YnI+Jm5ic3A7Jm5ic3A7TGlyZSBsYSBicm9jaGUgYW5hbG9naXF1ZSBldCBjYWxjdWxlciBsJ2luZGljZSBkJ2h1bWlkaXTDqSBhdmVjIGwnw6l0YWxvbm5hZ2U8YnI+Jm5ic3A7Jm5ic3A7QWZmaWNoZXIgbCdpbmRpY2U8YnI+Jm5ic3A7Jm5ic3A7U2kgaW5kaWNlICZsdDsgNTAgYWxvcnMgw6ljcmlyZSAxIHN1ciBQMjxicj4mbmJzcDsmbmJzcDtTaW5vbiDDqWNyaXJlIDAgc3VyIFAyPC9wPjwvZGl2PiIsICI8cD48c3Ryb25nPlByZW1pw6hyZSBlcnJldXIgOiBvdWJsaWVyIGxhIGJvdWNsZS48L3N0cm9uZz4gU2FucyDCqyByw6lww6l0ZXIgaW5kw6lmaW5pbWVudCDCuywgbGUgcHJvZ3JhbW1lIG1lc3VyZSB1bmUgc2V1bGUgZm9pcyBhdSBkw6ltYXJyYWdlIHB1aXMgbmUgZmFpdCBwbHVzIHJpZW4uIExhIHBsYW50ZSBwZXV0IHPDqWNoZXIsIGlsIG5lIHMnZW4gYXBlcmNldnJhIGphbWFpcy48L3A+IiwgIjxwPjxzdHJvbmc+RGV1eGnDqG1lIGVycmV1ciA6IG91YmxpZXIgbGUgwqsgc2lub24gwrsuPC9zdHJvbmc+IExhIHBvbXBlIHMnYWxsdW1lIGV0IG5lIHMnw6l0ZWludCBwbHVzIGphbWFpcy4gQydlc3QgbCdlcnJldXIgbGEgcGx1cyBmcsOpcXVlbnRlIOKAlCBldCBsYSBwbHVzIGZhY2lsZSDDoCByZXDDqXJlciwgcHVpc3F1ZSDDp2EgZMOpYm9yZGUgYXUgdGVzdC48L3A+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+w4AgcmV0ZW5pcjwvYj5VbiDCqyBzaSDCuyBzYW5zIMKrIHNpbm9uIMK7LCBjJ2VzdCB1bmUgYWN0aW9uIHF1J29uIGTDqWNsZW5jaGUgc2FucyBqYW1haXMgbCdhcnLDqnRlci48L2Rpdj4iXV0sIFsiTGUgbG9naWdyYW1tZSA6IMOgIHF1b2kgc2VydCBjaGFxdWUgZm9ybWUiLCBbIjxwPjxzdHJvbmc+T3ZhbGU8L3N0cm9uZz4gOiBkw6lidXQgb3UgZmluLiA8c3Ryb25nPlBhcmFsbMOpbG9ncmFtbWU8L3N0cm9uZz4gOiB1bmUgZW50csOpZSBvdSB1bmUgc29ydGllLCBjJ2VzdC3DoC1kaXJlIHVuIMOpY2hhbmdlIGF2ZWMgbCdleHTDqXJpZXVyIOKAlCBsaXJlIHVuIGNhcHRldXIsIGFmZmljaGVyIHVuIHLDqXN1bHRhdC4gPHN0cm9uZz5SZWN0YW5nbGU8L3N0cm9uZz4gOiB1biB0cmFpdGVtZW50LCB1biBjYWxjdWwgaW50ZXJuZS4gPHN0cm9uZz5Mb3NhbmdlPC9zdHJvbmc+IDogdW4gdGVzdCwgc2V1bCBzeW1ib2xlIGQnb8O5IHBhcnRlbnQgZGV1eCBmbMOoY2hlcy48L3A+IiwgIjxwPkwnZXJyZXVyIGxhIHBsdXMgZnLDqXF1ZW50ZSBlc3QgZGUgbWV0dHJlIGwnYWZmaWNoYWdlIGRhbnMgdW4gcmVjdGFuZ2xlLiBBZmZpY2hlciwgYydlc3QgPGVtPnNvcnRpcjwvZW0+IHVuZSBpbmZvcm1hdGlvbiB2ZXJzIGwndXRpbGlzYXRldXIgOiBjJ2VzdCB1biBwYXJhbGzDqWxvZ3JhbW1lLjwvcD4iLCAiPHA+UGV0aXRlIGxpbWl0ZSBkZSBsJ291dGlsIGVuIGxpZ25lIDogaWwgZGVzc2luZSBlbiBjb2xvbm5lLCBkb25jIGxhIGJvdWNsZSBkZSByZXRvdXIgbmUgcGV1dCBwYXMgw6p0cmUgdHJhY8OpZS4gw4ljcmlyZSDCqyByZXRvdXIgYXUgZMOpYnV0IMK7IGRhbnMgbGEgZGVybmnDqHJlIGNhc2Ugw6l0YWl0IGxhIGJvbm5lIHNvbHV0aW9uLjwvcD4iXV0sIFsiQmlsYW4gZGUgbOKAmWFjdGl2aXTDqSDigJQgY2UgcXVlIHR1IGRvaXMgcmV0ZW5pciIsIFsiPHA+PHN0cm9uZz5UdSBhcyB0cmFkdWl0IHVuIGNhaGllciBkZXMgY2hhcmdlcyBlbiBpbnN0cnVjdGlvbnMgZXjDqWN1dGFibGVzLjwvc3Ryb25nPjwvcD4iLCAiPHN2ZyBjbGFzcz1cInNjaGVtYVwiIHZpZXdCb3g9XCIwIDAgNzAwIDE1MFwiIHhtbG5zPVwiaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmdcIiByb2xlPVwiaW1nXCIgYXJpYS1sYWJlbD1cIkR1IGNhaGllciBkZXMgY2hhcmdlcyBhdSBwcm9ncmFtbWVcIj48dGV4dCB4PVwiMzUwLjBcIiB5PVwiMjBcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjE0XCIgZm9udC13ZWlnaHQ9XCI3MDBcIiBmaWxsPVwiIzE0MjYyQlwiPkR1IGNhaGllciBkZXMgY2hhcmdlcyBhdSBwcm9ncmFtbWU8L3RleHQ+PGRlZnM+PG1hcmtlciBpZD1cImZsXCIgbWFya2VyV2lkdGg9XCI3XCIgbWFya2VySGVpZ2h0PVwiN1wiIHJlZlg9XCI2XCIgcmVmWT1cIjMuNVwiIG9yaWVudD1cImF1dG9cIj48cGF0aCBkPVwiTTAgMCBMNyAzLjUgTDAgNyB6XCIgZmlsbD1cIiM1QTZDNzFcIi8+PC9tYXJrZXI+PC9kZWZzPjxyZWN0IHg9XCIxNC4wXCIgeT1cIjUyXCIgd2lkdGg9XCIxNTcuNVwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiOTIuOFwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5MaXJlIGNhcHRldXI8L3RleHQ+PHBhdGggZD1cIk0xNzQuNSA4MSBMMTgyLjUgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiMTg1LjVcIiB5PVwiNTJcIiB3aWR0aD1cIjE1Ny41XCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0ZERUNGMlwiIHN0cm9rZT1cIiNDMjE4NUJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCIyNjQuMlwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5DYWxjdWxlciBpbmRpY2U8L3RleHQ+PHBhdGggZD1cIk0zNDYuMCA4MSBMMzU0LjAgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiMzU3LjBcIiB5PVwiNTJcIiB3aWR0aD1cIjE1Ny41XCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0UyRUZFRVwiIHN0cm9rZT1cIiMwRTZFNkJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCI0MzUuOFwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5UZXN0ZXIgY29uZGl0aW9uPC90ZXh0PjxwYXRoIGQ9XCJNNTE3LjUgODEgTDUyNS41IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjUyOC41XCIgeT1cIjUyXCIgd2lkdGg9XCIxNTcuNVwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNGREVDRjJcIiBzdHJva2U9XCIjQzIxODVCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNjA3LjJcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+Q29tbWFuZGVyIHNvcnRpZTwvdGV4dD48L3N2Zz4iLCAiPHVsPjxsaT5VbmUgdmFyaWFibGUgbcOpbW9yaXNlIHVuZSBpbmZvcm1hdGlvbiB1dGlsZSBhdSB0cmFpdGVtZW50LjwvbGk+PGxpPkxlIHByb2dyYW1tZSBkb2l0IGNvbnZlcnRpciBsYSBtZXN1cmUgYnJ1dGUgYXZlYyBs4oCZw6l0YWxvbm5hZ2UgZGUgdG9uIG1vbnRhZ2UuPC9saT48bGk+VW5lIHN0cnVjdHVyZSBjb25kaXRpb25uZWxsZSBwZXJtZXQgZGUgY2hvaXNpciBlbnRyZSBkZXV4IGFjdGlvbnMuPC9saT48bGk+TGUgc2V1aWwgZG9pdCDDqnRyZSBkb2N1bWVudMOpIGNvbW1lIHVuIGNob2l4LCBwYXMgY29tbWUgdW5lIGNvbnN0YW50ZSB1bml2ZXJzZWxsZS48L2xpPjwvdWw+IiwgIjxwPjxzdHJvbmc+Vm9jYWJ1bGFpcmUgZXNzZW50aWVsIDo8L3N0cm9uZz4gdmFyaWFibGUgwrcgY2FsY3VsIMK3IGNvbmRpdGlvbiDCtyBzZXVpbCDCtyBib3VjbGUuPC9wPiIsICI8ZGl2IGNsYXNzPVwicmV0ZW5pclwiPjxiPsOAIHJldGVuaXI8L2I+U2kgdHUgcGV1eCBleHBsaXF1ZXIgbGUgc2Now6ltYSBhdmVjIHRlcyBwcm9wcmVzIG1vdHMgZXQgZG9ubmVyIHVuIGV4ZW1wbGUsIGzigJllc3NlbnRpZWwgZGUgbOKAmWFjdGl2aXTDqSBlc3QgYWNxdWlzLjwvZGl2PiJdXV0=";
   var EMPREINTE = 319326350;
+  function rendreLignes(lignes){
+    var html = "", tampon = [];
+    function vider(){
+      if(tampon.length){
+        html += "<ul>" + tampon.map(function(x){ return "<li>" + x + "</li>"; }).join("") + "</ul>";
+        tampon = [];
+      }
+    }
+    lignes.forEach(function(x){
+      if(/^\s*<(ul|ol|div|svg|p|a|table|figure|img|h[1-6]|blockquote)\b/i.test(x)){ vider(); html += x; }
+      else tampon.push(x);
+    });
+    vider();
+    return html;
+  }
+  
   function empreinte(t){
     var h = 5381;
     for(var i = 0; i < t.length; i++){ h = ((h * 33) ^ t.charCodeAt(i)) >>> 0; }
@@ -776,7 +793,7 @@ if(new URLSearchParams(location.search).get("prof") === "1"){
     var texte = decodeURIComponent(escape(atob(COFFRE)));
     var sections = JSON.parse(texte);
     cible.innerHTML = sections.map(function(s){
-      return "<h3>" + s[0] + "</h3><ul>" + s[1].map(function(l){ return "<li>" + l + "</li>"; }).join("") + "</ul>";
+      return "<h3>" + s[0] + "</h3>" + rendreLignes(s[1]);
     }).join("");
 
     /* les vidéos insérées dans la correction se chargent aussi au clic */
@@ -878,6 +895,7 @@ function dateFr(iso){
 }
 
 function construirePDF(d){
+  if(!window.jspdf || !window.jspdf.jsPDF){ window.print(); return; }
   var doc = new window.jspdf.jsPDF({ unit:"mm", format:"a4" });
   var y = 0, page = 1;
   var nomComplet = propre((d.identite.nom + " " + d.identite.prenom).trim());
@@ -1164,5 +1182,6 @@ el("pdf").addEventListener("click", function(){
 
 })();
 </script>
+<script src="assets/correction-bilan.js"></script>
 </body>
 </html>
