@@ -10,8 +10,9 @@ techno-3e/
 ├── seq1-act2.html    ← Séquence 1 · Activité 2
 ├── seq1-act3.html    ← Séquence 1 · Activité 3
 ├── seq2-act1-p1.html ← Séquence 2 · Activité 1, partie 1
-├── seq2-act1-p2.html ← Séquence 2 · Activité 1, partie 2
-├── seq2-act1-p3.html ← Séquence 2 · Activité 1, partie 3
+├── seq2-act1-p2.html ← Séquence 2 · Activité 1, partie 2 (adresse IP, routage, débit — sans ordinateur)
+├── seq2-act1-p3.html ← Séquence 2 · Activité 1, partie 3 (Filius)
+├── seq2-act1-p4.html ← Séquence 2 · Activité 1, partie 4 (analyse du routage)
 ├── seq3-act1-p1.html ← Séquence 3 · Activité 1, partie 1 (micro:bit)
 ├── seq3-act1-p2.html ← Séquence 3 · Activité 1, partie 2 (micro:bit)
 ├── seq3-act2-p1.html ← Séquence 3 · Activité 2, partie 1 (IA et images)

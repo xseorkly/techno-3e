@@ -302,9 +302,10 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
           <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
         </optgroup>
         <optgroup label="Séquence 2">
-          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Comprendre</option>
-          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Filius</option>
-          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Analyser le routage</option>
+          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
+          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage & débit</option>
+          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
+          <option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
         </optgroup>
         <optgroup label="Séquence 3">
           <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
@@ -353,10 +354,10 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <h1 class="titre">L'IA qui reconnaît — partie 2 : j'entraîne ma propre IA</h1>
     <p class="sous">Main ouverte, main fermée : allumer et éteindre la micro:bit · 55 min</p>
     <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
-      <a href="#materiel"><b>6′</b>Les outils</a>
-      <a href="#base"><b>18′</b>Base de données</a>
-      <a href="#modele"><b>12′</b>Entraînement</a>
-      <a href="#usage"><b>14′</b>Utilisation</a>
+      <a href="#materiel"><b>3′</b>Matériel</a>
+      <a href="#base"><b>20′</b>Base de données</a>
+      <a href="#modele"><b>10′</b>Entraînement</a>
+      <a href="#usage"><b>17′</b>Utilisation</a>
       <a href="#synthese"><b>5′</b>Synthèse</a>
     </nav>
   </header>
@@ -386,41 +387,14 @@ document.getElementById("navfiches").addEventListener("change", function(){
     </div>
   </details>
 
-    <article class="bloc" id="materiel">
-    <div class="marge"><span class="duree">6′</span></div>
+  <article class="bloc" id="materiel">
+    <div class="marge"><span class="duree">3′</span></div>
     <div class="corps">
-      <h2>Les deux outils, et le matériel</h2>
+      <h2>Le matériel</h2>
       <div class="situation">
-        <p>Un ordinateur, une webcam, une carte micro:bit et son câble USB. Rien à installer : tout se passe dans le navigateur.</p>
+        <p>Un ordinateur, une webcam, la connexion Internet, une carte micro:bit et son câble USB. Rien à installer : tout se passe dans le navigateur.</p>
         <p style="margin-top:14px">Objectif de la séance : la caméra reconnaît ta main ouverte ou ta main fermée, et la micro:bit allume ou éteint son écran en conséquence.</p>
       </div>
-
-      <h3>Vittascience IA — pour entraîner</h3>
-      <p class="consigne">C'est une plateforme française, soutenue par le ministère de l'Éducation nationale, qui permet d'entraîner un modèle de reconnaissance d'<strong>images</strong>, de <strong>sons</strong> ou de <strong>postures</strong>. Tu montres des exemples à la webcam, tu les ranges dans des catégories, et la plateforme construit le modèle.</p>
-      <div class="retenir"><b>Un point important</b>Tes images <strong>ne quittent pas ton ordinateur</strong>. Elles restent en mémoire dans le navigateur pendant tout l'entraînement et toute l'utilisation. Rien n'est envoyé sur Internet, rien n'est stocké chez un fournisseur étranger. C'est ce qui rend l'outil utilisable en classe sans difficulté avec le règlement sur les données personnelles.</div>
-
-      <h3>Adacraft — pour programmer</h3>
-      <p class="consigne">C'est un environnement de programmation par blocs, dérivé de Scratch, enrichi d'extensions. Deux nous intéressent : l'extension <strong>IA</strong>, qui va chercher le modèle que tu viens d'entraîner, et l'extension <strong>micro:bit</strong>, qui pilote la carte. C'est là que tu relieras la reconnaissance à une action réelle.</p>
-
-      <div class="video" data-src="https://www.youtube-nocookie.com/embed/QfQCN9m5gOg">
-        <p class="vt">Entraîner une IA à reconnaître des images avec Vittascience</p>
-        <p class="vs">La capsule officielle : l'interface, la création des catégories, la capture et l'entraînement.</p>
-        <div class="actions">
-          <button class="vlire" type="button">Lire la vidéo</button>
-          <a href="https://fr.vittascience.com/ia/" target="_blank" rel="noopener">Ouvrir Vittascience IA</a>
-        </div>
-      </div>
-
-      <details class="ref" style="margin-top:18px">
-        <summary>Pour aller plus loin — le webinaire complet</summary>
-        <div class="dedans">
-          <p style="margin:0 0 12px">Présentation détaillée par l'équipe de Vittascience : entraînement images et sons, visualisation du réseau de neurones, zones d'interaction, puis passage à Adacraft et à Python. Les chapitres permettent d'aller directement au passage utile.</p>
-          <div class="video" data-src="https://www.youtube-nocookie.com/embed/z5AvIKckMvc">
-            <p class="vt">Webinaire — l'intelligence artificielle chez Vittascience</p>
-            <div class="actions"><button class="vlire" type="button">Lire la vidéo</button></div>
-          </div>
-        </div>
-      </details>
     </div>
   </article>
 
@@ -431,49 +405,25 @@ document.getElementById("navfiches").addEventListener("change", function(){
       <p class="amorce">Une IA n'apprend rien toute seule : il faut lui montrer des exemples déjà classés. C'est le travail le plus long, et c'est lui qui décide de la qualité du résultat.</p>
 
       <div class="bandeau">
-        <p>Sur Vittascience IA, choisis <em>Reconnaissance</em> puis <em>Images</em>. Aucun compte n'est nécessaire pour commencer.</p>
-        <a href="https://fr.vittascience.com/ia/images" target="_blank" rel="noopener">Ouvrir l'entraînement d'images</a>
+        <p>L'outil de Google, gratuit et sans compte. Choisis <em>Get Started</em>, puis <em>Image Project</em>, puis <em>Standard image model</em>.</p>
+        <a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener">Ouvrir Teachable Machine</a>
       </div>
 
       <div class="cartes" id="etapes">
-        <div class="cartefiche" data-etape="Ouvrir l'entraînement d'images sur Vittascience">
-          <label class="etape"><input type="checkbox" id="et-1"><span><b>1.</b> Ouvrir Vittascience IA, choisir <em>Reconnaissance</em> puis <em>Images</em>.</span></label>
+        <div class="cartefiche" data-etape="Ouvrir Teachable Machine en mode Image Project">
+          <label class="etape"><input type="checkbox" id="et-1"><span><b>1.</b> Ouvrir Teachable Machine, cliquer sur <em>Get Started</em>, puis choisir <em>Image Project</em>.</span></label>
         </div>
         <div class="cartefiche" data-etape="Autoriser la webcam">
-          <label class="etape"><input type="checkbox" id="et-2"><span><b>2.</b> Autoriser le navigateur à utiliser la caméra. L'image apparaît dans la fenêtre de capture.</span></label>
+          <label class="etape"><input type="checkbox" id="et-2"><span><b>2.</b> Cliquer sur <em>Webcam</em> dans la première classe et autoriser le navigateur à utiliser la caméra.</span></label>
         </div>
-        <div class="cartefiche" data-etape="Créer et nommer les deux catégories">
-          <label class="etape"><input type="checkbox" id="et-3"><span><b>3.</b> Créer deux catégories et les nommer <strong>MAIN OUVERTE</strong> et <strong>MAIN FERMEE</strong>. En majuscules et sans accent : tu devras les retaper à l'identique dans le programme.</span></label>
+        <div class="cartefiche" data-etape="Renommer les deux classes">
+          <label class="etape"><input type="checkbox" id="et-3"><span><b>3.</b> Renommer <em>Class 1</em> en <strong>MAIN OUVERTE</strong> et <em>Class 2</em> en <strong>MAIN FERMEE</strong>. Écris-les en majuscules sans accent : tu devras les retaper à l'identique dans le programme.</span></label>
         </div>
-        <div class="cartefiche" data-etape="Capturer les images de la main ouverte">
-          <label class="etape"><input type="checkbox" id="et-4"><span><b>4.</b> Maintenir le bouton de capture pour enregistrer une cinquantaine d'images de la main ouverte, en bougeant un peu la main et en changeant légèrement de distance.</span></label>
+        <div class="cartefiche" data-etape="Photographier la main ouverte">
+          <label class="etape"><input type="checkbox" id="et-4"><span><b>4.</b> Maintenir le bouton d'enregistrement enfoncé pour capturer une cinquantaine d'images de la main ouverte, en bougeant un peu la main.</span></label>
         </div>
-        <div class="cartefiche" data-etape="Capturer les images de la main fermée">
-          <label class="etape"><input type="checkbox" id="et-5"><span><b>5.</b> Faire de même pour la main fermée, avec un nombre d'images comparable.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Lancer l'entraînement">
-          <label class="etape"><input type="checkbox" id="et-6"><span><b>6.</b> Cliquer sur <em>Entraîner le modèle</em> et laisser le calcul se terminer sans fermer l'onglet.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Tester le modèle devant la caméra">
-          <label class="etape"><input type="checkbox" id="et-7"><span><b>7.</b> Montrer les deux positions et lire le pourcentage de confiance affiché pour chaque catégorie.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Observer les zones d'interaction">
-          <label class="etape"><input type="checkbox" id="et-8"><span><b>8.</b> Afficher les <em>zones d'interaction</em> : la plateforme colore les parties de l'image sur lesquelles le modèle s'appuie pour décider. C'est la boîte noire qui s'ouvre.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Exporter le modèle vers Adacraft">
-          <label class="etape"><input type="checkbox" id="et-9"><span><b>9.</b> Depuis Vittascience IA, envoyer le modèle vers Adacraft, ou copier son identifiant pour le charger ensuite.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Ajouter les extensions IA et micro:bit">
-          <label class="etape"><input type="checkbox" id="et-10"><span><b>10.</b> Dans Adacraft, ouvrir le menu <em>Extensions</em> en bas à gauche et ajouter <strong>IA</strong> puis <strong>micro:bit</strong>.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Charger le modèle et lancer la reconnaissance">
-          <label class="etape"><input type="checkbox" id="et-11"><span><b>11.</b> Dans <em>quand drapeau cliqué</em> : charger le modèle, activer la webcam, puis lancer la détection dans une boucle <em>répéter indéfiniment</em>.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Commander la carte selon la catégorie détectée">
-          <label class="etape"><input type="checkbox" id="et-12"><span><b>12.</b> Si la catégorie détectée est <strong>MAIN OUVERTE</strong>, afficher une image sur la micro:bit ; sinon si c'est <strong>MAIN FERMEE</strong>, effacer l'écran.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Connecter la carte et exécuter">
-          <label class="etape"><input type="checkbox" id="et-13"><span><b>13.</b> Brancher la micro:bit, la connecter depuis Adacraft, puis cliquer sur <em>Exécuter</em> et tester devant la caméra.</span></label>
+        <div class="cartefiche" data-etape="Photographier la main fermée">
+          <label class="etape"><input type="checkbox" id="et-5"><span><b>5.</b> Faire de même pour la main fermée, avec autant d'images environ.</span></label>
         </div>
       </div>
 
@@ -506,10 +456,21 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="marge"><span class="duree">10′</span></div>
     <div class="corps">
       <h2>Étape 2 — J'entraîne le modèle</h2>
+      <div class="cartes" id="etapes2">
+        <div class="cartefiche" data-etape="Lancer l'entraînement">
+          <label class="etape"><input type="checkbox" id="et-6"><span><b>6.</b> Cliquer sur <em>Train Model</em> et laisser l'onglet ouvert pendant tout le calcul.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Tester dans l'aperçu">
+          <label class="etape"><input type="checkbox" id="et-7"><span><b>7.</b> Dans <em>Preview</em>, montrer la main ouverte puis la main fermée. Les barres indiquent les scores de confiance produits par le modèle pour les classes apprises. Un score élevé n’est pas une certitude absolue : il faut tester sur des exemples nouveaux.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Exporter et récupérer le lien du modèle">
+          <label class="etape"><input type="checkbox" id="et-8"><span><b>8.</b> Cliquer sur <em>Export Model</em>, onglet <em>Tensorflow.js</em>, cocher <em>Upload (shareable link)</em>, cliquer sur <em>Upload my model</em>, puis copier le lien obtenu.</span></label>
+        </div>
+      </div>
 
       <div class="ligne" style="margin-top:16px">
-        <span class="cle">Mon modèle</span>
-        <input id="lien-modele" placeholder="nom ou identifiant du modèle entraîné" aria-label="Lien du modèle entraîné">
+        <span class="cle">Lien de mon modèle</span>
+        <input id="lien-modele" placeholder="https://teachablemachine.withgoogle.com/models/…" aria-label="Lien du modèle entraîné">
       </div>
 
       <h3>Ce que j'observe dans l'aperçu</h3>
@@ -531,10 +492,6 @@ document.getElementById("navfiches").addEventListener("change", function(){
         </div>
       </div>
 
-      <h3>N2b — J'ouvre la boîte noire</h3>
-      <p class="consigne">Affiche les <strong>zones d'interaction</strong>. Elles montrent les parties de l'image que le modèle regarde vraiment pour décider. Sur quoi s'appuie-t-il ? Sur ta main, ou aussi sur autre chose ?</p>
-      <textarea id="n2b" data-rep placeholder="Ce que le modèle regarde…"></textarea>
-
       <p class="consigne" style="margin-top:18px">N2a — Que se passe-t-il quand tu montres ta main de profil, une position que le modèle n'a jamais vue ? Explique pourquoi.</p>
       <textarea id="n2a" data-rep aria-label="N2a — Que se passe-t-il quand tu montres ta main de profil, une position que le modèle n&#x27;a jamais vue ? Expliq"></textarea>
     </div>
@@ -547,10 +504,24 @@ document.getElementById("navfiches").addEventListener("change", function(){
       <p class="amorce">Le modèle est en ligne, à son adresse. Il reste à le brancher dans un programme par blocs qui pilote la micro:bit.</p>
 
       <div class="bandeau">
-        <p>Programmation par blocs, dérivée de Scratch. Ajoute les extensions <em>IA</em> et <em>micro:bit</em> dans le menu <em>Extensions</em>, en bas à gauche.</p>
-        <a href="https://fr.vittascience.com/adacraft/?mode=mixed" target="_blank" rel="noopener">Ouvrir Adacraft</a>
+        <p>Programmation par blocs. Ajoute les extensions <em>IA Image</em> et <em>micro:bit</em> dans le menu <em>Extensions</em>, en bas à gauche.</p>
+        <a href="https://fr.vittascience.com/adacraft/?mode=mixed" target="_blank" rel="noopener">Ouvrir Vittascience Adacraft</a>
       </div>
 
+      <div class="cartes" id="etapes3">
+        <div class="cartefiche" data-etape="Ajouter les extensions IA Image et micro:bit">
+          <label class="etape"><input type="checkbox" id="et-9"><span><b>9.</b> Ouvrir Vittascience Adacraft et ajouter les extensions <em>IA Image</em> et <em>micro:bit</em>.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Charger le modèle et lancer la webcam">
+          <label class="etape"><input type="checkbox" id="et-10"><span><b>10.</b> Dans <em>quand drapeau cliqué</em> : effacer l'écran, sélectionner et initialiser le modèle en collant son URL, puis activer la webcam et lancer la détection.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Écrire la sélection sur la classe détectée">
+          <label class="etape"><input type="checkbox" id="et-11"><span><b>11.</b> Dans <em>répéter indéfiniment</em> : si la classe détectée est <strong>MAIN OUVERTE</strong>, dire « allume » et afficher une image sur la carte ; sinon si c'est <strong>MAIN FERMEE</strong>, dire « éteint » et effacer l'écran.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Connecter la carte et exécuter">
+          <label class="etape"><input type="checkbox" id="et-12"><span><b>12.</b> Brancher la micro:bit, la connecter depuis Vittascience, puis cliquer sur <em>Exécuter</em> et tester devant la caméra.</span></label>
+        </div>
+      </div>
 
       <h3>Bilan de la séance</h3>
       <p class="consigne">Qu'est-ce qui a marché du premier coup, et sur quoi as-tu buté ?</p>
@@ -605,19 +576,18 @@ var FICHE = {
   sequence: 3,
   activite: 2,
   titre: "L'IA qui reconnaît - partie 2 : j'entraîne ma propre IA",
-  thematique: "Vittascience IA et Adacraft, main ouverte et main fermée",
+  thematique: "Teachable Machine et Vittascience, main ouverte et main fermée",
   duree: "55 min",
   niveau: "3e",
   cps: { intitule: "", niveaux: [] },
   sortie: [
-    { type:"etapes", titre:"Les treize étapes du TP", duree:"44'" },
-    { type:"tab",   cle:"releve", titre:"Ma base de données", duree:"18'",
+    { type:"etapes", titre:"Les douze étapes du TP", duree:"50'" },
+    { type:"tab",   cle:"releve", titre:"Ma base de données", duree:"20'",
       entetes:["Classe", "Nombre d'images"], largeurs:[70, 112] },
     { type:"qcm",   cle:"n1a" },
-    { type:"champ", cle:"lien-modele", titre:"Mon modèle entraîné" },
-    { type:"tab",   cle:"mesures", titre:"Ce que j'observe dans l'aperçu", duree:"12'",
+    { type:"champ", cle:"lien-modele", titre:"Le lien de mon modèle entraîné" },
+    { type:"tab",   cle:"mesures", titre:"Ce que j'observe dans l'aperçu", duree:"10'",
       entetes:["Essai", "Classe annoncée", "Confiance"], largeurs:[62, 62, 58] },
-    { type:"texte", cle:"n2b", titre:"N2b — Les zones d'interaction" },
     { type:"texte", cle:"n2a", titre:"N2a — La main de profil" },
     { type:"texte", cle:"bilan", titre:"Bilan de la séance" },
     { type:"texte", cle:"rep-synthese", titre:"Ma synthèse — les trois étapes", duree:"5'" }
@@ -1074,7 +1044,7 @@ el("pdf").addEventListener("click", function(){
 
 })();
 </script>
-<script>window.CORRECTION_BILAN={coffre:"W1siTGVzIGRldXggb3V0aWxzLCBldCBwb3VycXVvaSBkZXV4IiwgWyI8cD5PbiBhIHV0aWxpc8OpIDxzdHJvbmc+ZGV1eDwvc3Ryb25nPiBvdXRpbHMsIGV0IGJlYXVjb3VwIGNvbmZvbmRlbnQgbGV1ciByw7RsZS4gUmV0aWVucyBsYSBkaWZmw6lyZW5jZSwgZWxsZSByZXZpZW50IMOgIGNoYXF1ZSBwcm9qZXQgZCdJQS48L3A+IiwgIjxwPjxzdHJvbmc+Vml0dGFzY2llbmNlIElBPC9zdHJvbmc+IHNlcnQgw6AgPGVtPmZhYnJpcXVlcjwvZW0+IGxlIG1vZMOobGUuIFR1IGx1aSBtb250cmVzIGRlcyBleGVtcGxlcyBjbGFzc8OpcywgaWwgZW4gdGlyZSB1bmUgcsOoZ2xlLiBDJ2VzdCBsJ2F0ZWxpZXIuPC9wPiIsICI8cD48c3Ryb25nPkFkYWNyYWZ0PC9zdHJvbmc+IHNlcnQgw6AgPGVtPnNlIHNlcnZpcjwvZW0+IGR1IG1vZMOobGUuIElsIG5lIHNhaXQgcmllbiBhcHByZW5kcmUgOiBpbCBwb3NlIGxhIHF1ZXN0aW9uIMKrIHF1J2VzdC1jZSBxdWUgdHUgdm9pcyA/IMK7IGF1IG1vZMOobGUgZMOpasOgIGVudHJhw65uw6ksIGV0IGTDqWNsZW5jaGUgdW5lIGFjdGlvbiBzZWxvbiBsYSByw6lwb25zZS4gQydlc3QgbCd1dGlsaXNhdGV1ciBkZSBsJ2F0ZWxpZXIuPC9wPiIsICI8ZGl2IGNsYXNzPVwicmV0ZW5pclwiPjxiPsOAIHJldGVuaXI8L2I+VW4gbW9kw6hsZSBzJ2VudHJhw65uZSB1bmUgZm9pcywgcHVpcyBzJ3V0aWxpc2UgYXV0YW50IGRlIGZvaXMgcXUnb24gdmV1dCwgZGFucyBuJ2ltcG9ydGUgcXVlbCBwcm9ncmFtbWUuIExlcyBkZXV4IMOpdGFwZXMgc29udCBzw6lwYXLDqWVzLCBldCBjJ2VzdCB2cmFpIGRlIHRvdXRlcyBsZXMgSUEuPC9kaXY+Il1dLCBbIk1hIGJhc2UgZGUgZG9ubsOpZXMg4oCUIGxhIGNvcnJlY3Rpb24iLCBbIjxwPklsIG4neSBhIHBhcyBkZSBjaGlmZnJlIHVuaXF1ZSBhdHRlbmR1LCBtYWlzIHRyb2lzIGNob3NlcyBkZXZhaWVudCDDqnRyZSB2cmFpZXMuPC9wPiIsICI8cD48c3Ryb25nPlVuZSBjaW5xdWFudGFpbmUgZCdpbWFnZXMgcGFyIGNhdMOpZ29yaWU8L3N0cm9uZz4sIGF1IG1pbmltdW0uIEVuIGRlc3NvdXMgZGUgdmluZ3QsIGxlIG1vZMOobGUgZGV2aWVudCB0csOocyBpbnN0YWJsZS48L3A+IiwgIjxwPjxzdHJvbmc+VW4gbm9tYnJlIGNvbXBhcmFibGUgZGFucyBsZXMgZGV1eCBjYXTDqWdvcmllcy48L3N0cm9uZz4gU2kgdHUgYXMgMTAwIGltYWdlcyBkZSBtYWluIG91dmVydGUgZXQgMjAgZGUgbWFpbiBmZXJtw6llLCBsZSBtb2TDqGxlIHByZW5kIGwnaGFiaXR1ZGUgZGUgcsOpcG9uZHJlIMKrIG1haW4gb3V2ZXJ0ZSDCuyA6IGMnZXN0IHN0YXRpc3RpcXVlbWVudCBwYXlhbnQgcG91ciBsdWkuIE9uIGFwcGVsbGUgw6dhIHVuIGpldSA8ZW0+ZMOpc8OpcXVpbGlicsOpPC9lbT4sIGV0IGMnZXN0IHVuZSBkZXMgY2F1c2VzIGRlIGJpYWlzIGxlcyBwbHVzIGZyw6lxdWVudGVzLjwvcD4iLCAiPHA+PHN0cm9uZz5EZXMgaW1hZ2VzIHZhcmnDqWVzLjwvc3Ryb25nPiBTaSB0b3V0ZXMgb250IMOpdMOpIHByaXNlcyBleGFjdGVtZW50IGRhbnMgbGEgbcOqbWUgcG9zaXRpb24sIMOgIGxhIG3Dqm1lIGRpc3RhbmNlLCBsZSBtb2TDqGxlIGFwcHJlbmQgbGEgcG9zaXRpb24gYXV0YW50IHF1ZSBsYSBtYWluLjwvcD4iLCAiPGRpdiBjbGFzcz1cInJldGVuaXJcIj48Yj7DgCByZXRlbmlyPC9iPkxhIHF1YWxpdMOpIGQndW5lIElBIG5lIHZpZW50IHBhcyBkdSBwcm9ncmFtbWUsIGVsbGUgdmllbnQgZGVzIGRvbm7DqWVzLiBOb21icmUgc3VmZmlzYW50LCBjYXTDqWdvcmllcyDDqXF1aWxpYnLDqWVzLCBleGVtcGxlcyB2YXJpw6lzIDogY2VzIHRyb2lzIHLDqGdsZXMgdmFsZW50IHBvdXIgdG91dGVzIGxlcyBJQSBkdSBtb25kZS48L2Rpdj4iXV0sIFsiTjFhIOKAlCBQb3VycXVvaSDDqXRpcXVldGVyIGxlcyBpbWFnZXMiLCBbIjxwPjxzdHJvbmc+UsOpcG9uc2UgYiA6IGxhIG1hY2hpbmUgYXBwcmVuZCBlbiBjb21wYXJhbnQgZGVzIGV4ZW1wbGVzIGRvbnQgb24gbHVpIGEgZG9ubsOpIGxhIHLDqXBvbnNlLjwvc3Ryb25nPiBDJ2VzdCBjZSBxdSdvbiBhcHBlbGxlIGwnYXBwcmVudGlzc2FnZSA8ZW0+c3VwZXJ2aXPDqTwvZW0+LjwvcD4iLCAiPHA+U2FucyDDqXRpcXVldHRlLCBsYSBtYWNoaW5lIHZvaXQgZGVzIGltYWdlcyBtYWlzIG4nYSBhdWN1biBtb3llbiBkZSBzYXZvaXIgY2UgcXUnZWxsZSBkb2l0IGRpc3Rpbmd1ZXIuIEMnZXN0IHRvaSBxdWksIGVuIHJhbmdlYW50IGxlcyBpbWFnZXMgZGFucyBkZXV4IGNhdMOpZ29yaWVzIG5vbW3DqWVzLCBsdWkgZGlzIDogwqsgdm9pbMOgIGNlIHF1ZSBqJ2FwcGVsbGUgdW5lIG1haW4gb3V2ZXJ0ZSwgZXQgdm9pbMOgIGNlIHF1ZSBqJ2FwcGVsbGUgdW5lIG1haW4gZmVybcOpZSDCuy48L3A+IiwgIjxwPkxlcyBhdXRyZXMgcsOpcG9uc2VzIG5lIHRpZW5uZW50IHBhcyA6IGxlIHJhbmdlbWVudCBuJ2FjY8OpbMOocmUgcmllbiBldCBuJ8OpY29ub21pc2UgcGFzIGRlIG3DqW1vaXJlLiBFdCBpbCBuJ2VzdCBjZXJ0YWluZW1lbnQgcGFzIGZhY3VsdGF0aWYg4oCUIHNhbnMgbHVpLCBpbCBuJ3kgYSBwYXMgZCdhcHByZW50aXNzYWdlIGR1IHRvdXQuPC9wPiJdXSwgWyJDZSBxdWUgaidvYnNlcnZlIGRhbnMgbCdhcGVyw6d1IOKAlCBsYSBjb3JyZWN0aW9uIiwgWyI8cD48c3Ryb25nPk1haW4gb3V2ZXJ0ZSBiaWVuIGVuIGZhY2UsIG1haW4gZmVybcOpZSBiaWVuIGVuIGZhY2UgOjwvc3Ryb25nPiBsYSBib25uZSBjYXTDqWdvcmllIGRvaXQgc29ydGlyIGF2ZWMgdW5lIGNvbmZpYW5jZSDDqWxldsOpZSwgc291dmVudCBhdS1kZXNzdXMgZGUgOTAgJS4gU2kgY2Ugbidlc3QgcGFzIGxlIGNhcywgYydlc3QgbGEgYmFzZSBkJ2ltYWdlcyBxdSdpbCBmYXV0IHJlcHJlbmRyZSwgcGFzIGxlIHByb2dyYW1tZS48L3A+IiwgIjxwPjxzdHJvbmc+TWFpbiBkZSBwcm9maWwgOjwvc3Ryb25nPiBjJ2VzdCBsJ2Vzc2FpIGludMOpcmVzc2FudC4gTGEgY29uZmlhbmNlIGNodXRlLCBldCBsYSBjYXTDqWdvcmllIGFubm9uY8OpZSBwZXV0IMOqdHJlIGZhdXNzZS48L3A+IiwgIjxwPjxzdHJvbmc+Q29tbWVudCBsaXJlIHVuIHBvdXJjZW50YWdlLjwvc3Ryb25nPiBMZSBtb2TDqGxlIHLDqXBhcnRpdCB0b3Vqb3VycyAxMDAgJSBlbnRyZSBsZXMgY2F0w6lnb3JpZXMgcXUnaWwgY29ubmHDrnQuIFVuZSByw6lwb25zZSDDoCA5NSAlIGNvbnRyZSA1ICUgdmV1dCBkaXJlIHF1J2lsIGVzdCBzw7tyLiBVbmUgcsOpcG9uc2Ugw6AgNTUgJSBjb250cmUgNDUgJSB2ZXV0IGRpcmUgcXUnaWwgaMOpc2l0ZSDigJQgbcOqbWUgcydpbCBhbm5vbmNlIHF1YW5kIG3Dqm1lIHVuZSBjYXTDqWdvcmllLjwvcD4iLCAiPGRpdiBjbGFzcz1cInJldGVuaXJcIj48Yj7DgCByZXRlbmlyPC9iPlVuIHNjb3JlIGRlIGNvbmZpYW5jZSBuJ2VzdCBwYXMgdW5lIG5vdGUgZGUgdsOpcml0w6kuIEMnZXN0IGxhIHBhcnQgcXVlIGxlIG1vZMOobGUgYXR0cmlidWUgw6AgdW5lIGNhdMOpZ29yaWUgcGFybWkgY2VsbGVzIHF1J29uIGx1aSBhIGFwcHJpc2VzLCBldCBpbCBuZSBwZXV0IGphbWFpcyByw6lwb25kcmUgwqsgamUgbmUgc2FpcyBwYXMgwrsuPC9kaXY+Il1dLCBbIk4yYiDigJQgTGVzIHpvbmVzIGQnaW50ZXJhY3Rpb24sIGxhIGJvw650ZSBub2lyZSBvdXZlcnRlIiwgWyI8cD5DJ2VzdCBsYSBxdWVzdGlvbiBsYSBwbHVzIHJpY2hlIGRlIGxhIHPDqWFuY2UsIGV0IGxlcyByw6lwb25zZXMgdmFyaWVudCBkJ3VuIGdyb3VwZSDDoCBsJ2F1dHJlLiBDZSBxdSdpbCBmYWxsYWl0IG9ic2VydmVyIDogPHN0cm9uZz5sZSBtb2TDqGxlIG5lIHJlZ2FyZGUgcGFzIGZvcmPDqW1lbnQgY2UgcXVlIHR1IGNyb2lzPC9zdHJvbmc+LjwvcD4iLCAiPHA+RGFucyBsZSBtZWlsbGV1ciBkZXMgY2FzLCBsZXMgem9uZXMgY29sb3LDqWVzIHNlIGNvbmNlbnRyZW50IHN1ciBsYSBtYWluIGV0IHN1cnRvdXQgc3VyIGxlcyBkb2lndHMsIGzDoCBvw7kgc2Ugam91ZSB2cmFpbWVudCBsYSBkaWZmw6lyZW5jZSBlbnRyZSBvdXZlcnRlIGV0IGZlcm3DqWUuIExlIG1vZMOobGUgYSBhcHByaXMgbGEgYm9ubmUgY2hvc2UuPC9wPiIsICI8cD5NYWlzIHRyw6hzIHNvdXZlbnQsIGxlcyB6b25lcyBkw6lib3JkZW50IDogc3VyIGxhIG1hbmNoZSwgc3VyIGxlIGZvbmQgZHUgbXVyLCBzdXIgdW5lIHpvbmUgZCdvbWJyZS4gQ2VsYSB2ZXV0IGRpcmUgcXVlIGxlIG1vZMOobGUgcydhcHB1aWUgYXVzc2kgc3VyIGRlcyDDqWzDqW1lbnRzIHF1aSBuJ29udCByaWVuIMOgIHZvaXIgYXZlYyBsZSBnZXN0ZS4gSWwgZm9uY3Rpb25uZXJhIHRhbnQgcXVlIHJpZW4gbmUgY2hhbmdlIOKAlCBldCBzZSB0cm9tcGVyYSBkw6hzIHF1ZSB0dSBjaGFuZ2VyYXMgZGUgcHVsbCBvdSBkZSBzYWxsZS48L3A+IiwgIjxwPkMnZXN0IGV4YWN0ZW1lbnQgbGUgbcOpY2FuaXNtZSBkZXMgYmlhaXMgdnVzIGVuIHBhcnRpZSAxLCBtYWlzIHJlbmR1IDxlbT52aXNpYmxlPC9lbT4uIFVuZSBJQSBuJ2EgYXVjdW5lIGlkw6llIGRlIGNlIHF1J2VzdCB1bmUgbWFpbi4gRWxsZSBhIHRyb3V2w6ksIGRhbnMgbGVzIHBpeGVscywgY2UgcXVpIHPDqXBhcmFpdCBsZSBtaWV1eCB0ZXMgZGV1eCBwYXF1ZXRzIGQnaW1hZ2VzLiBTaSBjZSBxdWkgbGVzIHPDqXBhcmFpdCBsZSBtaWV1eCDDqXRhaXQgbGEgY291bGV1ciBkdSBmb25kLCBjJ2VzdCBsZSBmb25kIHF1J2VsbGUgYSBhcHByaXMuPC9wPiIsICI8ZGl2IGNsYXNzPVwicmV0ZW5pclwiPjxiPsOAIHJldGVuaXI8L2I+Vm9pciBjZSBxdWUgbGUgbW9kw6hsZSByZWdhcmRlIGNoYW5nZSB0b3V0IDogb24gY2Vzc2UgZGUgY3JvaXJlIHF1J2lsIMKrIGNvbXByZW5kIMK7LCBvbiB2b2l0IHF1J2lsIHJlcMOocmUgZGVzIGRpZmbDqXJlbmNlcy4gQydlc3QgcHLDqWNpc8OpbWVudCBjZSBxdSdhdWN1biBvdXRpbCBuZSBtb250cmFpdCBhdmFudC48L2Rpdj4iXV0sIFsiTjJhIOKAlCBMYSBtYWluIGRlIHByb2ZpbCwgZXQgcG91cnF1b2kgZWxsZSBwacOoZ2UgbGUgbW9kw6hsZSIsIFsiPHA+PHN0cm9uZz5MZSBtb2TDqGxlIGFubm9uY2UgcXVhbmQgbcOqbWUgdW5lIGRlcyBkZXV4IGNhdMOpZ29yaWVzPC9zdHJvbmc+LCBnw6luw6lyYWxlbWVudCBhdmVjIHVuZSBjb25maWFuY2UgcGx1cyBmYWlibGUsIGV0IHNvdXZlbnQgbGEgbWF1dmFpc2UuPC9wPiIsICI8cD5MYSByYWlzb24gZXN0IHNpbXBsZSA6IGlsIG4nYSBqYW1haXMgdnUgY2V0dGUgcG9zaXRpb24uIElsIG5lIHBldXQgcGFzIHLDqXBvbmRyZSDCqyBpbmNvbm51IMK7LCBjZXR0ZSBwb3NzaWJpbGl0w6kgbidleGlzdGUgcGFzIHBvdXIgbHVpLiBJbCBjaG9pc2l0IGRvbmMgY2VsbGUgZGUgc2VzIGRldXggY2F0w6lnb3JpZXMgZG9udCBsJ2ltYWdlIHNlIHJhcHByb2NoZSBsZSBwbHVzLCBxdWl0dGUgw6Agc2UgdHJvbXBlci48L3A+IiwgIjxwPkNvbW1lbnQgY29ycmlnZXIgPyBEZXV4IHNvbHV0aW9ucywgZXQgbGVzIGRldXggc29udCBib25uZXMuIEFqb3V0ZXIgZGVzIGltYWdlcyBkZSBwcm9maWwgZGFucyBsZXMgZGV1eCBjYXTDqWdvcmllcywgcG91ciBxdSdpbCBhcHByZW5uZSBjZXMgcG9zaXRpb25zLiBPdSBjcsOpZXIgdW5lIHRyb2lzacOobWUgY2F0w6lnb3JpZSDCqyBhdXRyZSDCuyBvw7kgbCdvbiByYW5nZSB0b3V0IGNlIHF1aSBuJ2VzdCBuaSB1bmUgbWFpbiBvdXZlcnRlIG5pIHVuZSBtYWluIGZlcm3DqWUg4oCUIGMnZXN0IGNlIHF1ZSBmb250IGxlcyB2cmFpcyBzeXN0w6htZXMuPC9wPiJdXSwgWyJMZSBwcm9ncmFtbWUgZGFucyBBZGFjcmFmdCDigJQgbGEgc3RydWN0dXJlIGF0dGVuZHVlIiwgWyI8cD5MZSBwcm9ncmFtbWUgdGllbnQgZW4gZGV1eCBwYXJ0aWVzLCBldCBsJ29yZHJlIGNvbXB0ZS48L3A+IiwgIjxkaXYgY2xhc3M9XCJleGVtcGxlXCI+PHA+PGI+QXUgZMOpbWFycmFnZSwgdW5lIHNldWxlIGZvaXM8L2I+PGJyPkVmZmFjZXIgbCfDqWNyYW4gZGUgbGEgY2FydGUuPGJyPkNoYXJnZXIgbGUgbW9kw6hsZSBlbnRyYcOubsOpLjxicj5BY3RpdmVyIGxhIHdlYmNhbSBldCBsYW5jZXIgbGEgZMOpdGVjdGlvbi48L3A+PC9kaXY+IiwgIjxkaXYgY2xhc3M9XCJleGVtcGxlXCI+PHA+PGI+UHVpcyBlbiBib3VjbGUsIGluZMOpZmluaW1lbnQ8L2I+PGJyPlNpIGxhIGNhdMOpZ29yaWUgZMOpdGVjdMOpZSBlc3QgTUFJTiBPVVZFUlRFLCBhbG9ycyBhZmZpY2hlciB1bmUgaW1hZ2Ugc3VyIGxhIG1pY3JvOmJpdC48YnI+U2lub24gc2kgbGEgY2F0w6lnb3JpZSBkw6l0ZWN0w6llIGVzdCBNQUlOIEZFUk1FRSwgYWxvcnMgZWZmYWNlciBsJ8OpY3Jhbi48L3A+PC9kaXY+IiwgIjxwPjxzdHJvbmc+TGVzIHRyb2lzIGVycmV1cnMgcXVpIHJldmllbm5lbnQuPC9zdHJvbmc+IENoYXJnZXIgbGUgbW9kw6hsZSA8ZW0+w6AgbCdpbnTDqXJpZXVyPC9lbT4gZGUgbGEgYm91Y2xlIDogaWwgc2UgcmVjaGFyZ2UgZGVzIGRpemFpbmVzIGRlIGZvaXMgcGFyIHNlY29uZGUgZXQgdG91dCBzZSBmaWdlLiBPdWJsaWVyIGxhIGJvdWNsZSA6IGxhIGNhcnRlIG5lIHLDqWFnaXQgcXUndW5lIHNldWxlIGZvaXMsIGF1IGTDqW1hcnJhZ2UuIEV0IMOpY3JpcmUgbGUgbm9tIGRlIGxhIGNhdMOpZ29yaWUgZGlmZsOpcmVtbWVudCBkZSBjZWx1aSBzYWlzaSBkYW5zIFZpdHRhc2NpZW5jZSDigJQgdW5lIG1hanVzY3VsZSBvdSB1biBhY2NlbnQgZGUgZGlmZsOpcmVuY2Ugc3VmZml0IMOgIGNlIHF1ZSBsYSBjb21wYXJhaXNvbiBzb2l0IHRvdWpvdXJzIGZhdXNzZS48L3A+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+w4AgcmV0ZW5pcjwvYj5DZSBxdWkgc2UgZmFpdCB1bmUgZm9pcyB2YSBhdSBkw6ltYXJyYWdlLiBDZSBxdWkgZG9pdCDDqnRyZSBzdXJ2ZWlsbMOpIGVuIHBlcm1hbmVuY2UgdmEgZGFucyBsYSBib3VjbGUuIEMnZXN0IGxhIG3Dqm1lIGxvZ2lxdWUgcXVlIGxlIHN5c3TDqG1lIGQnYXJyb3NhZ2UgZGUgbGEgc8OpcXVlbmNlIDQuPC9kaXY+Il1dLCBbIk1hIHN5bnRow6hzZSDigJQgbGVzIHRyb2lzIMOpdGFwZXMsIGNvcnJpZ8OpZXMiLCBbIjxwPjxzdHJvbmc+w4l0YXBlIDEsIGxhIGJhc2UgZGUgZG9ubsOpZXMuPC9zdHJvbmc+IExlcyBpbWFnZXMgZGUgbWFpbiBvdXZlcnRlIGV0IGRlIG1haW4gZmVybcOpZSBjYXB0dXLDqWVzIMOgIGxhIHdlYmNhbSwgcmFuZ8OpZXMgZGFucyBkZXV4IGNhdMOpZ29yaWVzIG5vbW3DqWVzLiBDJ2VzdCB0b2kgcXVpIGFzIGZhYnJpcXXDqSBjZXR0ZSBiYXNlLCBldCBlbGxlIG4nYSBwYXMgcXVpdHTDqSB0b24gb3JkaW5hdGV1ci48L3A+IiwgIjxwPjxzdHJvbmc+w4l0YXBlIDIsIGwnZW50cmHDrm5lbWVudC48L3N0cm9uZz4gTGUgY2FsY3VsIGxhbmPDqSBwYXIgVml0dGFzY2llbmNlLCBxdWkgcHJvZHVpdCBsZSBtb2TDqGxlLiBDJ2VzdCBsYSBzZXVsZSDDqXRhcGUgb8O5IGxhIG1hY2hpbmUgwqsgYXBwcmVuZCDCuyBxdWVscXVlIGNob3NlLjwvcD4iLCAiPHA+PHN0cm9uZz7DiXRhcGUgMywgbCd1dGlsaXNhdGlvbi48L3N0cm9uZz4gTGUgcHJvZ3JhbW1lIEFkYWNyYWZ0IHF1aSBpbnRlcnJvZ2UgY2UgbW9kw6hsZSBlbiBkaXJlY3QsIGltYWdlIGFwcsOocyBpbWFnZSwgZXQgY29tbWFuZGUgbCfDqWNyYW4gZGUgbGEgbWljcm86Yml0IHNlbG9uIGxhIHLDqXBvbnNlLjwvcD4iLCAiPHA+Q2VzIHRyb2lzIMOpdGFwZXMgc29udCBsZXMgbcOqbWVzIHF1ZSBjZWxsZXMgdnVlcyBlbiBwYXJ0aWUgMSBwb3VyIGxlIHBhcmtpbmcsIGwnYcOpcm9wb3J0IGV0IGxlIG1hZ2FzaW4uIExhIHNldWxlIGRpZmbDqXJlbmNlLCBjJ2VzdCBxdWUgY2V0dGUgZm9pcyA8c3Ryb25nPmMnZXN0IHRvaSBxdWkgYXMgZmFpdCBsZXMgdHJvaXM8L3N0cm9uZz4uPC9wPiJdXSwgWyJCaWxhbiBkZSBs4oCZYWN0aXZpdMOpIOKAlCBjZSBxdWUgdHUgZG9pcyByZXRlbmlyIiwgWyI8cD48c3Ryb25nPlR1IG7igJlhcyBwYXMgc2V1bGVtZW50IMKrIHV0aWxpc8OpIHVuIHNpdGUgwrsgOiB0dSBhcyBjb25zdHJ1aXQgdW4gcGV0aXQgcHJvdG9jb2xlIGV4cMOpcmltZW50YWwgZOKAmWFwcHJlbnRpc3NhZ2UgYXV0b21hdGlxdWUuPC9zdHJvbmc+PC9wPiIsICI8c3ZnIGNsYXNzPVwic2NoZW1hXCIgdmlld0JveD1cIjAgMCA3MDAgMTUwXCIgeG1sbnM9XCJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Z1wiIHJvbGU9XCJpbWdcIiBhcmlhLWxhYmVsPVwiRW50cmHDrm5lciBzYW5zIHNlIHRyb21wZXIgZOKAmW9iamVjdGlmXCI+PHRleHQgeD1cIjM1MC4wXCIgeT1cIjIwXCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxNFwiIGZvbnQtd2VpZ2h0PVwiNzAwXCIgZmlsbD1cIiMxNDI2MkJcIj5FbnRyYcOubmVyIHNhbnMgc2UgdHJvbXBlciBk4oCZb2JqZWN0aWY8L3RleHQ+PGRlZnM+PG1hcmtlciBpZD1cImZsXCIgbWFya2VyV2lkdGg9XCI3XCIgbWFya2VySGVpZ2h0PVwiN1wiIHJlZlg9XCI2XCIgcmVmWT1cIjMuNVwiIG9yaWVudD1cImF1dG9cIj48cGF0aCBkPVwiTTAgMCBMNyAzLjUgTDAgNyB6XCIgZmlsbD1cIiM1QTZDNzFcIi8+PC9tYXJrZXI+PC9kZWZzPjxyZWN0IHg9XCIxNC4wXCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNzUuNlwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5Db2xsZWN0ZXI8L3RleHQ+PHBhdGggZD1cIk0xNDAuMiA4MSBMMTQ4LjIgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiMTUxLjJcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0ZERUNGMlwiIHN0cm9rZT1cIiNDMjE4NUJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCIyMTIuOFwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj7DiXRpcXVldGVyPC90ZXh0PjxwYXRoIGQ9XCJNMjc3LjQgODEgTDI4NS40IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjI4OC40XCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiMzUwLjBcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+RW50cmHDrm5lcjwvdGV4dD48cGF0aCBkPVwiTTQxNC42IDgxIEw0MjIuNiA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCI0MjUuNlwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRkRFQ0YyXCIgc3Ryb2tlPVwiI0MyMTg1QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjQ4Ny4yXCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPlRlc3RlcjwvdGV4dD48cGF0aCBkPVwiTTU1MS44IDgxIEw1NTkuOCA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCI1NjIuOFwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRTJFRkVFXCIgc3Ryb2tlPVwiIzBFNkU2QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjYyNC40XCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPkFtw6lsaW9yZXI8L3RleHQ+PC9zdmc+IiwgIjx1bD48bGk+VW5lIGNsYXNzZSBkb2l0IMOqdHJlIGTDqWZpbmllIGNsYWlyZW1lbnQuPC9saT48bGk+TGVzIGV4ZW1wbGVzIGTigJllbnRyYcOubmVtZW50IGRvaXZlbnQgw6p0cmUgdmFyacOpcyBldCByZXByw6lzZW50YXRpZnMgZGUgbOKAmXVzYWdlIHByw6l2dS48L2xpPjxsaT5VbiB0ZXN0IHBlcnRpbmVudCB1dGlsaXNlIGRlcyBzaXR1YXRpb25zIG5vdXZlbGxlcy48L2xpPjxsaT5MZXMgc2NvcmVzIGR1IG1vZMOobGUgYWlkZW50IMOgIGNvbXBhcmVyIGxlcyByw6lwb25zZXMsIG1haXMgaWxzIG5lIHRyYW5zZm9ybWVudCBwYXMgdW5lIHByw6lkaWN0aW9uIGVuIHbDqXJpdMOpLjwvbGk+PC91bD4iLCAiPHA+PHN0cm9uZz5Wb2NhYnVsYWlyZSBlc3NlbnRpZWwgOjwvc3Ryb25nPiBjbGFzc2UgwrcgZGl2ZXJzaXTDqSDCtyBzY29yZSDCtyBnw6luw6lyYWxpc2F0aW9uIMK3IHRlc3QuPC9wPiIsICI8ZGl2IGNsYXNzPVwicmV0ZW5pclwiPjxiPsOAIHJldGVuaXI8L2I+U2kgdHUgcGV1eCBleHBsaXF1ZXIgbGUgc2Now6ltYSBhdmVjIHRlcyBwcm9wcmVzIG1vdHMgZXQgZG9ubmVyIHVuIGV4ZW1wbGUsIGzigJllc3NlbnRpZWwgZGUgbOKAmWFjdGl2aXTDqSBlc3QgYWNxdWlzLjwvZGl2PiJdXV0=",empreinte:2596935826};</script>
+<script>window.CORRECTION_BILAN={coffre:"W1siQ3LDqWVyIGRlcyBkb25uw6llcyB1dGlsZXMiLFsiPHA+RGV1eCBjbGFzc2VzIMKrIG1haW4gb3V2ZXJ0ZSDCuyBldCDCqyBtYWluIGZlcm3DqWUgwrsgZG9pdmVudCBjb250ZW5pciBkZXMgZXhlbXBsZXMgdmFyacOpcyA6IGRpc3RhbmNlLCBvcmllbnRhdGlvbiwgYXJyacOocmUtcGxhbiwgbHVtacOocmUsIHBlcnNvbm5lcyBkaWZmw6lyZW50ZXMgc2kgcG9zc2libGUuIERlcyBjZW50YWluZXMgZOKAmWltYWdlcyBxdWFzaSBpZGVudGlxdWVzIGFwcG9ydGVudCBtb2lucyBk4oCZaW5mb3JtYXRpb24gcXVlIGRlcyBleGVtcGxlcyBkaXZlcnNpZmnDqXMuPC9wPiIsIjxkaXYgY2xhc3M9XCJ0eXBlaW5mb1wiPjxzdHJvbmc+Q2hvaXggZGUgY29uY2VwdGlvbjwvc3Ryb25nPjxzcGFuPlR1IGTDqWNpZGVzIGNlIHF1ZSBzaWduaWZpZSBjaGFxdWUgY2xhc3NlIGV0IHF1ZWxsZXMgdmFyaWF0aW9ucyBsZSBtb2TDqGxlIGRvaXQgc2F2b2lyIHJlY29ubmHDrnRyZS48L3NwYW4+PC9kaXY+Il1dLFsiTGUgc2NvcmUgZGUgY29uZmlhbmNlIDogY29tbWVudCBsZSBsaXJlIixbIjxwPkxlcyBiYXJyZXMgZGUgVGVhY2hhYmxlIE1hY2hpbmUgc29udCBkZXMgPHN0cm9uZz5zY29yZXMgcHJvZHVpdHMgcGFyIGxlIG1vZMOobGUgcG91ciBsZXMgY2xhc3NlcyBjb25udWVzPC9zdHJvbmc+LiBVbiBhZmZpY2hhZ2Ugw6AgOTcgJSBuZSBzaWduaWZpZSBwYXMgYXV0b21hdGlxdWVtZW50IMKrIDk3ICUgZGUgcHJvYmFiaWxpdMOpIHF1ZSBsYSB2w6lyaXTDqSBzb2l0IGNlbGxlLWNpIMK7LjwvcD4iLCI8cD5Db21wYXJlIHBsdXTDtHQgbGVzIHNjb3JlcyBlbnRyZSBlc3NhaXMgZXQgZGVtYW5kZS10b2kgc2kgbGUgbW9kw6hsZSByZXN0ZSBjb3JyZWN0IHN1ciBkZXMgZXhlbXBsZXMgbm91dmVhdXggZXQgZGlmZmljaWxlcy48L3A+IiwiPGRpdiBjbGFzcz1cInJldGVuaXJcIj48Yj7DgCByZXRlbmlyPC9iPlNjb3JlIMOpbGV2w6kg4omgIGNlcnRpdHVkZSBhYnNvbHVlLiBVbmUgYm9ubmUgw6l2YWx1YXRpb24gdXRpbGlzZSBwbHVzaWV1cnMgZXNzYWlzIGV0IG5vdGUgbGVzIGVycmV1cnMuPC9kaXY+Il1dLFsiRW50cmHDrm5lciBwdWlzIHRlc3RlciIsWyI8cD5BcHLDqHMgbOKAmWVudHJhw65uZW1lbnQsIGdhcmRlIHZvbG9udGFpcmVtZW50IGRlcyBnZXN0ZXMgcXVlIGxlIG1vZMOobGUgbuKAmWEgcGFzIHZ1cyA6IG1haW4gZGUgcHJvZmlsLCBhdXRyZSBwZXJzb25uZSwgYXV0cmUgZm9uZC4gQ+KAmWVzdCBjZXR0ZSBwaGFzZSBxdWkgcGVybWV0IGRlIHbDqXJpZmllciBsYSA8c3Ryb25nPmfDqW7DqXJhbGlzYXRpb248L3N0cm9uZz4uPC9wPiIsIjxzdmcgY2xhc3M9XCJzY2hlbWFcIiB2aWV3Qm94PVwiMCAwIDcwMCAxNTBcIiB4bWxucz1cImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnXCIgcm9sZT1cImltZ1wiIGFyaWEtbGFiZWw9XCJUb24gcHJvdG9jb2xlIGRlIHRlc3RcIj48dGV4dCB4PVwiMzUwLjBcIiB5PVwiMjBcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjE0XCIgZm9udC13ZWlnaHQ9XCI3MDBcIiBmaWxsPVwiIzE0MjYyQlwiPlRvbiBwcm90b2NvbGUgZGUgdGVzdDwvdGV4dD48ZGVmcz48bWFya2VyIGlkPVwiZmxcIiBtYXJrZXJXaWR0aD1cIjdcIiBtYXJrZXJIZWlnaHQ9XCI3XCIgcmVmWD1cIjZcIiByZWZZPVwiMy41XCIgb3JpZW50PVwiYXV0b1wiPjxwYXRoIGQ9XCJNMCAwIEw3IDMuNSBMMCA3IHpcIiBmaWxsPVwiIzVBNkM3MVwiLz48L21hcmtlcj48L2RlZnM+PHJlY3QgeD1cIjE0LjBcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0UyRUZFRVwiIHN0cm9rZT1cIiMwRTZFNkJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCI3NS42XCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPkVudHJhw65uZXIgc3VyIEE8L3RleHQ+PHBhdGggZD1cIk0xNDAuMiA4MSBMMTQ4LjIgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiMTUxLjJcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0ZERUNGMlwiIHN0cm9rZT1cIiNDMjE4NUJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCIyMTIuOFwiIHk9XCI2OVwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5HYXJkZXIgZGVzPC90ZXh0Pjx0ZXh0IHg9XCIyMTIuOFwiIHk9XCI4NFwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5leGVtcGxlcyBCPC90ZXh0PjxwYXRoIGQ9XCJNMjc3LjQgODEgTDI4NS40IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjI4OC40XCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiMzUwLjBcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+VGVzdGVyIEI8L3RleHQ+PHBhdGggZD1cIk00MTQuNiA4MSBMNDIyLjYgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiNDI1LjZcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0ZERUNGMlwiIHN0cm9rZT1cIiNDMjE4NUJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCI0ODcuMlwiIHk9XCI2OVwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5Ob3RlciByw6l1c3NpdGVzIC88L3RleHQ+PHRleHQgeD1cIjQ4Ny4yXCIgeT1cIjg0XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPmVycmV1cnM8L3RleHQ+PHBhdGggZD1cIk01NTEuOCA4MSBMNTU5LjggODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiNTYyLjhcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0UyRUZFRVwiIHN0cm9rZT1cIiMwRTZFNkJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCI2MjQuNFwiIHk9XCI2OVwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5BbcOpbGlvcmVyIGxlczwvdGV4dD48dGV4dCB4PVwiNjI0LjRcIiB5PVwiODRcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+ZG9ubsOpZXM8L3RleHQ+PC9zdmc+Il1dLFsiVHV0b3JpZWxzIHZpZMOpbyBpbnTDqWdyw6lzIixbIjxhIGNsYXNzPVwicmVzc291cmNlLWNvcnJcIiBocmVmPVwiaHR0cHM6Ly90ZWFjaGFibGVtYWNoaW5lLndpdGhnb29nbGUuY29tL1wiIHRhcmdldD1cIl9ibGFua1wiIHJlbD1cIm5vb3BlbmVyXCI+PGI+VGVhY2hhYmxlIE1hY2hpbmUg4oCUIEdhdGhlciwgVHJhaW4sIEV4cG9ydDwvYj48c3Bhbj5MYSBwYWdlIG9mZmljaWVsbGUgY29udGllbnQgZGUgY291cnRlcyB2aWTDqW9zIGRlIHByaXNlIGVuIG1haW4gZXQgcGVybWV0IGRlIHRlc3RlciBkaXJlY3RlbWVudC48L3NwYW4+PC9hPiJdXSxbIkJpbGFuIGRlIGzigJlhY3Rpdml0w6kg4oCUIGNlIHF1ZSB0dSBkb2lzIHJldGVuaXIiLFsiPHA+PHN0cm9uZz5UdSBu4oCZYXMgcGFzIHNldWxlbWVudCDCqyB1dGlsaXPDqSB1biBzaXRlIMK7IDogdHUgYXMgY29uc3RydWl0IHVuIHBldGl0IHByb3RvY29sZSBleHDDqXJpbWVudGFsIGTigJlhcHByZW50aXNzYWdlIGF1dG9tYXRpcXVlLjwvc3Ryb25nPjwvcD4iLCI8c3ZnIGNsYXNzPVwic2NoZW1hXCIgdmlld0JveD1cIjAgMCA3MDAgMTUwXCIgeG1sbnM9XCJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Z1wiIHJvbGU9XCJpbWdcIiBhcmlhLWxhYmVsPVwiRW50cmHDrm5lciBzYW5zIHNlIHRyb21wZXIgZOKAmW9iamVjdGlmXCI+PHRleHQgeD1cIjM1MC4wXCIgeT1cIjIwXCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxNFwiIGZvbnQtd2VpZ2h0PVwiNzAwXCIgZmlsbD1cIiMxNDI2MkJcIj5FbnRyYcOubmVyIHNhbnMgc2UgdHJvbXBlciBk4oCZb2JqZWN0aWY8L3RleHQ+PGRlZnM+PG1hcmtlciBpZD1cImZsXCIgbWFya2VyV2lkdGg9XCI3XCIgbWFya2VySGVpZ2h0PVwiN1wiIHJlZlg9XCI2XCIgcmVmWT1cIjMuNVwiIG9yaWVudD1cImF1dG9cIj48cGF0aCBkPVwiTTAgMCBMNyAzLjUgTDAgNyB6XCIgZmlsbD1cIiM1QTZDNzFcIi8+PC9tYXJrZXI+PC9kZWZzPjxyZWN0IHg9XCIxNC4wXCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiNzUuNlwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj5Db2xsZWN0ZXI8L3RleHQ+PHBhdGggZD1cIk0xNDAuMiA4MSBMMTQ4LjIgODFcIiBzdHJva2U9XCIjNUE2QzcxXCIgc3Ryb2tlLXdpZHRoPVwiMlwiIG1hcmtlci1lbmQ9XCJ1cmwoI2ZsKVwiLz48cmVjdCB4PVwiMTUxLjJcIiB5PVwiNTJcIiB3aWR0aD1cIjEyMy4yXCIgaGVpZ2h0PVwiNThcIiByeD1cIjlcIiBmaWxsPVwiI0ZERUNGMlwiIHN0cm9rZT1cIiNDMjE4NUJcIiBzdHJva2Utd2lkdGg9XCIyXCIvPjx0ZXh0IHg9XCIyMTIuOFwiIHk9XCI3NlwiIHRleHQtYW5jaG9yPVwibWlkZGxlXCIgZm9udC1mYW1pbHk9XCJBcmlhbCxzYW5zLXNlcmlmXCIgZm9udC1zaXplPVwiMTEuNVwiIGZvbnQtd2VpZ2h0PVwiNjAwXCIgZmlsbD1cIiMxNDI2MkJcIj7DiXRpcXVldGVyPC90ZXh0PjxwYXRoIGQ9XCJNMjc3LjQgODEgTDI4NS40IDgxXCIgc3Ryb2tlPVwiIzVBNkM3MVwiIHN0cm9rZS13aWR0aD1cIjJcIiBtYXJrZXItZW5kPVwidXJsKCNmbClcIi8+PHJlY3QgeD1cIjI4OC40XCIgeT1cIjUyXCIgd2lkdGg9XCIxMjMuMlwiIGhlaWdodD1cIjU4XCIgcng9XCI5XCIgZmlsbD1cIiNFMkVGRUVcIiBzdHJva2U9XCIjMEU2RTZCXCIgc3Ryb2tlLXdpZHRoPVwiMlwiLz48dGV4dCB4PVwiMzUwLjBcIiB5PVwiNzZcIiB0ZXh0LWFuY2hvcj1cIm1pZGRsZVwiIGZvbnQtZmFtaWx5PVwiQXJpYWwsc2Fucy1zZXJpZlwiIGZvbnQtc2l6ZT1cIjExLjVcIiBmb250LXdlaWdodD1cIjYwMFwiIGZpbGw9XCIjMTQyNjJCXCI+RW50cmHDrm5lcjwvdGV4dD48cGF0aCBkPVwiTTQxNC42IDgxIEw0MjIuNiA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCI0MjUuNlwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRkRFQ0YyXCIgc3Ryb2tlPVwiI0MyMTg1QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjQ4Ny4yXCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPlRlc3RlcjwvdGV4dD48cGF0aCBkPVwiTTU1MS44IDgxIEw1NTkuOCA4MVwiIHN0cm9rZT1cIiM1QTZDNzFcIiBzdHJva2Utd2lkdGg9XCIyXCIgbWFya2VyLWVuZD1cInVybCgjZmwpXCIvPjxyZWN0IHg9XCI1NjIuOFwiIHk9XCI1MlwiIHdpZHRoPVwiMTIzLjJcIiBoZWlnaHQ9XCI1OFwiIHJ4PVwiOVwiIGZpbGw9XCIjRTJFRkVFXCIgc3Ryb2tlPVwiIzBFNkU2QlwiIHN0cm9rZS13aWR0aD1cIjJcIi8+PHRleHQgeD1cIjYyNC40XCIgeT1cIjc2XCIgdGV4dC1hbmNob3I9XCJtaWRkbGVcIiBmb250LWZhbWlseT1cIkFyaWFsLHNhbnMtc2VyaWZcIiBmb250LXNpemU9XCIxMS41XCIgZm9udC13ZWlnaHQ9XCI2MDBcIiBmaWxsPVwiIzE0MjYyQlwiPkFtw6lsaW9yZXI8L3RleHQ+PC9zdmc+IiwiPHVsPjxsaT5VbmUgY2xhc3NlIGRvaXQgw6p0cmUgZMOpZmluaWUgY2xhaXJlbWVudC48L2xpPjxsaT5MZXMgZXhlbXBsZXMgZOKAmWVudHJhw65uZW1lbnQgZG9pdmVudCDDqnRyZSB2YXJpw6lzIGV0IHJlcHLDqXNlbnRhdGlmcyBkZSBs4oCZdXNhZ2UgcHLDqXZ1LjwvbGk+PGxpPlVuIHRlc3QgcGVydGluZW50IHV0aWxpc2UgZGVzIHNpdHVhdGlvbnMgbm91dmVsbGVzLjwvbGk+PGxpPkxlcyBzY29yZXMgZHUgbW9kw6hsZSBhaWRlbnQgw6AgY29tcGFyZXIgbGVzIHLDqXBvbnNlcywgbWFpcyBpbHMgbmUgdHJhbnNmb3JtZW50IHBhcyB1bmUgcHLDqWRpY3Rpb24gZW4gdsOpcml0w6kuPC9saT48L3VsPiIsIjxwPjxzdHJvbmc+Vm9jYWJ1bGFpcmUgZXNzZW50aWVsIDo8L3N0cm9uZz4gY2xhc3NlIMK3IGRpdmVyc2l0w6kgwrcgc2NvcmUgwrcgZ8OpbsOpcmFsaXNhdGlvbiDCtyB0ZXN0LjwvcD4iLCI8ZGl2IGNsYXNzPVwicmV0ZW5pclwiPjxiPsOAIHJldGVuaXI8L2I+U2kgdHUgcGV1eCBleHBsaXF1ZXIgbGUgc2Now6ltYSBhdmVjIHRlcyBwcm9wcmVzIG1vdHMgZXQgZG9ubmVyIHVuIGV4ZW1wbGUsIGzigJllc3NlbnRpZWwgZGUgbOKAmWFjdGl2aXTDqSBlc3QgYWNxdWlzLjwvZGl2PiJdXV0=",empreinte:2596935826};</script>
 <script src="assets/correction-bilan.js"></script>
 </body>
 </html>

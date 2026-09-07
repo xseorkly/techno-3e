@@ -36,3 +36,9 @@ Une fois déverrouillée, l'évaluation s'affiche en formulaire complet — iden
 Le barème n'apparaît jamais pour l'élève. Il s'affiche sous chaque question uniquement en ajoutant `?prof=1` à l'adresse de la page, comme partout ailleurs sur le site.
 
 Moteur : `assets/evaluation.js`, styles dans `assets/site-addons.css`.
+
+## Séquence 2 — insertion d’une nouvelle partie 2
+- Nouvelle `seq2-act1-p2.html` : activité sans ordinateur sur l’adresse IP, la table de routage et le débit.
+- Ancienne partie 2 Filius déplacée en `seq2-act1-p3.html` (mot de passe inchangé : `Quartier2B`).
+- Ancienne partie 3 analyse du routage déplacée en `seq2-act1-p4.html` (mot de passe inchangé : `Chemin2C`).
+- Mot de passe de la nouvelle partie 2 : `Adresse2B`.
