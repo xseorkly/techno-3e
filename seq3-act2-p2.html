@@ -286,6 +286,49 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
 @media print{.barre,.chrono{display:none}}
 </style>
 <link rel="stylesheet" href="assets/site-addons.css">
+
+<!-- Navigation séquentielle harmonisée -->
+<style id="sequence-pager-style">
+.pager{
+  max-width:820px;
+  margin:22px auto 120px;
+  padding:0 20px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  box-sizing:border-box;
+}
+.pager a{
+  flex:1 1 0;
+  display:flex;
+  align-items:center;
+  min-height:46px;
+  box-sizing:border-box;
+  text-decoration:none;
+  border:1px solid #D2DEDE;
+  border-radius:9px;
+  background:#fff;
+  padding:11px 14px;
+  color:#0E6E6B;
+  font-family:"Archivo",Arial,sans-serif;
+  font-weight:600;
+  line-height:1.25;
+  transition:background .15s ease,border-color .15s ease,transform .15s ease;
+}
+.pager a:last-child{justify-content:flex-end;text-align:right}
+.pager a:hover,.pager a:focus-visible{
+  background:#E2EFEE;
+  border-color:#0E6E6B;
+  outline:none;
+}
+.pager a:active{transform:translateY(1px)}
+@media (max-width:620px){
+  .pager{flex-direction:column;margin-bottom:125px}
+  .pager a,.pager a:last-child{justify-content:flex-start;text-align:left}
+}
+@media print{.pager{display:none!important}}
+</style>
+
 </head>
 <body>
 
@@ -553,6 +596,8 @@ document.getElementById("navfiches").addEventListener("change", function(){
   <div id="alerte" class="alerte" hidden></div>
 
 </main>
+<nav class="pager" aria-label="Navigation dans la Séquence 3"><a href="seq3-act2-p1.html">← Activité 2 · Partie 1 — Trois caméras qui décident</a><a href="seq3-act2-p3.html">Activité 2 · Partie 3 — Où mon IA se trompe-t-elle ? →</a></nav>
+
 
 <div class="barre">
   <button class="lien" id="effacer" type="button">Effacer mes réponses</button>
