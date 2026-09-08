@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Séquence 4 · Séance 6 — Diagnostiquer et alerter</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
@@ -321,8 +322,7 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
-<link rel="stylesheet" href="assets/site-addons.css">
-
+<link href="assets/site-addons.css" rel="stylesheet"/>
 <!-- Navigation séquentielle harmonisée -->
 <style id="sequence-pager-style">
 .pager{
@@ -364,292 +364,273 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
 }
 @media print{.pager{display:none!important}}
 </style>
-
 </head>
 <body>
-
-<nav class="navsite" aria-label="Navigation du site">
-  <div class="dedans">
-    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
-    <label class="saut">
-      <span>Aller à</span>
-      <select id="navfiches" aria-label="Aller à une autre activité">
-        <optgroup label="Séquence 1">
-          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
-          <option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
-          <option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
-          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
-        </optgroup>
-        <optgroup label="Séquence 2">
-          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
-          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage & débit</option>
-          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
-          <option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
-        </optgroup>
-        <optgroup label="Séquence 3">
-          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
-          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
-          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
-          <option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
-          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
-          <option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
-          <option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
-        </optgroup>
-        <optgroup label="Séquence 4">
-          <option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
-          <option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
-          <option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
-          <option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
-          <option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
-          <option value="seq4-act6.html" selected>Séance 6 — Diagnostiquer et alerter</option>
-        </optgroup>
-        <optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
-        <optgroup label="Outils">
-          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
-          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
-          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
-        </optgroup>
-      <optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges & SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option></optgroup></select>
-    </label>
-  </div>
+<nav aria-label="Navigation du site" class="navsite">
+<div class="dedans">
+<a class="accueil" href="index.html">← Accueil</a>
+<label class="saut">
+<span>Aller à</span>
+<select aria-label="Aller à une autre activité" id="navfiches">
+<optgroup label="Séquence 1">
+<option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+<option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
+<option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
+<option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+</optgroup>
+<optgroup label="Séquence 2">
+<option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels &amp; réseau</option>
+<option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage &amp; débit</option>
+<option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
+<option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
+</optgroup>
+<optgroup label="Séquence 3">
+<option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+<option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+<option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+<option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+<option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+<option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+<option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
+</optgroup>
+<optgroup label="Séquence 4">
+<option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
+<option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
+<option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
+<option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
+<option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
+<option selected="" value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
+</optgroup>
+<optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
+<optgroup label="Outils">
+<option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+<option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+<option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+</optgroup>
+<optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges &amp; SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option><option value="osi-seq3-act1.html">OSI S3 · Séance 1 — Algorithme et logigramme</option><option value="osi-seq3-act2.html">OSI S3 · Séance 2 — Fonctions et solutions techniques</option><option value="osi-seq3-act3.html">OSI S3 · Séance 3 — Revue d’architecture</option><option value="osi-seq3-act4.html">OSI S3 · Séance 4 — Chaînes d’information et d’énergie</option><option value="osi-seq3-act5.html">OSI S3 · Séance 5 — Programmer, tester, corriger</option></optgroup></select>
+</label>
+</div>
 </nav>
 <script>
 document.getElementById("navfiches").addEventListener("change", function(){
   if(this.value) location.href = this.value;
 });
 </script>
-
-
 <main class="page">
-
-  <header class="entete">
-    <div class="cycle">
-      <span class="lab">Cycle 4</span>
-      <span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
-    </div>
-    <div class="marque">
-      <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
-      <p class="fil">Technologie · Séquence 4 · Activité 6</p>
-    </div>
-    <h1 class="titre">L'arrosage automatique — séance 6 : diagnostiquer et alerter</h1>
-    <p class="sous">Analyse du graphique, hypothèses et alerte à distance · 55 min</p>
-    <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
-      <a href="#graphique"><b>12′</b>Le graphique</a>
-      <a href="#panne"><b>15′</b>Diagnostic</a>
-      <a href="#solution"><b>15′</b>La solution</a>
-      <a href="#alerte-radio"><b>8′</b>Alerte radio</a>
-      <a href="#synthese"><b>5′</b>Synthèse</a>
-    </nav>
-  </header>
-
-  <section class="identite" aria-label="Mon identité">
-    <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="family-name"></div>
-    <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
-    <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
-    <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
-    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"></div>
-    <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
-  </section>
-  <details class="ref">
-    <summary>Ce que je travaille dans cette activité</summary>
-    <div class="dedans">
-      <dl>
-        <dt>Programme</dt><dd>Technologie, cycle 4, BO du 29 février 2024 — repères de progressivité classe de 3e</dd>
-        <dt>Compétence</dt><dd>Identifier un dysfonctionnement d'un objet technique et y remédier</dd>
-        <dt>Repère 3e</dt><dd>Formuler des hypothèses expliquant le dysfonctionnement d'un objet technique</dd>
-        <dt>Repère 3e</dt><dd>Proposer un protocole de dépannage puis de réparation</dd>
-        <dt>Repère 3e</dt><dd>Interfacer deux objets techniques communicants</dd>
-      </dl>
-      <p style="margin:14px 0 6px;font-weight:600">Connaissances</p>
-      <ul>
-        <li>La fiabilité, la durabilité, l'indice de réparabilité</li>
-        <li>La technologie et les caractéristiques des composants à remplacer : capteurs, actionneurs, microcontrôleurs</li>
-        <li>Instruction conditionnelle ; variable de type booléen</li>
-        <li>Le rôle d'un terminal, des liaisons filaires ou non filaires</li>
-      </ul>
-      <p style="margin:14px 0 6px;font-weight:600">Ce que je dois savoir faire</p>
-      <ul>
-        <li>N1 — Je sais lire un graphique de données et y repérer le déclenchement du système</li>
-        <li>N2 — et je sais formuler plusieurs hypothèses expliquant un dysfonctionnement</li>
-        <li>N3 — et je sais proposer un protocole pour trancher entre ces hypothèses</li>
-        <li>N4 — et je sais programmer la solution retenue et alerter à distance</li>
-      </ul>
-    </div>
-  </details>
-  <article class="bloc" id="graphique">
-    <div class="marge"><span class="duree">12′</span></div>
-    <div class="corps">
-      <h2>Je lis le graphique</h2>
-      <div class="situation">
-        <p>Un système d'arrosage automatique tombe en panne sans prévenir. Personne ne s'en aperçoit : la pompe reçoit bien l'ordre de démarrer, les voyants sont normaux. Ce sont les plantes qui, quelques jours plus tard, annoncent la mauvaise nouvelle.</p>
-        <p style="margin-top:14px">Dans les Pyrénées-Orientales, où les sécheresses à répétition ont mis les vergers en danger depuis 2022, une station d'épuration alimente désormais le goutte-à-goutte des agriculteurs avec les eaux usées traitées des touristes. Quand l'eau coûte ce prix-là, une panne non détectée pendant trois jours n'est plus un détail.</p>
-      </div>
-      <p class="consigne">Voici les données enregistrées pendant 92 heures. La courbe rouge indique l'état de la broche P2 : 1 quand la pompe fonctionne, 0 sinon. La ligne noire marque le seuil de 50 % de l’indice relatif choisi pour le prototype.</p>
-      <img class="illus" src="img/seq4-graphique-dysfonctionnement.png" alt="Graphique de l'évolution de la température, de l’indice d’humidité relatif et de l'état de la broche P2 sur 92 heures. Le graphique d'origine emploie le libellé pourcentage d'humidité pour cet indice." onerror="this.remove()">
-      <p class="consigne" style="font-size:14px"><strong>Libellé du graphique :</strong> l’image d’origine affiche « pourcentage d’humidité ». Dans cette version de la séquence, lis cette courbe comme <strong>l’indice d’humidité relatif</strong> issu de l’étalonnage. Le seuil noir à 50 % est le seuil de conception du prototype.</p>
-      <div class="cartes" data-tab="lecture" id="tablecture">
-        <div class="ligne" data-cle="Évolution de la température">
-          <span class="cle">Évolution de la température</span>
-          <input id="l1" placeholder="que fait-elle ?" aria-label="que fait-elle ? pour Évolution de la température">
-        </div>
-        <div class="ligne" data-cle="Évolution de l’indice d’humidité relatif">
-          <span class="cle">Évolution de l’indice d’humidité relatif</span>
-          <input id="l2" placeholder="que fait-il ?" aria-label="que fait-il ? pour Évolution de l’indice d’humidité relatif">
-        </div>
-        <div class="ligne" data-cle="Premier déclenchement de la pompe">
-          <span class="cle">Premier déclenchement de la pompe</span>
-          <input id="l3" placeholder="à quelle heure ?" aria-label="à quelle heure ? pour Premier déclenchement de la pompe">
-        </div>
-        <div class="ligne" data-cle="Second déclenchement">
-          <span class="cle">Second déclenchement</span>
-          <input id="l4" placeholder="à quelle heure ?" aria-label="à quelle heure ? pour Second déclenchement">
-        </div>
-      </div>
-
-    </div>
-  </article>
-  <article class="bloc" id="panne">
-    <div class="marge"><span class="duree">15′</span></div>
-    <div class="corps">
-      <h2>Je diagnostique</h2>
-      <p class="consigne">Après le second déclenchement, quelque chose ne va pas. Regarde ce que fait la courbe d'humidité juste après.</p>
-      <h3>N1 — Le dysfonctionnement</h3>
-      <p class="consigne">Décris précisément ce qui ne fonctionne pas, en citant les valeurs du graphique.</p>
-      <textarea id="n1" data-rep placeholder="" aria-label="Décris précisément ce qui ne fonctionne pas, en citant les valeurs du graphique."></textarea>
-      <h3>N2 — Mes hypothèses</h3>
-      <p class="consigne">Un bon diagnostic ne s'arrête pas à la première idée. Propose trois causes possibles, différentes les unes des autres.</p>
-      <div class="cartes" data-tab="hypotheses" id="tabhypotheses">
-        <div class="ligne" data-cle="Hypothèse 1">
-          <span class="cle">Hypothèse 1</span>
-          <input id="y1" placeholder="cause possible" aria-label="cause possible pour Hypothèse 1">
-        </div>
-        <div class="ligne" data-cle="Hypothèse 2">
-          <span class="cle">Hypothèse 2</span>
-          <input id="y2" placeholder="cause possible" aria-label="cause possible pour Hypothèse 2">
-        </div>
-        <div class="ligne" data-cle="Hypothèse 3">
-          <span class="cle">Hypothèse 3</span>
-          <input id="y3" placeholder="cause possible" aria-label="cause possible pour Hypothèse 3">
-        </div>
-      </div>
-      <h3>N3 — Mon protocole de vérification</h3>
-      <p class="consigne">Choisis deux de tes hypothèses et décris l'essai concret qui permettrait de savoir laquelle est la bonne. Que regardes-tu, et que conclus-tu selon le résultat ?</p>
-      <textarea id="n3" data-rep placeholder="" style="min-height:130px" aria-label="Choisis deux de tes hypothèses et décris l&#x27;essai concret qui permettrait de savoir laquelle est la bonne. Que "></textarea>
-
-    </div>
-  </article>
-  <article class="bloc" id="solution">
-    <div class="marge"><span class="duree">15′</span></div>
-    <div class="corps">
-      <h2>Je programme la solution</h2>
-      <p class="consigne">La cause la plus probable est un réservoir vide. Le <strong>module de détection de liquide</strong> se colle contre la paroi du réservoir, sans contact avec l'eau. C'est un détecteur logique : il vaut 1 s'il y a du liquide, 0 s'il n'y en a pas.</p>
-      <div class="exemple">
-        <p class="titre-ex">L'algorithme à programmer</p>
-        <p>Si le niveau d'eau est bas (= 0)<br>Alors déclencher l'alarme et éteindre la pompe<br>Sinon éteindre l'alarme<br>&nbsp;<br>Si indice d’humidité relatif &lt; 50 % ET température &lt; 25 °C<br>Alors arroser<br>Sinon ne pas arroser</p>
-      </div>
-      <div class="bandeau">
-        <p>Reprends ton programme de la séance 4 et ajoute le détecteur de niveau.</p>
-        <a href="https://makecode.microbit.org/#lang=fr" target="_blank" rel="noopener">Ouvrir MakeCode</a>
-      </div>
-      <div class="cartes" id="etapes">
-        <div class="cartefiche" data-etape="Lire le détecteur de niveau">
-          <label class="etape"><input type="checkbox" id="et-1"><span><b>1.</b> Lire la broche numérique sur laquelle est branché le détecteur de liquide.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Écrire le test du niveau bas">
-          <label class="etape"><input type="checkbox" id="et-2"><span><b>2.</b> Déclencher l'alarme et couper la pompe si le niveau est à 0.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Garder la condition d'arrosage">
-          <label class="etape"><input type="checkbox" id="et-3"><span><b>3.</b> Conserver la double condition humidité et température de la séance 4.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Tester et faire valider">
-          <label class="etape"><input type="checkbox" id="et-4"><span><b>4.</b> Vider puis remplir le réservoir pour vérifier les deux cas, et appeler le professeur.</span></label>
-        </div>
-      </div>
-      <div class="bandeau">
-        <p>Le programme corrigé, à ouvrir après validation pour comparer avec le tien.</p>
-        <a href="ressources/arrosage-capteur-niveau-eau.hex" target="_blank" rel="noopener">Télécharger le corrigé</a>
-      </div>
-      <h3>N4 — Pourquoi couper la pompe</h3>
-      <div class="qcm" data-qcm="n4" data-titre="N4 — Couper la pompe quand le réservoir est vide">
-        <p class="enonce">Pourquoi le programme doit-il éteindre la pompe lorsque le réservoir est vide ?</p>
-        <div class="choix">
-          <label><input type="radio" name="n4" id="n4-a" value="a"><span class="lt">a</span><span>Pour économiser la pile de la carte</span></label>
-          <label><input type="radio" name="n4" id="n4-b" value="b"><span class="lt">b</span><span>Parce qu'une pompe qui tourne à sec s'abîme et finit par tomber en panne</span></label>
-          <label><input type="radio" name="n4" id="n4-c" value="c"><span class="lt">c</span><span>Parce que le capteur d'humidité ne fonctionne plus</span></label>
-          <label><input type="radio" name="n4" id="n4-d" value="d"><span class="lt">d</span><span>Ce n'est pas nécessaire, la pompe s'arrête toute seule</span></label>
-        </div>
-      </div>
-
-    </div>
-  </article>
-  <article class="bloc" id="alerte-radio">
-    <div class="marge"><span class="duree">8′</span></div>
-    <div class="corps">
-      <h2>J'alerte le jardinier à distance</h2>
-      <p class="consigne">Le système sait maintenant qu'il manque d'eau, mais personne n'est là pour le voir. Une seconde carte micro:bit, posée dans la maison, peut recevoir l'alerte par radio — comme les deux cartes de la séquence 3.</p>
-      <p class="consigne">Écris en langage naturel ce que doit faire la carte du jardin, puis ce que doit faire la carte de la maison.</p>
-      <textarea id="alerte-algo" data-rep placeholder="Carte du jardin :
-Carte de la maison :" style="min-height:120px" aria-label="Écris en langage naturel ce que doit faire la carte du jardin, puis ce que doit faire la carte de la maison."></textarea>
-      <details class="ref" style="margin-top:20px">
-        <summary>Coup de pouce — un exemple d'envoi radio</summary>
-        <div class="dedans">
-          <p style="margin:0 0 12px">Ce programme envoie des messages différents selon les capteurs. Observe comment il combine les tests et l'envoi radio.</p>
-          <p style="margin:0 0 12px"><img class="illus" style="max-width:560px" src="img/seq4-programme-radio.png" alt="Programme MakeCode envoyant par radio des messages selon la température et le niveau d eau." onerror="this.remove()"></p>
-        </div>
-      </details>
-
-    </div>
-  </article>
-  <article class="bloc" id="synthese">
-    <div class="marge"><span class="duree">5′</span></div>
-    <div class="corps">
-      <h2>Ma synthèse</h2>
-      <p class="consigne">Explique comment les données enregistrées par un système permettent de repérer une panne que personne n'a vue, et pourquoi cela compte quand l'eau est rare.</p>
-      <textarea id="rep-synthese" data-rep placeholder="" aria-label="Explique comment les données enregistrées par un système permettent de repérer une panne que personne n&#x27;a vue,"></textarea>
-
-    </div>
-  </article>
-  <article class="bloc" id="cps">
-    <div class="marge"><span class="duree">CPS</span></div>
-    <div class="corps">
-      <h2>Je développe mes compétences psychosociales</h2>
-      <div class="cps">
-        <p>Atteindre ses buts — maîtrise de soi. Où est-ce que je me situe aujourd'hui ?</p>
-        <div class="niveaux">
-          <label><input type="radio" name="cps" id="cps-1" value="1"><span><b>N1</b> — Je peux dire ce que je veux réussir.</span></label>
-          <label><input type="radio" name="cps" id="cps-2" value="2"><span><b>N2</b> — Je peux décomposer un but en étapes.</span></label>
-          <label><input type="radio" name="cps" id="cps-3" value="3"><span><b>N3</b> — Je prépare un plan pour y arriver.</span></label>
-          <label><input type="radio" name="cps" id="cps-4" value="4"><span><b>N4</b> — Je vais jusqu'au bout de mes objectifs.</span></label>
-        </div>
-      </div>
-    </div>
-  </article>
-
-
-  <section class="corrbloc" id="correction">
-    <h2>Correction expliquée et bilan de l’activité</h2>
-    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
-    <div class="saisie">
-      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction"
-             autocomplete="off" spellcheck="false">
-      <button type="button" id="corr-btn">Afficher</button>
-    </div>
-    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
-    <div class="corr" id="corr-contenu" hidden></div>
-  </section>
-
-  <div id="alerte" class="alerte" hidden></div>
-
-</main>
-<nav class="pager" aria-label="Navigation dans la Séquence 4"><a href="seq4-act5.html">← Séance 5 · Enregistrer les données</a><a href="index.html">Retour à l’accueil →</a></nav>
-
-
-<div class="barre">
-  <button class="lien" id="effacer" type="button">Effacer mes réponses</button>
-  <button class="btn" id="pdf" type="button">Générer le PDF</button>
-  <p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+<header class="entete">
+<div class="cycle">
+<span class="lab">Cycle 4</span>
+<span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
 </div>
-
+<div class="marque">
+<img alt="Lycée français de Vienne" onerror="this.remove()" src="img/logo-lfv.png"/>
+<p class="fil">Technologie · Séquence 4 · Activité 6</p>
+</div>
+<h1 class="titre">L'arrosage automatique — séance 6 : diagnostiquer et alerter</h1>
+<p class="sous">Analyse du graphique, hypothèses et alerte à distance · 55 min</p>
+<nav aria-label="Étapes de l'activité" class="chrono" id="chrono">
+<a href="#graphique"><b>12′</b>Le graphique</a>
+<a href="#panne"><b>15′</b>Diagnostic</a>
+<a href="#solution"><b>15′</b>La solution</a>
+<a href="#alerte-radio"><b>8′</b>Alerte radio</a>
+<a href="#synthese"><b>5′</b>Synthèse</a>
+</nav>
+</header>
+<section aria-label="Mon identité" class="identite">
+<div class="champ"><label for="nom">Nom</label><input autocomplete="family-name" id="nom"/></div>
+<div class="champ"><label for="prenom">Prénom</label><input autocomplete="given-name" id="prenom"/></div>
+<div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"/></div>
+<div class="champ"><label for="groupe">Groupe</label><input id="groupe"/></div>
+<div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"/></div>
+<div class="champ"><label for="date">Date</label><input id="date" type="date"/></div>
+</section>
+<details class="ref">
+<summary>Ce que je travaille dans cette activité</summary>
+<div class="dedans">
+<dl>
+<dt>Programme</dt><dd>Technologie, cycle 4, BO du 29 février 2024 — repères de progressivité classe de 3e</dd>
+<dt>Compétence</dt><dd>Identifier un dysfonctionnement d'un objet technique et y remédier</dd>
+<dt>Repère 3e</dt><dd>Formuler des hypothèses expliquant le dysfonctionnement d'un objet technique</dd>
+<dt>Repère 3e</dt><dd>Proposer un protocole de dépannage puis de réparation</dd>
+<dt>Repère 3e</dt><dd>Interfacer deux objets techniques communicants</dd>
+</dl>
+<p style="margin:14px 0 6px;font-weight:600">Connaissances</p>
+<ul>
+<li>La fiabilité, la durabilité, l'indice de réparabilité</li>
+<li>La technologie et les caractéristiques des composants à remplacer : capteurs, actionneurs, microcontrôleurs</li>
+<li>Instruction conditionnelle ; variable de type booléen</li>
+<li>Le rôle d'un terminal, des liaisons filaires ou non filaires</li>
+</ul>
+<p style="margin:14px 0 6px;font-weight:600">Ce que je dois savoir faire</p>
+<ul>
+<li>N1 — Je sais lire un graphique de données et y repérer le déclenchement du système</li>
+<li>N2 — et je sais formuler plusieurs hypothèses expliquant un dysfonctionnement</li>
+<li>N3 — et je sais proposer un protocole pour trancher entre ces hypothèses</li>
+<li>N4 — et je sais programmer la solution retenue et alerter à distance</li>
+</ul>
+</div>
+</details>
+<article class="bloc" id="graphique">
+<div class="marge"><span class="duree">12′</span></div>
+<div class="corps">
+<h2>Je lis le graphique</h2>
+<div class="situation">
+<p>Un système d'arrosage automatique tombe en panne sans prévenir. Personne ne s'en aperçoit : la pompe reçoit bien l'ordre de démarrer, les voyants sont normaux. Ce sont les plantes qui, quelques jours plus tard, annoncent la mauvaise nouvelle.</p>
+<p style="margin-top:14px">Dans les Pyrénées-Orientales, où les sécheresses à répétition ont mis les vergers en danger depuis 2022, une station d'épuration alimente désormais le goutte-à-goutte des agriculteurs avec les eaux usées traitées des touristes. Quand l'eau coûte ce prix-là, une panne non détectée pendant trois jours n'est plus un détail.</p>
+</div>
+<p class="consigne">Voici les données enregistrées pendant 92 heures. La courbe rouge indique l'état de la broche P2 : 1 quand la pompe fonctionne, 0 sinon. La ligne noire marque le seuil de 50 % de l’indice relatif choisi pour le prototype.</p>
+<img alt="Graphique de l'évolution de la température, de l’indice d’humidité relatif et de l'état de la broche P2 sur 92 heures. Le graphique d'origine emploie le libellé pourcentage d'humidité pour cet indice." class="illus" onerror="this.remove()" src="img/seq4-graphique-dysfonctionnement.png"/>
+<p class="consigne" style="font-size:14px"><strong>Libellé du graphique :</strong> l’image d’origine affiche « pourcentage d’humidité ». Dans cette version de la séquence, lis cette courbe comme <strong>l’indice d’humidité relatif</strong> issu de l’étalonnage. Le seuil noir à 50 % est le seuil de conception du prototype.</p>
+<div class="cartes" data-tab="lecture" id="tablecture">
+<div class="ligne" data-cle="Évolution de la température">
+<span class="cle">Évolution de la température</span>
+<input aria-label="que fait-elle ? pour Évolution de la température" id="l1" placeholder="que fait-elle ?"/>
+</div>
+<div class="ligne" data-cle="Évolution de l’indice d’humidité relatif">
+<span class="cle">Évolution de l’indice d’humidité relatif</span>
+<input aria-label="que fait-il ? pour Évolution de l’indice d’humidité relatif" id="l2" placeholder="que fait-il ?"/>
+</div>
+<div class="ligne" data-cle="Premier déclenchement de la pompe">
+<span class="cle">Premier déclenchement de la pompe</span>
+<input aria-label="à quelle heure ? pour Premier déclenchement de la pompe" id="l3" placeholder="à quelle heure ?"/>
+</div>
+<div class="ligne" data-cle="Second déclenchement">
+<span class="cle">Second déclenchement</span>
+<input aria-label="à quelle heure ? pour Second déclenchement" id="l4" placeholder="à quelle heure ?"/>
+</div>
+</div>
+</div>
+</article>
+<article class="bloc" id="panne">
+<div class="marge"><span class="duree">15′</span></div>
+<div class="corps">
+<h2>Je diagnostique</h2>
+<p class="consigne">Après le second déclenchement, quelque chose ne va pas. Regarde ce que fait la courbe d'humidité juste après.</p>
+<h3>N1 — Le dysfonctionnement</h3>
+<p class="consigne">Décris précisément ce qui ne fonctionne pas, en citant les valeurs du graphique.</p>
+<textarea aria-label="Décris précisément ce qui ne fonctionne pas, en citant les valeurs du graphique." data-rep="" id="n1" placeholder=""></textarea>
+<h3>N2 — Mes hypothèses</h3>
+<p class="consigne">Un bon diagnostic ne s'arrête pas à la première idée. Propose trois causes possibles, différentes les unes des autres.</p>
+<div class="cartes" data-tab="hypotheses" id="tabhypotheses">
+<div class="ligne" data-cle="Hypothèse 1">
+<span class="cle">Hypothèse 1</span>
+<input aria-label="cause possible pour Hypothèse 1" id="y1" placeholder="cause possible"/>
+</div>
+<div class="ligne" data-cle="Hypothèse 2">
+<span class="cle">Hypothèse 2</span>
+<input aria-label="cause possible pour Hypothèse 2" id="y2" placeholder="cause possible"/>
+</div>
+<div class="ligne" data-cle="Hypothèse 3">
+<span class="cle">Hypothèse 3</span>
+<input aria-label="cause possible pour Hypothèse 3" id="y3" placeholder="cause possible"/>
+</div>
+</div>
+<h3>N3 — Mon protocole de vérification</h3>
+<p class="consigne">Choisis deux de tes hypothèses et décris l'essai concret qui permettrait de savoir laquelle est la bonne. Que regardes-tu, et que conclus-tu selon le résultat ?</p>
+<textarea aria-label="Choisis deux de tes hypothèses et décris l'essai concret qui permettrait de savoir laquelle est la bonne. Que " data-rep="" id="n3" placeholder="" style="min-height:130px"></textarea>
+</div>
+</article>
+<article class="bloc" id="solution">
+<div class="marge"><span class="duree">15′</span></div>
+<div class="corps">
+<h2>Je programme la solution</h2>
+<p class="consigne">La cause la plus probable est un réservoir vide. Le <strong>module de détection de liquide</strong> se colle contre la paroi du réservoir, sans contact avec l'eau. C'est un détecteur logique : il vaut 1 s'il y a du liquide, 0 s'il n'y en a pas.</p>
+<div class="exemple">
+<p class="titre-ex">L'algorithme à programmer</p>
+<p>Si le niveau d'eau est bas (= 0)<br/>Alors déclencher l'alarme et éteindre la pompe<br/>Sinon éteindre l'alarme<br/> <br/>Si indice d’humidité relatif &lt; 50 % ET température &lt; 25 °C<br/>Alors arroser<br/>Sinon ne pas arroser</p>
+</div>
+<div class="bandeau">
+<p>Reprends ton programme de la séance 4 et ajoute le détecteur de niveau.</p>
+<a href="https://makecode.microbit.org/#lang=fr" rel="noopener" target="_blank">Ouvrir MakeCode</a>
+</div>
+<div class="cartes" id="etapes">
+<div class="cartefiche" data-etape="Lire le détecteur de niveau">
+<label class="etape"><input id="et-1" type="checkbox"/><span><b>1.</b> Lire la broche numérique sur laquelle est branché le détecteur de liquide.</span></label>
+</div>
+<div class="cartefiche" data-etape="Écrire le test du niveau bas">
+<label class="etape"><input id="et-2" type="checkbox"/><span><b>2.</b> Déclencher l'alarme et couper la pompe si le niveau est à 0.</span></label>
+</div>
+<div class="cartefiche" data-etape="Garder la condition d'arrosage">
+<label class="etape"><input id="et-3" type="checkbox"/><span><b>3.</b> Conserver la double condition humidité et température de la séance 4.</span></label>
+</div>
+<div class="cartefiche" data-etape="Tester et faire valider">
+<label class="etape"><input id="et-4" type="checkbox"/><span><b>4.</b> Vider puis remplir le réservoir pour vérifier les deux cas, et appeler le professeur.</span></label>
+</div>
+</div>
+<div class="bandeau">
+<p>Le programme corrigé, à ouvrir après validation pour comparer avec le tien.</p>
+<a href="ressources/arrosage-capteur-niveau-eau.hex" rel="noopener" target="_blank">Télécharger le corrigé</a>
+</div>
+<h3>N4 — Pourquoi couper la pompe</h3>
+<div class="qcm" data-qcm="n4" data-titre="N4 — Couper la pompe quand le réservoir est vide">
+<p class="enonce">Pourquoi le programme doit-il éteindre la pompe lorsque le réservoir est vide ?</p>
+<div class="choix">
+<label><input id="n4-a" name="n4" type="radio" value="a"/><span class="lt">a</span><span>Pour économiser la pile de la carte</span></label>
+<label><input id="n4-b" name="n4" type="radio" value="b"/><span class="lt">b</span><span>Parce qu'une pompe qui tourne à sec s'abîme et finit par tomber en panne</span></label>
+<label><input id="n4-c" name="n4" type="radio" value="c"/><span class="lt">c</span><span>Parce que le capteur d'humidité ne fonctionne plus</span></label>
+<label><input id="n4-d" name="n4" type="radio" value="d"/><span class="lt">d</span><span>Ce n'est pas nécessaire, la pompe s'arrête toute seule</span></label>
+</div>
+</div>
+</div>
+</article>
+<article class="bloc" id="alerte-radio">
+<div class="marge"><span class="duree">8′</span></div>
+<div class="corps">
+<h2>J'alerte le jardinier à distance</h2>
+<p class="consigne">Le système sait maintenant qu'il manque d'eau, mais personne n'est là pour le voir. Une seconde carte micro:bit, posée dans la maison, peut recevoir l'alerte par radio — comme les deux cartes de la séquence 3.</p>
+<p class="consigne">Écris en langage naturel ce que doit faire la carte du jardin, puis ce que doit faire la carte de la maison.</p>
+<textarea aria-label="Écris en langage naturel ce que doit faire la carte du jardin, puis ce que doit faire la carte de la maison." data-rep="" id="alerte-algo" placeholder="Carte du jardin :
+Carte de la maison :" style="min-height:120px"></textarea>
+<details class="ref" style="margin-top:20px">
+<summary>Coup de pouce — un exemple d'envoi radio</summary>
+<div class="dedans">
+<p style="margin:0 0 12px">Ce programme envoie des messages différents selon les capteurs. Observe comment il combine les tests et l'envoi radio.</p>
+<p style="margin:0 0 12px"><img alt="Programme MakeCode envoyant par radio des messages selon la température et le niveau d eau." class="illus" onerror="this.remove()" src="img/seq4-programme-radio.png" style="max-width:560px"/></p>
+</div>
+</details>
+</div>
+</article>
+<article class="bloc" id="synthese">
+<div class="marge"><span class="duree">5′</span></div>
+<div class="corps">
+<h2>Ma synthèse</h2>
+<p class="consigne">Explique comment les données enregistrées par un système permettent de repérer une panne que personne n'a vue, et pourquoi cela compte quand l'eau est rare.</p>
+<textarea aria-label="Explique comment les données enregistrées par un système permettent de repérer une panne que personne n'a vue," data-rep="" id="rep-synthese" placeholder=""></textarea>
+</div>
+</article>
+<article class="bloc" id="cps">
+<div class="marge"><span class="duree">CPS</span></div>
+<div class="corps">
+<h2>Je développe mes compétences psychosociales</h2>
+<div class="cps">
+<p>Atteindre ses buts — maîtrise de soi. Où est-ce que je me situe aujourd'hui ?</p>
+<div class="niveaux">
+<label><input id="cps-1" name="cps" type="radio" value="1"/><span><b>N1</b> — Je peux dire ce que je veux réussir.</span></label>
+<label><input id="cps-2" name="cps" type="radio" value="2"/><span><b>N2</b> — Je peux décomposer un but en étapes.</span></label>
+<label><input id="cps-3" name="cps" type="radio" value="3"/><span><b>N3</b> — Je prépare un plan pour y arriver.</span></label>
+<label><input id="cps-4" name="cps" type="radio" value="4"/><span><b>N4</b> — Je vais jusqu'au bout de mes objectifs.</span></label>
+</div>
+</div>
+</div>
+</article>
+<section class="corrbloc" id="correction">
+<h2>Correction expliquée et bilan de l’activité</h2>
+<p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+<div class="saisie">
+<input aria-label="Mot de passe de la correction" autocomplete="off" id="corr-mdp" placeholder="Mot de passe" spellcheck="false" type="password"/>
+<button id="corr-btn" type="button">Afficher</button>
+</div>
+<p class="refus" hidden="" id="corr-refus">Mot de passe incorrect.</p>
+<div class="corr" hidden="" id="corr-contenu"></div>
+</section>
+<div class="alerte" hidden="" id="alerte"></div>
+</main>
+<nav aria-label="Navigation dans la Séquence 4" class="pager"><a href="seq4-act5.html">← Séance 5 · Enregistrer les données</a><a href="index.html">Retour à l’accueil →</a></nav>
+<div class="barre">
+<button class="lien" id="effacer" type="button">Effacer mes réponses</button>
+<button class="btn" id="pdf" type="button">Générer le PDF</button>
+<p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+</div>
 <script>
 (function(){
 "use strict";

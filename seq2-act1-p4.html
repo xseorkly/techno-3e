@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Les chemins de l'information — partie 4 : analyser le routage</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
@@ -285,10 +286,8 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
-<link rel="stylesheet" href="assets/site-addons.css">
-
+<link href="assets/site-addons.css" rel="stylesheet"/>
 <style>.pager{max-width:820px;margin:22px auto 120px;padding:0 20px;display:flex;justify-content:space-between;gap:12px}.pager a{flex:1;text-decoration:none;border:1px solid #D2DEDE;border-radius:9px;background:#fff;padding:11px 14px;color:#0E6E6B;font-family:"Archivo",sans-serif;font-weight:600}.pager a:last-child{text-align:right}.pager a:hover{background:#E2EFEE;border-color:#0E6E6B}@media print{.pager{display:none}}</style>
-
 <!-- Navigation séquentielle harmonisée -->
 <style id="sequence-pager-style">
 .pager{
@@ -330,318 +329,285 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
 }
 @media print{.pager{display:none!important}}
 </style>
-
 </head>
 <body>
-
-<nav class="navsite" aria-label="Navigation du site">
-  <div class="dedans">
-    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
-    <label class="saut">
-      <span>Aller à</span>
-      <select id="navfiches" aria-label="Aller à une autre activité">
-        <optgroup label="Séquence 1">
-          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
-          <option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
-          <option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
-          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
-        </optgroup>
-        <optgroup label="Séquence 2">
-          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
-          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage & débit</option>
-          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
-          <option value="seq2-act1-p4.html" selected>Activité 1 · partie 4 — Analyser le routage</option>
-        </optgroup>
-        <optgroup label="Séquence 3">
-          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
-          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
-          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
-          <option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
-          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
-          <option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
-          <option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
-        </optgroup>
-        <optgroup label="Séquence 4">
-          <option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
-          <option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
-          <option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
-          <option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
-          <option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
-          <option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
-        </optgroup>
-        <optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
-        <optgroup label="Outils">
-          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
-          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
-          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
-        </optgroup>
-      <optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges & SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option></optgroup></select>
-    </label>
-  </div>
+<nav aria-label="Navigation du site" class="navsite">
+<div class="dedans">
+<a class="accueil" href="index.html">← Accueil</a>
+<label class="saut">
+<span>Aller à</span>
+<select aria-label="Aller à une autre activité" id="navfiches">
+<optgroup label="Séquence 1">
+<option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+<option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
+<option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
+<option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+</optgroup>
+<optgroup label="Séquence 2">
+<option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels &amp; réseau</option>
+<option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage &amp; débit</option>
+<option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
+<option selected="" value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
+</optgroup>
+<optgroup label="Séquence 3">
+<option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+<option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+<option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+<option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+<option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+<option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+<option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
+</optgroup>
+<optgroup label="Séquence 4">
+<option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
+<option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
+<option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
+<option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
+<option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
+<option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
+</optgroup>
+<optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
+<optgroup label="Outils">
+<option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+<option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+<option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+</optgroup>
+<optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges &amp; SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option><option value="osi-seq3-act1.html">OSI S3 · Séance 1 — Algorithme et logigramme</option><option value="osi-seq3-act2.html">OSI S3 · Séance 2 — Fonctions et solutions techniques</option><option value="osi-seq3-act3.html">OSI S3 · Séance 3 — Revue d’architecture</option><option value="osi-seq3-act4.html">OSI S3 · Séance 4 — Chaînes d’information et d’énergie</option><option value="osi-seq3-act5.html">OSI S3 · Séance 5 — Programmer, tester, corriger</option></optgroup></select>
+</label>
+</div>
 </nav>
 <script>
 document.getElementById("navfiches").addEventListener("change", function(){
   if(this.value) location.href = this.value;
 });
 </script>
-
-
 <main class="page">
-
-  <header class="entete">
-    <div class="cycle">
-      <span class="lab">Cycle 4</span>
-      <span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
-    </div>
-    <div class="marque">
-      <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
-      <p class="fil">Technologie · Séquence 2 · Activité 1</p>
-    </div>
-    <h1 class="titre">Les chemins de l'information — partie 4 : analyser le routage</h1>
-    <p class="sous">T10 — La circulation de l'information dans un réseau · 55 min</p>
-    <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
-      <a href="#niveau4"><b>45′</b>Niveau 4</a>
-      <a href="#synthese"><b>10′</b>Synthèse</a>
-    </nav>
-  </header>
-
-  <section class="identite" aria-label="Mon identité">
-    <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="family-name"></div>
-    <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
-    <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
-    <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
-    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"></div>
-    <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
-  </section>
-
-  <details class="ref">
-    <summary>Ce que je travaille dans cette activité</summary>
-    <div class="dedans">
-      <dl>
-        <dt>Thème</dt><dd>Structure, fonctionnement, comportement : des objets et des systèmes techniques à comprendre</dd>
-        <dt>Attendu</dt><dd>SFC1 — Décrire et caractériser l'organisation interne d'un objet ou d'un système technique et ses échanges avec son environnement (énergies, données)</dd>
-        <dt>SFC17</dt><dd>Identifier et représenter la circulation d'une information dans le réseau Internet</dd>
-        <dt>SFC18</dt><dd>Justifier la nécessité d'un protocole de routage pour faire communiquer plusieurs réseaux</dd>
-        <dt>SFC1p</dt><dd>Le rôle et la structure d'une adresse IP, des tables de routage</dd>
-        <dt>SFC1q</dt><dd>Le débit et les ordres de grandeur associés</dd>
-      </dl>
-      <ul>
-        <li>N1 — Je sais qu'une information est acheminée entre réseaux grâce à son adresse IP et à des tables de routage, et que la quantité de données transmise par seconde s'appelle le débit</li>
-        <li>N2 — et je sais expliquer, avec mes mots, le rôle d'une table de routage, l'effet du débit sur la vitesse de circulation d'une information, et la différence entre une adresse IP privée et une adresse IP publique</li>
-        <li>N3 — et je sais configurer et tester, sur un réseau simulé, les adresses IP et les passerelles permettant à plusieurs réseaux de communiquer entre eux</li>
-        <li>N4 — et je sais expliquer, adresses IP, tables de routage et débits à l'appui, comment une information est acheminée entre plusieurs réseaux et pourquoi le chemin choisi dépend à la fois du routage et de l'état du trafic</li>
-      </ul>
-    </div>
-  </details>
-
-
-
-
-
-
-
-  <article class="bloc" id="niveau4">
-    <div class="marge"><span class="duree">55′</span></div>
-    <div class="corps">
-      <h2>Activité — niveau 4 : lire le routage</h2>
-      <p class="amorce">Maintenant que vous avez configuré et testé votre réseau dans Filius, vous allez analyser plus finement comment le routage choisit un chemin et comment se lit une table de routage.</p>
-
-      <div class="ressources" style="margin-bottom:22px">
-        <p class="appli" style="margin-bottom:10px">Toute cette partie s'appuie sur l'application « Du réseau du collège jusqu'à Internet », avec ses onglets <em>Trajet &amp; routage</em>, <em>Débit</em> et <em>Trafic</em>.</p>
-        <p style="margin:0"><a href="outils/reseau-complet.html" target="_blank" rel="noopener"><strong>Ouvrir l'application dans un nouvel onglet</strong></a></p>
-        <img class="apercu" style="margin-top:14px" src="img/seq2-act1-app.png" alt="Aperçu de l'application : le réseau du collège relié à Internet." onerror="this.remove()">
-      </div>
-
-      <h3>N4a — À quel réseau appartient chaque adresse ?</h3>
-      <p class="consigne">Dans notre modèle, chaque sous-réseau utilise le masque /24 (255.255.255.0) : les trois premiers octets identifient donc le réseau et le dernier l’hôte. Collège → 192.168.1.___ , serveur vidéo → 203.0.113.___ , serveur Pronote → 198.51.100.___ . Repères visibles dans l'application : PC de Léa 192.168.1.25, serveur vidéo 203.0.113.10, serveur Pronote 198.51.100.5.</p>
-      <div class="cartes" id="n4a">
-        <div class="ligne" data-adresse="192.168.1.42">
-          <span class="cle">192.168.1.42</span>
-          <select id="n4a-1" aria-label="Réseau de 192.168.1.42">
-            <option value="">Choisir…</option>
-            <option>Réseau du collège</option>
-            <option>Réseau du serveur vidéo</option>
-            <option>Réseau du serveur Pronote</option>
-            <option>Adresse impossible</option>
-          </select>
-        </div>
-        <div class="ligne" data-adresse="203.0.113.200">
-          <span class="cle">203.0.113.200</span>
-          <select id="n4a-2" aria-label="Réseau de 203.0.113.200">
-            <option value="">Choisir…</option>
-            <option>Réseau du collège</option>
-            <option>Réseau du serveur vidéo</option>
-            <option>Réseau du serveur Pronote</option>
-            <option>Adresse impossible</option>
-          </select>
-        </div>
-        <div class="ligne" data-adresse="198.51.100.9">
-          <span class="cle">198.51.100.9</span>
-          <select id="n4a-3" aria-label="Réseau de 198.51.100.9">
-            <option value="">Choisir…</option>
-            <option>Réseau du collège</option>
-            <option>Réseau du serveur vidéo</option>
-            <option>Réseau du serveur Pronote</option>
-            <option>Adresse impossible</option>
-          </select>
-        </div>
-        <div class="ligne" data-adresse="192.168.2.25">
-          <span class="cle">192.168.2.25</span>
-          <select id="n4a-4" aria-label="Réseau de 192.168.2.25">
-            <option value="">Choisir…</option>
-            <option>Réseau du collège</option>
-            <option>Réseau du serveur vidéo</option>
-            <option>Réseau du serveur Pronote</option>
-            <option>Adresse impossible</option>
-          </select>
-        </div>
-        <div class="ligne" data-adresse="203.0.113.300">
-          <span class="cle">203.0.113.300</span>
-          <select id="n4a-5" aria-label="Réseau de 203.0.113.300">
-            <option value="">Choisir…</option>
-            <option>Réseau du collège</option>
-            <option>Réseau du serveur vidéo</option>
-            <option>Réseau du serveur Pronote</option>
-            <option>Adresse impossible</option>
-          </select>
-        </div>
-      </div>
-
-      <h3>N4b — Rester dans le réseau local</h3>
-      <p class="consigne">Un nouvel ordinateur reçoit l'adresse 192.168.1.10. Léa (192.168.1.25) veut lui envoyer un fichier. En observant l'onglet <em>Trajet &amp; routage</em>, explique si l'information devra ou non passer par la Box et le FAI, et pourquoi.</p>
-      <textarea id="n4b" data-rep aria-label="Un nouvel ordinateur reçoit l&#x27;adresse 192.168.1.10. Léa (192.168.1.25) veut lui envoyer un fichier. En observa"></textarea>
-
-      <h3>N4c — Le chemin dépend du trafic</h3>
-      <p class="consigne">Dans l'onglet <em>Trafic</em>, trois chemins relient la source au serveur : A (source → R1 → serveur, 2 sauts), B (source → R2 → R3 → serveur, 3 sauts), C (source → R4 → R5 → R6 → serveur, 4 sauts). Fais varier le volume de trafic et note à chaque fois le chemin retenu.</p>
-      <div class="cartes" id="n4c">
-        <div class="ligne" data-volume="Faible">
-          <span class="cle">Faible</span>
-          <input id="n4c-1a" placeholder="Chemin retenu" aria-label="Chemin retenu à trafic faible">
-          <input id="n4c-1b" placeholder="Débit du chemin" aria-label="Débit du chemin à trafic faible">
-        </div>
-        <div class="ligne" data-volume="Moyen">
-          <span class="cle">Moyen</span>
-          <input id="n4c-2a" placeholder="Chemin retenu" aria-label="Chemin retenu à trafic moyen">
-          <input id="n4c-2b" placeholder="Débit du chemin" aria-label="Débit du chemin à trafic moyen">
-        </div>
-        <div class="ligne" data-volume="Élevé">
-          <span class="cle">Élevé</span>
-          <input id="n4c-3a" placeholder="Chemin retenu" aria-label="Chemin retenu à trafic élevé">
-          <input id="n4c-3b" placeholder="Débit du chemin" aria-label="Débit du chemin à trafic élevé">
-        </div>
-      </div>
-
-      <p class="consigne" style="margin-top:20px">Le chemin le plus court (A, 2 sauts) est-il toujours celui qui est choisi ? Justifie avec ce que tu observes.</p>
-      <textarea id="n4c1" data-rep aria-label="Le chemin le plus court (A, 2 sauts) est-il toujours celui qui est choisi ? Justifie avec ce que tu observes."></textarea>
-
-      <p class="consigne" style="margin-top:20px">À trafic élevé, le chemin B affiche un meilleur nombre de sauts que C mais n'est pas retenu. Pourquoi le routage choisit-il quand même C ? Appuie-toi sur les débits affichés.</p>
-      <textarea id="n4c2" data-rep aria-label="À trafic élevé, le chemin B affiche un meilleur nombre de sauts que C mais n&#x27;est pas retenu. Pourquoi le routa"></textarea>
-
-      <p class="consigne" style="margin-top:20px">Active l'interrupteur « Panne du routeur R1 » à trafic faible. Que se passe-t-il pour le chemin A, et quel chemin prend alors le relais ? Que démontre cette expérience sur l'utilité d'avoir plusieurs routes ?</p>
-      <textarea id="n4c3" data-rep aria-label="Active l&#x27;interrupteur « Panne du routeur R1 » à trafic faible. Que se passe-t-il pour le chemin A, et quel che"></textarea>
-
-      <h3>N4d — Les tables mystères</h3>
-      <p class="consigne">Observe le schéma de l'onglet <em>Trafic</em> et relève les voisins directs de chaque routeur. Retrouve ensuite de quel routeur il s'agit, de R1 à R6. Rappel : le prochain saut est le voisin vers qui envoyer l'information ; quand la destination est directement reliée au routeur, on écrit « livraison directe ».</p>
-      <div class="cartes" id="n4d">
-        <div class="cartefiche" data-table="Table α">
-          <p class="chapeau">Table α</p>
-          <table class="routage">
-            <tr><th>Destination</th><th>Prochain saut</th></tr>
-            <tr><td>Serveur</td><td>R6</td></tr>
-            <tr><td>Source</td><td>R4</td></tr>
-          </table>
-          <div class="grille deuxtiers" style="margin-top:12px">
-            <div class="mini"><label for="n4d-1r">Routeur</label>
-              <select id="n4d-1r"><option value="">Choisir…</option><option>R1</option><option>R2</option><option>R3</option><option>R4</option><option>R5</option><option>R6</option></select>
-            </div>
-            <div class="mini"><label for="n4d-1j">Justification</label><textarea id="n4d-1j"></textarea></div>
-          </div>
-        </div>
-
-        <div class="cartefiche" data-table="Table β">
-          <p class="chapeau">Table β</p>
-          <table class="routage">
-            <tr><th>Destination</th><th>Prochain saut</th></tr>
-            <tr><td>Serveur</td><td>R3</td></tr>
-            <tr><td>Source</td><td>livraison directe</td></tr>
-          </table>
-          <div class="grille deuxtiers" style="margin-top:12px">
-            <div class="mini"><label for="n4d-2r">Routeur</label>
-              <select id="n4d-2r"><option value="">Choisir…</option><option>R1</option><option>R2</option><option>R3</option><option>R4</option><option>R5</option><option>R6</option></select>
-            </div>
-            <div class="mini"><label for="n4d-2j">Justification</label><textarea id="n4d-2j"></textarea></div>
-          </div>
-        </div>
-
-        <div class="cartefiche" data-table="Table γ">
-          <p class="chapeau">Table γ</p>
-          <table class="routage">
-            <tr><th>Destination</th><th>Prochain saut</th></tr>
-            <tr><td>Serveur</td><td>livraison directe</td></tr>
-            <tr><td>Source</td><td>R5</td></tr>
-          </table>
-          <div class="grille deuxtiers" style="margin-top:12px">
-            <div class="mini"><label for="n4d-3r">Routeur</label>
-              <select id="n4d-3r"><option value="">Choisir…</option><option>R1</option><option>R2</option><option>R3</option><option>R4</option><option>R5</option><option>R6</option></select>
-            </div>
-            <div class="mini"><label for="n4d-3j">Justification</label><textarea id="n4d-3j"></textarea></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <article class="bloc" id="synthese">
-    <div class="marge"><span class="duree">10′</span></div>
-    <div class="corps">
-      <h2>Ma synthèse</h2>
-      <p class="consigne">Comment une information trouve-t-elle son chemin entre le collège et un serveur sur Internet ?</p>
-      <textarea id="rep-synthese1" data-rep aria-label="Comment une information trouve-t-elle son chemin entre le collège et un serveur sur Internet ?"></textarea>
-      <p class="consigne" style="margin-top:20px">Qu'est-ce que le débit et de quoi dépend-il ?</p>
-      <textarea id="rep-synthese2" data-rep aria-label="Qu&#x27;est-ce que le débit et de quoi dépend-il ?"></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="cps">
-    <div class="marge"><span class="duree">CPS</span></div>
-    <div class="corps">
-      <h2>Je développe mes compétences psychosociales</h2>
-      <div class="cps">
-        <p>Atteindre ses buts — maîtrise de soi. Où est-ce que je me situe aujourd'hui ?</p>
-        <div class="niveaux">
-          <label><input type="radio" name="cps" id="cps-1" value="1"><span><b>N1</b> — Je peux dire ce que je veux réussir.</span></label>
-          <label><input type="radio" name="cps" id="cps-2" value="2"><span><b>N2</b> — Je peux décomposer un but en étapes.</span></label>
-          <label><input type="radio" name="cps" id="cps-3" value="3"><span><b>N3</b> — Je prépare un plan pour y arriver.</span></label>
-          <label><input type="radio" name="cps" id="cps-4" value="4"><span><b>N4</b> — Je vais jusqu'au bout de mes objectifs.</span></label>
-        </div>
-      </div>
-    </div>
-  </article>
-
-
-  <section class="corrbloc" id="correction">
-    <h2>Correction expliquée et bilan de l’activité</h2>
-    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
-    <div class="saisie">
-      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction"
-             autocomplete="off" spellcheck="false">
-      <button type="button" id="corr-btn">Afficher</button>
-    </div>
-    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
-    <div class="corr" id="corr-contenu" hidden></div>
-  </section>
-
-  <div id="alerte" class="alerte" hidden></div>
-
-</main>
-<nav class="pager" aria-label="Navigation dans la Séquence 2"><a href="seq2-act1-p3.html">← Partie 3 · Filius</a><a href="index.html">Retour à l’accueil →</a></nav>
-
-<div class="barre">
-  <button class="lien" id="effacer" type="button">Effacer mes réponses</button>
-  <button class="btn" id="pdf" type="button">Générer le PDF</button>
-  <p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+<header class="entete">
+<div class="cycle">
+<span class="lab">Cycle 4</span>
+<span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
 </div>
-
+<div class="marque">
+<img alt="Lycée français de Vienne" onerror="this.remove()" src="img/logo-lfv.png"/>
+<p class="fil">Technologie · Séquence 2 · Activité 1</p>
+</div>
+<h1 class="titre">Les chemins de l'information — partie 4 : analyser le routage</h1>
+<p class="sous">T10 — La circulation de l'information dans un réseau · 55 min</p>
+<nav aria-label="Étapes de l'activité" class="chrono" id="chrono">
+<a href="#niveau4"><b>45′</b>Niveau 4</a>
+<a href="#synthese"><b>10′</b>Synthèse</a>
+</nav>
+</header>
+<section aria-label="Mon identité" class="identite">
+<div class="champ"><label for="nom">Nom</label><input autocomplete="family-name" id="nom"/></div>
+<div class="champ"><label for="prenom">Prénom</label><input autocomplete="given-name" id="prenom"/></div>
+<div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"/></div>
+<div class="champ"><label for="groupe">Groupe</label><input id="groupe"/></div>
+<div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"/></div>
+<div class="champ"><label for="date">Date</label><input id="date" type="date"/></div>
+</section>
+<details class="ref">
+<summary>Ce que je travaille dans cette activité</summary>
+<div class="dedans">
+<dl>
+<dt>Thème</dt><dd>Structure, fonctionnement, comportement : des objets et des systèmes techniques à comprendre</dd>
+<dt>Attendu</dt><dd>SFC1 — Décrire et caractériser l'organisation interne d'un objet ou d'un système technique et ses échanges avec son environnement (énergies, données)</dd>
+<dt>SFC17</dt><dd>Identifier et représenter la circulation d'une information dans le réseau Internet</dd>
+<dt>SFC18</dt><dd>Justifier la nécessité d'un protocole de routage pour faire communiquer plusieurs réseaux</dd>
+<dt>SFC1p</dt><dd>Le rôle et la structure d'une adresse IP, des tables de routage</dd>
+<dt>SFC1q</dt><dd>Le débit et les ordres de grandeur associés</dd>
+</dl>
+<ul>
+<li>N1 — Je sais qu'une information est acheminée entre réseaux grâce à son adresse IP et à des tables de routage, et que la quantité de données transmise par seconde s'appelle le débit</li>
+<li>N2 — et je sais expliquer, avec mes mots, le rôle d'une table de routage, l'effet du débit sur la vitesse de circulation d'une information, et la différence entre une adresse IP privée et une adresse IP publique</li>
+<li>N3 — et je sais configurer et tester, sur un réseau simulé, les adresses IP et les passerelles permettant à plusieurs réseaux de communiquer entre eux</li>
+<li>N4 — et je sais expliquer, adresses IP, tables de routage et débits à l'appui, comment une information est acheminée entre plusieurs réseaux et pourquoi le chemin choisi dépend à la fois du routage et de l'état du trafic</li>
+</ul>
+</div>
+</details>
+<article class="bloc" id="niveau4">
+<div class="marge"><span class="duree">55′</span></div>
+<div class="corps">
+<h2>Activité — niveau 4 : lire le routage</h2>
+<p class="amorce">Maintenant que vous avez configuré et testé votre réseau dans Filius, vous allez analyser plus finement comment le routage choisit un chemin et comment se lit une table de routage.</p>
+<div class="ressources" style="margin-bottom:22px">
+<p class="appli" style="margin-bottom:10px">Toute cette partie s'appuie sur l'application « Du réseau du collège jusqu'à Internet », avec ses onglets <em>Trajet &amp; routage</em>, <em>Débit</em> et <em>Trafic</em>.</p>
+<p style="margin:0"><a href="outils/reseau-complet.html" rel="noopener" target="_blank"><strong>Ouvrir l'application dans un nouvel onglet</strong></a></p>
+<img alt="Aperçu de l'application : le réseau du collège relié à Internet." class="apercu" onerror="this.remove()" src="img/seq2-act1-app.png" style="margin-top:14px"/>
+</div>
+<h3>N4a — À quel réseau appartient chaque adresse ?</h3>
+<p class="consigne">Dans notre modèle, chaque sous-réseau utilise le masque /24 (255.255.255.0) : les trois premiers octets identifient donc le réseau et le dernier l’hôte. Collège → 192.168.1.___ , serveur vidéo → 203.0.113.___ , serveur Pronote → 198.51.100.___ . Repères visibles dans l'application : PC de Léa 192.168.1.25, serveur vidéo 203.0.113.10, serveur Pronote 198.51.100.5.</p>
+<div class="cartes" id="n4a">
+<div class="ligne" data-adresse="192.168.1.42">
+<span class="cle">192.168.1.42</span>
+<select aria-label="Réseau de 192.168.1.42" id="n4a-1">
+<option value="">Choisir…</option>
+<option>Réseau du collège</option>
+<option>Réseau du serveur vidéo</option>
+<option>Réseau du serveur Pronote</option>
+<option>Adresse impossible</option>
+</select>
+</div>
+<div class="ligne" data-adresse="203.0.113.200">
+<span class="cle">203.0.113.200</span>
+<select aria-label="Réseau de 203.0.113.200" id="n4a-2">
+<option value="">Choisir…</option>
+<option>Réseau du collège</option>
+<option>Réseau du serveur vidéo</option>
+<option>Réseau du serveur Pronote</option>
+<option>Adresse impossible</option>
+</select>
+</div>
+<div class="ligne" data-adresse="198.51.100.9">
+<span class="cle">198.51.100.9</span>
+<select aria-label="Réseau de 198.51.100.9" id="n4a-3">
+<option value="">Choisir…</option>
+<option>Réseau du collège</option>
+<option>Réseau du serveur vidéo</option>
+<option>Réseau du serveur Pronote</option>
+<option>Adresse impossible</option>
+</select>
+</div>
+<div class="ligne" data-adresse="192.168.2.25">
+<span class="cle">192.168.2.25</span>
+<select aria-label="Réseau de 192.168.2.25" id="n4a-4">
+<option value="">Choisir…</option>
+<option>Réseau du collège</option>
+<option>Réseau du serveur vidéo</option>
+<option>Réseau du serveur Pronote</option>
+<option>Adresse impossible</option>
+</select>
+</div>
+<div class="ligne" data-adresse="203.0.113.300">
+<span class="cle">203.0.113.300</span>
+<select aria-label="Réseau de 203.0.113.300" id="n4a-5">
+<option value="">Choisir…</option>
+<option>Réseau du collège</option>
+<option>Réseau du serveur vidéo</option>
+<option>Réseau du serveur Pronote</option>
+<option>Adresse impossible</option>
+</select>
+</div>
+</div>
+<h3>N4b — Rester dans le réseau local</h3>
+<p class="consigne">Un nouvel ordinateur reçoit l'adresse 192.168.1.10. Léa (192.168.1.25) veut lui envoyer un fichier. En observant l'onglet <em>Trajet &amp; routage</em>, explique si l'information devra ou non passer par la Box et le FAI, et pourquoi.</p>
+<textarea aria-label="Un nouvel ordinateur reçoit l'adresse 192.168.1.10. Léa (192.168.1.25) veut lui envoyer un fichier. En observa" data-rep="" id="n4b"></textarea>
+<h3>N4c — Le chemin dépend du trafic</h3>
+<p class="consigne">Dans l'onglet <em>Trafic</em>, trois chemins relient la source au serveur : A (source → R1 → serveur, 2 sauts), B (source → R2 → R3 → serveur, 3 sauts), C (source → R4 → R5 → R6 → serveur, 4 sauts). Fais varier le volume de trafic et note à chaque fois le chemin retenu.</p>
+<div class="cartes" id="n4c">
+<div class="ligne" data-volume="Faible">
+<span class="cle">Faible</span>
+<input aria-label="Chemin retenu à trafic faible" id="n4c-1a" placeholder="Chemin retenu"/>
+<input aria-label="Débit du chemin à trafic faible" id="n4c-1b" placeholder="Débit du chemin"/>
+</div>
+<div class="ligne" data-volume="Moyen">
+<span class="cle">Moyen</span>
+<input aria-label="Chemin retenu à trafic moyen" id="n4c-2a" placeholder="Chemin retenu"/>
+<input aria-label="Débit du chemin à trafic moyen" id="n4c-2b" placeholder="Débit du chemin"/>
+</div>
+<div class="ligne" data-volume="Élevé">
+<span class="cle">Élevé</span>
+<input aria-label="Chemin retenu à trafic élevé" id="n4c-3a" placeholder="Chemin retenu"/>
+<input aria-label="Débit du chemin à trafic élevé" id="n4c-3b" placeholder="Débit du chemin"/>
+</div>
+</div>
+<p class="consigne" style="margin-top:20px">Le chemin le plus court (A, 2 sauts) est-il toujours celui qui est choisi ? Justifie avec ce que tu observes.</p>
+<textarea aria-label="Le chemin le plus court (A, 2 sauts) est-il toujours celui qui est choisi ? Justifie avec ce que tu observes." data-rep="" id="n4c1"></textarea>
+<p class="consigne" style="margin-top:20px">À trafic élevé, le chemin B affiche un meilleur nombre de sauts que C mais n'est pas retenu. Pourquoi le routage choisit-il quand même C ? Appuie-toi sur les débits affichés.</p>
+<textarea aria-label="À trafic élevé, le chemin B affiche un meilleur nombre de sauts que C mais n'est pas retenu. Pourquoi le routa" data-rep="" id="n4c2"></textarea>
+<p class="consigne" style="margin-top:20px">Active l'interrupteur « Panne du routeur R1 » à trafic faible. Que se passe-t-il pour le chemin A, et quel chemin prend alors le relais ? Que démontre cette expérience sur l'utilité d'avoir plusieurs routes ?</p>
+<textarea aria-label="Active l'interrupteur « Panne du routeur R1 » à trafic faible. Que se passe-t-il pour le chemin A, et quel che" data-rep="" id="n4c3"></textarea>
+<h3>N4d — Les tables mystères</h3>
+<p class="consigne">Observe le schéma de l'onglet <em>Trafic</em> et relève les voisins directs de chaque routeur. Retrouve ensuite de quel routeur il s'agit, de R1 à R6. Rappel : le prochain saut est le voisin vers qui envoyer l'information ; quand la destination est directement reliée au routeur, on écrit « livraison directe ».</p>
+<div class="cartes" id="n4d">
+<div class="cartefiche" data-table="Table α">
+<p class="chapeau">Table α</p>
+<table class="routage">
+<tr><th>Destination</th><th>Prochain saut</th></tr>
+<tr><td>Serveur</td><td>R6</td></tr>
+<tr><td>Source</td><td>R4</td></tr>
+</table>
+<div class="grille deuxtiers" style="margin-top:12px">
+<div class="mini"><label for="n4d-1r">Routeur</label>
+<select id="n4d-1r"><option value="">Choisir…</option><option>R1</option><option>R2</option><option>R3</option><option>R4</option><option>R5</option><option>R6</option></select>
+</div>
+<div class="mini"><label for="n4d-1j">Justification</label><textarea id="n4d-1j"></textarea></div>
+</div>
+</div>
+<div class="cartefiche" data-table="Table β">
+<p class="chapeau">Table β</p>
+<table class="routage">
+<tr><th>Destination</th><th>Prochain saut</th></tr>
+<tr><td>Serveur</td><td>R3</td></tr>
+<tr><td>Source</td><td>livraison directe</td></tr>
+</table>
+<div class="grille deuxtiers" style="margin-top:12px">
+<div class="mini"><label for="n4d-2r">Routeur</label>
+<select id="n4d-2r"><option value="">Choisir…</option><option>R1</option><option>R2</option><option>R3</option><option>R4</option><option>R5</option><option>R6</option></select>
+</div>
+<div class="mini"><label for="n4d-2j">Justification</label><textarea id="n4d-2j"></textarea></div>
+</div>
+</div>
+<div class="cartefiche" data-table="Table γ">
+<p class="chapeau">Table γ</p>
+<table class="routage">
+<tr><th>Destination</th><th>Prochain saut</th></tr>
+<tr><td>Serveur</td><td>livraison directe</td></tr>
+<tr><td>Source</td><td>R5</td></tr>
+</table>
+<div class="grille deuxtiers" style="margin-top:12px">
+<div class="mini"><label for="n4d-3r">Routeur</label>
+<select id="n4d-3r"><option value="">Choisir…</option><option>R1</option><option>R2</option><option>R3</option><option>R4</option><option>R5</option><option>R6</option></select>
+</div>
+<div class="mini"><label for="n4d-3j">Justification</label><textarea id="n4d-3j"></textarea></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="bloc" id="synthese">
+<div class="marge"><span class="duree">10′</span></div>
+<div class="corps">
+<h2>Ma synthèse</h2>
+<p class="consigne">Comment une information trouve-t-elle son chemin entre le collège et un serveur sur Internet ?</p>
+<textarea aria-label="Comment une information trouve-t-elle son chemin entre le collège et un serveur sur Internet ?" data-rep="" id="rep-synthese1"></textarea>
+<p class="consigne" style="margin-top:20px">Qu'est-ce que le débit et de quoi dépend-il ?</p>
+<textarea aria-label="Qu'est-ce que le débit et de quoi dépend-il ?" data-rep="" id="rep-synthese2"></textarea>
+</div>
+</article>
+<article class="bloc" id="cps">
+<div class="marge"><span class="duree">CPS</span></div>
+<div class="corps">
+<h2>Je développe mes compétences psychosociales</h2>
+<div class="cps">
+<p>Atteindre ses buts — maîtrise de soi. Où est-ce que je me situe aujourd'hui ?</p>
+<div class="niveaux">
+<label><input id="cps-1" name="cps" type="radio" value="1"/><span><b>N1</b> — Je peux dire ce que je veux réussir.</span></label>
+<label><input id="cps-2" name="cps" type="radio" value="2"/><span><b>N2</b> — Je peux décomposer un but en étapes.</span></label>
+<label><input id="cps-3" name="cps" type="radio" value="3"/><span><b>N3</b> — Je prépare un plan pour y arriver.</span></label>
+<label><input id="cps-4" name="cps" type="radio" value="4"/><span><b>N4</b> — Je vais jusqu'au bout de mes objectifs.</span></label>
+</div>
+</div>
+</div>
+</article>
+<section class="corrbloc" id="correction">
+<h2>Correction expliquée et bilan de l’activité</h2>
+<p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+<div class="saisie">
+<input aria-label="Mot de passe de la correction" autocomplete="off" id="corr-mdp" placeholder="Mot de passe" spellcheck="false" type="password"/>
+<button id="corr-btn" type="button">Afficher</button>
+</div>
+<p class="refus" hidden="" id="corr-refus">Mot de passe incorrect.</p>
+<div class="corr" hidden="" id="corr-contenu"></div>
+</section>
+<div class="alerte" hidden="" id="alerte"></div>
+</main>
+<nav aria-label="Navigation dans la Séquence 2" class="pager"><a href="seq2-act1-p3.html">← Partie 3 · Filius</a><a href="index.html">Retour à l’accueil →</a></nav>
+<div class="barre">
+<button class="lien" id="effacer" type="button">Effacer mes réponses</button>
+<button class="btn" id="pdf" type="button">Générer le PDF</button>
+<p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+</div>
 <script>
 (function(){
 "use strict";

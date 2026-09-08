@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Séquence 4 · Séance 3 — Je conçois le programme</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
@@ -321,8 +322,7 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
-<link rel="stylesheet" href="assets/site-addons.css">
-
+<link href="assets/site-addons.css" rel="stylesheet"/>
 <!-- Navigation séquentielle harmonisée -->
 <style id="sequence-pager-style">
 .pager{
@@ -364,272 +364,252 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
 }
 @media print{.pager{display:none!important}}
 </style>
-
 </head>
 <body>
-
-<nav class="navsite" aria-label="Navigation du site">
-  <div class="dedans">
-    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
-    <label class="saut">
-      <span>Aller à</span>
-      <select id="navfiches" aria-label="Aller à une autre activité">
-        <optgroup label="Séquence 1">
-          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
-          <option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
-          <option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
-          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
-        </optgroup>
-        <optgroup label="Séquence 2">
-          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
-          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage & débit</option>
-          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
-          <option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
-        </optgroup>
-        <optgroup label="Séquence 3">
-          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
-          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
-          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
-          <option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
-          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
-          <option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
-          <option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
-        </optgroup>
-        <optgroup label="Séquence 4">
-          <option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
-          <option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
-          <option value="seq4-act3.html" selected>Séance 3 — Je conçois le programme</option>
-          <option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
-          <option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
-          <option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
-        </optgroup>
-        <optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
-        <optgroup label="Outils">
-          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
-          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
-          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
-        </optgroup>
-      <optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges & SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option></optgroup></select>
-    </label>
-  </div>
+<nav aria-label="Navigation du site" class="navsite">
+<div class="dedans">
+<a class="accueil" href="index.html">← Accueil</a>
+<label class="saut">
+<span>Aller à</span>
+<select aria-label="Aller à une autre activité" id="navfiches">
+<optgroup label="Séquence 1">
+<option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+<option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
+<option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
+<option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+</optgroup>
+<optgroup label="Séquence 2">
+<option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels &amp; réseau</option>
+<option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage &amp; débit</option>
+<option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
+<option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
+</optgroup>
+<optgroup label="Séquence 3">
+<option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+<option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+<option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+<option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+<option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+<option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+<option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
+</optgroup>
+<optgroup label="Séquence 4">
+<option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
+<option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
+<option selected="" value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
+<option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
+<option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
+<option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
+</optgroup>
+<optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
+<optgroup label="Outils">
+<option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+<option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+<option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+</optgroup>
+<optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges &amp; SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option><option value="osi-seq3-act1.html">OSI S3 · Séance 1 — Algorithme et logigramme</option><option value="osi-seq3-act2.html">OSI S3 · Séance 2 — Fonctions et solutions techniques</option><option value="osi-seq3-act3.html">OSI S3 · Séance 3 — Revue d’architecture</option><option value="osi-seq3-act4.html">OSI S3 · Séance 4 — Chaînes d’information et d’énergie</option><option value="osi-seq3-act5.html">OSI S3 · Séance 5 — Programmer, tester, corriger</option></optgroup></select>
+</label>
+</div>
 </nav>
 <script>
 document.getElementById("navfiches").addEventListener("change", function(){
   if(this.value) location.href = this.value;
 });
 </script>
-
-
 <main class="page">
-
-  <header class="entete">
-    <div class="cycle">
-      <span class="lab">Cycle 4</span>
-      <span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
-    </div>
-    <div class="marque">
-      <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
-      <p class="fil">Technologie · Séquence 4 · Activité 3</p>
-    </div>
-    <h1 class="titre">L'arrosage automatique — séance 3 : je conçois le programme</h1>
-    <p class="sous">Algorithme, logigramme et programmation par blocs · 55 min</p>
-    <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
-      <a href="#probleme"><b>5′</b>Problème</a>
-      <a href="#donnees"><b>7′</b>Données</a>
-      <a href="#algo"><b>12′</b>Algorithme</a>
-      <a href="#logigramme"><b>13′</b>Logigramme</a>
-      <a href="#prog"><b>13′</b>Programmation</a>
-      <a href="#synthese"><b>5′</b>Synthèse</a>
-    </nav>
-  </header>
-
-  <section class="identite" aria-label="Mon identité">
-    <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="family-name"></div>
-    <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
-    <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
-    <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
-    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"></div>
-    <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
-  </section>
-  <details class="ref">
-    <summary>Ce que je travaille dans cette activité</summary>
-    <div class="dedans">
-      <dl>
-        <dt>Programme</dt><dd>Technologie, cycle 4, BO du 29 février 2024 — repères de progressivité classe de 3e</dd>
-        <dt>Compétence</dt><dd>Comprendre et modifier un programme associé à une fonctionnalité d'un objet ou d'un système technique</dd>
-        <dt>Repère 3e</dt><dd>Déterminer les données utilisées et produites par un programme associé à une fonctionnalité en vue de le modifier</dd>
-        <dt>Repère 3e</dt><dd>Programmer un algorithme lié à une nouvelle fonctionnalité</dd>
-        <dt>Repère 3e</dt><dd>Élaborer ou concevoir un algorithme permettant de répondre au besoin visé, puis le traduire en un programme, le tester et le mettre au point</dd>
-      </dl>
-      <p style="margin:14px 0 6px;font-weight:600">Connaissances</p>
-      <ul>
-        <li>Instruction d'affectation, variable (type nombre)</li>
-        <li>Instruction conditionnelle ; instructions itératives ; événement</li>
-        <li>Entrées et sorties d'un programme : données issues de capteurs, sorties en lien avec un actionneur</li>
-        <li>Programmation graphique par blocs ; les modes de représentation : algorithme, logigramme</li>
-      </ul>
-      <p style="margin:14px 0 6px;font-weight:600">Ce que je dois savoir faire</p>
-      <ul>
-        <li>N1 — Je sais distinguer les données d'entrée et de sortie du programme</li>
-        <li>N2 — et je sais écrire en français l'algorithme de l'arrosage automatique</li>
-        <li>N3 — et je sais le traduire en logigramme avec les symboles normalisés</li>
-        <li>N4 — et je sais le programmer par blocs, le tester et le mettre au point</li>
-      </ul>
-    </div>
-  </details>
-  <article class="bloc" id="probleme">
-    <div class="marge"><span class="duree">5′</span></div>
-    <div class="corps">
-      <h2>Le problème à résoudre</h2>
-      <div class="situation">
-        <p>Le capteur est étalonné : le programme peut maintenant transformer la valeur brute en indice d'humidité relatif. Il reste à automatiser l'arrosage.</p>
-        <p style="margin-top:14px"><strong>Fonctionnement attendu :</strong> le capteur mesure en permanence une valeur brute, le programme la transforme grâce à l’étalonnage en indice relatif, puis l’arrosage se déclenche lorsque cet indice passe sous le seuil de 50 % choisi pour le prototype. L'arrosage sera simulé par une DEL branchée sur la broche P2.</p>
-      </div>
-      <h3>D'où vient ce seuil de 50 % ?</h3>
-      <p class="consigne">Dans notre maquette, <strong>50 % correspond à la moitié de l’indice relatif défini par Vsec et Vhumide</strong>. Nous le choisissons comme seuil de conception pour tester l’algorithme. Dans une installation réelle, le seuil serait déterminé selon la plante, le sol, le climat et la méthode de mesure.</p>
-      <p class="consigne">Le collège veut installer ton système sur son potager. Quel seuil choisirais-tu, et de quoi as-tu besoin pour le décider ?</p>
-      <textarea id="n0" data-rep placeholder="" style="min-height:90px" aria-label="Le collège veut installer ton système sur son potager. Quel seuil choisirais-tu, et de quoi as-tu besoin pour "></textarea>
-      <p class="amorce">Cette fois, aucun bloc ne t'est donné. Tu conçois, puis tu programmes.</p>
-
-    </div>
-  </article>
-  <article class="bloc" id="donnees">
-    <div class="marge"><span class="duree">7′</span></div>
-    <div class="corps">
-      <h2>Les données du programme</h2>
-      <p class="consigne">Avant d'écrire quoi que ce soit, il faut savoir ce qui entre et ce qui sort.</p>
-      <div class="cartes" data-tab="donnees" id="tabdonnees">
-        <div class="ligne" data-cle="Donnée d'entrée">
-          <span class="cle">Donnée d'entrée</span>
-          <input id="e1a" placeholder="laquelle ?" aria-label="laquelle ? pour Donnée d'entrée">
-          <select id="e1b" aria-label="son type pour Donnée d'entrée"><option value="">son type</option><option>Nombre</option><option>Chaîne de caractères</option><option>Booléen</option></select>
-          <input id="e1c" placeholder="d'où vient-elle ?" aria-label="d'où vient-elle ? pour Donnée d'entrée">
-        </div>
-        <div class="ligne" data-cle="Donnée calculée">
-          <span class="cle">Donnée calculée</span>
-          <input id="e2a" placeholder="laquelle ?" aria-label="laquelle ? pour Donnée calculée">
-          <select id="e2b" aria-label="son type pour Donnée calculée"><option value="">son type</option><option>Nombre</option><option>Chaîne de caractères</option><option>Booléen</option></select>
-          <input id="e2c" placeholder="comment ?" aria-label="comment ? pour Donnée calculée">
-        </div>
-        <div class="ligne" data-cle="Donnée de sortie">
-          <span class="cle">Donnée de sortie</span>
-          <input id="e3a" placeholder="laquelle ?" aria-label="laquelle ? pour Donnée de sortie">
-          <select id="e3b" aria-label="son type pour Donnée de sortie"><option value="">son type</option><option>Nombre</option><option>Chaîne de caractères</option><option>Booléen</option></select>
-          <input id="e3c" placeholder="vers quoi ?" aria-label="vers quoi ? pour Donnée de sortie">
-        </div>
-      </div>
-
-    </div>
-  </article>
-  <article class="bloc" id="algo">
-    <div class="marge"><span class="duree">12′</span></div>
-    <div class="corps">
-      <h2>J'écris l'algorithme en français</h2>
-      <p class="consigne">Décris, phrase par phrase et dans l'ordre, ce que le programme doit faire. Utilise les mots : <em>répéter indéfiniment</em>, <em>mettre dans</em>, <em>si</em>, <em>alors</em>, <em>sinon</em>, <em>afficher</em>.</p>
-      <textarea id="rep-algo" data-rep placeholder="Répéter indéfiniment
-…" style="min-height:230px" aria-label="Décris, phrase par phrase et dans l&#x27;ordre, ce que le programme doit faire. Utilise les mots : répéter indéfini"></textarea>
-
-    </div>
-  </article>
-  <article class="bloc" id="logigramme">
-    <div class="marge"><span class="duree">13′</span></div>
-    <div class="corps">
-      <h2>Je dessine le logigramme</h2>
-      <p class="consigne">Traduis ton algorithme avec les symboles normalisés. Laisse vides les lignes inutiles.</p>
-      <div class="legende">
-        <div><svg viewBox="0 0 90 40" aria-hidden="true"><rect x="3" y="6" width="84" height="28" rx="14" fill="none" stroke="#0E6E6B" stroke-width="2"/></svg><span>Début ou fin</span></div>
-        <div><svg viewBox="0 0 90 40" aria-hidden="true"><path d="M14 6 H87 L76 34 H3 Z" fill="none" stroke="#0E6E6B" stroke-width="2"/></svg><span>Entrée ou sortie</span></div>
-        <div><svg viewBox="0 0 90 40" aria-hidden="true"><rect x="3" y="6" width="84" height="28" fill="none" stroke="#0E6E6B" stroke-width="2"/></svg><span>Traitement</span></div>
-        <div><svg viewBox="0 0 90 40" aria-hidden="true"><path d="M45 4 L87 20 L45 36 L3 20 Z" fill="none" stroke="#0E6E6B" stroke-width="2"/></svg><span>Test</span></div>
-      </div>
-      <div class="cartes" id="logi">
-        <div class="ligne"><select id="lo-1t" aria-label="Forme de l'étape 1"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-1c" placeholder="Contenu de l'étape 1" aria-label="Contenu de l'étape 1"></div>
-        <div class="ligne"><select id="lo-2t" aria-label="Forme de l'étape 2"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-2c" placeholder="Contenu de l'étape 2" aria-label="Contenu de l'étape 2"></div>
-        <div class="ligne"><select id="lo-3t" aria-label="Forme de l'étape 3"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-3c" placeholder="Contenu de l'étape 3" aria-label="Contenu de l'étape 3"></div>
-        <div class="ligne"><select id="lo-4t" aria-label="Forme de l'étape 4"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-4c" placeholder="Contenu de l'étape 4" aria-label="Contenu de l'étape 4"></div>
-        <div class="ligne"><select id="lo-5t" aria-label="Forme de l'étape 5"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-5c" placeholder="Contenu de l'étape 5" aria-label="Contenu de l'étape 5"></div>
-        <div class="ligne"><select id="lo-6t" aria-label="Forme de l'étape 6"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-6c" placeholder="Contenu de l'étape 6" aria-label="Contenu de l'étape 6"></div>
-        <div class="ligne"><select id="lo-7t" aria-label="Forme de l'étape 7"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-7c" placeholder="Contenu de l'étape 7" aria-label="Contenu de l'étape 7"></div>
-        <div class="ligne"><select id="lo-8t" aria-label="Forme de l'étape 8"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-8c" placeholder="Contenu de l'étape 8" aria-label="Contenu de l'étape 8"></div>
-        <div class="ligne"><select id="lo-9t" aria-label="Forme de l'étape 9"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-9c" placeholder="Contenu de l'étape 9" aria-label="Contenu de l'étape 9"></div>
-        <div class="ligne"><select id="lo-10t" aria-label="Forme de l'étape 10"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-10c" placeholder="Contenu de l'étape 10" aria-label="Contenu de l'étape 10"></div>
-      </div>
-      <p class="consigne">Le PDF dessinera ton logigramme avec les vraies formes, reliées par des flèches.</p>
-
-    </div>
-  </article>
-  <article class="bloc" id="prog">
-    <div class="marge"><span class="duree">13′</span></div>
-    <div class="corps">
-      <h2>Je programme et je teste</h2>
-      <div class="bandeau">
-        <p>Programmation par blocs. La DEL branchée en P2 simule la pompe.</p>
-        <a href="https://makecode.microbit.org/#lang=fr" target="_blank" rel="noopener">Ouvrir MakeCode</a>
-      </div>
-      <div class="cartes" id="etapes">
-        <div class="cartefiche" data-etape="Lire l'humidité en boucle">
-          <label class="etape"><input type="checkbox" id="et-1"><span><b>1.</b> Faire lire la broche analogique en continu et ranger la valeur convertie dans une variable.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Afficher le taux à l'écran">
-          <label class="etape"><input type="checkbox" id="et-2"><span><b>2.</b> Afficher l'indice d'humidité relatif sur l'écran à LED.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Écrire le test du seuil">
-          <label class="etape"><input type="checkbox" id="et-3"><span><b>3.</b> Déclencher la sortie P2 quand l’indice relatif passe sous le seuil de 50 %, et l'éteindre sinon.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Tester dans le simulateur">
-          <label class="etape"><input type="checkbox" id="et-4"><span><b>4.</b> Vérifier le comportement dans le simulateur en faisant varier la valeur.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Téléverser et faire valider">
-          <label class="etape"><input type="checkbox" id="et-5"><span><b>5.</b> Téléverser sur la carte, tester sur la terre, puis appeler le professeur.</span></label>
-        </div>
-      </div>
-      <details class="ref" style="margin-top:20px">
-        <summary>Coup de pouce — à n'ouvrir qu'en cas de blocage</summary>
-        <div class="dedans">
-          <p style="margin:0 0 12px">Voici les briques dont tu as besoin, mélangées. À toi de trouver comment les assembler et ce qu'il faut écrire dans les cases blanches.</p>
-          <p style="margin:0 0 12px"><img class="illus" style="max-width:520px" src="img/seq4-blocs-aide.png" alt="Blocs MakeCode : si/sinon, écrire sur la broche P2, définir humidité, montrer nombre, comparaison inférieur à 50." onerror="this.remove()"></p>
-        </div>
-      </details>
-      <h3>Ce qui a marché, ce qui a bloqué</h3>
-      <textarea id="bilan" data-rep placeholder="J'ai réussi à…  J'ai buté sur…" aria-label="Ce qui a marché, ce qui a bloqué — J&#x27;ai réussi à…  J&#x27;ai buté sur…"></textarea>
-
-    </div>
-  </article>
-  <article class="bloc" id="synthese">
-    <div class="marge"><span class="duree">5′</span></div>
-    <div class="corps">
-      <h2>Ma synthèse</h2>
-      <p class="consigne">À quoi sert d'écrire l'algorithme et le logigramme avant de programmer ?</p>
-      <textarea id="rep-synthese" data-rep placeholder="" aria-label="À quoi sert d&#x27;écrire l&#x27;algorithme et le logigramme avant de programmer ?"></textarea>
-
-    </div>
-  </article>
-
-
-  <section class="corrbloc" id="correction">
-    <h2>Correction expliquée et bilan de l’activité</h2>
-    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
-    <div class="saisie">
-      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction"
-             autocomplete="off" spellcheck="false">
-      <button type="button" id="corr-btn">Afficher</button>
-    </div>
-    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
-    <div class="corr" id="corr-contenu" hidden></div>
-  </section>
-
-  <div id="alerte" class="alerte" hidden></div>
-
-</main>
-<nav class="pager" aria-label="Navigation dans la Séquence 4"><a href="seq4-act2.html">← Séance 2 · Calibrer le capteur</a><a href="seq4-act4.html">Séance 4 · Les opérateurs logiques →</a></nav>
-
-
-<div class="barre">
-  <button class="lien" id="effacer" type="button">Effacer mes réponses</button>
-  <button class="btn" id="pdf" type="button">Générer le PDF</button>
-  <p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+<header class="entete">
+<div class="cycle">
+<span class="lab">Cycle 4</span>
+<span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
 </div>
-
+<div class="marque">
+<img alt="Lycée français de Vienne" onerror="this.remove()" src="img/logo-lfv.png"/>
+<p class="fil">Technologie · Séquence 4 · Activité 3</p>
+</div>
+<h1 class="titre">L'arrosage automatique — séance 3 : je conçois le programme</h1>
+<p class="sous">Algorithme, logigramme et programmation par blocs · 55 min</p>
+<nav aria-label="Étapes de l'activité" class="chrono" id="chrono">
+<a href="#probleme"><b>5′</b>Problème</a>
+<a href="#donnees"><b>7′</b>Données</a>
+<a href="#algo"><b>12′</b>Algorithme</a>
+<a href="#logigramme"><b>13′</b>Logigramme</a>
+<a href="#prog"><b>13′</b>Programmation</a>
+<a href="#synthese"><b>5′</b>Synthèse</a>
+</nav>
+</header>
+<section aria-label="Mon identité" class="identite">
+<div class="champ"><label for="nom">Nom</label><input autocomplete="family-name" id="nom"/></div>
+<div class="champ"><label for="prenom">Prénom</label><input autocomplete="given-name" id="prenom"/></div>
+<div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"/></div>
+<div class="champ"><label for="groupe">Groupe</label><input id="groupe"/></div>
+<div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"/></div>
+<div class="champ"><label for="date">Date</label><input id="date" type="date"/></div>
+</section>
+<details class="ref">
+<summary>Ce que je travaille dans cette activité</summary>
+<div class="dedans">
+<dl>
+<dt>Programme</dt><dd>Technologie, cycle 4, BO du 29 février 2024 — repères de progressivité classe de 3e</dd>
+<dt>Compétence</dt><dd>Comprendre et modifier un programme associé à une fonctionnalité d'un objet ou d'un système technique</dd>
+<dt>Repère 3e</dt><dd>Déterminer les données utilisées et produites par un programme associé à une fonctionnalité en vue de le modifier</dd>
+<dt>Repère 3e</dt><dd>Programmer un algorithme lié à une nouvelle fonctionnalité</dd>
+<dt>Repère 3e</dt><dd>Élaborer ou concevoir un algorithme permettant de répondre au besoin visé, puis le traduire en un programme, le tester et le mettre au point</dd>
+</dl>
+<p style="margin:14px 0 6px;font-weight:600">Connaissances</p>
+<ul>
+<li>Instruction d'affectation, variable (type nombre)</li>
+<li>Instruction conditionnelle ; instructions itératives ; événement</li>
+<li>Entrées et sorties d'un programme : données issues de capteurs, sorties en lien avec un actionneur</li>
+<li>Programmation graphique par blocs ; les modes de représentation : algorithme, logigramme</li>
+</ul>
+<p style="margin:14px 0 6px;font-weight:600">Ce que je dois savoir faire</p>
+<ul>
+<li>N1 — Je sais distinguer les données d'entrée et de sortie du programme</li>
+<li>N2 — et je sais écrire en français l'algorithme de l'arrosage automatique</li>
+<li>N3 — et je sais le traduire en logigramme avec les symboles normalisés</li>
+<li>N4 — et je sais le programmer par blocs, le tester et le mettre au point</li>
+</ul>
+</div>
+</details>
+<article class="bloc" id="probleme">
+<div class="marge"><span class="duree">5′</span></div>
+<div class="corps">
+<h2>Le problème à résoudre</h2>
+<div class="situation">
+<p>Le capteur est étalonné : le programme peut maintenant transformer la valeur brute en indice d'humidité relatif. Il reste à automatiser l'arrosage.</p>
+<p style="margin-top:14px"><strong>Fonctionnement attendu :</strong> le capteur mesure en permanence une valeur brute, le programme la transforme grâce à l’étalonnage en indice relatif, puis l’arrosage se déclenche lorsque cet indice passe sous le seuil de 50 % choisi pour le prototype. L'arrosage sera simulé par une DEL branchée sur la broche P2.</p>
+</div>
+<h3>D'où vient ce seuil de 50 % ?</h3>
+<p class="consigne">Dans notre maquette, <strong>50 % correspond à la moitié de l’indice relatif défini par Vsec et Vhumide</strong>. Nous le choisissons comme seuil de conception pour tester l’algorithme. Dans une installation réelle, le seuil serait déterminé selon la plante, le sol, le climat et la méthode de mesure.</p>
+<p class="consigne">Le collège veut installer ton système sur son potager. Quel seuil choisirais-tu, et de quoi as-tu besoin pour le décider ?</p>
+<textarea aria-label="Le collège veut installer ton système sur son potager. Quel seuil choisirais-tu, et de quoi as-tu besoin pour " data-rep="" id="n0" placeholder="" style="min-height:90px"></textarea>
+<p class="amorce">Cette fois, aucun bloc ne t'est donné. Tu conçois, puis tu programmes.</p>
+</div>
+</article>
+<article class="bloc" id="donnees">
+<div class="marge"><span class="duree">7′</span></div>
+<div class="corps">
+<h2>Les données du programme</h2>
+<p class="consigne">Avant d'écrire quoi que ce soit, il faut savoir ce qui entre et ce qui sort.</p>
+<div class="cartes" data-tab="donnees" id="tabdonnees">
+<div class="ligne" data-cle="Donnée d'entrée">
+<span class="cle">Donnée d'entrée</span>
+<input aria-label="laquelle ? pour Donnée d'entrée" id="e1a" placeholder="laquelle ?"/>
+<select aria-label="son type pour Donnée d'entrée" id="e1b"><option value="">son type</option><option>Nombre</option><option>Chaîne de caractères</option><option>Booléen</option></select>
+<input aria-label="d'où vient-elle ? pour Donnée d'entrée" id="e1c" placeholder="d'où vient-elle ?"/>
+</div>
+<div class="ligne" data-cle="Donnée calculée">
+<span class="cle">Donnée calculée</span>
+<input aria-label="laquelle ? pour Donnée calculée" id="e2a" placeholder="laquelle ?"/>
+<select aria-label="son type pour Donnée calculée" id="e2b"><option value="">son type</option><option>Nombre</option><option>Chaîne de caractères</option><option>Booléen</option></select>
+<input aria-label="comment ? pour Donnée calculée" id="e2c" placeholder="comment ?"/>
+</div>
+<div class="ligne" data-cle="Donnée de sortie">
+<span class="cle">Donnée de sortie</span>
+<input aria-label="laquelle ? pour Donnée de sortie" id="e3a" placeholder="laquelle ?"/>
+<select aria-label="son type pour Donnée de sortie" id="e3b"><option value="">son type</option><option>Nombre</option><option>Chaîne de caractères</option><option>Booléen</option></select>
+<input aria-label="vers quoi ? pour Donnée de sortie" id="e3c" placeholder="vers quoi ?"/>
+</div>
+</div>
+</div>
+</article>
+<article class="bloc" id="algo">
+<div class="marge"><span class="duree">12′</span></div>
+<div class="corps">
+<h2>J'écris l'algorithme en français</h2>
+<p class="consigne">Décris, phrase par phrase et dans l'ordre, ce que le programme doit faire. Utilise les mots : <em>répéter indéfiniment</em>, <em>mettre dans</em>, <em>si</em>, <em>alors</em>, <em>sinon</em>, <em>afficher</em>.</p>
+<textarea aria-label="Décris, phrase par phrase et dans l'ordre, ce que le programme doit faire. Utilise les mots : répéter indéfini" data-rep="" id="rep-algo" placeholder="Répéter indéfiniment
+…" style="min-height:230px"></textarea>
+</div>
+</article>
+<article class="bloc" id="logigramme">
+<div class="marge"><span class="duree">13′</span></div>
+<div class="corps">
+<h2>Je dessine le logigramme</h2>
+<p class="consigne">Traduis ton algorithme avec les symboles normalisés. Laisse vides les lignes inutiles.</p>
+<div class="legende">
+<div><svg aria-hidden="true" viewbox="0 0 90 40"><rect fill="none" height="28" rx="14" stroke="#0E6E6B" stroke-width="2" width="84" x="3" y="6"></rect></svg><span>Début ou fin</span></div>
+<div><svg aria-hidden="true" viewbox="0 0 90 40"><path d="M14 6 H87 L76 34 H3 Z" fill="none" stroke="#0E6E6B" stroke-width="2"></path></svg><span>Entrée ou sortie</span></div>
+<div><svg aria-hidden="true" viewbox="0 0 90 40"><rect fill="none" height="28" stroke="#0E6E6B" stroke-width="2" width="84" x="3" y="6"></rect></svg><span>Traitement</span></div>
+<div><svg aria-hidden="true" viewbox="0 0 90 40"><path d="M45 4 L87 20 L45 36 L3 20 Z" fill="none" stroke="#0E6E6B" stroke-width="2"></path></svg><span>Test</span></div>
+</div>
+<div class="cartes" id="logi">
+<div class="ligne"><select aria-label="Forme de l'étape 1" id="lo-1t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 1" id="lo-1c" placeholder="Contenu de l'étape 1"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 2" id="lo-2t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 2" id="lo-2c" placeholder="Contenu de l'étape 2"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 3" id="lo-3t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 3" id="lo-3c" placeholder="Contenu de l'étape 3"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 4" id="lo-4t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 4" id="lo-4c" placeholder="Contenu de l'étape 4"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 5" id="lo-5t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 5" id="lo-5c" placeholder="Contenu de l'étape 5"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 6" id="lo-6t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 6" id="lo-6c" placeholder="Contenu de l'étape 6"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 7" id="lo-7t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 7" id="lo-7c" placeholder="Contenu de l'étape 7"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 8" id="lo-8t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 8" id="lo-8c" placeholder="Contenu de l'étape 8"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 9" id="lo-9t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 9" id="lo-9c" placeholder="Contenu de l'étape 9"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 10" id="lo-10t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 10" id="lo-10c" placeholder="Contenu de l'étape 10"/></div>
+</div>
+<p class="consigne">Le PDF dessinera ton logigramme avec les vraies formes, reliées par des flèches.</p>
+</div>
+</article>
+<article class="bloc" id="prog">
+<div class="marge"><span class="duree">13′</span></div>
+<div class="corps">
+<h2>Je programme et je teste</h2>
+<div class="bandeau">
+<p>Programmation par blocs. La DEL branchée en P2 simule la pompe.</p>
+<a href="https://makecode.microbit.org/#lang=fr" rel="noopener" target="_blank">Ouvrir MakeCode</a>
+</div>
+<div class="cartes" id="etapes">
+<div class="cartefiche" data-etape="Lire l'humidité en boucle">
+<label class="etape"><input id="et-1" type="checkbox"/><span><b>1.</b> Faire lire la broche analogique en continu et ranger la valeur convertie dans une variable.</span></label>
+</div>
+<div class="cartefiche" data-etape="Afficher le taux à l'écran">
+<label class="etape"><input id="et-2" type="checkbox"/><span><b>2.</b> Afficher l'indice d'humidité relatif sur l'écran à LED.</span></label>
+</div>
+<div class="cartefiche" data-etape="Écrire le test du seuil">
+<label class="etape"><input id="et-3" type="checkbox"/><span><b>3.</b> Déclencher la sortie P2 quand l’indice relatif passe sous le seuil de 50 %, et l'éteindre sinon.</span></label>
+</div>
+<div class="cartefiche" data-etape="Tester dans le simulateur">
+<label class="etape"><input id="et-4" type="checkbox"/><span><b>4.</b> Vérifier le comportement dans le simulateur en faisant varier la valeur.</span></label>
+</div>
+<div class="cartefiche" data-etape="Téléverser et faire valider">
+<label class="etape"><input id="et-5" type="checkbox"/><span><b>5.</b> Téléverser sur la carte, tester sur la terre, puis appeler le professeur.</span></label>
+</div>
+</div>
+<details class="ref" style="margin-top:20px">
+<summary>Coup de pouce — à n'ouvrir qu'en cas de blocage</summary>
+<div class="dedans">
+<p style="margin:0 0 12px">Voici les briques dont tu as besoin, mélangées. À toi de trouver comment les assembler et ce qu'il faut écrire dans les cases blanches.</p>
+<p style="margin:0 0 12px"><img alt="Blocs MakeCode : si/sinon, écrire sur la broche P2, définir humidité, montrer nombre, comparaison inférieur à 50." class="illus" onerror="this.remove()" src="img/seq4-blocs-aide.png" style="max-width:520px"/></p>
+</div>
+</details>
+<h3>Ce qui a marché, ce qui a bloqué</h3>
+<textarea aria-label="Ce qui a marché, ce qui a bloqué — J'ai réussi à…  J'ai buté sur…" data-rep="" id="bilan" placeholder="J'ai réussi à…  J'ai buté sur…"></textarea>
+</div>
+</article>
+<article class="bloc" id="synthese">
+<div class="marge"><span class="duree">5′</span></div>
+<div class="corps">
+<h2>Ma synthèse</h2>
+<p class="consigne">À quoi sert d'écrire l'algorithme et le logigramme avant de programmer ?</p>
+<textarea aria-label="À quoi sert d'écrire l'algorithme et le logigramme avant de programmer ?" data-rep="" id="rep-synthese" placeholder=""></textarea>
+</div>
+</article>
+<section class="corrbloc" id="correction">
+<h2>Correction expliquée et bilan de l’activité</h2>
+<p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+<div class="saisie">
+<input aria-label="Mot de passe de la correction" autocomplete="off" id="corr-mdp" placeholder="Mot de passe" spellcheck="false" type="password"/>
+<button id="corr-btn" type="button">Afficher</button>
+</div>
+<p class="refus" hidden="" id="corr-refus">Mot de passe incorrect.</p>
+<div class="corr" hidden="" id="corr-contenu"></div>
+</section>
+<div class="alerte" hidden="" id="alerte"></div>
+</main>
+<nav aria-label="Navigation dans la Séquence 4" class="pager"><a href="seq4-act2.html">← Séance 2 · Calibrer le capteur</a><a href="seq4-act4.html">Séance 4 · Les opérateurs logiques →</a></nav>
+<div class="barre">
+<button class="lien" id="effacer" type="button">Effacer mes réponses</button>
+<button class="btn" id="pdf" type="button">Générer le PDF</button>
+<p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+</div>
 <script>
 (function(){
 "use strict";

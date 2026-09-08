@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Séquence 3 · Activité 3, partie 2 — Je réalise et je teste</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
@@ -285,8 +286,7 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
-<link rel="stylesheet" href="assets/site-addons.css">
-
+<link href="assets/site-addons.css" rel="stylesheet"/>
 <!-- Navigation séquentielle harmonisée -->
 <style id="sequence-pager-style">
 .pager{
@@ -328,310 +328,283 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
 }
 @media print{.pager{display:none!important}}
 </style>
-
 </head>
 <body>
-
-<nav class="navsite" aria-label="Navigation du site">
-  <div class="dedans">
-    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
-    <label class="saut">
-      <span>Aller à</span>
-      <select id="navfiches" aria-label="Aller à une autre activité">
-        <optgroup label="Séquence 1">
-          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
-          <option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
-          <option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
-          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
-        </optgroup>
-        <optgroup label="Séquence 2">
-          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
-          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage & débit</option>
-          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
-          <option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
-        </optgroup>
-        <optgroup label="Séquence 3">
-          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
-          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
-          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
-          <option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
-          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
-          <option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
-          <option value="seq3-act3-p2.html" selected>Activité 3 · partie 2 — Je réalise et je teste</option>
-        </optgroup>
-        <optgroup label="Séquence 4">
-          <option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
-          <option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
-          <option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
-          <option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
-          <option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
-          <option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
-        </optgroup>
-        <optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
-        <optgroup label="Outils">
-          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
-          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
-          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
-        </optgroup>
-      <optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges & SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option></optgroup></select>
-    </label>
-  </div>
+<nav aria-label="Navigation du site" class="navsite">
+<div class="dedans">
+<a class="accueil" href="index.html">← Accueil</a>
+<label class="saut">
+<span>Aller à</span>
+<select aria-label="Aller à une autre activité" id="navfiches">
+<optgroup label="Séquence 1">
+<option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+<option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
+<option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
+<option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+</optgroup>
+<optgroup label="Séquence 2">
+<option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels &amp; réseau</option>
+<option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage &amp; débit</option>
+<option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
+<option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
+</optgroup>
+<optgroup label="Séquence 3">
+<option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+<option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+<option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+<option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+<option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+<option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+<option selected="" value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
+</optgroup>
+<optgroup label="Séquence 4">
+<option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
+<option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
+<option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
+<option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
+<option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
+<option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
+</optgroup>
+<optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
+<optgroup label="Outils">
+<option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+<option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+<option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+</optgroup>
+<optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges &amp; SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option><option value="osi-seq3-act1.html">OSI S3 · Séance 1 — Algorithme et logigramme</option><option value="osi-seq3-act2.html">OSI S3 · Séance 2 — Fonctions et solutions techniques</option><option value="osi-seq3-act3.html">OSI S3 · Séance 3 — Revue d’architecture</option><option value="osi-seq3-act4.html">OSI S3 · Séance 4 — Chaînes d’information et d’énergie</option><option value="osi-seq3-act5.html">OSI S3 · Séance 5 — Programmer, tester, corriger</option></optgroup></select>
+</label>
+</div>
 </nav>
 <script>
 document.getElementById("navfiches").addEventListener("change", function(){
   if(this.value) location.href = this.value;
 });
 </script>
-
-
 <main class="page">
-
-  <header class="entete">
-    <div class="cycle">
-      <span class="lab">Cycle 4</span>
-      <span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
-    </div>
-    <div class="marque">
-      <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
-      <p class="fil">Technologie · Séquence 3 · Activité 3</p>
-    </div>
-    <h1 class="titre">Jouer contre la machine — partie 2 : je réalise et je teste</h1>
-    <p class="sous">Entraîner, programmer, jouer cinq parties · 55 min</p>
-    <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
-      <a href="#reprise"><b>3′</b>Reprise</a>
-      <a href="#entrainement"><b>17′</b>Entraînement</a>
-      <a href="#programme"><b>20′</b>Programme</a>
-      <a href="#parties"><b>10′</b>Cinq parties</a>
-      <a href="#synthese"><b>5′</b>Synthèse</a>
-    </nav>
-  </header>
-
-  <section class="identite" aria-label="Mon identité">
-    <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="family-name"></div>
-    <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
-    <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
-    <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
-    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"></div>
-    <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
-  </section>
-
-  <details class="ref">
-    <summary>Ce que je travaille dans cette activité</summary>
-    <div class="dedans">
-      <dl>
-        <dt>Compétences</dt><dd>Réaliser, tester et mettre au point un système combinant un modèle d'IA et un objet programmable ; évaluer la fiabilité d'un système par l'expérimentation</dd>
-        <dt>Connaissances</dt><dd>Apprentissage supervisé ; variable et structure de sélection ; taux de reconnaissance ; conditions de fiabilité d'un modèle</dd>
-      </dl>
-      <ul>
-        <li>N1 — Je sais entraîner un modèle à trois classes et récupérer son lien</li>
-        <li>N2 — et je sais construire le programme qui compare mon signe et celui de la machine</li>
-        <li>N3 — et je sais mesurer la fiabilité de la reconnaissance signe par signe</li>
-        <li>N4 — et je sais expliquer les confusions observées et proposer une correction</li>
-      </ul>
-    </div>
-  </details>
-
-  <article class="bloc" id="reprise">
-    <div class="marge"><span class="duree">3′</span></div>
-    <div class="corps">
-      <h2>Je reprends ma conception</h2>
-      <div class="situation">
-        <p>Sors ton PDF de la séance précédente. Relis ton logigramme et le point que tu n'avais pas résolu. Tu vas maintenant construire le système que tu as conçu.</p>
-      </div>
-      <p class="consigne" style="margin-top:16px">Après relecture : est-ce que ton logigramme tient toujours, ou faut-il déjà le corriger ? Note ce que tu changes.</p>
-      <textarea id="revision" data-rep placeholder="Mon logigramme tient / je dois changer…" aria-label="Après relecture : est-ce que ton logigramme tient toujours, ou faut-il déjà le corriger ? Note ce que tu chang"></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="entrainement">
-    <div class="marge"><span class="duree">17′</span></div>
-    <div class="corps">
-      <h2>J'entraîne le modèle à trois signes</h2>
-      <div class="bandeau">
-        <p>Même outil que la séance sur les stylos. Trois classes cette fois, aux noms décidés en partie 1.</p>
-        <a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener">Ouvrir Teachable Machine</a>
-      </div>
-
-      <div class="cartes" id="etapes">
-        <div class="cartefiche" data-etape="Créer les trois classes de signes">
-          <label class="etape"><input type="checkbox" id="et-1"><span><b>1.</b> Nouveau projet <em>Image Project</em>, puis trois classes nommées comme prévu, en majuscules sans accent.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Capturer les images en variant les angles">
-          <label class="etape"><input type="checkbox" id="et-2"><span><b>2.</b> Capturer une centaine d'images par signe, en tournant la main, en la rapprochant et en l'éloignant. C'est la variété, pas seulement le nombre, qui fait la fiabilité.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Entraîner et vérifier dans l'aperçu">
-          <label class="etape"><input type="checkbox" id="et-3"><span><b>3.</b> Lancer <em>Train Model</em>, puis vérifier les trois signes dans <em>Preview</em>.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Exporter le modèle et copier son lien">
-          <label class="etape"><input type="checkbox" id="et-4"><span><b>4.</b> <em>Export Model</em>, onglet <em>Tensorflow.js</em>, <em>Upload (shareable link)</em>, puis copier le lien.</span></label>
-        </div>
-      </div>
-
-      <div class="ligne" style="margin-top:16px">
-        <span class="cle">Lien de mon modèle</span>
-        <input id="lien-modele" placeholder="https://teachablemachine.withgoogle.com/models/…" aria-label="Lien du modèle entraîné">
-      </div>
-
-      <h3>Je mesure la reconnaissance</h3>
-      <p class="consigne">Montre chaque signe cinq fois, dans des positions différentes, et compte les bonnes réponses.</p>
-      <div class="cartes" data-tab="reco" id="tabreco">
-        <div class="ligne" data-cle="Pierre">
-          <span class="cle">Pierre</span>
-          <input id="p1a" inputmode="numeric" placeholder="bonnes réponses sur 5" aria-label="Reconnaissance de la pierre">
-          <input id="p1b" placeholder="confondue avec…" aria-label="Confusion, pierre">
-        </div>
-        <div class="ligne" data-cle="Feuille">
-          <span class="cle">Feuille</span>
-          <input id="p2a" inputmode="numeric" placeholder="bonnes réponses sur 5" aria-label="Reconnaissance de la feuille">
-          <input id="p2b" placeholder="confondue avec…" aria-label="Confusion, feuille">
-        </div>
-        <div class="ligne" data-cle="Ciseaux">
-          <span class="cle">Ciseaux</span>
-          <input id="p3a" inputmode="numeric" placeholder="bonnes réponses sur 5" aria-label="Reconnaissance des ciseaux">
-          <input id="p3b" placeholder="confondus avec…" aria-label="Confusion, ciseaux">
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <article class="bloc" id="programme">
-    <div class="marge"><span class="duree">20′</span></div>
-    <div class="corps">
-      <h2>Je construis le programme</h2>
-      <p class="amorce">Suis ton propre logigramme. Aucune marche à suivre n'est donnée ici : les blocs dont tu as besoin, tu les as tous déjà utilisés.</p>
-
-      <div class="bandeau">
-        <p>Extensions à ajouter : <em>IA Image</em> et <em>micro:bit</em>.</p>
-        <a href="https://fr.vittascience.com/adacraft/?mode=mixed" target="_blank" rel="noopener">Ouvrir Vittascience Adacraft</a>
-      </div>
-
-      <div class="cartes" id="etapes2">
-        <div class="cartefiche" data-etape="Charger le modèle et lancer la webcam">
-          <label class="etape"><input type="checkbox" id="et-5"><span><b>5.</b> Le programme charge mon modèle et la webcam tourne.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="La machine tire son signe">
-          <label class="etape"><input type="checkbox" id="et-6"><span><b>6.</b> À chaque partie, la machine choisit son propre signe.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Mon signe est reconnu et rangé">
-          <label class="etape"><input type="checkbox" id="et-7"><span><b>7.</b> Le signe que je montre est reconnu et rangé dans une variable.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Le résultat est calculé">
-          <label class="etape"><input type="checkbox" id="et-8"><span><b>8.</b> Le programme compare les deux signes et détermine le gagnant, égalité comprise.</span></label>
-        </div>
-        <div class="cartefiche" data-etape="Le résultat s'affiche sur la carte">
-          <label class="etape"><input type="checkbox" id="et-9"><span><b>9.</b> La micro:bit affiche le signe de la machine, puis le résultat de la partie.</span></label>
-        </div>
-      </div>
-
-      <h3>Ce que j'ai dû changer par rapport à ma conception</h3>
-      <p class="consigne">Presque personne ne programme exactement ce qu'il avait prévu. Note les écarts.</p>
-      <textarea id="ecarts" data-rep aria-label="Presque personne ne programme exactement ce qu&#x27;il avait prévu. Note les écarts."></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="parties">
-    <div class="marge"><span class="duree">10′</span></div>
-    <div class="corps">
-      <h2>Cinq parties contre la machine</h2>
-      <p class="consigne">Joue cinq parties et note, à chaque fois, si le système s'est comporté correctement.</p>
-      <div class="cartes" data-tab="parties" id="tabparties">
-        <div class="ligne" data-cle="Partie 1">
-          <span class="cle">Partie 1</span>
-          <input id="g1a" placeholder="mon signe" aria-label="Mon signe, partie 1">
-          <input id="g1b" placeholder="signe machine" aria-label="Signe de la machine, partie 1">
-          <select id="g1c" aria-label="Verdict, partie 1"><option value="">Verdict juste ?</option><option>Oui</option><option>Non</option></select>
-        </div>
-        <div class="ligne" data-cle="Partie 2">
-          <span class="cle">Partie 2</span>
-          <input id="g2a" placeholder="mon signe" aria-label="Mon signe, partie 2">
-          <input id="g2b" placeholder="signe machine" aria-label="Signe de la machine, partie 2">
-          <select id="g2c" aria-label="Verdict, partie 2"><option value="">Verdict juste ?</option><option>Oui</option><option>Non</option></select>
-        </div>
-        <div class="ligne" data-cle="Partie 3">
-          <span class="cle">Partie 3</span>
-          <input id="g3a" placeholder="mon signe" aria-label="Mon signe, partie 3">
-          <input id="g3b" placeholder="signe machine" aria-label="Signe de la machine, partie 3">
-          <select id="g3c" aria-label="Verdict, partie 3"><option value="">Verdict juste ?</option><option>Oui</option><option>Non</option></select>
-        </div>
-        <div class="ligne" data-cle="Partie 4">
-          <span class="cle">Partie 4</span>
-          <input id="g4a" placeholder="mon signe" aria-label="Mon signe, partie 4">
-          <input id="g4b" placeholder="signe machine" aria-label="Signe de la machine, partie 4">
-          <select id="g4c" aria-label="Verdict, partie 4"><option value="">Verdict juste ?</option><option>Oui</option><option>Non</option></select>
-        </div>
-        <div class="ligne" data-cle="Partie 5">
-          <span class="cle">Partie 5</span>
-          <input id="g5a" placeholder="mon signe" aria-label="Mon signe, partie 5">
-          <input id="g5b" placeholder="signe machine" aria-label="Signe de la machine, partie 5">
-          <select id="g5c" aria-label="Verdict, partie 5"><option value="">Verdict juste ?</option><option>Oui</option><option>Non</option></select>
-        </div>
-      </div>
-
-      <h3>N3 — L'origine des erreurs</h3>
-      <div class="qcm" data-qcm="n3" data-titre="N3 — D'où vient l'erreur">
-        <p class="enonce">Quand le système annonce un mauvais résultat, d'où vient le problème le plus souvent ?</p>
-        <div class="choix">
-          <label><input type="radio" name="n3" id="n3-a" value="a"><span class="lt">a</span><span>Du calcul du gagnant, qui serait mal écrit</span></label>
-          <label><input type="radio" name="n3" id="n3-b" value="b"><span class="lt">b</span><span>De la reconnaissance : le modèle s'est trompé sur mon signe</span></label>
-          <label><input type="radio" name="n3" id="n3-c" value="c"><span class="lt">c</span><span>Du tirage au hasard de la machine, qui serait truqué</span></label>
-          <label><input type="radio" name="n3" id="n3-d" value="d"><span class="lt">d</span><span>De la carte micro:bit, qui afficherait mal</span></label>
-        </div>
-      </div>
-
-      <p class="consigne" style="margin-top:18px">N4 — Comment le vérifier ? Décris un essai simple qui permet de savoir si l'erreur vient de la reconnaissance ou du calcul du gagnant.</p>
-      <textarea id="n4" data-rep aria-label="N4 — Comment le vérifier ? Décris un essai simple qui permet de savoir si l&#x27;erreur vient de la reconnaissance "></textarea>
-    </div>
-  </article>
-
-  <div class="cadre-pedago"><div><b>Minimum attendu aujourd’hui</b><p>Le système échange les choix, produit le bon gagnant sur les cas imposés et les tests sont consignés.</p></div><div><b>Pour aller plus loin</b><p>Ajouter une classe « autre », un seuil de décision ou un compteur de score et mesurer la fiabilité.</p></div></div>
-<article class="bloc" id="synthese">
-    <div class="marge"><span class="duree">5′</span></div>
-    <div class="corps">
-      <h2>Ma synthèse</h2>
-      <p class="consigne">Ton système utilise à la fois un capteur, une IA, une variable, un tirage au hasard et une sélection. Explique le rôle de chacun en une phrase.</p>
-      <textarea id="rep-synthese" data-rep aria-label="Ton système utilise à la fois un capteur, une IA, une variable, un tirage au hasard et une sélection. Explique"></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="cps">
-    <div class="marge"><span class="duree">CPS</span></div>
-    <div class="corps">
-      <h2>Je développe mes compétences psychosociales</h2>
-      <div class="cps">
-        <p>Atteindre ses buts — maîtrise de soi. Cette activité demandait de chercher seul avant de recevoir de l'aide. Où est-ce que je me situe aujourd'hui ?</p>
-        <div class="niveaux">
-          <label><input type="radio" name="cps" id="cps-1" value="1"><span><b>N1</b> — Je peux dire ce que je veux réussir.</span></label>
-          <label><input type="radio" name="cps" id="cps-2" value="2"><span><b>N2</b> — Je peux décomposer un but en étapes.</span></label>
-          <label><input type="radio" name="cps" id="cps-3" value="3"><span><b>N3</b> — Je prépare un plan pour y arriver.</span></label>
-          <label><input type="radio" name="cps" id="cps-4" value="4"><span><b>N4</b> — Je vais jusqu'au bout de mes objectifs.</span></label>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <section class="corrbloc" id="correction" data-addon="1">
-    <h2>Correction expliquée et bilan de l’activité</h2>
-    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
-    <div class="saisie">
-      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction" autocomplete="off" spellcheck="false">
-      <button type="button" id="corr-btn">Afficher</button>
-    </div>
-    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
-    <div class="corr" id="corr-contenu" hidden></div>
-  </section>
-
-  <div id="alerte" class="alerte" hidden></div>
-
-</main>
-<nav class="pager" aria-label="Navigation dans la Séquence 3"><a href="seq3-act3-p1.html">← Activité 3 · Partie 1 — Je conçois le système</a><a href="index.html">Retour à l’accueil →</a></nav>
-
-
-<div class="barre">
-  <button class="lien" id="effacer" type="button">Effacer mes réponses</button>
-  <button class="btn" id="pdf" type="button">Générer le PDF</button>
-  <p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+<header class="entete">
+<div class="cycle">
+<span class="lab">Cycle 4</span>
+<span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
 </div>
-
+<div class="marque">
+<img alt="Lycée français de Vienne" onerror="this.remove()" src="img/logo-lfv.png"/>
+<p class="fil">Technologie · Séquence 3 · Activité 3</p>
+</div>
+<h1 class="titre">Jouer contre la machine — partie 2 : je réalise et je teste</h1>
+<p class="sous">Entraîner, programmer, jouer cinq parties · 55 min</p>
+<nav aria-label="Étapes de l'activité" class="chrono" id="chrono">
+<a href="#reprise"><b>3′</b>Reprise</a>
+<a href="#entrainement"><b>17′</b>Entraînement</a>
+<a href="#programme"><b>20′</b>Programme</a>
+<a href="#parties"><b>10′</b>Cinq parties</a>
+<a href="#synthese"><b>5′</b>Synthèse</a>
+</nav>
+</header>
+<section aria-label="Mon identité" class="identite">
+<div class="champ"><label for="nom">Nom</label><input autocomplete="family-name" id="nom"/></div>
+<div class="champ"><label for="prenom">Prénom</label><input autocomplete="given-name" id="prenom"/></div>
+<div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"/></div>
+<div class="champ"><label for="groupe">Groupe</label><input id="groupe"/></div>
+<div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"/></div>
+<div class="champ"><label for="date">Date</label><input id="date" type="date"/></div>
+</section>
+<details class="ref">
+<summary>Ce que je travaille dans cette activité</summary>
+<div class="dedans">
+<dl>
+<dt>Compétences</dt><dd>Réaliser, tester et mettre au point un système combinant un modèle d'IA et un objet programmable ; évaluer la fiabilité d'un système par l'expérimentation</dd>
+<dt>Connaissances</dt><dd>Apprentissage supervisé ; variable et structure de sélection ; taux de reconnaissance ; conditions de fiabilité d'un modèle</dd>
+</dl>
+<ul>
+<li>N1 — Je sais entraîner un modèle à trois classes et récupérer son lien</li>
+<li>N2 — et je sais construire le programme qui compare mon signe et celui de la machine</li>
+<li>N3 — et je sais mesurer la fiabilité de la reconnaissance signe par signe</li>
+<li>N4 — et je sais expliquer les confusions observées et proposer une correction</li>
+</ul>
+</div>
+</details>
+<article class="bloc" id="reprise">
+<div class="marge"><span class="duree">3′</span></div>
+<div class="corps">
+<h2>Je reprends ma conception</h2>
+<div class="situation">
+<p>Sors ton PDF de la séance précédente. Relis ton logigramme et le point que tu n'avais pas résolu. Tu vas maintenant construire le système que tu as conçu.</p>
+</div>
+<p class="consigne" style="margin-top:16px">Après relecture : est-ce que ton logigramme tient toujours, ou faut-il déjà le corriger ? Note ce que tu changes.</p>
+<textarea aria-label="Après relecture : est-ce que ton logigramme tient toujours, ou faut-il déjà le corriger ? Note ce que tu chang" data-rep="" id="revision" placeholder="Mon logigramme tient / je dois changer…"></textarea>
+</div>
+</article>
+<article class="bloc" id="entrainement">
+<div class="marge"><span class="duree">17′</span></div>
+<div class="corps">
+<h2>J'entraîne le modèle à trois signes</h2>
+<div class="bandeau">
+<p>Même outil que la séance sur les stylos. Trois classes cette fois, aux noms décidés en partie 1.</p>
+<a href="https://teachablemachine.withgoogle.com/" rel="noopener" target="_blank">Ouvrir Teachable Machine</a>
+</div>
+<div class="cartes" id="etapes">
+<div class="cartefiche" data-etape="Créer les trois classes de signes">
+<label class="etape"><input id="et-1" type="checkbox"/><span><b>1.</b> Nouveau projet <em>Image Project</em>, puis trois classes nommées comme prévu, en majuscules sans accent.</span></label>
+</div>
+<div class="cartefiche" data-etape="Capturer les images en variant les angles">
+<label class="etape"><input id="et-2" type="checkbox"/><span><b>2.</b> Capturer une centaine d'images par signe, en tournant la main, en la rapprochant et en l'éloignant. C'est la variété, pas seulement le nombre, qui fait la fiabilité.</span></label>
+</div>
+<div class="cartefiche" data-etape="Entraîner et vérifier dans l'aperçu">
+<label class="etape"><input id="et-3" type="checkbox"/><span><b>3.</b> Lancer <em>Train Model</em>, puis vérifier les trois signes dans <em>Preview</em>.</span></label>
+</div>
+<div class="cartefiche" data-etape="Exporter le modèle et copier son lien">
+<label class="etape"><input id="et-4" type="checkbox"/><span><b>4.</b> <em>Export Model</em>, onglet <em>Tensorflow.js</em>, <em>Upload (shareable link)</em>, puis copier le lien.</span></label>
+</div>
+</div>
+<div class="ligne" style="margin-top:16px">
+<span class="cle">Lien de mon modèle</span>
+<input aria-label="Lien du modèle entraîné" id="lien-modele" placeholder="https://teachablemachine.withgoogle.com/models/…"/>
+</div>
+<h3>Je mesure la reconnaissance</h3>
+<p class="consigne">Montre chaque signe cinq fois, dans des positions différentes, et compte les bonnes réponses.</p>
+<div class="cartes" data-tab="reco" id="tabreco">
+<div class="ligne" data-cle="Pierre">
+<span class="cle">Pierre</span>
+<input aria-label="Reconnaissance de la pierre" id="p1a" inputmode="numeric" placeholder="bonnes réponses sur 5"/>
+<input aria-label="Confusion, pierre" id="p1b" placeholder="confondue avec…"/>
+</div>
+<div class="ligne" data-cle="Feuille">
+<span class="cle">Feuille</span>
+<input aria-label="Reconnaissance de la feuille" id="p2a" inputmode="numeric" placeholder="bonnes réponses sur 5"/>
+<input aria-label="Confusion, feuille" id="p2b" placeholder="confondue avec…"/>
+</div>
+<div class="ligne" data-cle="Ciseaux">
+<span class="cle">Ciseaux</span>
+<input aria-label="Reconnaissance des ciseaux" id="p3a" inputmode="numeric" placeholder="bonnes réponses sur 5"/>
+<input aria-label="Confusion, ciseaux" id="p3b" placeholder="confondus avec…"/>
+</div>
+</div>
+</div>
+</article>
+<article class="bloc" id="programme">
+<div class="marge"><span class="duree">20′</span></div>
+<div class="corps">
+<h2>Je construis le programme</h2>
+<p class="amorce">Suis ton propre logigramme. Aucune marche à suivre n'est donnée ici : les blocs dont tu as besoin, tu les as tous déjà utilisés.</p>
+<div class="bandeau">
+<p>Extensions à ajouter : <em>IA Image</em> et <em>micro:bit</em>.</p>
+<a href="https://fr.vittascience.com/adacraft/?mode=mixed" rel="noopener" target="_blank">Ouvrir Vittascience Adacraft</a>
+</div>
+<div class="cartes" id="etapes2">
+<div class="cartefiche" data-etape="Charger le modèle et lancer la webcam">
+<label class="etape"><input id="et-5" type="checkbox"/><span><b>5.</b> Le programme charge mon modèle et la webcam tourne.</span></label>
+</div>
+<div class="cartefiche" data-etape="La machine tire son signe">
+<label class="etape"><input id="et-6" type="checkbox"/><span><b>6.</b> À chaque partie, la machine choisit son propre signe.</span></label>
+</div>
+<div class="cartefiche" data-etape="Mon signe est reconnu et rangé">
+<label class="etape"><input id="et-7" type="checkbox"/><span><b>7.</b> Le signe que je montre est reconnu et rangé dans une variable.</span></label>
+</div>
+<div class="cartefiche" data-etape="Le résultat est calculé">
+<label class="etape"><input id="et-8" type="checkbox"/><span><b>8.</b> Le programme compare les deux signes et détermine le gagnant, égalité comprise.</span></label>
+</div>
+<div class="cartefiche" data-etape="Le résultat s'affiche sur la carte">
+<label class="etape"><input id="et-9" type="checkbox"/><span><b>9.</b> La micro:bit affiche le signe de la machine, puis le résultat de la partie.</span></label>
+</div>
+</div>
+<h3>Ce que j'ai dû changer par rapport à ma conception</h3>
+<p class="consigne">Presque personne ne programme exactement ce qu'il avait prévu. Note les écarts.</p>
+<textarea aria-label="Presque personne ne programme exactement ce qu'il avait prévu. Note les écarts." data-rep="" id="ecarts"></textarea>
+</div>
+</article>
+<article class="bloc" id="parties">
+<div class="marge"><span class="duree">10′</span></div>
+<div class="corps">
+<h2>Cinq parties contre la machine</h2>
+<p class="consigne">Joue cinq parties et note, à chaque fois, si le système s'est comporté correctement.</p>
+<div class="cartes" data-tab="parties" id="tabparties">
+<div class="ligne" data-cle="Partie 1">
+<span class="cle">Partie 1</span>
+<input aria-label="Mon signe, partie 1" id="g1a" placeholder="mon signe"/>
+<input aria-label="Signe de la machine, partie 1" id="g1b" placeholder="signe machine"/>
+<select aria-label="Verdict, partie 1" id="g1c"><option value="">Verdict juste ?</option><option>Oui</option><option>Non</option></select>
+</div>
+<div class="ligne" data-cle="Partie 2">
+<span class="cle">Partie 2</span>
+<input aria-label="Mon signe, partie 2" id="g2a" placeholder="mon signe"/>
+<input aria-label="Signe de la machine, partie 2" id="g2b" placeholder="signe machine"/>
+<select aria-label="Verdict, partie 2" id="g2c"><option value="">Verdict juste ?</option><option>Oui</option><option>Non</option></select>
+</div>
+<div class="ligne" data-cle="Partie 3">
+<span class="cle">Partie 3</span>
+<input aria-label="Mon signe, partie 3" id="g3a" placeholder="mon signe"/>
+<input aria-label="Signe de la machine, partie 3" id="g3b" placeholder="signe machine"/>
+<select aria-label="Verdict, partie 3" id="g3c"><option value="">Verdict juste ?</option><option>Oui</option><option>Non</option></select>
+</div>
+<div class="ligne" data-cle="Partie 4">
+<span class="cle">Partie 4</span>
+<input aria-label="Mon signe, partie 4" id="g4a" placeholder="mon signe"/>
+<input aria-label="Signe de la machine, partie 4" id="g4b" placeholder="signe machine"/>
+<select aria-label="Verdict, partie 4" id="g4c"><option value="">Verdict juste ?</option><option>Oui</option><option>Non</option></select>
+</div>
+<div class="ligne" data-cle="Partie 5">
+<span class="cle">Partie 5</span>
+<input aria-label="Mon signe, partie 5" id="g5a" placeholder="mon signe"/>
+<input aria-label="Signe de la machine, partie 5" id="g5b" placeholder="signe machine"/>
+<select aria-label="Verdict, partie 5" id="g5c"><option value="">Verdict juste ?</option><option>Oui</option><option>Non</option></select>
+</div>
+</div>
+<h3>N3 — L'origine des erreurs</h3>
+<div class="qcm" data-qcm="n3" data-titre="N3 — D'où vient l'erreur">
+<p class="enonce">Quand le système annonce un mauvais résultat, d'où vient le problème le plus souvent ?</p>
+<div class="choix">
+<label><input id="n3-a" name="n3" type="radio" value="a"/><span class="lt">a</span><span>Du calcul du gagnant, qui serait mal écrit</span></label>
+<label><input id="n3-b" name="n3" type="radio" value="b"/><span class="lt">b</span><span>De la reconnaissance : le modèle s'est trompé sur mon signe</span></label>
+<label><input id="n3-c" name="n3" type="radio" value="c"/><span class="lt">c</span><span>Du tirage au hasard de la machine, qui serait truqué</span></label>
+<label><input id="n3-d" name="n3" type="radio" value="d"/><span class="lt">d</span><span>De la carte micro:bit, qui afficherait mal</span></label>
+</div>
+</div>
+<p class="consigne" style="margin-top:18px">N4 — Comment le vérifier ? Décris un essai simple qui permet de savoir si l'erreur vient de la reconnaissance ou du calcul du gagnant.</p>
+<textarea aria-label="N4 — Comment le vérifier ? Décris un essai simple qui permet de savoir si l'erreur vient de la reconnaissance " data-rep="" id="n4"></textarea>
+</div>
+</article>
+<div class="cadre-pedago"><div><b>Minimum attendu aujourd’hui</b><p>Le système échange les choix, produit le bon gagnant sur les cas imposés et les tests sont consignés.</p></div><div><b>Pour aller plus loin</b><p>Ajouter une classe « autre », un seuil de décision ou un compteur de score et mesurer la fiabilité.</p></div></div>
+<article class="bloc" id="synthese">
+<div class="marge"><span class="duree">5′</span></div>
+<div class="corps">
+<h2>Ma synthèse</h2>
+<p class="consigne">Ton système utilise à la fois un capteur, une IA, une variable, un tirage au hasard et une sélection. Explique le rôle de chacun en une phrase.</p>
+<textarea aria-label="Ton système utilise à la fois un capteur, une IA, une variable, un tirage au hasard et une sélection. Explique" data-rep="" id="rep-synthese"></textarea>
+</div>
+</article>
+<article class="bloc" id="cps">
+<div class="marge"><span class="duree">CPS</span></div>
+<div class="corps">
+<h2>Je développe mes compétences psychosociales</h2>
+<div class="cps">
+<p>Atteindre ses buts — maîtrise de soi. Cette activité demandait de chercher seul avant de recevoir de l'aide. Où est-ce que je me situe aujourd'hui ?</p>
+<div class="niveaux">
+<label><input id="cps-1" name="cps" type="radio" value="1"/><span><b>N1</b> — Je peux dire ce que je veux réussir.</span></label>
+<label><input id="cps-2" name="cps" type="radio" value="2"/><span><b>N2</b> — Je peux décomposer un but en étapes.</span></label>
+<label><input id="cps-3" name="cps" type="radio" value="3"/><span><b>N3</b> — Je prépare un plan pour y arriver.</span></label>
+<label><input id="cps-4" name="cps" type="radio" value="4"/><span><b>N4</b> — Je vais jusqu'au bout de mes objectifs.</span></label>
+</div>
+</div>
+</div>
+</article>
+<section class="corrbloc" data-addon="1" id="correction">
+<h2>Correction expliquée et bilan de l’activité</h2>
+<p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+<div class="saisie">
+<input aria-label="Mot de passe de la correction" autocomplete="off" id="corr-mdp" placeholder="Mot de passe" spellcheck="false" type="password"/>
+<button id="corr-btn" type="button">Afficher</button>
+</div>
+<p class="refus" hidden="" id="corr-refus">Mot de passe incorrect.</p>
+<div class="corr" hidden="" id="corr-contenu"></div>
+</section>
+<div class="alerte" hidden="" id="alerte"></div>
+</main>
+<nav aria-label="Navigation dans la Séquence 3" class="pager"><a href="seq3-act3-p1.html">← Activité 3 · Partie 1 — Je conçois le système</a><a href="index.html">Retour à l’accueil →</a></nav>
+<div class="barre">
+<button class="lien" id="effacer" type="button">Effacer mes réponses</button>
+<button class="btn" id="pdf" type="button">Générer le PDF</button>
+<p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+</div>
 <script>
 (function(){
 "use strict";

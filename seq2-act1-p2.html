@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Les chemins de l'information — partie 2 : adresse IP, routage et débit</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
@@ -285,8 +286,7 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
-<link rel="stylesheet" href="assets/site-addons.css">
-
+<link href="assets/site-addons.css" rel="stylesheet"/>
 <style>
 /* Activité analogique — ajouts spécifiques */
 .hero-probleme{background:linear-gradient(135deg,#FFF7F2,#FFF);border:1px solid #F2C7B1;border-left:5px solid #D65D34;border-radius:10px;padding:18px 20px;margin:18px 0}
@@ -306,7 +306,6 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
 @media(max-width:700px){.analogie-grid,.ip-neighborhoods{grid-template-columns:1fr 1fr}.route-map{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}.debit-wrap{grid-template-columns:1fr}.qrow{grid-template-columns:1fr}.role-strip{grid-template-columns:1fr 1fr}}
 @media print{body{background:#fff;font-size:14px}.page{max-width:none;padding:0 10mm 10mm}.hero-probleme,.qbox,.challenge,.road,.quartier,.routeur-card,.analogie{break-inside:avoid}.analogie-grid{grid-template-columns:repeat(3,1fr)}.ip-neighborhoods{grid-template-columns:repeat(3,1fr)}.route-map{grid-template-columns:1fr 40px 1fr 40px 1fr}.arrow{transform:none}.debit-wrap{grid-template-columns:1fr 1fr}.pager{display:none}.role-strip{grid-template-columns:repeat(4,1fr)}textarea{min-height:55px!important}}
 </style>
-
 <!-- Navigation séquentielle harmonisée -->
 <style id="sequence-pager-style">
 .pager{
@@ -348,192 +347,174 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
 }
 @media print{.pager{display:none!important}}
 </style>
-
 </head>
 <body>
-
-<nav class="navsite" aria-label="Navigation du site">
-  <div class="dedans">
-    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
-    <label class="saut">
-      <span>Aller à</span>
-      <select id="navfiches" aria-label="Aller à une autre activité">
-        <optgroup label="Séquence 1">
-          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
-          <option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
-          <option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
-          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
-        </optgroup>
-        <optgroup label="Séquence 2">
-          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
-          <option value="seq2-act1-p2.html" selected>Activité 1 · partie 2 — Adresse IP, routage & débit</option>
-          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
-          <option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
-        </optgroup>
-        <optgroup label="Séquence 3">
-          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
-          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
-          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
-          <option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
-          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
-          <option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
-          <option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
-        </optgroup>
-        <optgroup label="Séquence 4">
-          <option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
-          <option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
-          <option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
-          <option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
-          <option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
-          <option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
-        </optgroup>
-        <optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
-        <optgroup label="Outils">
-          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
-          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
-          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
-        </optgroup>
-      <optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges & SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option></optgroup></select>
-    </label>
-  </div>
+<nav aria-label="Navigation du site" class="navsite">
+<div class="dedans">
+<a class="accueil" href="index.html">← Accueil</a>
+<label class="saut">
+<span>Aller à</span>
+<select aria-label="Aller à une autre activité" id="navfiches">
+<optgroup label="Séquence 1">
+<option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+<option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
+<option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
+<option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+</optgroup>
+<optgroup label="Séquence 2">
+<option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels &amp; réseau</option>
+<option selected="" value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage &amp; débit</option>
+<option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
+<option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
+</optgroup>
+<optgroup label="Séquence 3">
+<option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+<option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+<option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+<option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+<option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+<option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+<option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
+</optgroup>
+<optgroup label="Séquence 4">
+<option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
+<option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
+<option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
+<option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
+<option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
+<option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
+</optgroup>
+<optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
+<optgroup label="Outils">
+<option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+<option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+<option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+</optgroup>
+<optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges &amp; SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option><option value="osi-seq3-act1.html">OSI S3 · Séance 1 — Algorithme et logigramme</option><option value="osi-seq3-act2.html">OSI S3 · Séance 2 — Fonctions et solutions techniques</option><option value="osi-seq3-act3.html">OSI S3 · Séance 3 — Revue d’architecture</option><option value="osi-seq3-act4.html">OSI S3 · Séance 4 — Chaînes d’information et d’énergie</option><option value="osi-seq3-act5.html">OSI S3 · Séance 5 — Programmer, tester, corriger</option></optgroup></select>
+</label>
+</div>
 </nav>
 <script>
 document.getElementById("navfiches").addEventListener("change", function(){
   if(this.value) location.href = this.value;
 });
 </script>
-
-
-
 <main class="page">
-  <header class="entete">
-    <div class="cycle"><span class="lab">Cycle 4</span><span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span></div>
-    <div class="marque"><img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()"><p class="fil">Technologie · Séquence 2 · Activité 1</p></div>
-    <h1 class="titre">Les chemins de l'information — partie 2 : le réseau postal de la classe</h1>
-    <p class="sous">Adresse IP · table de routage · débit · activité sans ordinateur · 55 min</p>
-    <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
-      <a href="#mission"><b>5′</b>Mission</a><a href="#ip"><b>12′</b>Adresse IP</a><a href="#routage"><b>15′</b>Routage</a><a href="#debit"><b>10′</b>Débit</a><a href="#defi"><b>8′</b>Défi</a><a href="#bilan"><b>5′</b>Bilan</a>
-    </nav>
-  </header>
-
-  <section class="identite" aria-label="Mon identité">
-    <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="family-name"></div>
-    <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
-    <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
-    <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
-    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role" placeholder="routeur, expéditeur, chronométreur…"></div>
-    <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
-  </section>
-
-  <details class="ref"><summary>Ce que je travaille dans cette activité</summary><div class="dedans">
-    <dl><dt>Objectif</dt><dd>Comprendre avec des analogies et une manipulation réelle comment une information est identifiée, orientée et transmise dans un réseau.</dd><dt>SFC17</dt><dd>Identifier et représenter la circulation d'une information dans le réseau Internet.</dd><dt>SFC18</dt><dd>Justifier la nécessité d'un protocole de routage pour faire communiquer plusieurs réseaux.</dd><dt>SFC1p</dt><dd>Le rôle et la structure d'une adresse IP, des tables de routage.</dd><dt>SFC1q</dt><dd>Le débit et les ordres de grandeur associés.</dd></dl>
-    <ul><li>N1 — Je sais associer adresse IP, routeur/table de routage et débit à une analogie simple.</li><li>N2 — Je sais expliquer avec mes mots le rôle de chacun.</li><li>N3 — Je sais suivre un paquet de réseau en réseau et repérer la liaison qui limite le transfert.</li></ul>
-  </div></details>
-
-  <section class="hero-probleme" id="mission">
-    <h2>Mission — faire voyager un « colis numérique »</h2>
-    <p>Un élève du <strong>réseau A</strong> doit envoyer un message à un élève du <strong>réseau C</strong>. Vous n’avez pas d’ordinateur : la classe va devenir le réseau.</p>
-    <p><strong>Question :</strong> comment le colis sait-il <em>à qui</em> aller, <em>par où</em> passer et <em>combien de colis</em> peuvent circuler en même temps ?</p>
-  </section>
-
-  <div class="analogie-grid" aria-label="Les analogies de l'activité">
-    <div class="analogie"><div class="ico">🏠</div><b>Adresse IP</b><span>Comme une adresse postale : elle permet d’identifier la destination.</span></div>
-    <div class="analogie"><div class="ico">📦</div><b>Paquet</b><span>Comme une lettre ou un colis : une petite partie des données à transporter.</span></div>
-    <div class="analogie"><div class="ico">🏤</div><b>Routeur</b><span>Comme un centre de tri : il décide vers quelle prochaine étape envoyer le paquet.</span></div>
-    <div class="analogie"><div class="ico">📋</div><b>Table de routage</b><span>Comme le panneau du centre de tri : « pour cette destination, envoie par ici ».</span></div>
-    <div class="analogie"><div class="ico">🛣️</div><b>Liaison</b><span>Comme une route entre deux centres : elle transporte les paquets.</span></div>
-    <div class="analogie"><div class="ico">🚚🚚🚚</div><b>Débit</b><span>Comme la capacité d’une route : combien de colis passent pendant un temps donné.</span></div>
-  </div>
-
-  <div class="sansordi"><b>Matériel du groupe :</b> 10 à 12 petites enveloppes ou cartes « paquet », 3 feuilles « Routeur R1 / R2 / R3 », un chronomètre et cette fiche imprimée. Les élèves jouent les appareils et les routeurs.</div>
-
-  <article class="bloc" id="ip"><div class="marge"><span class="duree">12′</span></div><div class="corps">
-    <h2>1 — Adresse IP : « À quelle adresse dois-je livrer ? »</h2>
-    <p class="amorce">Dans notre modèle, chaque quartier est un réseau en <strong>/24</strong>. Les trois premiers nombres indiquent le réseau ; le dernier différencie les appareils de ce réseau.</p>
-    <div class="ip-neighborhoods">
-      <div class="quartier"><h4>Quartier / réseau A</h4><div class="ip-card">Léa<code>192.168.1.4</code></div><div class="ip-card">Noah<code>192.168.1.9</code></div></div>
-      <div class="quartier"><h4>Quartier / réseau B</h4><div class="ip-card">Youssef<code>192.168.2.7</code></div><div class="ip-card">Inès<code>192.168.2.12</code></div></div>
-      <div class="quartier"><h4>Quartier / réseau C</h4><div class="ip-card">Emma<code>192.168.3.8</code></div><div class="ip-card">Adam<code>192.168.3.15</code></div></div>
-    </div>
-    <div class="sansordi"><b>Manipulation :</b> donne une enveloppe à Léa. Sur l’enveloppe, écris « destination : 192.168.2.7 ». Sans prononcer le prénom du destinataire, faites parvenir l’enveloppe au bon élève en utilisant seulement les cartes d’adresse.</div>
-    <div class="qbox"><h3>Je vérifie ce que j’ai compris</h3>
-      <div class="qrow"><label for="ip-dest">Qui reçoit 192.168.2.7 ?</label><select id="ip-dest"><option value="">Choisir…</option><option>Léa</option><option>Youssef</option><option>Emma</option></select></div>
-      <div class="qrow"><label for="ip-meme">Léa et Youssef sont-ils dans le même réseau ?</label><select id="ip-meme"><option value="">Choisir…</option><option>Oui</option><option>Non</option></select></div>
-      <div class="qrow"><label for="ip-double">Peut-on donner la même IP à deux appareils du même réseau en même temps ?</label><select id="ip-double"><option value="">Choisir…</option><option>Oui</option><option>Non</option></select></div>
-      <label for="ip-role"><strong>Avec tes mots : à quoi sert une adresse IP ?</strong></label><textarea id="ip-role" data-rep placeholder="Une adresse IP sert à…" aria-label="Rôle d'une adresse IP"></textarea>
-    </div>
-  </div></article>
-
-  <article class="bloc" id="routage"><div class="marge"><span class="duree">15′</span></div><div class="corps">
-    <h2>2 — Table de routage : « Vers quel centre de tri maintenant ? »</h2>
-    <p class="amorce">Un paquet destiné à un autre réseau arrive à un routeur. Le routeur ne devine pas : il consulte sa table et choisit le <strong>prochain saut</strong>.</p>
-    <div class="route-map">
-      <div class="routeur-card"><div class="rname">R1</div><table><tr><th>Destination</th><th>Envoyer vers</th></tr><tr><td>réseau 1</td><td>direct</td></tr><tr><td>réseau 2</td><td>R2</td></tr><tr><td>réseau 3</td><td>R2</td></tr></table></div>
-      <div class="arrow">→</div>
-      <div class="routeur-card"><div class="rname">R2</div><table><tr><th>Destination</th><th>Envoyer vers</th></tr><tr><td>réseau 1</td><td>R1</td></tr><tr><td>réseau 2</td><td>direct</td></tr><tr><td>réseau 3</td><td>R3</td></tr></table></div>
-      <div class="arrow">→</div>
-      <div class="routeur-card"><div class="rname">R3</div><table><tr><th>Destination</th><th>Envoyer vers</th></tr><tr><td>réseau 1</td><td>R2</td></tr><tr><td>réseau 2</td><td>R2</td></tr><tr><td>réseau 3</td><td>direct</td></tr></table></div>
-    </div>
-    <div class="role-strip"><div class="role-card"><b>Source</b>192.168.1.4</div><div class="role-card"><b>Routeur</b>R1</div><div class="role-card"><b>Routeur</b>R2</div><div class="role-card"><b>Destination</b>192.168.3.8</div></div>
-    <div class="sansordi"><b>Manipulation :</b> trois élèves deviennent R1, R2 et R3. Le paquet part de Léa vers Emma. À chaque étape, le « routeur » doit lire la destination et montrer dans sa table pourquoi il transmet au voisin choisi.</div>
-    <div class="qbox"><h3>Je suis le paquet</h3>
-      <div class="qrow"><label for="route-r1">R1 reçoit un paquet pour le réseau 3. Prochaine étape ?</label><select id="route-r1"><option value="">Choisir…</option><option>R1 le garde</option><option>R2</option><option>R3 directement</option></select></div>
-      <div class="qrow"><label for="route-r2">R2 reçoit ensuite ce paquet. Prochaine étape ?</label><select id="route-r2"><option value="">Choisir…</option><option>R1</option><option>R2 le garde</option><option>R3</option></select></div>
-      <div class="qrow"><label for="route-tout">R1 doit-il connaître par cœur tous les gestes futurs du paquet ?</label><select id="route-tout"><option value="">Choisir…</option><option>Oui</option><option>Non, il choisit surtout la prochaine étape</option></select></div>
-      <label for="route-role"><strong>Avec tes mots : à quoi sert une table de routage ?</strong></label><textarea id="route-role" data-rep placeholder="Une table de routage permet au routeur de…" aria-label="Rôle d'une table de routage"></textarea>
-    </div>
-  </div></article>
-
-  <article class="bloc" id="debit"><div class="marge"><span class="duree">10′</span></div><div class="corps">
-    <h2>3 — Débit : « Combien de colis peuvent passer ? »</h2>
-    <p class="amorce">Cette fois, on ne change ni l’adresse ni le chemin. On compare simplement la <strong>capacité de deux liaisons</strong>.</p>
-    <div class="debit-wrap">
-      <div class="road"><h4>Route A — petite route</h4><div class="lane"><span class="packet">1</span></div><p><strong>Règle :</strong> 1 paquet toutes les 2 secondes.</p></div>
-      <div class="road"><h4>Route B — grande route</h4><div class="lane wide"><span class="packet">1</span><span class="packet">2</span><span class="packet">3</span></div><p><strong>Règle :</strong> 3 paquets toutes les 2 secondes.</p></div>
-    </div>
-    <div class="sansordi"><b>Manipulation :</b> pendant 10 secondes, faites réellement passer les enveloppes selon la règle de chaque route. Un élève chronomètre, un autre compte les paquets arrivés.</div>
-    <div class="qbox"><h3>Je mesure</h3>
-      <div class="qrow"><label for="debit-a">Paquets arrivés sur la route A en 10 s</label><input id="debit-a" type="number" min="0" inputmode="numeric"></div>
-      <div class="qrow"><label for="debit-b">Paquets arrivés sur la route B en 10 s</label><input id="debit-b" type="number" min="0" inputmode="numeric"></div>
-      <div class="qrow"><label for="debit-fort">Quelle route a le plus grand débit ?</label><select id="debit-fort"><option value="">Choisir…</option><option>Route A</option><option>Route B</option><option>Elles ont le même débit</option></select></div>
-      <label for="debit-role"><strong>Avec tes mots : qu’est-ce que le débit ?</strong></label><textarea id="debit-role" data-rep placeholder="Le débit indique…" aria-label="Définition du débit"></textarea>
-    </div>
-    <div class="bandeau"><p><strong>Passage au vrai réseau :</strong> au lieu de compter des enveloppes par seconde, on compte des bits par seconde : bit/s, kbit/s, Mbit/s, Gbit/s.</p></div>
-  </div></article>
-
-  <article class="bloc" id="defi"><div class="marge"><span class="duree">8′</span></div><div class="corps">
-    <h2>4 — Défi final : expliquer tout le voyage</h2>
-    <div class="challenge">
-      <p><strong>Mission :</strong> 10 paquets doivent aller de <code>192.168.1.3</code> à <code>192.168.3.8</code>.</p>
-      <div class="capacity"><span class="node">Réseau 1</span><span class="linkcap">10 paquets/s</span><span class="node">R1</span><span class="linkcap">2 paquets/s</span><span class="node">R2</span><span class="linkcap">8 paquets/s</span><span class="node">R3 / réseau 3</span></div>
-      <p>Le paquet connaît sa destination grâce à son adresse IP. Les routeurs utilisent leur table. Mais une des liaisons laisse passer beaucoup moins de données que les autres.</p>
-    </div>
-    <div class="qbox">
-      <div class="qrow"><label for="defi-ip">Quelle information permet de savoir à qui livrer ?</label><select id="defi-ip"><option value="">Choisir…</option><option>L'adresse IP</option><option>Le débit</option><option>Le nom du routeur</option></select></div>
-      <div class="qrow"><label for="defi-route">Qu'utilise un routeur pour choisir la prochaine étape ?</label><select id="defi-route"><option value="">Choisir…</option><option>Une table de routage</option><option>La taille de l'écran</option><option>Le Wi-Fi</option></select></div>
-      <div class="qrow"><label for="defi-bouchon">Quelle liaison limite ici le transfert global ?</label><select id="defi-bouchon"><option value="">Choisir…</option><option>10 paquets/s</option><option>2 paquets/s</option><option>8 paquets/s</option></select></div>
-      <label for="defi-exp"><strong>Explique le voyage en 3 ou 4 phrases en utilisant : adresse IP, routeur, table de routage, débit.</strong></label><textarea id="defi-exp" data-rep placeholder="Le paquet porte… Puis le routeur… Le débit…" aria-label="Explication du défi final"></textarea>
-    </div>
-  </div></article>
-
-  <article class="bloc" id="bilan"><div class="marge"><span class="duree">5′</span></div><div class="corps">
-    <h2>5 — Mon bilan</h2><p class="amorce">Complète ces trois phrases sans regarder le haut de la fiche.</p>
-    <div class="bilan3">
-      <div class="fill-line"><strong>Adresse IP →</strong><textarea id="bilan-ip" data-rep aria-label="Bilan adresse IP"></textarea></div>
-      <div class="fill-line"><strong>Table de routage →</strong><textarea id="bilan-route" data-rep aria-label="Bilan table de routage"></textarea></div>
-      <div class="fill-line"><strong>Débit →</strong><textarea id="bilan-debit" data-rep aria-label="Bilan débit"></textarea></div>
-    </div>
-    <h3>Je me situe</h3>
-    <div class="qcm" data-qcm="auto" data-titre="Auto-évaluation"><label><input type="radio" name="auto" id="auto1" value="1"><span class="lt">1</span><span>J’ai encore besoin d’aide pour distinguer les trois notions.</span></label><label><input type="radio" name="auto" id="auto2" value="2"><span class="lt">2</span><span>Je reconnais les notions mais j’hésite pour les expliquer.</span></label><label><input type="radio" name="auto" id="auto3" value="3"><span class="lt">3</span><span>Je sais expliquer les trois notions avec les analogies.</span></label><label><input type="radio" name="auto" id="auto4" value="4"><span class="lt">4</span><span>Je sais expliquer le voyage d’un paquet et repérer un goulot d’étranglement.</span></label></div>
-  </div></article>
-
-  <section class="corrbloc" id="correction"><h2>Correction expliquée et bilan de l’activité</h2><p class="intro">Entre le mot de passe donné par le professeur pour afficher les réponses, les explications et ce qu’il faut retenir.</p><div class="saisie"><input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction" autocomplete="off" spellcheck="false"><button type="button" id="corr-btn">Afficher</button></div><p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p><div class="corr" id="corr-contenu" hidden></div></section>
-<div id="alerte" class="alerte" hidden></div>
+<header class="entete">
+<div class="cycle"><span class="lab">Cycle 4</span><span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span></div>
+<div class="marque"><img alt="Lycée français de Vienne" onerror="this.remove()" src="img/logo-lfv.png"/><p class="fil">Technologie · Séquence 2 · Activité 1</p></div>
+<h1 class="titre">Les chemins de l'information — partie 2 : le réseau postal de la classe</h1>
+<p class="sous">Adresse IP · table de routage · débit · activité sans ordinateur · 55 min</p>
+<nav aria-label="Étapes de l'activité" class="chrono" id="chrono">
+<a href="#mission"><b>5′</b>Mission</a><a href="#ip"><b>12′</b>Adresse IP</a><a href="#routage"><b>15′</b>Routage</a><a href="#debit"><b>10′</b>Débit</a><a href="#defi"><b>8′</b>Défi</a><a href="#bilan"><b>5′</b>Bilan</a>
+</nav>
+</header>
+<section aria-label="Mon identité" class="identite">
+<div class="champ"><label for="nom">Nom</label><input autocomplete="family-name" id="nom"/></div>
+<div class="champ"><label for="prenom">Prénom</label><input autocomplete="given-name" id="prenom"/></div>
+<div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"/></div>
+<div class="champ"><label for="groupe">Groupe</label><input id="groupe"/></div>
+<div class="champ"><label for="role">Rôle dans le groupe</label><input id="role" placeholder="routeur, expéditeur, chronométreur…"/></div>
+<div class="champ"><label for="date">Date</label><input id="date" type="date"/></div>
+</section>
+<details class="ref"><summary>Ce que je travaille dans cette activité</summary><div class="dedans">
+<dl><dt>Objectif</dt><dd>Comprendre avec des analogies et une manipulation réelle comment une information est identifiée, orientée et transmise dans un réseau.</dd><dt>SFC17</dt><dd>Identifier et représenter la circulation d'une information dans le réseau Internet.</dd><dt>SFC18</dt><dd>Justifier la nécessité d'un protocole de routage pour faire communiquer plusieurs réseaux.</dd><dt>SFC1p</dt><dd>Le rôle et la structure d'une adresse IP, des tables de routage.</dd><dt>SFC1q</dt><dd>Le débit et les ordres de grandeur associés.</dd></dl>
+<ul><li>N1 — Je sais associer adresse IP, routeur/table de routage et débit à une analogie simple.</li><li>N2 — Je sais expliquer avec mes mots le rôle de chacun.</li><li>N3 — Je sais suivre un paquet de réseau en réseau et repérer la liaison qui limite le transfert.</li></ul>
+</div></details>
+<section class="hero-probleme" id="mission">
+<h2>Mission — faire voyager un « colis numérique »</h2>
+<p>Un élève du <strong>réseau A</strong> doit envoyer un message à un élève du <strong>réseau C</strong>. Vous n’avez pas d’ordinateur : la classe va devenir le réseau.</p>
+<p><strong>Question :</strong> comment le colis sait-il <em>à qui</em> aller, <em>par où</em> passer et <em>combien de colis</em> peuvent circuler en même temps ?</p>
+</section>
+<div aria-label="Les analogies de l'activité" class="analogie-grid">
+<div class="analogie"><div class="ico">🏠</div><b>Adresse IP</b><span>Comme une adresse postale : elle permet d’identifier la destination.</span></div>
+<div class="analogie"><div class="ico">📦</div><b>Paquet</b><span>Comme une lettre ou un colis : une petite partie des données à transporter.</span></div>
+<div class="analogie"><div class="ico">🏤</div><b>Routeur</b><span>Comme un centre de tri : il décide vers quelle prochaine étape envoyer le paquet.</span></div>
+<div class="analogie"><div class="ico">📋</div><b>Table de routage</b><span>Comme le panneau du centre de tri : « pour cette destination, envoie par ici ».</span></div>
+<div class="analogie"><div class="ico">🛣️</div><b>Liaison</b><span>Comme une route entre deux centres : elle transporte les paquets.</span></div>
+<div class="analogie"><div class="ico">🚚🚚🚚</div><b>Débit</b><span>Comme la capacité d’une route : combien de colis passent pendant un temps donné.</span></div>
+</div>
+<div class="sansordi"><b>Matériel du groupe :</b> 10 à 12 petites enveloppes ou cartes « paquet », 3 feuilles « Routeur R1 / R2 / R3 », un chronomètre et cette fiche imprimée. Les élèves jouent les appareils et les routeurs.</div>
+<article class="bloc" id="ip"><div class="marge"><span class="duree">12′</span></div><div class="corps">
+<h2>1 — Adresse IP : « À quelle adresse dois-je livrer ? »</h2>
+<p class="amorce">Dans notre modèle, chaque quartier est un réseau en <strong>/24</strong>. Les trois premiers nombres indiquent le réseau ; le dernier différencie les appareils de ce réseau.</p>
+<div class="ip-neighborhoods">
+<div class="quartier"><h4>Quartier / réseau A</h4><div class="ip-card">Léa<code>192.168.1.4</code></div><div class="ip-card">Noah<code>192.168.1.9</code></div></div>
+<div class="quartier"><h4>Quartier / réseau B</h4><div class="ip-card">Youssef<code>192.168.2.7</code></div><div class="ip-card">Inès<code>192.168.2.12</code></div></div>
+<div class="quartier"><h4>Quartier / réseau C</h4><div class="ip-card">Emma<code>192.168.3.8</code></div><div class="ip-card">Adam<code>192.168.3.15</code></div></div>
+</div>
+<div class="sansordi"><b>Manipulation :</b> donne une enveloppe à Léa. Sur l’enveloppe, écris « destination : 192.168.2.7 ». Sans prononcer le prénom du destinataire, faites parvenir l’enveloppe au bon élève en utilisant seulement les cartes d’adresse.</div>
+<div class="qbox"><h3>Je vérifie ce que j’ai compris</h3>
+<div class="qrow"><label for="ip-dest">Qui reçoit 192.168.2.7 ?</label><select id="ip-dest"><option value="">Choisir…</option><option>Léa</option><option>Youssef</option><option>Emma</option></select></div>
+<div class="qrow"><label for="ip-meme">Léa et Youssef sont-ils dans le même réseau ?</label><select id="ip-meme"><option value="">Choisir…</option><option>Oui</option><option>Non</option></select></div>
+<div class="qrow"><label for="ip-double">Peut-on donner la même IP à deux appareils du même réseau en même temps ?</label><select id="ip-double"><option value="">Choisir…</option><option>Oui</option><option>Non</option></select></div>
+<label for="ip-role"><strong>Avec tes mots : à quoi sert une adresse IP ?</strong></label><textarea aria-label="Rôle d'une adresse IP" data-rep="" id="ip-role" placeholder="Une adresse IP sert à…"></textarea>
+</div>
+</div></article>
+<article class="bloc" id="routage"><div class="marge"><span class="duree">15′</span></div><div class="corps">
+<h2>2 — Table de routage : « Vers quel centre de tri maintenant ? »</h2>
+<p class="amorce">Un paquet destiné à un autre réseau arrive à un routeur. Le routeur ne devine pas : il consulte sa table et choisit le <strong>prochain saut</strong>.</p>
+<div class="route-map">
+<div class="routeur-card"><div class="rname">R1</div><table><tr><th>Destination</th><th>Envoyer vers</th></tr><tr><td>réseau 1</td><td>direct</td></tr><tr><td>réseau 2</td><td>R2</td></tr><tr><td>réseau 3</td><td>R2</td></tr></table></div>
+<div class="arrow">→</div>
+<div class="routeur-card"><div class="rname">R2</div><table><tr><th>Destination</th><th>Envoyer vers</th></tr><tr><td>réseau 1</td><td>R1</td></tr><tr><td>réseau 2</td><td>direct</td></tr><tr><td>réseau 3</td><td>R3</td></tr></table></div>
+<div class="arrow">→</div>
+<div class="routeur-card"><div class="rname">R3</div><table><tr><th>Destination</th><th>Envoyer vers</th></tr><tr><td>réseau 1</td><td>R2</td></tr><tr><td>réseau 2</td><td>R2</td></tr><tr><td>réseau 3</td><td>direct</td></tr></table></div>
+</div>
+<div class="role-strip"><div class="role-card"><b>Source</b>192.168.1.4</div><div class="role-card"><b>Routeur</b>R1</div><div class="role-card"><b>Routeur</b>R2</div><div class="role-card"><b>Destination</b>192.168.3.8</div></div>
+<div class="sansordi"><b>Manipulation :</b> trois élèves deviennent R1, R2 et R3. Le paquet part de Léa vers Emma. À chaque étape, le « routeur » doit lire la destination et montrer dans sa table pourquoi il transmet au voisin choisi.</div>
+<div class="qbox"><h3>Je suis le paquet</h3>
+<div class="qrow"><label for="route-r1">R1 reçoit un paquet pour le réseau 3. Prochaine étape ?</label><select id="route-r1"><option value="">Choisir…</option><option>R1 le garde</option><option>R2</option><option>R3 directement</option></select></div>
+<div class="qrow"><label for="route-r2">R2 reçoit ensuite ce paquet. Prochaine étape ?</label><select id="route-r2"><option value="">Choisir…</option><option>R1</option><option>R2 le garde</option><option>R3</option></select></div>
+<div class="qrow"><label for="route-tout">R1 doit-il connaître par cœur tous les gestes futurs du paquet ?</label><select id="route-tout"><option value="">Choisir…</option><option>Oui</option><option>Non, il choisit surtout la prochaine étape</option></select></div>
+<label for="route-role"><strong>Avec tes mots : à quoi sert une table de routage ?</strong></label><textarea aria-label="Rôle d'une table de routage" data-rep="" id="route-role" placeholder="Une table de routage permet au routeur de…"></textarea>
+</div>
+</div></article>
+<article class="bloc" id="debit"><div class="marge"><span class="duree">10′</span></div><div class="corps">
+<h2>3 — Débit : « Combien de colis peuvent passer ? »</h2>
+<p class="amorce">Cette fois, on ne change ni l’adresse ni le chemin. On compare simplement la <strong>capacité de deux liaisons</strong>.</p>
+<div class="debit-wrap">
+<div class="road"><h4>Route A — petite route</h4><div class="lane"><span class="packet">1</span></div><p><strong>Règle :</strong> 1 paquet toutes les 2 secondes.</p></div>
+<div class="road"><h4>Route B — grande route</h4><div class="lane wide"><span class="packet">1</span><span class="packet">2</span><span class="packet">3</span></div><p><strong>Règle :</strong> 3 paquets toutes les 2 secondes.</p></div>
+</div>
+<div class="sansordi"><b>Manipulation :</b> pendant 10 secondes, faites réellement passer les enveloppes selon la règle de chaque route. Un élève chronomètre, un autre compte les paquets arrivés.</div>
+<div class="qbox"><h3>Je mesure</h3>
+<div class="qrow"><label for="debit-a">Paquets arrivés sur la route A en 10 s</label><input id="debit-a" inputmode="numeric" min="0" type="number"/></div>
+<div class="qrow"><label for="debit-b">Paquets arrivés sur la route B en 10 s</label><input id="debit-b" inputmode="numeric" min="0" type="number"/></div>
+<div class="qrow"><label for="debit-fort">Quelle route a le plus grand débit ?</label><select id="debit-fort"><option value="">Choisir…</option><option>Route A</option><option>Route B</option><option>Elles ont le même débit</option></select></div>
+<label for="debit-role"><strong>Avec tes mots : qu’est-ce que le débit ?</strong></label><textarea aria-label="Définition du débit" data-rep="" id="debit-role" placeholder="Le débit indique…"></textarea>
+</div>
+<div class="bandeau"><p><strong>Passage au vrai réseau :</strong> au lieu de compter des enveloppes par seconde, on compte des bits par seconde : bit/s, kbit/s, Mbit/s, Gbit/s.</p></div>
+</div></article>
+<article class="bloc" id="defi"><div class="marge"><span class="duree">8′</span></div><div class="corps">
+<h2>4 — Défi final : expliquer tout le voyage</h2>
+<div class="challenge">
+<p><strong>Mission :</strong> 10 paquets doivent aller de <code>192.168.1.3</code> à <code>192.168.3.8</code>.</p>
+<div class="capacity"><span class="node">Réseau 1</span><span class="linkcap">10 paquets/s</span><span class="node">R1</span><span class="linkcap">2 paquets/s</span><span class="node">R2</span><span class="linkcap">8 paquets/s</span><span class="node">R3 / réseau 3</span></div>
+<p>Le paquet connaît sa destination grâce à son adresse IP. Les routeurs utilisent leur table. Mais une des liaisons laisse passer beaucoup moins de données que les autres.</p>
+</div>
+<div class="qbox">
+<div class="qrow"><label for="defi-ip">Quelle information permet de savoir à qui livrer ?</label><select id="defi-ip"><option value="">Choisir…</option><option>L'adresse IP</option><option>Le débit</option><option>Le nom du routeur</option></select></div>
+<div class="qrow"><label for="defi-route">Qu'utilise un routeur pour choisir la prochaine étape ?</label><select id="defi-route"><option value="">Choisir…</option><option>Une table de routage</option><option>La taille de l'écran</option><option>Le Wi-Fi</option></select></div>
+<div class="qrow"><label for="defi-bouchon">Quelle liaison limite ici le transfert global ?</label><select id="defi-bouchon"><option value="">Choisir…</option><option>10 paquets/s</option><option>2 paquets/s</option><option>8 paquets/s</option></select></div>
+<label for="defi-exp"><strong>Explique le voyage en 3 ou 4 phrases en utilisant : adresse IP, routeur, table de routage, débit.</strong></label><textarea aria-label="Explication du défi final" data-rep="" id="defi-exp" placeholder="Le paquet porte… Puis le routeur… Le débit…"></textarea>
+</div>
+</div></article>
+<article class="bloc" id="bilan"><div class="marge"><span class="duree">5′</span></div><div class="corps">
+<h2>5 — Mon bilan</h2><p class="amorce">Complète ces trois phrases sans regarder le haut de la fiche.</p>
+<div class="bilan3">
+<div class="fill-line"><strong>Adresse IP →</strong><textarea aria-label="Bilan adresse IP" data-rep="" id="bilan-ip"></textarea></div>
+<div class="fill-line"><strong>Table de routage →</strong><textarea aria-label="Bilan table de routage" data-rep="" id="bilan-route"></textarea></div>
+<div class="fill-line"><strong>Débit →</strong><textarea aria-label="Bilan débit" data-rep="" id="bilan-debit"></textarea></div>
+</div>
+<h3>Je me situe</h3>
+<div class="qcm" data-qcm="auto" data-titre="Auto-évaluation"><label><input id="auto1" name="auto" type="radio" value="1"/><span class="lt">1</span><span>J’ai encore besoin d’aide pour distinguer les trois notions.</span></label><label><input id="auto2" name="auto" type="radio" value="2"/><span class="lt">2</span><span>Je reconnais les notions mais j’hésite pour les expliquer.</span></label><label><input id="auto3" name="auto" type="radio" value="3"/><span class="lt">3</span><span>Je sais expliquer les trois notions avec les analogies.</span></label><label><input id="auto4" name="auto" type="radio" value="4"/><span class="lt">4</span><span>Je sais expliquer le voyage d’un paquet et repérer un goulot d’étranglement.</span></label></div>
+</div></article>
+<section class="corrbloc" id="correction"><h2>Correction expliquée et bilan de l’activité</h2><p class="intro">Entre le mot de passe donné par le professeur pour afficher les réponses, les explications et ce qu’il faut retenir.</p><div class="saisie"><input aria-label="Mot de passe de la correction" autocomplete="off" id="corr-mdp" placeholder="Mot de passe" spellcheck="false" type="password"/><button id="corr-btn" type="button">Afficher</button></div><p class="refus" hidden="" id="corr-refus">Mot de passe incorrect.</p><div class="corr" hidden="" id="corr-contenu"></div></section>
+<div class="alerte" hidden="" id="alerte"></div>
 </main>
-<nav class="pager" aria-label="Navigation dans la Séquence 2"><a href="seq2-act1-p1.html">← Partie 1 · Matériels du réseau</a><a href="seq2-act1-p3.html">Partie 3 · Filius →</a></nav>
-
+<nav aria-label="Navigation dans la Séquence 2" class="pager"><a href="seq2-act1-p1.html">← Partie 1 · Matériels du réseau</a><a href="seq2-act1-p3.html">Partie 3 · Filius →</a></nav>
 <div class="barre"><button class="lien" id="effacer" type="button">Effacer mes réponses</button><button class="btn" id="pdf" type="button">Générer le PDF</button><p class="etat" id="etat">Tes réponses restent sur cet appareil.</p></div>
-
 <script>
 (function(){
 "use strict";

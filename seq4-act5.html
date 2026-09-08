@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Séquence 4 · Séance 5 — Enregistrer les données</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
@@ -321,8 +322,7 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
-<link rel="stylesheet" href="assets/site-addons.css">
-
+<link href="assets/site-addons.css" rel="stylesheet"/>
 <!-- Navigation séquentielle harmonisée -->
 <style id="sequence-pager-style">
 .pager{
@@ -364,343 +364,323 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
 }
 @media print{.pager{display:none!important}}
 </style>
-
 </head>
 <body>
-
-<nav class="navsite" aria-label="Navigation du site">
-  <div class="dedans">
-    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
-    <label class="saut">
-      <span>Aller à</span>
-      <select id="navfiches" aria-label="Aller à une autre activité">
-        <optgroup label="Séquence 1">
-          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
-          <option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
-          <option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
-          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
-        </optgroup>
-        <optgroup label="Séquence 2">
-          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
-          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage & débit</option>
-          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
-          <option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
-        </optgroup>
-        <optgroup label="Séquence 3">
-          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
-          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
-          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
-          <option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
-          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
-          <option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
-          <option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
-        </optgroup>
-        <optgroup label="Séquence 4">
-          <option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
-          <option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
-          <option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
-          <option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
-          <option value="seq4-act5.html" selected>Séance 5 — Enregistrer les données</option>
-          <option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
-        </optgroup>
-        <optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
-        <optgroup label="Outils">
-          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
-          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
-          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
-        </optgroup>
-      <optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges & SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option></optgroup></select>
-    </label>
-  </div>
+<nav aria-label="Navigation du site" class="navsite">
+<div class="dedans">
+<a class="accueil" href="index.html">← Accueil</a>
+<label class="saut">
+<span>Aller à</span>
+<select aria-label="Aller à une autre activité" id="navfiches">
+<optgroup label="Séquence 1">
+<option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+<option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
+<option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
+<option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+</optgroup>
+<optgroup label="Séquence 2">
+<option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels &amp; réseau</option>
+<option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage &amp; débit</option>
+<option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
+<option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
+</optgroup>
+<optgroup label="Séquence 3">
+<option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+<option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+<option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+<option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+<option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+<option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+<option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
+</optgroup>
+<optgroup label="Séquence 4">
+<option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
+<option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
+<option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
+<option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
+<option selected="" value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
+<option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
+</optgroup>
+<optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
+<optgroup label="Outils">
+<option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+<option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+<option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+</optgroup>
+<optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges &amp; SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option><option value="osi-seq3-act1.html">OSI S3 · Séance 1 — Algorithme et logigramme</option><option value="osi-seq3-act2.html">OSI S3 · Séance 2 — Fonctions et solutions techniques</option><option value="osi-seq3-act3.html">OSI S3 · Séance 3 — Revue d’architecture</option><option value="osi-seq3-act4.html">OSI S3 · Séance 4 — Chaînes d’information et d’énergie</option><option value="osi-seq3-act5.html">OSI S3 · Séance 5 — Programmer, tester, corriger</option></optgroup></select>
+</label>
+</div>
 </nav>
 <script>
 document.getElementById("navfiches").addEventListener("change", function(){
   if(this.value) location.href = this.value;
 });
 </script>
-
-
 <main class="page">
-
-  <header class="entete">
-    <div class="cycle">
-      <span class="lab">Cycle 4</span>
-      <span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
-    </div>
-    <div class="marque">
-      <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
-      <p class="fil">Technologie · Séquence 4 · Activité 5</p>
-    </div>
-    <h1 class="titre">L'arrosage automatique — séance 5 : enregistrer les données</h1>
-    <p class="sous">Listes, fichier CSV et traitement dans un tableur · 55 min</p>
-    <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
-      <a href="#pourquoi"><b>8′</b>Pourquoi</a>
-      <a href="#programme"><b>10′</b>Le programme</a>
-      <a href="#vocabulaire"><b>8′</b>Vocabulaire</a>
-      <a href="#recuperer"><b>9′</b>Récupérer</a>
-      <a href="#tableur"><b>15′</b>Tableur</a>
-      <a href="#synthese"><b>5′</b>Synthèse</a>
-    </nav>
-  </header>
-
-  <section class="identite" aria-label="Mon identité">
-    <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="family-name"></div>
-    <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
-    <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
-    <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
-    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"></div>
-    <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
-  </section>
-  <details class="ref">
-    <summary>Ce que je travaille dans cette activité</summary>
-    <div class="dedans">
-      <dl>
-        <dt>Programme</dt><dd>Technologie, cycle 4, BO du 29 février 2024 — repères de progressivité classe de 3e</dd>
-        <dt>Compétence</dt><dd>Décrire et caractériser l'organisation interne d'un objet ou d'un système technique et ses échanges avec son environnement (données)</dd>
-        <dt>Repère 3e</dt><dd>Représenter sous forme de données les informations de diverses natures utilisées par un OST</dd>
-        <dt>Repère 3e</dt><dd>Identifier, selon les cas, leur mise en forme, leur transmission, ou leur stockage dans des fichiers (texte, image, nombre) afin de comprendre le fonctionnement de l'OST</dd>
-      </dl>
-      <p style="margin:14px 0 6px;font-weight:600">Connaissances</p>
-      <ul>
-        <li>Vocabulaire des données : objet, descripteur, collection (liste), type, données structurées</li>
-        <li>Traitement des données : mise en forme et traitement de données (calculs, filtre, tri) dans un logiciel (tableur)</li>
-        <li>Structure de données « listes » afin de stocker des données issues du programme pour les parcourir et les traiter</li>
-        <li>Système d'information et stockage : fichier de type tableur ou CSV, extension et format de fichiers</li>
-      </ul>
-      <p style="margin:14px 0 6px;font-weight:600">Ce que je dois savoir faire</p>
-      <ul>
-        <li>N1 — Je sais décrire en langage naturel un programme d'enregistrement de données</li>
-        <li>N2 — et je sais nommer les éléments d'une table de données : objet, descripteur, collection, type</li>
-        <li>N3 — et je sais récupérer un fichier CSV et le convertir en tableau exploitable</li>
-        <li>N4 — et je sais écrire les formules qui rendent les données lisibles et en calculer les moyennes</li>
-      </ul>
-    </div>
-  </details>
-  <article class="bloc" id="pourquoi">
-    <div class="marge"><span class="duree">8′</span></div>
-    <div class="corps">
-      <h2>Pourquoi enregistrer des données ?</h2>
-      <div class="situation">
-        <p>Le système fonctionne. Mais le jardinier ne sait toujours pas si son réglage est le bon : arrose-t-il trop ? pas assez ? au bon moment ?</p>
-        <p style="margin-top:14px">Chez les agriculteurs, les sondes connectées peuvent enregistrer ou transmettre des mesures pour suivre l’état des parcelles. Ces données peuvent éviter des tournées inutiles, comparer des stratégies d’irrigation ou révéler un dysfonctionnement. Les gains de temps, d’eau ou d’argent dépendent toutefois de la culture, du matériel et du contexte : ils doivent être mesurés et sourcés, pas généralisés.</p>
-        <p style="margin-top:14px">Pour décider, il faut <strong>garder une trace</strong> de ce que le système mesure, heure après heure, pendant plusieurs jours.</p>
-      </div>
-      <h3>N1 — À quoi servent les données collectées</h3>
-      <div class="qcm" data-qcm="n1" data-titre="N1 — L'utilité des données collectées">
-        <p class="enonce">Que permettent principalement les données enregistrées par un système ?</p>
-        <div class="choix">
-          <label><input type="radio" name="n1" id="n1-a" value="a"><span class="lt">a</span><span>Rien, elles occupent seulement de la mémoire</span></label>
-          <label><input type="radio" name="n1" id="n1-b" value="b"><span class="lt">b</span><span>Vérifier son bon fonctionnement, l'optimiser et détecter un dysfonctionnement</span></label>
-          <label><input type="radio" name="n1" id="n1-c" value="c"><span class="lt">c</span><span>Accélérer le programme</span></label>
-          <label><input type="radio" name="n1" id="n1-d" value="d"><span class="lt">d</span><span>Remplacer le capteur</span></label>
-        </div>
-      </div>
-
-    </div>
-  </article>
-  <article class="bloc" id="programme">
-    <div class="marge"><span class="duree">10′</span></div>
-    <div class="corps">
-      <h2>Le programme d'enregistrement</h2>
-      <div class="bandeau">
-        <p>Le programme qui enregistre température et humidité dans la mémoire de la carte.</p>
-        <a href="ressources/enregistrer-des-donnees.hex" target="_blank" rel="noopener">Télécharger le programme</a>
-      </div>
-      <p class="consigne">Ouvre-le dans MakeCode et observe-le. Les mesures sont rangées dans une <strong>liste</strong>, une structure qui empile les valeurs les unes après les autres pour pouvoir les relire ensuite.</p>
-      <p class="consigne">Décris en langage naturel le fonctionnement de ce programme : que déclenche le bouton A, le bouton B, et la combinaison A+B ?</p>
-      <textarea id="n2" data-rep placeholder="Quand A est appuyé…" style="min-height:130px" aria-label="Décris en langage naturel le fonctionnement de ce programme : que déclenche le bouton A, le bouton B, et la co"></textarea>
-
-    </div>
-  </article>
-  <article class="bloc" id="vocabulaire">
-    <div class="marge"><span class="duree">8′</span></div>
-    <div class="corps">
-      <h2>Le vocabulaire des données</h2>
-      <img class="illus" src="img/seq4-table-donnees.png" alt="Table de données : les descripteurs en en-tête, un objet par ligne, une collection de valeurs par colonne." onerror="this.remove()">
-      <p class="consigne" style="text-align:center">Une table de données et son vocabulaire.</p>
-      <div class="assoc">
-        <div class="paire">
-          <span class="nom">Objet</span>
-          <select id="as-1" data-assoc data-terme="Objet" aria-label="Réponse pour Objet">
-            <option value="">Choisir…</option>
-            <option>Une ligne du tableau, qui décrit un élément par toutes ses valeurs</option>
-            <option>Le nom d'une colonne, qui indique ce que la valeur représente</option>
-            <option>L'ensemble des valeurs d'une même colonne</option>
-            <option>La nature d'une valeur : nombre, chaîne de caractères ou booléen</option>
-          </select>
-        </div>
-        <div class="paire">
-          <span class="nom">Descripteur</span>
-          <select id="as-2" data-assoc data-terme="Descripteur" aria-label="Réponse pour Descripteur">
-            <option value="">Choisir…</option>
-            <option>Une ligne du tableau, qui décrit un élément par toutes ses valeurs</option>
-            <option>Le nom d'une colonne, qui indique ce que la valeur représente</option>
-            <option>L'ensemble des valeurs d'une même colonne</option>
-            <option>La nature d'une valeur : nombre, chaîne de caractères ou booléen</option>
-          </select>
-        </div>
-        <div class="paire">
-          <span class="nom">Collection</span>
-          <select id="as-3" data-assoc data-terme="Collection" aria-label="Réponse pour Collection">
-            <option value="">Choisir…</option>
-            <option>Une ligne du tableau, qui décrit un élément par toutes ses valeurs</option>
-            <option>Le nom d'une colonne, qui indique ce que la valeur représente</option>
-            <option>L'ensemble des valeurs d'une même colonne</option>
-            <option>La nature d'une valeur : nombre, chaîne de caractères ou booléen</option>
-          </select>
-        </div>
-        <div class="paire">
-          <span class="nom">Type</span>
-          <select id="as-4" data-assoc data-terme="Type" aria-label="Réponse pour Type">
-            <option value="">Choisir…</option>
-            <option>Une ligne du tableau, qui décrit un élément par toutes ses valeurs</option>
-            <option>Le nom d'une colonne, qui indique ce que la valeur représente</option>
-            <option>L'ensemble des valeurs d'une même colonne</option>
-            <option>La nature d'une valeur : nombre, chaîne de caractères ou booléen</option>
-          </select>
-        </div>
-      </div>
-      <h3>Dans notre fichier de mesures</h3>
-      <div class="cartes" data-tab="monfichier" id="tabmonfichier">
-        <div class="ligne" data-cle="Les descripteurs sont">
-          <span class="cle">Les descripteurs sont</span>
-          <input id="f1" placeholder="lesquels ?" aria-label="lesquels ? pour Les descripteurs sont">
-        </div>
-        <div class="ligne" data-cle="Un objet correspond à">
-          <span class="cle">Un objet correspond à</span>
-          <input id="f2" placeholder="quoi ?" aria-label="quoi ? pour Un objet correspond à">
-        </div>
-        <div class="ligne" data-cle="Le type de la colonne Hum">
-          <span class="cle">Le type de la colonne Hum</span>
-          <select id="f3" aria-label="quel type ? pour Le type de la colonne Hum"><option value="">quel type ?</option><option>Nombre</option><option>Chaîne de caractères</option><option>Booléen</option></select>
-        </div>
-      </div>
-
-    </div>
-  </article>
-  <article class="bloc" id="recuperer">
-    <div class="marge"><span class="duree">9′</span></div>
-    <div class="corps">
-      <h2>Je récupère les données</h2>
-      <p class="consigne">Avec une <strong>micro:bit V2</strong>, le journal de données est stocké sur la carte. Reconnecte-la à l’ordinateur puis ouvre le fichier <strong>MY_DATA</strong> visible sur le lecteur MICROBIT dans un navigateur. Tu peux ensuite copier ou télécharger les données et les ouvrir dans un tableur. Le jeu de secours proposé ici est déjà fourni au format CSV.</p>
-      <img class="illus" src="img/seq4-import-csv.png" alt="Fenêtre d'import d'un fichier CSV dans le tableur, avec le choix du séparateur." onerror="this.remove()">
-      <p class="consigne" style="text-align:center">L'import du fichier : attention au séparateur et au format décimal.</p>
-      <div class="bandeau">
-        <p>Si la récupération sur ta carte échoue, utilise ce jeu de mesures.</p>
-        <a href="ressources/MY_DATA.csv" target="_blank" rel="noopener">Télécharger MY_DATA.csv</a>
-      </div>
-      <h3>N3 — Le format du fichier</h3>
-      <div class="qcm" data-qcm="n3" data-titre="N3 — Le fichier CSV">
-        <p class="enonce">Qu'est-ce qu'un fichier CSV ?</p>
-        <div class="choix">
-          <label><input type="radio" name="n3" id="n3-a" value="a"><span class="lt">a</span><span>Une image compressée</span></label>
-          <label><input type="radio" name="n3" id="n3-b" value="b"><span class="lt">b</span><span>Un fichier texte où les valeurs sont séparées par un caractère</span></label>
-          <label><input type="radio" name="n3" id="n3-c" value="c"><span class="lt">c</span><span>Un programme exécutable</span></label>
-          <label><input type="radio" name="n3" id="n3-d" value="d"><span class="lt">d</span><span>Un format réservé au logiciel de la carte</span></label>
-        </div>
-      </div>
-
-    </div>
-  </article>
-  <article class="bloc" id="tableur">
-    <div class="marge"><span class="duree">15′</span></div>
-    <div class="corps">
-      <h2>Je mets les données en forme</h2>
-      <p class="consigne">Le fichier donne le temps en secondes et l’humidité en valeur brute. Ajoute une colonne temps en heures et une colonne <strong>indice d’humidité relatif</strong> calculée avec l’étalonnage, puis les moyennes.</p>
-      <div class="cartes" data-tab="formules" id="tabformules">
-        <div class="ligne" data-cle="Temps en heure">
-          <span class="cle">Temps en heure</span>
-          <input id="g1" placeholder="la formule" aria-label="la formule pour Temps en heure">
-        </div>
-        <div class="ligne" data-cle="Indice d’humidité relatif en %">
-          <span class="cle">Indice d’humidité relatif en %</span>
-          <input id="g2" placeholder="la formule" aria-label="la formule pour l’indice d’humidité relatif en %">
-        </div>
-        <div class="ligne" data-cle="Moyenne des températures">
-          <span class="cle">Moyenne des températures</span>
-          <input id="g3" placeholder="la formule" aria-label="la formule pour Moyenne des températures">
-        </div>
-        <div class="ligne" data-cle="Moyenne de l’indice d’humidité">
-          <span class="cle">Moyenne de l’indice d’humidité</span>
-          <input id="g4" placeholder="la formule" aria-label="la formule pour la moyenne de l’indice d’humidité">
-        </div>
-      </div>
-      <h3>Mes résultats</h3>
-      <div class="cartes" data-tab="resultats" id="tabresultats">
-        <div class="ligne" data-cle="Température moyenne">
-          <span class="cle">Température moyenne</span>
-          <input id="h1" placeholder="valeur obtenue" aria-label="valeur obtenue pour Température moyenne">
-        </div>
-        <div class="ligne" data-cle="Indice d’humidité moyen">
-          <span class="cle">Indice d’humidité moyen</span>
-          <input id="h2" placeholder="valeur obtenue" aria-label="valeur obtenue pour l’indice d’humidité moyen">
-        </div>
-      </div>
-      <p class="consigne">Enregistre ton fichier dans ton espace personnel : tu en auras besoin la séance prochaine.</p>
-      <h3>Je m'entraîne — la montre connectée</h3>
-      <p class="consigne">Même travail, autre système. Une montre connectée a enregistré une séance de sport minute par minute : l'heure, la durée de l'activité, la distance parcourue en mètres et la fréquence cardiaque. Deux colonnes sont vides, à toi de les calculer.</p>
-      <div class="bandeau">
-        <p>Le relevé de la montre, à ouvrir dans le tableur.</p>
-        <a href="ressources/montre-connectee.csv" target="_blank" rel="noopener">Télécharger le fichier</a>
-      </div>
-      <div class="cartes" data-tab="montre" id="tabmontre">
-        <div class="ligne" data-cle="Vitesse moyenne en m/s">
-          <span class="cle">Vitesse moyenne en m/s</span>
-          <input id="s1" placeholder="la formule" aria-label="la formule pour Vitesse moyenne en m/s">
-        </div>
-        <div class="ligne" data-cle="Vitesse moyenne en km/h">
-          <span class="cle">Vitesse moyenne en km/h</span>
-          <input id="s2" placeholder="la formule" aria-label="la formule pour Vitesse moyenne en km/h">
-        </div>
-        <div class="ligne" data-cle="Distance totale en km">
-          <span class="cle">Distance totale en km</span>
-          <input id="s3" placeholder="le résultat" aria-label="le résultat pour Distance totale en km">
-        </div>
-        <div class="ligne" data-cle="Fréquence cardiaque moyenne">
-          <span class="cle">Fréquence cardiaque moyenne</span>
-          <input id="s4" placeholder="le résultat" aria-label="le résultat pour Fréquence cardiaque moyenne">
-        </div>
-      </div>
-      <p class="consigne">À faire en classe s'il te reste du temps, sinon à la maison.</p>
-
-    </div>
-  </article>
-  <div class="cadre-pedago"><div><b>Minimum attendu aujourd’hui</b><p>Récupérer les données, identifier les colonnes, calculer le temps en heures et l’indice relatif avec la formule d’étalonnage.</p></div><div><b>Pour aller plus loin</b><p>Tracer un graphique, expliquer un événement d’arrosage et comparer deux périodes de mesure.</p></div></div>
-<article class="bloc" id="synthese">
-    <div class="marge"><span class="duree">5′</span></div>
-    <div class="corps">
-      <h2>Ma synthèse</h2>
-      <p class="consigne">Explique le chemin parcouru par une mesure, du capteur jusqu'à la cellule du tableur.</p>
-      <textarea id="rep-synthese" data-rep placeholder="" aria-label="Explique le chemin parcouru par une mesure, du capteur jusqu&#x27;à la cellule du tableur."></textarea>
-
-    </div>
-  </article>
-
-
-  <section class="corrbloc" id="correction">
-    <h2>Correction expliquée et bilan de l’activité</h2>
-    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
-    <div class="saisie">
-      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction"
-             autocomplete="off" spellcheck="false">
-      <button type="button" id="corr-btn">Afficher</button>
-    </div>
-    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
-    <div class="corr" id="corr-contenu" hidden></div>
-  </section>
-
-  <div id="alerte" class="alerte" hidden></div>
-
-</main>
-<nav class="pager" aria-label="Navigation dans la Séquence 4"><a href="seq4-act4.html">← Séance 4 · Les opérateurs logiques</a><a href="seq4-act6.html">Séance 6 · Diagnostiquer et alerter →</a></nav>
-
-
-<div class="barre">
-  <button class="lien" id="effacer" type="button">Effacer mes réponses</button>
-  <button class="btn" id="pdf" type="button">Générer le PDF</button>
-  <p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+<header class="entete">
+<div class="cycle">
+<span class="lab">Cycle 4</span>
+<span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
 </div>
-
+<div class="marque">
+<img alt="Lycée français de Vienne" onerror="this.remove()" src="img/logo-lfv.png"/>
+<p class="fil">Technologie · Séquence 4 · Activité 5</p>
+</div>
+<h1 class="titre">L'arrosage automatique — séance 5 : enregistrer les données</h1>
+<p class="sous">Listes, fichier CSV et traitement dans un tableur · 55 min</p>
+<nav aria-label="Étapes de l'activité" class="chrono" id="chrono">
+<a href="#pourquoi"><b>8′</b>Pourquoi</a>
+<a href="#programme"><b>10′</b>Le programme</a>
+<a href="#vocabulaire"><b>8′</b>Vocabulaire</a>
+<a href="#recuperer"><b>9′</b>Récupérer</a>
+<a href="#tableur"><b>15′</b>Tableur</a>
+<a href="#synthese"><b>5′</b>Synthèse</a>
+</nav>
+</header>
+<section aria-label="Mon identité" class="identite">
+<div class="champ"><label for="nom">Nom</label><input autocomplete="family-name" id="nom"/></div>
+<div class="champ"><label for="prenom">Prénom</label><input autocomplete="given-name" id="prenom"/></div>
+<div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"/></div>
+<div class="champ"><label for="groupe">Groupe</label><input id="groupe"/></div>
+<div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"/></div>
+<div class="champ"><label for="date">Date</label><input id="date" type="date"/></div>
+</section>
+<details class="ref">
+<summary>Ce que je travaille dans cette activité</summary>
+<div class="dedans">
+<dl>
+<dt>Programme</dt><dd>Technologie, cycle 4, BO du 29 février 2024 — repères de progressivité classe de 3e</dd>
+<dt>Compétence</dt><dd>Décrire et caractériser l'organisation interne d'un objet ou d'un système technique et ses échanges avec son environnement (données)</dd>
+<dt>Repère 3e</dt><dd>Représenter sous forme de données les informations de diverses natures utilisées par un OST</dd>
+<dt>Repère 3e</dt><dd>Identifier, selon les cas, leur mise en forme, leur transmission, ou leur stockage dans des fichiers (texte, image, nombre) afin de comprendre le fonctionnement de l'OST</dd>
+</dl>
+<p style="margin:14px 0 6px;font-weight:600">Connaissances</p>
+<ul>
+<li>Vocabulaire des données : objet, descripteur, collection (liste), type, données structurées</li>
+<li>Traitement des données : mise en forme et traitement de données (calculs, filtre, tri) dans un logiciel (tableur)</li>
+<li>Structure de données « listes » afin de stocker des données issues du programme pour les parcourir et les traiter</li>
+<li>Système d'information et stockage : fichier de type tableur ou CSV, extension et format de fichiers</li>
+</ul>
+<p style="margin:14px 0 6px;font-weight:600">Ce que je dois savoir faire</p>
+<ul>
+<li>N1 — Je sais décrire en langage naturel un programme d'enregistrement de données</li>
+<li>N2 — et je sais nommer les éléments d'une table de données : objet, descripteur, collection, type</li>
+<li>N3 — et je sais récupérer un fichier CSV et le convertir en tableau exploitable</li>
+<li>N4 — et je sais écrire les formules qui rendent les données lisibles et en calculer les moyennes</li>
+</ul>
+</div>
+</details>
+<article class="bloc" id="pourquoi">
+<div class="marge"><span class="duree">8′</span></div>
+<div class="corps">
+<h2>Pourquoi enregistrer des données ?</h2>
+<div class="situation">
+<p>Le système fonctionne. Mais le jardinier ne sait toujours pas si son réglage est le bon : arrose-t-il trop ? pas assez ? au bon moment ?</p>
+<p style="margin-top:14px">Chez les agriculteurs, les sondes connectées peuvent enregistrer ou transmettre des mesures pour suivre l’état des parcelles. Ces données peuvent éviter des tournées inutiles, comparer des stratégies d’irrigation ou révéler un dysfonctionnement. Les gains de temps, d’eau ou d’argent dépendent toutefois de la culture, du matériel et du contexte : ils doivent être mesurés et sourcés, pas généralisés.</p>
+<p style="margin-top:14px">Pour décider, il faut <strong>garder une trace</strong> de ce que le système mesure, heure après heure, pendant plusieurs jours.</p>
+</div>
+<h3>N1 — À quoi servent les données collectées</h3>
+<div class="qcm" data-qcm="n1" data-titre="N1 — L'utilité des données collectées">
+<p class="enonce">Que permettent principalement les données enregistrées par un système ?</p>
+<div class="choix">
+<label><input id="n1-a" name="n1" type="radio" value="a"/><span class="lt">a</span><span>Rien, elles occupent seulement de la mémoire</span></label>
+<label><input id="n1-b" name="n1" type="radio" value="b"/><span class="lt">b</span><span>Vérifier son bon fonctionnement, l'optimiser et détecter un dysfonctionnement</span></label>
+<label><input id="n1-c" name="n1" type="radio" value="c"/><span class="lt">c</span><span>Accélérer le programme</span></label>
+<label><input id="n1-d" name="n1" type="radio" value="d"/><span class="lt">d</span><span>Remplacer le capteur</span></label>
+</div>
+</div>
+</div>
+</article>
+<article class="bloc" id="programme">
+<div class="marge"><span class="duree">10′</span></div>
+<div class="corps">
+<h2>Le programme d'enregistrement</h2>
+<div class="bandeau">
+<p>Le programme qui enregistre température et humidité dans la mémoire de la carte.</p>
+<a href="ressources/enregistrer-des-donnees.hex" rel="noopener" target="_blank">Télécharger le programme</a>
+</div>
+<p class="consigne">Ouvre-le dans MakeCode et observe-le. Les mesures sont rangées dans une <strong>liste</strong>, une structure qui empile les valeurs les unes après les autres pour pouvoir les relire ensuite.</p>
+<p class="consigne">Décris en langage naturel le fonctionnement de ce programme : que déclenche le bouton A, le bouton B, et la combinaison A+B ?</p>
+<textarea aria-label="Décris en langage naturel le fonctionnement de ce programme : que déclenche le bouton A, le bouton B, et la co" data-rep="" id="n2" placeholder="Quand A est appuyé…" style="min-height:130px"></textarea>
+</div>
+</article>
+<article class="bloc" id="vocabulaire">
+<div class="marge"><span class="duree">8′</span></div>
+<div class="corps">
+<h2>Le vocabulaire des données</h2>
+<img alt="Table de données : les descripteurs en en-tête, un objet par ligne, une collection de valeurs par colonne." class="illus" onerror="this.remove()" src="img/seq4-table-donnees.png"/>
+<p class="consigne" style="text-align:center">Une table de données et son vocabulaire.</p>
+<div class="assoc">
+<div class="paire">
+<span class="nom">Objet</span>
+<select aria-label="Réponse pour Objet" data-assoc="" data-terme="Objet" id="as-1">
+<option value="">Choisir…</option>
+<option>Une ligne du tableau, qui décrit un élément par toutes ses valeurs</option>
+<option>Le nom d'une colonne, qui indique ce que la valeur représente</option>
+<option>L'ensemble des valeurs d'une même colonne</option>
+<option>La nature d'une valeur : nombre, chaîne de caractères ou booléen</option>
+</select>
+</div>
+<div class="paire">
+<span class="nom">Descripteur</span>
+<select aria-label="Réponse pour Descripteur" data-assoc="" data-terme="Descripteur" id="as-2">
+<option value="">Choisir…</option>
+<option>Une ligne du tableau, qui décrit un élément par toutes ses valeurs</option>
+<option>Le nom d'une colonne, qui indique ce que la valeur représente</option>
+<option>L'ensemble des valeurs d'une même colonne</option>
+<option>La nature d'une valeur : nombre, chaîne de caractères ou booléen</option>
+</select>
+</div>
+<div class="paire">
+<span class="nom">Collection</span>
+<select aria-label="Réponse pour Collection" data-assoc="" data-terme="Collection" id="as-3">
+<option value="">Choisir…</option>
+<option>Une ligne du tableau, qui décrit un élément par toutes ses valeurs</option>
+<option>Le nom d'une colonne, qui indique ce que la valeur représente</option>
+<option>L'ensemble des valeurs d'une même colonne</option>
+<option>La nature d'une valeur : nombre, chaîne de caractères ou booléen</option>
+</select>
+</div>
+<div class="paire">
+<span class="nom">Type</span>
+<select aria-label="Réponse pour Type" data-assoc="" data-terme="Type" id="as-4">
+<option value="">Choisir…</option>
+<option>Une ligne du tableau, qui décrit un élément par toutes ses valeurs</option>
+<option>Le nom d'une colonne, qui indique ce que la valeur représente</option>
+<option>L'ensemble des valeurs d'une même colonne</option>
+<option>La nature d'une valeur : nombre, chaîne de caractères ou booléen</option>
+</select>
+</div>
+</div>
+<h3>Dans notre fichier de mesures</h3>
+<div class="cartes" data-tab="monfichier" id="tabmonfichier">
+<div class="ligne" data-cle="Les descripteurs sont">
+<span class="cle">Les descripteurs sont</span>
+<input aria-label="lesquels ? pour Les descripteurs sont" id="f1" placeholder="lesquels ?"/>
+</div>
+<div class="ligne" data-cle="Un objet correspond à">
+<span class="cle">Un objet correspond à</span>
+<input aria-label="quoi ? pour Un objet correspond à" id="f2" placeholder="quoi ?"/>
+</div>
+<div class="ligne" data-cle="Le type de la colonne Hum">
+<span class="cle">Le type de la colonne Hum</span>
+<select aria-label="quel type ? pour Le type de la colonne Hum" id="f3"><option value="">quel type ?</option><option>Nombre</option><option>Chaîne de caractères</option><option>Booléen</option></select>
+</div>
+</div>
+</div>
+</article>
+<article class="bloc" id="recuperer">
+<div class="marge"><span class="duree">9′</span></div>
+<div class="corps">
+<h2>Je récupère les données</h2>
+<p class="consigne">Avec une <strong>micro:bit V2</strong>, le journal de données est stocké sur la carte. Reconnecte-la à l’ordinateur puis ouvre le fichier <strong>MY_DATA</strong> visible sur le lecteur MICROBIT dans un navigateur. Tu peux ensuite copier ou télécharger les données et les ouvrir dans un tableur. Le jeu de secours proposé ici est déjà fourni au format CSV.</p>
+<img alt="Fenêtre d'import d'un fichier CSV dans le tableur, avec le choix du séparateur." class="illus" onerror="this.remove()" src="img/seq4-import-csv.png"/>
+<p class="consigne" style="text-align:center">L'import du fichier : attention au séparateur et au format décimal.</p>
+<div class="bandeau">
+<p>Si la récupération sur ta carte échoue, utilise ce jeu de mesures.</p>
+<a href="ressources/MY_DATA.csv" rel="noopener" target="_blank">Télécharger MY_DATA.csv</a>
+</div>
+<h3>N3 — Le format du fichier</h3>
+<div class="qcm" data-qcm="n3" data-titre="N3 — Le fichier CSV">
+<p class="enonce">Qu'est-ce qu'un fichier CSV ?</p>
+<div class="choix">
+<label><input id="n3-a" name="n3" type="radio" value="a"/><span class="lt">a</span><span>Une image compressée</span></label>
+<label><input id="n3-b" name="n3" type="radio" value="b"/><span class="lt">b</span><span>Un fichier texte où les valeurs sont séparées par un caractère</span></label>
+<label><input id="n3-c" name="n3" type="radio" value="c"/><span class="lt">c</span><span>Un programme exécutable</span></label>
+<label><input id="n3-d" name="n3" type="radio" value="d"/><span class="lt">d</span><span>Un format réservé au logiciel de la carte</span></label>
+</div>
+</div>
+</div>
+</article>
+<article class="bloc" id="tableur">
+<div class="marge"><span class="duree">15′</span></div>
+<div class="corps">
+<h2>Je mets les données en forme</h2>
+<p class="consigne">Le fichier donne le temps en secondes et l’humidité en valeur brute. Ajoute une colonne temps en heures et une colonne <strong>indice d’humidité relatif</strong> calculée avec l’étalonnage, puis les moyennes.</p>
+<div class="cartes" data-tab="formules" id="tabformules">
+<div class="ligne" data-cle="Temps en heure">
+<span class="cle">Temps en heure</span>
+<input aria-label="la formule pour Temps en heure" id="g1" placeholder="la formule"/>
+</div>
+<div class="ligne" data-cle="Indice d’humidité relatif en %">
+<span class="cle">Indice d’humidité relatif en %</span>
+<input aria-label="la formule pour l’indice d’humidité relatif en %" id="g2" placeholder="la formule"/>
+</div>
+<div class="ligne" data-cle="Moyenne des températures">
+<span class="cle">Moyenne des températures</span>
+<input aria-label="la formule pour Moyenne des températures" id="g3" placeholder="la formule"/>
+</div>
+<div class="ligne" data-cle="Moyenne de l’indice d’humidité">
+<span class="cle">Moyenne de l’indice d’humidité</span>
+<input aria-label="la formule pour la moyenne de l’indice d’humidité" id="g4" placeholder="la formule"/>
+</div>
+</div>
+<h3>Mes résultats</h3>
+<div class="cartes" data-tab="resultats" id="tabresultats">
+<div class="ligne" data-cle="Température moyenne">
+<span class="cle">Température moyenne</span>
+<input aria-label="valeur obtenue pour Température moyenne" id="h1" placeholder="valeur obtenue"/>
+</div>
+<div class="ligne" data-cle="Indice d’humidité moyen">
+<span class="cle">Indice d’humidité moyen</span>
+<input aria-label="valeur obtenue pour l’indice d’humidité moyen" id="h2" placeholder="valeur obtenue"/>
+</div>
+</div>
+<p class="consigne">Enregistre ton fichier dans ton espace personnel : tu en auras besoin la séance prochaine.</p>
+<h3>Je m'entraîne — la montre connectée</h3>
+<p class="consigne">Même travail, autre système. Une montre connectée a enregistré une séance de sport minute par minute : l'heure, la durée de l'activité, la distance parcourue en mètres et la fréquence cardiaque. Deux colonnes sont vides, à toi de les calculer.</p>
+<div class="bandeau">
+<p>Le relevé de la montre, à ouvrir dans le tableur.</p>
+<a href="ressources/montre-connectee.csv" rel="noopener" target="_blank">Télécharger le fichier</a>
+</div>
+<div class="cartes" data-tab="montre" id="tabmontre">
+<div class="ligne" data-cle="Vitesse moyenne en m/s">
+<span class="cle">Vitesse moyenne en m/s</span>
+<input aria-label="la formule pour Vitesse moyenne en m/s" id="s1" placeholder="la formule"/>
+</div>
+<div class="ligne" data-cle="Vitesse moyenne en km/h">
+<span class="cle">Vitesse moyenne en km/h</span>
+<input aria-label="la formule pour Vitesse moyenne en km/h" id="s2" placeholder="la formule"/>
+</div>
+<div class="ligne" data-cle="Distance totale en km">
+<span class="cle">Distance totale en km</span>
+<input aria-label="le résultat pour Distance totale en km" id="s3" placeholder="le résultat"/>
+</div>
+<div class="ligne" data-cle="Fréquence cardiaque moyenne">
+<span class="cle">Fréquence cardiaque moyenne</span>
+<input aria-label="le résultat pour Fréquence cardiaque moyenne" id="s4" placeholder="le résultat"/>
+</div>
+</div>
+<p class="consigne">À faire en classe s'il te reste du temps, sinon à la maison.</p>
+</div>
+</article>
+<div class="cadre-pedago"><div><b>Minimum attendu aujourd’hui</b><p>Récupérer les données, identifier les colonnes, calculer le temps en heures et l’indice relatif avec la formule d’étalonnage.</p></div><div><b>Pour aller plus loin</b><p>Tracer un graphique, expliquer un événement d’arrosage et comparer deux périodes de mesure.</p></div></div>
+<article class="bloc" id="synthese">
+<div class="marge"><span class="duree">5′</span></div>
+<div class="corps">
+<h2>Ma synthèse</h2>
+<p class="consigne">Explique le chemin parcouru par une mesure, du capteur jusqu'à la cellule du tableur.</p>
+<textarea aria-label="Explique le chemin parcouru par une mesure, du capteur jusqu'à la cellule du tableur." data-rep="" id="rep-synthese" placeholder=""></textarea>
+</div>
+</article>
+<section class="corrbloc" id="correction">
+<h2>Correction expliquée et bilan de l’activité</h2>
+<p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+<div class="saisie">
+<input aria-label="Mot de passe de la correction" autocomplete="off" id="corr-mdp" placeholder="Mot de passe" spellcheck="false" type="password"/>
+<button id="corr-btn" type="button">Afficher</button>
+</div>
+<p class="refus" hidden="" id="corr-refus">Mot de passe incorrect.</p>
+<div class="corr" hidden="" id="corr-contenu"></div>
+</section>
+<div class="alerte" hidden="" id="alerte"></div>
+</main>
+<nav aria-label="Navigation dans la Séquence 4" class="pager"><a href="seq4-act4.html">← Séance 4 · Les opérateurs logiques</a><a href="seq4-act6.html">Séance 6 · Diagnostiquer et alerter →</a></nav>
+<div class="barre">
+<button class="lien" id="effacer" type="button">Effacer mes réponses</button>
+<button class="btn" id="pdf" type="button">Générer le PDF</button>
+<p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+</div>
 <script>
 (function(){
 "use strict";

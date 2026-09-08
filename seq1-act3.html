@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Séquence 1 · Activité 3 — L'IA dans notre poche</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
@@ -223,8 +224,7 @@ textarea::placeholder{color:#9FB0B3}
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
-<link rel="stylesheet" href="assets/site-addons.css">
-
+<link href="assets/site-addons.css" rel="stylesheet"/>
 <!-- Navigation séquentielle harmonisée -->
 <style id="sequence-pager-style">
 .pager{
@@ -266,386 +266,344 @@ textarea::placeholder{color:#9FB0B3}
 }
 @media print{.pager{display:none!important}}
 </style>
-
 </head>
 <body>
-
-<nav class="navsite" aria-label="Navigation du site">
-  <div class="dedans">
-    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
-    <label class="saut">
-      <span>Aller à</span>
-      <select id="navfiches" aria-label="Aller à une autre activité">
-        <optgroup label="Séquence 1">
-          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
-          <option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
-          <option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
-          <option value="seq1-act3.html" selected>Activité 3 — L'IA dans notre poche</option>
-        </optgroup>
-        <optgroup label="Séquence 2">
-          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
-          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage & débit</option>
-          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
-          <option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
-        </optgroup>
-        <optgroup label="Séquence 3">
-          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
-          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
-          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
-          <option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
-          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
-          <option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
-          <option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
-        </optgroup>
-        <optgroup label="Séquence 4">
-          <option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
-          <option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
-          <option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
-          <option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
-          <option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
-          <option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
-        </optgroup>
-        <optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
-        <optgroup label="Outils">
-          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
-          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
-          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
-        </optgroup>
-      <optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges & SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option></optgroup></select>
-    </label>
-  </div>
+<nav aria-label="Navigation du site" class="navsite">
+<div class="dedans">
+<a class="accueil" href="index.html">← Accueil</a>
+<label class="saut">
+<span>Aller à</span>
+<select aria-label="Aller à une autre activité" id="navfiches">
+<optgroup label="Séquence 1">
+<option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+<option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
+<option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
+<option selected="" value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+</optgroup>
+<optgroup label="Séquence 2">
+<option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels &amp; réseau</option>
+<option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage &amp; débit</option>
+<option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
+<option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
+</optgroup>
+<optgroup label="Séquence 3">
+<option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+<option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+<option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+<option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+<option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+<option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+<option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
+</optgroup>
+<optgroup label="Séquence 4">
+<option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
+<option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
+<option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
+<option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
+<option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
+<option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
+</optgroup>
+<optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
+<optgroup label="Outils">
+<option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+<option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+<option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+</optgroup>
+<optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges &amp; SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option><option value="osi-seq3-act1.html">OSI S3 · Séance 1 — Algorithme et logigramme</option><option value="osi-seq3-act2.html">OSI S3 · Séance 2 — Fonctions et solutions techniques</option><option value="osi-seq3-act3.html">OSI S3 · Séance 3 — Revue d’architecture</option><option value="osi-seq3-act4.html">OSI S3 · Séance 4 — Chaînes d’information et d’énergie</option><option value="osi-seq3-act5.html">OSI S3 · Séance 5 — Programmer, tester, corriger</option></optgroup></select>
+</label>
+</div>
 </nav>
 <script>
 document.getElementById("navfiches").addEventListener("change", function(){
   if(this.value) location.href = this.value;
 });
 </script>
-
-
 <main class="page">
-
-  <header class="entete">
-    <div class="cycle">
-      <span class="lab">Cycle 4</span>
-      <span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
-    </div>
-    <div class="marque">
-      <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
-      <p class="fil">Technologie · Séquence 1 · Activité 3</p>
-    </div>
-    <h1 class="titre">L'IA dans notre poche : comment les assistants vocaux transforment notre quotidien ?</h1>
-    <p class="sous">T1 — L'évolution des OST · 1 h 30</p>
-    <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
-      <a href="#situation"><b>2′</b>Situation</a>
-      <a href="#constats"><b>5′</b>Constats</a>
-      <a href="#probleme"><b>3′</b>Problème</a>
-      <a href="#idees"><b>5′</b>Idées</a>
-      <a href="#niveaux12"><b>15′</b>Niveaux 1-2</a>
-      <a href="#explorer"><b>20′</b>J'explore</a>
-      <a href="#niveaux34"><b>20′</b>Niveaux 3-4</a>
-      <a href="#synthese"><b>5′</b>Synthèse</a>
-      <a href="#ressources"><b>10′</b>Ressources</a>
-    </nav>
-  </header>
-
-  <section class="identite" aria-label="Mon identité">
-    <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="family-name"></div>
-    <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
-    <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
-    <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
-    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"></div>
-    <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
-  </section>
-
-  <details class="ref">
-    <summary>Ce que je travaille dans cette activité</summary>
-    <div class="dedans">
-      <dl>
-        <dt>Thème</dt><dd>Les objets et les systèmes techniques : leurs usages et leurs interactions à découvrir et à analyser</dd>
-        <dt>Attendu</dt><dd>OST1 — Décrire les liens entre usages et évolutions technologiques des objets et des systèmes techniques</dd>
-        <dt>Compétence</dt><dd>Exprimer dans un argumentaire court l'incidence des contraintes sociétales sur les OST</dd>
-        <dt>Connaissances</dt><dd>Les grands types d'apprentissage des intelligences artificielles et leurs usages possibles (géolocalisation, identification, calcul, traduction…) ; les incidences sociétales, notamment l'étude du biais et de l'effet de l'usage d'une IA</dd>
-      </dl>
-      <ul>
-        <li>N1 — Je sais définir les grands types d'apprentissage des IA (supervisé, non supervisé, par renforcement) et citer leurs usages possibles dans les moyens de communication</li>
-        <li>N2 — et je sais expliquer comment un type d'apprentissage de l'IA permet un usage concret dans un moyen de communication</li>
-        <li>N3 — et je sais identifier les biais possibles dans un système utilisant l'IA et proposer des solutions pour les limiter</li>
-        <li>N4 — et je sais analyser les effets positifs et négatifs de l'usage de l'IA dans un moyen de communication et proposer des améliorations responsables</li>
-      </ul>
-    </div>
-  </details>
-
-  <article class="bloc" id="situation">
-    <div class="marge"><span class="duree">2′</span></div>
-    <div class="corps">
-      <h2>Situation déclenchante</h2>
-      <div class="situation">
-        <img class="illus" src="img/seq1-act3.jpg"
-             alt="Des élèves regardent ensemble l'écran d'un smartphone autour d'une table."
-             onerror="this.remove()">
-        <p>Ton collège installe sur l'ENT un <strong>assistant conversationnel</strong> : une intelligence artificielle générative, du même type que celles que beaucoup d'entre vous utilisent déjà. On lui pose une question en français, elle répond en français, rédige un texte, résume un document ou traduit un message.</p>
-        <p style="margin-top:14px">Les avis se partagent aussitôt. Certains élèves la trouvent très pratique pour comprendre un exercice ou reformuler une leçon. D'autres racontent qu'elle leur a donné des réponses fausses avec un aplomb total, ou des dates inventées. Des enseignants s'inquiètent : cette IA a appris sur des textes écrits par des humains, avec leurs approximations et leurs préjugés — que reproduit-elle exactement ?</p>
-        <p style="margin-top:14px">Avant de trancher, vous n'allez pas discuter : <strong>vous allez l'essayer</strong>, méthodiquement, et regarder ce qu'elle produit vraiment.</p>
-      </div>
-    </div>
-  </article>
-
-  <article class="bloc" id="constats">
-    <div class="marge"><span class="duree">5′</span></div>
-    <div class="corps">
-      <h2>Mes constats, mes observations</h2>
-      <p class="consigne">Que remarques-tu dans cette situation ?</p>
-      <textarea id="rep-constats" data-rep placeholder="J'observe que…" aria-label="Que remarques-tu dans cette situation ? — J&#x27;observe que…"></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="probleme">
-    <div class="marge"><span class="duree">3′</span></div>
-    <div class="corps">
-      <h2>Mon problème à résoudre</h2>
-      <p class="consigne">Formule une seule question.</p>
-      <textarea id="rep-probleme" data-rep placeholder="Comment… ?" style="min-height:100px" aria-label="Formule une seule question. — Comment… ?"></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="idees">
-    <div class="marge"><span class="duree">5′</span></div>
-    <div class="corps">
-      <h2>Mes idées pour le résoudre</h2>
-      <textarea id="rep-idees" data-rep placeholder="Peut-être que…" aria-label="Mes idées pour le résoudre — Peut-être que…"></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="niveaux12">
-    <div class="marge"><span class="duree">15′</span></div>
-    <div class="corps">
-      <h2>Activités — niveaux 1 et 2</h2>
-      <p class="amorce">Avant d'essayer l'assistant, il faut savoir de quoi on parle. Une IA générative n'est qu'une forme d'IA parmi d'autres : tu vas découvrir les différents types d'apprentissage et les usages qu'ils permettent dans les moyens de communication.</p>
-
-      <h3>N1a — Les usages possibles d'une IA</h3>
-      <div class="qcm" data-qcm="n1a1" data-titre="N1a.1 — Traduire un message">
-        <p class="enonce">Tu demandes à l'assistant de traduire un message en anglais. Quel usage de l'IA met-il en œuvre ?</p>
-        <div class="choix">
-          <label><input type="radio" name="n1a1" id="n1a1-a" value="a"><span class="lt">a</span><span>la géolocalisation</span></label>
-          <label><input type="radio" name="n1a1" id="n1a1-b" value="b"><span class="lt">b</span><span>la traduction</span></label>
-          <label><input type="radio" name="n1a1" id="n1a1-c" value="c"><span class="lt">c</span><span>l'identification</span></label>
-        </div>
-      </div>
-
-      <div class="qcm" data-qcm="n1a2" data-titre="N1a.2 — Reconnaître la nature d'une demande" style="margin-top:12px">
-        <p class="enonce">Le collège veut que l'assistant refuse de rédiger un texte insultant. Pour cela, il doit reconnaître la nature de ce qu'on lui demande. Quel usage de l'IA est mobilisé ?</p>
-        <div class="choix">
-          <label><input type="radio" name="n1a2" id="n1a2-a" value="a"><span class="lt">a</span><span>l'identification / la classification de contenus</span></label>
-          <label><input type="radio" name="n1a2" id="n1a2-b" value="b"><span class="lt">b</span><span>le calcul d'itinéraire</span></label>
-          <label><input type="radio" name="n1a2" id="n1a2-c" value="c"><span class="lt">c</span><span>la géolocalisation</span></label>
-        </div>
-      </div>
-
-      <div class="qcm" data-qcm="n1a3" data-titre="N1a.3 — Les usages possibles d'une IA" style="margin-top:12px">
-        <p class="enonce">Une IA ne sert pas qu'à écrire du texte. Parmi les usages suivants, lesquels sont aussi des usages d'une IA ?</p>
-        <div class="choix">
-          <label><input type="radio" name="n1a3" id="n1a3-a" value="a"><span class="lt">a</span><span>reconnaître un visage sur une photo (identification)</span></label>
-          <label><input type="radio" name="n1a3" id="n1a3-b" value="b"><span class="lt">b</span><span>proposer un itinéraire routier (géolocalisation)</span></label>
-          <label><input type="radio" name="n1a3" id="n1a3-c" value="c"><span class="lt">c</span><span>calculer automatiquement une trajectoire (calcul)</span></label>
-          <label><input type="radio" name="n1a3" id="n1a3-d" value="d"><span class="lt">d</span><span>toutes ces réponses</span></label>
-        </div>
-      </div>
-
-      <h3>N1b — Le biais de l'IA</h3>
-      <div class="qcm" data-qcm="n1b" data-titre="N1b — Ce qu'est un biais">
-        <p class="enonce">Un « biais » d'une intelligence artificielle correspond à :</p>
-        <div class="choix">
-          <label><input type="radio" name="n1b" id="n1b-a" value="a"><span class="lt">a</span><span>une panne matérielle du serveur</span></label>
-          <label><input type="radio" name="n1b" id="n1b-b" value="b"><span class="lt">b</span><span>une erreur ou une déformation dans les résultats de l'IA, souvent liée aux données utilisées pour l'entraîner</span></label>
-          <label><input type="radio" name="n1b" id="n1b-c" value="c"><span class="lt">c</span><span>un bug dans l'interface graphique de l'application</span></label>
-          <label><input type="radio" name="n1b" id="n1b-d" value="d"><span class="lt">d</span><span>une mise à jour du logiciel</span></label>
-        </div>
-      </div>
-
-      <h3>N2a — Comment cette IA a-t-elle appris ?</h3>
-      <p class="consigne">Après avoir regardé la vidéo OST1e : qu'est-ce que l'apprentissage supervisé ? Explique ensuite, avec tes mots, sur quoi un assistant conversationnel a été entraîné pour savoir répondre en français.</p>
-      <div class="video" data-src="https://podeduc.apps.education.fr/video/113245-ost1e-les-grands-types-dapprentissage-des-intelligences-artificielles-et-leurs-usages-possibles/?is_iframe=true">
-        <p class="vt">OST1e — Les grands types d'apprentissage des intelligences artificielles</p>
-        <p class="vs">Vidéo PodEduc · code application élève : VOST1e</p>
-        <div class="actions">
-          <button class="vlire" type="button">Lire la vidéo</button>
-          <a href="https://podeduc.apps.education.fr/video/113245-ost1e-les-grands-types-dapprentissage-des-intelligences-artificielles-et-leurs-usages-possibles" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
-        </div>
-      </div>
-      <textarea id="n2a" data-rep placeholder="L'apprentissage supervisé, c'est…" aria-label="Vidéo PodEduc · code application élève : VOST1e — L&#x27;apprentissage supervisé, c&#x27;est…"></textarea>
-
-      <h3>N2b — Biais et incidences sociétales</h3>
-      <p class="consigne">Après avoir regardé la vidéo OST1f, cite deux effets négatifs que les biais de cette IA peuvent avoir sur les élèves qui l'utilisent.</p>
-      <div class="video" data-src="https://podeduc.apps.education.fr/video/113242-ost1f-les-incidences-societales-notamment-letude-du-biais-et-de-leffet-de-lusage-dune-intelligence-artificielle-ia/?is_iframe=true">
-        <p class="vt">OST1f — Les incidences sociétales : le biais et l'effet de l'usage d'une IA</p>
-        <p class="vs">Vidéo PodEduc · code application élève : VOST1f</p>
-        <div class="actions">
-          <button class="vlire" type="button">Lire la vidéo</button>
-          <a href="https://podeduc.apps.education.fr/video/113242-ost1f-les-incidences-societales-notamment-letude-du-biais-et-de-leffet-de-lusage-dune-intelligence-artificielle-ia" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
-        </div>
-      </div>
-      <textarea id="n2b" data-rep placeholder="Premier effet négatif :&#10;Deuxième effet négatif :" aria-label="Vidéo PodEduc · code application élève : VOST1f — Premier effet négatif :
-Deuxième effet négatif :"></textarea>
-    </div>
-  </article>
-
-    <article class="bloc" id="explorer">
-    <div class="marge"><span class="duree">20′</span></div>
-    <div class="corps">
-      <h2>J'explore l'IA générative</h2>
-      <p class="amorce">Quatre essais, dans l'ordre. Ton professeur projette l'assistant au tableau : la classe propose les questions, il les saisit, et vous regardez ensemble ce qui sort. À chaque essai, tu notes la réponse obtenue et ce que tu en conclus. Ce n'est pas un jeu : vous construisez une preuve.</p>
-
-      <div class="bandeau">
-        <p>L'assistant est ouvert sur le poste du professeur et projeté. <strong>Aucun compte élève n'est nécessaire</strong>, et <strong>aucun nom, aucune adresse, aucune photo</strong> ne sont saisis : ce qu'on écrit à une IA quitte l'établissement.</p>
-        <a href="https://eduscol.education.gouv.fr/6702/les-intelligences-artificielles-et-leurs-usages-en-education" target="_blank" rel="noopener">Le cadre officiel</a>
-      </div>
-
-      <h3>Essai 1 — La même question, deux fois</h3>
-      <p class="consigne">La classe choisit une question, par exemple « Explique en trois phrases pourquoi le ciel est bleu ». Le professeur la pose une première fois, puis une seconde fois dans une nouvelle conversation. Compare les deux réponses affichées.</p>
-      <textarea id="ex1" data-rep placeholder="Ce que j'observe en comparant les deux réponses…"></textarea>
-
-      <h3>Essai 2 — Une question dont tu connais la réponse</h3>
-      <p class="consigne">Proposez une question sur un sujet que vous maîtrisez : une règle d'un sport que vous pratiquez, l'intrigue d'un livre lu en français, une date vue en histoire. Vérifiez la réponse mot à mot, ensemble.</p>
-      <textarea id="ex2" data-rep placeholder="Ma question, la réponse de l'IA, et ce qui est exact ou faux…"></textarea>
-
-      <h3>Essai 3 — Le piège de l'assurance</h3>
-      <p class="consigne">Inventez un titre de livre ou un nom de personne qui n'existe pas, et demandez-lui un résumé ou une biographie. Regardez si elle refuse, ou si elle invente.</p>
-      <textarea id="ex3" data-rep placeholder="Ce que j'ai demandé, ce qu'elle a répondu…"></textarea>
-
-      <h3>Essai 4 — Le métier et la personne</h3>
-      <p class="consigne">Le professeur demande successivement de décrire « une journée de travail d'un ingénieur », puis « d'une secrétaire », puis « d'une infirmière ». Laissez les trois réponses affichées côte à côte et comparez : les mots employés, les qualités attribuées, et qui est décrit.</p>
-      <textarea id="ex4" data-rep placeholder="Ce que je remarque en comparant les trois réponses…"></textarea>
-
-      <details class="ref" style="margin:22px 0">
-        <summary>Préparation — à lire avant la séance</summary>
-        <div class="dedans">
-          <p style="margin:0 0 12px">L'assistant reste ouvert sur le poste du professeur et projeté. Aucun élève ne se connecte : les conditions d'utilisation de la plupart des assistants grand public imposent 18 ans, et rien ne doit être saisi qui permette d'identifier quelqu'un.</p>
-          <p style="margin:0 0 12px">Prévoir <strong>deux onglets</strong> ouverts sur deux conversations neuves : l'essai 1 exige de poser la même question dans deux conversations distinctes, sinon l'assistant se souvient et l'effet disparaît.</p>
-          <p style="margin:0 0 12px">Pour l'essai 3, choisir un titre franchement inventé. Certains assistants refusent désormais poliment plutôt que d'inventer : c'est un résultat en soi, à commenter comme tel plutôt que comme un échec de la manipulation.</p>
-          <p style="margin:0">Pour l'essai 4, garder les trois réponses affichées simultanément. C'est la comparaison qui fait apparaître le biais, pas la lecture d'une réponse isolée.</p>
-        </div>
-      </details>
-      <h3>Ce que ces quatre essais m'apprennent</h3>
-      <p class="consigne">En trois ou quatre lignes : que sais-tu maintenant sur cette IA que tu ne savais pas avant de l'essayer ?</p>
-      <textarea id="ex-bilan" data-rep></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="niveaux34">
-    <div class="marge"><span class="duree">20′</span></div>
-    <div class="corps">
-      <h2>Activités — niveaux 3 et 4</h2>
-      <p class="amorce">Tu connais maintenant les principes de fonctionnement de l'intelligence artificielle et ses principaux usages. Tu vas exercer ton esprit critique en analysant les biais de l'IA, leurs conséquences pour les utilisateurs et les solutions permettant de concevoir des applications plus fiables et plus responsables.</p>
-
-      <h3>N3 — Débat : les biais de l'IA, un mal nécessaire ?</h3>
-      <p class="consigne">Au sein de l'îlot, organisez le débat en deux groupes. Prépare trois arguments en t'appuyant sur la vidéo OST1f et sur la situation déclenchante.</p>
-      <div class="cartefiche">
-        <div class="mini" style="margin-bottom:14px">
-          <label for="debat-groupe">Mon groupe</label>
-          <select id="debat-groupe">
-            <option value="">Choisir…</option>
-            <option>Groupe A — Les biais de l'IA sont inévitables et peu importants.</option>
-            <option>Groupe B — Les biais de l'IA sont dangereux et doivent être éliminés à tout prix.</option>
-          </select>
-        </div>
-        <div class="grille">
-          <div class="mini"><label for="debat-1">Argument 1</label><textarea id="debat-1"></textarea></div>
-          <div class="mini"><label for="debat-2">Argument 2</label><textarea id="debat-2"></textarea></div>
-          <div class="mini"><label for="debat-3">Argument 3</label><textarea id="debat-3"></textarea></div>
-        </div>
-      </div>
-
-      <h3>N4a — Pourquoi un site de streaming utilise-t-il l'IA ?</h3>
-      <p class="consigne">Explique en trois ou quatre phrases comment l'IA analyse tes préférences (films regardés, notes, temps passé) pour proposer des contenus adaptés.</p>
-      <textarea id="n4a" data-rep aria-label="Explique en trois ou quatre phrases comment l&#x27;IA analyse tes préférences (films regardés, notes, temps passé) "></textarea>
-
-      <h3>N4b — Reconnaissance faciale et biais</h3>
-      <p class="consigne">Un logiciel de reconnaissance faciale a plus de mal à reconnaître les visages des femmes que ceux des hommes. Pourquoi est-ce un problème ? Donne un exemple de conséquence négative et propose une solution simple.</p>
-      <textarea id="n4b" data-rep aria-label="Un logiciel de reconnaissance faciale a plus de mal à reconnaître les visages des femmes que ceux des hommes. "></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="synthese">
-    <div class="marge"><span class="duree">5′</span></div>
-    <div class="corps">
-      <h2>Ma synthèse</h2>
-      <p class="consigne">En quelques lignes : que change l'IA dans nos moyens de communication, et à quelles conditions ?</p>
-      <textarea id="rep-synthese" data-rep aria-label="En quelques lignes : que change l&#x27;IA dans nos moyens de communication, et à quelles conditions ?"></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="ressources">
-    <div class="marge"><span class="duree">10′</span></div>
-    <div class="corps">
-      <h2>Fiches de connaissances et quiz</h2>
-      <div class="ressources">
-        <p class="appli">Les codes ci-dessous s'utilisent dans l'application élève : <a href="https://www.app.sti-ac-bordeaux.fr/" target="_blank" rel="noopener">app.sti-ac-bordeaux.fr</a></p>
-        <h3 style="margin-top:0">Fiches de connaissances <span style="color:var(--doux);font-weight:400;font-size:15px">(5′)</span></h3>
-        <ul>
-          <li><span class="code">FOST1e</span><a href="https://nuage01.apps.education.fr/public.php/dav/files/tD2HPYQLCKKTgjG?accept=zip">Les grands types d'apprentissage des IA et leurs usages</a></li>
-          <li><span class="code">FOST1f</span><a href="https://nuage01.apps.education.fr/public.php/dav/files/kZSCaGnqFzFYE6C?accept=zip">Les incidences sociétales : biais et effets de l'usage d'une IA</a></li>
-        </ul>
-        <h3>Quiz auto-correctifs <span style="color:var(--doux);font-weight:400;font-size:15px">(5′)</span></h3>
-        <ul>
-          <li><span class="code">QVOST1e</span><a href="https://podeduc.apps.education.fr/quiz/113245-ost1e-les-grands-types-dapprentissage-des-intelligences-artificielles-et-leurs-usages-possibles" target="_blank" rel="noopener">Quiz — Les types d'apprentissage des IA</a></li>
-          <li><span class="code">QVOST1f</span><a href="https://podeduc.apps.education.fr/quiz/113242-ost1f-les-incidences-societales-notamment-letude-du-biais-et-de-leffet-de-lusage-dune-intelligence-artificielle-ia" target="_blank" rel="noopener">Quiz — Biais et incidences sociétales</a></li>
-        </ul>
-      </div>
-    </div>
-  </article>
-
-  <article class="bloc" id="cps">
-    <div class="marge"><span class="duree">CPS</span></div>
-    <div class="corps">
-      <h2>Je développe mes compétences psychosociales</h2>
-      <div class="cps">
-        <p>Exercer son esprit critique face à une réponse produite par une IA. Où est-ce que je me situe aujourd'hui ?</p>
-        <div class="niveaux">
-          <label><input type="radio" name="cps" id="cps-1" value="1"><span><b>N1</b> — Je ne sais pas distinguer une information vraie d'une opinion.</span></label>
-          <label><input type="radio" name="cps" id="cps-2" value="2"><span><b>N2</b> — Je sais, avec de l'aide, repérer un biais dans une réponse d'IA.</span></label>
-          <label><input type="radio" name="cps" id="cps-3" value="3"><span><b>N3</b> — Je sais comparer deux sources IA et j'identifie les différences importantes.</span></label>
-          <label><input type="radio" name="cps" id="cps-4" value="4"><span><b>N4</b> — Je sais évaluer de façon autonome la fiabilité d'une réponse d'IA et je la justifie.</span></label>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <section class="corrbloc" id="correction" data-addon="1">
-    <h2>Correction expliquée et bilan de l’activité</h2>
-    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
-    <div class="saisie">
-      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction" autocomplete="off" spellcheck="false">
-      <button type="button" id="corr-btn">Afficher</button>
-    </div>
-    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
-    <div class="corr" id="corr-contenu" hidden></div>
-  </section>
-
-
-  <section class="evalbloc" id="evaluation">
-    <h2>Évaluation de compétence</h2>
-    <p class="intro">Ouverte en classe par le professeur. Saisis le mot de passe pour afficher le sujet.</p>
-    <div class="saisie">
-      <input type="password" id="eval-mdp" placeholder="Mot de passe" aria-label="Mot de passe de l'évaluation"
-             autocomplete="off" spellcheck="false">
-      <button type="button" id="eval-btn">Afficher l'évaluation</button>
-    </div>
-    <p class="refus" id="eval-refus" hidden>Mot de passe incorrect.</p>
-    <div id="eval-contenu" hidden></div>
-  </section>
-
-  <div id="alerte" class="alerte" hidden></div>
-
-</main>
-<nav class="pager" aria-label="Navigation dans la Séquence 1"><a href="seq1-act2-p2.html">← Activité 2 · Partie 2 — Préparer l’exposition</a><a href="index.html">Retour à l’accueil →</a></nav>
-
-
-<div class="barre">
-  <button class="lien" id="effacer" type="button">Effacer mes réponses</button>
-  <button class="btn" id="pdf" type="button">Générer le PDF</button>
-  <p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+<header class="entete">
+<div class="cycle">
+<span class="lab">Cycle 4</span>
+<span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
 </div>
-
+<div class="marque">
+<img alt="Lycée français de Vienne" onerror="this.remove()" src="img/logo-lfv.png"/>
+<p class="fil">Technologie · Séquence 1 · Activité 3</p>
+</div>
+<h1 class="titre">L'IA dans notre poche : comment les assistants vocaux transforment notre quotidien ?</h1>
+<p class="sous">T1 — L'évolution des OST · 1 h 30</p>
+<nav aria-label="Étapes de l'activité" class="chrono" id="chrono">
+<a href="#situation"><b>2′</b>Situation</a>
+<a href="#constats"><b>5′</b>Constats</a>
+<a href="#probleme"><b>3′</b>Problème</a>
+<a href="#idees"><b>5′</b>Idées</a>
+<a href="#niveaux12"><b>15′</b>Niveaux 1-2</a>
+<a href="#explorer"><b>20′</b>J'explore</a>
+<a href="#niveaux34"><b>20′</b>Niveaux 3-4</a>
+<a href="#synthese"><b>5′</b>Synthèse</a>
+<a href="#ressources"><b>10′</b>Ressources</a>
+</nav>
+</header>
+<section aria-label="Mon identité" class="identite">
+<div class="champ"><label for="nom">Nom</label><input autocomplete="family-name" id="nom"/></div>
+<div class="champ"><label for="prenom">Prénom</label><input autocomplete="given-name" id="prenom"/></div>
+<div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"/></div>
+<div class="champ"><label for="groupe">Groupe</label><input id="groupe"/></div>
+<div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"/></div>
+<div class="champ"><label for="date">Date</label><input id="date" type="date"/></div>
+</section>
+<details class="ref">
+<summary>Ce que je travaille dans cette activité</summary>
+<div class="dedans">
+<dl>
+<dt>Thème</dt><dd>Les objets et les systèmes techniques : leurs usages et leurs interactions à découvrir et à analyser</dd>
+<dt>Attendu</dt><dd>OST1 — Décrire les liens entre usages et évolutions technologiques des objets et des systèmes techniques</dd>
+<dt>Compétence</dt><dd>Exprimer dans un argumentaire court l'incidence des contraintes sociétales sur les OST</dd>
+<dt>Connaissances</dt><dd>Les grands types d'apprentissage des intelligences artificielles et leurs usages possibles (géolocalisation, identification, calcul, traduction…) ; les incidences sociétales, notamment l'étude du biais et de l'effet de l'usage d'une IA</dd>
+</dl>
+<ul>
+<li>N1 — Je sais définir les grands types d'apprentissage des IA (supervisé, non supervisé, par renforcement) et citer leurs usages possibles dans les moyens de communication</li>
+<li>N2 — et je sais expliquer comment un type d'apprentissage de l'IA permet un usage concret dans un moyen de communication</li>
+<li>N3 — et je sais identifier les biais possibles dans un système utilisant l'IA et proposer des solutions pour les limiter</li>
+<li>N4 — et je sais analyser les effets positifs et négatifs de l'usage de l'IA dans un moyen de communication et proposer des améliorations responsables</li>
+</ul>
+</div>
+</details>
+<article class="bloc" id="situation">
+<div class="marge"><span class="duree">2′</span></div>
+<div class="corps">
+<h2>Situation déclenchante</h2>
+<div class="situation">
+<img alt="Des élèves regardent ensemble l'écran d'un smartphone autour d'une table." class="illus" onerror="this.remove()" src="img/seq1-act3.jpg"/>
+<p>Ton collège installe sur l'ENT un <strong>assistant conversationnel</strong> : une intelligence artificielle générative, du même type que celles que beaucoup d'entre vous utilisent déjà. On lui pose une question en français, elle répond en français, rédige un texte, résume un document ou traduit un message.</p>
+<p style="margin-top:14px">Les avis se partagent aussitôt. Certains élèves la trouvent très pratique pour comprendre un exercice ou reformuler une leçon. D'autres racontent qu'elle leur a donné des réponses fausses avec un aplomb total, ou des dates inventées. Des enseignants s'inquiètent : cette IA a appris sur des textes écrits par des humains, avec leurs approximations et leurs préjugés — que reproduit-elle exactement ?</p>
+<p style="margin-top:14px">Avant de trancher, vous n'allez pas discuter : <strong>vous allez l'essayer</strong>, méthodiquement, et regarder ce qu'elle produit vraiment.</p>
+</div>
+</div>
+</article>
+<article class="bloc" id="constats">
+<div class="marge"><span class="duree">5′</span></div>
+<div class="corps">
+<h2>Mes constats, mes observations</h2>
+<p class="consigne">Que remarques-tu dans cette situation ?</p>
+<textarea aria-label="Que remarques-tu dans cette situation ? — J'observe que…" data-rep="" id="rep-constats" placeholder="J'observe que…"></textarea>
+</div>
+</article>
+<article class="bloc" id="probleme">
+<div class="marge"><span class="duree">3′</span></div>
+<div class="corps">
+<h2>Mon problème à résoudre</h2>
+<p class="consigne">Formule une seule question.</p>
+<textarea aria-label="Formule une seule question. — Comment… ?" data-rep="" id="rep-probleme" placeholder="Comment… ?" style="min-height:100px"></textarea>
+</div>
+</article>
+<article class="bloc" id="idees">
+<div class="marge"><span class="duree">5′</span></div>
+<div class="corps">
+<h2>Mes idées pour le résoudre</h2>
+<textarea aria-label="Mes idées pour le résoudre — Peut-être que…" data-rep="" id="rep-idees" placeholder="Peut-être que…"></textarea>
+</div>
+</article>
+<article class="bloc" id="niveaux12">
+<div class="marge"><span class="duree">15′</span></div>
+<div class="corps">
+<h2>Activités — niveaux 1 et 2</h2>
+<p class="amorce">Avant d'essayer l'assistant, il faut savoir de quoi on parle. Une IA générative n'est qu'une forme d'IA parmi d'autres : tu vas découvrir les différents types d'apprentissage et les usages qu'ils permettent dans les moyens de communication.</p>
+<h3>N1a — Les usages possibles d'une IA</h3>
+<div class="qcm" data-qcm="n1a1" data-titre="N1a.1 — Traduire un message">
+<p class="enonce">Tu demandes à l'assistant de traduire un message en anglais. Quel usage de l'IA met-il en œuvre ?</p>
+<div class="choix">
+<label><input id="n1a1-a" name="n1a1" type="radio" value="a"/><span class="lt">a</span><span>la géolocalisation</span></label>
+<label><input id="n1a1-b" name="n1a1" type="radio" value="b"/><span class="lt">b</span><span>la traduction</span></label>
+<label><input id="n1a1-c" name="n1a1" type="radio" value="c"/><span class="lt">c</span><span>l'identification</span></label>
+</div>
+</div>
+<div class="qcm" data-qcm="n1a2" data-titre="N1a.2 — Reconnaître la nature d'une demande" style="margin-top:12px">
+<p class="enonce">Le collège veut que l'assistant refuse de rédiger un texte insultant. Pour cela, il doit reconnaître la nature de ce qu'on lui demande. Quel usage de l'IA est mobilisé ?</p>
+<div class="choix">
+<label><input id="n1a2-a" name="n1a2" type="radio" value="a"/><span class="lt">a</span><span>l'identification / la classification de contenus</span></label>
+<label><input id="n1a2-b" name="n1a2" type="radio" value="b"/><span class="lt">b</span><span>le calcul d'itinéraire</span></label>
+<label><input id="n1a2-c" name="n1a2" type="radio" value="c"/><span class="lt">c</span><span>la géolocalisation</span></label>
+</div>
+</div>
+<div class="qcm" data-qcm="n1a3" data-titre="N1a.3 — Les usages possibles d'une IA" style="margin-top:12px">
+<p class="enonce">Une IA ne sert pas qu'à écrire du texte. Parmi les usages suivants, lesquels sont aussi des usages d'une IA ?</p>
+<div class="choix">
+<label><input id="n1a3-a" name="n1a3" type="radio" value="a"/><span class="lt">a</span><span>reconnaître un visage sur une photo (identification)</span></label>
+<label><input id="n1a3-b" name="n1a3" type="radio" value="b"/><span class="lt">b</span><span>proposer un itinéraire routier (géolocalisation)</span></label>
+<label><input id="n1a3-c" name="n1a3" type="radio" value="c"/><span class="lt">c</span><span>calculer automatiquement une trajectoire (calcul)</span></label>
+<label><input id="n1a3-d" name="n1a3" type="radio" value="d"/><span class="lt">d</span><span>toutes ces réponses</span></label>
+</div>
+</div>
+<h3>N1b — Le biais de l'IA</h3>
+<div class="qcm" data-qcm="n1b" data-titre="N1b — Ce qu'est un biais">
+<p class="enonce">Un « biais » d'une intelligence artificielle correspond à :</p>
+<div class="choix">
+<label><input id="n1b-a" name="n1b" type="radio" value="a"/><span class="lt">a</span><span>une panne matérielle du serveur</span></label>
+<label><input id="n1b-b" name="n1b" type="radio" value="b"/><span class="lt">b</span><span>une erreur ou une déformation dans les résultats de l'IA, souvent liée aux données utilisées pour l'entraîner</span></label>
+<label><input id="n1b-c" name="n1b" type="radio" value="c"/><span class="lt">c</span><span>un bug dans l'interface graphique de l'application</span></label>
+<label><input id="n1b-d" name="n1b" type="radio" value="d"/><span class="lt">d</span><span>une mise à jour du logiciel</span></label>
+</div>
+</div>
+<h3>N2a — Comment cette IA a-t-elle appris ?</h3>
+<p class="consigne">Après avoir regardé la vidéo OST1e : qu'est-ce que l'apprentissage supervisé ? Explique ensuite, avec tes mots, sur quoi un assistant conversationnel a été entraîné pour savoir répondre en français.</p>
+<div class="video" data-src="https://podeduc.apps.education.fr/video/113245-ost1e-les-grands-types-dapprentissage-des-intelligences-artificielles-et-leurs-usages-possibles/?is_iframe=true">
+<p class="vt">OST1e — Les grands types d'apprentissage des intelligences artificielles</p>
+<p class="vs">Vidéo PodEduc · code application élève : VOST1e</p>
+<div class="actions">
+<button class="vlire" type="button">Lire la vidéo</button>
+<a href="https://podeduc.apps.education.fr/video/113245-ost1e-les-grands-types-dapprentissage-des-intelligences-artificielles-et-leurs-usages-possibles" rel="noopener" target="_blank">Ouvrir sur PodEduc</a>
+</div>
+</div>
+<textarea aria-label="Vidéo PodEduc · code application élève : VOST1e — L'apprentissage supervisé, c'est…" data-rep="" id="n2a" placeholder="L'apprentissage supervisé, c'est…"></textarea>
+<h3>N2b — Biais et incidences sociétales</h3>
+<p class="consigne">Après avoir regardé la vidéo OST1f, cite deux effets négatifs que les biais de cette IA peuvent avoir sur les élèves qui l'utilisent.</p>
+<div class="video" data-src="https://podeduc.apps.education.fr/video/113242-ost1f-les-incidences-societales-notamment-letude-du-biais-et-de-leffet-de-lusage-dune-intelligence-artificielle-ia/?is_iframe=true">
+<p class="vt">OST1f — Les incidences sociétales : le biais et l'effet de l'usage d'une IA</p>
+<p class="vs">Vidéo PodEduc · code application élève : VOST1f</p>
+<div class="actions">
+<button class="vlire" type="button">Lire la vidéo</button>
+<a href="https://podeduc.apps.education.fr/video/113242-ost1f-les-incidences-societales-notamment-letude-du-biais-et-de-leffet-de-lusage-dune-intelligence-artificielle-ia" rel="noopener" target="_blank">Ouvrir sur PodEduc</a>
+</div>
+</div>
+<textarea aria-label="Vidéo PodEduc · code application élève : VOST1f — Premier effet négatif :
+Deuxième effet négatif :" data-rep="" id="n2b" placeholder="Premier effet négatif :
+Deuxième effet négatif :"></textarea>
+</div>
+</article>
+<article class="bloc" id="explorer">
+<div class="marge"><span class="duree">20′</span></div>
+<div class="corps">
+<h2>J'explore l'IA générative</h2>
+<p class="amorce">Quatre essais, dans l'ordre. Ton professeur projette l'assistant au tableau : la classe propose les questions, il les saisit, et vous regardez ensemble ce qui sort. À chaque essai, tu notes la réponse obtenue et ce que tu en conclus. Ce n'est pas un jeu : vous construisez une preuve.</p>
+<div class="bandeau">
+<p>L'assistant est ouvert sur le poste du professeur et projeté. <strong>Aucun compte élève n'est nécessaire</strong>, et <strong>aucun nom, aucune adresse, aucune photo</strong> ne sont saisis : ce qu'on écrit à une IA quitte l'établissement.</p>
+<a href="https://eduscol.education.gouv.fr/6702/les-intelligences-artificielles-et-leurs-usages-en-education" rel="noopener" target="_blank">Le cadre officiel</a>
+</div>
+<h3>Essai 1 — La même question, deux fois</h3>
+<p class="consigne">La classe choisit une question, par exemple « Explique en trois phrases pourquoi le ciel est bleu ». Le professeur la pose une première fois, puis une seconde fois dans une nouvelle conversation. Compare les deux réponses affichées.</p>
+<textarea data-rep="" id="ex1" placeholder="Ce que j'observe en comparant les deux réponses…"></textarea>
+<h3>Essai 2 — Une question dont tu connais la réponse</h3>
+<p class="consigne">Proposez une question sur un sujet que vous maîtrisez : une règle d'un sport que vous pratiquez, l'intrigue d'un livre lu en français, une date vue en histoire. Vérifiez la réponse mot à mot, ensemble.</p>
+<textarea data-rep="" id="ex2" placeholder="Ma question, la réponse de l'IA, et ce qui est exact ou faux…"></textarea>
+<h3>Essai 3 — Le piège de l'assurance</h3>
+<p class="consigne">Inventez un titre de livre ou un nom de personne qui n'existe pas, et demandez-lui un résumé ou une biographie. Regardez si elle refuse, ou si elle invente.</p>
+<textarea data-rep="" id="ex3" placeholder="Ce que j'ai demandé, ce qu'elle a répondu…"></textarea>
+<h3>Essai 4 — Le métier et la personne</h3>
+<p class="consigne">Le professeur demande successivement de décrire « une journée de travail d'un ingénieur », puis « d'une secrétaire », puis « d'une infirmière ». Laissez les trois réponses affichées côte à côte et comparez : les mots employés, les qualités attribuées, et qui est décrit.</p>
+<textarea data-rep="" id="ex4" placeholder="Ce que je remarque en comparant les trois réponses…"></textarea>
+<details class="ref" style="margin:22px 0">
+<summary>Préparation — à lire avant la séance</summary>
+<div class="dedans">
+<p style="margin:0 0 12px">L'assistant reste ouvert sur le poste du professeur et projeté. Aucun élève ne se connecte : les conditions d'utilisation de la plupart des assistants grand public imposent 18 ans, et rien ne doit être saisi qui permette d'identifier quelqu'un.</p>
+<p style="margin:0 0 12px">Prévoir <strong>deux onglets</strong> ouverts sur deux conversations neuves : l'essai 1 exige de poser la même question dans deux conversations distinctes, sinon l'assistant se souvient et l'effet disparaît.</p>
+<p style="margin:0 0 12px">Pour l'essai 3, choisir un titre franchement inventé. Certains assistants refusent désormais poliment plutôt que d'inventer : c'est un résultat en soi, à commenter comme tel plutôt que comme un échec de la manipulation.</p>
+<p style="margin:0">Pour l'essai 4, garder les trois réponses affichées simultanément. C'est la comparaison qui fait apparaître le biais, pas la lecture d'une réponse isolée.</p>
+</div>
+</details>
+<h3>Ce que ces quatre essais m'apprennent</h3>
+<p class="consigne">En trois ou quatre lignes : que sais-tu maintenant sur cette IA que tu ne savais pas avant de l'essayer ?</p>
+<textarea data-rep="" id="ex-bilan"></textarea>
+</div>
+</article>
+<article class="bloc" id="niveaux34">
+<div class="marge"><span class="duree">20′</span></div>
+<div class="corps">
+<h2>Activités — niveaux 3 et 4</h2>
+<p class="amorce">Tu connais maintenant les principes de fonctionnement de l'intelligence artificielle et ses principaux usages. Tu vas exercer ton esprit critique en analysant les biais de l'IA, leurs conséquences pour les utilisateurs et les solutions permettant de concevoir des applications plus fiables et plus responsables.</p>
+<h3>N3 — Débat : les biais de l'IA, un mal nécessaire ?</h3>
+<p class="consigne">Au sein de l'îlot, organisez le débat en deux groupes. Prépare trois arguments en t'appuyant sur la vidéo OST1f et sur la situation déclenchante.</p>
+<div class="cartefiche">
+<div class="mini" style="margin-bottom:14px">
+<label for="debat-groupe">Mon groupe</label>
+<select id="debat-groupe">
+<option value="">Choisir…</option>
+<option>Groupe A — Les biais de l'IA sont inévitables et peu importants.</option>
+<option>Groupe B — Les biais de l'IA sont dangereux et doivent être éliminés à tout prix.</option>
+</select>
+</div>
+<div class="grille">
+<div class="mini"><label for="debat-1">Argument 1</label><textarea id="debat-1"></textarea></div>
+<div class="mini"><label for="debat-2">Argument 2</label><textarea id="debat-2"></textarea></div>
+<div class="mini"><label for="debat-3">Argument 3</label><textarea id="debat-3"></textarea></div>
+</div>
+</div>
+<h3>N4a — Pourquoi un site de streaming utilise-t-il l'IA ?</h3>
+<p class="consigne">Explique en trois ou quatre phrases comment l'IA analyse tes préférences (films regardés, notes, temps passé) pour proposer des contenus adaptés.</p>
+<textarea aria-label="Explique en trois ou quatre phrases comment l'IA analyse tes préférences (films regardés, notes, temps passé) " data-rep="" id="n4a"></textarea>
+<h3>N4b — Reconnaissance faciale et biais</h3>
+<p class="consigne">Un logiciel de reconnaissance faciale a plus de mal à reconnaître les visages des femmes que ceux des hommes. Pourquoi est-ce un problème ? Donne un exemple de conséquence négative et propose une solution simple.</p>
+<textarea aria-label="Un logiciel de reconnaissance faciale a plus de mal à reconnaître les visages des femmes que ceux des hommes. " data-rep="" id="n4b"></textarea>
+</div>
+</article>
+<article class="bloc" id="synthese">
+<div class="marge"><span class="duree">5′</span></div>
+<div class="corps">
+<h2>Ma synthèse</h2>
+<p class="consigne">En quelques lignes : que change l'IA dans nos moyens de communication, et à quelles conditions ?</p>
+<textarea aria-label="En quelques lignes : que change l'IA dans nos moyens de communication, et à quelles conditions ?" data-rep="" id="rep-synthese"></textarea>
+</div>
+</article>
+<article class="bloc" id="ressources">
+<div class="marge"><span class="duree">10′</span></div>
+<div class="corps">
+<h2>Fiches de connaissances et quiz</h2>
+<div class="ressources">
+<p class="appli">Les codes ci-dessous s'utilisent dans l'application élève : <a href="https://www.app.sti-ac-bordeaux.fr/" rel="noopener" target="_blank">app.sti-ac-bordeaux.fr</a></p>
+<h3 style="margin-top:0">Fiches de connaissances <span style="color:var(--doux);font-weight:400;font-size:15px">(5′)</span></h3>
+<ul>
+<li><span class="code">FOST1e</span><a href="https://nuage01.apps.education.fr/public.php/dav/files/tD2HPYQLCKKTgjG?accept=zip">Les grands types d'apprentissage des IA et leurs usages</a></li>
+<li><span class="code">FOST1f</span><a href="https://nuage01.apps.education.fr/public.php/dav/files/kZSCaGnqFzFYE6C?accept=zip">Les incidences sociétales : biais et effets de l'usage d'une IA</a></li>
+</ul>
+<h3>Quiz auto-correctifs <span style="color:var(--doux);font-weight:400;font-size:15px">(5′)</span></h3>
+<ul>
+<li><span class="code">QVOST1e</span><a href="https://podeduc.apps.education.fr/quiz/113245-ost1e-les-grands-types-dapprentissage-des-intelligences-artificielles-et-leurs-usages-possibles" rel="noopener" target="_blank">Quiz — Les types d'apprentissage des IA</a></li>
+<li><span class="code">QVOST1f</span><a href="https://podeduc.apps.education.fr/quiz/113242-ost1f-les-incidences-societales-notamment-letude-du-biais-et-de-leffet-de-lusage-dune-intelligence-artificielle-ia" rel="noopener" target="_blank">Quiz — Biais et incidences sociétales</a></li>
+</ul>
+</div>
+</div>
+</article>
+<article class="bloc" id="cps">
+<div class="marge"><span class="duree">CPS</span></div>
+<div class="corps">
+<h2>Je développe mes compétences psychosociales</h2>
+<div class="cps">
+<p>Exercer son esprit critique face à une réponse produite par une IA. Où est-ce que je me situe aujourd'hui ?</p>
+<div class="niveaux">
+<label><input id="cps-1" name="cps" type="radio" value="1"/><span><b>N1</b> — Je ne sais pas distinguer une information vraie d'une opinion.</span></label>
+<label><input id="cps-2" name="cps" type="radio" value="2"/><span><b>N2</b> — Je sais, avec de l'aide, repérer un biais dans une réponse d'IA.</span></label>
+<label><input id="cps-3" name="cps" type="radio" value="3"/><span><b>N3</b> — Je sais comparer deux sources IA et j'identifie les différences importantes.</span></label>
+<label><input id="cps-4" name="cps" type="radio" value="4"/><span><b>N4</b> — Je sais évaluer de façon autonome la fiabilité d'une réponse d'IA et je la justifie.</span></label>
+</div>
+</div>
+</div>
+</article>
+<section class="corrbloc" data-addon="1" id="correction">
+<h2>Correction expliquée et bilan de l’activité</h2>
+<p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+<div class="saisie">
+<input aria-label="Mot de passe de la correction" autocomplete="off" id="corr-mdp" placeholder="Mot de passe" spellcheck="false" type="password"/>
+<button id="corr-btn" type="button">Afficher</button>
+</div>
+<p class="refus" hidden="" id="corr-refus">Mot de passe incorrect.</p>
+<div class="corr" hidden="" id="corr-contenu"></div>
+</section>
+<section class="evalbloc" id="evaluation">
+<h2>Évaluation de compétence</h2>
+<p class="intro">Ouverte en classe par le professeur. Saisis le mot de passe pour afficher le sujet.</p>
+<div class="saisie">
+<input aria-label="Mot de passe de l'évaluation" autocomplete="off" id="eval-mdp" placeholder="Mot de passe" spellcheck="false" type="password"/>
+<button id="eval-btn" type="button">Afficher l'évaluation</button>
+</div>
+<p class="refus" hidden="" id="eval-refus">Mot de passe incorrect.</p>
+<div hidden="" id="eval-contenu"></div>
+</section>
+<div class="alerte" hidden="" id="alerte"></div>
+</main>
+<nav aria-label="Navigation dans la Séquence 1" class="pager"><a href="seq1-act2-p2.html">← Activité 2 · Partie 2 — Préparer l’exposition</a><a href="index.html">Retour à l’accueil →</a></nav>
+<div class="barre">
+<button class="lien" id="effacer" type="button">Effacer mes réponses</button>
+<button class="btn" id="pdf" type="button">Générer le PDF</button>
+<p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+</div>
 <script>
 (function(){
 "use strict";

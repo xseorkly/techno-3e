@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Séquence 3 · Activité 3, partie 1 — Je conçois le système</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
@@ -285,8 +286,7 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
-<link rel="stylesheet" href="assets/site-addons.css">
-
+<link href="assets/site-addons.css" rel="stylesheet"/>
 <!-- Navigation séquentielle harmonisée -->
 <style id="sequence-pager-style">
 .pager{
@@ -328,333 +328,307 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
 }
 @media print{.pager{display:none!important}}
 </style>
-
 </head>
 <body>
-
-<nav class="navsite" aria-label="Navigation du site">
-  <div class="dedans">
-    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
-    <label class="saut">
-      <span>Aller à</span>
-      <select id="navfiches" aria-label="Aller à une autre activité">
-        <optgroup label="Séquence 1">
-          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
-          <option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
-          <option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
-          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
-        </optgroup>
-        <optgroup label="Séquence 2">
-          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
-          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage & débit</option>
-          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
-          <option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
-        </optgroup>
-        <optgroup label="Séquence 3">
-          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
-          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
-          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
-          <option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
-          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
-          <option value="seq3-act3-p1.html" selected>Activité 3 · partie 1 — Je conçois le système</option>
-          <option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
-        </optgroup>
-        <optgroup label="Séquence 4">
-          <option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
-          <option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
-          <option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
-          <option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
-          <option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
-          <option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
-        </optgroup>
-        <optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
-        <optgroup label="Outils">
-          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
-          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
-          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
-        </optgroup>
-      <optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges & SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option></optgroup></select>
-    </label>
-  </div>
+<nav aria-label="Navigation du site" class="navsite">
+<div class="dedans">
+<a class="accueil" href="index.html">← Accueil</a>
+<label class="saut">
+<span>Aller à</span>
+<select aria-label="Aller à une autre activité" id="navfiches">
+<optgroup label="Séquence 1">
+<option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+<option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
+<option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
+<option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+</optgroup>
+<optgroup label="Séquence 2">
+<option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels &amp; réseau</option>
+<option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage &amp; débit</option>
+<option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
+<option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
+</optgroup>
+<optgroup label="Séquence 3">
+<option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+<option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+<option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+<option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+<option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+<option selected="" value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+<option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
+</optgroup>
+<optgroup label="Séquence 4">
+<option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
+<option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
+<option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
+<option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
+<option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
+<option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
+</optgroup>
+<optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
+<optgroup label="Outils">
+<option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+<option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+<option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+</optgroup>
+<optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges &amp; SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option><option value="osi-seq3-act1.html">OSI S3 · Séance 1 — Algorithme et logigramme</option><option value="osi-seq3-act2.html">OSI S3 · Séance 2 — Fonctions et solutions techniques</option><option value="osi-seq3-act3.html">OSI S3 · Séance 3 — Revue d’architecture</option><option value="osi-seq3-act4.html">OSI S3 · Séance 4 — Chaînes d’information et d’énergie</option><option value="osi-seq3-act5.html">OSI S3 · Séance 5 — Programmer, tester, corriger</option></optgroup></select>
+</label>
+</div>
 </nav>
 <script>
 document.getElementById("navfiches").addEventListener("change", function(){
   if(this.value) location.href = this.value;
 });
 </script>
-
-
 <main class="page">
-
-  <header class="entete">
-    <div class="cycle">
-      <span class="lab">Cycle 4</span>
-      <span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
-    </div>
-    <div class="marque">
-      <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
-      <p class="fil">Technologie · Séquence 3 · Activité 3</p>
-    </div>
-    <h1 class="titre">Jouer contre la machine — partie 1 : je conçois le système</h1>
-    <p class="sous">Pierre, feuille, ciseaux contre l'ordinateur · 55 min</p>
-    <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
-      <a href="#situation"><b>3′</b>Situation</a>
-      <a href="#constats"><b>4′</b>Constats</a>
-      <a href="#probleme"><b>3′</b>Problème</a>
-      <a href="#idees"><b>4′</b>Idées</a>
-      <a href="#boite"><b>10′</b>Boîte à outils</a>
-      <a href="#algo"><b>10′</b>Algorithme</a>
-      <a href="#logigramme"><b>12′</b>Logigramme</a>
-      <a href="#base"><b>6′</b>Base d'images</a>
-      <a href="#reste"><b>3′</b>Points bloquants</a>
-    </nav>
-  </header>
-
-  <section class="identite" aria-label="Mon identité">
-    <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="family-name"></div>
-    <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
-    <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
-    <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
-    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"></div>
-    <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
-  </section>
-
-  <details class="ref">
-    <summary>Ce que je travaille dans cette activité</summary>
-    <div class="dedans">
-      <dl>
-        <dt>Compétences</dt><dd>Concevoir tout ou partie d'un objet communicant en réinvestissant des solutions déjà étudiées ; décrire un algorithme en langage courant puis le représenter par un logigramme</dd>
-        <dt>Connaissances</dt><dd>Capteur et actionneur ; variable ; nombre aléatoire ; structure de sélection ; apprentissage supervisé et représentativité d'une base d'images</dd>
-      </dl>
-      <ul>
-        <li>N1 — Je sais choisir, parmi les solutions déjà étudiées, celles dont ce projet a besoin, et écarter les autres</li>
-        <li>N2 — et je sais écrire en français l'algorithme complet du jeu</li>
-        <li>N3 — et je sais le traduire en logigramme avec les symboles normalisés</li>
-        <li>N4 — et je sais anticiper les conditions à respecter pour que la reconnaissance soit fiable</li>
-      </ul>
-    </div>
-  </details>
-
-  <article class="bloc" id="situation">
-    <div class="marge"><span class="duree">3′</span></div>
-    <div class="corps">
-      <h2>Situation déclenchante</h2>
-      <div class="situation">
-        <p>Depuis cinq séances, tu as appris séparément à faire tirer un nombre au hasard à une carte, à comparer deux valeurs, à afficher une image sur un écran à LED, et à entraîner une IA pour reconnaître ce que voit une caméra.</p>
-        <p style="margin-top:14px">Aujourd'hui, personne ne te donne la marche à suivre. Le défi : <strong>tu joues à pierre, feuille, ciseaux contre la machine</strong>. Elle voit ton signe par la webcam, elle joue le sien, et elle annonce qui a gagné. Tu disposes d'une webcam et d'une carte micro:bit.</p>
-        <p style="margin-top:14px">Cette séance ne sert pas à programmer. Elle sert à <strong>concevoir</strong> : décider quelles solutions tu réutilises, dans quel ordre, et pourquoi. Tu programmeras la séance suivante.</p>
-      </div>
-    </div>
-  </article>
-
-  <article class="bloc" id="constats">
-    <div class="marge"><span class="duree">4′</span></div>
-    <div class="corps">
-      <h2>Mes constats, mes observations</h2>
-      <p class="consigne">Décompose la partie : que se passe-t-il, dans l'ordre, entre le moment où tu montres ton signe et celui où le résultat s'affiche ?</p>
-      <textarea id="rep-constats" data-rep placeholder="D'abord…, ensuite…, enfin…" aria-label="Décompose la partie : que se passe-t-il, dans l&#x27;ordre, entre le moment où tu montres ton signe et celui où le "></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="probleme">
-    <div class="marge"><span class="duree">3′</span></div>
-    <div class="corps">
-      <h2>Mon problème à résoudre</h2>
-      <textarea id="rep-probleme" data-rep placeholder="Comment… ?" style="min-height:100px" aria-label="Mon problème à résoudre — Comment… ?"></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="idees">
-    <div class="marge"><span class="duree">4′</span></div>
-    <div class="corps">
-      <h2>Mes idées pour le résoudre</h2>
-      <p class="consigne">Note toutes les pistes du groupe, même celles dont tu n'es pas sûr.</p>
-      <textarea id="rep-idees" data-rep placeholder="Peut-être que…" aria-label="Note toutes les pistes du groupe, même celles dont tu n&#x27;es pas sûr."></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="boite">
-    <div class="marge"><span class="duree">10′</span></div>
-    <div class="corps">
-      <h2>Ma boîte à outils</h2>
-      <p class="amorce">Voici tout ce que tu as étudié depuis le début de l'année. Certaines de ces solutions sont indispensables ici, d'autres peuvent servir, d'autres n'ont rien à y faire. À toi de trier, et de dire pourquoi.</p>
-      <div class="cartes" data-tab="outils" id="taboutils">
-        <div class="ligne" data-cle="Un modèle d'images entraîné (Teachable Machine)">
-          <span class="cle">Modèle d'images</span>
-          <select id="o1a" aria-label="Utilité du modèle d'images"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
-          <input id="o1b" placeholder="Pourquoi ?" aria-label="Justification, modèle d'images">
-        </div>
-        <div class="ligne" data-cle="Le tirage d'un nombre aléatoire">
-          <span class="cle">Nombre aléatoire</span>
-          <select id="o2a" aria-label="Utilité du nombre aléatoire"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
-          <input id="o2b" placeholder="Pourquoi ?" aria-label="Justification, nombre aléatoire">
-        </div>
-        <div class="ligne" data-cle="La structure si / sinon si / sinon">
-          <span class="cle">Si / sinon si / sinon</span>
-          <select id="o3a" aria-label="Utilité de la sélection"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
-          <input id="o3b" placeholder="Pourquoi ?" aria-label="Justification, sélection">
-        </div>
-        <div class="ligne" data-cle="Une variable">
-          <span class="cle">Une variable</span>
-          <select id="o4a" aria-label="Utilité de la variable"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
-          <input id="o4b" placeholder="Pourquoi ?" aria-label="Justification, variable">
-        </div>
-        <div class="ligne" data-cle="L'écran à 25 LED de la carte">
-          <span class="cle">Écran à 25 LED</span>
-          <select id="o5a" aria-label="Utilité de l'écran"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
-          <input id="o5b" placeholder="Pourquoi ?" aria-label="Justification, écran">
-        </div>
-        <div class="ligne" data-cle="L'accéléromètre (le geste de secouer)">
-          <span class="cle">Accéléromètre</span>
-          <select id="o6a" aria-label="Utilité de l'accéléromètre"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
-          <input id="o6b" placeholder="Pourquoi ?" aria-label="Justification, accéléromètre">
-        </div>
-        <div class="ligne" data-cle="La radio et le numéro de groupe">
-          <span class="cle">Radio et groupe</span>
-          <select id="o7a" aria-label="Utilité de la radio"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
-          <input id="o7b" placeholder="Pourquoi ?" aria-label="Justification, radio">
-        </div>
-        <div class="ligne" data-cle="Une table de routage">
-          <span class="cle">Table de routage</span>
-          <select id="o8a" aria-label="Utilité de la table de routage"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
-          <input id="o8b" placeholder="Pourquoi ?" aria-label="Justification, table de routage">
-        </div>
-        <div class="ligne" data-cle="La webcam">
-          <span class="cle">La webcam</span>
-          <select id="o9a" aria-label="Utilité de la webcam"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
-          <input id="o9b" placeholder="Pourquoi ?" aria-label="Justification, webcam">
-        </div>
-        <div class="ligne" data-cle="Le débit de la connexion">
-          <span class="cle">Le débit</span>
-          <select id="o10a" aria-label="Utilité du débit"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
-          <input id="o10b" placeholder="Pourquoi ?" aria-label="Justification, débit">
-        </div>
-      </div>
-
-      <h3>N1 — Qui joue au hasard ?</h3>
-      <div class="qcm" data-qcm="n1" data-titre="N1 — Le hasard dans cette partie">
-        <p class="enonce">Dans ce jeu, qui a besoin d'un tirage au hasard ?</p>
-        <div class="choix">
-          <label><input type="radio" name="n1" id="n1-a" value="a"><span class="lt">a</span><span>Le joueur humain, pour choisir son signe</span></label>
-          <label><input type="radio" name="n1" id="n1-b" value="b"><span class="lt">b</span><span>La machine, pour choisir son propre signe</span></label>
-          <label><input type="radio" name="n1" id="n1-c" value="c"><span class="lt">c</span><span>Les deux, chacun de son côté</span></label>
-          <label><input type="radio" name="n1" id="n1-d" value="d"><span class="lt">d</span><span>Personne : l'IA décide de tout</span></label>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <article class="bloc" id="algo">
-    <div class="marge"><span class="duree">10′</span></div>
-    <div class="corps">
-      <h2>J'écris l'algorithme en français</h2>
-      <p class="consigne">Décris, phrase par phrase et dans l'ordre, ce que le système doit faire. N'oublie ni le cas de l'égalité, ni le moment où la machine tire son signe. Cette fois, aucun exemple n'est donné.</p>
-      <textarea id="rep-algo" data-rep style="min-height:240px" placeholder="Début&#10;…" aria-label="Décris, phrase par phrase et dans l&#x27;ordre, ce que le système doit faire. N&#x27;oublie ni le cas de l&#x27;égalité, ni l"></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="logigramme">
-    <div class="marge"><span class="duree">12′</span></div>
-    <div class="corps">
-      <h2>Je dessine le logigramme</h2>
-      <p class="consigne">Traduis ton algorithme avec les symboles normalisés. Choisis la forme de chaque étape, puis écris ce qu'elle contient. Laisse vides les lignes inutiles.</p>
-
-      <div class="legende">
-        <div><svg viewBox="0 0 90 40" aria-hidden="true"><rect x="3" y="6" width="84" height="28" rx="14" fill="none" stroke="#0E6E6B" stroke-width="2"/></svg><span>Début ou fin</span></div>
-        <div><svg viewBox="0 0 90 40" aria-hidden="true"><path d="M14 6 H87 L76 34 H3 Z" fill="none" stroke="#0E6E6B" stroke-width="2"/></svg><span>Entrée ou sortie</span></div>
-        <div><svg viewBox="0 0 90 40" aria-hidden="true"><rect x="3" y="6" width="84" height="28" fill="none" stroke="#0E6E6B" stroke-width="2"/></svg><span>Traitement</span></div>
-        <div><svg viewBox="0 0 90 40" aria-hidden="true"><path d="M45 4 L87 20 L45 36 L3 20 Z" fill="none" stroke="#0E6E6B" stroke-width="2"/></svg><span>Test</span></div>
-      </div>
-
-      <div class="cartes" id="logi">
-        <div class="ligne"><select id="lo-1t" aria-label="Forme de l'étape 1"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-1c" placeholder="Contenu de l'étape 1" aria-label="Contenu de l'étape 1"></div>
-        <div class="ligne"><select id="lo-2t" aria-label="Forme de l'étape 2"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-2c" placeholder="Contenu de l'étape 2" aria-label="Contenu de l'étape 2"></div>
-        <div class="ligne"><select id="lo-3t" aria-label="Forme de l'étape 3"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-3c" placeholder="Contenu de l'étape 3" aria-label="Contenu de l'étape 3"></div>
-        <div class="ligne"><select id="lo-4t" aria-label="Forme de l'étape 4"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-4c" placeholder="Contenu de l'étape 4" aria-label="Contenu de l'étape 4"></div>
-        <div class="ligne"><select id="lo-5t" aria-label="Forme de l'étape 5"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-5c" placeholder="Contenu de l'étape 5" aria-label="Contenu de l'étape 5"></div>
-        <div class="ligne"><select id="lo-6t" aria-label="Forme de l'étape 6"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-6c" placeholder="Contenu de l'étape 6" aria-label="Contenu de l'étape 6"></div>
-        <div class="ligne"><select id="lo-7t" aria-label="Forme de l'étape 7"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-7c" placeholder="Contenu de l'étape 7" aria-label="Contenu de l'étape 7"></div>
-        <div class="ligne"><select id="lo-8t" aria-label="Forme de l'étape 8"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-8c" placeholder="Contenu de l'étape 8" aria-label="Contenu de l'étape 8"></div>
-        <div class="ligne"><select id="lo-9t" aria-label="Forme de l'étape 9"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-9c" placeholder="Contenu de l'étape 9" aria-label="Contenu de l'étape 9"></div>
-        <div class="ligne"><select id="lo-10t" aria-label="Forme de l'étape 10"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-10c" placeholder="Contenu de l'étape 10" aria-label="Contenu de l'étape 10"></div>
-        <div class="ligne"><select id="lo-11t" aria-label="Forme de l'étape 11"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-11c" placeholder="Contenu de l'étape 11" aria-label="Contenu de l'étape 11"></div>
-        <div class="ligne"><select id="lo-12t" aria-label="Forme de l'étape 12"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input id="lo-12c" placeholder="Contenu de l'étape 12" aria-label="Contenu de l'étape 12"></div>
-      </div>
-      <p class="consigne" style="margin-top:10px">Le PDF dessinera ton logigramme avec les vraies formes, reliées par des flèches.</p>
-    </div>
-  </article>
-
-  <article class="bloc" id="base">
-    <div class="marge"><span class="duree">6′</span></div>
-    <div class="corps">
-      <h2>Je prépare ma base d'images</h2>
-      <p class="consigne">La séance prochaine, tu entraîneras le modèle. Décide dès maintenant de ce que tu vas photographier.</p>
-      <div class="cartes" data-tab="base" id="tabbase">
-        <div class="ligne" data-cle="Nombre de classes">
-          <span class="cle">Combien de classes</span>
-          <input id="b1" placeholder="et pourquoi ce nombre" aria-label="Nombre de classes">
-        </div>
-        <div class="ligne" data-cle="Noms exacts des classes">
-          <span class="cle">Noms des classes</span>
-          <input id="b2" placeholder="en majuscules, sans accent" aria-label="Noms des classes">
-        </div>
-        <div class="ligne" data-cle="Images par classe">
-          <span class="cle">Images par classe</span>
-          <input id="b3" placeholder="combien environ" aria-label="Nombre d'images par classe">
-        </div>
-        <div class="ligne" data-cle="Conditions de prise de vue">
-          <span class="cle">Conditions de prise</span>
-          <input id="b4" placeholder="fond, lumière, distance, angles…" aria-label="Conditions de prise de vue">
-        </div>
-      </div>
-
-      <h3>N2 — Trois signes au lieu de deux</h3>
-      <p class="consigne">La séance précédente, le modèle distinguait une main ouverte d'une main fermée. Ici, il devra distinguer trois signes, dont deux qui se ressemblent beaucoup selon l'angle de la main. Lesquels, et que comptes-tu faire pour limiter les confusions ?</p>
-      <textarea id="n2" data-rep aria-label="La séance précédente, le modèle distinguait une main ouverte d&#x27;une main fermée. Ici, il devra distinguer trois"></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="reste">
-    <div class="marge"><span class="duree">3′</span></div>
-    <div class="corps">
-      <h2>Ce que je n'ai pas encore résolu</h2>
-      <p class="consigne">Sois honnête : ce que tu notes ici sera repris au début de la séance suivante.</p>
-      <textarea id="rep-reste" data-rep placeholder="Je ne sais pas encore comment…" aria-label="Sois honnête : ce que tu notes ici sera repris au début de la séance suivante."></textarea>
-
-      <details class="ref" style="margin-top:22px">
-        <summary>Coup de pouce — à n'ouvrir qu'en cas de blocage réel</summary>
-        <div class="dedans">
-          <p><strong>Indice 1.</strong> Le système a besoin de deux signes à chaque partie : celui que tu montres, et celui de la machine. Ils n'arrivent pas par le même chemin. D'où vient chacun ?</p>
-          <p style="margin-top:12px"><strong>Indice 2.</strong> Pour comparer deux valeurs, il faut d'abord les ranger quelque part. Combien de variables te faut-il, et que contient chacune ?</p>
-          <p style="margin-top:12px"><strong>Indice 3.</strong> Trois signes contre trois signes, cela fait neuf combinaisons. Trois donnent une égalité. Cherche la règle qui décide des six autres sans écrire six tests séparés.</p>
-        </div>
-      </details>
-    </div>
-  </article>
-
-  <section class="corrbloc" id="correction" data-addon="1">
-    <h2>Correction expliquée et bilan de l’activité</h2>
-    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
-    <div class="saisie">
-      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction" autocomplete="off" spellcheck="false">
-      <button type="button" id="corr-btn">Afficher</button>
-    </div>
-    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
-    <div class="corr" id="corr-contenu" hidden></div>
-  </section>
-
-  <div id="alerte" class="alerte" hidden></div>
-
-</main>
-<nav class="pager" aria-label="Navigation dans la Séquence 3"><a href="seq3-act2-p3.html">← Activité 2 · Partie 3 — Où mon IA se trompe-t-elle ?</a><a href="seq3-act3-p2.html">Activité 3 · Partie 2 — Je réalise et je teste →</a></nav>
-
-
-<div class="barre">
-  <button class="lien" id="effacer" type="button">Effacer mes réponses</button>
-  <button class="btn" id="pdf" type="button">Générer le PDF</button>
-  <p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+<header class="entete">
+<div class="cycle">
+<span class="lab">Cycle 4</span>
+<span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
 </div>
-
+<div class="marque">
+<img alt="Lycée français de Vienne" onerror="this.remove()" src="img/logo-lfv.png"/>
+<p class="fil">Technologie · Séquence 3 · Activité 3</p>
+</div>
+<h1 class="titre">Jouer contre la machine — partie 1 : je conçois le système</h1>
+<p class="sous">Pierre, feuille, ciseaux contre l'ordinateur · 55 min</p>
+<nav aria-label="Étapes de l'activité" class="chrono" id="chrono">
+<a href="#situation"><b>3′</b>Situation</a>
+<a href="#constats"><b>4′</b>Constats</a>
+<a href="#probleme"><b>3′</b>Problème</a>
+<a href="#idees"><b>4′</b>Idées</a>
+<a href="#boite"><b>10′</b>Boîte à outils</a>
+<a href="#algo"><b>10′</b>Algorithme</a>
+<a href="#logigramme"><b>12′</b>Logigramme</a>
+<a href="#base"><b>6′</b>Base d'images</a>
+<a href="#reste"><b>3′</b>Points bloquants</a>
+</nav>
+</header>
+<section aria-label="Mon identité" class="identite">
+<div class="champ"><label for="nom">Nom</label><input autocomplete="family-name" id="nom"/></div>
+<div class="champ"><label for="prenom">Prénom</label><input autocomplete="given-name" id="prenom"/></div>
+<div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"/></div>
+<div class="champ"><label for="groupe">Groupe</label><input id="groupe"/></div>
+<div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"/></div>
+<div class="champ"><label for="date">Date</label><input id="date" type="date"/></div>
+</section>
+<details class="ref">
+<summary>Ce que je travaille dans cette activité</summary>
+<div class="dedans">
+<dl>
+<dt>Compétences</dt><dd>Concevoir tout ou partie d'un objet communicant en réinvestissant des solutions déjà étudiées ; décrire un algorithme en langage courant puis le représenter par un logigramme</dd>
+<dt>Connaissances</dt><dd>Capteur et actionneur ; variable ; nombre aléatoire ; structure de sélection ; apprentissage supervisé et représentativité d'une base d'images</dd>
+</dl>
+<ul>
+<li>N1 — Je sais choisir, parmi les solutions déjà étudiées, celles dont ce projet a besoin, et écarter les autres</li>
+<li>N2 — et je sais écrire en français l'algorithme complet du jeu</li>
+<li>N3 — et je sais le traduire en logigramme avec les symboles normalisés</li>
+<li>N4 — et je sais anticiper les conditions à respecter pour que la reconnaissance soit fiable</li>
+</ul>
+</div>
+</details>
+<article class="bloc" id="situation">
+<div class="marge"><span class="duree">3′</span></div>
+<div class="corps">
+<h2>Situation déclenchante</h2>
+<div class="situation">
+<p>Depuis cinq séances, tu as appris séparément à faire tirer un nombre au hasard à une carte, à comparer deux valeurs, à afficher une image sur un écran à LED, et à entraîner une IA pour reconnaître ce que voit une caméra.</p>
+<p style="margin-top:14px">Aujourd'hui, personne ne te donne la marche à suivre. Le défi : <strong>tu joues à pierre, feuille, ciseaux contre la machine</strong>. Elle voit ton signe par la webcam, elle joue le sien, et elle annonce qui a gagné. Tu disposes d'une webcam et d'une carte micro:bit.</p>
+<p style="margin-top:14px">Cette séance ne sert pas à programmer. Elle sert à <strong>concevoir</strong> : décider quelles solutions tu réutilises, dans quel ordre, et pourquoi. Tu programmeras la séance suivante.</p>
+</div>
+</div>
+</article>
+<article class="bloc" id="constats">
+<div class="marge"><span class="duree">4′</span></div>
+<div class="corps">
+<h2>Mes constats, mes observations</h2>
+<p class="consigne">Décompose la partie : que se passe-t-il, dans l'ordre, entre le moment où tu montres ton signe et celui où le résultat s'affiche ?</p>
+<textarea aria-label="Décompose la partie : que se passe-t-il, dans l'ordre, entre le moment où tu montres ton signe et celui où le " data-rep="" id="rep-constats" placeholder="D'abord…, ensuite…, enfin…"></textarea>
+</div>
+</article>
+<article class="bloc" id="probleme">
+<div class="marge"><span class="duree">3′</span></div>
+<div class="corps">
+<h2>Mon problème à résoudre</h2>
+<textarea aria-label="Mon problème à résoudre — Comment… ?" data-rep="" id="rep-probleme" placeholder="Comment… ?" style="min-height:100px"></textarea>
+</div>
+</article>
+<article class="bloc" id="idees">
+<div class="marge"><span class="duree">4′</span></div>
+<div class="corps">
+<h2>Mes idées pour le résoudre</h2>
+<p class="consigne">Note toutes les pistes du groupe, même celles dont tu n'es pas sûr.</p>
+<textarea aria-label="Note toutes les pistes du groupe, même celles dont tu n'es pas sûr." data-rep="" id="rep-idees" placeholder="Peut-être que…"></textarea>
+</div>
+</article>
+<article class="bloc" id="boite">
+<div class="marge"><span class="duree">10′</span></div>
+<div class="corps">
+<h2>Ma boîte à outils</h2>
+<p class="amorce">Voici tout ce que tu as étudié depuis le début de l'année. Certaines de ces solutions sont indispensables ici, d'autres peuvent servir, d'autres n'ont rien à y faire. À toi de trier, et de dire pourquoi.</p>
+<div class="cartes" data-tab="outils" id="taboutils">
+<div class="ligne" data-cle="Un modèle d'images entraîné (Teachable Machine)">
+<span class="cle">Modèle d'images</span>
+<select aria-label="Utilité du modèle d'images" id="o1a"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
+<input aria-label="Justification, modèle d'images" id="o1b" placeholder="Pourquoi ?"/>
+</div>
+<div class="ligne" data-cle="Le tirage d'un nombre aléatoire">
+<span class="cle">Nombre aléatoire</span>
+<select aria-label="Utilité du nombre aléatoire" id="o2a"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
+<input aria-label="Justification, nombre aléatoire" id="o2b" placeholder="Pourquoi ?"/>
+</div>
+<div class="ligne" data-cle="La structure si / sinon si / sinon">
+<span class="cle">Si / sinon si / sinon</span>
+<select aria-label="Utilité de la sélection" id="o3a"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
+<input aria-label="Justification, sélection" id="o3b" placeholder="Pourquoi ?"/>
+</div>
+<div class="ligne" data-cle="Une variable">
+<span class="cle">Une variable</span>
+<select aria-label="Utilité de la variable" id="o4a"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
+<input aria-label="Justification, variable" id="o4b" placeholder="Pourquoi ?"/>
+</div>
+<div class="ligne" data-cle="L'écran à 25 LED de la carte">
+<span class="cle">Écran à 25 LED</span>
+<select aria-label="Utilité de l'écran" id="o5a"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
+<input aria-label="Justification, écran" id="o5b" placeholder="Pourquoi ?"/>
+</div>
+<div class="ligne" data-cle="L'accéléromètre (le geste de secouer)">
+<span class="cle">Accéléromètre</span>
+<select aria-label="Utilité de l'accéléromètre" id="o6a"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
+<input aria-label="Justification, accéléromètre" id="o6b" placeholder="Pourquoi ?"/>
+</div>
+<div class="ligne" data-cle="La radio et le numéro de groupe">
+<span class="cle">Radio et groupe</span>
+<select aria-label="Utilité de la radio" id="o7a"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
+<input aria-label="Justification, radio" id="o7b" placeholder="Pourquoi ?"/>
+</div>
+<div class="ligne" data-cle="Une table de routage">
+<span class="cle">Table de routage</span>
+<select aria-label="Utilité de la table de routage" id="o8a"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
+<input aria-label="Justification, table de routage" id="o8b" placeholder="Pourquoi ?"/>
+</div>
+<div class="ligne" data-cle="La webcam">
+<span class="cle">La webcam</span>
+<select aria-label="Utilité de la webcam" id="o9a"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
+<input aria-label="Justification, webcam" id="o9b" placeholder="Pourquoi ?"/>
+</div>
+<div class="ligne" data-cle="Le débit de la connexion">
+<span class="cle">Le débit</span>
+<select aria-label="Utilité du débit" id="o10a"><option value="">Choisir…</option><option>Indispensable</option><option>Peut servir</option><option>Inutile ici</option></select>
+<input aria-label="Justification, débit" id="o10b" placeholder="Pourquoi ?"/>
+</div>
+</div>
+<h3>N1 — Qui joue au hasard ?</h3>
+<div class="qcm" data-qcm="n1" data-titre="N1 — Le hasard dans cette partie">
+<p class="enonce">Dans ce jeu, qui a besoin d'un tirage au hasard ?</p>
+<div class="choix">
+<label><input id="n1-a" name="n1" type="radio" value="a"/><span class="lt">a</span><span>Le joueur humain, pour choisir son signe</span></label>
+<label><input id="n1-b" name="n1" type="radio" value="b"/><span class="lt">b</span><span>La machine, pour choisir son propre signe</span></label>
+<label><input id="n1-c" name="n1" type="radio" value="c"/><span class="lt">c</span><span>Les deux, chacun de son côté</span></label>
+<label><input id="n1-d" name="n1" type="radio" value="d"/><span class="lt">d</span><span>Personne : l'IA décide de tout</span></label>
+</div>
+</div>
+</div>
+</article>
+<article class="bloc" id="algo">
+<div class="marge"><span class="duree">10′</span></div>
+<div class="corps">
+<h2>J'écris l'algorithme en français</h2>
+<p class="consigne">Décris, phrase par phrase et dans l'ordre, ce que le système doit faire. N'oublie ni le cas de l'égalité, ni le moment où la machine tire son signe. Cette fois, aucun exemple n'est donné.</p>
+<textarea aria-label="Décris, phrase par phrase et dans l'ordre, ce que le système doit faire. N'oublie ni le cas de l'égalité, ni l" data-rep="" id="rep-algo" placeholder="Début
+…" style="min-height:240px"></textarea>
+</div>
+</article>
+<article class="bloc" id="logigramme">
+<div class="marge"><span class="duree">12′</span></div>
+<div class="corps">
+<h2>Je dessine le logigramme</h2>
+<p class="consigne">Traduis ton algorithme avec les symboles normalisés. Choisis la forme de chaque étape, puis écris ce qu'elle contient. Laisse vides les lignes inutiles.</p>
+<div class="legende">
+<div><svg aria-hidden="true" viewbox="0 0 90 40"><rect fill="none" height="28" rx="14" stroke="#0E6E6B" stroke-width="2" width="84" x="3" y="6"></rect></svg><span>Début ou fin</span></div>
+<div><svg aria-hidden="true" viewbox="0 0 90 40"><path d="M14 6 H87 L76 34 H3 Z" fill="none" stroke="#0E6E6B" stroke-width="2"></path></svg><span>Entrée ou sortie</span></div>
+<div><svg aria-hidden="true" viewbox="0 0 90 40"><rect fill="none" height="28" stroke="#0E6E6B" stroke-width="2" width="84" x="3" y="6"></rect></svg><span>Traitement</span></div>
+<div><svg aria-hidden="true" viewbox="0 0 90 40"><path d="M45 4 L87 20 L45 36 L3 20 Z" fill="none" stroke="#0E6E6B" stroke-width="2"></path></svg><span>Test</span></div>
+</div>
+<div class="cartes" id="logi">
+<div class="ligne"><select aria-label="Forme de l'étape 1" id="lo-1t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 1" id="lo-1c" placeholder="Contenu de l'étape 1"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 2" id="lo-2t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 2" id="lo-2c" placeholder="Contenu de l'étape 2"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 3" id="lo-3t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 3" id="lo-3c" placeholder="Contenu de l'étape 3"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 4" id="lo-4t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 4" id="lo-4c" placeholder="Contenu de l'étape 4"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 5" id="lo-5t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 5" id="lo-5c" placeholder="Contenu de l'étape 5"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 6" id="lo-6t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 6" id="lo-6c" placeholder="Contenu de l'étape 6"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 7" id="lo-7t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 7" id="lo-7c" placeholder="Contenu de l'étape 7"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 8" id="lo-8t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 8" id="lo-8c" placeholder="Contenu de l'étape 8"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 9" id="lo-9t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 9" id="lo-9c" placeholder="Contenu de l'étape 9"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 10" id="lo-10t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 10" id="lo-10c" placeholder="Contenu de l'étape 10"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 11" id="lo-11t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 11" id="lo-11c" placeholder="Contenu de l'étape 11"/></div>
+<div class="ligne"><select aria-label="Forme de l'étape 12" id="lo-12t"><option value="">Forme…</option><option>Début ou fin</option><option>Entrée ou sortie</option><option>Traitement</option><option>Test</option></select><input aria-label="Contenu de l'étape 12" id="lo-12c" placeholder="Contenu de l'étape 12"/></div>
+</div>
+<p class="consigne" style="margin-top:10px">Le PDF dessinera ton logigramme avec les vraies formes, reliées par des flèches.</p>
+</div>
+</article>
+<article class="bloc" id="base">
+<div class="marge"><span class="duree">6′</span></div>
+<div class="corps">
+<h2>Je prépare ma base d'images</h2>
+<p class="consigne">La séance prochaine, tu entraîneras le modèle. Décide dès maintenant de ce que tu vas photographier.</p>
+<div class="cartes" data-tab="base" id="tabbase">
+<div class="ligne" data-cle="Nombre de classes">
+<span class="cle">Combien de classes</span>
+<input aria-label="Nombre de classes" id="b1" placeholder="et pourquoi ce nombre"/>
+</div>
+<div class="ligne" data-cle="Noms exacts des classes">
+<span class="cle">Noms des classes</span>
+<input aria-label="Noms des classes" id="b2" placeholder="en majuscules, sans accent"/>
+</div>
+<div class="ligne" data-cle="Images par classe">
+<span class="cle">Images par classe</span>
+<input aria-label="Nombre d'images par classe" id="b3" placeholder="combien environ"/>
+</div>
+<div class="ligne" data-cle="Conditions de prise de vue">
+<span class="cle">Conditions de prise</span>
+<input aria-label="Conditions de prise de vue" id="b4" placeholder="fond, lumière, distance, angles…"/>
+</div>
+</div>
+<h3>N2 — Trois signes au lieu de deux</h3>
+<p class="consigne">La séance précédente, le modèle distinguait une main ouverte d'une main fermée. Ici, il devra distinguer trois signes, dont deux qui se ressemblent beaucoup selon l'angle de la main. Lesquels, et que comptes-tu faire pour limiter les confusions ?</p>
+<textarea aria-label="La séance précédente, le modèle distinguait une main ouverte d'une main fermée. Ici, il devra distinguer trois" data-rep="" id="n2"></textarea>
+</div>
+</article>
+<article class="bloc" id="reste">
+<div class="marge"><span class="duree">3′</span></div>
+<div class="corps">
+<h2>Ce que je n'ai pas encore résolu</h2>
+<p class="consigne">Sois honnête : ce que tu notes ici sera repris au début de la séance suivante.</p>
+<textarea aria-label="Sois honnête : ce que tu notes ici sera repris au début de la séance suivante." data-rep="" id="rep-reste" placeholder="Je ne sais pas encore comment…"></textarea>
+<details class="ref" style="margin-top:22px">
+<summary>Coup de pouce — à n'ouvrir qu'en cas de blocage réel</summary>
+<div class="dedans">
+<p><strong>Indice 1.</strong> Le système a besoin de deux signes à chaque partie : celui que tu montres, et celui de la machine. Ils n'arrivent pas par le même chemin. D'où vient chacun ?</p>
+<p style="margin-top:12px"><strong>Indice 2.</strong> Pour comparer deux valeurs, il faut d'abord les ranger quelque part. Combien de variables te faut-il, et que contient chacune ?</p>
+<p style="margin-top:12px"><strong>Indice 3.</strong> Trois signes contre trois signes, cela fait neuf combinaisons. Trois donnent une égalité. Cherche la règle qui décide des six autres sans écrire six tests séparés.</p>
+</div>
+</details>
+</div>
+</article>
+<section class="corrbloc" data-addon="1" id="correction">
+<h2>Correction expliquée et bilan de l’activité</h2>
+<p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+<div class="saisie">
+<input aria-label="Mot de passe de la correction" autocomplete="off" id="corr-mdp" placeholder="Mot de passe" spellcheck="false" type="password"/>
+<button id="corr-btn" type="button">Afficher</button>
+</div>
+<p class="refus" hidden="" id="corr-refus">Mot de passe incorrect.</p>
+<div class="corr" hidden="" id="corr-contenu"></div>
+</section>
+<div class="alerte" hidden="" id="alerte"></div>
+</main>
+<nav aria-label="Navigation dans la Séquence 3" class="pager"><a href="seq3-act2-p3.html">← Activité 2 · Partie 3 — Où mon IA se trompe-t-elle ?</a><a href="seq3-act3-p2.html">Activité 3 · Partie 2 — Je réalise et je teste →</a></nav>
+<div class="barre">
+<button class="lien" id="effacer" type="button">Effacer mes réponses</button>
+<button class="btn" id="pdf" type="button">Générer le PDF</button>
+<p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+</div>
 <script>
 (function(){
 "use strict";

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Séquence 1 · Activité 2, partie 2 : préparer l'exposition</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
@@ -223,8 +224,7 @@ textarea::placeholder{color:#9FB0B3}
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
-<link rel="stylesheet" href="assets/site-addons.css">
-
+<link href="assets/site-addons.css" rel="stylesheet"/>
 <!-- Navigation séquentielle harmonisée -->
 <style id="sequence-pager-style">
 .pager{
@@ -266,393 +266,360 @@ textarea::placeholder{color:#9FB0B3}
 }
 @media print{.pager{display:none!important}}
 </style>
-
 </head>
 <body>
-
-<nav class="navsite" aria-label="Navigation du site">
-  <div class="dedans">
-    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
-    <label class="saut">
-      <span>Aller à</span>
-      <select id="navfiches" aria-label="Aller à une autre activité">
-        <optgroup label="Séquence 1">
-          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
-          <option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
-          <option value="seq1-act2-p2.html" selected>Activité 2 · partie 2 — Préparer l'exposition</option>
-          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
-        </optgroup>
-        <optgroup label="Séquence 2">
-          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
-          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage & débit</option>
-          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
-          <option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
-        </optgroup>
-        <optgroup label="Séquence 3">
-          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
-          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
-          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
-          <option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
-          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
-          <option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
-          <option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
-        </optgroup>
-        <optgroup label="Séquence 4">
-          <option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
-          <option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
-          <option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
-          <option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
-          <option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
-          <option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
-        </optgroup>
-        <optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
-        <optgroup label="Outils">
-          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
-          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
-          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
-        </optgroup>
-      <optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges & SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option></optgroup></select>
-    </label>
-  </div>
+<nav aria-label="Navigation du site" class="navsite">
+<div class="dedans">
+<a class="accueil" href="index.html">← Accueil</a>
+<label class="saut">
+<span>Aller à</span>
+<select aria-label="Aller à une autre activité" id="navfiches">
+<optgroup label="Séquence 1">
+<option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+<option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
+<option selected="" value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
+<option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+</optgroup>
+<optgroup label="Séquence 2">
+<option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels &amp; réseau</option>
+<option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage &amp; débit</option>
+<option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
+<option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
+</optgroup>
+<optgroup label="Séquence 3">
+<option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+<option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+<option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+<option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+<option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+<option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+<option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
+</optgroup>
+<optgroup label="Séquence 4">
+<option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
+<option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
+<option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
+<option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
+<option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
+<option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
+</optgroup>
+<optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
+<optgroup label="Outils">
+<option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+<option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+<option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+</optgroup>
+<optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges &amp; SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option><option value="osi-seq3-act1.html">OSI S3 · Séance 1 — Algorithme et logigramme</option><option value="osi-seq3-act2.html">OSI S3 · Séance 2 — Fonctions et solutions techniques</option><option value="osi-seq3-act3.html">OSI S3 · Séance 3 — Revue d’architecture</option><option value="osi-seq3-act4.html">OSI S3 · Séance 4 — Chaînes d’information et d’énergie</option><option value="osi-seq3-act5.html">OSI S3 · Séance 5 — Programmer, tester, corriger</option></optgroup></select>
+</label>
+</div>
 </nav>
 <script>
 document.getElementById("navfiches").addEventListener("change", function(){
   if(this.value) location.href = this.value;
 });
 </script>
-
-
 <main class="page">
-
-  <header class="entete">
-    <div class="cycle">
-      <span class="lab">Cycle 4</span>
-      <span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
-    </div>
-    <div class="marque">
-      <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
-      <p class="fil">Technologie · Séquence 1 · Activité 2</p>
-    </div>
-    <h1 class="titre">Du téléphone au smartphone — partie 2 : préparer l'exposition</h1>
-    <p class="sous">T1 — L'évolution des OST · 55 min</p>
-    <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
-      <a href="#niveaux34"><b>40′</b>Niveaux 3-4</a>
-      <a href="#synthese"><b>5′</b>Synthèse</a>
-      <a href="#ressources"><b>10′</b>Ressources</a>
-    </nav>
-  </header>
-
-  <section class="identite" aria-label="Mon identité">
-    <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="family-name"></div>
-    <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
-    <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
-    <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
-    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"></div>
-    <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
-  </section>
-
-  <details class="ref">
-    <summary>Ce que je travaille dans cette activité</summary>
-    <div class="dedans">
-      <dl>
-        <dt>Thème</dt><dd>OST — Les objets et systèmes techniques : leurs usages et leurs interactions à découvrir et à analyser</dd>
-        <dt>Attendu</dt><dd>OST1 — Décrire les liens entre usages et évolutions technologiques des objets et des systèmes techniques</dd>
-        <dt>OST11</dt><dd>Identifier les innovations de rupture attachées à l'évolution d'un OST</dd>
-        <dt>OST12</dt><dd>Mettre en relation une découverte scientifique avec ses développements technologiques et leurs effets sur la société</dd>
-        <dt>OST13</dt><dd>Argumentaire court : incidence d'un OST sur la société</dd>
-        <dt>OST1a</dt><dd>Les éléments qui participent à l'évolution des besoins (invention, innovation, développement durable)</dd>
-        <dt>OST1c</dt><dd>La famille et la lignée d'OST</dd>
-        <dt>OST1d</dt><dd>Les contraintes sociétales</dd>
-      </dl>
-      <ul>
-        <li>N1 — Je sais reconnaître une lignée d'OST et identifier les principales ruptures technologiques</li>
-        <li>N2 — et je sais mettre en relation une découverte scientifique avec l'évolution d'un OST</li>
-        <li>N3 — et je sais expliquer l'incidence d'un OST sur la société</li>
-        <li>N4 — et je sais analyser les contraintes sociétales qui ont influencé l'évolution des OST</li>
-      </ul>
-    </div>
-  </details>
-
-  
-    
-  
-  
-  
-  
-  <article class="bloc" id="niveaux34">
-    <div class="marge"><span class="duree">40′</span></div>
-    <div class="corps">
-      <h2>Activités — niveaux 3 et 4</h2>
-      <p class="amorce">Tu maîtrises maintenant les notions essentielles. Tu vas les mobiliser pour analyser cette évolution, réaliser une frise chronologique et imaginer un smartphone répondant aux enjeux de la société de demain.</p>
-
-      <h3>N3 — Frise chronologique</h3>
-      <p class="consigne">Prépare ici le contenu des cinq panneaux de l'exposition, puis réalise la frise sur Canva ou un autre outil.</p>
-      <div class="cartes" id="frise">
-        <div class="cartefiche" data-objet="Télégraphe">
-          <p class="chapeau">Télégraphe</p>
-          <div class="grille deuxtiers">
-            <div class="mini"><label for="fr1-date">Date d'apparition</label><input id="fr1-date" data-frise="date"></div>
-            <div class="grille">
-              <div class="mini"><label for="fr1-inno">Innovation majeure</label>
-                <select id="fr1-inno" data-frise="innovation">
-                  <option value="">Choisir…</option>
-                  <option>balayage et transmission de l’image d’un document</option>
-                  <option>transmission électrique</option>
-                  <option>miniaturisation et ondes radio</option>
-                  <option>transmission vocale analogique</option>
-                  <option>écran tactile et applications</option>
-                </select>
-              </div>
-              <div class="mini"><label for="fr1-bes">Besoin sociétal</label>
-                <select id="fr1-bes" data-frise="besoin">
-                  <option value="">Choisir…</option>
-                  <option>accéder à internet et aux services numériques</option>
-                  <option>transmettre des documents rapidement</option>
-                  <option>discuter en temps réel sans se déplacer</option>
-                  <option>communiquer en se déplaçant</option>
-                  <option>communiquer rapidement sur de longues distances</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cartefiche" data-objet="Téléphone fixe">
-          <p class="chapeau">Téléphone fixe</p>
-          <div class="grille deuxtiers">
-            <div class="mini"><label for="fr2-date">Date d'apparition</label><input id="fr2-date" data-frise="date"></div>
-            <div class="grille">
-              <div class="mini"><label for="fr2-inno">Innovation majeure</label>
-                <select id="fr2-inno" data-frise="innovation">
-                  <option value="">Choisir…</option>
-                  <option>balayage et transmission de l’image d’un document</option>
-                  <option>transmission électrique</option>
-                  <option>miniaturisation et ondes radio</option>
-                  <option>transmission vocale analogique</option>
-                  <option>écran tactile et applications</option>
-                </select>
-              </div>
-              <div class="mini"><label for="fr2-bes">Besoin sociétal</label>
-                <select id="fr2-bes" data-frise="besoin">
-                  <option value="">Choisir…</option>
-                  <option>accéder à internet et aux services numériques</option>
-                  <option>transmettre des documents rapidement</option>
-                  <option>discuter en temps réel sans se déplacer</option>
-                  <option>communiquer en se déplaçant</option>
-                  <option>communiquer rapidement sur de longues distances</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cartefiche" data-objet="Fax">
-          <p class="chapeau">Fax</p>
-          <div class="grille deuxtiers">
-            <div class="mini"><label for="fr3-date">Date d'apparition</label><input id="fr3-date" data-frise="date"></div>
-            <div class="grille">
-              <div class="mini"><label for="fr3-inno">Innovation majeure</label>
-                <select id="fr3-inno" data-frise="innovation">
-                  <option value="">Choisir…</option>
-                  <option>balayage et transmission de l’image d’un document</option>
-                  <option>transmission électrique</option>
-                  <option>miniaturisation et ondes radio</option>
-                  <option>transmission vocale analogique</option>
-                  <option>écran tactile et applications</option>
-                </select>
-              </div>
-              <div class="mini"><label for="fr3-bes">Besoin sociétal</label>
-                <select id="fr3-bes" data-frise="besoin">
-                  <option value="">Choisir…</option>
-                  <option>accéder à internet et aux services numériques</option>
-                  <option>transmettre des documents rapidement</option>
-                  <option>discuter en temps réel sans se déplacer</option>
-                  <option>communiquer en se déplaçant</option>
-                  <option>communiquer rapidement sur de longues distances</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cartefiche" data-objet="Téléphone mobile">
-          <p class="chapeau">Téléphone mobile</p>
-          <div class="grille deuxtiers">
-            <div class="mini"><label for="fr4-date">Date d'apparition</label><input id="fr4-date" data-frise="date"></div>
-            <div class="grille">
-              <div class="mini"><label for="fr4-inno">Innovation majeure</label>
-                <select id="fr4-inno" data-frise="innovation">
-                  <option value="">Choisir…</option>
-                  <option>balayage et transmission de l’image d’un document</option>
-                  <option>transmission électrique</option>
-                  <option>miniaturisation et ondes radio</option>
-                  <option>transmission vocale analogique</option>
-                  <option>écran tactile et applications</option>
-                </select>
-              </div>
-              <div class="mini"><label for="fr4-bes">Besoin sociétal</label>
-                <select id="fr4-bes" data-frise="besoin">
-                  <option value="">Choisir…</option>
-                  <option>accéder à internet et aux services numériques</option>
-                  <option>transmettre des documents rapidement</option>
-                  <option>discuter en temps réel sans se déplacer</option>
-                  <option>communiquer en se déplaçant</option>
-                  <option>communiquer rapidement sur de longues distances</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cartefiche" data-objet="Smartphone">
-          <p class="chapeau">Smartphone</p>
-          <div class="grille deuxtiers">
-            <div class="mini"><label for="fr5-date">Date d'apparition</label><input id="fr5-date" data-frise="date"></div>
-            <div class="grille">
-              <div class="mini"><label for="fr5-inno">Innovation majeure</label>
-                <select id="fr5-inno" data-frise="innovation">
-                  <option value="">Choisir…</option>
-                  <option>balayage et transmission de l’image d’un document</option>
-                  <option>transmission électrique</option>
-                  <option>miniaturisation et ondes radio</option>
-                  <option>transmission vocale analogique</option>
-                  <option>écran tactile et applications</option>
-                </select>
-              </div>
-              <div class="mini"><label for="fr5-bes">Besoin sociétal</label>
-                <select id="fr5-bes" data-frise="besoin">
-                  <option value="">Choisir…</option>
-                  <option>accéder à internet et aux services numériques</option>
-                  <option>transmettre des documents rapidement</option>
-                  <option>discuter en temps réel sans se déplacer</option>
-                  <option>communiquer en se déplaçant</option>
-                  <option>communiquer rapidement sur de longues distances</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="mini" style="margin-top:14px">
-        <label for="frise-lien">Lien vers ma frise (Canva ou autre) — facultatif</label>
-        <input id="frise-lien" data-lien placeholder="https://…">
-      </div>
-
-      <h3>N4 — Smartphone du futur (2030)</h3>
-      <p class="consigne">Conçois un smartphone idéal qui répond à trois enjeux sociétaux tout en intégrant des innovations.</p>
-      <div class="cartes" id="futur">
-        <div class="cartefiche" data-enjeu="Éducation">
-          <p class="chapeau">Éducation</p>
-          <div class="grille trois">
-            <div class="mini"><label for="n4a-f">Fonctionnalité innovante</label><textarea id="n4a-f" data-n4="fonctionnalite" placeholder="Ex. : traduction instantanée et cours interactifs"></textarea></div>
-            <div class="mini"><label for="n4a-t">Technologie utilisée</label><textarea id="n4a-t" data-n4="technologie" placeholder="Ex. : IA générative"></textarea></div>
-            <div class="mini"><label for="n4a-b">Bénéfices pour la société</label><textarea id="n4a-b" data-n4="benefices" placeholder="Ex. : accès à l'éducation pour tous, réduction des inégalités"></textarea></div>
-          </div>
-        </div>
-        <div class="cartefiche" data-enjeu="Environnement">
-          <p class="chapeau">Environnement</p>
-          <div class="grille trois">
-            <div class="mini"><label for="n4b-f">Fonctionnalité innovante</label><textarea id="n4b-f" data-n4="fonctionnalite"></textarea></div>
-            <div class="mini"><label for="n4b-t">Technologie utilisée</label><textarea id="n4b-t" data-n4="technologie"></textarea></div>
-            <div class="mini"><label for="n4b-b">Bénéfices pour la société</label><textarea id="n4b-b" data-n4="benefices"></textarea></div>
-          </div>
-        </div>
-        <div class="cartefiche" data-enjeu="Santé">
-          <p class="chapeau">Santé</p>
-          <div class="grille trois">
-            <div class="mini"><label for="n4c-f">Fonctionnalité innovante</label><textarea id="n4c-f" data-n4="fonctionnalite"></textarea></div>
-            <div class="mini"><label for="n4c-t">Technologie utilisée</label><textarea id="n4c-t" data-n4="technologie"></textarea></div>
-            <div class="mini"><label for="n4c-b">Bénéfices pour la société</label><textarea id="n4c-b" data-n4="benefices"></textarea></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <article class="bloc" id="synthese">
-    <div class="marge"><span class="duree">5′</span></div>
-    <div class="corps">
-      <h2>Ma synthèse</h2>
-      <p class="consigne">En quelques lignes : pourquoi les moyens de communication ont-ils autant changé ?</p>
-      <textarea id="rep-synthese" data-rep aria-label="En quelques lignes : pourquoi les moyens de communication ont-ils autant changé ?"></textarea>
-    </div>
-  </article>
-
-  <article class="bloc" id="ressources">
-    <div class="marge"><span class="duree">20′</span></div>
-    <div class="corps">
-      <h2>Fiches de connaissances et quiz</h2>
-      <div class="ressources">
-        <p class="appli">Les codes ci-dessous s'utilisent dans l'application élève : <a href="https://www.app.sti-ac-bordeaux.fr/" target="_blank" rel="noopener">app.sti-ac-bordeaux.fr</a></p>
-        <h3 style="margin-top:0">Fiches de connaissances <span style="color:var(--doux);font-weight:400;font-size:15px">(10′)</span></h3>
-        <ul>
-          <li><span class="code">FOST1a</span><a href="https://nuage01.apps.education.fr/public.php/dav/files/SW5baiZ2eJTqWfQ?accept=zip">Les éléments qui participent à l'évolution des besoins</a></li>
-          <li><span class="code">FOST1d</span><a href="https://nuage01.apps.education.fr/public.php/dav/files/yrkbGNrTRKceMJp?accept=zip">Les contraintes sociétales</a></li>
-          <li><span class="code">FOST1c</span><a href="https://nuage01.apps.education.fr/public.php/dav/files/o2qoHTQBzyHqgGf?accept=zip">La famille et la lignée d'OST</a></li>
-        </ul>
-        <h3>Quiz auto-correctifs <span style="color:var(--doux);font-weight:400;font-size:15px">(10′)</span></h3>
-        <ul>
-          <li><span class="code">QVOST1a</span><a href="https://podeduc.apps.education.fr/quiz/113251-ost1a-les-elements-qui-participent-a-levolution-des-besoins-invention-innovation-developpement-durable" target="_blank" rel="noopener">Quiz — Invention, innovation, développement durable</a></li>
-          <li><span class="code">QVOST1d</span><a href="https://podeduc.apps.education.fr/quiz/113246-ost1d-les-contraintes-societales" target="_blank" rel="noopener">Quiz — Les contraintes sociétales</a></li>
-          <li><span class="code">QVOST1c</span><a href="https://podeduc.apps.education.fr/quiz/113247-ost1c-la-famille-et-la-lignee-dost" target="_blank" rel="noopener">Quiz — La famille et la lignée d'OST</a></li>
-        </ul>
-      </div>
-    </div>
-  </article>
-
-  <article class="bloc" id="cps">
-    <div class="marge"><span class="duree">CPS</span></div>
-    <div class="corps">
-      <h2>Je développe mes compétences psychosociales</h2>
-      <div class="cps">
-        <p>Se fixer un objectif et le mener à son terme. Où est-ce que je me situe aujourd'hui ?</p>
-        <div class="niveaux">
-          <label><input type="radio" name="cps" id="cps-1" value="1"><span><b>N1</b> — Je peux dire ce que je veux réussir.</span></label>
-          <label><input type="radio" name="cps" id="cps-2" value="2"><span><b>N2</b> — Je peux décomposer un but en étapes.</span></label>
-          <label><input type="radio" name="cps" id="cps-3" value="3"><span><b>N3</b> — Je prépare un plan pour y arriver.</span></label>
-          <label><input type="radio" name="cps" id="cps-4" value="4"><span><b>N4</b> — Je vais jusqu'au bout de mes objectifs.</span></label>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <section class="corrbloc" id="correction" data-addon="1">
-    <h2>Correction expliquée et bilan de l’activité</h2>
-    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
-    <div class="saisie">
-      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction" autocomplete="off" spellcheck="false">
-      <button type="button" id="corr-btn">Afficher</button>
-    </div>
-    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
-    <div class="corr" id="corr-contenu" hidden></div>
-  </section>
-
-
-  <section class="evalbloc" id="evaluation">
-    <h2>Évaluation de compétence</h2>
-    <p class="intro">Ouverte en classe par le professeur. Saisis le mot de passe pour afficher le sujet.</p>
-    <div class="saisie">
-      <input type="password" id="eval-mdp" placeholder="Mot de passe" aria-label="Mot de passe de l'évaluation"
-             autocomplete="off" spellcheck="false">
-      <button type="button" id="eval-btn">Afficher l'évaluation</button>
-    </div>
-    <p class="refus" id="eval-refus" hidden>Mot de passe incorrect.</p>
-    <div id="eval-contenu" hidden></div>
-  </section>
-
-  <div id="alerte" class="alerte" hidden></div>
-
-</main>
-<nav class="pager" aria-label="Navigation dans la Séquence 1"><a href="seq1-act2-p1.html">← Activité 2 · Partie 1 — Comprendre l’évolution</a><a href="seq1-act3.html">Activité 3 — L’IA dans notre poche →</a></nav>
-
-
-<div class="barre">
-  <button class="lien" id="effacer" type="button">Effacer mes réponses</button>
-  <button class="btn" id="pdf" type="button">Générer le PDF</button>
-  <p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+<header class="entete">
+<div class="cycle">
+<span class="lab">Cycle 4</span>
+<span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
 </div>
-
+<div class="marque">
+<img alt="Lycée français de Vienne" onerror="this.remove()" src="img/logo-lfv.png"/>
+<p class="fil">Technologie · Séquence 1 · Activité 2</p>
+</div>
+<h1 class="titre">Du téléphone au smartphone — partie 2 : préparer l'exposition</h1>
+<p class="sous">T1 — L'évolution des OST · 55 min</p>
+<nav aria-label="Étapes de l'activité" class="chrono" id="chrono">
+<a href="#niveaux34"><b>40′</b>Niveaux 3-4</a>
+<a href="#synthese"><b>5′</b>Synthèse</a>
+<a href="#ressources"><b>10′</b>Ressources</a>
+</nav>
+</header>
+<section aria-label="Mon identité" class="identite">
+<div class="champ"><label for="nom">Nom</label><input autocomplete="family-name" id="nom"/></div>
+<div class="champ"><label for="prenom">Prénom</label><input autocomplete="given-name" id="prenom"/></div>
+<div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"/></div>
+<div class="champ"><label for="groupe">Groupe</label><input id="groupe"/></div>
+<div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"/></div>
+<div class="champ"><label for="date">Date</label><input id="date" type="date"/></div>
+</section>
+<details class="ref">
+<summary>Ce que je travaille dans cette activité</summary>
+<div class="dedans">
+<dl>
+<dt>Thème</dt><dd>OST — Les objets et systèmes techniques : leurs usages et leurs interactions à découvrir et à analyser</dd>
+<dt>Attendu</dt><dd>OST1 — Décrire les liens entre usages et évolutions technologiques des objets et des systèmes techniques</dd>
+<dt>OST11</dt><dd>Identifier les innovations de rupture attachées à l'évolution d'un OST</dd>
+<dt>OST12</dt><dd>Mettre en relation une découverte scientifique avec ses développements technologiques et leurs effets sur la société</dd>
+<dt>OST13</dt><dd>Argumentaire court : incidence d'un OST sur la société</dd>
+<dt>OST1a</dt><dd>Les éléments qui participent à l'évolution des besoins (invention, innovation, développement durable)</dd>
+<dt>OST1c</dt><dd>La famille et la lignée d'OST</dd>
+<dt>OST1d</dt><dd>Les contraintes sociétales</dd>
+</dl>
+<ul>
+<li>N1 — Je sais reconnaître une lignée d'OST et identifier les principales ruptures technologiques</li>
+<li>N2 — et je sais mettre en relation une découverte scientifique avec l'évolution d'un OST</li>
+<li>N3 — et je sais expliquer l'incidence d'un OST sur la société</li>
+<li>N4 — et je sais analyser les contraintes sociétales qui ont influencé l'évolution des OST</li>
+</ul>
+</div>
+</details>
+<article class="bloc" id="niveaux34">
+<div class="marge"><span class="duree">40′</span></div>
+<div class="corps">
+<h2>Activités — niveaux 3 et 4</h2>
+<p class="amorce">Tu maîtrises maintenant les notions essentielles. Tu vas les mobiliser pour analyser cette évolution, réaliser une frise chronologique et imaginer un smartphone répondant aux enjeux de la société de demain.</p>
+<h3>N3 — Frise chronologique</h3>
+<p class="consigne">Prépare ici le contenu des cinq panneaux de l'exposition, puis réalise la frise sur Canva ou un autre outil.</p>
+<div class="cartes" id="frise">
+<div class="cartefiche" data-objet="Télégraphe">
+<p class="chapeau">Télégraphe</p>
+<div class="grille deuxtiers">
+<div class="mini"><label for="fr1-date">Date d'apparition</label><input data-frise="date" id="fr1-date"/></div>
+<div class="grille">
+<div class="mini"><label for="fr1-inno">Innovation majeure</label>
+<select data-frise="innovation" id="fr1-inno">
+<option value="">Choisir…</option>
+<option>balayage et transmission de l’image d’un document</option>
+<option>transmission électrique</option>
+<option>miniaturisation et ondes radio</option>
+<option>transmission vocale analogique</option>
+<option>écran tactile et applications</option>
+</select>
+</div>
+<div class="mini"><label for="fr1-bes">Besoin sociétal</label>
+<select data-frise="besoin" id="fr1-bes">
+<option value="">Choisir…</option>
+<option>accéder à internet et aux services numériques</option>
+<option>transmettre des documents rapidement</option>
+<option>discuter en temps réel sans se déplacer</option>
+<option>communiquer en se déplaçant</option>
+<option>communiquer rapidement sur de longues distances</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<div class="cartefiche" data-objet="Téléphone fixe">
+<p class="chapeau">Téléphone fixe</p>
+<div class="grille deuxtiers">
+<div class="mini"><label for="fr2-date">Date d'apparition</label><input data-frise="date" id="fr2-date"/></div>
+<div class="grille">
+<div class="mini"><label for="fr2-inno">Innovation majeure</label>
+<select data-frise="innovation" id="fr2-inno">
+<option value="">Choisir…</option>
+<option>balayage et transmission de l’image d’un document</option>
+<option>transmission électrique</option>
+<option>miniaturisation et ondes radio</option>
+<option>transmission vocale analogique</option>
+<option>écran tactile et applications</option>
+</select>
+</div>
+<div class="mini"><label for="fr2-bes">Besoin sociétal</label>
+<select data-frise="besoin" id="fr2-bes">
+<option value="">Choisir…</option>
+<option>accéder à internet et aux services numériques</option>
+<option>transmettre des documents rapidement</option>
+<option>discuter en temps réel sans se déplacer</option>
+<option>communiquer en se déplaçant</option>
+<option>communiquer rapidement sur de longues distances</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<div class="cartefiche" data-objet="Fax">
+<p class="chapeau">Fax</p>
+<div class="grille deuxtiers">
+<div class="mini"><label for="fr3-date">Date d'apparition</label><input data-frise="date" id="fr3-date"/></div>
+<div class="grille">
+<div class="mini"><label for="fr3-inno">Innovation majeure</label>
+<select data-frise="innovation" id="fr3-inno">
+<option value="">Choisir…</option>
+<option>balayage et transmission de l’image d’un document</option>
+<option>transmission électrique</option>
+<option>miniaturisation et ondes radio</option>
+<option>transmission vocale analogique</option>
+<option>écran tactile et applications</option>
+</select>
+</div>
+<div class="mini"><label for="fr3-bes">Besoin sociétal</label>
+<select data-frise="besoin" id="fr3-bes">
+<option value="">Choisir…</option>
+<option>accéder à internet et aux services numériques</option>
+<option>transmettre des documents rapidement</option>
+<option>discuter en temps réel sans se déplacer</option>
+<option>communiquer en se déplaçant</option>
+<option>communiquer rapidement sur de longues distances</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<div class="cartefiche" data-objet="Téléphone mobile">
+<p class="chapeau">Téléphone mobile</p>
+<div class="grille deuxtiers">
+<div class="mini"><label for="fr4-date">Date d'apparition</label><input data-frise="date" id="fr4-date"/></div>
+<div class="grille">
+<div class="mini"><label for="fr4-inno">Innovation majeure</label>
+<select data-frise="innovation" id="fr4-inno">
+<option value="">Choisir…</option>
+<option>balayage et transmission de l’image d’un document</option>
+<option>transmission électrique</option>
+<option>miniaturisation et ondes radio</option>
+<option>transmission vocale analogique</option>
+<option>écran tactile et applications</option>
+</select>
+</div>
+<div class="mini"><label for="fr4-bes">Besoin sociétal</label>
+<select data-frise="besoin" id="fr4-bes">
+<option value="">Choisir…</option>
+<option>accéder à internet et aux services numériques</option>
+<option>transmettre des documents rapidement</option>
+<option>discuter en temps réel sans se déplacer</option>
+<option>communiquer en se déplaçant</option>
+<option>communiquer rapidement sur de longues distances</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<div class="cartefiche" data-objet="Smartphone">
+<p class="chapeau">Smartphone</p>
+<div class="grille deuxtiers">
+<div class="mini"><label for="fr5-date">Date d'apparition</label><input data-frise="date" id="fr5-date"/></div>
+<div class="grille">
+<div class="mini"><label for="fr5-inno">Innovation majeure</label>
+<select data-frise="innovation" id="fr5-inno">
+<option value="">Choisir…</option>
+<option>balayage et transmission de l’image d’un document</option>
+<option>transmission électrique</option>
+<option>miniaturisation et ondes radio</option>
+<option>transmission vocale analogique</option>
+<option>écran tactile et applications</option>
+</select>
+</div>
+<div class="mini"><label for="fr5-bes">Besoin sociétal</label>
+<select data-frise="besoin" id="fr5-bes">
+<option value="">Choisir…</option>
+<option>accéder à internet et aux services numériques</option>
+<option>transmettre des documents rapidement</option>
+<option>discuter en temps réel sans se déplacer</option>
+<option>communiquer en se déplaçant</option>
+<option>communiquer rapidement sur de longues distances</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mini" style="margin-top:14px">
+<label for="frise-lien">Lien vers ma frise (Canva ou autre) — facultatif</label>
+<input data-lien="" id="frise-lien" placeholder="https://…"/>
+</div>
+<h3>N4 — Smartphone du futur (2030)</h3>
+<p class="consigne">Conçois un smartphone idéal qui répond à trois enjeux sociétaux tout en intégrant des innovations.</p>
+<div class="cartes" id="futur">
+<div class="cartefiche" data-enjeu="Éducation">
+<p class="chapeau">Éducation</p>
+<div class="grille trois">
+<div class="mini"><label for="n4a-f">Fonctionnalité innovante</label><textarea data-n4="fonctionnalite" id="n4a-f" placeholder="Ex. : traduction instantanée et cours interactifs"></textarea></div>
+<div class="mini"><label for="n4a-t">Technologie utilisée</label><textarea data-n4="technologie" id="n4a-t" placeholder="Ex. : IA générative"></textarea></div>
+<div class="mini"><label for="n4a-b">Bénéfices pour la société</label><textarea data-n4="benefices" id="n4a-b" placeholder="Ex. : accès à l'éducation pour tous, réduction des inégalités"></textarea></div>
+</div>
+</div>
+<div class="cartefiche" data-enjeu="Environnement">
+<p class="chapeau">Environnement</p>
+<div class="grille trois">
+<div class="mini"><label for="n4b-f">Fonctionnalité innovante</label><textarea data-n4="fonctionnalite" id="n4b-f"></textarea></div>
+<div class="mini"><label for="n4b-t">Technologie utilisée</label><textarea data-n4="technologie" id="n4b-t"></textarea></div>
+<div class="mini"><label for="n4b-b">Bénéfices pour la société</label><textarea data-n4="benefices" id="n4b-b"></textarea></div>
+</div>
+</div>
+<div class="cartefiche" data-enjeu="Santé">
+<p class="chapeau">Santé</p>
+<div class="grille trois">
+<div class="mini"><label for="n4c-f">Fonctionnalité innovante</label><textarea data-n4="fonctionnalite" id="n4c-f"></textarea></div>
+<div class="mini"><label for="n4c-t">Technologie utilisée</label><textarea data-n4="technologie" id="n4c-t"></textarea></div>
+<div class="mini"><label for="n4c-b">Bénéfices pour la société</label><textarea data-n4="benefices" id="n4c-b"></textarea></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="bloc" id="synthese">
+<div class="marge"><span class="duree">5′</span></div>
+<div class="corps">
+<h2>Ma synthèse</h2>
+<p class="consigne">En quelques lignes : pourquoi les moyens de communication ont-ils autant changé ?</p>
+<textarea aria-label="En quelques lignes : pourquoi les moyens de communication ont-ils autant changé ?" data-rep="" id="rep-synthese"></textarea>
+</div>
+</article>
+<article class="bloc" id="ressources">
+<div class="marge"><span class="duree">20′</span></div>
+<div class="corps">
+<h2>Fiches de connaissances et quiz</h2>
+<div class="ressources">
+<p class="appli">Les codes ci-dessous s'utilisent dans l'application élève : <a href="https://www.app.sti-ac-bordeaux.fr/" rel="noopener" target="_blank">app.sti-ac-bordeaux.fr</a></p>
+<h3 style="margin-top:0">Fiches de connaissances <span style="color:var(--doux);font-weight:400;font-size:15px">(10′)</span></h3>
+<ul>
+<li><span class="code">FOST1a</span><a href="https://nuage01.apps.education.fr/public.php/dav/files/SW5baiZ2eJTqWfQ?accept=zip">Les éléments qui participent à l'évolution des besoins</a></li>
+<li><span class="code">FOST1d</span><a href="https://nuage01.apps.education.fr/public.php/dav/files/yrkbGNrTRKceMJp?accept=zip">Les contraintes sociétales</a></li>
+<li><span class="code">FOST1c</span><a href="https://nuage01.apps.education.fr/public.php/dav/files/o2qoHTQBzyHqgGf?accept=zip">La famille et la lignée d'OST</a></li>
+</ul>
+<h3>Quiz auto-correctifs <span style="color:var(--doux);font-weight:400;font-size:15px">(10′)</span></h3>
+<ul>
+<li><span class="code">QVOST1a</span><a href="https://podeduc.apps.education.fr/quiz/113251-ost1a-les-elements-qui-participent-a-levolution-des-besoins-invention-innovation-developpement-durable" rel="noopener" target="_blank">Quiz — Invention, innovation, développement durable</a></li>
+<li><span class="code">QVOST1d</span><a href="https://podeduc.apps.education.fr/quiz/113246-ost1d-les-contraintes-societales" rel="noopener" target="_blank">Quiz — Les contraintes sociétales</a></li>
+<li><span class="code">QVOST1c</span><a href="https://podeduc.apps.education.fr/quiz/113247-ost1c-la-famille-et-la-lignee-dost" rel="noopener" target="_blank">Quiz — La famille et la lignée d'OST</a></li>
+</ul>
+</div>
+</div>
+</article>
+<article class="bloc" id="cps">
+<div class="marge"><span class="duree">CPS</span></div>
+<div class="corps">
+<h2>Je développe mes compétences psychosociales</h2>
+<div class="cps">
+<p>Se fixer un objectif et le mener à son terme. Où est-ce que je me situe aujourd'hui ?</p>
+<div class="niveaux">
+<label><input id="cps-1" name="cps" type="radio" value="1"/><span><b>N1</b> — Je peux dire ce que je veux réussir.</span></label>
+<label><input id="cps-2" name="cps" type="radio" value="2"/><span><b>N2</b> — Je peux décomposer un but en étapes.</span></label>
+<label><input id="cps-3" name="cps" type="radio" value="3"/><span><b>N3</b> — Je prépare un plan pour y arriver.</span></label>
+<label><input id="cps-4" name="cps" type="radio" value="4"/><span><b>N4</b> — Je vais jusqu'au bout de mes objectifs.</span></label>
+</div>
+</div>
+</div>
+</article>
+<section class="corrbloc" data-addon="1" id="correction">
+<h2>Correction expliquée et bilan de l’activité</h2>
+<p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+<div class="saisie">
+<input aria-label="Mot de passe de la correction" autocomplete="off" id="corr-mdp" placeholder="Mot de passe" spellcheck="false" type="password"/>
+<button id="corr-btn" type="button">Afficher</button>
+</div>
+<p class="refus" hidden="" id="corr-refus">Mot de passe incorrect.</p>
+<div class="corr" hidden="" id="corr-contenu"></div>
+</section>
+<section class="evalbloc" id="evaluation">
+<h2>Évaluation de compétence</h2>
+<p class="intro">Ouverte en classe par le professeur. Saisis le mot de passe pour afficher le sujet.</p>
+<div class="saisie">
+<input aria-label="Mot de passe de l'évaluation" autocomplete="off" id="eval-mdp" placeholder="Mot de passe" spellcheck="false" type="password"/>
+<button id="eval-btn" type="button">Afficher l'évaluation</button>
+</div>
+<p class="refus" hidden="" id="eval-refus">Mot de passe incorrect.</p>
+<div hidden="" id="eval-contenu"></div>
+</section>
+<div class="alerte" hidden="" id="alerte"></div>
+</main>
+<nav aria-label="Navigation dans la Séquence 1" class="pager"><a href="seq1-act2-p1.html">← Activité 2 · Partie 1 — Comprendre l’évolution</a><a href="seq1-act3.html">Activité 3 — L’IA dans notre poche →</a></nav>
+<div class="barre">
+<button class="lien" id="effacer" type="button">Effacer mes réponses</button>
+<button class="btn" id="pdf" type="button">Générer le PDF</button>
+<p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+</div>
 <script>
 (function(){
 "use strict";
