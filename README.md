@@ -230,3 +230,9 @@ Envoie-moi la trame, je te renvoie un fichier complet (`seq1-act2.html`, etc.) �
 - osi-seq1-act2.html : innovation, famille/lignée et antériorité
 - osi-seq1-act3.html : démarche de projet, rôles et revues
 - osi-seq1-act4.html : rétroplanning et Gantt interactif
+
+
+## Olympiades SI — Séquence 2 : Cahier des charges & SysML
+- osi-seq2-act1.html : contexte et cas d’utilisation
+- osi-seq2-act2.html : exigences et CdCF
+- osi-seq2-act3.html : blocs internes et architecture
