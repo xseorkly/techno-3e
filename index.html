@@ -226,6 +226,17 @@ footer p{margin:0}
   footer p+ p{margin-top:7px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chev{transition:none}}
+
+/* Séquence 5 · Olympiades des Sciences de l’Ingénieur */
+.subseq-head{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;margin:14px 0 8px;padding:12px 14px;border-radius:14px;background:#f3f8f7;border:1px solid #cfe1df}
+.subseq-head+.session{margin-top:0}
+.subseq-num{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:42px;border-radius:12px;background:var(--petrole,#0E6E6B);color:#fff;font-family:Archivo,sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.04em}
+.subseq-head strong{display:block;font-family:Archivo,sans-serif;color:var(--encre,#14262B);font-size:1rem}
+.subseq-head small{display:block;color:var(--doux,#5A6C71);margin-top:2px;line-height:1.35}
+.subseq-head.innovation{background:#fff4f8;border-color:#f0c6d6}
+.subseq-head.innovation .subseq-num{background:var(--magenta,#C2185B)}
+@media(max-width:650px){.subseq-head{grid-template-columns:38px 1fr;padding:10px}.subseq-num{min-width:38px;height:38px}}
+
 </style>
 </head>
 <body>
@@ -361,25 +372,37 @@ footer p{margin:0}
       </details>
 
       <details class="sequence-card">
-        <summary>
-          <span class="seq-num">05</span>
-          <span class="seq-title">
-            <span class="seq-kicker">Conception & projet</span>
-            <h3>Mission design</h3>
-            <p>Réinventer le porte-courrier : du besoin au prototype.</p>
-          </span>
-          <span class="seq-side"><span class="count">7 activités</span><span class="chev" aria-hidden="true">⌄</span></span>
-        </summary>
-        <div class="sessions">
-          <a class="session" href="seq5-act1.html"><span class="session-num">01</span><span><strong>Un objet encore utile ?</strong><small>Analyser le besoin et l’évolution des usages · 55 min</small></span><span class="session-go">→</span></a>
-          <a class="session" href="seq5-act2.html"><span class="session-num">02</span><span><strong>Avec quoi interagit-il ?</strong><small>Contexte et cas d’utilisation · 55 min</small></span><span class="session-go">→</span></a>
-          <a class="session" href="seq5-act3.html"><span class="session-num">03</span><span><strong>Pourquoi l’existant pose-t-il problème ?</strong><small>Analyse des causes avec Ishikawa / 6M · 55 min</small></span><span class="session-go">→</span></a>
-          <a class="session" href="seq5-act4.html"><span class="session-num">04</span><span><strong>Construire le cahier des charges</strong><small>Exigences, critères et niveaux mesurables · 55 min</small></span><span class="session-go">→</span></a>
-          <a class="session" href="seq5-act5.html"><span class="session-num">05</span><span><strong>Imaginer et choisir une solution</strong><small>Trois idées, croquis et matrice de décision · 55 min</small></span><span class="session-go">→</span></a>
-          <a class="session" href="seq5-act6.html"><span class="session-num">06</span><span><strong>Du croquis au modèle 3D</strong><small>Croquis coté et modélisation Tinkercad · 55 min</small></span><span class="session-go">→</span></a>
-          <a class="session" href="seq5-act7.html"><span class="session-num">07</span><span><strong>Tester, améliorer et convaincre</strong><small>Tests, amélioration et pitch · 55 min</small></span><span class="session-go">→</span></a>
-        </div>
-      </details>
+  <summary>
+    <span class="seq-num">05</span>
+    <span class="seq-title">
+      <span class="seq-kicker">Olympiades des Sciences de l’Ingénieur</span>
+      <h3>Projet OSI</h3>
+      <p>Deux séquences pour analyser, inventer, concevoir et défendre une innovation.</p>
+    </span>
+    <span class="seq-side">
+      <span class="count">2 séq. · 7 séances</span>
+      <span class="chev" aria-hidden="true">⌄</span>
+    </span>
+  </summary>
+  <div class="sessions">
+    <div class="subseq-head">
+      <span class="subseq-num">S1</span>
+      <span><strong>Porte-courrier augmenté</strong><small>Analyser l’objet, ses usages, ses interactions et construire son cahier des charges.</small></span>
+    </div>
+    <a class="session" href="seq5-act1.html"><span class="session-num">01</span><span><strong>Un objet encore utile ?</strong><small>Analyser le besoin et l’évolution des usages · 55 min</small></span><span class="session-go">→</span></a>
+    <a class="session" href="seq5-act2.html"><span class="session-num">02</span><span><strong>Avec quoi interagit-il ?</strong><small>Contexte et cas d’utilisation · 55 min</small></span><span class="session-go">→</span></a>
+    <a class="session" href="seq5-act3.html"><span class="session-num">03</span><span><strong>Pourquoi l’existant pose-t-il problème ?</strong><small>Analyse des causes avec Ishikawa / 6M · 55 min</small></span><span class="session-go">→</span></a>
+    <a class="session" href="seq5-act4.html"><span class="session-num">04</span><span><strong>Construire le cahier des charges</strong><small>Exigences, critères et niveaux mesurables · 55 min</small></span><span class="session-go">→</span></a>
+
+    <div class="subseq-head innovation">
+      <span class="subseq-num">S2</span>
+      <span><strong>J’invente, j’innove</strong><small>Imaginer plusieurs solutions, choisir, modéliser, tester puis convaincre.</small></span>
+    </div>
+    <a class="session" href="seq5-act5.html"><span class="session-num">05</span><span><strong>Imaginer et choisir une solution</strong><small>Trois idées, croquis et matrice de décision · 55 min</small></span><span class="session-go">→</span></a>
+    <a class="session" href="seq5-act6.html"><span class="session-num">06</span><span><strong>Du croquis au modèle 3D</strong><small>Croquis coté et modélisation Tinkercad · 55 min</small></span><span class="session-go">→</span></a>
+    <a class="session" href="seq5-act7.html"><span class="session-num">07</span><span><strong>Tester, améliorer et convaincre</strong><small>Tests, amélioration et pitch · 55 min</small></span><span class="session-go">→</span></a>
+  </div>
+</details>
 
     </div>
   </section>

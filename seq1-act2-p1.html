@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Séquence 1 · Activité 2, partie 1 : comprendre l'évolution</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
@@ -224,7 +223,8 @@ textarea::placeholder{color:#9FB0B3}
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
-<link href="assets/site-addons.css" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/site-addons.css">
+
 <!-- Navigation séquentielle harmonisée -->
 <style id="sequence-pager-style">
 .pager{
@@ -266,324 +266,359 @@ textarea::placeholder{color:#9FB0B3}
 }
 @media print{.pager{display:none!important}}
 </style>
+
 </head>
 <body>
-<nav aria-label="Navigation du site" class="navsite">
-<div class="dedans">
-<a class="accueil" href="index.html">← Accueil</a>
-<label class="saut">
-<span>Aller à</span>
-<select aria-label="Aller à une autre activité" id="navfiches">
-<optgroup label="Séquence 1">
-<option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
-<option selected="" value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
-<option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
-<option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
-</optgroup>
-<optgroup label="Séquence 2">
-<option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels &amp; réseau</option>
-<option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage &amp; débit</option>
-<option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
-<option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
-</optgroup>
-<optgroup label="Séquence 3">
-<option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
-<option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
-<option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
-<option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
-<option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
-<option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
-<option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
-</optgroup>
-<optgroup label="Séquence 4">
-<option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
-<option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
-<option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
-<option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
-<option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
-<option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
-</optgroup>
-<optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
-<optgroup label="Outils">
-<option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
-<option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
-<option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
-</optgroup>
-<optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges &amp; SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option><option value="osi-seq3-act1.html">OSI S3 · Séance 1 — Algorithme et logigramme</option><option value="osi-seq3-act2.html">OSI S3 · Séance 2 — Fonctions et solutions techniques</option><option value="osi-seq3-act3.html">OSI S3 · Séance 3 — Revue d’architecture</option><option value="osi-seq3-act4.html">OSI S3 · Séance 4 — Chaînes d’information et d’énergie</option><option value="osi-seq3-act5.html">OSI S3 · Séance 5 — Programmer, tester, corriger</option></optgroup><option value="osi-seq4-act1.html">OSI S4 · Séance 1 — Croquis coté</option><option value="osi-seq4-act2.html">OSI S4 · Séance 2 — Modélisation 3D</option><option value="osi-seq4-act3.html">OSI S4 · Séance 3 — Fabricabilité</option><option value="osi-seq4-act4.html">OSI S4 · Séance 4 — Dossier et pitch final</option></select>
-</label>
-</div>
+
+<nav class="navsite" aria-label="Navigation du site">
+  <div class="dedans">
+    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
+    <label class="saut">
+      <span>Aller à</span>
+      <select id="navfiches" aria-label="Aller à une autre activité">
+        <optgroup label="Séquence 1">
+          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+          <option value="seq1-act2-p1.html" selected>Activité 2 · partie 1 — Comprendre l'évolution</option>
+          <option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
+          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+        </optgroup>
+        <optgroup label="Séquence 2">
+          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
+          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage & débit</option>
+          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
+          <option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
+        </optgroup>
+        <optgroup label="Séquence 3">
+          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+          <option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+          <option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+          <option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
+        </optgroup>
+        <optgroup label="Séquence 4">
+          <option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
+          <option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
+          <option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
+          <option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
+          <option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
+          <option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
+        </optgroup>
+        <optgroup label="Séquence 5 · OSI — Porte-courrier augmenté"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges</option></optgroup><optgroup label="Séquence 5 · OSI — J’invente, j’innove"><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
+        <optgroup label="Outils">
+          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+        </optgroup>
+      </select>
+    </label>
+  </div>
 </nav>
 <script>
 document.getElementById("navfiches").addEventListener("change", function(){
   if(this.value) location.href = this.value;
 });
 </script>
+
+
 <main class="page">
-<header class="entete">
-<div class="cycle">
-<span class="lab">Cycle 4</span>
-<span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
-</div>
-<div class="marque">
-<img alt="Lycée français de Vienne" onerror="this.remove()" src="img/logo-lfv.png"/>
-<p class="fil">Technologie · Séquence 1 · Activité 2</p>
-</div>
-<h1 class="titre">Du téléphone au smartphone — partie 1 : comprendre l'évolution</h1>
-<p class="sous">T1 — L'évolution des OST · 55 min</p>
-<nav aria-label="Étapes de l'activité" class="chrono" id="chrono">
-<a href="#situation"><b>2′</b>Situation</a>
-<a href="#videos"><b>15′</b>Je m'informe</a>
-<a href="#constats"><b>5′</b>Constats</a>
-<a href="#probleme"><b>3′</b>Problème</a>
-<a href="#idees"><b>5′</b>Idées</a>
-<a href="#niveaux12"><b>20′</b>Niveaux 1-2</a>
-</nav>
-</header>
-<section aria-label="Mon identité" class="identite">
-<div class="champ"><label for="nom">Nom</label><input autocomplete="family-name" id="nom"/></div>
-<div class="champ"><label for="prenom">Prénom</label><input autocomplete="given-name" id="prenom"/></div>
-<div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"/></div>
-<div class="champ"><label for="groupe">Groupe</label><input id="groupe"/></div>
-<div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"/></div>
-<div class="champ"><label for="date">Date</label><input id="date" type="date"/></div>
-</section>
-<details class="ref">
-<summary>Ce que je travaille dans cette activité</summary>
-<div class="dedans">
-<dl>
-<dt>Thème</dt><dd>OST — Les objets et systèmes techniques : leurs usages et leurs interactions à découvrir et à analyser</dd>
-<dt>Attendu</dt><dd>OST1 — Décrire les liens entre usages et évolutions technologiques des objets et des systèmes techniques</dd>
-<dt>OST11</dt><dd>Identifier les innovations de rupture attachées à l'évolution d'un OST</dd>
-<dt>OST12</dt><dd>Mettre en relation une découverte scientifique avec ses développements technologiques et leurs effets sur la société</dd>
-<dt>OST13</dt><dd>Argumentaire court : incidence d'un OST sur la société</dd>
-<dt>OST1a</dt><dd>Les éléments qui participent à l'évolution des besoins (invention, innovation, développement durable)</dd>
-<dt>OST1c</dt><dd>La famille et la lignée d'OST</dd>
-<dt>OST1d</dt><dd>Les contraintes sociétales</dd>
-</dl>
-<ul>
-<li>N1 — Je sais reconnaître une lignée d'OST et identifier les principales ruptures technologiques</li>
-<li>N2 — et je sais mettre en relation une découverte scientifique avec l'évolution d'un OST</li>
-<li>N3 — et je sais expliquer l'incidence d'un OST sur la société</li>
-<li>N4 — et je sais analyser les contraintes sociétales qui ont influencé l'évolution des OST</li>
-</ul>
-</div>
-</details>
-<article class="bloc" id="situation">
-<div class="marge"><span class="duree">2′</span></div>
-<div class="corps">
-<h2>Situation déclenchante</h2>
-<div class="situation">
-<img alt="Des visiteurs devant une exposition sur 150 ans d'évolution des moyens de communication." class="illus" onerror="this.remove()" src="img/seq1-act2.jpg"/>
-<p>Votre collège prépare une exposition intitulée <em>150 ans d'évolution des moyens de communication</em>. Vous devez expliquer aux visiteurs pourquoi ces objets ont autant changé et quels besoins ou contraintes ont conduit à leur évolution.</p>
-</div>
-</div>
-</article>
-<article class="bloc" id="videos">
-<div class="marge"><span class="duree">15′</span></div>
-<div class="corps">
-<h2>Je m'informe avant de répondre</h2>
-<p class="amorce">Pour expliquer aux visiteurs pourquoi ces objets ont autant changé, il faut d'abord connaître l'histoire. Regarde les trois vidéos, environ neuf minutes en tout, et prends des notes au fur et à mesure. Tu t'appuieras sur ces notes pour toutes les questions qui suivent.</p>
-<div class="video-lien">
-<div>
-<b>1. Des signaux de fumée au téléphone</b>
-<span>2 min 18 · Lumni — les premiers signaux à distance, le courrier, le télégraphe de Chappe, le télégraphe électrique de Morse, la radio et le téléphone.</span>
-</div>
-<a href="https://www.lumni.fr/video/les-moyens-de-communication-des-signaux-de-fumee-au-telephone" rel="noopener" target="_blank">Regarder</a>
-</div>
-<p class="consigne">Note les objets présentés et, pour chacun, ce qu'il permettait de faire.</p>
-<textarea data-rep="" id="notes-v1" placeholder="Objets vus, dans l'ordre…"></textarea>
-<div class="video-lien" style="margin-top:22px">
-<div>
-<b>2. Internet : évolution des systèmes et création des réseaux</b>
-<span>3 min 27 · Lumni — le passage du téléphone aux ordinateurs, puis la mise en réseau.</span>
-</div>
-<a href="https://www.lumni.fr/video/internet-evolution-des-systemes-et-creation-des-reseaux" rel="noopener" target="_blank">Regarder</a>
-</div>
-<p class="consigne">Qu'est-ce qui change quand les machines sont reliées entre elles ? Quel nouveau besoin apparaît ?</p>
-<textarea data-rep="" id="notes-v2" placeholder="Ce qui change…"></textarea>
-<div class="video-lien" style="margin-top:22px">
-<div>
-<b>3. Le téléphone portable, la grande épopée</b>
-<span>3 min 10 · Lumni, avec Jamy — le premier mobile, la démocratisation des années 1990, la 2G et la 3G, l'Internet mobile, puis le smartphone tactile.</span>
-</div>
-<a href="https://www.lumni.fr/video/le-telephone-portable-la-grande-epopee" rel="noopener" target="_blank">Regarder</a>
-</div>
-<p class="consigne">Relève au moins trois dates et, pour chacune, ce qui devient possible à ce moment-là.</p>
-<textarea data-rep="" id="notes-v3" placeholder="Date → ce qui devient possible…"></textarea>
-<details class="ref" style="margin-top:22px">
-<summary>Pour aller plus loin — toute l'histoire d'un seul tenant (8 min 39)</summary>
-<div class="dedans">
-<p style="margin:0 0 12px">Du télégraphe optique de Claude Chappe en 1794 jusqu'à la 5G, en passant par le téléphone, les ondes électromagnétiques, la radio, la télévision, l'informatique, le mobile, le Wi-Fi, Internet et les objets connectés. Utile si tu veux revoir l'ensemble avant la frise chronologique.</p>
-<div class="video" data-src="https://www.youtube-nocookie.com/embed/LKGkmbz57ds">
-<p class="vt">L'histoire des systèmes et réseaux de télécommunications</p>
-<p class="vs">8 min 39</p>
-<div class="actions">
-<button class="vlire" type="button">Lire la vidéo</button>
-</div>
-</div>
-</div>
-</details>
-</div>
-</article>
-<article class="bloc" id="constats">
-<div class="marge"><span class="duree">5′</span></div>
-<div class="corps">
-<h2>Mes constats, mes observations</h2>
-<p class="consigne">Que remarques-tu sur les objets présentés dans l'exposition ?</p>
-<textarea aria-label="Que remarques-tu sur les objets présentés dans l'exposition ?" data-rep="" id="rep-constats" placeholder="J'observe que…"></textarea>
-</div>
-</article>
-<article class="bloc" id="probleme">
-<div class="marge"><span class="duree">3′</span></div>
-<div class="corps">
-<h2>Mon problème à résoudre</h2>
-<p class="consigne">Formule une seule question, celle que l'exposition doit permettre d'expliquer.</p>
-<textarea aria-label="Formule une seule question, celle que l'exposition doit permettre d'expliquer." data-rep="" id="rep-probleme" placeholder="Comment… ?" style="min-height:100px"></textarea>
-</div>
-</article>
-<article class="bloc" id="idees">
-<div class="marge"><span class="duree">5′</span></div>
-<div class="corps">
-<h2>Mes idées pour le résoudre</h2>
-<textarea aria-label="Mes idées pour le résoudre — Peut-être que…" data-rep="" id="rep-idees" placeholder="Peut-être que…"></textarea>
-</div>
-</article>
-<article class="bloc" id="niveaux12">
-<div class="marge"><span class="duree">20′</span></div>
-<div class="corps">
-<h2>Activités — niveaux 1 et 2</h2>
-<p class="amorce">Avant d'expliquer pourquoi les moyens de communication ont évolué, il faut comprendre les notions qui caractérisent cette évolution. Tu vas identifier les innovations, les découvertes scientifiques et les besoins qui ont marqué l'histoire du téléphone jusqu'au smartphone.</p>
-<h3>N1a — Invention ou innovation ?</h3>
-<div class="qcm" data-qcm="n1a" data-titre="N1a — Invention ou innovation ?">
-<p class="enonce">Qu'est-ce qui distingue une invention d'une innovation ?</p>
-<p class="note">Une seule réponse.</p>
-<div class="choix">
-<label><input id="n1a-A" name="n1a" type="radio" value="A"/><span class="lt">A</span><span>Une invention est une nouvelle idée ou un nouveau principe technique ; une innovation est sa mise sur le marché avec succès auprès des utilisateurs.</span></label>
-<label><input id="n1a-B" name="n1a" type="radio" value="B"/><span class="lt">B</span><span>Une invention et une innovation désignent exactement la même chose.</span></label>
-<label><input id="n1a-C" name="n1a" type="radio" value="C"/><span class="lt">C</span><span>Une innovation précède toujours l'invention correspondante.</span></label>
-<label><input id="n1a-D" name="n1a" type="radio" value="D"/><span class="lt">D</span><span>Une invention concerne uniquement le développement durable.</span></label>
-</div>
-</div>
-<h3>N1b — Développement durable</h3>
-<div class="qcm" data-qcm="n1b" data-titre="N1b — Évolutions relevant du développement durable">
-<p class="enonce">Parmi les évolutions suivantes du smartphone, lesquelles relèvent du développement durable ?</p>
-<p class="note">Plusieurs réponses possibles.</p>
-<div class="choix">
-<label><input id="n1b-A" name="n1b" type="checkbox" value="A"/><span class="lt">A</span><span>L'utilisation de plastique recyclé dans la coque.</span></label>
-<label><input id="n1b-B" name="n1b" type="checkbox" value="B"/><span class="lt">B</span><span>L'ajout d'un appareil photo à plus haute résolution.</span></label>
-<label><input id="n1b-C" name="n1b" type="checkbox" value="C"/><span class="lt">C</span><span>La conception d'une batterie remplaçable par l'utilisateur pour prolonger la durée de vie de l'appareil.</span></label>
-<label><input id="n1b-D" name="n1b" type="checkbox" value="D"/><span class="lt">D</span><span>L'augmentation de la puissance du processeur.</span></label>
-</div>
-</div>
-<h3>N1c — La lignée du téléphone</h3>
-<p class="consigne">Associe chaque étape de la lignée à sa description.</p>
-<div class="assoc">
-<div class="paire">
-<img alt="Téléphone à cadran" onerror="this.remove()" src="img/tel-cadran.png"/>
-<span class="nom">Téléphone fixe à cadran</span>
-<select aria-label="Description du téléphone fixe à cadran" data-assoc="" data-objet="Téléphone fixe à cadran" id="n1c-1">
-<option value="">Choisir une description…</option>
-<option>Permet d'appeler sans être relié par un fil, depuis n'importe quel lieu.</option>
-<option>Introduit la commande par le doigt sur un écran, remplaçant les touches physiques.</option>
-<option>Fonctionne uniquement branché à une ligne téléphonique filaire.</option>
-<option>Combine un grand écran et un format compact grâce à un écran flexible.</option>
-</select>
-</div>
-<div class="paire">
-<img alt="Téléphone à touches" onerror="this.remove()" src="img/tel-touches.png"/>
-<span class="nom">Téléphone mobile à touches</span>
-<select aria-label="Description du téléphone mobile à touches" data-assoc="" data-objet="Téléphone mobile à touches" id="n1c-2">
-<option value="">Choisir une description…</option>
-<option>Permet d'appeler sans être relié par un fil, depuis n'importe quel lieu.</option>
-<option>Introduit la commande par le doigt sur un écran, remplaçant les touches physiques.</option>
-<option>Fonctionne uniquement branché à une ligne téléphonique filaire.</option>
-<option>Combine un grand écran et un format compact grâce à un écran flexible.</option>
-</select>
-</div>
-<div class="paire">
-<img alt="Smartphone à écran tactile" onerror="this.remove()" src="img/tel-tactile.png"/>
-<span class="nom">Popularisation du smartphone tactile multipoint</span>
-<select aria-label="Description de la popularisation du smartphone tactile multipoint" data-assoc="" data-objet="Popularisation du smartphone tactile multipoint" id="n1c-3">
-<option value="">Choisir une description…</option>
-<option>Permet d'appeler sans être relié par un fil, depuis n'importe quel lieu.</option>
-<option>Introduit la commande par le doigt sur un écran, remplaçant les touches physiques.</option>
-<option>Fonctionne uniquement branché à une ligne téléphonique filaire.</option>
-<option>Combine un grand écran et un format compact grâce à un écran flexible.</option>
-</select>
-</div>
-<div class="paire">
-<img alt="Smartphone à écran pliable" onerror="this.remove()" src="img/tel-pliable.png"/>
-<span class="nom">Smartphone pliable actuel</span>
-<select aria-label="Description du smartphone pliable actuel" data-assoc="" data-objet="Smartphone pliable actuel" id="n1c-4">
-<option value="">Choisir une description…</option>
-<option>Permet d'appeler sans être relié par un fil, depuis n'importe quel lieu.</option>
-<option>Introduit la commande par le doigt sur un écran, remplaçant les touches physiques.</option>
-<option>Fonctionne uniquement branché à une ligne téléphonique filaire.</option>
-<option>Combine un grand écran et un format compact grâce à un écran flexible.</option>
-</select>
-</div>
-</div>
-<h3>N1d — Contraintes sociétales</h3>
-<div class="qcm" data-qcm="n1d" data-titre="N1d — Contraintes sociétales">
-<p class="enonce">Parmi les éléments suivants, lesquels sont des contraintes sociétales qui influencent la conception des smartphones ?</p>
-<p class="note">Plusieurs réponses possibles.</p>
-<div class="choix">
-<label><input id="n1d-A" name="n1d" type="checkbox" value="A"/><span class="lt">A</span><span>L'accessibilité pour les personnes malvoyantes ou malentendantes.</span></label>
-<label><input id="n1d-B" name="n1d" type="checkbox" value="B"/><span class="lt">B</span><span>Le coût de fabrication.</span></label>
-<label><input id="n1d-C" name="n1d" type="checkbox" value="C"/><span class="lt">C</span><span>La couleur préférée du concepteur.</span></label>
-<label><input id="n1d-D" name="n1d" type="checkbox" value="D"/><span class="lt">D</span><span>Le respect des règlements sur le recyclage des appareils électroniques.</span></label>
-</div>
-</div>
-<div class="video" data-src="https://podeduc.apps.education.fr/video/113246-ost1d-les-contraintes-societales/?is_iframe=true">
-<p class="vt">OST1d — Les contraintes sociétales</p>
-<p class="vs">Vidéo PodEduc · code application élève : VOST1d</p>
-<div class="actions">
-<button class="vlire" type="button">Lire la vidéo</button>
-<a href="https://podeduc.apps.education.fr/video/113246-ost1d-les-contraintes-societales" rel="noopener" target="_blank">Ouvrir sur PodEduc</a>
-</div>
-</div>
-<h3>N2a — Expliquer avec mes mots</h3>
-<p class="consigne">En t'appuyant sur la vidéo OST1a, explique la différence entre invention et innovation. Illustre ta réponse avec un exemple pris dans l'histoire du téléphone portable.</p>
-<div class="video" data-src="https://podeduc.apps.education.fr/video/113251-ost1a-les-elements-qui-participent-a-levolution-des-besoins-invention-innovation-developpement-durable/?is_iframe=true">
-<p class="vt">OST1a — Les éléments qui participent à l'évolution des besoins</p>
-<p class="vs">Vidéo PodEduc · code application élève : VOST1a</p>
-<div class="actions">
-<button class="vlire" type="button">Lire la vidéo</button>
-<a href="https://podeduc.apps.education.fr/video/113251-ost1a-les-elements-qui-participent-a-levolution-des-besoins-invention-innovation-developpement-durable" rel="noopener" target="_blank">Ouvrir sur PodEduc</a>
-</div>
-</div>
-<textarea aria-label="Vidéo PodEduc · code application élève : VOST1a — Une invention, c'est… alors qu'une innovation…" data-rep="" id="n2a" placeholder="Une invention, c'est… alors qu'une innovation…"></textarea>
-<h3>N2b — La lignée d'OST</h3>
-<p class="consigne">En t'appuyant sur la vidéo OST1c, explique ce qu'est une « lignée d'OST ». Montre pourquoi le smartphone, le téléphone fixe et le talkie-walkie peuvent appartenir à une même famille par leur besoin de communication, puis explique pourquoi cela ne suffit pas à prouver qu'ils appartiennent à une seule lignée technique.</p>
-<div class="video" data-src="https://podeduc.apps.education.fr/video/113247-ost1c-la-famille-et-la-lignee-dost/?is_iframe=true">
-<p class="vt">OST1c — La famille et la lignée d'OST</p>
-<p class="vs">Vidéo PodEduc · code application élève : VOST1c</p>
-<div class="actions">
-<button class="vlire" type="button">Lire la vidéo</button>
-<a href="https://podeduc.apps.education.fr/video/113247-ost1c-la-famille-et-la-lignee-dost" rel="noopener" target="_blank">Ouvrir sur PodEduc</a>
-</div>
-</div>
-<textarea aria-label="Vidéo PodEduc · code application élève : VOST1c — Une lignée d'OST, c'est…" data-rep="" id="n2b" placeholder="Une lignée d'OST, c'est…"></textarea>
-</div>
-</article>
-<section class="corrbloc" data-addon="1" id="correction">
-<h2>Correction expliquée et bilan de l’activité</h2>
-<p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
-<div class="saisie">
-<input aria-label="Mot de passe de la correction" autocomplete="off" id="corr-mdp" placeholder="Mot de passe" spellcheck="false" type="password"/>
-<button id="corr-btn" type="button">Afficher</button>
-</div>
-<p class="refus" hidden="" id="corr-refus">Mot de passe incorrect.</p>
-<div class="corr" hidden="" id="corr-contenu"></div>
-</section>
-<div class="alerte" hidden="" id="alerte"></div>
+
+  <header class="entete">
+    <div class="cycle">
+      <span class="lab">Cycle 4</span>
+      <span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
+    </div>
+    <div class="marque">
+      <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
+      <p class="fil">Technologie · Séquence 1 · Activité 2</p>
+    </div>
+    <h1 class="titre">Du téléphone au smartphone — partie 1 : comprendre l'évolution</h1>
+    <p class="sous">T1 — L'évolution des OST · 55 min</p>
+    <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
+      <a href="#situation"><b>2′</b>Situation</a>
+      <a href="#videos"><b>15′</b>Je m'informe</a>
+      <a href="#constats"><b>5′</b>Constats</a>
+      <a href="#probleme"><b>3′</b>Problème</a>
+      <a href="#idees"><b>5′</b>Idées</a>
+      <a href="#niveaux12"><b>20′</b>Niveaux 1-2</a>
+    </nav>
+  </header>
+
+  <section class="identite" aria-label="Mon identité">
+    <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="family-name"></div>
+    <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
+    <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
+    <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
+    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"></div>
+    <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
+  </section>
+
+  <details class="ref">
+    <summary>Ce que je travaille dans cette activité</summary>
+    <div class="dedans">
+      <dl>
+        <dt>Thème</dt><dd>OST — Les objets et systèmes techniques : leurs usages et leurs interactions à découvrir et à analyser</dd>
+        <dt>Attendu</dt><dd>OST1 — Décrire les liens entre usages et évolutions technologiques des objets et des systèmes techniques</dd>
+        <dt>OST11</dt><dd>Identifier les innovations de rupture attachées à l'évolution d'un OST</dd>
+        <dt>OST12</dt><dd>Mettre en relation une découverte scientifique avec ses développements technologiques et leurs effets sur la société</dd>
+        <dt>OST13</dt><dd>Argumentaire court : incidence d'un OST sur la société</dd>
+        <dt>OST1a</dt><dd>Les éléments qui participent à l'évolution des besoins (invention, innovation, développement durable)</dd>
+        <dt>OST1c</dt><dd>La famille et la lignée d'OST</dd>
+        <dt>OST1d</dt><dd>Les contraintes sociétales</dd>
+      </dl>
+      <ul>
+        <li>N1 — Je sais reconnaître une lignée d'OST et identifier les principales ruptures technologiques</li>
+        <li>N2 — et je sais mettre en relation une découverte scientifique avec l'évolution d'un OST</li>
+        <li>N3 — et je sais expliquer l'incidence d'un OST sur la société</li>
+        <li>N4 — et je sais analyser les contraintes sociétales qui ont influencé l'évolution des OST</li>
+      </ul>
+    </div>
+  </details>
+
+  <article class="bloc" id="situation">
+    <div class="marge"><span class="duree">2′</span></div>
+    <div class="corps">
+      <h2>Situation déclenchante</h2>
+      <div class="situation">
+        <img class="illus" src="img/seq1-act2.jpg"
+             alt="Des visiteurs devant une exposition sur 150 ans d'évolution des moyens de communication."
+             onerror="this.remove()">
+        <p>Votre collège prépare une exposition intitulée <em>150 ans d'évolution des moyens de communication</em>. Vous devez expliquer aux visiteurs pourquoi ces objets ont autant changé et quels besoins ou contraintes ont conduit à leur évolution.</p>
+      </div>
+    </div>
+  </article>
+
+    <article class="bloc" id="videos">
+    <div class="marge"><span class="duree">15′</span></div>
+    <div class="corps">
+      <h2>Je m'informe avant de répondre</h2>
+      <p class="amorce">Pour expliquer aux visiteurs pourquoi ces objets ont autant changé, il faut d'abord connaître l'histoire. Regarde les trois vidéos, environ neuf minutes en tout, et prends des notes au fur et à mesure. Tu t'appuieras sur ces notes pour toutes les questions qui suivent.</p>
+
+      <div class="video-lien">
+        <div>
+          <b>1. Des signaux de fumée au téléphone</b>
+          <span>2 min 18 · Lumni — les premiers signaux à distance, le courrier, le télégraphe de Chappe, le télégraphe électrique de Morse, la radio et le téléphone.</span>
+        </div>
+        <a href="https://www.lumni.fr/video/les-moyens-de-communication-des-signaux-de-fumee-au-telephone" target="_blank" rel="noopener">Regarder</a>
+      </div>
+      <p class="consigne">Note les objets présentés et, pour chacun, ce qu'il permettait de faire.</p>
+      <textarea id="notes-v1" data-rep placeholder="Objets vus, dans l'ordre…"></textarea>
+
+      <div class="video-lien" style="margin-top:22px">
+        <div>
+          <b>2. Internet : évolution des systèmes et création des réseaux</b>
+          <span>3 min 27 · Lumni — le passage du téléphone aux ordinateurs, puis la mise en réseau.</span>
+        </div>
+        <a href="https://www.lumni.fr/video/internet-evolution-des-systemes-et-creation-des-reseaux" target="_blank" rel="noopener">Regarder</a>
+      </div>
+      <p class="consigne">Qu'est-ce qui change quand les machines sont reliées entre elles ? Quel nouveau besoin apparaît ?</p>
+      <textarea id="notes-v2" data-rep placeholder="Ce qui change…"></textarea>
+
+      <div class="video-lien" style="margin-top:22px">
+        <div>
+          <b>3. Le téléphone portable, la grande épopée</b>
+          <span>3 min 10 · Lumni, avec Jamy — le premier mobile, la démocratisation des années 1990, la 2G et la 3G, l'Internet mobile, puis le smartphone tactile.</span>
+        </div>
+        <a href="https://www.lumni.fr/video/le-telephone-portable-la-grande-epopee" target="_blank" rel="noopener">Regarder</a>
+      </div>
+      <p class="consigne">Relève au moins trois dates et, pour chacune, ce qui devient possible à ce moment-là.</p>
+      <textarea id="notes-v3" data-rep placeholder="Date → ce qui devient possible…"></textarea>
+
+      <details class="ref" style="margin-top:22px">
+        <summary>Pour aller plus loin — toute l'histoire d'un seul tenant (8 min 39)</summary>
+        <div class="dedans">
+          <p style="margin:0 0 12px">Du télégraphe optique de Claude Chappe en 1794 jusqu'à la 5G, en passant par le téléphone, les ondes électromagnétiques, la radio, la télévision, l'informatique, le mobile, le Wi-Fi, Internet et les objets connectés. Utile si tu veux revoir l'ensemble avant la frise chronologique.</p>
+          <div class="video" data-src="https://www.youtube-nocookie.com/embed/LKGkmbz57ds">
+            <p class="vt">L'histoire des systèmes et réseaux de télécommunications</p>
+            <p class="vs">8 min 39</p>
+            <div class="actions">
+              <button class="vlire" type="button">Lire la vidéo</button>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </article>
+
+  <article class="bloc" id="constats">
+    <div class="marge"><span class="duree">5′</span></div>
+    <div class="corps">
+      <h2>Mes constats, mes observations</h2>
+      <p class="consigne">Que remarques-tu sur les objets présentés dans l'exposition ?</p>
+      <textarea id="rep-constats" data-rep placeholder="J'observe que…" aria-label="Que remarques-tu sur les objets présentés dans l&#x27;exposition ?"></textarea>
+    </div>
+  </article>
+
+  <article class="bloc" id="probleme">
+    <div class="marge"><span class="duree">3′</span></div>
+    <div class="corps">
+      <h2>Mon problème à résoudre</h2>
+      <p class="consigne">Formule une seule question, celle que l'exposition doit permettre d'expliquer.</p>
+      <textarea id="rep-probleme" data-rep placeholder="Comment… ?" style="min-height:100px" aria-label="Formule une seule question, celle que l&#x27;exposition doit permettre d&#x27;expliquer."></textarea>
+    </div>
+  </article>
+
+  <article class="bloc" id="idees">
+    <div class="marge"><span class="duree">5′</span></div>
+    <div class="corps">
+      <h2>Mes idées pour le résoudre</h2>
+      <textarea id="rep-idees" data-rep placeholder="Peut-être que…" aria-label="Mes idées pour le résoudre — Peut-être que…"></textarea>
+    </div>
+  </article>
+
+  <article class="bloc" id="niveaux12">
+    <div class="marge"><span class="duree">20′</span></div>
+    <div class="corps">
+      <h2>Activités — niveaux 1 et 2</h2>
+      <p class="amorce">Avant d'expliquer pourquoi les moyens de communication ont évolué, il faut comprendre les notions qui caractérisent cette évolution. Tu vas identifier les innovations, les découvertes scientifiques et les besoins qui ont marqué l'histoire du téléphone jusqu'au smartphone.</p>
+
+      <h3>N1a — Invention ou innovation ?</h3>
+      <div class="qcm" data-qcm="n1a" data-titre="N1a — Invention ou innovation ?">
+        <p class="enonce">Qu'est-ce qui distingue une invention d'une innovation ?</p>
+        <p class="note">Une seule réponse.</p>
+        <div class="choix">
+          <label><input type="radio" name="n1a" id="n1a-A" value="A"><span class="lt">A</span><span>Une invention est une nouvelle idée ou un nouveau principe technique ; une innovation est sa mise sur le marché avec succès auprès des utilisateurs.</span></label>
+          <label><input type="radio" name="n1a" id="n1a-B" value="B"><span class="lt">B</span><span>Une invention et une innovation désignent exactement la même chose.</span></label>
+          <label><input type="radio" name="n1a" id="n1a-C" value="C"><span class="lt">C</span><span>Une innovation précède toujours l'invention correspondante.</span></label>
+          <label><input type="radio" name="n1a" id="n1a-D" value="D"><span class="lt">D</span><span>Une invention concerne uniquement le développement durable.</span></label>
+        </div>
+      </div>
+
+      <h3>N1b — Développement durable</h3>
+      <div class="qcm" data-qcm="n1b" data-titre="N1b — Évolutions relevant du développement durable">
+        <p class="enonce">Parmi les évolutions suivantes du smartphone, lesquelles relèvent du développement durable ?</p>
+        <p class="note">Plusieurs réponses possibles.</p>
+        <div class="choix">
+          <label><input type="checkbox" name="n1b" id="n1b-A" value="A"><span class="lt">A</span><span>L'utilisation de plastique recyclé dans la coque.</span></label>
+          <label><input type="checkbox" name="n1b" id="n1b-B" value="B"><span class="lt">B</span><span>L'ajout d'un appareil photo à plus haute résolution.</span></label>
+          <label><input type="checkbox" name="n1b" id="n1b-C" value="C"><span class="lt">C</span><span>La conception d'une batterie remplaçable par l'utilisateur pour prolonger la durée de vie de l'appareil.</span></label>
+          <label><input type="checkbox" name="n1b" id="n1b-D" value="D"><span class="lt">D</span><span>L'augmentation de la puissance du processeur.</span></label>
+        </div>
+      </div>
+
+      <h3>N1c — La lignée du téléphone</h3>
+      <p class="consigne">Associe chaque étape de la lignée à sa description.</p>
+      <div class="assoc">
+        <div class="paire">
+          <img src="img/tel-cadran.png" alt="Téléphone à cadran" onerror="this.remove()">
+          <span class="nom">Téléphone fixe à cadran</span>
+          <select id="n1c-1" data-assoc data-objet="Téléphone fixe à cadran" aria-label="Description du téléphone fixe à cadran">
+            <option value="">Choisir une description…</option>
+            <option>Permet d'appeler sans être relié par un fil, depuis n'importe quel lieu.</option>
+            <option>Introduit la commande par le doigt sur un écran, remplaçant les touches physiques.</option>
+            <option>Fonctionne uniquement branché à une ligne téléphonique filaire.</option>
+            <option>Combine un grand écran et un format compact grâce à un écran flexible.</option>
+          </select>
+        </div>
+        <div class="paire">
+          <img src="img/tel-touches.png" alt="Téléphone à touches" onerror="this.remove()">
+          <span class="nom">Téléphone mobile à touches</span>
+          <select id="n1c-2" data-assoc data-objet="Téléphone mobile à touches" aria-label="Description du téléphone mobile à touches">
+            <option value="">Choisir une description…</option>
+            <option>Permet d'appeler sans être relié par un fil, depuis n'importe quel lieu.</option>
+            <option>Introduit la commande par le doigt sur un écran, remplaçant les touches physiques.</option>
+            <option>Fonctionne uniquement branché à une ligne téléphonique filaire.</option>
+            <option>Combine un grand écran et un format compact grâce à un écran flexible.</option>
+          </select>
+        </div>
+        <div class="paire">
+          <img src="img/tel-tactile.png" alt="Smartphone à écran tactile" onerror="this.remove()">
+          <span class="nom">Popularisation du smartphone tactile multipoint</span>
+          <select id="n1c-3" data-assoc data-objet="Popularisation du smartphone tactile multipoint" aria-label="Description de la popularisation du smartphone tactile multipoint">
+            <option value="">Choisir une description…</option>
+            <option>Permet d'appeler sans être relié par un fil, depuis n'importe quel lieu.</option>
+            <option>Introduit la commande par le doigt sur un écran, remplaçant les touches physiques.</option>
+            <option>Fonctionne uniquement branché à une ligne téléphonique filaire.</option>
+            <option>Combine un grand écran et un format compact grâce à un écran flexible.</option>
+          </select>
+        </div>
+        <div class="paire">
+          <img src="img/tel-pliable.png" alt="Smartphone à écran pliable" onerror="this.remove()">
+          <span class="nom">Smartphone pliable actuel</span>
+          <select id="n1c-4" data-assoc data-objet="Smartphone pliable actuel" aria-label="Description du smartphone pliable actuel">
+            <option value="">Choisir une description…</option>
+            <option>Permet d'appeler sans être relié par un fil, depuis n'importe quel lieu.</option>
+            <option>Introduit la commande par le doigt sur un écran, remplaçant les touches physiques.</option>
+            <option>Fonctionne uniquement branché à une ligne téléphonique filaire.</option>
+            <option>Combine un grand écran et un format compact grâce à un écran flexible.</option>
+          </select>
+        </div>
+      </div>
+
+      <h3>N1d — Contraintes sociétales</h3>
+      <div class="qcm" data-qcm="n1d" data-titre="N1d — Contraintes sociétales">
+        <p class="enonce">Parmi les éléments suivants, lesquels sont des contraintes sociétales qui influencent la conception des smartphones ?</p>
+        <p class="note">Plusieurs réponses possibles.</p>
+        <div class="choix">
+          <label><input type="checkbox" name="n1d" id="n1d-A" value="A"><span class="lt">A</span><span>L'accessibilité pour les personnes malvoyantes ou malentendantes.</span></label>
+          <label><input type="checkbox" name="n1d" id="n1d-B" value="B"><span class="lt">B</span><span>Le coût de fabrication.</span></label>
+          <label><input type="checkbox" name="n1d" id="n1d-C" value="C"><span class="lt">C</span><span>La couleur préférée du concepteur.</span></label>
+          <label><input type="checkbox" name="n1d" id="n1d-D" value="D"><span class="lt">D</span><span>Le respect des règlements sur le recyclage des appareils électroniques.</span></label>
+        </div>
+      </div>
+      <div class="video" data-src="https://podeduc.apps.education.fr/video/113246-ost1d-les-contraintes-societales/?is_iframe=true">
+        <p class="vt">OST1d — Les contraintes sociétales</p>
+        <p class="vs">Vidéo PodEduc · code application élève : VOST1d</p>
+        <div class="actions">
+          <button class="vlire" type="button">Lire la vidéo</button>
+          <a href="https://podeduc.apps.education.fr/video/113246-ost1d-les-contraintes-societales" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
+        </div>
+      </div>
+
+      <h3>N2a — Expliquer avec mes mots</h3>
+      <p class="consigne">En t'appuyant sur la vidéo OST1a, explique la différence entre invention et innovation. Illustre ta réponse avec un exemple pris dans l'histoire du téléphone portable.</p>
+      <div class="video" data-src="https://podeduc.apps.education.fr/video/113251-ost1a-les-elements-qui-participent-a-levolution-des-besoins-invention-innovation-developpement-durable/?is_iframe=true">
+        <p class="vt">OST1a — Les éléments qui participent à l'évolution des besoins</p>
+        <p class="vs">Vidéo PodEduc · code application élève : VOST1a</p>
+        <div class="actions">
+          <button class="vlire" type="button">Lire la vidéo</button>
+          <a href="https://podeduc.apps.education.fr/video/113251-ost1a-les-elements-qui-participent-a-levolution-des-besoins-invention-innovation-developpement-durable" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
+        </div>
+      </div>
+      <textarea id="n2a" data-rep placeholder="Une invention, c'est… alors qu'une innovation…" aria-label="Vidéo PodEduc · code application élève : VOST1a — Une invention, c&#x27;est… alors qu&#x27;une innovation…"></textarea>
+
+      <h3>N2b — La lignée d'OST</h3>
+      <p class="consigne">En t'appuyant sur la vidéo OST1c, explique ce qu'est une « lignée d'OST ». Montre pourquoi le smartphone, le téléphone fixe et le talkie-walkie peuvent appartenir à une même famille par leur besoin de communication, puis explique pourquoi cela ne suffit pas à prouver qu'ils appartiennent à une seule lignée technique.</p>
+      <div class="video" data-src="https://podeduc.apps.education.fr/video/113247-ost1c-la-famille-et-la-lignee-dost/?is_iframe=true">
+        <p class="vt">OST1c — La famille et la lignée d'OST</p>
+        <p class="vs">Vidéo PodEduc · code application élève : VOST1c</p>
+        <div class="actions">
+          <button class="vlire" type="button">Lire la vidéo</button>
+          <a href="https://podeduc.apps.education.fr/video/113247-ost1c-la-famille-et-la-lignee-dost" target="_blank" rel="noopener">Ouvrir sur PodEduc</a>
+        </div>
+      </div>
+      <textarea id="n2b" data-rep placeholder="Une lignée d'OST, c'est…" aria-label="Vidéo PodEduc · code application élève : VOST1c — Une lignée d&#x27;OST, c&#x27;est…"></textarea>
+    </div>
+  </article>
+
+  
+  
+  
+  
+  <section class="corrbloc" id="correction" data-addon="1">
+    <h2>Correction expliquée et bilan de l’activité</h2>
+    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+    <div class="saisie">
+      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction" autocomplete="off" spellcheck="false">
+      <button type="button" id="corr-btn">Afficher</button>
+    </div>
+    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
+    <div class="corr" id="corr-contenu" hidden></div>
+  </section>
+
+  <div id="alerte" class="alerte" hidden></div>
+
 </main>
-<nav aria-label="Navigation dans la Séquence 1" class="pager"><a href="seq1-act1.html">← Activité 1 · Lancement smartphone</a><a href="seq1-act2-p2.html">Activité 2 · Partie 2 — Préparer l’exposition →</a></nav>
+<nav class="pager" aria-label="Navigation dans la Séquence 1"><a href="seq1-act1.html">← Activité 1 · Lancement smartphone</a><a href="seq1-act2-p2.html">Activité 2 · Partie 2 — Préparer l’exposition →</a></nav>
+
+
 <div class="barre">
-<button class="lien" id="effacer" type="button">Effacer mes réponses</button>
-<button class="btn" id="pdf" type="button">Générer le PDF</button>
-<p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+  <button class="lien" id="effacer" type="button">Effacer mes réponses</button>
+  <button class="btn" id="pdf" type="button">Générer le PDF</button>
+  <p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
 </div>
+
 <script>
 (function(){
 "use strict";

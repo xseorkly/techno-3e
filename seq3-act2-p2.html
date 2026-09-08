@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Séquence 3 · Activité 2, partie 2 — J'entraîne ma propre IA</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
@@ -286,7 +285,8 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
-<link href="assets/site-addons.css" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/site-addons.css">
+
 <!-- Navigation séquentielle harmonisée -->
 <style id="sequence-pager-style">
 .pager{
@@ -328,256 +328,284 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
 }
 @media print{.pager{display:none!important}}
 </style>
+
 </head>
 <body>
-<nav aria-label="Navigation du site" class="navsite">
-<div class="dedans">
-<a class="accueil" href="index.html">← Accueil</a>
-<label class="saut">
-<span>Aller à</span>
-<select aria-label="Aller à une autre activité" id="navfiches">
-<optgroup label="Séquence 1">
-<option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
-<option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
-<option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
-<option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
-</optgroup>
-<optgroup label="Séquence 2">
-<option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels &amp; réseau</option>
-<option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage &amp; débit</option>
-<option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
-<option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
-</optgroup>
-<optgroup label="Séquence 3">
-<option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
-<option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
-<option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
-<option selected="" value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
-<option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
-<option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
-<option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
-</optgroup>
-<optgroup label="Séquence 4">
-<option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
-<option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
-<option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
-<option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
-<option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
-<option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
-</optgroup>
-<optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
-<optgroup label="Outils">
-<option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
-<option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
-<option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
-</optgroup>
-<optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges &amp; SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option><option value="osi-seq3-act1.html">OSI S3 · Séance 1 — Algorithme et logigramme</option><option value="osi-seq3-act2.html">OSI S3 · Séance 2 — Fonctions et solutions techniques</option><option value="osi-seq3-act3.html">OSI S3 · Séance 3 — Revue d’architecture</option><option value="osi-seq3-act4.html">OSI S3 · Séance 4 — Chaînes d’information et d’énergie</option><option value="osi-seq3-act5.html">OSI S3 · Séance 5 — Programmer, tester, corriger</option></optgroup><option value="osi-seq4-act1.html">OSI S4 · Séance 1 — Croquis coté</option><option value="osi-seq4-act2.html">OSI S4 · Séance 2 — Modélisation 3D</option><option value="osi-seq4-act3.html">OSI S4 · Séance 3 — Fabricabilité</option><option value="osi-seq4-act4.html">OSI S4 · Séance 4 — Dossier et pitch final</option></select>
-</label>
-</div>
+
+<nav class="navsite" aria-label="Navigation du site">
+  <div class="dedans">
+    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
+    <label class="saut">
+      <span>Aller à</span>
+      <select id="navfiches" aria-label="Aller à une autre activité">
+        <optgroup label="Séquence 1">
+          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+          <option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
+          <option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
+          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+        </optgroup>
+        <optgroup label="Séquence 2">
+          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
+          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage & débit</option>
+          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
+          <option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
+        </optgroup>
+        <optgroup label="Séquence 3">
+          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+          <option value="seq3-act2-p2.html" selected>Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+          <option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+          <option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
+        </optgroup>
+        <optgroup label="Séquence 4">
+          <option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
+          <option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
+          <option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
+          <option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
+          <option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
+          <option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
+        </optgroup>
+        <optgroup label="Séquence 5 · OSI — Porte-courrier augmenté"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges</option></optgroup><optgroup label="Séquence 5 · OSI — J’invente, j’innove"><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
+        <optgroup label="Outils">
+          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+        </optgroup>
+      </select>
+    </label>
+  </div>
 </nav>
 <script>
 document.getElementById("navfiches").addEventListener("change", function(){
   if(this.value) location.href = this.value;
 });
 </script>
+
+
 <main class="page">
-<header class="entete">
-<div class="cycle">
-<span class="lab">Cycle 4</span>
-<span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
-</div>
-<div class="marque">
-<img alt="Lycée français de Vienne" onerror="this.remove()" src="img/logo-lfv.png"/>
-<p class="fil">Technologie · Séquence 3 · Activité 2</p>
-</div>
-<h1 class="titre">L'IA qui reconnaît — partie 2 : j'entraîne ma propre IA</h1>
-<p class="sous">Main ouverte, main fermée : allumer et éteindre la micro:bit · 55 min</p>
-<nav aria-label="Étapes de l'activité" class="chrono" id="chrono">
-<a href="#materiel"><b>3′</b>Matériel</a>
-<a href="#base"><b>20′</b>Base de données</a>
-<a href="#modele"><b>10′</b>Entraînement</a>
-<a href="#usage"><b>17′</b>Utilisation</a>
-<a href="#synthese"><b>5′</b>Synthèse</a>
-</nav>
-</header>
-<section aria-label="Mon identité" class="identite">
-<div class="champ"><label for="nom">Nom</label><input autocomplete="family-name" id="nom"/></div>
-<div class="champ"><label for="prenom">Prénom</label><input autocomplete="given-name" id="prenom"/></div>
-<div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"/></div>
-<div class="champ"><label for="groupe">Groupe</label><input id="groupe"/></div>
-<div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"/></div>
-<div class="champ"><label for="date">Date</label><input id="date" type="date"/></div>
-</section>
-<details class="ref">
-<summary>Ce que je travaille dans cette activité</summary>
-<div class="dedans">
-<dl>
-<dt>Compétences</dt><dd>Constituer une base de données d'images étiquetées, entraîner un modèle et l'utiliser pour commander un objet programmable</dd>
-<dt>Connaissances</dt><dd>Apprentissage supervisé ; classe et échantillon ; modèle entraîné ; programmation par blocs d'un système embarqué</dd>
-</dl>
-<ul>
-<li>N1 — Je sais nommer les trois étapes que je viens de réaliser</li>
-<li>N2 — et je sais expliquer le rôle du nombre et de la variété des images dans la qualité du modèle</li>
-<li>N3 — et je sais utiliser le modèle dans un programme par blocs pour commander la carte</li>
-<li>N4 — et je sais expliquer ce qui limite la fiabilité de mon modèle</li>
-</ul>
-</div>
-</details>
-<article class="bloc" id="materiel">
-<div class="marge"><span class="duree">3′</span></div>
-<div class="corps">
-<h2>Le matériel</h2>
-<div class="situation">
-<p>Un ordinateur, une webcam, la connexion Internet, une carte micro:bit et son câble USB. Rien à installer : tout se passe dans le navigateur.</p>
-<p style="margin-top:14px">Objectif de la séance : la caméra reconnaît ta main ouverte ou ta main fermée, et la micro:bit allume ou éteint son écran en conséquence.</p>
-</div>
-</div>
-</article>
-<article class="bloc" id="base">
-<div class="marge"><span class="duree">20′</span></div>
-<div class="corps">
-<h2>Étape 1 — Je constitue la base de données</h2>
-<p class="amorce">Une IA n'apprend rien toute seule : il faut lui montrer des exemples déjà classés. C'est le travail le plus long, et c'est lui qui décide de la qualité du résultat.</p>
-<div class="bandeau">
-<p>L'outil de Google, gratuit et sans compte. Choisis <em>Get Started</em>, puis <em>Image Project</em>, puis <em>Standard image model</em>.</p>
-<a href="https://teachablemachine.withgoogle.com/" rel="noopener" target="_blank">Ouvrir Teachable Machine</a>
-</div>
-<div class="cartes" id="etapes">
-<div class="cartefiche" data-etape="Ouvrir Teachable Machine en mode Image Project">
-<label class="etape"><input id="et-1" type="checkbox"/><span><b>1.</b> Ouvrir Teachable Machine, cliquer sur <em>Get Started</em>, puis choisir <em>Image Project</em>.</span></label>
-</div>
-<div class="cartefiche" data-etape="Autoriser la webcam">
-<label class="etape"><input id="et-2" type="checkbox"/><span><b>2.</b> Cliquer sur <em>Webcam</em> dans la première classe et autoriser le navigateur à utiliser la caméra.</span></label>
-</div>
-<div class="cartefiche" data-etape="Renommer les deux classes">
-<label class="etape"><input id="et-3" type="checkbox"/><span><b>3.</b> Renommer <em>Class 1</em> en <strong>MAIN OUVERTE</strong> et <em>Class 2</em> en <strong>MAIN FERMEE</strong>. Écris-les en majuscules sans accent : tu devras les retaper à l'identique dans le programme.</span></label>
-</div>
-<div class="cartefiche" data-etape="Photographier la main ouverte">
-<label class="etape"><input id="et-4" type="checkbox"/><span><b>4.</b> Maintenir le bouton d'enregistrement enfoncé pour capturer une cinquantaine d'images de la main ouverte, en bougeant un peu la main.</span></label>
-</div>
-<div class="cartefiche" data-etape="Photographier la main fermée">
-<label class="etape"><input id="et-5" type="checkbox"/><span><b>5.</b> Faire de même pour la main fermée, avec autant d'images environ.</span></label>
-</div>
-</div>
-<h3>Mon relevé</h3>
-<div class="cartes" data-tab="releve" id="tabreleve">
-<div class="ligne" data-cle="MAIN OUVERTE">
-<span class="cle">MAIN OUVERTE</span>
-<input aria-label="Nombre d'images de la main ouverte" id="r1a" inputmode="numeric" placeholder="nombre d'images"/>
-</div>
-<div class="ligne" data-cle="MAIN FERMEE">
-<span class="cle">MAIN FERMEE</span>
-<input aria-label="Nombre d'images de la main fermée" id="r2a" inputmode="numeric" placeholder="nombre d'images"/>
-</div>
-</div>
-<h3>N1a — Pourquoi étiqueter</h3>
-<div class="qcm" data-qcm="n1a" data-titre="N1a — Le rôle des étiquettes">
-<p class="enonce">Pourquoi faut-il ranger les images dans deux classes nommées, au lieu de tout mettre ensemble ?</p>
-<div class="choix">
-<label><input id="n1a-a" name="n1a" type="radio" value="a"/><span class="lt">a</span><span>Pour que les images se chargent plus vite</span></label>
-<label><input id="n1a-b" name="n1a" type="radio" value="b"/><span class="lt">b</span><span>Parce que la machine apprend en comparant des exemples dont on lui a donné la réponse</span></label>
-<label><input id="n1a-c" name="n1a" type="radio" value="c"/><span class="lt">c</span><span>Pour économiser de la mémoire</span></label>
-<label><input id="n1a-d" name="n1a" type="radio" value="d"/><span class="lt">d</span><span>Ce n'est pas obligatoire, c'est juste plus joli</span></label>
-</div>
-</div>
-</div>
-</article>
-<article class="bloc" id="modele">
-<div class="marge"><span class="duree">10′</span></div>
-<div class="corps">
-<h2>Étape 2 — J'entraîne le modèle</h2>
-<div class="cartes" id="etapes2">
-<div class="cartefiche" data-etape="Lancer l'entraînement">
-<label class="etape"><input id="et-6" type="checkbox"/><span><b>6.</b> Cliquer sur <em>Train Model</em> et laisser l'onglet ouvert pendant tout le calcul.</span></label>
-</div>
-<div class="cartefiche" data-etape="Tester dans l'aperçu">
-<label class="etape"><input id="et-7" type="checkbox"/><span><b>7.</b> Dans <em>Preview</em>, montrer la main ouverte puis la main fermée. Les barres indiquent les scores de confiance produits par le modèle pour les classes apprises. Un score élevé n’est pas une certitude absolue : il faut tester sur des exemples nouveaux.</span></label>
-</div>
-<div class="cartefiche" data-etape="Exporter et récupérer le lien du modèle">
-<label class="etape"><input id="et-8" type="checkbox"/><span><b>8.</b> Cliquer sur <em>Export Model</em>, onglet <em>Tensorflow.js</em>, cocher <em>Upload (shareable link)</em>, cliquer sur <em>Upload my model</em>, puis copier le lien obtenu.</span></label>
-</div>
-</div>
-<div class="ligne" style="margin-top:16px">
-<span class="cle">Lien de mon modèle</span>
-<input aria-label="Lien du modèle entraîné" id="lien-modele" placeholder="https://teachablemachine.withgoogle.com/models/…"/>
-</div>
-<h3>Ce que j'observe dans l'aperçu</h3>
-<div class="cartes" data-tab="mesures" id="tabmesures">
-<div class="ligne" data-cle="Main ouverte, bien en face">
-<span class="cle">Main ouverte, en face</span>
-<input aria-label="Classe annoncée, main ouverte en face" id="m1a" placeholder="classe annoncée"/>
-<input aria-label="Score du modèle, main ouverte en face" id="m1b" placeholder="score du modèle en %"/>
-</div>
-<div class="ligne" data-cle="Main fermée, bien en face">
-<span class="cle">Main fermée, en face</span>
-<input aria-label="Classe annoncée, main fermée en face" id="m2a" placeholder="classe annoncée"/>
-<input aria-label="Score du modèle, main fermée en face" id="m2b" placeholder="score du modèle en %"/>
-</div>
-<div class="ligne" data-cle="Main de profil">
-<span class="cle">Main de profil</span>
-<input aria-label="Classe annoncée, main de profil" id="m3a" placeholder="classe annoncée"/>
-<input aria-label="Score du modèle, main de profil" id="m3b" placeholder="score du modèle en %"/>
-</div>
-</div>
-<p class="consigne" style="margin-top:18px">N2a — Que se passe-t-il quand tu montres ta main de profil, une position que le modèle n'a jamais vue ? Explique pourquoi.</p>
-<textarea aria-label="N2a — Que se passe-t-il quand tu montres ta main de profil, une position que le modèle n'a jamais vue ? Expliq" data-rep="" id="n2a"></textarea>
-</div>
-</article>
-<article class="bloc" id="usage">
-<div class="marge"><span class="duree">17′</span></div>
-<div class="corps">
-<h2>Étape 3 — J'utilise le modèle pour commander la carte</h2>
-<p class="amorce">Le modèle est en ligne, à son adresse. Il reste à le brancher dans un programme par blocs qui pilote la micro:bit.</p>
-<div class="bandeau">
-<p>Programmation par blocs. Ajoute les extensions <em>IA Image</em> et <em>micro:bit</em> dans le menu <em>Extensions</em>, en bas à gauche.</p>
-<a href="https://fr.vittascience.com/adacraft/?mode=mixed" rel="noopener" target="_blank">Ouvrir Vittascience Adacraft</a>
-</div>
-<div class="cartes" id="etapes3">
-<div class="cartefiche" data-etape="Ajouter les extensions IA Image et micro:bit">
-<label class="etape"><input id="et-9" type="checkbox"/><span><b>9.</b> Ouvrir Vittascience Adacraft et ajouter les extensions <em>IA Image</em> et <em>micro:bit</em>.</span></label>
-</div>
-<div class="cartefiche" data-etape="Charger le modèle et lancer la webcam">
-<label class="etape"><input id="et-10" type="checkbox"/><span><b>10.</b> Dans <em>quand drapeau cliqué</em> : effacer l'écran, sélectionner et initialiser le modèle en collant son URL, puis activer la webcam et lancer la détection.</span></label>
-</div>
-<div class="cartefiche" data-etape="Écrire la sélection sur la classe détectée">
-<label class="etape"><input id="et-11" type="checkbox"/><span><b>11.</b> Dans <em>répéter indéfiniment</em> : si la classe détectée est <strong>MAIN OUVERTE</strong>, dire « allume » et afficher une image sur la carte ; sinon si c'est <strong>MAIN FERMEE</strong>, dire « éteint » et effacer l'écran.</span></label>
-</div>
-<div class="cartefiche" data-etape="Connecter la carte et exécuter">
-<label class="etape"><input id="et-12" type="checkbox"/><span><b>12.</b> Brancher la micro:bit, la connecter depuis Vittascience, puis cliquer sur <em>Exécuter</em> et tester devant la caméra.</span></label>
-</div>
-</div>
-<h3>Bilan de la séance</h3>
-<p class="consigne">Qu'est-ce qui a marché du premier coup, et sur quoi as-tu buté ?</p>
-<textarea aria-label="Qu'est-ce qui a marché du premier coup, et sur quoi as-tu buté ?" data-rep="" id="bilan" placeholder="J'ai réussi à…  J'ai buté sur…"></textarea>
-</div>
-</article>
-<div class="cadre-pedago"><div><b>Minimum attendu aujourd’hui</b><p>Deux classes correctement entraînées, trois tests dont au moins un exemple nouveau, et une observation argumentée sur les scores.</p></div><div><b>Pour aller plus loin</b><p>Tester une autre personne, changer le fond ou la lumière et comparer le taux de réussite.</p></div></div>
+
+  <header class="entete">
+    <div class="cycle">
+      <span class="lab">Cycle 4</span>
+      <span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
+    </div>
+    <div class="marque">
+      <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
+      <p class="fil">Technologie · Séquence 3 · Activité 2</p>
+    </div>
+    <h1 class="titre">L'IA qui reconnaît — partie 2 : j'entraîne ma propre IA</h1>
+    <p class="sous">Main ouverte, main fermée : allumer et éteindre la micro:bit · 55 min</p>
+    <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
+      <a href="#materiel"><b>3′</b>Matériel</a>
+      <a href="#base"><b>20′</b>Base de données</a>
+      <a href="#modele"><b>10′</b>Entraînement</a>
+      <a href="#usage"><b>17′</b>Utilisation</a>
+      <a href="#synthese"><b>5′</b>Synthèse</a>
+    </nav>
+  </header>
+
+  <section class="identite" aria-label="Mon identité">
+    <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="family-name"></div>
+    <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
+    <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
+    <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
+    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"></div>
+    <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
+  </section>
+
+  <details class="ref">
+    <summary>Ce que je travaille dans cette activité</summary>
+    <div class="dedans">
+      <dl>
+        <dt>Compétences</dt><dd>Constituer une base de données d'images étiquetées, entraîner un modèle et l'utiliser pour commander un objet programmable</dd>
+        <dt>Connaissances</dt><dd>Apprentissage supervisé ; classe et échantillon ; modèle entraîné ; programmation par blocs d'un système embarqué</dd>
+      </dl>
+      <ul>
+        <li>N1 — Je sais nommer les trois étapes que je viens de réaliser</li>
+        <li>N2 — et je sais expliquer le rôle du nombre et de la variété des images dans la qualité du modèle</li>
+        <li>N3 — et je sais utiliser le modèle dans un programme par blocs pour commander la carte</li>
+        <li>N4 — et je sais expliquer ce qui limite la fiabilité de mon modèle</li>
+      </ul>
+    </div>
+  </details>
+
+  <article class="bloc" id="materiel">
+    <div class="marge"><span class="duree">3′</span></div>
+    <div class="corps">
+      <h2>Le matériel</h2>
+      <div class="situation">
+        <p>Un ordinateur, une webcam, la connexion Internet, une carte micro:bit et son câble USB. Rien à installer : tout se passe dans le navigateur.</p>
+        <p style="margin-top:14px">Objectif de la séance : la caméra reconnaît ta main ouverte ou ta main fermée, et la micro:bit allume ou éteint son écran en conséquence.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="bloc" id="base">
+    <div class="marge"><span class="duree">20′</span></div>
+    <div class="corps">
+      <h2>Étape 1 — Je constitue la base de données</h2>
+      <p class="amorce">Une IA n'apprend rien toute seule : il faut lui montrer des exemples déjà classés. C'est le travail le plus long, et c'est lui qui décide de la qualité du résultat.</p>
+
+      <div class="bandeau">
+        <p>L'outil de Google, gratuit et sans compte. Choisis <em>Get Started</em>, puis <em>Image Project</em>, puis <em>Standard image model</em>.</p>
+        <a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener">Ouvrir Teachable Machine</a>
+      </div>
+
+      <div class="cartes" id="etapes">
+        <div class="cartefiche" data-etape="Ouvrir Teachable Machine en mode Image Project">
+          <label class="etape"><input type="checkbox" id="et-1"><span><b>1.</b> Ouvrir Teachable Machine, cliquer sur <em>Get Started</em>, puis choisir <em>Image Project</em>.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Autoriser la webcam">
+          <label class="etape"><input type="checkbox" id="et-2"><span><b>2.</b> Cliquer sur <em>Webcam</em> dans la première classe et autoriser le navigateur à utiliser la caméra.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Renommer les deux classes">
+          <label class="etape"><input type="checkbox" id="et-3"><span><b>3.</b> Renommer <em>Class 1</em> en <strong>MAIN OUVERTE</strong> et <em>Class 2</em> en <strong>MAIN FERMEE</strong>. Écris-les en majuscules sans accent : tu devras les retaper à l'identique dans le programme.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Photographier la main ouverte">
+          <label class="etape"><input type="checkbox" id="et-4"><span><b>4.</b> Maintenir le bouton d'enregistrement enfoncé pour capturer une cinquantaine d'images de la main ouverte, en bougeant un peu la main.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Photographier la main fermée">
+          <label class="etape"><input type="checkbox" id="et-5"><span><b>5.</b> Faire de même pour la main fermée, avec autant d'images environ.</span></label>
+        </div>
+      </div>
+
+      <h3>Mon relevé</h3>
+      <div class="cartes" data-tab="releve" id="tabreleve">
+        <div class="ligne" data-cle="MAIN OUVERTE">
+          <span class="cle">MAIN OUVERTE</span>
+          <input id="r1a" inputmode="numeric" placeholder="nombre d'images" aria-label="Nombre d'images de la main ouverte">
+        </div>
+        <div class="ligne" data-cle="MAIN FERMEE">
+          <span class="cle">MAIN FERMEE</span>
+          <input id="r2a" inputmode="numeric" placeholder="nombre d'images" aria-label="Nombre d'images de la main fermée">
+        </div>
+      </div>
+
+      <h3>N1a — Pourquoi étiqueter</h3>
+      <div class="qcm" data-qcm="n1a" data-titre="N1a — Le rôle des étiquettes">
+        <p class="enonce">Pourquoi faut-il ranger les images dans deux classes nommées, au lieu de tout mettre ensemble ?</p>
+        <div class="choix">
+          <label><input type="radio" name="n1a" id="n1a-a" value="a"><span class="lt">a</span><span>Pour que les images se chargent plus vite</span></label>
+          <label><input type="radio" name="n1a" id="n1a-b" value="b"><span class="lt">b</span><span>Parce que la machine apprend en comparant des exemples dont on lui a donné la réponse</span></label>
+          <label><input type="radio" name="n1a" id="n1a-c" value="c"><span class="lt">c</span><span>Pour économiser de la mémoire</span></label>
+          <label><input type="radio" name="n1a" id="n1a-d" value="d"><span class="lt">d</span><span>Ce n'est pas obligatoire, c'est juste plus joli</span></label>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="bloc" id="modele">
+    <div class="marge"><span class="duree">10′</span></div>
+    <div class="corps">
+      <h2>Étape 2 — J'entraîne le modèle</h2>
+      <div class="cartes" id="etapes2">
+        <div class="cartefiche" data-etape="Lancer l'entraînement">
+          <label class="etape"><input type="checkbox" id="et-6"><span><b>6.</b> Cliquer sur <em>Train Model</em> et laisser l'onglet ouvert pendant tout le calcul.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Tester dans l'aperçu">
+          <label class="etape"><input type="checkbox" id="et-7"><span><b>7.</b> Dans <em>Preview</em>, montrer la main ouverte puis la main fermée. Les barres indiquent les scores de confiance produits par le modèle pour les classes apprises. Un score élevé n’est pas une certitude absolue : il faut tester sur des exemples nouveaux.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Exporter et récupérer le lien du modèle">
+          <label class="etape"><input type="checkbox" id="et-8"><span><b>8.</b> Cliquer sur <em>Export Model</em>, onglet <em>Tensorflow.js</em>, cocher <em>Upload (shareable link)</em>, cliquer sur <em>Upload my model</em>, puis copier le lien obtenu.</span></label>
+        </div>
+      </div>
+
+      <div class="ligne" style="margin-top:16px">
+        <span class="cle">Lien de mon modèle</span>
+        <input id="lien-modele" placeholder="https://teachablemachine.withgoogle.com/models/…" aria-label="Lien du modèle entraîné">
+      </div>
+
+      <h3>Ce que j'observe dans l'aperçu</h3>
+      <div class="cartes" data-tab="mesures" id="tabmesures">
+        <div class="ligne" data-cle="Main ouverte, bien en face">
+          <span class="cle">Main ouverte, en face</span>
+          <input id="m1a" placeholder="classe annoncée" aria-label="Classe annoncée, main ouverte en face">
+          <input id="m1b" placeholder="score du modèle en %" aria-label="Score du modèle, main ouverte en face">
+        </div>
+        <div class="ligne" data-cle="Main fermée, bien en face">
+          <span class="cle">Main fermée, en face</span>
+          <input id="m2a" placeholder="classe annoncée" aria-label="Classe annoncée, main fermée en face">
+          <input id="m2b" placeholder="score du modèle en %" aria-label="Score du modèle, main fermée en face">
+        </div>
+        <div class="ligne" data-cle="Main de profil">
+          <span class="cle">Main de profil</span>
+          <input id="m3a" placeholder="classe annoncée" aria-label="Classe annoncée, main de profil">
+          <input id="m3b" placeholder="score du modèle en %" aria-label="Score du modèle, main de profil">
+        </div>
+      </div>
+
+      <p class="consigne" style="margin-top:18px">N2a — Que se passe-t-il quand tu montres ta main de profil, une position que le modèle n'a jamais vue ? Explique pourquoi.</p>
+      <textarea id="n2a" data-rep aria-label="N2a — Que se passe-t-il quand tu montres ta main de profil, une position que le modèle n&#x27;a jamais vue ? Expliq"></textarea>
+    </div>
+  </article>
+
+  <article class="bloc" id="usage">
+    <div class="marge"><span class="duree">17′</span></div>
+    <div class="corps">
+      <h2>Étape 3 — J'utilise le modèle pour commander la carte</h2>
+      <p class="amorce">Le modèle est en ligne, à son adresse. Il reste à le brancher dans un programme par blocs qui pilote la micro:bit.</p>
+
+      <div class="bandeau">
+        <p>Programmation par blocs. Ajoute les extensions <em>IA Image</em> et <em>micro:bit</em> dans le menu <em>Extensions</em>, en bas à gauche.</p>
+        <a href="https://fr.vittascience.com/adacraft/?mode=mixed" target="_blank" rel="noopener">Ouvrir Vittascience Adacraft</a>
+      </div>
+
+      <div class="cartes" id="etapes3">
+        <div class="cartefiche" data-etape="Ajouter les extensions IA Image et micro:bit">
+          <label class="etape"><input type="checkbox" id="et-9"><span><b>9.</b> Ouvrir Vittascience Adacraft et ajouter les extensions <em>IA Image</em> et <em>micro:bit</em>.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Charger le modèle et lancer la webcam">
+          <label class="etape"><input type="checkbox" id="et-10"><span><b>10.</b> Dans <em>quand drapeau cliqué</em> : effacer l'écran, sélectionner et initialiser le modèle en collant son URL, puis activer la webcam et lancer la détection.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Écrire la sélection sur la classe détectée">
+          <label class="etape"><input type="checkbox" id="et-11"><span><b>11.</b> Dans <em>répéter indéfiniment</em> : si la classe détectée est <strong>MAIN OUVERTE</strong>, dire « allume » et afficher une image sur la carte ; sinon si c'est <strong>MAIN FERMEE</strong>, dire « éteint » et effacer l'écran.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Connecter la carte et exécuter">
+          <label class="etape"><input type="checkbox" id="et-12"><span><b>12.</b> Brancher la micro:bit, la connecter depuis Vittascience, puis cliquer sur <em>Exécuter</em> et tester devant la caméra.</span></label>
+        </div>
+      </div>
+
+      <h3>Bilan de la séance</h3>
+      <p class="consigne">Qu'est-ce qui a marché du premier coup, et sur quoi as-tu buté ?</p>
+      <textarea id="bilan" data-rep placeholder="J'ai réussi à…  J'ai buté sur…" aria-label="Qu&#x27;est-ce qui a marché du premier coup, et sur quoi as-tu buté ?"></textarea>
+    </div>
+  </article>
+
+  <div class="cadre-pedago"><div><b>Minimum attendu aujourd’hui</b><p>Deux classes correctement entraînées, trois tests dont au moins un exemple nouveau, et une observation argumentée sur les scores.</p></div><div><b>Pour aller plus loin</b><p>Tester une autre personne, changer le fond ou la lumière et comparer le taux de réussite.</p></div></div>
 <article class="bloc" id="synthese">
-<div class="marge"><span class="duree">5′</span></div>
-<div class="corps">
-<h2>Ma synthèse</h2>
-<p class="consigne">Retrouve les trois étapes de la partie 1 dans ce que tu viens de faire, et dis ce que tu as fabriqué à chacune.</p>
-<textarea aria-label="Retrouve les trois étapes de la partie 1 dans ce que tu viens de faire, et dis ce que tu as fabriqué à chacune" data-rep="" id="rep-synthese"></textarea>
-</div>
-</article>
-<section class="corrbloc" data-addon="1" id="correction">
-<h2>Correction expliquée et bilan de l’activité</h2>
-<p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
-<div class="saisie">
-<input aria-label="Mot de passe de la correction" autocomplete="off" id="corr-mdp" placeholder="Mot de passe" spellcheck="false" type="password"/>
-<button id="corr-btn" type="button">Afficher</button>
-</div>
-<p class="refus" hidden="" id="corr-refus">Mot de passe incorrect.</p>
-<div class="corr" hidden="" id="corr-contenu"></div>
-</section>
-<div class="alerte" hidden="" id="alerte"></div>
+    <div class="marge"><span class="duree">5′</span></div>
+    <div class="corps">
+      <h2>Ma synthèse</h2>
+      <p class="consigne">Retrouve les trois étapes de la partie 1 dans ce que tu viens de faire, et dis ce que tu as fabriqué à chacune.</p>
+      <textarea id="rep-synthese" data-rep aria-label="Retrouve les trois étapes de la partie 1 dans ce que tu viens de faire, et dis ce que tu as fabriqué à chacune"></textarea>
+    </div>
+  </article>
+
+  <section class="corrbloc" id="correction" data-addon="1">
+    <h2>Correction expliquée et bilan de l’activité</h2>
+    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+    <div class="saisie">
+      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction" autocomplete="off" spellcheck="false">
+      <button type="button" id="corr-btn">Afficher</button>
+    </div>
+    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
+    <div class="corr" id="corr-contenu" hidden></div>
+  </section>
+
+  <div id="alerte" class="alerte" hidden></div>
+
 </main>
-<nav aria-label="Navigation dans la Séquence 3" class="pager"><a href="seq3-act2-p1.html">← Activité 2 · Partie 1 — Trois caméras qui décident</a><a href="seq3-act2-p3.html">Activité 2 · Partie 3 — Où mon IA se trompe-t-elle ? →</a></nav>
+<nav class="pager" aria-label="Navigation dans la Séquence 3"><a href="seq3-act2-p1.html">← Activité 2 · Partie 1 — Trois caméras qui décident</a><a href="seq3-act2-p3.html">Activité 2 · Partie 3 — Où mon IA se trompe-t-elle ? →</a></nav>
+
+
 <div class="barre">
-<button class="lien" id="effacer" type="button">Effacer mes réponses</button>
-<button class="btn" id="pdf" type="button">Générer le PDF</button>
-<p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+  <button class="lien" id="effacer" type="button">Effacer mes réponses</button>
+  <button class="btn" id="pdf" type="button">Générer le PDF</button>
+  <p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
 </div>
+
 <script>
 (function(){
 "use strict";

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Séquence 4 · Séance 2 — Calibrer le capteur</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
@@ -322,7 +321,8 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
-<link href="assets/site-addons.css" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/site-addons.css">
+
 <!-- Navigation séquentielle harmonisée -->
 <style id="sequence-pager-style">
 .pager{
@@ -364,268 +364,288 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
 }
 @media print{.pager{display:none!important}}
 </style>
+
 </head>
 <body>
-<nav aria-label="Navigation du site" class="navsite">
-<div class="dedans">
-<a class="accueil" href="index.html">← Accueil</a>
-<label class="saut">
-<span>Aller à</span>
-<select aria-label="Aller à une autre activité" id="navfiches">
-<optgroup label="Séquence 1">
-<option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
-<option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
-<option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
-<option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
-</optgroup>
-<optgroup label="Séquence 2">
-<option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels &amp; réseau</option>
-<option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage &amp; débit</option>
-<option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
-<option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
-</optgroup>
-<optgroup label="Séquence 3">
-<option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
-<option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
-<option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
-<option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
-<option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
-<option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
-<option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
-</optgroup>
-<optgroup label="Séquence 4">
-<option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
-<option selected="" value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
-<option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
-<option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
-<option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
-<option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
-</optgroup>
-<optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
-<optgroup label="Outils">
-<option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
-<option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
-<option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
-</optgroup>
-<optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges &amp; SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option><option value="osi-seq3-act1.html">OSI S3 · Séance 1 — Algorithme et logigramme</option><option value="osi-seq3-act2.html">OSI S3 · Séance 2 — Fonctions et solutions techniques</option><option value="osi-seq3-act3.html">OSI S3 · Séance 3 — Revue d’architecture</option><option value="osi-seq3-act4.html">OSI S3 · Séance 4 — Chaînes d’information et d’énergie</option><option value="osi-seq3-act5.html">OSI S3 · Séance 5 — Programmer, tester, corriger</option></optgroup><option value="osi-seq4-act1.html">OSI S4 · Séance 1 — Croquis coté</option><option value="osi-seq4-act2.html">OSI S4 · Séance 2 — Modélisation 3D</option><option value="osi-seq4-act3.html">OSI S4 · Séance 3 — Fabricabilité</option><option value="osi-seq4-act4.html">OSI S4 · Séance 4 — Dossier et pitch final</option></select>
-</label>
-</div>
+
+<nav class="navsite" aria-label="Navigation du site">
+  <div class="dedans">
+    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
+    <label class="saut">
+      <span>Aller à</span>
+      <select id="navfiches" aria-label="Aller à une autre activité">
+        <optgroup label="Séquence 1">
+          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+          <option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
+          <option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
+          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+        </optgroup>
+        <optgroup label="Séquence 2">
+          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
+          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage & débit</option>
+          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
+          <option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
+        </optgroup>
+        <optgroup label="Séquence 3">
+          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+          <option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+          <option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+          <option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
+        </optgroup>
+        <optgroup label="Séquence 4">
+          <option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
+          <option value="seq4-act2.html" selected>Séance 2 — Calibrer le capteur</option>
+          <option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
+          <option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
+          <option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
+          <option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
+        </optgroup>
+        <optgroup label="Séquence 5 · OSI — Porte-courrier augmenté"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges</option></optgroup><optgroup label="Séquence 5 · OSI — J’invente, j’innove"><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
+        <optgroup label="Outils">
+          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+        </optgroup>
+      </select>
+    </label>
+  </div>
 </nav>
 <script>
 document.getElementById("navfiches").addEventListener("change", function(){
   if(this.value) location.href = this.value;
 });
 </script>
+
+
 <main class="page">
-<header class="entete">
-<div class="cycle">
-<span class="lab">Cycle 4</span>
-<span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
-</div>
-<div class="marque">
-<img alt="Lycée français de Vienne" onerror="this.remove()" src="img/logo-lfv.png"/>
-<p class="fil">Technologie · Séquence 4 · Activité 2</p>
-</div>
-<h1 class="titre">L'arrosage automatique — séance 2 : calibrer le capteur</h1>
-<p class="sous">Des valeurs analogiques aux pourcentages · 55 min</p>
-<nav aria-label="Étapes de l'activité" class="chrono" id="chrono">
-<a href="#materiel"><b>5′</b>Matériel</a>
-<a href="#mesures"><b>15′</b>Mesures</a>
-<a href="#type"><b>8′</b>Type de données</a>
-<a href="#indice"><b>15′</b>Indice</a>
-<a href="#programme"><b>7′</b>Programme</a>
-<a href="#synthese"><b>5′</b>Synthèse</a>
-</nav>
-</header>
-<section aria-label="Mon identité" class="identite">
-<div class="champ"><label for="nom">Nom</label><input autocomplete="family-name" id="nom"/></div>
-<div class="champ"><label for="prenom">Prénom</label><input autocomplete="given-name" id="prenom"/></div>
-<div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"/></div>
-<div class="champ"><label for="groupe">Groupe</label><input id="groupe"/></div>
-<div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"/></div>
-<div class="champ"><label for="date">Date</label><input id="date" type="date"/></div>
-</section>
-<details class="ref">
-<summary>Ce que je travaille dans cette activité</summary>
-<div class="dedans">
-<dl>
-<dt>Programme</dt><dd>Technologie, cycle 4, BO du 29 février 2024 — repères de progressivité classe de 3e</dd>
-<dt>Compétence</dt><dd>Décrire et caractériser l'organisation interne d'un objet ou d'un système technique et ses échanges avec son environnement</dd>
-<dt>Repère 3e</dt><dd>Associer des grandeurs analogiques issues d'un OST à des données exploitables</dd>
-<dt>Repère 3e</dt><dd>Déterminer les données utilisées et produites par un programme associé à une fonctionnalité en vue de le modifier</dd>
-</dl>
-<p style="margin:14px 0 6px;font-weight:600">Connaissances</p>
-<ul>
-<li>Les fonctions des constituants : capteurs, microcontrôleur</li>
-<li>Vocabulaire des données : type (nombre), données structurées</li>
-<li>Instruction d'affectation, variable (type nombre)</li>
-</ul>
-<p style="margin:14px 0 6px;font-weight:600">Ce que je dois savoir faire</p>
-<ul>
-<li>N1 — Je sais mettre en œuvre un protocole de mesure et relever des valeurs</li>
-<li>N2 — et je sais reconnaître le type et l'étendue des valeurs fournies par un capteur analogique</li>
-<li>N3 — et je sais construire l’indice relatif qui traduit ces valeurs en pourcentage</li>
-<li>N4 — et je sais modifier le programme pour afficher une donnée exploitable</li>
-</ul>
-</div>
-</details>
-<article class="bloc" id="materiel">
-<div class="marge"><span class="duree">5′</span></div>
-<div class="corps">
-<h2>Le matériel et le problème</h2>
-<div class="situation">
-<p>Le capteur planté dans la terre renvoie des nombres. Mais 720, est-ce sec ou humide ? Impossible de le dire tant qu'on n'a pas <strong>calibré</strong> le capteur, c'est-à-dire comparé ses valeurs à des états connus de la terre.</p>
-<img alt="Capteur d'humidité, carte d'extension micro:bit, récipient étanche et pipette de 2 ml." class="illus" onerror="this.remove()" src="img/seq4-materiel.png"/>
-<p class="consigne" style="text-align:center">Le matériel de l'expérience.</p>
-</div>
-<p class="amorce"><strong>Problème :</strong> comment calibrer le capteur d'humidité pour obtenir une valeur compréhensible par le jardinier ?</p>
-<h3>Dans la vraie vie</h3>
-<p class="consigne">Les sondes installées dans les champs mesurent l'humidité tous les 10 cm de profondeur, jusqu'aux racines. Selon la technologie, une même sonde ne réagit pas de la même façon dans un sol argileux ou dans un sol sableux : elle doit être calibrée pour le sol dans lequel elle est plantée. Un capteur mal calibré donne des chiffres précis… et faux.</p>
-<div class="qcm" data-qcm="n0" data-titre="N1a — Le même capteur dans deux sols">
-<p class="enonce">Pourquoi une sonde doit-elle être recalibrée quand on la change de parcelle ?</p>
-<div class="choix">
-<label><input id="n0-a" name="n0" type="radio" value="a"/><span class="lt">a</span><span>Parce qu'elle s'use avec le temps</span></label>
-<label><input id="n0-b" name="n0" type="radio" value="b"/><span class="lt">b</span><span>Parce que la même quantité d'eau ne donne pas la même mesure selon la nature du sol</span></label>
-<label><input id="n0-c" name="n0" type="radio" value="c"/><span class="lt">c</span><span>Parce que la température change</span></label>
-<label><input id="n0-d" name="n0" type="radio" value="d"/><span class="lt">d</span><span>Ce n'est pas nécessaire, une sonde est réglée une fois pour toutes</span></label>
-</div>
-</div>
-</div>
-</article>
-<article class="bloc" id="mesures">
-<div class="marge"><span class="duree">15′</span></div>
-<div class="corps">
-<h2>Mon protocole de mesure</h2>
-<p class="consigne">Place le capteur dans le récipient rempli de terre sèche, téléverse le programme fourni, et relève la valeur affichée. Ajoute ensuite l'eau à la pipette, par paliers, en relevant à chaque fois.</p>
-<div class="bandeau">
-<p>Le programme de mesure, à téléverser sur la carte avant de commencer.</p>
-<a href="ressources/arrosage-humidite.hex" rel="noopener" target="_blank">Télécharger le programme</a>
-</div>
-<div class="cartes" data-tab="mesures" id="tabmesures">
-<div class="ligne" data-cle="Terre sèche">
-<span class="cle">Terre sèche</span>
-<input aria-label="eau ajoutée pour Terre sèche" id="m1a" placeholder="eau ajoutée"/>
-<input aria-label="valeur du capteur pour Terre sèche" id="m1b" placeholder="valeur du capteur"/>
-</div>
-<div class="ligne" data-cle="Terre peu humide">
-<span class="cle">Terre peu humide</span>
-<input aria-label="eau ajoutée pour Terre peu humide" id="m2a" placeholder="eau ajoutée"/>
-<input aria-label="valeur du capteur pour Terre peu humide" id="m2b" placeholder="valeur du capteur"/>
-</div>
-<div class="ligne" data-cle="Terre humide">
-<span class="cle">Terre humide</span>
-<input aria-label="eau ajoutée pour Terre humide" id="m3a" placeholder="eau ajoutée"/>
-<input aria-label="valeur du capteur pour Terre humide" id="m3b" placeholder="valeur du capteur"/>
-</div>
-<div class="ligne" data-cle="Terre très humide">
-<span class="cle">Terre très humide</span>
-<input aria-label="eau ajoutée pour Terre très humide" id="m4a" placeholder="eau ajoutée"/>
-<input aria-label="valeur du capteur pour Terre très humide" id="m4b" placeholder="valeur du capteur"/>
-</div>
-<div class="ligne" data-cle="Capteur dans l'eau">
-<span class="cle">Capteur dans l'eau</span>
-<input aria-label="eau ajoutée pour Capteur dans l'eau" id="m5a" placeholder="eau ajoutée"/>
-<input aria-label="valeur du capteur pour Capteur dans l'eau" id="m5b" placeholder="valeur du capteur"/>
-</div>
-</div>
-<p class="consigne">La dernière ligne, capteur plongé dans l'eau, donne la valeur maximale : c'est elle qui servira de référence.</p>
-</div>
-</article>
-<article class="bloc" id="type">
-<div class="marge"><span class="duree">8′</span></div>
-<div class="corps">
-<h2>Le type des données reçues</h2>
-<div class="qcm" data-qcm="n1" data-titre="N1 — Le type des valeurs du capteur">
-<p class="enonce">À quel type correspondent les valeurs fournies par le capteur d'humidité ?</p>
-<div class="choix">
-<label><input id="n1-a" name="n1" type="radio" value="a"/><span class="lt">a</span><span>Chaîne de caractères</span></label>
-<label><input id="n1-b" name="n1" type="radio" value="b"/><span class="lt">b</span><span>Booléen, vrai ou faux</span></label>
-<label><input id="n1-c" name="n1" type="radio" value="c"/><span class="lt">c</span><span>Nombre</span></label>
-<label><input id="n1-d" name="n1" type="radio" value="d"/><span class="lt">d</span><span>Aucun des trois</span></label>
-</div>
-</div>
-<h3>N2 — Sont-elles exploitables ?</h3>
-<p class="consigne">Ces valeurs sont-elles directement utilisables par un jardinier ? Justifie ta réponse.</p>
-<textarea aria-label="Ces valeurs sont-elles directement utilisables par un jardinier ? Justifie ta réponse." data-rep="" id="n2" placeholder=""></textarea>
-</div>
-</article>
-<article class="bloc" id="indice">
-<div class="marge"><span class="duree">15′</span></div>
-<div class="corps">
-<h2>Du nombre brut à un indice relatif</h2>
-<p class="consigne">L’entrée analogique de la carte convertit la tension du capteur en un nombre entier compris entre <strong>0 et 1023</strong>. Ce nombre n’est pas directement un « pourcentage d’humidité ». Nous allons l’<strong>étalonner</strong> avec deux références mesurées sur notre montage : <strong>Vsec</strong> pour l’état de référence sec et <strong>Vhumide</strong> pour l’état de référence très humide.</p>
-<h3>N3 — Construire l’indice relatif</h3>
-<p class="consigne">Écris une formule qui donne 0 % pour Vsec et 100 % pour Vhumide. Puis applique-la à une valeur située entre les deux références.</p>
-<textarea aria-label="Écris une formule qui donne 0 % pour Vsec et 100 % pour Vhumide. Puis applique-la à une valeur située entre le" data-rep="" id="n3" placeholder="Indice = (mesure − Vsec) / (Vhumide − Vsec) × 100…" style="min-height:110px"></textarea>
-<h3>Je vérifie mon indice</h3>
-<div class="cartes" data-tab="conversion" id="tabconversion">
-<div class="ligne" data-cle="Référence sèche Vsec">
-<span class="cle">Référence sèche Vsec</span>
-<input aria-label="indice relatif obtenu pour la référence sèche" id="v1" placeholder="indice relatif obtenu"/>
-</div>
-<div class="ligne" data-cle="Valeur intermédiaire">
-<span class="cle">Valeur intermédiaire</span>
-<input aria-label="indice relatif obtenu pour une valeur intermédiaire" id="v2" placeholder="indice relatif obtenu"/>
-</div>
-<div class="ligne" data-cle="Ma mesure sur l’état sec">
-<span class="cle">Ma mesure sur l’état sec</span>
-<input aria-label="pourcentage obtenu pour Ma mesure sur l’état sec" id="v3" placeholder="indice relatif obtenu"/>
-</div>
-<div class="ligne" data-cle="Ma mesure sur l’état humide">
-<span class="cle">Ma mesure sur l’état humide</span>
-<input aria-label="pourcentage obtenu pour Ma mesure sur l’état humide" id="v4" placeholder="indice relatif obtenu"/>
-</div>
-</div>
-</div>
-</article>
-<article class="bloc" id="programme">
-<div class="marge"><span class="duree">7′</span></div>
-<div class="corps">
-<h2>Je modifie le programme</h2>
-<p class="consigne">Le programme affiche pour l’instant la valeur brute. Modifie-le pour qu’il calcule et affiche l’indice relatif d’humidité à partir de Vsec et Vhumide, puis vérifie sur le montage.</p>
-<div class="cartes" id="etapes">
-<div class="cartefiche" data-etape="Ouvrir le programme dans MakeCode">
-<label class="etape"><input id="et-1" type="checkbox"/><span><b>1.</b> Ouvrir le programme téléversé plus haut dans MakeCode.</span></label>
-</div>
-<div class="cartefiche" data-etape="Insérer la formule d’étalonnage">
-<label class="etape"><input id="et-2" type="checkbox"/><span><b>2.</b> Insérer le calcul qui transforme la valeur brute en indice relatif à partir de Vsec et Vhumide, puis borner le résultat entre 0 et 100.</span></label>
-</div>
-<div class="cartefiche" data-etape="Tester sur les quatre états de terre">
-<label class="etape"><input id="et-3" type="checkbox"/><span><b>3.</b> Tester sur la terre sèche puis humide et vérifier que l'affichage est cohérent.</span></label>
-</div>
-</div>
-<div class="bandeau">
-<p>L'éditeur MakeCode, en blocs.</p>
-<a href="https://makecode.microbit.org/#lang=fr" rel="noopener" target="_blank">Ouvrir MakeCode</a>
-</div>
-</div>
-</article>
-<article class="bloc" id="synthese">
-<div class="marge"><span class="duree">5′</span></div>
-<div class="corps">
-<h2>Ma synthèse</h2>
-<p class="consigne">Explique pourquoi une mesure brute issue d’un capteur doit souvent être étalonnée avant d’être utilisée pour décider.</p>
-<textarea aria-label="Explique pourquoi une mesure brute issue d’un capteur doit souvent être étalonnée avant d’être utilisée pour d" data-rep="" id="rep-synthese" placeholder=""></textarea>
-</div>
-</article>
-<section class="corrbloc" id="correction">
-<h2>Correction expliquée et bilan de l’activité</h2>
-<p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
-<div class="saisie">
-<input aria-label="Mot de passe de la correction" autocomplete="off" id="corr-mdp" placeholder="Mot de passe" spellcheck="false" type="password"/>
-<button id="corr-btn" type="button">Afficher</button>
-</div>
-<p class="refus" hidden="" id="corr-refus">Mot de passe incorrect.</p>
-<div class="corr" hidden="" id="corr-contenu"></div>
-</section>
-<div class="alerte" hidden="" id="alerte"></div>
+
+  <header class="entete">
+    <div class="cycle">
+      <span class="lab">Cycle 4</span>
+      <span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
+    </div>
+    <div class="marque">
+      <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
+      <p class="fil">Technologie · Séquence 4 · Activité 2</p>
+    </div>
+    <h1 class="titre">L'arrosage automatique — séance 2 : calibrer le capteur</h1>
+    <p class="sous">Des valeurs analogiques aux pourcentages · 55 min</p>
+    <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
+      <a href="#materiel"><b>5′</b>Matériel</a>
+      <a href="#mesures"><b>15′</b>Mesures</a>
+      <a href="#type"><b>8′</b>Type de données</a>
+      <a href="#indice"><b>15′</b>Indice</a>
+      <a href="#programme"><b>7′</b>Programme</a>
+      <a href="#synthese"><b>5′</b>Synthèse</a>
+    </nav>
+  </header>
+
+  <section class="identite" aria-label="Mon identité">
+    <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="family-name"></div>
+    <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
+    <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
+    <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
+    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"></div>
+    <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
+  </section>
+  <details class="ref">
+    <summary>Ce que je travaille dans cette activité</summary>
+    <div class="dedans">
+      <dl>
+        <dt>Programme</dt><dd>Technologie, cycle 4, BO du 29 février 2024 — repères de progressivité classe de 3e</dd>
+        <dt>Compétence</dt><dd>Décrire et caractériser l'organisation interne d'un objet ou d'un système technique et ses échanges avec son environnement</dd>
+        <dt>Repère 3e</dt><dd>Associer des grandeurs analogiques issues d'un OST à des données exploitables</dd>
+        <dt>Repère 3e</dt><dd>Déterminer les données utilisées et produites par un programme associé à une fonctionnalité en vue de le modifier</dd>
+      </dl>
+      <p style="margin:14px 0 6px;font-weight:600">Connaissances</p>
+      <ul>
+        <li>Les fonctions des constituants : capteurs, microcontrôleur</li>
+        <li>Vocabulaire des données : type (nombre), données structurées</li>
+        <li>Instruction d'affectation, variable (type nombre)</li>
+      </ul>
+      <p style="margin:14px 0 6px;font-weight:600">Ce que je dois savoir faire</p>
+      <ul>
+        <li>N1 — Je sais mettre en œuvre un protocole de mesure et relever des valeurs</li>
+        <li>N2 — et je sais reconnaître le type et l'étendue des valeurs fournies par un capteur analogique</li>
+        <li>N3 — et je sais construire l’indice relatif qui traduit ces valeurs en pourcentage</li>
+        <li>N4 — et je sais modifier le programme pour afficher une donnée exploitable</li>
+      </ul>
+    </div>
+  </details>
+  <article class="bloc" id="materiel">
+    <div class="marge"><span class="duree">5′</span></div>
+    <div class="corps">
+      <h2>Le matériel et le problème</h2>
+      <div class="situation">
+        <p>Le capteur planté dans la terre renvoie des nombres. Mais 720, est-ce sec ou humide ? Impossible de le dire tant qu'on n'a pas <strong>calibré</strong> le capteur, c'est-à-dire comparé ses valeurs à des états connus de la terre.</p>
+      <img class="illus" src="img/seq4-materiel.png" alt="Capteur d'humidité, carte d'extension micro:bit, récipient étanche et pipette de 2 ml." onerror="this.remove()">
+      <p class="consigne" style="text-align:center">Le matériel de l'expérience.</p>
+      </div>
+      <p class="amorce"><strong>Problème :</strong> comment calibrer le capteur d'humidité pour obtenir une valeur compréhensible par le jardinier ?</p>
+      <h3>Dans la vraie vie</h3>
+      <p class="consigne">Les sondes installées dans les champs mesurent l'humidité tous les 10 cm de profondeur, jusqu'aux racines. Selon la technologie, une même sonde ne réagit pas de la même façon dans un sol argileux ou dans un sol sableux : elle doit être calibrée pour le sol dans lequel elle est plantée. Un capteur mal calibré donne des chiffres précis… et faux.</p>
+      <div class="qcm" data-qcm="n0" data-titre="N1a — Le même capteur dans deux sols">
+        <p class="enonce">Pourquoi une sonde doit-elle être recalibrée quand on la change de parcelle ?</p>
+        <div class="choix">
+          <label><input type="radio" name="n0" id="n0-a" value="a"><span class="lt">a</span><span>Parce qu'elle s'use avec le temps</span></label>
+          <label><input type="radio" name="n0" id="n0-b" value="b"><span class="lt">b</span><span>Parce que la même quantité d'eau ne donne pas la même mesure selon la nature du sol</span></label>
+          <label><input type="radio" name="n0" id="n0-c" value="c"><span class="lt">c</span><span>Parce que la température change</span></label>
+          <label><input type="radio" name="n0" id="n0-d" value="d"><span class="lt">d</span><span>Ce n'est pas nécessaire, une sonde est réglée une fois pour toutes</span></label>
+        </div>
+      </div>
+
+    </div>
+  </article>
+  <article class="bloc" id="mesures">
+    <div class="marge"><span class="duree">15′</span></div>
+    <div class="corps">
+      <h2>Mon protocole de mesure</h2>
+      <p class="consigne">Place le capteur dans le récipient rempli de terre sèche, téléverse le programme fourni, et relève la valeur affichée. Ajoute ensuite l'eau à la pipette, par paliers, en relevant à chaque fois.</p>
+      <div class="bandeau">
+        <p>Le programme de mesure, à téléverser sur la carte avant de commencer.</p>
+        <a href="ressources/arrosage-humidite.hex" target="_blank" rel="noopener">Télécharger le programme</a>
+      </div>
+      <div class="cartes" data-tab="mesures" id="tabmesures">
+        <div class="ligne" data-cle="Terre sèche">
+          <span class="cle">Terre sèche</span>
+          <input id="m1a" placeholder="eau ajoutée" aria-label="eau ajoutée pour Terre sèche">
+          <input id="m1b" placeholder="valeur du capteur" aria-label="valeur du capteur pour Terre sèche">
+        </div>
+        <div class="ligne" data-cle="Terre peu humide">
+          <span class="cle">Terre peu humide</span>
+          <input id="m2a" placeholder="eau ajoutée" aria-label="eau ajoutée pour Terre peu humide">
+          <input id="m2b" placeholder="valeur du capteur" aria-label="valeur du capteur pour Terre peu humide">
+        </div>
+        <div class="ligne" data-cle="Terre humide">
+          <span class="cle">Terre humide</span>
+          <input id="m3a" placeholder="eau ajoutée" aria-label="eau ajoutée pour Terre humide">
+          <input id="m3b" placeholder="valeur du capteur" aria-label="valeur du capteur pour Terre humide">
+        </div>
+        <div class="ligne" data-cle="Terre très humide">
+          <span class="cle">Terre très humide</span>
+          <input id="m4a" placeholder="eau ajoutée" aria-label="eau ajoutée pour Terre très humide">
+          <input id="m4b" placeholder="valeur du capteur" aria-label="valeur du capteur pour Terre très humide">
+        </div>
+        <div class="ligne" data-cle="Capteur dans l'eau">
+          <span class="cle">Capteur dans l'eau</span>
+          <input id="m5a" placeholder="eau ajoutée" aria-label="eau ajoutée pour Capteur dans l'eau">
+          <input id="m5b" placeholder="valeur du capteur" aria-label="valeur du capteur pour Capteur dans l'eau">
+        </div>
+      </div>
+      <p class="consigne">La dernière ligne, capteur plongé dans l'eau, donne la valeur maximale : c'est elle qui servira de référence.</p>
+
+    </div>
+  </article>
+  <article class="bloc" id="type">
+    <div class="marge"><span class="duree">8′</span></div>
+    <div class="corps">
+      <h2>Le type des données reçues</h2>
+      <div class="qcm" data-qcm="n1" data-titre="N1 — Le type des valeurs du capteur">
+        <p class="enonce">À quel type correspondent les valeurs fournies par le capteur d'humidité ?</p>
+        <div class="choix">
+          <label><input type="radio" name="n1" id="n1-a" value="a"><span class="lt">a</span><span>Chaîne de caractères</span></label>
+          <label><input type="radio" name="n1" id="n1-b" value="b"><span class="lt">b</span><span>Booléen, vrai ou faux</span></label>
+          <label><input type="radio" name="n1" id="n1-c" value="c"><span class="lt">c</span><span>Nombre</span></label>
+          <label><input type="radio" name="n1" id="n1-d" value="d"><span class="lt">d</span><span>Aucun des trois</span></label>
+        </div>
+      </div>
+      <h3>N2 — Sont-elles exploitables ?</h3>
+      <p class="consigne">Ces valeurs sont-elles directement utilisables par un jardinier ? Justifie ta réponse.</p>
+      <textarea id="n2" data-rep placeholder="" aria-label="Ces valeurs sont-elles directement utilisables par un jardinier ? Justifie ta réponse."></textarea>
+
+    </div>
+  </article>
+  <article class="bloc" id="indice">
+    <div class="marge"><span class="duree">15′</span></div>
+    <div class="corps">
+      <h2>Du nombre brut à un indice relatif</h2>
+      <p class="consigne">L’entrée analogique de la carte convertit la tension du capteur en un nombre entier compris entre <strong>0 et 1023</strong>. Ce nombre n’est pas directement un « pourcentage d’humidité ». Nous allons l’<strong>étalonner</strong> avec deux références mesurées sur notre montage : <strong>Vsec</strong> pour l’état de référence sec et <strong>Vhumide</strong> pour l’état de référence très humide.</p>
+      <h3>N3 — Construire l’indice relatif</h3>
+      <p class="consigne">Écris une formule qui donne 0 % pour Vsec et 100 % pour Vhumide. Puis applique-la à une valeur située entre les deux références.</p>
+      <textarea id="n3" data-rep placeholder="Indice = (mesure − Vsec) / (Vhumide − Vsec) × 100…" style="min-height:110px" aria-label="Écris une formule qui donne 0 % pour Vsec et 100 % pour Vhumide. Puis applique-la à une valeur située entre le"></textarea>
+      <h3>Je vérifie mon indice</h3>
+      <div class="cartes" data-tab="conversion" id="tabconversion">
+        <div class="ligne" data-cle="Référence sèche Vsec">
+          <span class="cle">Référence sèche Vsec</span>
+          <input id="v1" placeholder="indice relatif obtenu" aria-label="indice relatif obtenu pour la référence sèche">
+        </div>
+        <div class="ligne" data-cle="Valeur intermédiaire">
+          <span class="cle">Valeur intermédiaire</span>
+          <input id="v2" placeholder="indice relatif obtenu" aria-label="indice relatif obtenu pour une valeur intermédiaire">
+        </div>
+        <div class="ligne" data-cle="Ma mesure sur l’état sec">
+          <span class="cle">Ma mesure sur l’état sec</span>
+          <input id="v3" placeholder="indice relatif obtenu" aria-label="pourcentage obtenu pour Ma mesure sur l’état sec">
+        </div>
+        <div class="ligne" data-cle="Ma mesure sur l’état humide">
+          <span class="cle">Ma mesure sur l’état humide</span>
+          <input id="v4" placeholder="indice relatif obtenu" aria-label="pourcentage obtenu pour Ma mesure sur l’état humide">
+        </div>
+      </div>
+
+    </div>
+  </article>
+  <article class="bloc" id="programme">
+    <div class="marge"><span class="duree">7′</span></div>
+    <div class="corps">
+      <h2>Je modifie le programme</h2>
+      <p class="consigne">Le programme affiche pour l’instant la valeur brute. Modifie-le pour qu’il calcule et affiche l’indice relatif d’humidité à partir de Vsec et Vhumide, puis vérifie sur le montage.</p>
+      <div class="cartes" id="etapes">
+        <div class="cartefiche" data-etape="Ouvrir le programme dans MakeCode">
+          <label class="etape"><input type="checkbox" id="et-1"><span><b>1.</b> Ouvrir le programme téléversé plus haut dans MakeCode.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Insérer la formule d’étalonnage">
+          <label class="etape"><input type="checkbox" id="et-2"><span><b>2.</b> Insérer le calcul qui transforme la valeur brute en indice relatif à partir de Vsec et Vhumide, puis borner le résultat entre 0 et 100.</span></label>
+        </div>
+        <div class="cartefiche" data-etape="Tester sur les quatre états de terre">
+          <label class="etape"><input type="checkbox" id="et-3"><span><b>3.</b> Tester sur la terre sèche puis humide et vérifier que l'affichage est cohérent.</span></label>
+        </div>
+      </div>
+      <div class="bandeau">
+        <p>L'éditeur MakeCode, en blocs.</p>
+        <a href="https://makecode.microbit.org/#lang=fr" target="_blank" rel="noopener">Ouvrir MakeCode</a>
+      </div>
+
+    </div>
+  </article>
+  <article class="bloc" id="synthese">
+    <div class="marge"><span class="duree">5′</span></div>
+    <div class="corps">
+      <h2>Ma synthèse</h2>
+      <p class="consigne">Explique pourquoi une mesure brute issue d’un capteur doit souvent être étalonnée avant d’être utilisée pour décider.</p>
+      <textarea id="rep-synthese" data-rep placeholder="" aria-label="Explique pourquoi une mesure brute issue d’un capteur doit souvent être étalonnée avant d’être utilisée pour d"></textarea>
+
+    </div>
+  </article>
+
+
+  <section class="corrbloc" id="correction">
+    <h2>Correction expliquée et bilan de l’activité</h2>
+    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+    <div class="saisie">
+      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction"
+             autocomplete="off" spellcheck="false">
+      <button type="button" id="corr-btn">Afficher</button>
+    </div>
+    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
+    <div class="corr" id="corr-contenu" hidden></div>
+  </section>
+
+  <div id="alerte" class="alerte" hidden></div>
+
 </main>
-<nav aria-label="Navigation dans la Séquence 4" class="pager"><a href="seq4-act1.html">← Séance 1 · De la plante aux données</a><a href="seq4-act3.html">Séance 3 · Je conçois le programme →</a></nav>
+<nav class="pager" aria-label="Navigation dans la Séquence 4"><a href="seq4-act1.html">← Séance 1 · De la plante aux données</a><a href="seq4-act3.html">Séance 3 · Je conçois le programme →</a></nav>
+
+
 <div class="barre">
-<button class="lien" id="effacer" type="button">Effacer mes réponses</button>
-<button class="btn" id="pdf" type="button">Générer le PDF</button>
-<p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+  <button class="lien" id="effacer" type="button">Effacer mes réponses</button>
+  <button class="btn" id="pdf" type="button">Générer le PDF</button>
+  <p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
 </div>
+
 <script>
 (function(){
 "use strict";

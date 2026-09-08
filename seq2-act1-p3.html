@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Les chemins de l'information — partie 3 : configurer le réseau avec Filius</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
@@ -286,8 +285,10 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
   border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
 @media print{.barre,.chrono{display:none}}
 </style>
-<link href="assets/site-addons.css" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/site-addons.css">
+
 <style>.pager{max-width:820px;margin:22px auto 120px;padding:0 20px;display:flex;justify-content:space-between;gap:12px}.pager a{flex:1;text-decoration:none;border:1px solid #D2DEDE;border-radius:9px;background:#fff;padding:11px 14px;color:#0E6E6B;font-family:"Archivo",sans-serif;font-weight:600}.pager a:last-child{text-align:right}.pager a:hover{background:#E2EFEE;border-color:#0E6E6B}@media print{.pager{display:none}}</style>
+
 <!-- Navigation séquentielle harmonisée -->
 <style id="sequence-pager-style">
 .pager{
@@ -329,180 +330,206 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
 }
 @media print{.pager{display:none!important}}
 </style>
+
 </head>
 <body>
-<nav aria-label="Navigation du site" class="navsite">
-<div class="dedans">
-<a class="accueil" href="index.html">← Accueil</a>
-<label class="saut">
-<span>Aller à</span>
-<select aria-label="Aller à une autre activité" id="navfiches">
-<optgroup label="Séquence 1">
-<option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
-<option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
-<option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
-<option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
-</optgroup>
-<optgroup label="Séquence 2">
-<option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels &amp; réseau</option>
-<option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage &amp; débit</option>
-<option selected="" value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
-<option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
-</optgroup>
-<optgroup label="Séquence 3">
-<option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
-<option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
-<option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
-<option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
-<option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
-<option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
-<option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
-</optgroup>
-<optgroup label="Séquence 4">
-<option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
-<option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
-<option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
-<option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
-<option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
-<option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
-</optgroup>
-<optgroup label="Séquence 5"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges fonctionnel</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
-<optgroup label="Outils">
-<option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
-<option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
-<option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
-</optgroup>
-<optgroup label="Olympiades SI · Séquence 1 — Être en bonne santé"><option value="osi-seq1-act1.html">Séance 1 — Choisir un problème de santé</option><option value="osi-seq1-act2.html">Séance 2 — Innovation ou évolution ?</option><option value="osi-seq1-act3.html">Séance 3 — Démarche de projet</option><option value="osi-seq1-act4.html">Séance 4 — Planifier le projet</option></optgroup><optgroup label="Olympiades SI · Séquence 2 — Cahier des charges &amp; SysML"><option value="osi-seq2-act1.html">Séance 1 — Contexte et cas d’utilisation</option><option value="osi-seq2-act2.html">Séance 2 — Exigences et CdCF</option><option value="osi-seq2-act3.html">Séance 3 — Blocs internes et architecture</option><option value="osi-seq3-act1.html">OSI S3 · Séance 1 — Algorithme et logigramme</option><option value="osi-seq3-act2.html">OSI S3 · Séance 2 — Fonctions et solutions techniques</option><option value="osi-seq3-act3.html">OSI S3 · Séance 3 — Revue d’architecture</option><option value="osi-seq3-act4.html">OSI S3 · Séance 4 — Chaînes d’information et d’énergie</option><option value="osi-seq3-act5.html">OSI S3 · Séance 5 — Programmer, tester, corriger</option></optgroup><option value="osi-seq4-act1.html">OSI S4 · Séance 1 — Croquis coté</option><option value="osi-seq4-act2.html">OSI S4 · Séance 2 — Modélisation 3D</option><option value="osi-seq4-act3.html">OSI S4 · Séance 3 — Fabricabilité</option><option value="osi-seq4-act4.html">OSI S4 · Séance 4 — Dossier et pitch final</option></select>
-</label>
-</div>
+
+<nav class="navsite" aria-label="Navigation du site">
+  <div class="dedans">
+    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
+    <label class="saut">
+      <span>Aller à</span>
+      <select id="navfiches" aria-label="Aller à une autre activité">
+        <optgroup label="Séquence 1">
+          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+          <option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
+          <option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
+          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+        </optgroup>
+        <optgroup label="Séquence 2">
+          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
+          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage & débit</option>
+          <option value="seq2-act1-p3.html" selected>Activité 1 · partie 3 — Filius</option>
+          <option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
+        </optgroup>
+        <optgroup label="Séquence 3">
+          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+          <option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+          <option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+          <option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
+        </optgroup>
+        <optgroup label="Séquence 4">
+          <option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
+          <option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
+          <option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
+          <option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
+          <option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
+          <option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
+        </optgroup>
+        <optgroup label="Séquence 5 · OSI — Porte-courrier augmenté"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges</option></optgroup><optgroup label="Séquence 5 · OSI — J’invente, j’innove"><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
+        <optgroup label="Outils">
+          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+        </optgroup>
+      </select>
+    </label>
+  </div>
 </nav>
 <script>
 document.getElementById("navfiches").addEventListener("change", function(){
   if(this.value) location.href = this.value;
 });
 </script>
+
+
 <main class="page">
-<header class="entete">
-<div class="cycle">
-<span class="lab">Cycle 4</span>
-<span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
-</div>
-<div class="marque">
-<img alt="Lycée français de Vienne" onerror="this.remove()" src="img/logo-lfv.png"/>
-<p class="fil">Technologie · Séquence 2 · Activité 1</p>
-</div>
-<h1 class="titre">Les chemins de l'information — partie 3 : configurer le réseau avec Filius</h1>
-<p class="sous">T10 — La circulation de l'information dans un réseau · 55 min</p>
-<nav aria-label="Étapes de l'activité" class="chrono" id="chrono">
-<a href="#niveau3"><b>55′</b>Filius</a>
-</nav>
-</header>
-<section aria-label="Mon identité" class="identite">
-<div class="champ"><label for="nom">Nom</label><input autocomplete="family-name" id="nom"/></div>
-<div class="champ"><label for="prenom">Prénom</label><input autocomplete="given-name" id="prenom"/></div>
-<div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"/></div>
-<div class="champ"><label for="groupe">Groupe</label><input id="groupe"/></div>
-<div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"/></div>
-<div class="champ"><label for="date">Date</label><input id="date" type="date"/></div>
-</section>
-<details class="ref">
-<summary>Ce que je travaille dans cette activité</summary>
-<div class="dedans">
-<dl>
-<dt>Thème</dt><dd>Structure, fonctionnement, comportement : des objets et des systèmes techniques à comprendre</dd>
-<dt>Attendu</dt><dd>SFC1 — Décrire et caractériser l'organisation interne d'un objet ou d'un système technique et ses échanges avec son environnement (énergies, données)</dd>
-<dt>SFC17</dt><dd>Identifier et représenter la circulation d'une information dans le réseau Internet</dd>
-<dt>SFC18</dt><dd>Justifier la nécessité d'un protocole de routage pour faire communiquer plusieurs réseaux</dd>
-<dt>SFC1p</dt><dd>Le rôle et la structure d'une adresse IP, des tables de routage</dd>
-<dt>SFC1q</dt><dd>Le débit et les ordres de grandeur associés</dd>
-</dl>
-<ul>
-<li>N1 — Je sais qu'une information est acheminée entre réseaux grâce à son adresse IP et à des tables de routage, et que la quantité de données transmise par seconde s'appelle le débit</li>
-<li>N2 — et je sais expliquer, avec mes mots, le rôle d'une table de routage, l'effet du débit sur la vitesse de circulation d'une information, et la différence entre une adresse IP privée et une adresse IP publique</li>
-<li>N3 — et je sais configurer et tester, sur un réseau simulé, les adresses IP et les passerelles permettant à plusieurs réseaux de communiquer entre eux</li>
-<li>N4 — et je sais expliquer, adresses IP, tables de routage et débits à l'appui, comment une information est acheminée entre plusieurs réseaux et pourquoi le chemin choisi dépend à la fois du routage et de l'état du trafic</li>
-</ul>
-</div>
-</details>
-<article class="bloc" id="niveau3">
-<div class="marge"><span class="duree">55′</span></div>
-<div class="corps">
-<h2>Activité — niveau 3 : configurer un réseau avec Filius</h2>
-<p class="amorce">Maintenant que vous connaissez le rôle de l'adresse IP, de la table de routage et du débit, vous allez configurer un réseau simulé avec le logiciel Filius pour observer concrètement comment une information y circule.</p>
-<p class="consigne">Coche chaque étape au fur et à mesure. Chaque vidéo se lance dans la page.</p>
-<div class="bandeau">
-<p>Garde la fiche d'aide ouverte dans un autre onglet : vocabulaire, commandes, réglages Filius et checklist de dépannage.</p>
-<a href="outils/aide-reseau.html" rel="noopener" target="_blank">Ouvrir la fiche d'aide</a>
-</div>
-<div class="cartes" id="filius">
-<div class="cartefiche" data-etape="Lancer Filius et choisir le français">
-<label class="etape"><input id="fil-1" type="checkbox"/><span><b>1.</b> Lancer le logiciel Filius, outil de virtualisation de réseau permettant de créer, configurer et tester des réseaux locaux et étendus. À la première installation, choisis la langue française.</span></label>
-<img alt="L'interface du logiciel Filius." class="apercu" onerror="this.remove()" src="img/seq2-act1-filius.jpg"/>
-</div>
-<div class="cartefiche" data-etape="Créer l'architecture du réseau">
-<label class="etape"><input id="fil-2" type="checkbox"/><span><b>2.</b> Créer l'architecture simplifiée de la salle de technologie du réseau du collège.</span></label>
-<div class="video" data-src="https://www.youtube-nocookie.com/embed/IbsJYp71-jU">
-<p class="vt">Filius : créer l'architecture d'un réseau</p>
-<div class="actions">
-<button class="vlire" type="button">Lire la vidéo</button>
-<a href="https://youtu.be/IbsJYp71-jU" rel="noopener" target="_blank">Ouvrir sur YouTube</a>
-</div>
-</div>
-</div>
-<div class="cartefiche" data-etape="Configurer les adresses IP">
-<label class="etape"><input id="fil-3" type="checkbox"/><span><b>3.</b> Configurer les adresses IP des ordinateurs des salles de technologie multimédia et classe mobile, ainsi que des serveurs.</span></label>
-<div class="video" data-src="https://www.youtube-nocookie.com/embed/1blgUDkNktg">
-<p class="vt">Filius : configurer des adresses IP</p>
-<div class="actions">
-<button class="vlire" type="button">Lire la vidéo</button>
-<a href="https://youtu.be/1blgUDkNktg" rel="noopener" target="_blank">Ouvrir sur YouTube</a>
-</div>
-</div>
-</div>
-<div class="cartefiche" data-etape="Configurer les passerelles">
-<label class="etape"><input id="fil-4" type="checkbox"/><span><b>4.</b> Configurer les passerelles des ordinateurs et des serveurs, ainsi que celle du routeur.</span></label>
-<div class="video" data-src="https://www.youtube-nocookie.com/embed/8fQxqCC9mG4">
-<p class="vt">Filius : configurer les passerelles sur le réseau</p>
-<div class="actions">
-<button class="vlire" type="button">Lire la vidéo</button>
-<a href="https://youtu.be/8fQxqCC9mG4" rel="noopener" target="_blank">Ouvrir sur YouTube</a>
-</div>
-</div>
-</div>
-<div class="cartefiche" data-etape="Tester la configuration">
-<label class="etape"><input id="fil-5" type="checkbox"/><span><b>5.</b> Tester la configuration et la communication du réseau, en suivant la vidéo jusqu'à 3:10.</span></label>
-<div class="video" data-src="https://www.youtube-nocookie.com/embed/1FgrXbeeACI">
-<p class="vt">Filius : tester la configuration du réseau</p>
-<div class="actions">
-<button class="vlire" type="button">Lire la vidéo</button>
-<a href="https://youtu.be/1FgrXbeeACI" rel="noopener" target="_blank">Ouvrir sur YouTube</a>
-</div>
-</div>
-</div>
-</div>
-<h3>Ce qui a marché, ce qui a bloqué</h3>
-<p class="consigne">Avant de quitter la salle, note où tu en es : ce que tu as réussi, et le point qui t'a bloqué.</p>
-<textarea aria-label="Avant de quitter la salle, note où tu en es : ce que tu as réussi, et le point qui t'a bloqué." data-rep="" id="bilan-p3" placeholder="J'ai réussi à…  Je suis bloqué sur…"></textarea>
-</div>
-</article>
-<section class="corrbloc" id="correction">
-<h2>Correction expliquée et bilan de l’activité</h2>
-<p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
-<div class="saisie">
-<input aria-label="Mot de passe de la correction" autocomplete="off" id="corr-mdp" placeholder="Mot de passe" spellcheck="false" type="password"/>
-<button id="corr-btn" type="button">Afficher</button>
-</div>
-<p class="refus" hidden="" id="corr-refus">Mot de passe incorrect.</p>
-<div class="corr" hidden="" id="corr-contenu"></div>
-</section>
-<div class="alerte" hidden="" id="alerte"></div>
+
+  <header class="entete">
+    <div class="cycle">
+      <span class="lab">Cycle 4</span>
+      <span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span>
+    </div>
+    <div class="marque">
+      <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
+      <p class="fil">Technologie · Séquence 2 · Activité 1</p>
+    </div>
+    <h1 class="titre">Les chemins de l'information — partie 3 : configurer le réseau avec Filius</h1>
+    <p class="sous">T10 — La circulation de l'information dans un réseau · 55 min</p>
+    <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
+      <a href="#niveau3"><b>55′</b>Filius</a>
+    </nav>
+  </header>
+
+  <section class="identite" aria-label="Mon identité">
+    <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="family-name"></div>
+    <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
+    <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
+    <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
+    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role"></div>
+    <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
+  </section>
+
+  <details class="ref">
+    <summary>Ce que je travaille dans cette activité</summary>
+    <div class="dedans">
+      <dl>
+        <dt>Thème</dt><dd>Structure, fonctionnement, comportement : des objets et des systèmes techniques à comprendre</dd>
+        <dt>Attendu</dt><dd>SFC1 — Décrire et caractériser l'organisation interne d'un objet ou d'un système technique et ses échanges avec son environnement (énergies, données)</dd>
+        <dt>SFC17</dt><dd>Identifier et représenter la circulation d'une information dans le réseau Internet</dd>
+        <dt>SFC18</dt><dd>Justifier la nécessité d'un protocole de routage pour faire communiquer plusieurs réseaux</dd>
+        <dt>SFC1p</dt><dd>Le rôle et la structure d'une adresse IP, des tables de routage</dd>
+        <dt>SFC1q</dt><dd>Le débit et les ordres de grandeur associés</dd>
+      </dl>
+      <ul>
+        <li>N1 — Je sais qu'une information est acheminée entre réseaux grâce à son adresse IP et à des tables de routage, et que la quantité de données transmise par seconde s'appelle le débit</li>
+        <li>N2 — et je sais expliquer, avec mes mots, le rôle d'une table de routage, l'effet du débit sur la vitesse de circulation d'une information, et la différence entre une adresse IP privée et une adresse IP publique</li>
+        <li>N3 — et je sais configurer et tester, sur un réseau simulé, les adresses IP et les passerelles permettant à plusieurs réseaux de communiquer entre eux</li>
+        <li>N4 — et je sais expliquer, adresses IP, tables de routage et débits à l'appui, comment une information est acheminée entre plusieurs réseaux et pourquoi le chemin choisi dépend à la fois du routage et de l'état du trafic</li>
+      </ul>
+    </div>
+  </details>
+
+
+
+
+
+
+  <article class="bloc" id="niveau3">
+    <div class="marge"><span class="duree">55′</span></div>
+    <div class="corps">
+      <h2>Activité — niveau 3 : configurer un réseau avec Filius</h2>
+      <p class="amorce">Maintenant que vous connaissez le rôle de l'adresse IP, de la table de routage et du débit, vous allez configurer un réseau simulé avec le logiciel Filius pour observer concrètement comment une information y circule.</p>
+      <p class="consigne">Coche chaque étape au fur et à mesure. Chaque vidéo se lance dans la page.</p>
+      <div class="bandeau">
+        <p>Garde la fiche d'aide ouverte dans un autre onglet : vocabulaire, commandes, réglages Filius et checklist de dépannage.</p>
+        <a href="outils/aide-reseau.html" target="_blank" rel="noopener">Ouvrir la fiche d'aide</a>
+      </div>
+
+      <div class="cartes" id="filius">
+        <div class="cartefiche" data-etape="Lancer Filius et choisir le français">
+          <label class="etape"><input type="checkbox" id="fil-1"><span><b>1.</b> Lancer le logiciel Filius, outil de virtualisation de réseau permettant de créer, configurer et tester des réseaux locaux et étendus. À la première installation, choisis la langue française.</span></label>
+          <img class="apercu" src="img/seq2-act1-filius.jpg" alt="L'interface du logiciel Filius." onerror="this.remove()">
+        </div>
+
+        <div class="cartefiche" data-etape="Créer l'architecture du réseau">
+          <label class="etape"><input type="checkbox" id="fil-2"><span><b>2.</b> Créer l'architecture simplifiée de la salle de technologie du réseau du collège.</span></label>
+          <div class="video" data-src="https://www.youtube-nocookie.com/embed/IbsJYp71-jU">
+            <p class="vt">Filius : créer l'architecture d'un réseau</p>
+            <div class="actions">
+              <button class="vlire" type="button">Lire la vidéo</button>
+              <a href="https://youtu.be/IbsJYp71-jU" target="_blank" rel="noopener">Ouvrir sur YouTube</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="cartefiche" data-etape="Configurer les adresses IP">
+          <label class="etape"><input type="checkbox" id="fil-3"><span><b>3.</b> Configurer les adresses IP des ordinateurs des salles de technologie multimédia et classe mobile, ainsi que des serveurs.</span></label>
+          <div class="video" data-src="https://www.youtube-nocookie.com/embed/1blgUDkNktg">
+            <p class="vt">Filius : configurer des adresses IP</p>
+            <div class="actions">
+              <button class="vlire" type="button">Lire la vidéo</button>
+              <a href="https://youtu.be/1blgUDkNktg" target="_blank" rel="noopener">Ouvrir sur YouTube</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="cartefiche" data-etape="Configurer les passerelles">
+          <label class="etape"><input type="checkbox" id="fil-4"><span><b>4.</b> Configurer les passerelles des ordinateurs et des serveurs, ainsi que celle du routeur.</span></label>
+          <div class="video" data-src="https://www.youtube-nocookie.com/embed/8fQxqCC9mG4">
+            <p class="vt">Filius : configurer les passerelles sur le réseau</p>
+            <div class="actions">
+              <button class="vlire" type="button">Lire la vidéo</button>
+              <a href="https://youtu.be/8fQxqCC9mG4" target="_blank" rel="noopener">Ouvrir sur YouTube</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="cartefiche" data-etape="Tester la configuration">
+          <label class="etape"><input type="checkbox" id="fil-5"><span><b>5.</b> Tester la configuration et la communication du réseau, en suivant la vidéo jusqu'à 3:10.</span></label>
+          <div class="video" data-src="https://www.youtube-nocookie.com/embed/1FgrXbeeACI">
+            <p class="vt">Filius : tester la configuration du réseau</p>
+            <div class="actions">
+              <button class="vlire" type="button">Lire la vidéo</button>
+              <a href="https://youtu.be/1FgrXbeeACI" target="_blank" rel="noopener">Ouvrir sur YouTube</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Ce qui a marché, ce qui a bloqué</h3>
+      <p class="consigne">Avant de quitter la salle, note où tu en es : ce que tu as réussi, et le point qui t'a bloqué.</p>
+      <textarea id="bilan-p3" data-rep placeholder="J'ai réussi à…  Je suis bloqué sur…" aria-label="Avant de quitter la salle, note où tu en es : ce que tu as réussi, et le point qui t&#x27;a bloqué."></textarea>
+    </div>
+  </article>
+
+
+  <section class="corrbloc" id="correction">
+    <h2>Correction expliquée et bilan de l’activité</h2>
+    <p class="intro">Entre le mot de passe donné par le professeur pour afficher la correction détaillée, les schémas, les ressources et le bilan de ce que tu dois retenir.</p>
+    <div class="saisie">
+      <input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction"
+             autocomplete="off" spellcheck="false">
+      <button type="button" id="corr-btn">Afficher</button>
+    </div>
+    <p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p>
+    <div class="corr" id="corr-contenu" hidden></div>
+  </section>
+
+  <div id="alerte" class="alerte" hidden></div>
+
 </main>
-<nav aria-label="Navigation dans la Séquence 2" class="pager"><a href="seq2-act1-p2.html">← Partie 2 · Jeu sans ordinateur</a><a href="seq2-act1-p4.html">Partie 4 · Analyser le routage →</a></nav>
+<nav class="pager" aria-label="Navigation dans la Séquence 2"><a href="seq2-act1-p2.html">← Partie 2 · Jeu sans ordinateur</a><a href="seq2-act1-p4.html">Partie 4 · Analyser le routage →</a></nav>
+
 <div class="barre">
-<button class="lien" id="effacer" type="button">Effacer mes réponses</button>
-<button class="btn" id="pdf" type="button">Générer le PDF</button>
-<p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
+  <button class="lien" id="effacer" type="button">Effacer mes réponses</button>
+  <button class="btn" id="pdf" type="button">Générer le PDF</button>
+  <p class="etat" id="etat">Tes réponses restent sur cet appareil.</p>
 </div>
+
 <script>
 (function(){
 "use strict";
