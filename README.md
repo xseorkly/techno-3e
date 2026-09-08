@@ -223,3 +223,10 @@ Le bandeau de la fiche d'aide indiquait « Séquence 1 · Séance 6 », je l'ai 
 ## Ajouter une fiche
 
 Envoie-moi la trame, je te renvoie un fichier complet (`seq1-act2.html`, etc.) à déposer dans le dossier, plus la ligne à coller dans `index.html`. Rien d'autre ne bouge.
+
+
+## Olympiades des Sciences de l’Ingénieur — Séquence 1
+- osi-seq1-act1.html : problématique santé et idéation CQFD
+- osi-seq1-act2.html : innovation, famille/lignée et antériorité
+- osi-seq1-act3.html : démarche de projet, rôles et revues
+- osi-seq1-act4.html : rétroplanning et Gantt interactif
