@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <rect width="1200" height="620" fill="#f4f7f7"/>
+  <text x="600" y="54" text-anchor="middle" font-family="Arial" font-size="34" fill="#0E6E6B" font-weight="700">Avant / Aujourd'hui : que doit-on ranger sur un bureau ?</text>
+  <rect x="45" y="100" width="510" height="470" rx="22" fill="#ffffff" stroke="#D2DEDE" stroke-width="3"/>
+  <text x="300" y="145" text-anchor="middle" font-family="Arial" font-size="28" fill="#14262B" font-weight="700">Bureau d'hier</text>
+  <rect x="110" y="430" width="380" height="26" rx="8" fill="#c89f6a"/>
+  <rect x="150" y="250" width="180" height="150" rx="14" fill="#d9c6a3" stroke="#7b6446" stroke-width="4"/>
+  <line x1="170" y1="300" x2="310" y2="300" stroke="#7b6446" stroke-width="4"/>
+  <line x1="170" y1="340" x2="310" y2="340" stroke="#7b6446" stroke-width="4"/>
+  <rect x="365" y="275" width="90" height="110" rx="10" fill="#faf2dc" stroke="#bda97d" stroke-width="3"/>
+  <path d="M390 275 h40 l25 25 v85 h-65 z" fill="#fff8e6" stroke="#bda97d" stroke-width="3"/>
+  <line x1="80" y1="185" x2="160" y2="185" stroke="#C2185B" stroke-width="4"/>
+  <text x="80" y="175" font-family="Arial" font-size="20" fill="#C2185B">courrier papier</text>
+  <line x1="80" y1="215" x2="220" y2="215" stroke="#C2185B" stroke-width="4"/>
+  <text x="80" y="205" font-family="Arial" font-size="20" fill="#C2185B">factures et dossiers</text>
+  <line x1="80" y1="245" x2="240" y2="245" stroke="#C2185B" stroke-width="4"/>
+  <text x="80" y="235" font-family="Arial" font-size="20" fill="#C2185B">magazines / notes</text>
+
+  <rect x="645" y="100" width="510" height="470" rx="22" fill="#ffffff" stroke="#D2DEDE" stroke-width="3"/>
+  <text x="900" y="145" text-anchor="middle" font-family="Arial" font-size="28" fill="#14262B" font-weight="700">Bureau d'aujourd'hui</text>
+  <rect x="710" y="430" width="380" height="26" rx="8" fill="#c89f6a"/>
+  <rect x="760" y="205" width="150" height="205" rx="18" fill="#1b2630"/>
+  <rect x="774" y="223" width="122" height="170" rx="10" fill="#8ad0ff"/>
+  <circle cx="835" cy="404" r="10" fill="#5A6C71"/>
+  <rect x="955" y="220" width="150" height="110" rx="10" fill="#313d4f"/>
+  <rect x="968" y="233" width="124" height="84" rx="6" fill="#d5eef9"/>
+  <rect x="940" y="360" width="34" height="52" rx="8" fill="#232d39"/>
+  <rect x="980" y="360" width="34" height="52" rx="8" fill="#232d39"/>
+  <path d="M1048 373 c16 -20 42 -20 58 0" stroke="#0E6E6B" stroke-width="5" fill="none"/>
+  <path d="M1058 392 c10 -12 26 -12 36 0" stroke="#0E6E6B" stroke-width="5" fill="none"/>
+  <circle cx="1076" cy="408" r="5" fill="#0E6E6B"/>
+  <path d="M745 398 q35 -38 70 0" stroke="#5A6C71" stroke-width="6" fill="none"/>
+  <text x="685" y="185" font-family="Arial" font-size="20" fill="#C2185B">smartphone</text>
+  <line x1="760" y1="188" x2="815" y2="220" stroke="#C2185B" stroke-width="4"/>
+  <text x="1030" y="190" font-family="Arial" font-size="20" fill="#C2185B">tablette</text>
+  <line x1="1020" y1="195" x2="1010" y2="220" stroke="#C2185B" stroke-width="4"/>
+  <text x="690" y="385" font-family="Arial" font-size="20" fill="#C2185B">câbles / accessoires</text>
+  <line x1="820" y1="390" x2="798" y2="390" stroke="#C2185B" stroke-width="4"/>
+  <text x="1015" y="360" font-family="Arial" font-size="20" fill="#C2185B">écouteurs / USB</text>
+  <line x1="1015" y1="365" x2="986" y2="385" stroke="#C2185B" stroke-width="4"/>
+  <rect x="760" y="470" width="300" height="52" rx="12" fill="#E2EFEE" stroke="#0E6E6B"/>
+  <text x="910" y="503" text-anchor="middle" font-family="Arial" font-size="24" fill="#0E6E6B" font-weight="700">Le besoin a évolué : l'objet doit s'adapter.</text>
+</svg>

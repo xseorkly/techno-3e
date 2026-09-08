@@ -42,3 +42,9 @@ Moteur : `assets/evaluation.js`, styles dans `assets/site-addons.css`.
 - Ancienne partie 2 Filius déplacée en `seq2-act1-p3.html` (mot de passe inchangé : `Quartier2B`).
 - Ancienne partie 3 analyse du routage déplacée en `seq2-act1-p4.html` (mot de passe inchangé : `Chemin2C`).
 - Mot de passe de la nouvelle partie 2 : `Adresse2B`.
+
+
+## Séquence 5 — Réinventer le porte-courrier
+- Ajout de 7 séances interactives : besoin, contexte/cas d’utilisation, Ishikawa 6M, cahier des charges, idéation/matrice de décision, croquis & Tinkercad, tests/amélioration/pitch.
+- Chaque séance comporte sauvegarde locale, PDF, correction protégée et bilan.
+- Les diagrammes de référence du dossier Drive ont été optimisés pour le web et intégrés dans les corrections.

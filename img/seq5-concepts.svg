@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <rect width="1200" height="520" fill="#f4f7f7"/>
+  <text x="600" y="52" text-anchor="middle" font-family="Arial" font-size="34" fill="#0E6E6B" font-weight="700">Trois pistes de solution pour lancer l'idéation</text>
+  <g transform="translate(55,95)">
+    <rect width="320" height="360" rx="22" fill="#fff" stroke="#D2DEDE" stroke-width="3"/>
+    <text x="160" y="48" text-anchor="middle" font-family="Arial" font-size="26" fill="#14262B" font-weight="700">A · Modulable</text>
+    <rect x="88" y="115" width="145" height="135" rx="16" fill="#d9c6a3" stroke="#7b6446" stroke-width="4"/>
+    <rect x="112" y="88" width="145" height="135" rx="16" fill="#e9d8b7" stroke="#7b6446" stroke-width="4"/>
+    <rect x="136" y="61" width="145" height="135" rx="16" fill="#f7e9ce" stroke="#7b6446" stroke-width="4"/>
+    <text x="160" y="300" text-anchor="middle" font-family="Arial" font-size="21" fill="#5A6C71">Plusieurs compartiments,
+tri visible, format adaptable.</text>
+  </g>
+  <g transform="translate(440,95)">
+    <rect width="320" height="360" rx="22" fill="#fff" stroke="#D2DEDE" stroke-width="3"/>
+    <text x="160" y="48" text-anchor="middle" font-family="Arial" font-size="26" fill="#14262B" font-weight="700">B · Nomade</text>
+    <rect x="75" y="85" width="175" height="170" rx="24" fill="#e2efee" stroke="#0E6E6B" stroke-width="4"/>
+    <path d="M120 85 q40 -45 85 0" fill="none" stroke="#0E6E6B" stroke-width="8"/>
+    <rect x="100" y="140" width="130" height="20" rx="10" fill="#0E6E6B"/>
+    <rect x="100" y="175" width="95" height="20" rx="10" fill="#0E6E6B"/>
+    <text x="160" y="300" text-anchor="middle" font-family="Arial" font-size="21" fill="#5A6C71">Léger, transportable,
+pour le flex-office.</text>
+  </g>
+  <g transform="translate(825,95)">
+    <rect width="320" height="360" rx="22" fill="#fff" stroke="#D2DEDE" stroke-width="3"/>
+    <text x="160" y="48" text-anchor="middle" font-family="Arial" font-size="26" fill="#14262B" font-weight="700">C · Hybride</text>
+    <rect x="86" y="116" width="148" height="108" rx="16" fill="#d9c6a3" stroke="#7b6446" stroke-width="4"/>
+    <rect x="130" y="72" width="96" height="172" rx="16" fill="#1b2630"/>
+    <rect x="141" y="86" width="74" height="143" rx="10" fill="#8ad0ff"/>
+    <circle cx="178" cy="237" r="5" fill="#C2185B"/>
+    <text x="160" y="300" text-anchor="middle" font-family="Arial" font-size="21" fill="#5A6C71">Courrier + smartphone +
+petits accessoires.</text>
+  </g>
+</svg>
