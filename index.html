@@ -252,6 +252,11 @@ footer p{margin:0}
   body{font-size:16px}
   .hero-top{align-items:flex-start}
   .brand img{height:42px}
+.brand .logo-aefe{height:34px;padding-left:14px;border-left:1px solid var(--trait)}
+@media(max-width:640px){
+  .brand{flex-wrap:wrap;gap:10px}
+  .brand .logo-aefe{height:28px;padding-left:10px}
+}
   .level{display:none}
   .hero h1{font-size:42px}
   .identity-name{font-size:27px}
@@ -285,7 +290,8 @@ footer p{margin:0}
     <div class="hero-top">
       <div class="brand">
         <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
-        <p class="kicker">Technologie · Cycle 4</p>
+          <img class="logo-aefe" src="img/logo-aefe.png" alt="AEFE — Agence pour l'enseignement français à l'étranger" onerror="this.remove()">
+          <p class="kicker">Technologie · Cycle 4</p>
       </div>
       <span class="level">Classe de 3e</span>
     </div>
