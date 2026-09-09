@@ -41,6 +41,38 @@ h2{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;color:var(--d
 footer{margin-top:44px;padding-top:22px;border-top:1px solid var(--trait);
   color:var(--doux);font-size:14.5px}
 a{color:var(--teal)}
+
+/* ---------- Codes de dépôt ---------- */
+.codes{background:var(--carte);border:1px solid var(--trait);border-left:4px solid var(--teal);
+  border-radius:var(--r);padding:20px 22px;margin-top:34px}
+.codes h2{font-family:"Archivo",sans-serif;font-weight:600;font-size:19px;margin:0 0 6px}
+.codes p.intro{color:var(--doux);font-size:15px;margin:0 0 14px}
+.codes .saisie{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.codes input{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--trait);
+  border-radius:8px;background:#fff;color:var(--encre);min-width:170px}
+.codes input:focus{outline:0;border-color:var(--teal)}
+.codes button{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;background:var(--teal);
+  color:#fff;border:0;border-radius:8px;padding:11px 20px;cursor:pointer}
+.codes button:hover{background:#0b5a58}
+.codes button.discret{background:none;border:1px solid var(--trait);color:var(--doux);
+  font-size:13.5px;padding:7px 12px}
+.codes button.discret:hover{border-color:var(--magenta);color:var(--magenta);background:none}
+.codes .etat{margin:12px 0 0;font-size:14.5px}
+.codes .etat.ok{color:#0b5a58}
+.codes .etat.ko{color:var(--magenta)}
+.codes table{width:100%;border-collapse:collapse;margin-top:16px;font-size:15px}
+.codes th,.codes td{border-bottom:1px solid var(--trait);padding:10px 8px;text-align:left}
+.codes th{font-family:"Archivo",sans-serif;font-size:12.5px;text-transform:uppercase;
+  letter-spacing:.04em;color:var(--doux);border-bottom-width:2px}
+.codes td.c{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:600;color:var(--teal)}
+.codes tr.off td{opacity:.45}
+.codes .puce{display:inline-block;font-size:12px;padding:2px 9px;border-radius:20px;
+  font-family:"Archivo",sans-serif}
+.codes .puce.on{background:var(--teal-pale);color:var(--teal)}
+.codes .puce.off{background:#F0F0F0;color:var(--doux)}
+.codes .ajout{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;padding-top:16px;
+  border-top:1px solid var(--trait)}
+@media print{.codes{display:none}}
 @media print{body{background:#fff} .copie{display:none}}
 </style>
 </head>
@@ -231,6 +263,28 @@ a{color:var(--teal)}
     <button class="copie" type="button">Copier</button>
   </div>
 
+
+  <section class="codes" id="codes">
+    <h2>Codes de dépôt des travaux</h2>
+    <p class="intro">Ces codes sont ceux que les élèves saisissent sur la page de dépôt. Tu peux en avoir plusieurs — un par groupe, un par séance — et en désactiver un sans le supprimer. La clé est déjà saisie : clique simplement sur « Afficher les codes ».</p>
+    <div class="saisie">
+      <input type="password" id="cle" value="ProfKlabi2026" autocomplete="off" spellcheck="false" aria-label="Clé professeur">
+      <button type="button" id="voir">Afficher les codes</button>
+    </div>
+    <p class="etat" id="etat" hidden></p>
+    <div id="liste" hidden>
+      <table>
+        <thead><tr><th>Code</th><th>À quoi il sert</th><th>État</th><th></th></tr></thead>
+        <tbody id="corps"></tbody>
+      </table>
+      <div class="ajout">
+        <input type="text" id="nouveau" placeholder="Nouveau code" maxlength="20">
+        <input type="text" id="libelle" placeholder="À quoi il sert" style="flex:1">
+        <button type="button" id="ajouter">Ajouter</button>
+      </div>
+    </div>
+  </section>
+
   <div class="avert">
     <b>Ce que cette page n'est pas.</b> Elle n'est reliée depuis aucune page du site et n'est pas indexée par les moteurs de recherche, mais elle reste accessible à qui connaît son adresse. De même, le verrou des corrections décourage la curiosité sans constituer une véritable protection : quelqu'un qui sait lire le code source d'une page peut le contourner. Cette page sert à organiser les accès. Tu peux communiquer chaque mot de passe aux élèves au moment où tu veux leur donner accès à la correction et au bilan.
   </div>
@@ -256,6 +310,81 @@ document.querySelectorAll(".copie").forEach(function(b){
     }
   });
 });
+
+
+(function(){
+  "use strict";
+  var URL_SCRIPT = "https://script.google.com/macros/s/AKfycbwuJgRQ6J8b9-SYjbfhggTTjvK2y3r7uCngFUIphvgvEadESWg7cKuWzUhEvklsDDI1lw/exec";
+  function el(id){ return document.getElementById(id); }
+  var cle = el("cle"), etat = el("etat"), liste = el("liste"), corps = el("corps");
+
+  function dire(t, type){
+    etat.textContent = t; etat.hidden = !t;
+    etat.className = "etat " + (type || "");
+  }
+
+  function appel(charge){
+    return fetch(URL_SCRIPT, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(Object.assign({ cle: cle.value.trim() }, charge))
+    }).then(function(r){ return r.json(); });
+  }
+
+  function afficher(codes){
+    corps.innerHTML = codes.map(function(c){
+      return '<tr class="' + (c.actif ? "" : "off") + '">'
+        + '<td class="c">' + c.code + '</td>'
+        + '<td>' + (c.libelle || "&mdash;") + '</td>'
+        + '<td><span class="puce ' + (c.actif ? "on" : "off") + '">'
+        + (c.actif ? "actif" : "désactivé") + '</span></td>'
+        + '<td style="text-align:right;white-space:nowrap">'
+        + '<button type="button" class="discret" data-bascule="' + c.code + '">'
+        + (c.actif ? "Désactiver" : "Réactiver") + '</button> '
+        + '<button type="button" class="discret" data-supprime="' + c.code + '">Supprimer</button>'
+        + '</td></tr>';
+    }).join("");
+    liste.hidden = false;
+  }
+
+  function traiter(r){
+    if(r.statut === "OK"){
+      if(r.codes) afficher(r.codes);
+      dire(r.message || "", "ok");
+    }else{
+      dire(r.message || "Opération refusée.", "ko");
+    }
+  }
+
+  el("voir").addEventListener("click", function(){
+    if(!cle.value.trim()){ dire("Saisis d'abord ta clé professeur.", "ko"); return; }
+    dire("Lecture en cours…", "");
+    appel({ action: "codes" }).then(traiter)
+      .catch(function(){ dire("Service injoignable. Vérifie ta connexion.", "ko"); });
+  });
+  cle.addEventListener("keydown", function(e){ if(e.key === "Enter") el("voir").click(); });
+
+  el("ajouter").addEventListener("click", function(){
+    var c = el("nouveau").value.trim();
+    if(!c){ dire("Saisis le nouveau code.", "ko"); return; }
+    appel({ action: "ajouter", code: c, libelle: el("libelle").value.trim() })
+      .then(function(r){ traiter(r); if(r.statut === "OK"){ el("nouveau").value = ""; el("libelle").value = ""; } })
+      .catch(function(){ dire("Service injoignable.", "ko"); });
+  });
+
+  corps.addEventListener("click", function(e){
+    var b = e.target.closest("button"); if(!b) return;
+    if(b.dataset.bascule){
+      appel({ action: "basculer", code: b.dataset.bascule }).then(traiter)
+        .catch(function(){ dire("Service injoignable.", "ko"); });
+    }
+    if(b.dataset.supprime){
+      if(!confirm("Supprimer définitivement le code " + b.dataset.supprime + " ?")) return;
+      appel({ action: "supprimer", code: b.dataset.supprime }).then(traiter)
+        .catch(function(){ dire("Service injoignable.", "ko"); });
+    }
+  });
+})();
 </script>
 </body>
 </html>
