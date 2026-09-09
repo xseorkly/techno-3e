@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Déposer notre travail — Technologie 3e6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --papier:#F4F7F7; --carte:#FFFFFF; --encre:#14262B; --doux:#5A6C71;
+  --teal:#0E6E6B; --teal-pale:#E2EFEE; --magenta:#C2185B; --trait:#D2DEDE; --r:12px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papier);color:var(--encre);
+  font-family:"Source Sans 3",system-ui,sans-serif;font-size:17px;line-height:1.55}
+.page{max-width:760px;margin:0 auto;padding:0 20px 80px}
+
+.navsite{position:sticky;top:0;z-index:20;display:flex;align-items:center;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--trait);padding:9px 20px}
+.navsite .dedans{max-width:760px;margin:0 auto;width:100%}
+.navsite a{display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  font-family:"Archivo",sans-serif;font-weight:600;font-size:14.5px;color:var(--teal);
+  border:1px solid var(--trait);border-radius:8px;padding:7px 14px;background:#fff}
+.navsite a:hover{border-color:var(--teal);background:var(--teal-pale)}
+
+header{padding:44px 0 26px;border-bottom:1px solid var(--trait)}
+.fil{font-family:"Archivo",sans-serif;font-weight:600;font-size:13px;color:var(--teal);margin:0 0 8px}
+h1{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(28px,5vw,38px);
+  line-height:1.12;margin:0 0 14px}
+header p{color:var(--doux);margin:0;max-width:62ch}
+
+.etapes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:26px 0 8px}
+.etapes div{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:14px 16px}
+.etapes b{display:block;font-family:"Archivo",sans-serif;font-size:13px;color:var(--teal);margin-bottom:4px}
+.etapes p{margin:0;font-size:14.5px;line-height:1.45}
+@media(max-width:640px){.etapes{grid-template-columns:1fr}}
+
+form{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);
+  padding:24px 26px;margin-top:24px}
+h2.section{font-family:"Archivo",sans-serif;font-size:16.5px;margin:0 0 4px}
+p.explique{color:var(--doux);font-size:14.5px;margin:0 0 16px}
+.membre{display:grid;grid-template-columns:30px 1fr 1fr;gap:12px;align-items:end;margin-bottom:12px}
+.membre .rang{font-family:"Archivo",sans-serif;font-weight:700;font-size:15px;color:var(--teal);
+  padding-bottom:11px}
+@media(max-width:640px){.membre{grid-template-columns:1fr 1fr}.membre .rang{grid-column:1/-1;padding:0}}
+label.champ{display:block;margin-bottom:16px}
+label.champ span{display:block;font-size:13.5px;color:var(--doux);margin-bottom:5px}
+label.champ em{font-style:normal;color:var(--doux)}
+input[type=text],select{width:100%;font:inherit;font-size:16px;padding:11px 12px;
+  border:1px solid var(--trait);border-radius:9px;background:#fff;color:var(--encre)}
+input:focus,select:focus{outline:0;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-pale)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.duo{grid-template-columns:1fr}}
+hr.sep{border:0;border-top:1px solid var(--trait);margin:22px 0}
+
+.zone{border:2px dashed var(--trait);border-radius:var(--r);padding:26px 20px;text-align:center;
+  background:#FBFDFD;cursor:pointer;transition:border-color .15s,background .15s}
+.zone:hover,.zone.survol{border-color:var(--teal);background:var(--teal-pale)}
+.zone b{display:block;font-family:"Archivo",sans-serif;font-size:16px;margin-bottom:4px}
+.zone span{color:var(--doux);font-size:14.5px}
+.zone.rempli{border-style:solid;border-color:var(--teal);background:var(--teal-pale)}
+#choisi{display:none;margin-top:14px;font-size:15px}
+#choisi b{font-family:"Archivo",sans-serif}
+
+.envoyer{width:100%;margin-top:20px;font-family:"Archivo",sans-serif;font-weight:600;
+  font-size:17px;background:var(--teal);color:#fff;border:0;border-radius:10px;
+  padding:15px 20px;cursor:pointer}
+.envoyer:hover{background:#0b5a58}
+.envoyer:disabled{background:#9FB6B5;cursor:not-allowed}
+
+.message{margin-top:18px;border-radius:10px;padding:14px 18px;font-size:15.5px;display:none}
+.message.ok{background:var(--teal-pale);border:1px solid var(--teal);color:#0b5a58;display:block}
+.message.ko{background:#FDECF2;border:1px solid var(--magenta);color:#8E1244;display:block}
+.message.attente{background:#FFF8E6;border:1px solid #E8D08A;display:block}
+
+.aide{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);
+  padding:18px 22px;margin-top:26px;font-size:15.5px}
+.aide h2{font-family:"Archivo",sans-serif;font-size:16px;margin:0 0 10px}
+.aide p{margin:0 0 10px}
+.aide p:last-child{margin:0}
+footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--trait);
+  color:var(--doux);font-size:14.5px}
+</style>
+</head>
+<body>
+
+<nav class="navsite"><div class="dedans"><a href="index.html">&#8592;&nbsp;Accueil</a></div></nav>
+
+<main class="page">
+
+  <header>
+    <p class="fil">Technologie · Classe de 3e6</p>
+    <h1>Déposer notre travail</h1>
+    <p>Votre PDF part directement chez votre professeur. Aucun compte à créer, aucune connexion à faire. Un seul dépôt par groupe suffit : inscrivez tous les membres, le fichier comptera pour chacun.</p>
+  </header>
+
+  <div class="etapes">
+    <div><b>1. Générez le PDF</b><p>Sur la fiche de l'activité, bouton « Générer le PDF ». Le fichier arrive dans les téléchargements.</p></div>
+    <div><b>2. Remplissez le formulaire</b><p>Les noms du groupe, l'activité concernée, et le code donné par le professeur.</p></div>
+    <div><b>3. Envoyez</b><p>Un message de confirmation s'affiche. Gardez le PDF : c'est votre trace de travail.</p></div>
+  </div>
+
+  <form id="formulaire" autocomplete="off">
+
+    <h2 class="section">Qui dépose ?</h2>
+    <p class="explique">Le premier élève est obligatoire. Ajoutez les autres membres du groupe s'il y en a, jusqu'à trois.</p>
+
+    <div class="membre">
+      <span class="rang">1</span>
+      <label class="champ" style="margin:0"><span>Nom</span><input type="text" id="nom1" required></label>
+      <label class="champ" style="margin:0"><span>Prénom</span><input type="text" id="prenom1" required></label>
+    </div>
+    <div class="membre">
+      <span class="rang">2</span>
+      <label class="champ" style="margin:0"><span>Nom <em>— si besoin</em></span><input type="text" id="nom2"></label>
+      <label class="champ" style="margin:0"><span>Prénom</span><input type="text" id="prenom2"></label>
+    </div>
+    <div class="membre">
+      <span class="rang">3</span>
+      <label class="champ" style="margin:0"><span>Nom <em>— si besoin</em></span><input type="text" id="nom3"></label>
+      <label class="champ" style="margin:0"><span>Prénom</span><input type="text" id="prenom3"></label>
+    </div>
+
+    <hr class="sep">
+
+    <div class="duo">
+      <label class="champ"><span>Numéro de groupe <em>— facultatif</em></span>
+        <input type="text" id="groupe" placeholder="ex. 4"></label>
+      <label class="champ"><span>Code de dépôt</span>
+        <input type="text" id="code" placeholder="donné par le professeur" required></label>
+    </div>
+
+    <label class="champ"><span>Activité concernée</span>
+      <select id="activite" required>
+        <option value="">Choisir…</option>
+        <optgroup label="Séquence 1 — Le smartphone">
+          <option>S1-A1 — Lancement de séquence</option>
+          <option>S1-A2-P1 — Du téléphone au smartphone, comprendre l'évolution</option>
+          <option>S1-A2-P2 — Du téléphone au smartphone, préparer l'exposition</option>
+          <option>S1-A3 — L'IA dans notre poche</option>
+        </optgroup>
+        <optgroup label="Séquence 2 — La circulation de l'information">
+          <option>S2-A1-P1 — Identifier les éléments d'un réseau</option>
+          <option>S2-A1-P2 — Le réseau postal des données</option>
+          <option>S2-A1-P3 — Configurer le réseau avec Filius</option>
+          <option>S2-A1-P4 — Analyser le routage</option>
+        </optgroup>
+        <optgroup label="Séquence 3 — Programmer et reconnaître">
+          <option>S3-A1-P1 — La micro:bit, découvrir la carte et le hasard</option>
+          <option>S3-A1-P2 — La micro:bit, deux cartes qui jouent ensemble</option>
+          <option>S3-A2-P1 — L'IA qui reconnaît, trois caméras qui décident</option>
+          <option>S3-A2-P2 — L'IA qui reconnaît, j'entraîne ma propre IA</option>
+          <option>S3-A2-P3 — L'IA qui reconnaît, où mon IA se trompe-t-elle</option>
+          <option>S3-A3-P1 — Jouer contre la machine, je conçois le système</option>
+          <option>S3-A3-P2 — Jouer contre la machine, je réalise et je teste</option>
+        </optgroup>
+        <optgroup label="Séquence 4 — L'arrosage automatique">
+          <option>S4-A1 — De la plante aux données</option>
+          <option>S4-A2 — Calibrer le capteur</option>
+          <option>S4-A3 — Je conçois le programme</option>
+          <option>S4-A4 — Les opérateurs logiques</option>
+          <option>S4-A5 — Enregistrer les données</option>
+          <option>S4-A6 — Diagnostiquer et alerter</option>
+        </optgroup>
+        <optgroup label="Séquence 5 — Olympiades, le porte-courrier augmenté">
+          <option>S5-A1 — Un objet encore utile ?</option>
+          <option>S5-A2 — Avec quoi interagit-il ?</option>
+          <option>S5-A3 — Pourquoi l'existant pose-t-il problème ?</option>
+          <option>S5-A4 — Construire le cahier des charges</option>
+          <option>S5-A5 — Imaginer et choisir une solution</option>
+          <option>S5-A6 — Du croquis au modèle 3D</option>
+          <option>S5-A7 — Tester, améliorer et convaincre</option>
+        </optgroup>
+        <optgroup label="Séquence 6 — Olympiades, j'invente j'innove">
+          <option>S6-A1 — Créer notre startup et observer la ville</option>
+          <option>S6-A2 — Comprendre l'utilisateur, persona et 5 Pourquoi</option>
+          <option>S6-A3 — Transformer un besoin en défi d'innovation</option>
+          <option>S6-A4 — Innovation ou déjà-vu ?</option>
+          <option>S6-A5 — Organiser le projet</option>
+          <option>S6-A6 — Décrire les usages avec SysML</option>
+          <option>S6-A7 — Construire le cahier des charges</option>
+          <option>S6-A8 — Prévoir le fonctionnement, l'algorigramme</option>
+          <option>S6-A9 — Choisir les solutions techniques</option>
+          <option>S6-A10 — Construire l'architecture du système</option>
+          <option>S6-A11 — Programmer, tester, corriger</option>
+          <option>S6-A12 — Du concept au croquis coté</option>
+          <option>S6-A13 — Modéliser la solution en 3D</option>
+          <option>S6-A14 — Valider et convaincre</option>
+        </optgroup>
+        <optgroup label="Évaluations">
+          <option>EVAL-S1-A2 — Évaluation, du téléphone au smartphone</option>
+          <option>EVAL-S1-A3 — Évaluation, l'IA dans notre poche</option>
+        </optgroup>
+      </select>
+    </label>
+
+    <div class="zone" id="zone" tabindex="0" role="button" aria-label="Choisir le fichier PDF à déposer">
+      <b>Choisissez votre PDF</b>
+      <span>ou faites-le glisser ici · 20 Mo maximum</span>
+      <input type="file" id="fichier" accept="application/pdf,.pdf" hidden>
+    </div>
+    <p id="choisi"></p>
+
+    <button type="submit" class="envoyer" id="bouton">Envoyer notre travail</button>
+    <div class="message" id="message" role="status" aria-live="polite"></div>
+  </form>
+
+  <div class="aide">
+    <h2>Si ça ne marche pas</h2>
+    <p><strong>« Code de dépôt incorrect »</strong> — le code est celui écrit au tableau, avec les majuscules.</p>
+    <p><strong>« Seuls les fichiers PDF sont acceptés »</strong> — vous avez sans doute choisi une photo ou un document Word. Revenez sur la fiche et utilisez le bouton « Générer le PDF ».</p>
+    <p><strong>Rien ne se passe</strong> — vérifiez la connexion, puis réessayez une fois. Si le problème persiste, gardez le PDF et prévenez le professeur : votre travail n'est pas perdu.</p>
+    <p><strong>Chacun a rempli sa propre fiche ?</strong> Alors chacun dépose son PDF séparément, en n'inscrivant que son nom.</p>
+  </div>
+
+  <footer>
+    <p>Lycée français de Vienne · Technologie · M. Klabi</p>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- À REMPLACER par l'URL de ton déploiement Apps Script ---- */
+  var URL_SCRIPT = "COLLE_ICI_L_URL_DE_TON_APPS_SCRIPT";
+
+  var CLASSE = "3e6";
+  var TAILLE_MAX = 20 * 1024 * 1024;
+  function el(id){ return document.getElementById(id); }
+  var zone = el("zone"), champFichier = el("fichier"), choisi = el("choisi"),
+      message = el("message"), bouton = el("bouton");
+  var fichier = null;
+
+  function dire(texte, type){
+    message.textContent = texte;
+    message.className = "message " + type;
+  }
+
+  function prendre(f){
+    if(!f) return;
+    if(f.type.indexOf("pdf") === -1 && !/\.pdf$/i.test(f.name)){
+      dire("Ce n'est pas un fichier PDF. Utilisez le bouton « Générer le PDF » sur la fiche.", "ko");
+      return;
+    }
+    if(f.size > TAILLE_MAX){
+      dire("Fichier trop volumineux : " + Math.round(f.size/1048576) + " Mo pour 20 Mo autorisés.", "ko");
+      return;
+    }
+    fichier = f;
+    zone.classList.add("rempli");
+    choisi.style.display = "block";
+    choisi.innerHTML = "Fichier retenu : <b>" + f.name + "</b> — " + Math.max(1, Math.round(f.size/1024)) + " Ko";
+    message.className = "message";
+  }
+
+  zone.addEventListener("click", function(){ champFichier.click(); });
+  zone.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " ") champFichier.click(); });
+  champFichier.addEventListener("change", function(){ prendre(this.files[0]); });
+  ["dragenter","dragover"].forEach(function(t){
+    zone.addEventListener(t, function(e){ e.preventDefault(); zone.classList.add("survol"); });
+  });
+  ["dragleave","drop"].forEach(function(t){
+    zone.addEventListener(t, function(e){ e.preventDefault(); zone.classList.remove("survol"); });
+  });
+  zone.addEventListener("drop", function(e){ prendre(e.dataTransfer.files[0]); });
+
+  function membres(){
+    var liste = [];
+    for(var i = 1; i <= 3; i++){
+      var n = el("nom" + i).value.trim(), p = el("prenom" + i).value.trim();
+      if(n || p){
+        if(!n || !p) return { erreur: "Membre " + i + " : il manque le nom ou le prénom." };
+        liste.push({ nom: n, prenom: p });
+      }
+    }
+    if(!liste.length) return { erreur: "Indiquez au moins un nom et un prénom." };
+    return { liste: liste };
+  }
+
+  el("formulaire").addEventListener("submit", function(e){
+    e.preventDefault();
+    if(URL_SCRIPT.indexOf("http") !== 0){
+      dire("Le dépôt n'est pas encore configuré. Prévenez votre professeur.", "ko");
+      return;
+    }
+    var m = membres();
+    if(m.erreur){ dire(m.erreur, "ko"); return; }
+    var activite = el("activite").value, code = el("code").value.trim();
+    if(!activite){ dire("Choisissez l'activité concernée.", "ko"); return; }
+    if(!code){ dire("Le code de dépôt est obligatoire.", "ko"); return; }
+    if(!fichier){ dire("Choisissez d'abord votre fichier PDF.", "ko"); return; }
+
+    bouton.disabled = true;
+    bouton.textContent = "Envoi en cours…";
+    dire("Envoi en cours, ne fermez pas la page…", "attente");
+
+    var lecteur = new FileReader();
+    lecteur.onload = function(){
+      var base64 = String(lecteur.result).split(",")[1];
+      fetch(URL_SCRIPT, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          action: "depot", code: code, classe: CLASSE,
+          membres: m.liste, groupe: el("groupe").value.trim(),
+          activite: activite,
+          type: fichier.type || "application/pdf", fichier: base64
+        })
+      })
+      .then(function(r){ return r.json(); })
+      .then(function(rep){
+        bouton.disabled = false;
+        bouton.textContent = "Envoyer notre travail";
+        if(rep.statut === "OK"){
+          dire("Travail déposé sous le nom " + rep.fichier + ". Gardez votre PDF de votre côté.", "ok");
+          fichier = null; champFichier.value = "";
+          zone.classList.remove("rempli"); choisi.style.display = "none";
+        }else{
+          dire(rep.message || "Le dépôt a échoué. Réessayez.", "ko");
+        }
+      })
+      .catch(function(){
+        bouton.disabled = false;
+        bouton.textContent = "Envoyer notre travail";
+        dire("Envoi impossible. Vérifiez la connexion et réessayez. Votre PDF n'est pas perdu.", "ko");
+      });
+    };
+    lecteur.onerror = function(){
+      bouton.disabled = false;
+      bouton.textContent = "Envoyer notre travail";
+      dire("Le fichier n'a pas pu être lu. Réessayez.", "ko");
+    };
+    lecteur.readAsDataURL(fichier);
+  });
+})();
+</script>
+</body>
+</html>
