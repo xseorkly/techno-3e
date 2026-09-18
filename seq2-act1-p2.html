@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les chemins de l'information — partie 2 : adresse IP, routage et débit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{
+  --papier:#F4F7F7; --carte:#FFFFFF; --encre:#14262B; --doux:#5A6C71;
+  --teal:#0E6E6B; --teal-pale:#E2EFEE; --magenta:#C2185B; --trait:#D2DEDE;
+  --ok:#2E7D5B; --r:10px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--papier);color:var(--encre);
+  font-family:"Source Sans 3",system-ui,sans-serif;font-size:17px;line-height:1.55}
+.page{max-width:820px;margin:0 auto;padding:0 20px 140px}
+
+/* En-tête */
+
+/* ---------- Barre de navigation ---------- */
+.navsite{
+  position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--trait);padding:9px 20px;
+}
+.navsite .dedans{max-width:820px;margin:0 auto;width:100%;display:flex;align-items:center;gap:16px}
+.navsite .accueil{
+  display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  font-family:"Archivo",sans-serif;font-weight:600;font-size:14.5px;color:var(--teal);
+  border:1px solid var(--trait);border-radius:8px;padding:7px 14px;background:#fff;
+}
+.navsite .accueil:hover{border-color:var(--teal);background:var(--teal-pale)}
+.navsite .accueil:focus-visible{outline:2px solid var(--magenta);outline-offset:2px}
+.navsite .saut{margin-left:auto;display:flex;align-items:center;gap:9px}
+.navsite .saut span{font-size:13.5px;color:var(--doux)}
+.navsite select{
+  font:inherit;font-size:14.5px;color:var(--encre);background:#fff;
+  border:1px solid var(--trait);border-radius:8px;padding:7px 10px;max-width:min(52vw,330px);
+}
+.navsite select:focus{outline:0;border-color:var(--teal)}
+@media(max-width:640px){
+  .navsite{padding:8px 14px;gap:10px}
+  .navsite .saut span{display:none}
+  .navsite select{max-width:none;flex:1}
+}
+@media print{.navsite{display:none}}
+
+.entete{position:relative;background:var(--carte);border:1px solid var(--trait);
+  border-top:4px solid var(--teal);border-radius:var(--r);margin-top:26px;padding:26px 26px 0}
+.marque{display:flex;align-items:center;gap:13px;margin:0 0 14px}
+.marque img{height:44px;width:auto;display:block}
+.fil{font-family:"Archivo",sans-serif;font-weight:600;font-size:13px;color:var(--teal);
+  margin:0;padding-left:13px;border-left:1px solid var(--trait)}
+.titre{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(25px,4.2vw,34px);
+  line-height:1.14;margin:0 0 10px;max-width:22ch}
+.sous{color:var(--doux);margin:0 0 22px;font-size:16px}
+.cycle{position:absolute;right:26px;top:26px;display:flex;align-items:center;gap:8px}
+.cycle .lab{font-family:"Archivo",sans-serif;font-weight:600;font-size:11px;color:var(--doux)}
+.cycle .niv{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+  border:1.5px solid var(--trait);color:var(--doux);font-family:"Archivo",sans-serif;font-weight:600;font-size:13px}
+.cycle .niv.actif{background:var(--magenta);border-color:var(--magenta);color:#fff}
+@media(max-width:640px){.cycle{position:static;margin-bottom:14px}}
+
+.chrono{display:flex;gap:2px;border-top:1px solid var(--trait);margin:0 -26px;
+  overflow-x:auto;scrollbar-width:thin}
+.chrono a{flex:1 0 auto;min-width:78px;text-align:center;padding:12px 8px 14px;text-decoration:none;
+  color:var(--doux);border-top:3px solid transparent;font-size:12px;line-height:1.3}
+.chrono a:hover{background:var(--teal-pale);color:var(--teal)}
+.chrono a b{display:block;font-family:"Archivo",sans-serif;font-size:16px;color:var(--encre);font-weight:600}
+.chrono a.fait{border-top-color:var(--teal)}
+.chrono a.fait b{color:var(--teal)}
+
+/* Identité */
+.identite{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);
+  margin-top:18px;padding:18px 22px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px 18px}
+@media(max-width:640px){.identite{grid-template-columns:repeat(2,1fr)}}
+.champ label{display:block;font-size:13px;color:var(--doux);margin-bottom:4px}
+.champ input{width:100%;border:0;border-bottom:1.5px solid var(--trait);background:transparent;
+  font:inherit;font-size:16px;color:var(--encre);padding:4px 2px}
+.champ input:focus{outline:0;border-bottom-color:var(--teal)}
+.champ input.manque{border-bottom-color:var(--magenta)}
+
+/* Référentiel repliable */
+.ref{margin-top:18px;background:var(--carte);border:1px solid var(--trait);border-radius:var(--r)}
+.ref summary{cursor:pointer;padding:14px 22px;font-size:15px;color:var(--doux);
+  font-family:"Archivo",sans-serif;font-weight:600}
+.ref summary::marker{color:var(--teal)}
+.ref .dedans{padding:0 22px 20px;font-size:15px}
+.ref dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px}
+.ref dt{color:var(--teal);font-weight:600;white-space:nowrap}
+.ref dd{margin:0}
+.ref ul{margin:10px 0 0;padding-left:20px}
+
+/* Blocs */
+.bloc{display:grid;grid-template-columns:64px 1fr;gap:0 18px;margin-top:32px;scroll-margin-top:16px}
+@media(max-width:640px){.bloc{grid-template-columns:1fr}}
+.marge{text-align:right;padding-top:3px}
+.marge .duree{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;color:var(--doux);
+  display:inline-block;padding:2px 8px;border-radius:20px;background:var(--carte);border:1px solid var(--trait)}
+.bloc.fait .marge .duree{color:var(--teal);border-color:var(--teal);background:var(--teal-pale)}
+@media(max-width:640px){.marge{text-align:left;margin-bottom:8px}}
+.corps h2{font-family:"Archivo",sans-serif;font-weight:600;font-size:20px;margin:0 0 4px}
+.corps h3{font-family:"Archivo",sans-serif;font-weight:600;font-size:17px;margin:26px 0 6px}
+.consigne{color:var(--doux);font-size:15px;margin:0 0 12px}
+.amorce{background:var(--teal-pale);border-radius:var(--r);padding:16px 18px;font-size:16px;margin:0 0 6px}
+
+textarea{width:100%;min-height:130px;resize:vertical;background:var(--carte);
+  border:1px solid var(--trait);border-radius:var(--r);padding:16px;font:inherit;
+  font-size:16.5px;line-height:1.7;color:var(--encre)}
+textarea:focus{outline:0;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-pale)}
+textarea::placeholder{color:#9FB0B3}
+
+/* Situation */
+.situation{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:22px}
+.situation p{margin:0;font-size:18px;line-height:1.65}
+.illus{width:100%;border-radius:6px;display:block;margin:0 0 18px}
+
+/* QCM */
+.qcm{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:18px 20px}
+.qcm .enonce{font-weight:600;margin:0 0 4px}
+.qcm .note{color:var(--doux);font-size:14.5px;margin:0 0 12px}
+.choix{display:grid;gap:8px}
+.choix label{display:flex;gap:12px;align-items:flex-start;padding:11px 14px;
+  border:1px solid var(--trait);border-radius:8px;cursor:pointer;font-size:16px}
+.choix label:hover{border-color:var(--teal)}
+.choix input{accent-color:var(--teal);margin:4px 0 0;width:18px;height:18px;flex:none}
+.choix label:has(input:checked){border-color:var(--teal);background:var(--teal-pale)}
+.choix .lt{font-family:"Archivo",sans-serif;font-weight:600;color:var(--teal);flex:none}
+
+/* Association */
+.assoc{display:grid;gap:12px}
+.paire{display:flex;gap:16px;align-items:center;background:var(--carte);
+  border:1px solid var(--trait);border-radius:var(--r);padding:14px 16px}
+.paire img{width:54px;height:auto;flex:none;border-radius:4px}
+.paire .nom{font-weight:600;flex:none;width:150px;font-size:15.5px}
+.paire select{flex:1;min-width:0;font:inherit;font-size:15.5px;padding:9px 10px;
+  border:1px solid var(--trait);border-radius:8px;background:#fff;color:var(--encre)}
+.paire select:focus{outline:0;border-color:var(--teal)}
+@media(max-width:640px){
+  .paire{flex-wrap:wrap}
+  .paire .nom{width:auto}
+  .paire select{flex-basis:100%}
+}
+
+/* Cartes de saisie (frise, fiche technique) */
+.cartes{display:grid;gap:12px}
+.cartefiche{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:16px 18px}
+.cartefiche .chapeau{font-family:"Archivo",sans-serif;font-weight:600;font-size:16px;
+  color:var(--teal);margin:0 0 12px}
+.grille{display:grid;gap:12px}
+.grille.trois{grid-template-columns:1fr 1fr 1fr}
+.grille.deuxtiers{grid-template-columns:130px 1fr}
+@media(max-width:640px){.grille.trois,.grille.deuxtiers{grid-template-columns:1fr}}
+.mini label{display:block;font-size:13px;color:var(--doux);margin-bottom:4px}
+.mini input,.mini select,.mini textarea{width:100%;font:inherit;font-size:15.5px;
+  border:1px solid var(--trait);border-radius:8px;padding:9px 10px;background:#fff;color:var(--encre)}
+.mini textarea{min-height:64px;line-height:1.5}
+.mini input:focus,.mini select:focus,.mini textarea:focus{outline:0;border-color:var(--teal);box-shadow:none}
+
+/* Vidéos */
+.video{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);
+  padding:16px 18px;margin:14px 0}
+.video .vt{font-weight:600;margin:0 0 3px}
+.video .vs{color:var(--doux);font-size:14.5px;margin:0 0 12px}
+.video .actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.vlire{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;background:var(--teal);
+  color:#fff;border:0;border-radius:8px;padding:10px 18px;cursor:pointer}
+.vlire:hover{background:#0b5a58}
+.video a{color:var(--doux);font-size:14.5px}
+.cadre16{position:relative;padding-top:56.25%;border-radius:8px;overflow:hidden;background:#000}
+.cadre16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* Outils intégrés */
+.outil{background:var(--carte);border:1px solid var(--teal);border-radius:var(--r);
+  padding:16px 18px;margin:14px 0}
+.outil .vt{font-weight:600;margin:0 0 3px}
+.outil .vs{color:var(--doux);font-size:14.5px;margin:0 0 12px}
+.outil .actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.outil a{color:var(--doux);font-size:14.5px}
+.cadreoutil{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--trait)}
+.cadreoutil iframe{width:100%;height:820px;border:0;display:block;background:#fff}
+@media(max-width:640px){.cadreoutil iframe{height:640px}}
+.bandeau{display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+  background:var(--teal-pale);border-radius:var(--r);padding:16px 18px;margin:0 0 20px}
+.bandeau p{margin:0;flex:1;min-width:220px;font-size:15.5px}
+.bandeau a{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;
+  background:var(--teal);color:#fff;border-radius:8px;padding:10px 18px;text-decoration:none}
+.bandeau a:hover{background:#0b5a58}
+
+.corrbloc{background:var(--carte);border:1px solid var(--trait);border-left:4px solid var(--magenta);
+  border-radius:var(--r);padding:20px 22px;margin-top:34px}
+.corrbloc h2{font-family:"Archivo",sans-serif;font-weight:600;font-size:19px;margin:0 0 6px}
+.corrbloc p.intro{color:var(--doux);font-size:15px;margin:0 0 14px}
+.corrbloc .saisie{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.corrbloc input{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--trait);
+  border-radius:8px;background:#fff;color:var(--encre);min-width:190px}
+.corrbloc input:focus{outline:0;border-color:var(--magenta)}
+.corrbloc button{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;background:var(--magenta);
+  color:#fff;border:0;border-radius:8px;padding:11px 20px;cursor:pointer}
+.corrbloc button:hover{background:#a0154c}
+.corrbloc .refus{color:var(--magenta);font-size:14.5px;margin:10px 0 0}
+.corr h3{font-family:"Archivo",sans-serif;font-weight:600;font-size:16.5px;color:var(--magenta);
+  margin:22px 0 6px}
+.corr p{font-size:15.5px;line-height:1.6;margin:0 0 12px}
+.corr ul,.corr ol{margin:0 0 14px;padding-left:22px}
+.corr li{margin-bottom:7px;font-size:15.5px;line-height:1.55}
+.corr code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;
+  background:var(--teal-pale);color:var(--teal);padding:2px 6px;border-radius:4px}
+.corr svg.schema{display:block;width:100%;height:auto;margin:16px auto 18px;
+  background:#fff;border:1px solid var(--trait);border-radius:8px;padding:8px}
+.corr .retenir{background:var(--teal-pale);border-left:4px solid var(--teal);
+  border-radius:0 8px 8px 0;padding:14px 16px;margin:6px 0 16px;font-size:15.5px}
+.corr .retenir b{display:block;font-family:"Archivo",sans-serif;font-size:12.5px;
+  text-transform:uppercase;letter-spacing:.04em;color:var(--teal);margin-bottom:5px}
+.corr .exemple{margin:0 0 14px}
+.corr .video{margin:14px 0}
+@media print{.corrbloc{display:none}}
+
+/* Ressources */
+.ressources{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:18px 20px}
+.ressources ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ressources li{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.code{font-family:"Archivo",sans-serif;font-weight:600;font-size:13px;color:var(--teal);
+  background:var(--teal-pale);border-radius:5px;padding:3px 8px;flex:none}
+.ressources a{color:var(--encre)}
+.ressources a:hover{color:var(--magenta)}
+.ressources .appli{margin:0 0 14px;color:var(--doux);font-size:15px}
+
+/* CPS */
+.cps{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:20px 22px}
+.cps>p{margin:0 0 14px;font-size:15px;color:var(--doux)}
+.niveaux{display:grid;gap:8px}
+.niveaux label{display:flex;gap:12px;align-items:flex-start;padding:11px 14px;
+  border:1px solid var(--trait);border-radius:8px;cursor:pointer;font-size:16px}
+.niveaux input{accent-color:var(--teal);margin:4px 0 0;width:18px;height:18px;flex:none}
+.niveaux label:has(input:checked){border-color:var(--teal);background:var(--teal-pale)}
+.niveaux b{font-family:"Archivo",sans-serif;font-weight:600;color:var(--teal)}
+
+.etape{display:flex;gap:12px;align-items:flex-start;font-size:16px;cursor:pointer}
+.etape input{accent-color:var(--teal);margin:4px 0 0;width:19px;height:19px;flex:none}
+.etape b{font-family:"Archivo",sans-serif;color:var(--teal)}
+.cartefiche:has(.etape input:checked){border-color:var(--teal);background:#FAFDFD}
+.apercu{width:100%;max-width:520px;display:block;margin:14px 0 0;border-radius:6px;border:1px solid var(--trait)}
+.ligne{display:flex;gap:12px;align-items:center;background:var(--carte);
+  border:1px solid var(--trait);border-radius:var(--r);padding:12px 16px;flex-wrap:wrap}
+.ligne .cle{font-family:"Archivo",sans-serif;font-weight:600;font-size:15.5px;
+  min-width:120px;flex:none;color:var(--teal)}
+.ligne select,.ligne input{flex:1;min-width:150px;font:inherit;font-size:15.5px;
+  padding:9px 10px;border:1px solid var(--trait);border-radius:8px;background:#fff;color:var(--encre)}
+.ligne select:focus,.ligne input:focus{outline:0;border-color:var(--teal)}
+table.routage{border-collapse:collapse;font-size:15px;margin:0}
+table.routage th,table.routage td{border:1px solid var(--trait);padding:7px 14px;text-align:left}
+table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Archivo",sans-serif;font-weight:600;font-size:13px}
+
+/* Corrigé */
+.corrige{margin-top:12px;border-left:3px solid var(--ok);background:#F0F7F3;
+  border-radius:0 8px 8px 0;padding:14px 16px;font-size:15.5px;color:#245C45}
+.corrige h4{margin:0 0 6px;font-size:13px;font-family:"Archivo",sans-serif;color:var(--ok)}
+.corrige ul{margin:0;padding-left:18px}
+.corrige li{margin-bottom:3px}
+
+/* Barre */
+.barre{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);
+  border-top:1px solid var(--trait);backdrop-filter:blur(6px);padding:12px 20px;
+  display:flex;align-items:center;gap:16px;justify-content:center}
+.barre .etat{font-size:14px;color:var(--doux);flex:1;text-align:right;max-width:340px}
+.btn{font-family:"Archivo",sans-serif;font-weight:600;font-size:17px;background:var(--teal);
+  color:#fff;border:0;border-radius:8px;padding:13px 26px;cursor:pointer}
+.btn:hover{background:#0b5a58}
+.btn:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+.lien{background:none;border:0;color:var(--doux);font:inherit;font-size:14px;
+  text-decoration:underline;cursor:pointer;padding:0;flex:1;max-width:340px}
+.lien:hover{color:var(--magenta)}
+@media(max-width:640px){
+  .barre{flex-wrap:wrap;justify-content:space-between;gap:8px}
+  .barre .etat{order:-1;flex-basis:100%;text-align:left;max-width:none}
+  .btn{flex:1}
+}
+.alerte{background:#FDECF2;border:1px solid var(--magenta);color:#8E1244;
+  border-radius:8px;padding:12px 16px;margin-top:18px;font-size:15px}
+@media print{.barre,.chrono{display:none}}
+</style>
+<link rel="stylesheet" href="assets/site-addons.css">
+
+<style>
+/* Activité analogique — ajouts spécifiques */
+.hero-probleme{background:linear-gradient(135deg,#FFF7F2,#FFF);border:1px solid #F2C7B1;border-left:5px solid #D65D34;border-radius:10px;padding:18px 20px;margin:18px 0}
+.hero-probleme h2{color:#9A3F20;margin-top:0}.hero-probleme p{margin:.35em 0}
+.analogie-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.analogie{border:1px solid var(--trait);border-radius:10px;background:#fff;padding:13px;text-align:center;min-height:128px}
+.analogie .ico{font-size:32px;line-height:1}.analogie b{display:block;font-family:"Archivo",sans-serif;color:var(--teal);margin:7px 0 3px}.analogie span{font-size:14.5px;color:var(--doux)}
+.sansordi{background:#F0F7F3;border:1px solid #B9D9C7;border-radius:10px;padding:13px 15px;margin:14px 0}.sansordi b{color:#236245}
+.ip-neighborhoods{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}.quartier{border:2px solid var(--teal);border-radius:12px;padding:12px;background:#F7FBFB}.quartier h4{margin:0 0 8px;color:var(--teal);font-family:"Archivo",sans-serif}.ip-card{background:white;border:1px solid var(--trait);border-radius:8px;padding:8px 9px;margin:6px 0;font-size:15px}.ip-card code{display:block;font-size:14px;color:#8E1244;margin-top:2px}
+.qbox{background:#FAFCFC;border:1px solid var(--trait);border-radius:10px;padding:14px 16px;margin:14px 0}.qbox h3{margin:0 0 8px}.qrow{display:grid;grid-template-columns:minmax(160px,1fr) minmax(220px,1.25fr);gap:12px;align-items:center;margin:9px 0}.qrow label{font-weight:600}.qrow select,.qrow input{width:100%;padding:9px 10px;border:1px solid var(--trait);border-radius:8px;background:#fff;font:inherit}
+.route-map{display:grid;grid-template-columns:1fr 64px 1fr 64px 1fr;align-items:center;gap:6px;margin:18px 0}.routeur-card{border:2px solid #C2185B;border-radius:12px;background:#FFF7FA;padding:12px;text-align:center}.routeur-card .rname{font:700 19px "Archivo",sans-serif;color:#9A1249}.routeur-card table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13.5px;text-align:left}.routeur-card th,.routeur-card td{border-top:1px solid #E5CAD6;padding:5px}.arrow{font-size:30px;text-align:center;color:var(--teal)}
+.debit-wrap{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}.road{border:1px solid var(--trait);border-radius:12px;padding:14px;background:#fff}.road h4{margin:0 0 8px;font-family:"Archivo",sans-serif;color:var(--teal)}.lane{height:62px;background:#E6E8E8;border:3px solid #6B7477;border-radius:8px;display:flex;align-items:center;justify-content:space-evenly;margin:8px 0}.lane.wide{height:88px;flex-wrap:wrap}.packet{display:inline-grid;place-items:center;width:34px;height:28px;background:#F8D84E;border:2px solid #A88500;border-radius:4px;font-weight:700;font-size:12px}.road p{font-size:14.5px;margin:.4em 0}
+.challenge{background:linear-gradient(135deg,#EEF7FF,#fff);border:1px solid #BFD8ED;border-radius:12px;padding:17px;margin:15px 0}.capacity{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:14px 0}.node{border:2px solid #2674A8;border-radius:9px;background:#fff;padding:9px 12px;font:600 14px "Archivo",sans-serif}.linkcap{min-width:110px;text-align:center;color:#5A6C71;font-size:13px}.linkcap:before{content:"";display:block;height:4px;background:#2674A8;margin-bottom:3px;border-radius:2px}
+.bilan3{display:grid;grid-template-columns:1fr;gap:10px}.fill-line{display:grid;grid-template-columns:145px 1fr;gap:10px;align-items:start}.fill-line strong{color:var(--teal)}
+.pager{display:flex;justify-content:space-between;gap:12px;margin:24px 0}.pager a{flex:1;text-decoration:none;border:1px solid var(--trait);border-radius:9px;background:#fff;padding:11px 14px;color:var(--teal);font-family:"Archivo",sans-serif;font-weight:600}.pager a:last-child{text-align:right}.pager a:hover{background:var(--teal-pale);border-color:var(--teal)}
+.role-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}.role-card{border:1px dashed #92A4A8;border-radius:8px;padding:10px;text-align:center;background:#fff;font-size:14px}.role-card b{display:block;color:var(--magenta);font-family:"Archivo",sans-serif}
+@media(max-width:700px){.analogie-grid,.ip-neighborhoods{grid-template-columns:1fr 1fr}.route-map{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}.debit-wrap{grid-template-columns:1fr}.qrow{grid-template-columns:1fr}.role-strip{grid-template-columns:1fr 1fr}}
+@media print{body{background:#fff;font-size:14px}.page{max-width:none;padding:0 10mm 10mm}.hero-probleme,.qbox,.challenge,.road,.quartier,.routeur-card,.analogie{break-inside:avoid}.analogie-grid{grid-template-columns:repeat(3,1fr)}.ip-neighborhoods{grid-template-columns:repeat(3,1fr)}.route-map{grid-template-columns:1fr 40px 1fr 40px 1fr}.arrow{transform:none}.debit-wrap{grid-template-columns:1fr 1fr}.pager{display:none}.role-strip{grid-template-columns:repeat(4,1fr)}textarea{min-height:55px!important}}
+</style>
+
+<!-- Navigation séquentielle harmonisée -->
+<style id="sequence-pager-style">
+.pager{
+  max-width:820px;
+  margin:22px auto 120px;
+  padding:0 20px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  box-sizing:border-box;
+}
+.pager a{
+  flex:1 1 0;
+  display:flex;
+  align-items:center;
+  min-height:46px;
+  box-sizing:border-box;
+  text-decoration:none;
+  border:1px solid #D2DEDE;
+  border-radius:9px;
+  background:#fff;
+  padding:11px 14px;
+  color:#0E6E6B;
+  font-family:"Archivo",Arial,sans-serif;
+  font-weight:600;
+  line-height:1.25;
+  transition:background .15s ease,border-color .15s ease,transform .15s ease;
+}
+.pager a:last-child{justify-content:flex-end;text-align:right}
+.pager a:hover,.pager a:focus-visible{
+  background:#E2EFEE;
+  border-color:#0E6E6B;
+  outline:none;
+}
+.pager a:active{transform:translateY(1px)}
+@media (max-width:620px){
+  .pager{flex-direction:column;margin-bottom:125px}
+  .pager a,.pager a:last-child{justify-content:flex-start;text-align:left}
+}
+@media print{.pager{display:none!important}}
+</style>
+
+</head>
+<body>
+
+<nav class="navsite" aria-label="Navigation du site">
+  <div class="dedans">
+    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
+    <label class="saut">
+      <span>Aller à</span>
+      <select id="navfiches" aria-label="Aller à une autre activité">
+        <optgroup label="Séquence 1">
+          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+          <option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
+          <option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
+          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+        </optgroup>
+        <optgroup label="Séquence 2">
+          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
+          <option value="seq2-act1-p2.html" selected>Activité 1 · partie 2 — Adresse IP, routage & débit</option>
+          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
+          <option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
+        </optgroup>
+        <optgroup label="Séquence 3">
+          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+          <option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+          <option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+          <option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
+        </optgroup>
+        <optgroup label="Séquence 4">
+          <option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
+          <option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
+          <option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
+          <option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
+          <option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
+          <option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
+        </optgroup>
+        <optgroup label="Séquence 5 · OSI — Porte-courrier augmenté"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
+        <optgroup label="Séquence 6 · OSI — J’invente, j’innove"><option value="seq6-act1.html">Séance 1 — Créer notre startup et observer la ville</option><option value="seq6-act2.html">Séance 2 — Comprendre l’utilisateur : persona et 5 Pourquoi</option><option value="seq6-act3.html">Séance 3 — Transformer un besoin en défi d’innovation</option><option value="seq6-act4.html">Séance 4 — Innovation ou déjà-vu ?</option><option value="seq6-act5.html">Séance 5 — Organiser le projet</option><option value="seq6-act6.html">Séance 6 — Décrire les usages avec SysML</option><option value="seq6-act7.html">Séance 7 — Construire le cahier des charges</option><option value="seq6-act8.html">Séance 8 — Prévoir le fonctionnement : l’algorigramme</option><option value="seq6-act9.html">Séance 9 — Choisir les solutions techniques</option><option value="seq6-act10.html">Séance 10 — Construire l’architecture du système</option><option value="seq6-act11.html">Séance 11 — Programmer, tester, corriger</option><option value="seq6-act12.html">Séance 12 — Du concept au croquis coté</option><option value="seq6-act13.html">Séance 13 — Modéliser la solution en 3D</option><option value="seq6-act14.html">Séance 14 — Valider et convaincre</option></optgroup><optgroup label="Outils">
+          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+        </optgroup>
+      </select>
+    </label>
+  </div>
+</nav>
+<script>
+document.getElementById("navfiches").addEventListener("change", function(){
+  if(this.value) location.href = this.value;
+});
+</script>
+
+
+
+<main class="page">
+  <header class="entete">
+    <div class="cycle"><span class="lab">Cycle 4</span><span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span></div>
+    <div class="marque"><img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()"><p class="fil">Technologie · Séquence 2 · Activité 1</p></div>
+    <h1 class="titre">Les chemins de l'information — partie 2 : le réseau postal de la classe</h1>
+    <p class="sous">Adresse IP · table de routage · débit · activité sans ordinateur · 55 min</p>
+    <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
+      <a href="#mission"><b>5′</b>Mission</a><a href="#ip"><b>12′</b>Adresse IP</a><a href="#routage"><b>15′</b>Routage</a><a href="#debit"><b>10′</b>Débit</a><a href="#defi"><b>8′</b>Défi</a><a href="#bilan"><b>5′</b>Bilan</a>
+    </nav>
+  </header>
+
+  <section class="identite" aria-label="Mon identité">
+    <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="family-name"></div>
+    <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
+    <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
+    <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
+    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role" placeholder="routeur, expéditeur, chronométreur…"></div>
+    <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
+  </section>
+
+  <details class="ref"><summary>Ce que je travaille dans cette activité</summary><div class="dedans">
+    <dl><dt>Objectif</dt><dd>Comprendre avec des analogies et une manipulation réelle comment une information est identifiée, orientée et transmise dans un réseau.</dd><dt>SFC17</dt><dd>Identifier et représenter la circulation d'une information dans le réseau Internet.</dd><dt>SFC18</dt><dd>Justifier la nécessité d'un protocole de routage pour faire communiquer plusieurs réseaux.</dd><dt>SFC1p</dt><dd>Le rôle et la structure d'une adresse IP, des tables de routage.</dd><dt>SFC1q</dt><dd>Le débit et les ordres de grandeur associés.</dd></dl>
+    <ul><li>N1 — Je sais associer adresse IP, routeur/table de routage et débit à une analogie simple.</li><li>N2 — Je sais expliquer avec mes mots le rôle de chacun.</li><li>N3 — Je sais suivre un paquet de réseau en réseau et repérer la liaison qui limite le transfert.</li></ul>
+  </div></details>
+
+  <section class="hero-probleme" id="mission">
+    <h2>Mission — faire voyager un « colis numérique »</h2>
+    <p>Un élève du <strong>réseau A</strong> doit envoyer un message à un élève du <strong>réseau C</strong>. Vous n’avez pas d’ordinateur : la classe va devenir le réseau.</p>
+    <p><strong>Question :</strong> comment le colis sait-il <em>à qui</em> aller, <em>par où</em> passer et <em>combien de colis</em> peuvent circuler en même temps ?</p>
+  </section>
+
+  <div class="analogie-grid" aria-label="Les analogies de l'activité">
+    <div class="analogie"><div class="ico">🏠</div><b>Adresse IP</b><span>Comme une adresse postale : elle permet d’identifier la destination.</span></div>
+    <div class="analogie"><div class="ico">📦</div><b>Paquet</b><span>Comme une lettre ou un colis : une petite partie des données à transporter.</span></div>
+    <div class="analogie"><div class="ico">🏤</div><b>Routeur</b><span>Comme un centre de tri : il décide vers quelle prochaine étape envoyer le paquet.</span></div>
+    <div class="analogie"><div class="ico">📋</div><b>Table de routage</b><span>Comme le panneau du centre de tri : « pour cette destination, envoie par ici ».</span></div>
+    <div class="analogie"><div class="ico">🛣️</div><b>Liaison</b><span>Comme une route entre deux centres : elle transporte les paquets.</span></div>
+    <div class="analogie"><div class="ico">🚚🚚🚚</div><b>Débit</b><span>Comme la capacité d’une route : combien de colis passent pendant un temps donné.</span></div>
+  </div>
+
+  <div class="sansordi"><b>Matériel du groupe :</b> 10 à 12 petites enveloppes ou cartes « paquet », 3 feuilles « Routeur R1 / R2 / R3 », un chronomètre et cette fiche imprimée. Les élèves jouent les appareils et les routeurs.</div>
+
+  <article class="bloc" id="ip"><div class="marge"><span class="duree">12′</span></div><div class="corps">
+    <h2>1 — Adresse IP : « À quelle adresse dois-je livrer ? »</h2>
+    <p class="amorce">Dans notre modèle, chaque quartier est un réseau en <strong>/24</strong>. Les trois premiers nombres indiquent le réseau ; le dernier différencie les appareils de ce réseau.</p>
+    <div class="ip-neighborhoods">
+      <div class="quartier"><h4>Quartier / réseau A</h4><div class="ip-card">Léa<code>192.168.1.4</code></div><div class="ip-card">Noah<code>192.168.1.9</code></div></div>
+      <div class="quartier"><h4>Quartier / réseau B</h4><div class="ip-card">Youssef<code>192.168.2.7</code></div><div class="ip-card">Inès<code>192.168.2.12</code></div></div>
+      <div class="quartier"><h4>Quartier / réseau C</h4><div class="ip-card">Emma<code>192.168.3.8</code></div><div class="ip-card">Adam<code>192.168.3.15</code></div></div>
+    </div>
+    <div class="sansordi"><b>Manipulation :</b> donne une enveloppe à Léa. Sur l’enveloppe, écris « destination : 192.168.2.7 ». Sans prononcer le prénom du destinataire, faites parvenir l’enveloppe au bon élève en utilisant seulement les cartes d’adresse.</div>
+    <div class="qbox"><h3>Je vérifie ce que j’ai compris</h3>
+      <div class="qrow"><label for="ip-dest">Qui reçoit 192.168.2.7 ?</label><select id="ip-dest"><option value="">Choisir…</option><option>Léa</option><option>Youssef</option><option>Emma</option></select></div>
+      <div class="qrow"><label for="ip-meme">Léa et Youssef sont-ils dans le même réseau ?</label><select id="ip-meme"><option value="">Choisir…</option><option>Oui</option><option>Non</option></select></div>
+      <div class="qrow"><label for="ip-double">Peut-on donner la même IP à deux appareils du même réseau en même temps ?</label><select id="ip-double"><option value="">Choisir…</option><option>Oui</option><option>Non</option></select></div>
+      <label for="ip-role"><strong>Avec tes mots : à quoi sert une adresse IP ?</strong></label><textarea id="ip-role" data-rep placeholder="Une adresse IP sert à…" aria-label="Rôle d'une adresse IP"></textarea>
+    </div>
+  </div></article>
+
+  <article class="bloc" id="routage"><div class="marge"><span class="duree">15′</span></div><div class="corps">
+    <h2>2 — Table de routage : « Vers quel centre de tri maintenant ? »</h2>
+    <p class="amorce">Un paquet destiné à un autre réseau arrive à un routeur. Le routeur ne devine pas : il consulte sa table et choisit le <strong>prochain saut</strong>.</p>
+    <div class="route-map">
+      <div class="routeur-card"><div class="rname">R1</div><table><tr><th>Destination</th><th>Envoyer vers</th></tr><tr><td>réseau 1</td><td>direct</td></tr><tr><td>réseau 2</td><td>R2</td></tr><tr><td>réseau 3</td><td>R2</td></tr></table></div>
+      <div class="arrow">→</div>
+      <div class="routeur-card"><div class="rname">R2</div><table><tr><th>Destination</th><th>Envoyer vers</th></tr><tr><td>réseau 1</td><td>R1</td></tr><tr><td>réseau 2</td><td>direct</td></tr><tr><td>réseau 3</td><td>R3</td></tr></table></div>
+      <div class="arrow">→</div>
+      <div class="routeur-card"><div class="rname">R3</div><table><tr><th>Destination</th><th>Envoyer vers</th></tr><tr><td>réseau 1</td><td>R2</td></tr><tr><td>réseau 2</td><td>R2</td></tr><tr><td>réseau 3</td><td>direct</td></tr></table></div>
+    </div>
+    <div class="role-strip"><div class="role-card"><b>Source</b>192.168.1.4</div><div class="role-card"><b>Routeur</b>R1</div><div class="role-card"><b>Routeur</b>R2</div><div class="role-card"><b>Destination</b>192.168.3.8</div></div>
+    <div class="sansordi"><b>Manipulation :</b> trois élèves deviennent R1, R2 et R3. Le paquet part de Léa vers Emma. À chaque étape, le « routeur » doit lire la destination et montrer dans sa table pourquoi il transmet au voisin choisi.</div>
+    <div class="qbox"><h3>Je suis le paquet</h3>
+      <div class="qrow"><label for="route-r1">R1 reçoit un paquet pour le réseau 3. Prochaine étape ?</label><select id="route-r1"><option value="">Choisir…</option><option>R1 le garde</option><option>R2</option><option>R3 directement</option></select></div>
+      <div class="qrow"><label for="route-r2">R2 reçoit ensuite ce paquet. Prochaine étape ?</label><select id="route-r2"><option value="">Choisir…</option><option>R1</option><option>R2 le garde</option><option>R3</option></select></div>
+      <div class="qrow"><label for="route-tout">R1 doit-il connaître par cœur tous les gestes futurs du paquet ?</label><select id="route-tout"><option value="">Choisir…</option><option>Oui</option><option>Non, il choisit surtout la prochaine étape</option></select></div>
+      <label for="route-role"><strong>Avec tes mots : à quoi sert une table de routage ?</strong></label><textarea id="route-role" data-rep placeholder="Une table de routage permet au routeur de…" aria-label="Rôle d'une table de routage"></textarea>
+    </div>
+  </div></article>
+
+  <article class="bloc" id="debit"><div class="marge"><span class="duree">10′</span></div><div class="corps">
+    <h2>3 — Débit : « Combien de colis peuvent passer ? »</h2>
+    <p class="amorce">Cette fois, on ne change ni l’adresse ni le chemin. On compare simplement la <strong>capacité de deux liaisons</strong>.</p>
+    <div class="debit-wrap">
+      <div class="road"><h4>Route A — petite route</h4><div class="lane"><span class="packet">1</span></div><p><strong>Règle :</strong> 1 paquet toutes les 2 secondes.</p></div>
+      <div class="road"><h4>Route B — grande route</h4><div class="lane wide"><span class="packet">1</span><span class="packet">2</span><span class="packet">3</span></div><p><strong>Règle :</strong> 3 paquets toutes les 2 secondes.</p></div>
+    </div>
+    <div class="sansordi"><b>Manipulation :</b> pendant 10 secondes, faites réellement passer les enveloppes selon la règle de chaque route. Un élève chronomètre, un autre compte les paquets arrivés.</div>
+    <div class="qbox"><h3>Je mesure</h3>
+      <div class="qrow"><label for="debit-a">Paquets arrivés sur la route A en 10 s</label><input id="debit-a" type="number" min="0" inputmode="numeric"></div>
+      <div class="qrow"><label for="debit-b">Paquets arrivés sur la route B en 10 s</label><input id="debit-b" type="number" min="0" inputmode="numeric"></div>
+      <div class="qrow"><label for="debit-fort">Quelle route a le plus grand débit ?</label><select id="debit-fort"><option value="">Choisir…</option><option>Route A</option><option>Route B</option><option>Elles ont le même débit</option></select></div>
+      <label for="debit-role"><strong>Avec tes mots : qu’est-ce que le débit ?</strong></label><textarea id="debit-role" data-rep placeholder="Le débit indique…" aria-label="Définition du débit"></textarea>
+    </div>
+    <div class="bandeau"><p><strong>Passage au vrai réseau :</strong> au lieu de compter des enveloppes par seconde, on compte des bits par seconde : bit/s, kbit/s, Mbit/s, Gbit/s.</p></div>
+  </div></article>
+
+  <article class="bloc" id="defi"><div class="marge"><span class="duree">8′</span></div><div class="corps">
+    <h2>4 — Défi final : expliquer tout le voyage</h2>
+    <div class="challenge">
+      <p><strong>Mission :</strong> 10 paquets doivent aller de <code>192.168.1.3</code> à <code>192.168.3.8</code>.</p>
+      <div class="capacity"><span class="node">Réseau 1</span><span class="linkcap">10 paquets/s</span><span class="node">R1</span><span class="linkcap">2 paquets/s</span><span class="node">R2</span><span class="linkcap">8 paquets/s</span><span class="node">R3 / réseau 3</span></div>
+      <p>Le paquet connaît sa destination grâce à son adresse IP. Les routeurs utilisent leur table. Mais une des liaisons laisse passer beaucoup moins de données que les autres.</p>
+    </div>
+    <div class="qbox">
+      <div class="qrow"><label for="defi-ip">Quelle information permet de savoir à qui livrer ?</label><select id="defi-ip"><option value="">Choisir…</option><option>L'adresse IP</option><option>Le débit</option><option>Le nom du routeur</option></select></div>
+      <div class="qrow"><label for="defi-route">Qu'utilise un routeur pour choisir la prochaine étape ?</label><select id="defi-route"><option value="">Choisir…</option><option>Une table de routage</option><option>La taille de l'écran</option><option>Le Wi-Fi</option></select></div>
+      <div class="qrow"><label for="defi-bouchon">Quelle liaison limite ici le transfert global ?</label><select id="defi-bouchon"><option value="">Choisir…</option><option>10 paquets/s</option><option>2 paquets/s</option><option>8 paquets/s</option></select></div>
+      <label for="defi-exp"><strong>Explique le voyage en 3 ou 4 phrases en utilisant : adresse IP, routeur, table de routage, débit.</strong></label><textarea id="defi-exp" data-rep placeholder="Le paquet porte… Puis le routeur… Le débit…" aria-label="Explication du défi final"></textarea>
+    </div>
+  </div></article>
+
+  <article class="bloc" id="bilan"><div class="marge"><span class="duree">5′</span></div><div class="corps">
+    <h2>5 — Mon bilan</h2><p class="amorce">Complète ces trois phrases sans regarder le haut de la fiche.</p>
+    <div class="bilan3">
+      <div class="fill-line"><strong>Adresse IP →</strong><textarea id="bilan-ip" data-rep aria-label="Bilan adresse IP"></textarea></div>
+      <div class="fill-line"><strong>Table de routage →</strong><textarea id="bilan-route" data-rep aria-label="Bilan table de routage"></textarea></div>
+      <div class="fill-line"><strong>Débit →</strong><textarea id="bilan-debit" data-rep aria-label="Bilan débit"></textarea></div>
+    </div>
+    <h3>Je me situe</h3>
+    <div class="qcm" data-qcm="auto" data-titre="Auto-évaluation"><label><input type="radio" name="auto" id="auto1" value="1"><span class="lt">1</span><span>J’ai encore besoin d’aide pour distinguer les trois notions.</span></label><label><input type="radio" name="auto" id="auto2" value="2"><span class="lt">2</span><span>Je reconnais les notions mais j’hésite pour les expliquer.</span></label><label><input type="radio" name="auto" id="auto3" value="3"><span class="lt">3</span><span>Je sais expliquer les trois notions avec les analogies.</span></label><label><input type="radio" name="auto" id="auto4" value="4"><span class="lt">4</span><span>Je sais expliquer le voyage d’un paquet et repérer un goulot d’étranglement.</span></label></div>
+  </div></article>
+
+  <section class="corrbloc" id="correction"><h2>Correction expliquée et bilan de l’activité</h2><p class="intro">Entre le mot de passe donné par le professeur pour afficher les réponses, les explications et ce qu’il faut retenir.</p><div class="saisie"><input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction" autocomplete="off" spellcheck="false"><button type="button" id="corr-btn">Afficher</button></div><p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p><div class="corr" id="corr-contenu" hidden></div></section>
+<div id="alerte" class="alerte" hidden></div>
+</main>
+<nav class="pager" aria-label="Navigation dans la Séquence 2"><a href="seq2-act1-p1.html">← Partie 1 · Matériels du réseau</a><a href="seq2-act1-p3.html">Partie 3 · Filius →</a></nav>
+
+<div class="barre"><button class="lien" id="effacer" type="button">Effacer mes réponses</button><button class="btn" id="pdf" type="button">Générer le PDF</button><p class="etat" id="etat">Tes réponses restent sur cet appareil.</p></div>
+
+<script>
+(function(){
+"use strict";
+var FICHE={id:"seq2-act1-p2",ref:"Seq2-Act1-P2",sequence:2,activite:1,titre:"Le réseau postal de la classe — adresse IP, routage et débit"};
+var CLE="fiche-techno:"+FICHE.id, etat=document.getElementById("etat"), alerte=document.getElementById("alerte");
+function el(id){return document.getElementById(id)} function tous(s){return Array.prototype.slice.call(document.querySelectorAll(s))}
+function controles(){return tous("input[id],textarea[id],select[id]")}
+function sauver(){var d={};controles().forEach(function(c){if(c.type==="checkbox"||c.type==="radio"){if(c.checked)d[c.id]=true}else d[c.id]=c.value});try{localStorage.setItem(CLE,JSON.stringify(d))}catch(e){}}
+function restaurer(){try{var b=localStorage.getItem(CLE);if(!b)return;var d=JSON.parse(b);controles().forEach(function(c){if(!(c.id in d))return;if(c.type==="checkbox"||c.type==="radio")c.checked=true;else c.value=d[c.id]});etat.textContent="Réponses retrouvées sur cet appareil."}catch(e){}}
+function grandir(z){z.style.height="auto";z.style.height=(z.scrollHeight+4)+"px"}
+function maj(){var ids=["mission","ip","routage","debit","defi","bilan"],ln=tous("#chrono a");ids.forEach(function(id,i){var b=el(id);if(!b||!ln[i])return;var ok=id==="mission"||tous("#"+id+" textarea,#"+id+" input:not([type=radio]),#"+id+" select").some(function(c){return String(c.value||"").trim()})||tous("#"+id+" input:checked").length>0;b.classList.toggle("fait",ok);ln[i].classList.toggle("fait",ok)})}
+document.addEventListener("input",function(e){if(e.target.matches("textarea"))grandir(e.target);if(e.target.matches("input,textarea,select")){sauver();maj();etat.textContent="Réponses enregistrées sur cet appareil."}});document.addEventListener("change",function(e){if(e.target.matches("input,select")){sauver();maj()}});
+el("effacer").addEventListener("click",function(){if(!confirm("Effacer toutes tes réponses sur cette fiche ?"))return;controles().forEach(function(c){if(["nom","prenom","classe","groupe","role","date"].indexOf(c.id)>=0)return;if(c.type==="radio"||c.type==="checkbox")c.checked=false;else c.value=""});try{localStorage.removeItem(CLE)}catch(e){};tous("textarea").forEach(grandir);maj();etat.textContent="Réponses effacées."});
+(function(){var d=new Date(),p=function(n){return String(n).padStart(2,"0")};if(!el("date").value)el("date").value=d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())})();restaurer();tous("textarea").forEach(grandir);maj();
+function lire(){var d={id:{},rep:{}};["nom","prenom","classe","groupe","role","date"].forEach(function(k){d.id[k]=el(k).value.trim()});controles().forEach(function(c){if(["nom","prenom","classe","groupe","role","date","corr-mdp"].indexOf(c.id)>=0)return;if(c.type==="radio"){if(c.checked)d.rep[c.name]=c.value}else d.rep[c.id]=c.value});return d}
+function propre(t){return String(t||"").replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/→/g,"->").replace(/ /g," ")}
+function construirePDF(d){if(!window.jspdf||!window.jspdf.jsPDF){window.print();return null}var doc=new window.jspdf.jsPDF({unit:"mm",format:"a4"}),M=14,y=18,B=278,page=1;function chk(h){if(y+h>B){doc.addPage();page++;y=18}}function title(t){chk(14);doc.setFont("helvetica","bold");doc.setFontSize(13);doc.setTextColor(14,110,107);doc.text(propre(t),M,y);y+=7;doc.setDrawColor(210,222,222);doc.line(M,y,196,y);y+=5}function line(k,v){v=propre(v||"(non répondu)");var txt=doc.splitTextToSize(k+" : "+v,178);chk(txt.length*5+3);doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(20,38,43);doc.text(txt,M,y);y+=txt.length*5+2}doc.setFont("helvetica","bold");doc.setFontSize(16);doc.setTextColor(20,38,43);doc.text("Technologie 3e - Séquence 2 - Activité 1 - Partie 2",M,y);y+=8;doc.setFontSize(11);doc.setTextColor(90,108,113);doc.text("Le réseau postal de la classe : adresse IP, routage et débit",M,y);y+=10;line("Élève",(d.id.nom+" "+d.id.prenom).trim());line("Classe",d.id.classe);line("Groupe / rôle",(d.id.groupe||"")+" "+(d.id.role||""));title("1. Adresse IP");line("Destinataire de 192.168.2.7",d.rep["ip-dest"]);line("Même réseau ?",d.rep["ip-meme"]);line("Deux IP identiques ?",d.rep["ip-double"]);line("Mon explication",d.rep["ip-role"]);title("2. Table de routage");line("R1 ->",d.rep["route-r1"]);line("R2 ->",d.rep["route-r2"]);line("R1 connaît tout le trajet ?",d.rep["route-tout"]);line("Mon explication",d.rep["route-role"]);title("3. Débit");line("Route A en 10 s",d.rep["debit-a"]);line("Route B en 10 s",d.rep["debit-b"]);line("Plus grand débit",d.rep["debit-fort"]);line("Mon explication",d.rep["debit-role"]);title("4. Défi final");line("Identifier la destination",d.rep["defi-ip"]);line("Choisir la prochaine étape",d.rep["defi-route"]);line("Goulot d'étranglement",d.rep["defi-bouchon"]);line("Explication",d.rep["defi-exp"]);title("5. Bilan");line("Adresse IP",d.rep["bilan-ip"]);line("Table de routage",d.rep["bilan-route"]);line("Débit",d.rep["bilan-debit"]);line("Auto-évaluation",d.rep["auto"]);return doc}
+el("pdf").addEventListener("click",function(){var d=lire(),m=[];[["nom","ton nom"],["prenom","ton prénom"],["classe","ta classe"]].forEach(function(x){if(!d.id[x[0]])m.push(x[1])});if(m.length){alerte.hidden=false;alerte.textContent="Complète "+m.join(", ")+" avant de générer le PDF.";return}alerte.hidden=true;var b=this;b.disabled=true;b.textContent="Création du PDF…";try{var doc=construirePDF(d);if(doc){var nom=(d.id.nom+"-"+d.id.prenom+"-seq2-act1-p2.pdf").replace(/\s+/g,"-");doc.save(nom);etat.textContent="PDF téléchargé."}}catch(e){console.error(e);alerte.hidden=false;alerte.textContent="Le PDF n’a pas pu être créé. Utilise Imprimer / PDF navigateur."}b.disabled=false;b.textContent="Générer le PDF"});
+
+/* Correction protégée */
+var COFFRE="W1siMS4gTOKAmWFkcmVzc2UgSVAgOiBs4oCZYWRyZXNzZSBkdSBkZXN0aW5hdGFpcmUiLCBbIjxwPjxzdHJvbmc+RGFucyBjZXR0ZSBhY3Rpdml0w6ksIHVuZSBhZHJlc3NlIElQIGpvdWUgbGUgcsO0bGUgZOKAmXVuZSBhZHJlc3NlIHBvc3RhbGUuPC9zdHJvbmc+IEVsbGUgcGVybWV0IGRlIHNhdm9pciDDoCBxdWVsIGFwcGFyZWlsIHVuIHBhcXVldCBlc3QgZGVzdGluw6kuPC9wPiIsICI8cD5EYW5zIG5vdHJlIG1vZMOobGUsIG5vdXMgdXRpbGlzb25zIGRlcyByw6lzZWF1eCBlbiA8Y29kZT4vMjQ8L2NvZGU+IDogbGVzIHRyb2lzIHByZW1pZXJzIG5vbWJyZXMgcmVwcsOpc2VudGVudCBsZSByw6lzZWF1IGV0IGxlIGRlcm5pZXIgZGlmZsOpcmVuY2llIGxlcyBhcHBhcmVpbHMuIEV4ZW1wbGUgOiA8Y29kZT4xOTIuMTY4LjIuNzwvY29kZT4gYXBwYXJ0aWVudCBhdSByw6lzZWF1IDxjb2RlPjE5Mi4xNjguMi4wLzI0PC9jb2RlPi48L3A+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+UsOpcG9uc2VzPC9iPkxlIHBhcXVldCBkZXN0aW7DqSDDoCA8Y29kZT4xOTIuMTY4LjIuNzwvY29kZT4gdmEgw6AgWW91c3NlZi4gTMOpYSA8Y29kZT4xOTIuMTY4LjEuNDwvY29kZT4gZXQgWW91c3NlZiBuZSBzb250IHBhcyBkYW5zIGxlIG3Dqm1lIHLDqXNlYXUuIERldXggYXBwYXJlaWxzIG5lIGRvaXZlbnQgcGFzIGF2b2lyIGxhIG3Dqm1lIGFkcmVzc2UgSVAgZGFucyBsZSBtw6ptZSByw6lzZWF1IGF1IG3Dqm1lIG1vbWVudC48L2Rpdj4iLCAiPHA+PHN0cm9uZz7DgCByZXRlbmlyIDo8L3N0cm9uZz4gbOKAmWFkcmVzc2UgSVAgc2VydCDDoCBpZGVudGlmaWVyIGxvZ2lxdWVtZW50IGxhIHNvdXJjZSBldCBsYSBkZXN0aW5hdGlvbiBk4oCZdW5lIGNvbW11bmljYXRpb24gZGFucyB1biByw6lzZWF1IElQLjwvcD4iXV0sIFsiMi4gTGEgdGFibGUgZGUgcm91dGFnZSA6IGxlIHBhbm5lYXUgZHUgY2VudHJlIGRlIHRyaSIsIFsiPHA+TGUgcm91dGV1ciByZXNzZW1ibGUgw6AgdW4gPHN0cm9uZz5jZW50cmUgZGUgdHJpPC9zdHJvbmc+LiBJbCBsaXQgbOKAmWFkcmVzc2UgZGUgZGVzdGluYXRpb24sIGNvbnN1bHRlIHNhIDxzdHJvbmc+dGFibGUgZGUgcm91dGFnZTwvc3Ryb25nPiBldCBkw6ljaWRlIHZlcnMgcXVlbGxlIDxzdHJvbmc+cHJvY2hhaW5lIMOpdGFwZTwvc3Ryb25nPiBlbnZveWVyIGxlIHBhcXVldC48L3A+IiwgIjxwPlBvdXIgZW52b3llciB1biBwYXF1ZXQgZHUgcsOpc2VhdSAxIGF1IHLDqXNlYXUgMyBkYW5zIG5vdHJlIHNjaMOpbWEgOiA8c3Ryb25nPlIxIGVudm9pZSB2ZXJzIFIyPC9zdHJvbmc+LCBwdWlzIDxzdHJvbmc+UjIgZW52b2llIHZlcnMgUjM8L3N0cm9uZz4uIFIxIG7igJlhIHBhcyBiZXNvaW4gZGUgbcOpbW9yaXNlciBjaGFxdWUgbW91dmVtZW50IGZ1dHVyIDogaWwgY2hvaXNpdCBsZSBwcm9jaGFpbiBzYXV0IMOgIHBhcnRpciBkZSBzYSB0YWJsZS48L3A+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+RXJyZXVyIGZyw6lxdWVudGU8L2I+VW5lIHRhYmxlIGRlIHJvdXRhZ2UgbuKAmWVzdCBwYXMgdW5lIGNhcnRlIHF1aSBjb250aWVudCBvYmxpZ2F0b2lyZW1lbnQgdG91dCBsZSB0cmFqZXQuIEVsbGUgY29udGllbnQgZGVzIHJvdXRlcyBwZXJtZXR0YW50IGRlIGTDqXRlcm1pbmVyIG/DuSB0cmFuc21ldHRyZSBsZSBwYXF1ZXQgZW5zdWl0ZS48L2Rpdj4iXV0sIFsiMy4gTGUgZMOpYml0IDogY29tYmllbiBkZSBkb25uw6llcyBwYXNzZW50IHBlbmRhbnQgdW4gdGVtcHMgZG9ubsOpID8iLCBbIjxwPkxhIHBldGl0ZSByb3V0ZSBhdXRvcmlzZSA8c3Ryb25nPjEgcGFxdWV0IHRvdXRlcyBsZXMgMiBzZWNvbmRlczwvc3Ryb25nPi4gRW4gMTAgc2Vjb25kZXMsIGVsbGUgcGV1dCBkb25jIGZhaXJlIHBhc3NlciA8c3Ryb25nPjUgcGFxdWV0czwvc3Ryb25nPi4gTGEgZ3JhbmRlIHJvdXRlIGF1dG9yaXNlIDxzdHJvbmc+MyBwYXF1ZXRzIHRvdXRlcyBsZXMgMiBzZWNvbmRlczwvc3Ryb25nPiwgc29pdCA8c3Ryb25nPjE1IHBhcXVldHMgZW4gMTAgc2Vjb25kZXM8L3N0cm9uZz4uPC9wPiIsICI8cD48c3Ryb25nPkxlIGTDqWJpdCBtZXN1cmUgdW5lIHF1YW50aXTDqSBkZSBkb25uw6llcyBwYXIgdW5pdMOpIGRlIHRlbXBzLjwvc3Ryb25nPiBTdXIgdW4gcsOpc2VhdSByw6llbCwgb24gbOKAmWV4cHJpbWUgc291dmVudCBlbiBiaXQvcywga2JpdC9zLCBNYml0L3Mgb3UgR2JpdC9zLjwvcD4iLCAiPGRpdiBjbGFzcz1cInJldGVuaXJcIj48Yj7DgCBuZSBwYXMgY29uZm9uZHJlPC9iPlVuIGTDqWJpdCDDqWxldsOpIG5lIHNpZ25pZmllIHBhcyBxdeKAmXVuIHBhcXVldCBpbmRpdmlkdWVsIMKrIHJvdWxlIHBsdXMgdml0ZSDCuy4gQ2VsYSBzaWduaWZpZSBzdXJ0b3V0IHF1ZSBkYXZhbnRhZ2UgZGUgZG9ubsOpZXMgcGV1dmVudCDDqnRyZSB0cmFuc21pc2VzIHBlbmRhbnQgbGEgbcOqbWUgZHVyw6llLjwvZGl2PiJdXSwgWyI0LiBEw6lmaSBmaW5hbCA6IHLDqXVuaXIgbGVzIHRyb2lzIG5vdGlvbnMiLCBbIjxwPlBvdXIgZW52b3llciAxMCBwYXF1ZXRzIGRlIDxjb2RlPjE5Mi4xNjguMS4zPC9jb2RlPiB2ZXJzIDxjb2RlPjE5Mi4xNjguMy44PC9jb2RlPiA6IGzigJk8c3Ryb25nPmFkcmVzc2UgSVA8L3N0cm9uZz4gaW5kaXF1ZSBsYSBkZXN0aW5hdGlvbiwgY2hhcXVlIDxzdHJvbmc+cm91dGV1cjwvc3Ryb25nPiB1dGlsaXNlIHNhIDxzdHJvbmc+dGFibGUgZGUgcm91dGFnZTwvc3Ryb25nPiBwb3VyIGNob2lzaXIgbGUgcHJvY2hhaW4gc2F1dCwgZXQgbGUgPHN0cm9uZz5kw6liaXQ8L3N0cm9uZz4gZGUgY2hhcXVlIGxpYWlzb24gbGltaXRlIGxhIHF1YW50aXTDqSBkZSBkb25uw6llcyBxdWkgcGV1dCBsYSB0cmF2ZXJzZXIuPC9wPiIsICI8cD5BdmVjIGRlcyBsaWFpc29ucyBkZSAxMCwgMiBldCA4IHBhcXVldHMvcyBzdXIgbGUgbcOqbWUgdHJhamV0LCBsYSBsaWFpc29uIMOgIDxzdHJvbmc+MiBwYXF1ZXRzL3M8L3N0cm9uZz4gZXN0IGxlIDxzdHJvbmc+Z291bG90IGTigJnDqXRyYW5nbGVtZW50PC9zdHJvbmc+IDogZWxsZSBsaW1pdGUgbGUgdHJhbnNmZXJ0IGdsb2JhbC48L3A+Il1dLCBbIjUuIEJpbGFuIGRlIGzigJlhY3Rpdml0w6kg4oCUIGNlIHF1ZSB0dSBkb2lzIHNhdm9pciBleHBsaXF1ZXIiLCBbIjx1bD48bGk+PHN0cm9uZz5BZHJlc3NlIElQPC9zdHJvbmc+IOKGkiBwZXJtZXQgZOKAmWlkZW50aWZpZXIgbG9naXF1ZW1lbnQgbGUgZGVzdGluYXRhaXJlIGTigJl1bmUgY29tbXVuaWNhdGlvbi48L2xpPjxsaT48c3Ryb25nPlRhYmxlIGRlIHJvdXRhZ2U8L3N0cm9uZz4g4oaSIGluZGlxdWUgYXUgcm91dGV1ciB2ZXJzIHF1ZWxsZSBwcm9jaGFpbmUgw6l0YXBlIHRyYW5zbWV0dHJlIGxlIHBhcXVldC48L2xpPjxsaT48c3Ryb25nPkTDqWJpdDwvc3Ryb25nPiDihpIgcXVhbnRpdMOpIGRlIGRvbm7DqWVzIHRyYW5zbWlzZSBwZW5kYW50IHVuZSBkdXLDqWUgZG9ubsOpZS48L2xpPjwvdWw+IiwgIjxwPjxzdHJvbmc+TGEgcGhyYXNlIMOgIHNhdm9pciBkaXJlIDo8L3N0cm9uZz4gwqsgTGUgcGFxdWV0IHBvcnRlIHVuZSBhZHJlc3NlIElQIGRlIGRlc3RpbmF0aW9uLiBMZXMgcm91dGV1cnMgY29uc3VsdGVudCBsZXVycyB0YWJsZXMgZGUgcm91dGFnZSBwb3VyIGzigJlhY2hlbWluZXIgZGUgcsOpc2VhdSBlbiByw6lzZWF1LiBMZSBkw6liaXQgZGVzIGxpYWlzb25zIGTDqXRlcm1pbmUgbGEgcXVhbnRpdMOpIGRlIGRvbm7DqWVzIHF1aSBwZXV0IMOqdHJlIHRyYW5zbWlzZSBwZW5kYW50IHVuIHRlbXBzIGRvbm7DqS4gwrs8L3A+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+UHJvY2hhaW5lIMOpdGFwZTwvYj5EYW5zIGxhIHBhcnRpZSAzLCB0dSB2YXMgcmV0cm91dmVyIGNlcyB0cm9pcyBpZMOpZXMgZGFucyBGaWxpdXMgOiB0dSBjb25maWd1cmVyYXMgbGVzIGFkcmVzc2VzLCBsZXMgcGFzc2VyZWxsZXMgZXQgdHUgdGVzdGVyYXMgbGVzIGNvbW11bmljYXRpb25zLjwvZGl2PiJdXV0=",EMPREINTE=4054366658;function empreinte(t){var h=5381;for(var i=0;i<t.length;i++)h=((h*33)^t.charCodeAt(i))>>>0;return h}function rendre(l){var h="",buf=[];function vide(){if(buf.length){h+="<ul>"+buf.map(function(x){return "<li>"+x+"</li>"}).join("")+"</ul>";buf=[]}}l.forEach(function(x){if(/^\s*<(ul|ol|div|svg|p|a|table|figure|img|h[1-6]|blockquote)\b/i.test(x)){vide();h+=x}else buf.push(x)});vide();return h}var cb=el("corr-btn"),ci=el("corr-mdp"),cr=el("corr-refus"),cc=el("corr-contenu");function ouvrir(){if(empreinte(ci.value.trim())!==EMPREINTE){cr.hidden=false;ci.value="";ci.focus();return}cr.hidden=true;var sec=JSON.parse(decodeURIComponent(escape(atob(COFFRE))));cc.innerHTML=sec.map(function(x){return "<h3>"+x[0]+"</h3>"+rendre(x[1])}).join("");cc.hidden=false;ci.closest(".saisie").hidden=true;cc.scrollIntoView({behavior:"smooth",block:"nearest"})}cb.addEventListener("click",ouvrir);ci.addEventListener("keydown",function(e){if(e.key==="Enter")ouvrir()});
+})();
+</script>
+<script src="assets/correction-bilan.js"></script>
+</body></html>

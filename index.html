@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ressources et activités de technologie pour la classe de 3e — Fehmi KLABI, professeur de technologie, formateur et conseiller pédagogique.">
+<title>Technologie 3e — Fehmi KLABI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --papier:#F4F7F7;
+  --carte:#FFFFFF;
+  --encre:#14262B;
+  --doux:#5A6C71;
+  --teal:#0E6E6B;
+  --teal-2:#0A5A58;
+  --teal-pale:#E2EFEE;
+  --magenta:#C2185B;
+  --magenta-pale:#FBE8F0;
+  --trait:#D2DEDE;
+  --ombre:0 12px 35px rgba(20,38,43,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--papier);
+  color:var(--encre);
+  font-family:"Source Sans 3",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:17px;
+  line-height:1.55;
+}
+a{color:inherit}
+.page{max-width:1120px;margin:0 auto;padding:0 24px 70px}
+
+/* HERO */
+.hero{
+  margin:22px 0 0;
+  padding:34px 38px 36px;
+  background:var(--carte);
+  border:1px solid var(--trait);
+  border-radius:22px;
+  box-shadow:var(--ombre);
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  width:310px;height:310px;
+  right:-150px;top:-175px;
+  border-radius:50%;
+  background:var(--teal-pale);
+}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;z-index:1}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.brand img{height:52px;width:auto;display:block}
+.kicker{
+  margin:0;
+  color:var(--teal);
+  font-family:"Archivo",sans-serif;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.level{
+  flex:none;
+  border:1px solid var(--trait);
+  background:#FBFDFD;
+  color:var(--doux);
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:14px;
+  font-weight:600;
+}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:32px;align-items:end;margin-top:34px;position:relative;z-index:1}
+.hero h1{
+  margin:0 0 12px;
+  font-family:"Archivo",sans-serif;
+  font-size:clamp(39px,6vw,70px);
+  line-height:.98;
+  letter-spacing:-.035em;
+}
+.hero .intro{margin:0;color:var(--doux);max-width:60ch;font-size:18px}
+.identity{
+  border-left:4px solid var(--magenta);
+  padding:7px 0 7px 18px;
+}
+.identity-name{
+  margin:0 0 4px;
+  font-family:"Archivo",sans-serif;
+  font-size:clamp(25px,3vw,34px);
+  font-weight:700;
+  line-height:1.1;
+}
+.identity-role{margin:0;color:var(--encre);font-size:17px;font-weight:600}
+.identity-place{margin:5px 0 0;color:var(--doux);font-size:15px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px;position:relative;z-index:1}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  border-radius:10px;padding:11px 15px;
+  text-decoration:none;font-weight:700;font-size:15px;
+}
+.btn-primary{background:var(--teal);color:white}
+.btn-primary:hover{background:var(--teal-2)}
+.btn-secondary{background:var(--teal-pale);color:var(--teal-2)}
+.btn:focus-visible, summary:focus-visible, .session:focus-visible, .tool-card:focus-visible, .deposit-btn:focus-visible{outline:3px solid var(--magenta);outline-offset:3px}
+
+/* PARCOURS */
+.pathway{margin:24px 0 0;padding:20px 24px;background:#fff;border:1px solid var(--trait);border-radius:16px}
+.pathway-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:15px}
+.pathway h2{font-family:"Archivo",sans-serif;font-size:16px;margin:0}
+.pathway p{margin:0;color:var(--doux);font-size:14px}
+.path-steps{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:center}
+.path-step{text-align:center;background:var(--teal-pale);color:var(--teal-2);border-radius:9px;padding:10px 6px;font-weight:700;font-size:13px}
+.path-arrow{text-align:center;color:var(--magenta);font-weight:700;display:none}
+
+/* SEQUENCES */
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin:44px 0 18px}
+.section-head h2{font-family:"Archivo",sans-serif;font-size:28px;line-height:1.1;margin:0}
+.section-head p{margin:0;color:var(--doux);max-width:54ch;text-align:right}
+.sequence-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+.sequence-card{
+  margin:0;
+  background:var(--carte);
+  border:1px solid var(--trait);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 6px 24px rgba(20,38,43,.04);
+}
+.sequence-card[open]{border-color:#A9C7C6;box-shadow:var(--ombre)}
+.sequence-card summary{
+  list-style:none;
+  cursor:pointer;
+  padding:22px 22px 20px;
+  display:grid;
+  grid-template-columns:58px 1fr auto;
+  gap:16px;
+  align-items:center;
+  user-select:none;
+}
+.sequence-card summary::-webkit-details-marker{display:none}
+.seq-num{
+  width:58px;height:58px;
+  display:grid;place-items:center;
+  border-radius:14px;
+  background:var(--teal-pale);
+  color:var(--teal);
+  font-family:"Archivo",sans-serif;
+  font-size:24px;
+  font-weight:700;
+}
+.seq-title{min-width:0}
+.seq-kicker{display:block;color:var(--magenta);font-family:"Archivo",sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+.seq-title h3{font-family:"Archivo",sans-serif;font-size:20px;line-height:1.2;margin:0 0 5px}
+.seq-title p{margin:0;color:var(--doux);font-size:14.5px;line-height:1.35}
+.seq-side{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:7px}
+.count{font-size:13px;font-weight:700;color:var(--teal);background:var(--teal-pale);border-radius:999px;padding:5px 9px;white-space:nowrap}
+.chev{font-size:22px;color:var(--doux);transition:transform .2s ease;line-height:1}
+.sequence-card[open] .chev{transform:rotate(180deg)}
+.sessions{border-top:1px solid var(--trait);padding:10px 12px 13px;background:#FBFDFD}
+.session{
+  display:grid;
+  grid-template-columns:36px 1fr auto;
+  gap:12px;
+  align-items:center;
+  padding:12px 10px;
+  border-radius:10px;
+  text-decoration:none;
+}
+.session:hover{background:white}
+.session-num{font-family:"Archivo",sans-serif;font-weight:700;color:var(--teal);font-size:14px;text-align:center}
+.session strong{display:block;font-family:"Archivo",sans-serif;font-size:15.5px;line-height:1.25}
+.session small{display:block;color:var(--doux);font-size:13.5px;line-height:1.25;margin-top:2px}
+.session-go{color:var(--magenta);font-weight:700;font-size:18px}
+
+/* DÉPÔT DES TRAVAUX */
+.deposit{
+  margin-top:44px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:24px;
+  align-items:center;
+  padding:25px 26px;
+  background:linear-gradient(135deg,#FFFFFF 0%,#F0F7F6 100%);
+  border:1px solid #BCD4D2;
+  border-left:5px solid var(--teal);
+  border-radius:18px;
+  box-shadow:0 8px 28px rgba(20,38,43,.05);
+}
+.deposit-copy{display:flex;gap:17px;align-items:flex-start;min-width:0}
+.deposit-icon{
+  width:54px;height:54px;flex:none;
+  display:grid;place-items:center;
+  border-radius:14px;
+  background:var(--teal-pale);
+  color:var(--teal);
+}
+.deposit-icon svg{width:29px;height:29px;display:block}
+.deposit h2{font-family:"Archivo",sans-serif;font-size:23px;line-height:1.15;margin:1px 0 7px}
+.deposit p{margin:0;color:var(--doux);max-width:64ch}
+.deposit-note{display:block;margin-top:7px;color:var(--encre);font-size:14px;font-weight:600}
+.deposit-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-width:190px;
+  border-radius:11px;
+  padding:13px 17px;
+  background:var(--magenta);
+  color:#fff;
+  text-decoration:none;
+  font-family:"Archivo",sans-serif;
+  font-weight:700;
+  font-size:15px;
+  white-space:nowrap;
+}
+.deposit-btn:hover{filter:brightness(.93)}
+.deposit-btn span{font-size:19px;line-height:1}
+
+/* OUTILS */
+.tools{margin-top:44px}
+.tools h2{font-family:"Archivo",sans-serif;font-size:26px;margin:0 0 7px}
+.tools-intro{margin:0 0 16px;color:var(--doux)}
+.tools-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.tool-card{display:flex;gap:14px;align-items:center;text-decoration:none;background:#fff;border:1px solid var(--trait);border-radius:14px;padding:17px 18px}
+.tool-card:hover{border-color:var(--teal);box-shadow:0 7px 24px rgba(20,38,43,.05)}
+.tool-icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--magenta-pale);font-size:22px;flex:none}
+.tool-card h3{font-family:"Archivo",sans-serif;font-size:16px;margin:0 0 2px}
+.tool-card p{margin:0;color:var(--doux);font-size:13.5px;line-height:1.3}
+
+footer{margin-top:46px;padding:24px 4px 0;border-top:1px solid var(--trait);display:flex;justify-content:space-between;gap:20px;color:var(--doux);font-size:14px}
+.footer-id strong{color:var(--encre);font-family:"Archivo",sans-serif}
+footer p{margin:0}
+
+@media (max-width:820px){
+  .page{padding:0 16px 56px}
+  .hero{padding:26px 22px 28px;border-radius:18px}
+  .hero-grid{grid-template-columns:1fr;gap:24px;margin-top:27px}
+  .identity{max-width:520px}
+  .sequence-grid{grid-template-columns:1fr}
+  .section-head{display:block}
+  .section-head p{text-align:left;margin-top:8px}
+  .tools-grid{grid-template-columns:1fr}
+  .deposit{grid-template-columns:1fr;align-items:start}
+  .deposit-btn{justify-self:start}
+  .path-steps{grid-template-columns:1fr 20px 1fr 20px 1fr 20px 1fr}
+  .path-step:nth-of-type(n+5){margin-top:8px}
+}
+@media (max-width:610px){
+  body{font-size:16px}
+  .hero-top{align-items:flex-start}
+  .brand img{height:42px}
+.brand .logo-aefe{height:34px;padding-left:14px;border-left:1px solid var(--trait)}
+@media(max-width:640px){
+  .brand{flex-wrap:wrap;gap:10px}
+  .brand .logo-aefe{height:28px;padding-left:10px}
+}
+  .level{display:none}
+  .hero h1{font-size:42px}
+  .identity-name{font-size:27px}
+  .pathway{padding:18px}
+  .pathway-head{display:block}
+  .pathway-head p{margin-top:4px}
+  .path-steps{display:flex;flex-wrap:wrap;gap:7px}
+  .path-step{flex:1 1 42%;padding:9px}
+  .sequence-card summary{grid-template-columns:48px 1fr auto;padding:18px 16px;gap:12px}
+  .seq-num{width:48px;height:48px;font-size:20px;border-radius:12px}
+  .seq-title h3{font-size:17px}
+  .seq-title p{font-size:13.5px}
+  .count{display:none}
+  .session{grid-template-columns:30px 1fr auto;padding:11px 7px}
+  .deposit{padding:20px 18px;gap:17px}
+  .deposit-copy{gap:13px}
+  .deposit-icon{width:46px;height:46px;border-radius:12px}
+  .deposit h2{font-size:20px}
+  .deposit-btn{width:100%;min-width:0}
+  footer{display:block}
+  footer p+ p{margin-top:7px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chev{transition:none}}
+
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="hero">
+    <div class="hero-top">
+      <div class="brand">
+        <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
+          <img class="logo-aefe" src="img/logo-aefe.png" alt="AEFE — Agence pour l'enseignement français à l'étranger" onerror="this.remove()">
+          <p class="kicker">Technologie · Cycle 4</p>
+      </div>
+      <span class="level">Classe de 3e</span>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <h1>Technologie 3e</h1>
+        <p class="intro">Des activités pour comprendre les systèmes techniques, imaginer des solutions, programmer, expérimenter et améliorer.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#sequences">Découvrir les séquences <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-secondary" href="#outils">Boîte à outils</a>
+          <a class="btn btn-secondary" href="#depot">Déposer mon travail</a>
+        </div>
+      </div>
+
+      <div class="identity" aria-label="Auteur du site">
+        <p class="identity-name">Fehmi KLABI</p>
+        <p class="identity-role">Professeur de technologie</p>
+        <p class="identity-role">Formateur · Conseiller pédagogique</p>
+        <p class="identity-place">Lycée français de Vienne</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="pathway" aria-labelledby="pathway-title">
+    <div class="pathway-head">
+      <h2 id="pathway-title">Mon parcours en technologie</h2>
+      <p>Une même démarche pour apprendre à résoudre des problèmes techniques.</p>
+    </div>
+    <div class="path-steps" aria-label="Observer, comprendre, imaginer, concevoir, programmer, tester, améliorer">
+      <div class="path-step">Observer</div>
+      <div class="path-step">Comprendre</div>
+      <div class="path-step">Imaginer</div>
+      <div class="path-step">Concevoir</div>
+      <div class="path-step">Programmer</div>
+      <div class="path-step">Tester</div>
+      <div class="path-step">Améliorer</div>
+    </div>
+  </section>
+
+  <section id="sequences" aria-labelledby="sequences-title">
+    <div class="section-head">
+      <h2 id="sequences-title">Les séquences</h2>
+      <p>Choisis une séquence, puis ouvre la séance demandée par le professeur. Les détails restent repliés pour garder une page d’accueil claire.</p>
+    </div>
+
+    <div class="sequence-grid">
+
+      <details class="sequence-card">
+        <summary>
+          <span class="seq-num">01</span>
+          <span class="seq-title">
+            <span class="seq-kicker">Innovation & société</span>
+            <h3>Le smartphone</h3>
+            <p>Entre innovation, évolution et responsabilité.</p>
+          </span>
+          <span class="seq-side"><span class="count">4 activités</span><span class="chev" aria-hidden="true">⌄</span></span>
+        </summary>
+        <div class="sessions">
+          <a class="session" href="seq1-act1.html"><span class="session-num">01</span><span><strong>Lancement de séquence</strong><small>Du téléphone du grand-père au smartphone · 30 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq1-act2-p1.html"><span class="session-num">02</span><span><strong>Du téléphone au smartphone — partie 1</strong><small>Invention, innovation et lignée d’OST · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq1-act2-p2.html"><span class="session-num">03</span><span><strong>Du téléphone au smartphone — partie 2</strong><small>Frise chronologique et smartphone de 2030 · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq1-act3.html"><span class="session-num">04</span><span><strong>L’IA dans notre poche</strong><small>Usages, biais et incidences sociétales de l’IA · 1 h 30</small></span><span class="session-go">→</span></a>
+        </div>
+      </details>
+
+      <details class="sequence-card">
+        <summary>
+          <span class="seq-num">02</span>
+          <span class="seq-title">
+            <span class="seq-kicker">Réseaux</span>
+            <h3>La circulation de l’information</h3>
+            <p>Comprendre comment les données trouvent leur chemin.</p>
+          </span>
+          <span class="seq-side"><span class="count">4 activités</span><span class="chev" aria-hidden="true">⌄</span></span>
+        </summary>
+        <div class="sessions">
+          <a class="session" href="seq2-act1-p1.html"><span class="session-num">01</span><span><strong>Les chemins de l’information — partie 1</strong><small>Hub, switch, routeur et Wi‑Fi · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq2-act1-p2.html"><span class="session-num">02</span><span><strong>Les chemins de l’information — partie 2</strong><small>Jeu sans ordinateur : IP, routage et débit · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq2-act1-p3.html"><span class="session-num">03</span><span><strong>Les chemins de l’information — partie 3</strong><small>Configurer et tester un réseau avec Filius · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq2-act1-p4.html"><span class="session-num">04</span><span><strong>Les chemins de l’information — partie 4</strong><small>Lire une table et analyser le routage · 55 min</small></span><span class="session-go">→</span></a>
+        </div>
+      </details>
+
+      <details class="sequence-card">
+        <summary>
+          <span class="seq-num">03</span>
+          <span class="seq-title">
+            <span class="seq-kicker">Programmation & IA</span>
+            <h3>Programmer un objet</h3>
+            <p>Algorithmes, micro:bit et intelligence artificielle.</p>
+          </span>
+          <span class="seq-side"><span class="count">7 activités</span><span class="chev" aria-hidden="true">⌄</span></span>
+        </summary>
+        <div class="sessions">
+          <a class="session" href="seq3-act1-p1.html"><span class="session-num">01</span><span><strong>La micro:bit — partie 1</strong><small>Carte, composants et programmation d’un dé · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq3-act1-p2.html"><span class="session-num">02</span><span><strong>La micro:bit — partie 2</strong><small>Radio, algorithme et logigramme · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq3-act2-p1.html"><span class="session-num">03</span><span><strong>L’IA qui reconnaît — partie 1</strong><small>Trois caméras qui prennent des décisions · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq3-act2-p2.html"><span class="session-num">04</span><span><strong>L’IA qui reconnaît — partie 2</strong><small>Entraîner sa propre IA · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq3-act2-p3.html"><span class="session-num">05</span><span><strong>L’IA qui reconnaît — partie 3</strong><small>Reconnaître des objets et tester les limites · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq3-act3-p1.html"><span class="session-num">06</span><span><strong>Jouer contre la machine — partie 1</strong><small>Concevoir un algorithme et un logigramme · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq3-act3-p2.html"><span class="session-num">07</span><span><strong>Jouer contre la machine — partie 2</strong><small>Entraîner, programmer et tester · 55 min</small></span><span class="session-go">→</span></a>
+        </div>
+      </details>
+
+      <details class="sequence-card">
+        <summary>
+          <span class="seq-num">04</span>
+          <span class="seq-title">
+            <span class="seq-kicker">Automatisation & données</span>
+            <h3>L’arrosage automatique</h3>
+            <p>Acquérir, traiter et exploiter des données.</p>
+          </span>
+          <span class="seq-side"><span class="count">6 activités</span><span class="chev" aria-hidden="true">⌄</span></span>
+        </summary>
+        <div class="sessions">
+          <a class="session" href="seq4-act1.html"><span class="session-num">01</span><span><strong>De la plante aux données</strong><small>Chaîne d’information et descripteurs · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq4-act2.html"><span class="session-num">02</span><span><strong>Calibrer le capteur</strong><small>Des valeurs analogiques aux pourcentages · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq4-act3.html"><span class="session-num">03</span><span><strong>Je conçois le programme</strong><small>Algorithme, logigramme et blocs · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq4-act4.html"><span class="session-num">04</span><span><strong>Les opérateurs logiques</strong><small>ET, OU, NON et contrainte de température · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq4-act5.html"><span class="session-num">05</span><span><strong>Enregistrer les données</strong><small>Listes, CSV et traitement dans un tableur · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq4-act6.html"><span class="session-num">06</span><span><strong>Diagnostiquer et alerter</strong><small>Graphique, hypothèses et alerte radio · 55 min</small></span><span class="session-go">→</span></a>
+        </div>
+      </details>
+
+      <details class="sequence-card">
+  <summary>
+    <span class="seq-num">05</span>
+    <span class="seq-title">
+      <span class="seq-kicker">Olympiades des Sciences de l’Ingénieur</span>
+      <h3>Porte-courrier augmenté</h3>
+      <p>Analyser les usages, définir le besoin, imaginer, modéliser, tester et améliorer une solution.</p>
+    </span>
+    <span class="seq-side">
+      <span class="count">7 séances</span>
+      <span class="chev" aria-hidden="true">⌄</span>
+    </span>
+  </summary>
+  <div class="sessions">
+    <a class="session" href="seq5-act1.html"><span class="session-num">01</span><span><strong>Un objet encore utile ?</strong><small>Analyser le besoin et l’évolution des usages · 55 min</small></span><span class="session-go">→</span></a>
+    <a class="session" href="seq5-act2.html"><span class="session-num">02</span><span><strong>Avec quoi interagit-il ?</strong><small>Contexte et cas d’utilisation · 55 min</small></span><span class="session-go">→</span></a>
+    <a class="session" href="seq5-act3.html"><span class="session-num">03</span><span><strong>Pourquoi l’existant pose-t-il problème ?</strong><small>Analyse des causes avec Ishikawa / 6M · 55 min</small></span><span class="session-go">→</span></a>
+    <a class="session" href="seq5-act4.html"><span class="session-num">04</span><span><strong>Construire le cahier des charges</strong><small>Exigences, critères et niveaux mesurables · 55 min</small></span><span class="session-go">→</span></a>
+    <a class="session" href="seq5-act5.html"><span class="session-num">05</span><span><strong>Imaginer et choisir une solution</strong><small>Trois idées, croquis et matrice de décision · 55 min</small></span><span class="session-go">→</span></a>
+    <a class="session" href="seq5-act6.html"><span class="session-num">06</span><span><strong>Du croquis au modèle 3D</strong><small>Croquis coté et modélisation Tinkercad · 55 min</small></span><span class="session-go">→</span></a>
+    <a class="session" href="seq5-act7.html"><span class="session-num">07</span><span><strong>Tester, améliorer et convaincre</strong><small>Tests, amélioration et pitch · 55 min</small></span><span class="session-go">→</span></a>
+  </div>
+</details>
+
+
+      <details class="sequence-card">
+        <summary>
+          <span class="seq-num">06</span>
+          <span class="seq-title">
+            <span class="seq-kicker">Olympiades des Sciences de l’Ingénieur</span>
+            <h3>J’invente, j’innove</h3>
+            <p>Vivre mieux la ville : du besoin au prototype, puis à la preuve.</p>
+          </span>
+          <span class="seq-side"><span class="count">14 séances</span><span class="chev" aria-hidden="true">⌄</span></span>
+        </summary>
+        <div class="sessions">
+          <a class="session" href="seq6-act1.html"><span class="session-num">01</span><span><strong>Créer notre startup et observer la ville</strong><small>Lancer l’équipe et repérer un vrai problème urbain. · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq6-act2.html"><span class="session-num">02</span><span><strong>Comprendre l’utilisateur : persona et 5 Pourquoi</strong><small>Concevoir pour une personne réelle, pas pour une idée abstraite. · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq6-act3.html"><span class="session-num">03</span><span><strong>Transformer un besoin en défi d’innovation</strong><small>Passer de nombreuses idées à une problématique claire et utile. · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq6-act4.html"><span class="session-num">04</span><span><strong>Innovation ou déjà-vu ?</strong><small>Comparer, rechercher l’antériorité et préciser ce qui est réellement nouveau. · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq6-act5.html"><span class="session-num">05</span><span><strong>Organiser le projet</strong><small>Répartir les rôles et transformer une échéance en planning réaliste. · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq6-act6.html"><span class="session-num">06</span><span><strong>Décrire les usages avec SysML</strong><small>Représenter qui interagit avec le système et quels services il rend. · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq6-act7.html"><span class="session-num">07</span><span><strong>Construire le cahier des charges</strong><small>Transformer l’intention en exigences mesurables et vérifiables. · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq6-act8.html"><span class="session-num">08</span><span><strong>Prévoir le fonctionnement : l’algorigramme</strong><small>Décrire la logique du système avant de programmer. · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq6-act9.html"><span class="session-num">09</span><span><strong>Choisir les solutions techniques</strong><small>Associer fonctions techniques et solutions sans choisir au hasard. · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq6-act10.html"><span class="session-num">10</span><span><strong>Construire l’architecture du système</strong><small>Représenter composants, flux d’information et flux d’énergie. · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq6-act11.html"><span class="session-num">11</span><span><strong>Programmer, tester, corriger</strong><small>Faire fonctionner le prototype par une démarche de mise au point. · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq6-act12.html"><span class="session-num">12</span><span><strong>Du concept au croquis coté</strong><small>Rendre une solution fabriquable grâce au dessin technique. · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq6-act13.html"><span class="session-num">13</span><span><strong>Modéliser la solution en 3D</strong><small>Traduire le croquis en maquette numérique cohérente. · 55 min</small></span><span class="session-go">→</span></a>
+          <a class="session" href="seq6-act14.html"><span class="session-num">14</span><span><strong>Valider et convaincre</strong><small>Prouver que la solution répond au besoin et préparer le pitch OSI. · 55 min</small></span><span class="session-go">→</span></a>
+        </div>
+      </details>
+    </div>
+  </section>
+
+
+  <section class="deposit" id="depot" aria-labelledby="depot-title">
+    <div class="deposit-copy">
+      <span class="deposit-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 16V4"/>
+          <path d="m7.5 8.5 4.5-4.5 4.5 4.5"/>
+          <path d="M5 14v4.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V14"/>
+        </svg>
+      </span>
+      <div>
+        <h2 id="depot-title">Déposer mon travail</h2>
+        <p>Utilise cet espace lorsque le professeur te demande de conserver ou de rendre un fichier de travail. Prépare ton fichier, puis complète le formulaire avec les noms du groupe et l’activité concernée.</p>
+        <span class="deposit-note">Aucun compte n’est nécessaire : le fichier part directement dans l’espace Drive du professeur. Un seul dépôt suffit par groupe.</span>
+      </div>
+    </div>
+    <a class="deposit-btn" href="depot.html" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir le formulaire Google pour déposer mon travail dans un nouvel onglet">
+      Déposer un fichier <span aria-hidden="true">↗</span>
+    </a>
+  </section>
+
+  <section class="tools" id="outils" aria-labelledby="tools-title">
+    <h2 id="tools-title">Boîte à outils</h2>
+    <p class="tools-intro">Des ressources à ouvrir pendant les activités lorsque tu en as besoin.</p>
+    <div class="tools-grid">
+      <a class="tool-card" href="outils/aide-reseau.html">
+        <span class="tool-icon" aria-hidden="true">⌁</span>
+        <span><h3>Fiche d’aide réseau</h3><p>Vocabulaire, commandes Filius, calculs et dépannage.</p></span>
+      </a>
+      <a class="tool-card" href="outils/reseau-complet.html">
+        <span class="tool-icon" aria-hidden="true">↗</span>
+        <span><h3>Réseau virtuel interactif</h3><p>Observer le trajet d’un paquet, le débit et le trafic.</p></span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p class="footer-id"><strong>Fehmi KLABI</strong> · Professeur de technologie · Formateur · Conseiller pédagogique</p>
+    <p>Lycée français de Vienne · Cycle 4</p>
+  </footer>
+
+</main>
+
+<script>
+// Sur grand écran, une seule séquence reste ouverte à la fois pour préserver une page compacte.
+document.querySelectorAll('.sequence-card').forEach(function(card){
+  card.addEventListener('toggle', function(){
+    if(!card.open) return;
+    document.querySelectorAll('.sequence-card').forEach(function(other){
+      if(other !== card) other.open = false;
+    });
+  });
+});
+</script>
+</body>
+</html>
