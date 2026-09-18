@@ -1,0 +1,36 @@
+name: Patch teacher access
+on:
+  push:
+    paths:
+      - '.github/workflows/patch-teacher-access.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch index
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          if 'teacher-access' not in s:
+              css='''\n/* ACCÈS FORMATION ENSEIGNANTS — discret */\n.teacher-access{margin-top:26px;display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border:1px solid var(--trait);border-radius:12px;width:fit-content;max-width:100%}\n.teacher-access-icon{width:30px;height:30px;flex:none;display:grid;place-items:center;border-radius:8px;background:var(--teal-pale);color:var(--teal-2)}\n.teacher-access-icon svg{width:16px;height:16px;display:block}\n.teacher-access-title{font-family:"Archivo",sans-serif;font-size:14px;font-weight:700;white-space:nowrap}\n.teacher-access form{display:flex;align-items:center;gap:6px;margin:0}\n.teacher-access input{width:118px;height:34px;border:1px solid var(--trait);border-radius:8px;padding:0 10px;font:600 14px "Source Sans 3",sans-serif;color:var(--encre);background:#FBFDFD}\n.teacher-access input:focus{outline:2px solid var(--teal);outline-offset:1px}\n.teacher-access button{height:34px;border:0;border-radius:8px;padding:0 11px;background:var(--teal);color:#fff;font-family:"Archivo",sans-serif;font-size:13px;font-weight:700;cursor:pointer}\n.teacher-access button:hover{background:var(--teal-2)}\n.teacher-access-error{font-size:12px;color:var(--magenta);font-weight:700;margin:0 0 0 2px}\n@media(max-width:610px){.teacher-access{width:100%;flex-wrap:wrap;gap:8px}.teacher-access form{width:100%}.teacher-access input{flex:1;min-width:0;width:auto}}\n\n'''
+              s=s.replace('footer{margin-top:46px',css+'footer{margin-top:46px',1)
+              block='''\n  <section class="teacher-access" id="formation-enseignants" aria-label="Formation enseignants">\n    <span class="teacher-access-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg></span>\n    <span class="teacher-access-title">Formation Enseignants</span>\n    <form id="teacher-access-form" novalidate><input id="teacher-access-code" type="password" autocomplete="off" placeholder="Code" aria-label="Code d’accès formation enseignants"><button type="submit">Entrer</button></form>\n    <p class="teacher-access-error" id="teacher-access-error" hidden>Code incorrect</p>\n  </section>\n\n'''
+              marker='  <section class="deposit" id="depot"'
+              s=s.replace(marker,block+marker,1)
+              js='''\n\n// Accès compact à l’espace Formation enseignants.\n(function(){\n  const HASH='f0c5b979866566c0932b9a5d220d0e74c9743bab0731dd34a89911dd3817c9c2';\n  const KEY='formation_teachers_unlocked_v1';\n  const form=document.getElementById('teacher-access-form');\n  const input=document.getElementById('teacher-access-code');\n  const error=document.getElementById('teacher-access-error');\n  async function hash(value){const data=new TextEncoder().encode(value);const digest=await crypto.subtle.digest('SHA-256',data);return Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,'0')).join('');}\n  form.addEventListener('submit',async function(e){e.preventDefault();error.hidden=true;if(await hash(input.value.trim())===HASH){sessionStorage.setItem(KEY,'1');location.href='formation/index.html';}else{error.hidden=false;input.select();}});\n})();\n'''
+              s=s.replace('</script>\n</body>',js+'\n</script>\n</body>',1)
+              p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Ajoute un accès discret Formation enseignants"
+          git push
