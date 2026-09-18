@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <rect width="1200" height="520" fill="#f4f7f7"/>
+  <text x="600" y="48" text-anchor="middle" font-family="Arial" font-size="34" fill="#0E6E6B" font-weight="700">Tester, améliorer, convaincre</text>
+  <rect x="85" y="100" width="460" height="330" rx="20" fill="#fff" stroke="#D2DEDE" stroke-width="3"/>
+  <text x="315" y="145" text-anchor="middle" font-family="Arial" font-size="28" fill="#14262B" font-weight="700">Vérifier le cahier des charges</text>
+  <g font-family="Arial" font-size="22" fill="#14262B">
+    <text x="135" y="205">✓ encombrement</text>
+    <text x="135" y="250">✓ stabilité</text>
+    <text x="135" y="295">✓ tri visible</text>
+    <text x="135" y="340">✓ sécurité</text>
+    <text x="135" y="385">✓ coût / matériau</text>
+  </g>
+  <rect x="650" y="100" width="460" height="330" rx="20" fill="#fff" stroke="#D2DEDE" stroke-width="3"/>
+  <text x="880" y="145" text-anchor="middle" font-family="Arial" font-size="28" fill="#14262B" font-weight="700">Pitch final</text>
+  <g font-family="Arial" font-size="21" fill="#5A6C71">
+    <text x="700" y="205">1. Quel problème avons-nous identifié ?</text>
+    <text x="700" y="248">2. Quelle solution avons-nous imaginée ?</text>
+    <text x="700" y="291">3. Pourquoi l'avons-nous choisie ?</text>
+    <text x="700" y="334">4. Comment avons-nous vérifié qu'elle fonctionne ?</text>
+    <text x="700" y="377">5. Qu'améliorerions-nous encore ?</text>
+  </g>
+</svg>

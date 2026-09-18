@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560">
+  <rect width="1200" height="560" fill="#f4f7f7"/>
+  <text x="600" y="48" text-anchor="middle" font-family="Arial" font-size="34" fill="#0E6E6B" font-weight="700">Du croquis à la modélisation : quoi faut-il préciser ?</text>
+  <rect x="55" y="90" width="510" height="410" rx="20" fill="#fff" stroke="#D2DEDE" stroke-width="3"/>
+  <text x="310" y="130" text-anchor="middle" font-family="Arial" font-size="26" fill="#14262B" font-weight="700">Croquis coté</text>
+  <rect x="175" y="185" width="210" height="155" rx="20" fill="#e8d7bb" stroke="#7b6446" stroke-width="4"/>
+  <rect x="202" y="155" width="210" height="155" rx="20" fill="#f5ead6" stroke="#7b6446" stroke-width="4"/>
+  <line x1="160" y1="380" x2="430" y2="380" stroke="#C2185B" stroke-width="4"/>
+  <polygon points="160,380 176,372 176,388" fill="#C2185B"/><polygon points="430,380 414,372 414,388" fill="#C2185B"/>
+  <text x="295" y="372" text-anchor="middle" font-family="Arial" font-size="20" fill="#C2185B">largeur</text>
+  <line x1="448" y1="145" x2="448" y2="344" stroke="#C2185B" stroke-width="4"/>
+  <polygon points="448,145 440,161 456,161" fill="#C2185B"/><polygon points="448,344 440,328 456,328" fill="#C2185B"/>
+  <text x="468" y="250" font-family="Arial" font-size="20" fill="#C2185B">hauteur</text>
+  <text x="310" y="447" text-anchor="middle" font-family="Arial" font-size="20" fill="#5A6C71">vues, dimensions, nombre de compartiments, matériau</text>
+  <rect x="635" y="90" width="510" height="410" rx="20" fill="#fff" stroke="#D2DEDE" stroke-width="3"/>
+  <text x="890" y="130" text-anchor="middle" font-family="Arial" font-size="26" fill="#14262B" font-weight="700">Modélisation 3D</text>
+  <polygon points="770,290 900,220 1028,290 900,360" fill="#e2efee" stroke="#0E6E6B" stroke-width="4"/>
+  <polygon points="770,290 770,365 900,435 900,360" fill="#c5dfdc" stroke="#0E6E6B" stroke-width="4"/>
+  <polygon points="900,360 1028,290 1028,365 900,435" fill="#b5d4d0" stroke="#0E6E6B" stroke-width="4"/>
+  <rect x="850" y="235" width="100" height="82" rx="12" fill="#fff" stroke="#0E6E6B" stroke-width="3"/>
+  <text x="890" y="447" text-anchor="middle" font-family="Arial" font-size="20" fill="#5A6C71">Même objet, mais dimensions vérifiées et formes ajustées</text>
+</svg>

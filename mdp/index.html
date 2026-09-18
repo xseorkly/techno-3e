@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Mots de passe des corrections</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --papier:#F4F7F7; --carte:#FFFFFF; --encre:#14262B; --doux:#5A6C71;
+  --teal:#0E6E6B; --teal-pale:#E2EFEE; --magenta:#C2185B; --trait:#D2DEDE; --r:10px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papier);color:var(--encre);
+  font-family:"Source Sans 3",system-ui,sans-serif;font-size:17px;line-height:1.55}
+.page{max-width:760px;margin:0 auto;padding:0 20px 70px}
+header{padding:48px 0 26px;border-bottom:1px solid var(--trait)}
+.fil{font-family:"Archivo",sans-serif;font-weight:600;font-size:13px;color:var(--magenta);margin:0 0 8px}
+h1{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(28px,5vw,38px);
+  line-height:1.12;margin:0 0 14px}
+header p{color:var(--doux);margin:0;max-width:60ch}
+h2{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;color:var(--doux);
+  margin:38px 0 12px}
+.ligne{display:flex;align-items:center;gap:18px;background:var(--carte);
+  border:1px solid var(--trait);border-radius:var(--r);padding:16px 20px;margin-bottom:10px;flex-wrap:wrap}
+.ligne .quoi{flex:1;min-width:220px}
+.ligne .quoi b{display:block;font-family:"Archivo",sans-serif;font-weight:600;font-size:17px}
+.ligne .quoi span{color:var(--doux);font-size:14.5px}
+.mdp{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:17px;font-weight:600;
+  color:var(--magenta);background:#FDECF2;border:1px solid #F3C6D6;
+  border-radius:8px;padding:9px 16px;letter-spacing:.02em;user-select:all}
+.copie{background:none;border:1px solid var(--trait);border-radius:8px;color:var(--doux);
+  font:inherit;font-size:13.5px;padding:8px 12px;cursor:pointer}
+.copie:hover{border-color:var(--teal);color:var(--teal)}
+.avert{background:#FFF8E6;border:1px solid #E8D08A;border-radius:var(--r);
+  padding:16px 20px;margin:26px 0 0;font-size:15.5px}
+.avert b{font-family:"Archivo",sans-serif}
+footer{margin-top:44px;padding-top:22px;border-top:1px solid var(--trait);
+  color:var(--doux);font-size:14.5px}
+a{color:var(--teal)}
+
+/* ---------- Codes de dépôt ---------- */
+.codes{background:var(--carte);border:1px solid var(--trait);border-left:4px solid var(--teal);
+  border-radius:var(--r);padding:20px 22px;margin-top:34px}
+.codes h2{font-family:"Archivo",sans-serif;font-weight:600;font-size:19px;margin:0 0 6px}
+.codes p.intro{color:var(--doux);font-size:15px;margin:0 0 14px}
+.codes .saisie{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.codes input{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--trait);
+  border-radius:8px;background:#fff;color:var(--encre);min-width:170px}
+.codes input:focus{outline:0;border-color:var(--teal)}
+.codes button{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;background:var(--teal);
+  color:#fff;border:0;border-radius:8px;padding:11px 20px;cursor:pointer}
+.codes button:hover{background:#0b5a58}
+.codes button.discret{background:none;border:1px solid var(--trait);color:var(--doux);
+  font-size:13.5px;padding:7px 12px}
+.codes button.discret:hover{border-color:var(--magenta);color:var(--magenta);background:none}
+.codes .etat{margin:12px 0 0;font-size:14.5px}
+.codes .etat.ok{color:#0b5a58}
+.codes .etat.ko{color:var(--magenta)}
+.codes table{width:100%;border-collapse:collapse;margin-top:16px;font-size:15px}
+.codes th,.codes td{border-bottom:1px solid var(--trait);padding:10px 8px;text-align:left}
+.codes th{font-family:"Archivo",sans-serif;font-size:12.5px;text-transform:uppercase;
+  letter-spacing:.04em;color:var(--doux);border-bottom-width:2px}
+.codes td.c{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:600;color:var(--teal)}
+.codes tr.off td{opacity:.45}
+.codes .puce{display:inline-block;font-size:12px;padding:2px 9px;border-radius:20px;
+  font-family:"Archivo",sans-serif}
+.codes .puce.on{background:var(--teal-pale);color:var(--teal)}
+.codes .puce.off{background:#F0F0F0;color:var(--doux)}
+.codes .ajout{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;padding-top:16px;
+  border-top:1px solid var(--trait)}
+@media print{.codes{display:none}}
+@media print{body{background:#fff} .copie{display:none}}
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header>
+    <p class="fil">Page privée · à ne pas diffuser</p>
+    <h1>Mots de passe des corrections</h1>
+    <p>Chaque activité a son propre mot de passe pour la correction, et les deux évaluations de la séquence 1 ont le leur. Il ouvre le bloc « Correction expliquée et bilan de l’activité » situé en bas de la fiche correspondante. Les majuscules comptent.</p>
+  </header>
+
+  <h2>Séquence 1</h2>
+
+  <div class="ligne">
+    <span class="quoi"><b>Activité 1</b><span>Le smartphone : innovation et responsabilité</span></span>
+    <code class="mdp">Depart1A</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Activité 2 · partie 1</b><span>Comprendre l'évolution</span></span>
+    <code class="mdp">Lignee1B</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+  <div class="ligne">
+    <span class="quoi"><b>Activité 2 · partie 2</b><span>Préparer l'exposition</span></span>
+    <code class="mdp">Frise1B2</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Activité 3</b><span>L’IA dans notre poche</span></span>
+    <code class="mdp">Biais1C</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+  <h2>Séquence 2</h2>
+
+  <div class="ligne">
+    <span class="quoi"><b>Activité 1 · partie 1</b><span>Identifier les éléments du réseau</span></span>
+    <code class="mdp">Colis2A</code><button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Activité 1 · partie 2</b><span>Adresse IP, table de routage et débit — jeu sans ordinateur</span></span>
+    <code class="mdp">Adresse2B</code><button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Activité 1 · partie 3</b><span>Configurer le réseau avec Filius</span></span>
+    <code class="mdp">Quartier2B</code><button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Activité 1 · partie 4</b><span>Analyser le routage</span></span>
+    <code class="mdp">Chemin2C</code><button class="copie" type="button">Copier</button>
+  </div>
+
+  <h2>Séquence 3</h2>
+
+  <div class="ligne">
+    <span class="quoi"><b>Activité 1 · partie 1</b><span>Découvrir la micro:bit</span></span>
+    <code class="mdp">Carte3A</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Activité 1 · partie 2</b><span>Deux cartes qui jouent ensemble</span></span>
+    <code class="mdp">Radio3B</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Activité 2 · partie 1</b><span>L’IA qui reconnaît</span></span>
+    <code class="mdp">Vision3C</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Activité 2 · partie 2</b><span>J’entraîne ma propre IA</span></span>
+    <code class="mdp">Train3D</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Activité 2 · partie 3</b><span>Où mon IA se trompe-t-elle ?</span></span>
+    <code class="mdp">Biais3E</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Activité 3 · partie 1</b><span>Je conçois le système</span></span>
+    <code class="mdp">Concevoir3F</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Activité 3 · partie 2</b><span>Je réalise et je teste</span></span>
+    <code class="mdp">Tester3G</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+  <h2>Séquence 4</h2>
+
+  <div class="ligne">
+    <span class="quoi"><b>Séance 1</b><span>De la plante aux données</span></span>
+    <code class="mdp">Chaine4A</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Séance 2</b><span>Calibrer le capteur</span></span>
+    <code class="mdp">Calibre4B</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Séance 3</b><span>Je conçois le programme</span></span>
+    <code class="mdp">Logigramme4C</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Séance 4</b><span>Les opérateurs logiques</span></span>
+    <code class="mdp">Booleen4D</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Séance 5</b><span>Enregistrer les données</span></span>
+    <code class="mdp">Tableur4E</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+  <div class="ligne">
+    <span class="quoi"><b>Séance 6</b><span>Diagnostiquer et alerter</span></span>
+    <code class="mdp">Panne4F</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+
+  <h2>Séquence 5 — Olympiades des Sciences de l’Ingénieur</h2>
+  <h3 style="margin:18px 0 8px;color:var(--petrole);font-family:Archivo,sans-serif">Projet · Porte-courrier augmenté</h3>
+
+  <div class="ligne"><span class="quoi"><b>Séance 1</b><span>Un objet encore utile ?</span></span><code class="mdp">Besoin5A</code><button class="copie" type="button">Copier</button></div>
+
+  <div class="ligne"><span class="quoi"><b>Séance 2</b><span>Avec quoi interagit-il ?</span></span><code class="mdp">Contexte5B</code><button class="copie" type="button">Copier</button></div>
+
+  <div class="ligne"><span class="quoi"><b>Séance 3</b><span>Pourquoi l’existant pose-t-il problème ?</span></span><code class="mdp">Causes5C</code><button class="copie" type="button">Copier</button></div>
+
+  <div class="ligne"><span class="quoi"><b>Séance 4</b><span>Construire le cahier des charges</span></span><code class="mdp">Exigence5D</code><button class="copie" type="button">Copier</button></div>
+
+  <div class="ligne"><span class="quoi"><b>Séance 5</b><span>Imaginer et choisir une solution</span></span><code class="mdp">Choix5E</code><button class="copie" type="button">Copier</button></div>
+
+  <div class="ligne"><span class="quoi"><b>Séance 6</b><span>Du croquis au modèle 3D</span></span><code class="mdp">Modele5F</code><button class="copie" type="button">Copier</button></div>
+
+  <div class="ligne"><span class="quoi"><b>Séance 7</b><span>Tester, améliorer et convaincre</span></span><code class="mdp">Test5G</code><button class="copie" type="button">Copier</button></div>
+
+
+  <h2>Séquence 6 — Olympiades des Sciences de l’Ingénieur</h2>
+  <h3 style="margin:18px 0 8px;color:var(--petrole);font-family:Archivo,sans-serif">Projet · J’invente, j’innove — Vivre mieux la ville</h3>
+  <div class="ligne"><span class="quoi"><b>Séance 1</b><span>Créer notre startup et observer la ville</span></span><code class="mdp">Ville6A</code><button class="copie" type="button">Copier</button></div>
+  <div class="ligne"><span class="quoi"><b>Séance 2</b><span>Comprendre l’utilisateur : persona et 5 Pourquoi</span></span><code class="mdp">Persona6B</code><button class="copie" type="button">Copier</button></div>
+  <div class="ligne"><span class="quoi"><b>Séance 3</b><span>Transformer un besoin en défi d’innovation</span></span><code class="mdp">Idees6C</code><button class="copie" type="button">Copier</button></div>
+  <div class="ligne"><span class="quoi"><b>Séance 4</b><span>Innovation ou déjà-vu ?</span></span><code class="mdp">Brevet6D</code><button class="copie" type="button">Copier</button></div>
+  <div class="ligne"><span class="quoi"><b>Séance 5</b><span>Organiser le projet</span></span><code class="mdp">Gantt6E</code><button class="copie" type="button">Copier</button></div>
+  <div class="ligne"><span class="quoi"><b>Séance 6</b><span>Décrire les usages avec SysML</span></span><code class="mdp">Sysml6F</code><button class="copie" type="button">Copier</button></div>
+  <div class="ligne"><span class="quoi"><b>Séance 7</b><span>Construire le cahier des charges</span></span><code class="mdp">Exigence6G</code><button class="copie" type="button">Copier</button></div>
+  <div class="ligne"><span class="quoi"><b>Séance 8</b><span>Prévoir le fonctionnement : l’algorigramme</span></span><code class="mdp">Algo6H</code><button class="copie" type="button">Copier</button></div>
+  <div class="ligne"><span class="quoi"><b>Séance 9</b><span>Choisir les solutions techniques</span></span><code class="mdp">Fast6I</code><button class="copie" type="button">Copier</button></div>
+  <div class="ligne"><span class="quoi"><b>Séance 10</b><span>Construire l’architecture du système</span></span><code class="mdp">Chaines6J</code><button class="copie" type="button">Copier</button></div>
+  <div class="ligne"><span class="quoi"><b>Séance 11</b><span>Programmer, tester, corriger</span></span><code class="mdp">Code6K</code><button class="copie" type="button">Copier</button></div>
+  <div class="ligne"><span class="quoi"><b>Séance 12</b><span>Du concept au croquis coté</span></span><code class="mdp">Croquis6L</code><button class="copie" type="button">Copier</button></div>
+  <div class="ligne"><span class="quoi"><b>Séance 13</b><span>Modéliser la solution en 3D</span></span><code class="mdp">Modele6M</code><button class="copie" type="button">Copier</button></div>
+  <div class="ligne"><span class="quoi"><b>Séance 14</b><span>Valider et convaincre</span></span><code class="mdp">Pitch6N</code><button class="copie" type="button">Copier</button></div>
+
+  <h2>Évaluations de compétence <span style="font-weight:400;color:var(--doux)">séquence 1</span></h2>
+
+  <div class="ligne">
+    <span class="quoi"><b>Activité 2 · partie 2 — Évaluation</b><span>Innovations et ruptures</span></span>
+    <code class="mdp">Eval1B</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+  <div class="ligne">
+    <span class="quoi"><b>Activité 3 — Évaluation</b><span>L'IA dans les moyens de communication</span></span>
+    <code class="mdp">Eval1C</code>
+    <button class="copie" type="button">Copier</button>
+  </div>
+
+
+  <section class="codes" id="codes">
+    <h2>Codes de dépôt des travaux</h2>
+    <p class="intro">Ces codes sont ceux que les élèves saisissent sur la page de dépôt. Tu peux en avoir plusieurs — un par groupe, un par séance — et en désactiver un sans le supprimer. La clé est déjà saisie : clique simplement sur « Afficher les codes ».</p>
+    <div class="saisie">
+      <input type="password" id="cle" value="ProfKlabi2026" autocomplete="off" spellcheck="false" aria-label="Clé professeur">
+      <button type="button" id="voir">Afficher les codes</button>
+    </div>
+    <p class="etat" id="etat" hidden></p>
+    <div id="liste" hidden>
+      <table>
+        <thead><tr><th>Code</th><th>À quoi il sert</th><th>État</th><th></th></tr></thead>
+        <tbody id="corps"></tbody>
+      </table>
+      <div class="ajout">
+        <input type="text" id="nouveau" placeholder="Nouveau code" maxlength="20">
+        <input type="text" id="libelle" placeholder="À quoi il sert" style="flex:1">
+        <button type="button" id="ajouter">Ajouter</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="avert">
+    <b>Ce que cette page n'est pas.</b> Elle n'est reliée depuis aucune page du site et n'est pas indexée par les moteurs de recherche, mais elle reste accessible à qui connaît son adresse. De même, le verrou des corrections décourage la curiosité sans constituer une véritable protection : quelqu'un qui sait lire le code source d'une page peut le contourner. Cette page sert à organiser les accès. Tu peux communiquer chaque mot de passe aux élèves au moment où tu veux leur donner accès à la correction et au bilan.
+  </div>
+
+  <footer>
+    <p>Lycée français de Vienne · Technologie · <a href="../index.html">Retour au site</a></p>
+  </footer>
+
+</main>
+
+<script>
+document.querySelectorAll(".copie").forEach(function(b){
+  b.addEventListener("click", function(){
+    var mdp = b.previousElementSibling.textContent.trim();
+    var fini = function(){ b.textContent = "Copié"; setTimeout(function(){ b.textContent = "Copier"; }, 1600); };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(mdp).then(fini, function(){});
+    }else{
+      var z = document.createElement("textarea");
+      z.value = mdp; document.body.appendChild(z); z.select();
+      try{ document.execCommand("copy"); fini(); }catch(e){}
+      document.body.removeChild(z);
+    }
+  });
+});
+
+
+(function(){
+  "use strict";
+  var URL_SCRIPT = "https://script.google.com/macros/s/AKfycbwuJgRQ6J8b9-SYjbfhggTTjvK2y3r7uCngFUIphvgvEadESWg7cKuWzUhEvklsDDI1lw/exec";
+  function el(id){ return document.getElementById(id); }
+  var cle = el("cle"), etat = el("etat"), liste = el("liste"), corps = el("corps");
+
+  function dire(t, type){
+    etat.textContent = t; etat.hidden = !t;
+    etat.className = "etat " + (type || "");
+  }
+
+  function appel(charge){
+    return fetch(URL_SCRIPT, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(Object.assign({ cle: cle.value.trim() }, charge))
+    }).then(function(r){ return r.json(); });
+  }
+
+  function afficher(codes){
+    corps.innerHTML = codes.map(function(c){
+      return '<tr class="' + (c.actif ? "" : "off") + '">'
+        + '<td class="c">' + c.code + '</td>'
+        + '<td>' + (c.libelle || "&mdash;") + '</td>'
+        + '<td><span class="puce ' + (c.actif ? "on" : "off") + '">'
+        + (c.actif ? "actif" : "désactivé") + '</span></td>'
+        + '<td style="text-align:right;white-space:nowrap">'
+        + '<button type="button" class="discret" data-bascule="' + c.code + '">'
+        + (c.actif ? "Désactiver" : "Réactiver") + '</button> '
+        + '<button type="button" class="discret" data-supprime="' + c.code + '">Supprimer</button>'
+        + '</td></tr>';
+    }).join("");
+    liste.hidden = false;
+  }
+
+  function traiter(r){
+    if(r.statut === "OK"){
+      if(r.codes) afficher(r.codes);
+      dire(r.message || "", "ok");
+    }else{
+      dire(r.message || "Opération refusée.", "ko");
+    }
+  }
+
+  el("voir").addEventListener("click", function(){
+    if(!cle.value.trim()){ dire("Saisis d'abord ta clé professeur.", "ko"); return; }
+    dire("Lecture en cours…", "");
+    appel({ action: "codes" }).then(traiter)
+      .catch(function(){ dire("Service injoignable. Vérifie ta connexion.", "ko"); });
+  });
+  cle.addEventListener("keydown", function(e){ if(e.key === "Enter") el("voir").click(); });
+
+  el("ajouter").addEventListener("click", function(){
+    var c = el("nouveau").value.trim();
+    if(!c){ dire("Saisis le nouveau code.", "ko"); return; }
+    appel({ action: "ajouter", code: c, libelle: el("libelle").value.trim() })
+      .then(function(r){ traiter(r); if(r.statut === "OK"){ el("nouveau").value = ""; el("libelle").value = ""; } })
+      .catch(function(){ dire("Service injoignable.", "ko"); });
+  });
+
+  corps.addEventListener("click", function(e){
+    var b = e.target.closest("button"); if(!b) return;
+    if(b.dataset.bascule){
+      appel({ action: "basculer", code: b.dataset.bascule }).then(traiter)
+        .catch(function(){ dire("Service injoignable.", "ko"); });
+    }
+    if(b.dataset.supprime){
+      if(!confirm("Supprimer définitivement le code " + b.dataset.supprime + " ?")) return;
+      appel({ action: "supprimer", code: b.dataset.supprime }).then(traiter)
+        .catch(function(){ dire("Service injoignable.", "ko"); });
+    }
+  });
+})();
+</script>
+</body>
+</html>
