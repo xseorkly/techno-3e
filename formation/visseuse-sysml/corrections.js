@@ -1,0 +1,1 @@
+(()=>{const m=location.pathname.match(/seance-(\d)\.html$/);if(!m)return;const s=document.createElement('script');s.src=`corrections-${m[1]}.js`;document.head.appendChild(s);})();
