@@ -1,0 +1,1 @@
+(()=>{const key='expertise_'+location.pathname;document.querySelectorAll('[data-save]').forEach((el,i)=>{if(!el.id)el.id='f'+i;const k=key+'_'+el.id;if(localStorage.getItem(k)!==null)el.value=localStorage.getItem(k);el.addEventListener('input',()=>localStorage.setItem(k,el.value));});})();
