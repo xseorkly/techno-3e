@@ -1,0 +1,43 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>4.12 — Publier sur GitHub Pages</title><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body><main class="page"><nav class="nav"><a href="index.html">← Sommaire Point 4</a><a href="11-concevoir-dispositif.html">4.11</a><a class="active" href="12-github-pages.html">4.12 GitHub Pages</a><a href="13-generateur-dashboard.html">4.13 →</a></nav><header class="hero"><span class="brand">Point 4 · Sous-partie 12</span><h1>Publier les données des groupes sur GitHub Pages</h1><p class="lead">On part d’un fichier HTML unique. Le professeur remplace seulement les Channel ID publics puis publie la page.</p></header><section class="section card"><span class="kicker">Étape 1</span><h2>Le principe du code</h2><pre>ThingSpeak public
+   ↓ API JSON
+index.html
+   ↓
+GitHub Pages
+   ↓
+site visible dans le navigateur</pre><p>Le code lit la dernière entrée de chaque canal avec <code>/feeds/last.json</code>, puis affiche les valeurs dans une carte.</p></section><section class="section card"><span class="kicker">Étape 2</span><h2>Le seul endroit à modifier</h2><pre>const groupes = [
+  { nom: "Groupe 1", channelId: "1234567" },
+  { nom: "Groupe 2", channelId: "1234568" },
+  { nom: "Groupe 3", channelId: "1234569" }
+];</pre><div class="callout">Remplacez les numéros d’exemple par vos Channel ID. Pour cette version simple, utilisez des canaux publics et des données techniques anonymes.</div></section><section class="section card"><span class="kicker">Étape 3</span><h2>Code HTML minimal prêt à adapter</h2><textarea id="code" rows="28" readonly>&lt;!doctype html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width,initial-scale=1"&gt;
+&lt;title&gt;Stations IoT&lt;/title&gt;
+&lt;style&gt;
+body{font-family:Arial,sans-serif;background:#f4f7f7;margin:0;padding:24px;color:#14262b}
+h1{margin-top:0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}.card{background:#fff;border:1px solid #d2dede;border-radius:16px;padding:18px}.status{font-weight:700}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Stations IoT&lt;/h1&gt;
+&lt;div id="grid" class="grid"&gt;&lt;/div&gt;
+&lt;script&gt;
+const groupes=[
+ {nom:"Groupe 1",channelId:"VOTRE_CHANNEL_ID_1"},
+ {nom:"Groupe 2",channelId:"VOTRE_CHANNEL_ID_2"}
+];
+async function charger(){
+ const grid=document.getElementById('grid'); grid.innerHTML='';
+ for(const g of groupes){
+  const card=document.createElement('div'); card.className='card'; card.innerHTML=`&lt;h2&gt;${g.nom}&lt;/h2&gt;&lt;p&gt;Chargement...&lt;/p&gt;`; grid.appendChild(card);
+  try{
+   const r=await fetch(`https://api.thingspeak.com/channels/${g.channelId}/feeds/last.json`);
+   const d=await r.json();
+   card.innerHTML=`&lt;h2&gt;${g.nom}&lt;/h2&gt;&lt;p&gt;Température : &lt;strong&gt;${d.field1??'—'} °C&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Humidité : &lt;strong&gt;${d.field2??'—'} %&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;CO₂ : &lt;strong&gt;${d.field3??'—'} ppm&lt;/strong&gt;&lt;/p&gt;&lt;p class="status"&gt;Dernière mesure : ${new Date(d.created_at).toLocaleString()}&lt;/p&gt;`;
+  }catch(e){card.innerHTML=`&lt;h2&gt;${g.nom}&lt;/h2&gt;&lt;p&gt;Impossible de lire ce canal.&lt;/p&gt;`;}
+ }
+}
+charger(); setInterval(charger,30000);
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;</textarea><div class="toolbar" style="margin-top:12px"><button class="btn primary" id="copy">Copier le code</button></div></section><section class="section card"><span class="kicker">Étape 4</span><h2>Publier sur GitHub Pages</h2><div class="grid"><div class="step"><h3>1 — Créer un dépôt</h3><p>Exemple : <code>stations-iot</code>.</p></div><div class="step"><h3>2 — Ajouter index.html</h3><p>Collez le code puis remplacez les Channel ID.</p></div><div class="step"><h3>3 — Commit</h3><p>Enregistrez le fichier dans la branche principale.</p></div><div class="step"><h3>4 — Settings → Pages</h3><p>Choisissez la publication depuis la branche principale et le dossier racine.</p></div></div><p>Après publication, GitHub fournit l’adresse de votre site Pages.</p></section><section class="section card"><div class="danger">N’insérez pas une Write API Key dans cette page. Pour un canal privé, une Read API Key placée dans un fichier public serait également visible. Le Point 4.13 vous avertira avant tout export.</div></section><section class="section card source"><span class="kicker">Sources officielles</span><p><a href="https://www.mathworks.com/help/thingspeak/readlastentry.html" target="_blank" rel="noopener">MathWorks — Read Last Entry</a> · <a href="https://docs.github.com/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener">GitHub Docs — Creating a GitHub Pages site</a></p></section><div class="footer"><nav class="nav"><a href="11-concevoir-dispositif.html">← 4.11</a><a href="13-generateur-dashboard.html">4.13 Générateur sans coder →</a></nav></div><script>document.getElementById('copy').onclick=async()=>{await navigator.clipboard.writeText(document.getElementById('code').value);document.getElementById('copy').textContent='Code copié ✓';setTimeout(()=>document.getElementById('copy').textContent='Copier le code',1800)}</script><script src="../../common-tools.js"></script></main></body></html>
