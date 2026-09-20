@@ -1,5 +1,18 @@
 (function(){
+  function addIoTNavigation(){
+    const path=location.pathname;
+    if(!path.includes('/formation/objets-connectes/')) return;
+    document.querySelectorAll('.nav').forEach(nav=>{
+      const hasPoint3=[...nav.querySelectorAll('a')].some(a=>a.getAttribute('href')&&a.getAttribute('href').includes('point-3'));
+      if(hasPoint3) return;
+      const a=document.createElement('a');
+      a.href=path.includes('/point-3/')?'index.html':'point-3/index.html';
+      a.textContent='Point 3 · TP guidé →';
+      nav.appendChild(a);
+    });
+  }
   function addTools(){
+    addIoTNavigation();
     if(document.getElementById('formation-print-tools')) return;
     const style=document.createElement('style');
     style.textContent=`
