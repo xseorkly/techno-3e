@@ -3,12 +3,21 @@
     const path=location.pathname;
     if(!path.includes('/formation/objets-connectes/')) return;
     document.querySelectorAll('.nav').forEach(nav=>{
-      const hasPoint3=[...nav.querySelectorAll('a')].some(a=>a.getAttribute('href')&&a.getAttribute('href').includes('point-3'));
-      if(hasPoint3) return;
-      const a=document.createElement('a');
-      a.href=path.includes('/point-3/')?'index.html':'point-3/index.html';
-      a.textContent='Point 3 · TP guidé →';
-      nav.appendChild(a);
+      const links=[...nav.querySelectorAll('a')];
+      const hasPoint3=links.some(a=>a.getAttribute('href')&&a.getAttribute('href').includes('point-3'));
+      const hasPoint4=links.some(a=>a.getAttribute('href')&&a.getAttribute('href').includes('point-4'));
+      if(!hasPoint3 && !path.includes('/point-4/')){
+        const a=document.createElement('a');
+        a.href=path.includes('/point-3/')?'index.html':'point-3/index.html';
+        a.textContent='Point 3 · TP guidé →';
+        nav.appendChild(a);
+      }
+      if(path.includes('/point-3/') && !hasPoint4){
+        const a=document.createElement('a');
+        a.href='../point-4/index.html';
+        a.textContent='Point 4 · Classe connectée →';
+        nav.appendChild(a);
+      }
     });
   }
   function addTools(){
