@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Point 5 — Commander un actionneur depuis ThingSpeak</title>
+<style>
+:root{--paper:#F4F7F7;--card:#fff;--ink:#14262B;--muted:#5A6C71;--teal:#0E6E6B;--teal2:#0A5A58;--pale:#E2EFEE;--mag:#C2185B;--line:#D2DEDE;--amber:#9A6900;--amberp:#FFF5D9;--red:#9C2F2F;--redp:#FBEAEA;--shadow:0 12px 35px rgba(20,38,43,.08)}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.58 "Source Sans 3",system-ui,sans-serif}.page{max-width:1120px;margin:auto;padding:22px 22px 70px}.hero,.card,.step,.asset{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.hero{padding:34px 38px}.hero h1,h2,h3{font-family:Arial,sans-serif}.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.05;margin:14px 0}.lead{font-size:20px;color:var(--muted);max-width:78ch}.kicker{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:var(--teal)}.nav{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.btn{display:inline-block;text-decoration:none;border-radius:10px;padding:10px 14px;font-weight:800;border:1px solid var(--line)}.primary{background:var(--teal);color:#fff;border-color:var(--teal)}.secondary{background:var(--mag);color:#fff;border-color:var(--mag)}.outline{background:#fff;color:var(--teal2)}.section{margin-top:28px}.card,.step{padding:22px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}.assets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.asset{padding:14px;overflow:hidden}.asset img{width:100%;height:210px;object-fit:contain;background:#fff;border-radius:12px}.asset p{margin:8px 0 0;color:var(--muted);font-size:15px}.callout{padding:14px 16px;border-radius:12px;background:var(--pale);color:var(--teal2);font-weight:650}.warn{padding:14px 16px;border-radius:12px;background:var(--amberp);color:#684800}.danger{padding:14px 16px;border-radius:12px;background:var(--redp);color:var(--red)}.flow{padding:24px;border:1px solid var(--line);border-radius:18px;background:#fff}.flowline{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}.node{padding:12px 16px;border-radius:12px;background:var(--pale);font-weight:800;text-align:center}.arrow{font-size:24px;color:var(--mag);font-weight:900}.num{font-size:34px;font-weight:900;color:var(--teal)}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#10282d;color:#eaf4f4;padding:16px;border-radius:12px;font:14px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.mini{font-size:14px;color:var(--muted)}.steps{display:grid;gap:14px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;background:#fff}th,td{border:1px solid var(--line);padding:11px;vertical-align:top;text-align:left}th{background:var(--pale)}.footer{margin-top:34px;border-top:1px solid var(--line);padding-top:18px}.footer a{color:var(--teal2);font-weight:800;text-decoration:none}@media(max-width:820px){.grid,.assets{grid-template-columns:1fr}.hero{padding:24px 20px}}
+</style>
+</head>
+<body>
+<main class="page">
+<nav class="nav"><a class="btn outline" href="../index.html">← Objets connectés & IoT</a></nav>
+
+<header class="hero">
+<span class="kicker">Point 5 · expérimentation</span>
+<h1>Commander un actionneur depuis ThingSpeak</h1>
+<p class="lead">Vous savez déjà envoyer une donnée de capteur vers ThingSpeak. Ici, vous allez inverser le sens : une commande créée dans ThingSpeak sera lue par la micro:bit, puis transformée en action physique sur la REKA:BIT.</p>
+<div class="nav">
+<a class="btn primary" href="#demarrer">Commencer l’expérimentation ↓</a>
+<a class="btn secondary" href="pxt-thingspeak-read-cytron-v0.1.0.zip">Télécharger l’extension expérimentale (.zip)</a>
+</div>
+</header>
+
+<section class="section">
+<div class="callout"><strong>Objectif :</strong> construire une chaîne bidirectionnelle. Un champ ThingSpeak contient une consigne <strong>0 / 1</strong>. Un bouton écrit la consigne. La micro:bit lit la dernière valeur via le Grove WiFi 8266, puis commande un actionneur : moteur, LED, servo ou relais adapté.</div>
+</section>
+
+<section class="section">
+<h2>1. Le système que vous allez construire</h2>
+<div class="flow"><div class="flowline">
+<div class="node">Bouton ThingSpeak<br><small>0 / 1</small></div><div class="arrow">→</div>
+<div class="node">Internet / API</div><div class="arrow">→</div>
+<div class="node">Grove WiFi 8266</div><div class="arrow">→</div>
+<div class="node">micro:bit</div><div class="arrow">→</div>
+<div class="node">REKA:BIT</div><div class="arrow">→</div>
+<div class="node">Actionneur</div>
+</div></div>
+</section>
+
+<section class="section">
+<h2>2. Repérer le matériel et les ports</h2>
+<div class="assets">
+<figure class="asset"><img src="https://static.cytron.io/image/catalog/products/REKABIT/REKABIT-mBit-Top-v1v2.png" alt="REKA:BIT avec micro:bit"><figcaption><strong>REKA:BIT + micro:bit</strong><p>La REKA:BIT fournit les sorties moteurs, servos et ports Grove.</p></figcaption></figure>
+<figure class="asset"><img src="https://static.cytron.io/image/catalog/products/GRV-WIFI-8266/GRV-WIFI-Side1-tiny.png" alt="Grove WiFi 8266 Cytron"><figcaption><strong>Grove WiFi 8266</strong><p>Interface Wi‑Fi ESP8266. Dans ce parcours, elle communique avec la micro:bit par UART.</p></figcaption></figure>
+<figure class="asset"><img src="https://static.cytron.io/image/catalog/products/REKABIT/REKABIT-pinout-lres.png" alt="Schéma des ports REKA:BIT"><figcaption><strong>Repérage des ports</strong><p>P15:P16 pour le Wi‑Fi ; M1 pour un moteur ; P0:P1 pour une sortie Grove ; S1 à S4 pour les servos.</p></figcaption></figure>
+</div>
+<div class="warn" style="margin-top:16px"><strong>Branchement conseillé pour le premier essai :</strong> Grove WiFi 8266 sur le port <strong>P15:P16</strong>. Pour l’actionneur, utilisez soit un petit moteur DC sur <strong>M1</strong>, soit un module LED basse tension sur le signal <strong>P0</strong> du port Grove P0:P1.</div>
+<div class="danger" style="margin-top:12px"><strong>Sécurité :</strong> n’alimentez jamais une lampe secteur ou un moteur de puissance directement depuis une broche micro:bit. Pour une charge plus importante, utilisez un driver, un MOSFET ou un relais correctement isolé et une alimentation adaptée. Pas de 230 V dans cette expérimentation.</div>
+</section>
+
+<section class="section" id="demarrer">
+<h2>3. Créer le champ de commande dans ThingSpeak</h2>
+<div class="steps">
+<div class="step"><div class="num">01</div><h3>Ajouter un champ « Commande »</h3><p>Ouvrez votre canal ThingSpeak, puis <strong>Channel Settings</strong>. Nommez un champ libre, par exemple <strong>Field 4 — Commande actionneur</strong>. Enregistrez.</p></div>
+<div class="step"><div class="num">02</div><h3>Choisir une convention simple</h3><p>Nous utiliserons : <strong>0 = arrêt</strong> et <strong>1 = marche</strong>. Cette convention constitue déjà un mini‑protocole de commande.</p></div>
+<div class="step"><div class="num">03</div><h3>Repérer les clés API</h3><p>Dans <strong>API Keys</strong>, repérez la <strong>Write API Key</strong> pour écrire la commande et la <strong>Read API Key</strong> si votre canal est privé.</p></div>
+</div>
+</section>
+
+<section class="section">
+<h2>4. Créer deux boutons directement dans ThingSpeak</h2>
+<div class="card">
+<p>Dans ThingSpeak, ouvrez <strong>Apps → Plugins → New</strong>, choisissez un plugin personnalisé puis associez‑le à votre canal privé. Le plugin ci‑dessous crée deux boutons : MARCHE et ARRÊT.</p>
+<h3>HTML</h3>
+<pre>&lt;div class="commande"&gt;
+  &lt;h3&gt;Commande à distance&lt;/h3&gt;
+  &lt;button class="on" onclick="envoyer(1)"&gt;ALLUMER / DÉMARRER&lt;/button&gt;
+  &lt;button class="off" onclick="envoyer(0)"&gt;ÉTEINDRE / ARRÊTER&lt;/button&gt;
+  &lt;p id="etat"&gt;Prêt.&lt;/p&gt;
+&lt;/div&gt;
+
+%%PLUGIN_JAVASCRIPT%%</pre>
+<h3>CSS</h3>
+<pre>.commande { font-family: Arial, sans-serif; text-align:center; padding:18px; }
+button { border:0; border-radius:10px; padding:14px 18px; margin:6px;
+         font-weight:700; cursor:pointer; }
+.on  { background:#198754; color:white; }
+.off { background:#c0392b; color:white; }</pre>
+<h3>JavaScript</h3>
+<pre>const WRITE_KEY = "VOTRE_WRITE_API_KEY";
+const FIELD = 4;
+
+function envoyer(valeur) {
+  const url =
+    "https://api.thingspeak.com/update?api_key=" +
+    WRITE_KEY + "&field" + FIELD + "=" + valeur;
+
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", url, true);
+  xhr.send();
+}</pre>
+</div>
+<div class="warn" style="margin-top:14px"><strong>À observer :</strong> sur l’offre gratuite ThingSpeak, les écritures sont espacées d’environ 15 secondes. Ce système est donc une commande à distance, pas une télécommande temps réel. Cette limite fait partie de l’expérimentation.</div>
+</section>
+
+<section class="section">
+<h2>5. Ajouter l’extension MakeCode expérimentale</h2>
+<div class="grid">
+<div class="card">
+<h3>Extension ThingSpeak RX — V0.1</h3>
+<p>Cette extension complète l’extension Cytron ESP8266 avec un bloc de lecture de la dernière valeur d’un champ ThingSpeak.</p>
+<a class="btn secondary" href="pxt-thingspeak-read-cytron-v0.1.0.zip">Télécharger l’extension</a>
+<p class="mini"><strong>Important :</strong> cette version est expérimentale et n’est pas garantie à 100 %. Elle doit être testée sur le Grove WiFi 8266 réel. Selon le firmware ESP‑AT, une petite adaptation peut être nécessaire.</p>
+</div>
+<div class="card">
+<h3>Bloc principal</h3>
+<p><code>lire ThingSpeak canal [ID] champ [1..8] clé lecture [KEY]</code></p>
+<p>Le bloc interroge la dernière valeur du champ puis renvoie un nombre. Un autre bloc indique si la lecture a réussi.</p>
+</div>
+</div>
+</section>
+
+<section class="section">
+<h2>6. Programmer la lecture de la commande</h2>
+<div class="card">
+<h3>Logique générale</h3>
+<pre>AU DÉMARRAGE
+  initialiser ESP8266 : Tx P16 / Rx P15 / 115200
+  se connecter au Wi‑Fi
+
+TOUJOURS
+  commande ← lire ThingSpeak canal ID champ 4 clé READ_API_KEY
+
+  SI lecture réussie
+      SI commande = 1
+          activer l’actionneur
+      SINON
+          arrêter l’actionneur
+
+  attendre 2 secondes</pre>
+</div>
+</section>
+
+<section class="section">
+<h2>7. Trois actionneurs possibles</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Actionneur</th><th>Port recommandé</th><th>Commande</th><th>Usage</th></tr></thead>
+<tbody>
+<tr><td>Moteur DC</td><td><strong>M1</strong></td><td>1 → moteur avant ; 0 → frein/arrêt</td><td>Premier test conseillé : le driver moteur est intégré à la REKA:BIT.</td></tr>
+<tr><td>LED / entrée logique d’un relais 3,3 V</td><td><strong>P0</strong> sur Grove P0:P1</td><td>1 → P0 HIGH ; 0 → P0 LOW</td><td>Visualiser immédiatement la commande.</td></tr>
+<tr><td>Servo</td><td><strong>S1</strong></td><td>1 → 90° ; 0 → 0°</td><td>Simuler une vanne, une barrière, un volet.</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="section">
+<h2>8. Tester couche par couche</h2>
+<div class="grid">
+<div class="step"><div class="num">A</div><h3>Wi‑Fi</h3><p>Vérifiez d’abord que l’ESP8266 est initialisé et connecté.</p></div>
+<div class="step"><div class="num">B</div><h3>ThingSpeak</h3><p>Écrivez manuellement 0 puis 1 dans le champ et vérifiez l’historique.</p></div>
+<div class="step"><div class="num">C</div><h3>Lecture</h3><p>Affichez d’abord la valeur 0 ou 1 sur la matrice micro:bit.</p></div>
+<div class="step"><div class="num">D</div><h3>Action</h3><p>Seulement après, branchez M1, P0 ou S1 et testez le comportement.</p></div>
+</div>
+</section>
+
+<section class="section">
+<h2>9. Ce que cette expérimentation permet de comprendre</h2>
+<div class="grid">
+<div class="card"><h3>Un IoT bidirectionnel</h3><p>Le cloud n’est plus seulement un lieu où l’on envoie des mesures : il devient aussi une source de consigne.</p></div>
+<div class="card"><h3>Donnée, information, commande</h3><p>Une température mesurée et une valeur 0/1 sont toutes deux des données, mais elles n’ont pas le même rôle dans le système.</p></div>
+<div class="card"><h3>API REST</h3><p>Une URL devient concrètement un moyen d’écrire ou de lire une valeur distante.</p></div>
+<div class="card"><h3>Protocole</h3><p>La convention 0/1 est un protocole minimal. Elle peut être enrichie : vitesse, angle, intensité, mode de fonctionnement.</p></div>
+<div class="card"><h3>Latence et temps réel</h3><p>Vous pouvez mesurer le délai entre le clic et l’action et comprendre pourquoi tous les systèmes connectés ne sont pas temps réel.</p></div>
+<div class="card"><h3>Chaîne d’information / chaîne d’énergie</h3><p>La valeur numérique commande l’action, mais la puissance nécessaire au moteur est fournie par une autre chaîne.</p></div>
+<div class="card"><h3>Cybersécurité</h3><p>La Read API Key et la Write API Key n’accordent pas les mêmes droits. Une clé d’écriture exposée permettrait de commander le système.</p></div>
+<div class="card"><h3>Diagnostic</h3><p>Cloud, Wi‑Fi, UART, programme, port, actionneur : chaque couche peut être testée séparément.</p></div>
+</div>
+</section>
+
+<section class="section">
+<div class="callout"><strong>À retenir :</strong> le défi technique est volontairement simple. L’intérêt est de rendre visibles les choix d’architecture, la circulation de l’information, la notion de commande distante, les limites de la plateforme et les stratégies de mise au point.</div>
+</section>
+
+<div class="footer"><a href="../index.html">← Retour aux objets connectés & IoT</a></div>
+</main>
+</body>
+</html>
