@@ -53,9 +53,11 @@
 
     window.addEventListener('afterprint',nettoyer);
     window.print();
+
+    /* Secours pour certains navigateurs mobiles où afterprint n'est pas toujours émis. */
     setTimeout(function(){
       if(document.body.classList.contains('print-correction')) nettoyer();
-    },1500);
+    },30000);
   }
 
   function echapper(t){
