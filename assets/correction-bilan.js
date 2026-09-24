@@ -68,7 +68,8 @@
 
   var cfg=window.CORRECTION_BILAN;
   if(cfg){
-    var zone=document.querySelector('#correction[data-addon="1"]'), btn=document.getElementById('corr-btn'), inp=document.getElementById('corr-mdp'), refus=document.getElementById('corr-refus'), cible=document.getElementById('corr-contenu');
+    /* Compatibilité avec les anciennes pages (sans data-addon) et les nouvelles. */
+    var zone=document.querySelector('#correction[data-addon="1"], #correction'), btn=document.getElementById('corr-btn'), inp=document.getElementById('corr-mdp'), refus=document.getElementById('corr-refus'), cible=document.getElementById('corr-contenu');
     if(zone && btn && inp && cible){
       function ajouterBoutonImpression(){
         if(zone.querySelector('.btn-print-correction')) return;
