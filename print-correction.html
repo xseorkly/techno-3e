@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Correction — impression</title>
+<style>
+:root{--encre:#14262B;--teal:#0E6E6B;--magenta:#C2185B;--trait:#D2DEDE;--papier:#F4F7F7}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papier);color:var(--encre);font-family:Arial,sans-serif;font-size:17px;line-height:1.5}
+.toolbar{position:sticky;top:0;z-index:10;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:12px;background:#fff;border-bottom:1px solid var(--trait)}
+.toolbar button{font:600 15px Arial,sans-serif;border-radius:8px;padding:10px 16px;cursor:pointer}
+.print{background:var(--teal);color:#fff;border:1px solid var(--teal)}
+.back{background:#fff;color:var(--encre);border:1px solid var(--trait)}
+.page{max-width:900px;margin:22px auto 50px;background:#fff;padding:28px 34px;border:1px solid var(--trait);border-radius:10px}
+header{border-bottom:2px solid var(--teal);padding-bottom:18px;margin-bottom:22px}.kicker{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--magenta);margin-bottom:7px}h1{font-size:30px;line-height:1.15;margin:0}h2,h3{color:var(--teal);break-after:avoid}h3{font-size:20px;margin:24px 0 9px}.corr-section{border-top:1px solid var(--trait);padding-top:18px;margin-top:18px}.corr-section:first-child{border-top:0;margin-top:0;padding-top:0}img,svg,table,figure{max-width:100%!important;height:auto;break-inside:avoid-page}table{width:100%;border-collapse:collapse}th,td{border:1px solid var(--trait);padding:7px;vertical-align:top}a{color:var(--encre)}.vide{padding:30px;text-align:center;color:#666}
+@media(max-width:650px){.page{margin:0;background:#fff;border:0;border-radius:0;padding:20px 16px}h1{font-size:25px}}
+@media print{@page{size:A4;margin:12mm 14mm}body{background:#fff;font-size:11pt}.toolbar{display:none!important}.page{max-width:none;margin:0;padding:0;border:0;border-radius:0}.corr-section{break-inside:auto}p,li{orphans:3;widows:3}}
+</style>
+</head>
+<body>
+<div class="toolbar"><button class="back" id="back" type="button">← Retour à l’activité</button><button class="print" id="print" type="button">Imprimer / enregistrer en PDF</button></div>
+<main class="page" id="page"><div class="vide">Chargement de la correction…</div></main>
+<script>
+(function(){
+  'use strict';
+  var raw=sessionStorage.getItem('techno3e_print_correction');
+  var retour=sessionStorage.getItem('techno3e_print_return') || 'index.html';
+  var page=document.getElementById('page');
+  if(raw){
+    try{
+      var d=JSON.parse(raw);
+      document.title=(d.title||'Correction')+' — impression';
+      page.innerHTML='<header><div class="kicker">Correction / synthèse</div><h1>'+escapeHtml(d.title||'Correction')+'</h1></header><div class="correction">'+(d.html||'')+'</div>';
+    }catch(e){ page.innerHTML='<div class="vide">Impossible de charger la correction.</div>'; }
+  }else{
+    page.innerHTML='<div class="vide">Aucune correction à imprimer. Retourne à l’activité et affiche d’abord la correction.</div>';
+  }
+  document.getElementById('back').addEventListener('click',function(){ location.href=retour; });
+  document.getElementById('print').addEventListener('click',function(){ window.print(); });
+  function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  if(raw){ setTimeout(function(){ try{window.print();}catch(e){} },500); }
+})();
+</script>
+</body>
+</html>
