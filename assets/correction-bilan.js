@@ -20,60 +20,16 @@
   function empreinte(t){ var h=5381; for(var i=0;i<t.length;i++) h=((h*33)^t.charCodeAt(i))>>>0; return h; }
   function decode64(s){ try{return decodeURIComponent(escape(atob(s)));}catch(e){return atob(s);} }
   function titrePage(){ var h1=document.querySelector('h1'); return h1 ? h1.textContent.trim() : document.title; }
-  function echapper(t){
-    return String(t||'').replace(/[&<>"']/g,function(c){
-      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
-    });
-  }
 
   function imprimerCorrection(cible){
     if(!cible || cible.hidden) return;
-
-    var ancien=document.getElementById('correction-print-frame');
-    if(ancien) ancien.remove();
-
-    var frame=document.createElement('iframe');
-    frame.id='correction-print-frame';
-    frame.setAttribute('title','Impression de la correction');
-    frame.style.position='fixed';
-    frame.style.right='0';
-    frame.style.bottom='0';
-    frame.style.width='1px';
-    frame.style.height='1px';
-    frame.style.border='0';
-    frame.style.opacity='0';
-    frame.style.pointerEvents='none';
-    document.body.appendChild(frame);
-
-    var doc=frame.contentWindow.document;
-    var base=location.href.replace(/[^/]*$/,'');
-    var html='<!doctype html><html lang="fr"><head><meta charset="utf-8">'+
-      '<meta name="viewport" content="width=device-width,initial-scale=1">'+
-      '<base href="'+echapper(base)+'">'+
-      '<title>'+echapper(titrePage())+' — Correction</title>'+
-      '<style>'+ 
-      '@page{size:A4;margin:12mm 14mm}*{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#14262B}body{font-family:Arial,sans-serif;font-size:11pt;line-height:1.45}header{border-bottom:2px solid #0E6E6B;padding-bottom:6mm;margin-bottom:7mm}.kicker{font-weight:700;font-size:9pt;text-transform:uppercase;letter-spacing:.05em;color:#C2185B;margin-bottom:2mm}h1{font-size:19pt;line-height:1.15;margin:0;color:#14262B}h2,h3{color:#0E6E6B;break-after:avoid}h3{font-size:14pt;margin:5mm 0 3mm}.corr-section{border-top:1px solid #D2DEDE;padding-top:5mm;margin-top:5mm}.corr-section:first-child{border-top:0;margin-top:0;padding-top:0}p,li{orphans:3;widows:3}img,svg,table,figure{max-width:100%!important;break-inside:avoid-page}table{width:100%;border-collapse:collapse}th,td{border:1px solid #D2DEDE;padding:6px;vertical-align:top}a{color:#14262B;text-decoration:none}.ret,.callout,.situation,.card{break-inside:avoid-page}'+
-      '</style></head><body><header><div class="kicker">Correction / synthèse</div><h1>'+echapper(titrePage())+'</h1></header><main>'+cible.innerHTML+'</main></body></html>';
-
-    var nettoyer=function(){
-      setTimeout(function(){ var f=document.getElementById('correction-print-frame'); if(f) f.remove(); },500);
-    };
-
-    frame.onload=function(){
-      var w=frame.contentWindow;
-      try{
-        w.addEventListener('afterprint',nettoyer,{once:true});
-        setTimeout(function(){ w.focus(); w.print(); },350);
-        setTimeout(nettoyer,30000);
-      }catch(e){
-        nettoyer();
-        window.print();
-      }
-    };
-
-    doc.open();
-    doc.write(html);
-    doc.close();
+    try{
+      sessionStorage.setItem('techno3e_print_correction',JSON.stringify({title:titrePage(),html:cible.innerHTML}));
+      sessionStorage.setItem('techno3e_print_return',location.href);
+      location.href='print-correction.html';
+    }catch(e){
+      window.print();
+    }
   }
 
   var cfg=window.CORRECTION_BILAN;
