@@ -15,7 +15,32 @@ document.querySelectorAll('canvas[data-sketch]').forEach(setupCanvas);
 function answerBlocks(){const out=[];document.querySelectorAll('.question[data-label]').forEach(q=>{let vals=[];q.querySelectorAll('[data-save]').forEach(el=>{if(el.type==='radio'){if(el.checked)vals.push(el.value)}else if(el.type==='checkbox'){if(el.checked)vals.push(el.getAttribute('data-text')||'Oui')}else{const v=(el.value||'').trim();if(v)vals.push(v)}});if(vals.length)out.push([q.dataset.label,vals.join(' · ')])});return out}
 const pdf=document.getElementById('pdf');if(pdf)pdf.addEventListener('click',()=>{if(!(window.jspdf&&window.jspdf.jsPDF)){window.print();return}const nom=(document.getElementById('nom')?.value||'').trim(),pre=(document.getElementById('prenom')?.value||'').trim();if(!nom||!pre){const a=document.getElementById('alerte');if(a){a.hidden=false;a.textContent='Complète au moins ton nom et ton prénom avant de générer le PDF.'}return}const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:'mm',format:'a4'});let y=16;const M=15,W=180;function pc(h){if(y+h>282){doc.addPage();y=16}}function txt(s,size=10,bold=false,color=[20,38,43]){doc.setFont('helvetica',bold?'bold':'normal');doc.setFontSize(size);doc.setTextColor(...color);const lines=doc.splitTextToSize(String(s||''),W);pc(lines.length*5+3);doc.text(lines,M,y);y+=lines.length*5+3}txt('Olympiades des Sciences de l’Ingénieur · Séquence 6',8,false,[90,108,113]);txt(document.querySelector('h1')?.textContent||'Fiche élève',14,true);txt(nom+' '+pre+' · '+(document.getElementById('classe')?.value||'')+' · équipe '+(document.getElementById('groupe')?.value||''),9,false,[90,108,113]);y+=2;answerBlocks().forEach(([lab,val])=>{txt(lab,10,true,[14,110,107]);txt(val,10)});document.querySelectorAll('canvas[data-sketch]').forEach((c,i)=>{try{pc(58);txt('Production graphique '+(i+1),10,true,[14,110,107]);doc.addImage(c.toDataURL('image/png'),'PNG',M,y,W,45);y+=50}catch(e){}});doc.save(page+'_'+nom.replace(/\W+/g,'-')+'_'+pre.replace(/\W+/g,'-')+'.pdf')});
 
-/* Impression navigateur du cours : disponible sur toutes les séances de la séquence 6. */
+/* Règles communes d'impression injectées pour toute la séquence 6. */
+const printStyle=document.createElement('style');
+printStyle.id='seq6-print-fix';
+printStyle.textContent=`
+.print-correction-clone{display:none}
+.corr-print-actions{display:flex;justify-content:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid var(--trait,#D2DEDE)}
+.btn-print-correction{font:600 14px Archivo,sans-serif;background:var(--magenta,#C2185B);color:#fff;border:0;border-radius:8px;padding:10px 15px;cursor:pointer}
+@media print{
+  .btn-print-browser,.corr-print-actions{display:none!important}
+  body.print-correction>*:not(.print-correction-clone){display:none!important}
+  body.print-correction{background:#fff!important;margin:0!important;padding:0!important}
+  body.print-correction .print-correction-clone{display:block!important;max-width:none!important;margin:0!important;padding:12mm 14mm!important;color:#14262B!important;background:#fff!important;font-family:"Source Sans 3",Arial,sans-serif!important;font-size:11pt!important;line-height:1.45!important}
+  body.print-correction .print-correction-entete{border-bottom:2px solid #0E6E6B;padding-bottom:6mm;margin-bottom:7mm}
+  body.print-correction .print-correction-kicker{font:700 9pt Archivo,Arial,sans-serif;text-transform:uppercase;letter-spacing:.05em;color:#C2185B;margin-bottom:2mm}
+  body.print-correction .print-correction-entete h1{font:700 19pt Archivo,Arial,sans-serif;line-height:1.15;margin:0;color:#14262B}
+  body.print-correction .corr{display:block!important;margin:0!important}
+  body.print-correction .corr-section{break-inside:avoid-page;border-top:1px solid #D2DEDE;padding-top:5mm;margin-top:5mm}
+  body.print-correction .corr-section:first-child{border-top:0;margin-top:0;padding-top:0}
+  body.print-correction h3{font:600 14pt Archivo,Arial,sans-serif;color:#0E6E6B;margin:0 0 3mm}
+  body.print-correction img,body.print-correction svg,body.print-correction table,body.print-correction figure{max-width:100%!important;break-inside:avoid-page}
+  body.print-correction a{color:#14262B;text-decoration:none}
+}
+`;
+document.head.appendChild(printStyle);
+
+/* Impression navigateur du cours. */
 const barre=document.querySelector('.barre');
 if(barre && !barre.querySelector('.btn-print-browser')){
   const b=document.createElement('button');
