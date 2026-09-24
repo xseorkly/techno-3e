@@ -15,7 +15,6 @@ document.querySelectorAll('canvas[data-sketch]').forEach(setupCanvas);
 function answerBlocks(){const out=[];document.querySelectorAll('.question[data-label]').forEach(q=>{let vals=[];q.querySelectorAll('[data-save]').forEach(el=>{if(el.type==='radio'){if(el.checked)vals.push(el.value)}else if(el.type==='checkbox'){if(el.checked)vals.push(el.getAttribute('data-text')||'Oui')}else{const v=(el.value||'').trim();if(v)vals.push(v)}});if(vals.length)out.push([q.dataset.label,vals.join(' · ')])});return out}
 const pdf=document.getElementById('pdf');if(pdf)pdf.addEventListener('click',()=>{if(!(window.jspdf&&window.jspdf.jsPDF)){window.print();return}const nom=(document.getElementById('nom')?.value||'').trim(),pre=(document.getElementById('prenom')?.value||'').trim();if(!nom||!pre){const a=document.getElementById('alerte');if(a){a.hidden=false;a.textContent='Complète au moins ton nom et ton prénom avant de générer le PDF.'}return}const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:'mm',format:'a4'});let y=16;const M=15,W=180;function pc(h){if(y+h>282){doc.addPage();y=16}}function txt(s,size=10,bold=false,color=[20,38,43]){doc.setFont('helvetica',bold?'bold':'normal');doc.setFontSize(size);doc.setTextColor(...color);const lines=doc.splitTextToSize(String(s||''),W);pc(lines.length*5+3);doc.text(lines,M,y);y+=lines.length*5+3}txt('Olympiades des Sciences de l’Ingénieur · Séquence 6',8,false,[90,108,113]);txt(document.querySelector('h1')?.textContent||'Fiche élève',14,true);txt(nom+' '+pre+' · '+(document.getElementById('classe')?.value||'')+' · équipe '+(document.getElementById('groupe')?.value||''),9,false,[90,108,113]);y+=2;answerBlocks().forEach(([lab,val])=>{txt(lab,10,true,[14,110,107]);txt(val,10)});document.querySelectorAll('canvas[data-sketch]').forEach((c,i)=>{try{pc(58);txt('Production graphique '+(i+1),10,true,[14,110,107]);doc.addImage(c.toDataURL('image/png'),'PNG',M,y,W,45);y+=50}catch(e){}});doc.save(page+'_'+nom.replace(/\W+/g,'-')+'_'+pre.replace(/\W+/g,'-')+'.pdf')});
 
-/* Règles communes d'impression injectées pour toute la séquence 6. */
 const printStyle=document.createElement('style');
 printStyle.id='seq6-print-fix';
 printStyle.textContent=`
@@ -40,7 +39,6 @@ printStyle.textContent=`
 `;
 document.head.appendChild(printStyle);
 
-/* Impression navigateur du cours. */
 const barre=document.querySelector('.barre');
 if(barre && !barre.querySelector('.btn-print-browser')){
   const b=document.createElement('button');
@@ -49,7 +47,6 @@ if(barre && !barre.querySelector('.btn-print-browser')){
   const etat=barre.querySelector('.etat'); barre.insertBefore(b,etat||null);
 }
 
-/* Impression isolée de la correction une fois celle-ci déverrouillée. */
 function printCorrection(){
   const cible=document.getElementById('corr-contenu');
   if(!cible || cible.hidden) return;
@@ -59,7 +56,8 @@ function printCorrection(){
   art.innerHTML='<header class="print-correction-entete"><div class="print-correction-kicker">Correction / synthèse</div><h1>'+((h1&&h1.textContent)||document.title)+'</h1></header><div class="corr">'+cible.innerHTML+'</div>';
   document.body.appendChild(art); document.body.classList.add('print-correction');
   const clean=()=>{document.body.classList.remove('print-correction'); const x=document.querySelector('.print-correction-clone'); if(x)x.remove(); window.removeEventListener('afterprint',clean)};
-  window.addEventListener('afterprint',clean); window.print(); setTimeout(clean,1500);
+  window.addEventListener('afterprint',clean); window.print();
+  setTimeout(()=>{if(document.body.classList.contains('print-correction')) clean()},30000);
 }
 function ensureCorrectionPrint(){
   const cible=document.getElementById('corr-contenu'), zone=document.getElementById('correction');
