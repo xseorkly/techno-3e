@@ -25,6 +25,36 @@
     return h1 ? h1.textContent.trim() : document.title;
   }
 
+  function echapper(t){
+    return String(t||'').replace(/[&<>"']/g,function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  /* Styles injectés pour rendre l'impression correction indépendante des variantes CSS des anciennes pages. */
+  if(!document.getElementById('correction-print-fix')){
+    var ps=document.createElement('style');
+    ps.id='correction-print-fix';
+    ps.textContent='\
+.print-correction-clone{display:none}\
+@media print{\
+  .btn-print-browser,.corr-print-actions{display:none!important}\
+  body.print-correction>*:not(.print-correction-clone){display:none!important}\
+  body.print-correction{background:#fff!important;margin:0!important;padding:0!important}\
+  body.print-correction .print-correction-clone{display:block!important;max-width:none!important;margin:0!important;padding:12mm 14mm!important;color:#14262B!important;background:#fff!important;font-family:"Source Sans 3",Arial,sans-serif!important;font-size:11pt!important;line-height:1.45!important}\
+  body.print-correction .print-correction-entete{border-bottom:2px solid #0E6E6B;padding-bottom:6mm;margin-bottom:7mm}\
+  body.print-correction .print-correction-kicker{font:700 9pt Archivo,Arial,sans-serif;text-transform:uppercase;letter-spacing:.05em;color:#C2185B;margin-bottom:2mm}\
+  body.print-correction .print-correction-entete h1{font:700 19pt Archivo,Arial,sans-serif;line-height:1.15;margin:0;color:#14262B}\
+  body.print-correction .print-correction-contenu{display:block!important;margin:0!important}\
+  body.print-correction .corr-section{break-inside:avoid-page;border-top:1px solid #D2DEDE;padding-top:5mm;margin-top:5mm}\
+  body.print-correction .corr-section:first-child{border-top:0;margin-top:0;padding-top:0}\
+  body.print-correction h3{font:600 14pt Archivo,Arial,sans-serif;color:#0E6E6B;margin:0 0 3mm}\
+  body.print-correction img,body.print-correction svg,body.print-correction table,body.print-correction figure{max-width:100%!important;break-inside:avoid-page}\
+  body.print-correction a{color:#14262B;text-decoration:none}\
+}';
+    document.head.appendChild(ps);
+  }
+
   function imprimerCorrection(cible){
     if(!cible || cible.hidden) return;
 
@@ -54,22 +84,14 @@
     window.addEventListener('afterprint',nettoyer);
     window.print();
 
-    /* Secours pour certains navigateurs mobiles où afterprint n'est pas toujours émis. */
     setTimeout(function(){
       if(document.body.classList.contains('print-correction')) nettoyer();
     },30000);
   }
 
-  function echapper(t){
-    return String(t||'').replace(/[&<>"']/g,function(c){
-      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
-    });
-  }
-
   var cfg=window.CORRECTION_BILAN;
   if(cfg){
-    /* Compatibilité avec les anciennes pages (sans data-addon) et les nouvelles. */
-    var zone=document.querySelector('#correction[data-addon="1"], #correction'), btn=document.getElementById('corr-btn'), inp=document.getElementById('corr-mdp'), refus=document.getElementById('corr-refus'), cible=document.getElementById('corr-contenu');
+    var zone=document.querySelector('#correction'), btn=document.getElementById('corr-btn'), inp=document.getElementById('corr-mdp'), refus=document.getElementById('corr-refus'), cible=document.getElementById('corr-contenu');
     if(zone && btn && inp && cible){
       function ajouterBoutonImpression(){
         if(zone.querySelector('.btn-print-correction')) return;
