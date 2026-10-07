@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Du projet à la conception — Formation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../expertise-sequence/formation.css">
+<style>
+.hero .duration{display:inline-block;margin-top:8px;padding:6px 10px;border-radius:999px;background:var(--magp);color:var(--mag);font-weight:700}
+.timeline{display:grid;grid-template-columns:12fr 18fr 10fr 5fr;gap:8px;margin-top:16px}
+.timeline span{padding:9px;border-radius:9px;text-align:center;font-weight:700;background:var(--pale);color:var(--teal2)}
+.timeline span:last-child{background:var(--magp);color:var(--mag)}
+.theory{border-left:5px solid var(--amber);background:linear-gradient(135deg,#fff,#fffaf0)}
+.theory h3{margin-top:18px}.theory h3:first-of-type{margin-top:0}
+.pro-box{border-left:5px solid var(--mag);background:linear-gradient(135deg,#fff,#fdf6f9)}
+.quote{font-size:20px;font-weight:700;color:var(--teal2);padding:14px 16px;border-radius:12px;background:var(--pale);margin:14px 0}
+.choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.choice{padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.cycle{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-weight:700;margin:14px 0}
+.cycle b{background:var(--teal);color:white;border-radius:999px;padding:6px 10px}.cycle i{font-style:normal;color:var(--mag)}
+.refs.compact{font-size:14px;color:var(--muted)}
+.refs.compact li{margin:5px 0}
+.project-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+@media(max-width:760px){.timeline{grid-template-columns:1fr 1fr}.choice-grid{grid-template-columns:1fr}}
+@media print{
+  .nav,.formation-tools,.project-actions{display:none!important}
+  .hero,.card{box-shadow:none;break-inside:avoid}
+  textarea{overflow:visible!important;height:auto!important;min-height:90px}
+  body{background:#fff}
+}
+</style>
+<script>if(sessionStorage.getItem('formation_teachers_unlocked_v1')!=='1')location.replace('../index.html');</script>
+</head>
+<body>
+<main class="page">
+<header class="hero">
+  <div class="brand">Atelier transversal · Démarche de projet & créativité</div>
+  <h1>Du projet à la conception</h1>
+  <p class="lead">À quel moment l’élève cesse-t-il d’exécuter pour commencer réellement à concevoir ? Vous partez d’un projet que vous pratiquez déjà, vous identifiez les décisions laissées aux élèves, puis vous ouvrez un espace de conception sans perdre les apprentissages visés.</p>
+  <span class="duration">45 minutes · Travail en groupes</span>
+  <div class="timeline"><span>12 min · Décider</span><span>18 min · Ouvrir</span><span>10 min · Prototyper</span><span>5 min · Bilan</span></div>
+</header>
+
+<nav class="nav">
+  <a href="../index.html">← Espace formation</a>
+  <a href="#activite1">Commencer l’atelier →</a>
+  <a href="bilan.html">▶ Projeter le bilan</a>
+</nav>
+
+<section class="section">
+  <div class="card mission">
+    <span class="kicker">À apporter</span>
+    <h2>Travaillez sur une séquence qui existe vraiment</h2>
+    <p>Par groupe, choisissez <strong>une activité de projet ou de conception que vous avez déjà menée, ou que vous prévoyez réellement de mener</strong>. Gardez à portée de main la fiche élève, les consignes, les ressources fournies, les critères d’évaluation et, si possible, une production d’élève.</p>
+    <div class="callout">L’objectif n’est pas d’inventer un projet idéal. Il est de faire évoluer une pratique réelle en identifiant ce qui relève de l’exécution et ce qui engage réellement la pensée de conception.</div>
+  </div>
+</section>
+
+<section class="section" id="activite1">
+  <div class="card pro-box">
+    <span class="kicker">Activité 1 · 12 min</span>
+    <h2>Où est réellement la conception ?</h2>
+    <p class="time">7 min de travail en groupe · 5 min de mise en commun et apport théorique</p>
+
+    <div class="question">
+      <strong>1. Dans votre activité, qu’est-ce qui est déjà décidé avant que l’élève commence ?</strong>
+      <p class="small">Regardez notamment : besoin/problème, objet final, architecture, matériel, dimensions, composants, programme, procédure, critères, organisation, solution attendue.</p>
+      <textarea id="a1q1" data-save placeholder="Listez ce qui est prédéterminé…"></textarea>
+    </div>
+
+    <div class="question">
+      <strong>2. Parmi les décisions qui restent à l’élève, laquelle engage réellement une pensée technologique ?</strong>
+      <p class="small">Écartez les choix purement décoratifs ou sans conséquence sur le fonctionnement, la performance ou la justification de la solution.</p>
+      <textarea id="a1q2" data-save placeholder="La décision la plus structurante est…"></textarea>
+    </div>
+
+    <div class="question">
+      <strong>3. Si vous supprimiez cette décision, l’apprentissage visé changerait-il réellement ? Pourquoi ?</strong>
+      <textarea id="a1q3" data-save></textarea>
+    </div>
+
+    <div class="quote">Question de restitution : « Qui porte aujourd’hui les décisions importantes dans votre projet : l’enseignant, la fiche, le matériel… ou l’élève ? »</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card theory">
+    <span class="kicker">Bilan théorique 1 · Ce que cette activité devait faire émerger</span>
+    <h2>Concevoir n’est pas simplement faire</h2>
+
+    <h3>Une tâche complexe peut rester une tâche d’exécution</h3>
+    <p>Fabriquer, programmer ou assembler peut être techniquement exigeant sans placer l’élève en situation de conception. Si les choix structurants sont déjà pris — principe, architecture, composants, procédure, critères et forme de la solution — l’activité peut principalement relever de l’application.</p>
+
+    <h3>Bloom : regarder l’activité cognitive, pas classer les activités</h3>
+    <p>Dans la taxonomie révisée d’Anderson et Krathwohl, <strong>analyser, évaluer et créer</strong> décrivent des processus cognitifs. « Créer » ne signifie donc pas seulement produire un objet matériel : il s’agit de combiner des éléments pour élaborer une réponse nouvelle au regard du problème posé. Une fabrication entièrement prescrite peut être très sérieuse pédagogiquement, mais elle ne constitue pas nécessairement une activité de création.</p>
+
+    <h3>Un cadre commun n’impose pas un cheminement identique</h3>
+    <p>Les « postulats de Burns », tels qu’ils sont diffusés en France notamment par Jean-Pierre Astolfi, rappellent la diversité des rythmes, stratégies et manières de résoudre les problèmes. L’article de l’Académie de Bordeaux qui les présente précise toutefois qu’il n’existe pas de référence identifiée à un écrit original de Burns contenant exactement cette liste de sept postulats. Nous les utilisons donc ici comme <strong>repère de réflexion professionnelle</strong>, et non comme prescription scientifique.</p>
+    <div class="callout"><strong>Conséquence pour le projet :</strong> on peut conserver des objectifs, contraintes et critères communs tout en autorisant plusieurs stratégies, essais, représentations et solutions techniquement recevables.</div>
+
+    <div class="question">
+      <strong>Question professionnelle à conserver :</strong>
+      <p>Si deux groupes n’empruntent pas la même démarche, est-ce un problème… ou est-ce précisément ce que la situation doit permettre ?</p>
+    </div>
+
+    <ul class="refs compact">
+      <li>Anderson, L. W. & Krathwohl, D. R. (dir.) (2001), <em>A Taxonomy for Learning, Teaching, and Assessing</em>.</li>
+      <li><a href="https://www.cmu.edu/teaching/designteach/design/bloomsTaxonomy.html" target="_blank" rel="noopener">Carnegie Mellon University — Bloom’s Taxonomy ↗</a></li>
+      <li><a href="https://ent2d.ac-bordeaux.fr/disciplines/mathematiques/les-postulats-de-burns-un-outil-pour-guider-laccompagnement-des-eleves/" target="_blank" rel="noopener">Académie de Bordeaux — « Les postulats de Burns » ↗</a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="activite2">
+  <div class="card pro-box">
+    <span class="kicker">Activité 2 · 18 min</span>
+    <h2>Ouvrir sans perdre l’apprentissage</h2>
+    <p class="time">12 min de travail · 6 min d’apport théorique</p>
+    <div class="situation"><strong>Mission.</strong> Choisissez une seule partie de votre activité que vous pourriez cesser de prédéterminer, sans perdre l’apprentissage disciplinaire recherché.</div>
+
+    <div class="question">
+      <strong>1. Que décidez-vous de ne plus imposer ?</strong>
+      <p class="small">Écrivez une décision concrète : « je n’impose plus… » plutôt que « je laisse plus d’autonomie ».</p>
+      <textarea id="a2q1" data-save></textarea>
+    </div>
+
+    <div class="question">
+      <strong>2. Quelles contraintes doivent absolument rester — et pourquoi sont-elles fécondes pour la conception ?</strong>
+      <textarea id="a2q2" data-save placeholder="Coût, encombrement, énergie, résistance, précision, sécurité, temps, matériau, impact…"></textarea>
+    </div>
+
+    <div class="question">
+      <strong>3. Comment empêchez-vous le groupe de retenir immédiatement sa première idée ?</strong>
+      <textarea id="a2q3" data-save placeholder="Ex. exiger plusieurs principes, analogies, variantes, solutions techniques différentes…"></textarea>
+    </div>
+
+    <div class="question">
+      <strong>4. Sur quels critères les élèves devront-ils arbitrer entre leurs solutions ?</strong>
+      <textarea id="a2q4" data-save></textarea>
+    </div>
+
+    <div class="question">
+      <strong>5. Votre situation autorise-t-elle plusieurs démarches intellectuellement recevables, ou conduit-elle tous les élèves par le même chemin vers la même solution ?</strong>
+      <textarea id="a2q5" data-save></textarea>
+    </div>
+
+    <div class="quote">À décider : « Qu’est-ce qui doit être commun à tous : la démarche, ou les apprentissages et les critères de réussite ? »</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card theory">
+    <span class="kicker">Bilan théorique 2 · Ce que cette activité devait faire émerger</span>
+    <h2>La créativité ne consiste pas à supprimer les contraintes</h2>
+
+    <h3>Diverger puis converger</h3>
+    <p>Un espace de créativité suppose d’abord d’autoriser la production de plusieurs possibles, puis d’organiser leur comparaison. La pensée divergente contribue au potentiel créatif, mais elle ne suffit pas à elle seule : il faut ensuite sélectionner, combiner, évaluer et justifier. Runco et Acar soulignent que la pensée divergente est un indicateur de potentiel créatif, pas la créativité elle-même.</p>
+
+    <div class="choice-grid">
+      <div class="choice"><strong>Diverger</strong><br>Explorer, varier, déplacer le problème, produire plusieurs principes, analogies ou architectures.</div>
+      <div class="choice"><strong>Converger</strong><br>Comparer, argumenter, éliminer, combiner et choisir au regard de critères explicites.</div>
+    </div>
+
+    <h3>La contrainte peut être un moteur de conception</h3>
+    <p>Une consigne totalement ouverte peut laisser l’élève sans prise. Une contrainte pertinente réduit l’espace des possibles tout en créant un arbitrage : coût contre performance, masse contre résistance, autonomie contre puissance, simplicité contre précision. Le problème devient alors techniquement pensable.</p>
+
+    <h3>Créer suppose aussi des connaissances</h3>
+    <p>Les connaissances sur les matériaux, mécanismes, structures, énergies, capteurs, données ou algorithmes constituent un répertoire de solutions que l’élève peut recombiner. <strong>Enseigner des connaissances et développer la créativité ne sont pas deux projets concurrents.</strong></p>
+
+    <h3>Le processus créatif n’est pas instantané</h3>
+    <p>Le modèle historique de Wallas distingue préparation, incubation, illumination et vérification. En classe de technologie, on peut le traduire plus prudemment par : <strong>comprendre le problème → explorer → faire émerger des pistes → confronter une solution au réel</strong>. L’intérêt pédagogique est surtout d’éviter de demander trop vite « la bonne idée ».</p>
+
+    <ul class="refs compact">
+      <li>Wallas, G. (1926), <em>The Art of Thought</em>.</li>
+      <li>Runco, M. A. & Acar, S. (2012), « Divergent Thinking as an Indicator of Creative Potential », <em>Creativity Research Journal</em>, 24(1), 66–75.</li>
+      <li><a href="https://doi.org/10.1080/10400419.2012.652929" target="_blank" rel="noopener">DOI — Runco & Acar ↗</a></li>
+      <li>Stokes, P. D. (2005), <em>Creativity from Constraints</em>.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="activite3">
+  <div class="card pro-box">
+    <span class="kicker">Activité 3 · 10 min</span>
+    <h2>Le prototype : fabriquer ou apprendre ?</h2>
+    <p class="time">6 min de travail · 4 min d’apport théorique</p>
+
+    <div class="question">
+      <strong>1. Dans votre séquence, à quoi sert réellement le premier prototype ?</strong>
+      <div class="choice-grid" style="margin-top:10px">
+        <div class="choice">Montrer la solution finale</div>
+        <div class="choice">Vérifier une dimension</div>
+        <div class="choice">Révéler un problème</div>
+        <div class="choice">Comparer deux principes</div>
+        <div class="choice">Tester une hypothèse</div>
+        <div class="choice">Mesurer une performance</div>
+      </div>
+      <textarea id="a3q1" data-save placeholder="Dans notre séquence, le prototype sert à…"></textarea>
+    </div>
+
+    <div class="question">
+      <strong>2. Quelle information le prototype doit-il produire pour permettre une nouvelle décision ?</strong>
+      <textarea id="a3q2" data-save></textarea>
+    </div>
+
+    <div class="question">
+      <strong>3. Que devront modifier les élèves après le test — et sur quelle donnée s’appuieront-ils ?</strong>
+      <textarea id="a3q3" data-save></textarea>
+    </div>
+
+    <div class="cycle"><b>Idée</b><i>→</i><b>Prototype</b><i>→</i><b>Test</b><i>→</i><b>Donnée</b><i>→</i><b>Décision</b><i>→</i><b>Modification</b><i>↺</i></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card theory">
+    <span class="kicker">Bilan théorique 3 · Ce que cette activité devait faire émerger</span>
+    <h2>Le prototype est un instrument de pensée</h2>
+    <p>Un prototype n’est pas nécessairement une version presque terminée du produit. Il peut être partiel, rapide, en carton, numérique, simulé ou limité à une seule fonction. Sa valeur tient à la <strong>question qu’il permet de poser au réel</strong>.</p>
+    <p>Dans une démarche de conception, le prototype sert à rendre une idée discutable et testable. Il produit des informations qui permettent ensuite de confirmer, modifier ou abandonner une piste. L’itération n’est donc pas « recommencer parce que cela a raté » : c’est <strong>apprendre quelque chose de l’essai pour décider de la version suivante</strong>.</p>
+    <div class="callout"><strong>Repère :</strong> si le prototype ne produit aucune information utile à une décision, il risque de devenir seulement une étape de fabrication.</div>
+    <ul class="refs compact">
+      <li>Simon, H. A. (1996), <em>The Sciences of the Artificial</em>, 3e éd., MIT Press.</li>
+      <li><a href="https://direct.mit.edu/books/monograph/4551/The-Sciences-of-the-Artificial" target="_blank" rel="noopener">MIT Press — The Sciences of the Artificial ↗</a></li>
+      <li>Schön, D. A. (1983), <em>The Reflective Practitioner</em> — réflexion dans l’action et dialogue avec la situation.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card mirror">
+    <span class="kicker">Avant le bilan collectif</span>
+    <h2>Votre transformation en une phrase</h2>
+    <div class="question"><strong>Dans notre séquence, nous allons cesser de…</strong><textarea id="s1" data-save></textarea></div>
+    <div class="question"><strong>pour permettre aux élèves de décider / concevoir…</strong><textarea id="s2" data-save></textarea></div>
+    <div class="question"><strong>tout en conservant comme exigences communes…</strong><textarea id="s3" data-save></textarea></div>
+    <div class="question"><strong>et le premier prototype devra nous apprendre…</strong><textarea id="s4" data-save></textarea></div>
+    <div class="project-actions"><a class="btn primary" href="bilan.html">▶ Ouvrir le bilan à projeter</a><a class="btn secondary" href="../index.html">Retour à l’espace formation</a></div>
+  </div>
+</section>
+
+<div class="footer">Atelier « Du projet à la conception » · Formation enseignants de technologie · Fehmi KLABI</div>
+</main>
+<script src="../expertise-sequence/save.js"></script>
+<script src="../common-tools.js"></script>
+<script>
+(function(){
+  const areas=[...document.querySelectorAll('textarea')];
+  function expand(){areas.forEach(t=>{t.style.height='auto';t.style.height=Math.max(105,t.scrollHeight)+'px';});}
+  areas.forEach(t=>t.addEventListener('input',()=>{t.style.height='auto';t.style.height=t.scrollHeight+'px';}));
+  window.addEventListener('beforeprint',expand);
+  expand();
+})();
+</script>
+</body>
+</html>
