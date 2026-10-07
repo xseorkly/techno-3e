@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bilan projeté — Du projet à la conception</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F4F7F7;--card:#fff;--ink:#14262B;--muted:#5A6C71;--teal:#0E6E6B;--teal2:#0A5A58;--pale:#E2EFEE;--mag:#C2185B;--magp:#FBE8F0;--line:#D2DEDE;--amber:#9A6900;--amberp:#FFF5D9}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--paper);color:var(--ink);font:22px/1.4 "Source Sans 3",system-ui,sans-serif}
+.deck{height:100%;display:grid;grid-template-rows:auto 1fr auto}.topbar,.controls{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px;background:#fff;border-bottom:1px solid var(--line)}
+.topbar{font:700 13px Archivo,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--teal)}
+.controls{border-top:1px solid var(--line);border-bottom:0;justify-content:center}.btn{border:0;border-radius:10px;padding:9px 13px;background:var(--teal);color:#fff;font:700 15px "Source Sans 3";cursor:pointer;text-decoration:none}.btn.alt{background:var(--pale);color:var(--teal2)}
+.stage{position:relative;overflow:hidden}.slide{position:absolute;inset:0;padding:5vh 7vw;display:none;align-content:center;background:linear-gradient(135deg,#fff,#f7fbfb)}.slide.active{display:grid}
+.kicker{font:700 14px Archivo,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}h1,h2{font-family:Archivo,sans-serif;line-height:1.05;margin:12px 0 20px}h1{font-size:clamp(46px,7vw,92px)}h2{font-size:clamp(38px,5.2vw,70px)}p{max-width:80ch}.big{font-size:clamp(25px,3vw,42px);color:var(--muted)}
+.flow{display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:700;font-size:clamp(22px,2.5vw,36px)}.flow span{padding:10px 16px;border-radius:999px;background:var(--pale);color:var(--teal2)}.flow i{font-style:normal;color:var(--mag)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:28px}.panel{padding:22px;border-radius:18px;background:#fff;border:1px solid var(--line)}.panel h3{font-family:Archivo;margin-top:0}.panel ul{margin-bottom:0}
+.emphasis{font-size:clamp(28px,3.5vw,50px);font-weight:700;color:var(--mag);margin-top:28px}.matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.box{padding:18px;border-radius:16px;background:#fff;border:1px solid var(--line)}.box strong{display:block;font:700 18px Archivo,sans-serif;color:var(--teal);margin-bottom:8px}
+.creative{display:grid;gap:14px;justify-items:center}.creative .node{padding:13px 20px;border-radius:999px;background:var(--pale);color:var(--teal2);font-weight:700;min-width:min(520px,80vw);text-align:center}.creative .arrow{color:var(--mag);font-size:34px}
+.loop{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-weight:700}.loop span{padding:12px 15px;border-radius:12px;background:#fff;border:1px solid var(--line)}.loop i{font-style:normal;color:var(--mag)}
+.five{counter-reset:n;display:grid;gap:12px;max-width:1000px}.five div{padding:13px 16px 13px 64px;position:relative;background:#fff;border:1px solid var(--line);border-radius:14px}.five div:before{counter-increment:n;content:counter(n);position:absolute;left:16px;top:10px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--teal);color:#fff;font:700 16px Archivo}
+.counter{font-weight:700;color:var(--muted)}
+@media(max-width:800px){.cols,.matrix{grid-template-columns:1fr}.slide{padding:4vh 5vw;font-size:18px}}
+@media print{html,body{height:auto}.topbar,.controls{display:none}.stage{overflow:visible}.slide{position:relative;display:grid!important;min-height:100vh;page-break-after:always}.slide:last-child{page-break-after:auto}}
+</style>
+<script>if(sessionStorage.getItem('formation_teachers_unlocked_v1')!=='1')location.replace('../index.html');</script>
+</head>
+<body>
+<div class="deck">
+  <div class="topbar"><span>Du projet à la conception · Bilan</span><span class="counter" id="counter">1 / 6</span></div>
+  <main class="stage">
+    <section class="slide active">
+      <span class="kicker">Question de départ</span>
+      <h1>À quel moment l’élève devient-il réellement concepteur ?</h1>
+      <div class="flow"><span>Exécuter</span><i>→</i><span>Choisir</span><i>→</i><span>Arbitrer</span><i>→</i><span>Concevoir</span><i>→</i><span>Tester</span><i>→</i><span>Réviser</span></div>
+      <p class="big">Ce n’est pas le caractère spectaculaire du projet qui détermine l’activité intellectuelle de l’élève.</p>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">1 · Un cadre commun, des cheminements possibles</span>
+      <h2>Même problème ≠ même cheminement</h2>
+      <div class="cols">
+        <div class="panel"><h3>Ce qui peut être commun</h3><ul><li>objectif d’apprentissage</li><li>contraintes essentielles</li><li>critères de validation</li><li>ressources structurantes</li><li>exigences communes</li></ul></div>
+        <div class="panel"><h3>Ce qui peut varier</h3><ul><li>idées explorées</li><li>stratégies</li><li>ordre des essais</li><li>représentations</li><li>solutions techniques</li><li>chemin suivi</li></ul></div>
+      </div>
+      <p class="emphasis">La diversité des démarches n’interdit pas une exigence commune.</p>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">2 · Bloom comme outil de lecture</span>
+      <h2>Créer ≠ fabriquer</h2>
+      <div class="matrix">
+        <div class="box"><strong>Reproduire</strong>Une solution déjà définie<br><br>→ principalement appliquer</div>
+        <div class="box"><strong>Adapter</strong>Une solution à de nouvelles contraintes<br><br>→ analyser + décider</div>
+        <div class="box"><strong>Explorer puis arbitrer</strong>Plusieurs solutions techniquement recevables<br><br>→ analyser + évaluer + créer</div>
+      </div>
+      <p class="big">Bloom décrit la nature de l’activité cognitive ; ce n’est pas une échelle automatique de qualité pédagogique.</p>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">3 · La créativité se construit</span>
+      <h2>Ouvrir, puis organiser le choix</h2>
+      <div class="creative">
+        <div class="node">CONNAISSANCES · un répertoire de possibles</div><div class="arrow">↓</div>
+        <div class="node">DIVERGER · produire plusieurs pistes</div><div class="arrow">↓</div>
+        <div class="node">CONTRAINTES + CRITÈRES · rendre le problème pensable</div><div class="arrow">↓</div>
+        <div class="node">CONVERGER · comparer, argumenter, arbitrer</div><div class="arrow">↓</div>
+        <div class="node">SOLUTION À TESTER</div>
+      </div>
+      <p class="emphasis">Les bonnes contraintes donnent quelque chose à penser.</p>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">4 · Le prototype</span>
+      <h2>Il doit produire de l’information</h2>
+      <div class="loop"><span>Idée</span><i>→</i><span>Prototype</span><i>→</i><span>Test</span><i>→</i><span>Donnée</span><i>→</i><span>Décision</span><i>→</i><span>Modification</span><i>↺</i></div>
+      <p class="big">Le prototype n’est pas seulement une version imparfaite du produit final. Il sert à apprendre quelque chose sur la solution.</p>
+      <p class="emphasis">« Quelle information cet essai doit-il produire pour permettre la décision suivante ? »</p>
+    </section>
+
+    <section class="slide">
+      <span class="kicker">5 · À conserver pour les futures séquences</span>
+      <h2>Cinq questions avant de lancer un projet</h2>
+      <div class="five">
+        <div>Quel apprentissage justifie réellement le projet ?</div>
+        <div>Quelles décisions intellectuellement importantes appartiennent aux élèves ?</div>
+        <div>Comment provoquer plusieurs possibles avant le choix ?</div>
+        <div>Quels critères permettront d’arbitrer autrement que par préférence ?</div>
+        <div>Quelle information le prototype devra-t-il produire pour conduire à une amélioration ?</div>
+      </div>
+      <p class="emphasis">Projet → décisions → confrontation → apprentissage</p>
+    </section>
+  </main>
+  <div class="controls">
+    <a class="btn alt" href="index.html">← Atelier</a>
+    <button class="btn alt" id="prev">←</button>
+    <button class="btn" id="full">⛶ Plein écran</button>
+    <button class="btn alt" id="next">→</button>
+    <button class="btn alt" id="print">🖨 PDF</button>
+  </div>
+</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let i=0;
+function show(n){i=(n+slides.length)%slides.length;slides.forEach((s,k)=>s.classList.toggle('active',k===i));document.getElementById('counter').textContent=(i+1)+' / '+slides.length;}
+document.getElementById('prev').onclick=()=>show(i-1);document.getElementById('next').onclick=()=>show(i+1);
+document.getElementById('full').onclick=()=>{if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();};
+document.getElementById('print').onclick=()=>window.print();
+addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();show(i+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);});
+</script>
+</body>
+</html>
