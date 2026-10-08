@@ -17,6 +17,19 @@ function showBudget(){
   [['obj',b.per,5],['tot',b.tot,50]].forEach(function(r){var e=s.querySelector('[data-bs='+r[0]+']');e.querySelector('b').textContent=eur(r[1]);e.className='bs '+(r[1]>r[2]?'over':(r[1]>0?'ok':''));e.querySelector('.bm').textContent=(r[1]>r[2]?'dépasse le maximum de ':'maximum ')+r[2]+' €'});
 }
 function echo(){var e=document.getElementById('echo-budget');if(!e)return;var b=budget();e.textContent='Vos totaux de l’étape 4 : un objet coûte '+eur(b.per)+' (maximum 5 €) ; matériel et outils du poste '+eur(b.tot)+' (maximum 50 €).';e.className='callout'+((b.per>5||b.tot>50)?' over':'')}
+function theme(){
+  var out=document.getElementById('theme-out'),bar=document.getElementById('themebar');
+  if(bar){if(st.theme){bar.hidden=false;bar.innerHTML='';var b1=document.createElement('b');b1.textContent='🎲 Votre thème : '+st.theme;bar.appendChild(b1);if(st.theme_hint){var sp=document.createElement('span');sp.className='small';sp.textContent=' · personnes à qui penser : '+st.theme_hint;bar.appendChild(sp)}}}
+  if(!out)return;
+  var d=document.getElementById('draw'),r=document.getElementById('redraw'),h=document.getElementById('theme-hint'),T=window.THEMES||[];
+  function paint(){if(st.theme){out.textContent=st.theme;out.className='drawout set';h.textContent='Personnes à qui penser : '+(st.theme_hint||'');d.hidden=true;r.hidden=!!st.theme_n}else{out.textContent='Votre thème apparaîtra ici';out.className='drawout';h.textContent='';d.hidden=false;r.hidden=true}}
+  function pick(){var a=new Uint32Array(1);(window.crypto||{getRandomValues:function(x){x[0]=Math.floor(Math.random()*4294967295)}}).getRandomValues(a);return T[a[0]%T.length]}
+  function run(again){var cur=st.theme,i=0,btn=again?r:d;btn.disabled=true;var iv=setInterval(function(){out.textContent=T[i%T.length][0];out.className='drawout spin';i++},90);
+    setTimeout(function(){clearInterval(iv);var t=pick(),g=0;while(again&&t[0]===cur&&g++<20)t=pick();st.theme=t[0];st.theme_hint=t[1];if(again)st.theme_n='1';save();btn.disabled=false;paint()},1400)}
+  d.addEventListener('click',function(){run(false)});
+  r.addEventListener('click',function(){if(!st.theme_n)run(true)});
+  paint();
+}
 function cardCount(){var c=document.getElementById('ccount');if(!c)return;var n=document.querySelectorAll('input[data-card]:checked').length;c.textContent=n+(n>1?' cartes cochées':' carte cochée')+(n>6?' : essayez de n’en garder que 6 au plus':'')}
 [].forEach.call(document.querySelectorAll('[data-k]'),function(el){
   var k=el.getAttribute('data-k');
@@ -26,7 +39,7 @@ function cardCount(){var c=document.getElementById('ccount');if(!c)return;var n=
     var ev=(el.tagName==='SELECT')?'change':'input';
     el.addEventListener(ev,function(){st[k]=el.value;if(el.tagName==='TEXTAREA')grow(el);save();showBudget()});}
 });
-showBudget();cardCount();echo();
+showBudget();cardCount();echo();theme();
 var tb=document.getElementById('tmr');
 if(tb){
   var out=document.getElementById('tmrout'),iv=null;
