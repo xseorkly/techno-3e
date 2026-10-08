@@ -1,0 +1,258 @@
+[
+  {
+    "id": 1,
+    "slug": "premier-contact",
+    "title": "Vérifier le premier transfert",
+    "question": "Comment distinguer un problème de transfert d’un problème de robot ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\nbasic.showString(\"PRET\")\ninput.onButtonPressed(Button.A, function () {\nbasic.showIcon(IconNames.Yes)\n})",
+    "algo": "Au démarrage, arrêter les deux moteurs puis afficher PRET.\nQuand A est pressé, afficher une coche.",
+    "tests": [
+      "Importer le fichier HEX dans MakeCode pour retrouver les blocs.",
+      "Copier le HEX sur le disque MICROBIT avec un câble USB de données.",
+      "Observer PRET puis appuyer sur A : une coche doit apparaître."
+    ],
+    "lesson": "Faire distinguer événement, instruction et résultat observable. Demander une prédiction avant le transfert. La coche valide la carte et le programme, pas encore le châssis.",
+    "change": "Remplacer PRET par un mot court et annoncer le résultat avant l’essai.",
+    "limit": "Le défilement retarde la disponibilité visible du robot. Aucun déplacement dans cette fiche."
+  },
+  {
+    "id": 2,
+    "slug": "avance-duree",
+    "title": "Avancer pendant une seconde",
+    "question": "Pourquoi une durée ne garantit-elle pas une distance ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\ninput.onButtonPressed(Button.A, function () {\nmaqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, 80)\nbasic.pause(1000)\nmaqueen.motorStop(maqueen.Motors.All)\n})",
+    "algo": "Quand A est pressé :\n  Commander les deux moteurs vers l’avant à 80.\n  Attendre 1000 ms, soit une seconde.\n  Arrêter les deux moteurs.",
+    "tests": [
+      "Lever les roues pour vérifier le sens des moteurs.",
+      "Poser au sol, marquer la position de départ et appuyer sur A.",
+      "Mesurer trois déplacements avec le même réglage et comparer."
+    ],
+    "lesson": "Faire identifier une commande en boucle ouverte. Ne pas annoncer 50 cm : la consigne est une durée. La preuve attendue est un tableau d’essais avec unité.",
+    "change": "Changer seulement la durée à 1500 ms ; comparer avec la prévision.",
+    "limit": "80 est une commande de puissance sur 255, pas 80 cm/s. Les moteurs restent commandés pendant la pause."
+  },
+  {
+    "id": 3,
+    "slug": "led",
+    "title": "Commander les deux LED avant",
+    "question": "Comment produire un signal visible sans déplacer le robot ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\ninput.onButtonPressed(Button.A, function () {\nmaqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOn)\nbasic.pause(500)\nmaqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOff)\nmaqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOn)\nbasic.pause(500)\nmaqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOff)\n})",
+    "algo": "Quand A est pressé :\n  Allumer la LED avant gauche pendant 500 ms puis l’éteindre.\n  Allumer la LED avant droite pendant 500 ms puis l’éteindre.",
+    "tests": [
+      "Repérer les LED avant, distinctes de la matrice micro:bit.",
+      "Appuyer sur A et noter l’ordre gauche puis droite.",
+      "Vérifier que les deux LED sont éteintes à la fin."
+    ],
+    "lesson": "Travailler la séquence et la durée. Demander de dessiner un chronogramme avec deux lignes LED. Ne pas confondre LED avant et LED RGB sous le robot.",
+    "change": "Inverser les LED ; garder la même durée.",
+    "limit": "La pause bloque ce gestionnaire. Une répétition rapide du bouton n’est pas une stratégie de pilotage."
+  },
+  {
+    "id": 4,
+    "slug": "pivot",
+    "title": "Construire un pivot temporisé",
+    "question": "Comment choisir les commandes des deux roues pour tourner sur place ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\ninput.onButtonPressed(Button.A, function () {\nmaqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 80)\nmaqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, 80)\nbasic.pause(400)\nmaqueen.motorStop(maqueen.Motors.All)\n})",
+    "algo": "Quand A est pressé :\n  Faire avancer la roue gauche et reculer la roue droite à 80.\n  Attendre 400 ms.\n  Arrêter : le robot a pivoté vers la droite.",
+    "tests": [
+      "Vérifier M1 gauche et M2 droite roues levées.",
+      "Tracer un repère d’orientation au sol.",
+      "Mesurer l’angle pour trois essais, puis ajuster la durée."
+    ],
+    "lesson": "Relier le mouvement du châssis aux mouvements des roues. Faire argumenter les deux commandes avant de programmer. Un angle mesuré constitue la preuve.",
+    "change": "Remplacer 400 ms par une durée étalonnée pour environ 90°.",
+    "limit": "400 ms n’est pas une garantie de 90°. La carte micro:bit n’apporte pas de gyroscope pour mesurer ce pivot."
+  },
+  {
+    "id": 5,
+    "slug": "carre",
+    "title": "Répéter un parcours carré",
+    "question": "Quelle partie du trajet faut-il répéter ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\ninput.onButtonPressed(Button.A, function () {\nfor (let index = 0; index < 4; index++) {\nmaqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, 80)\nbasic.pause(1000)\nmaqueen.motorStop(maqueen.Motors.All)\nbasic.pause(200)\nmaqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 80)\nmaqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, 80)\nbasic.pause(400)\nmaqueen.motorStop(maqueen.Motors.All)\nbasic.pause(200)\n}\n})",
+    "algo": "Quand A est pressé, répéter quatre fois :\n  Avancer pendant 1000 ms puis arrêter.\n  Attendre 200 ms.\n  Pivoter à droite pendant 400 ms puis arrêter.\n  Attendre 200 ms.",
+    "tests": [
+      "Étalonner une avance et un quart de tour avant de répéter.",
+      "Marquer les quatre sommets réellement atteints.",
+      "Mesurer l’écart entre départ et arrivée."
+    ],
+    "lesson": "Distinguer répétition et duplication de blocs. Faire analyser l’accumulation des erreurs. L’objectif est un carré approché et expliqué.",
+    "change": "Changer le nombre de répétitions à 3 et prévoir la trajectoire sans changer l’angle.",
+    "limit": "Sans étalonnage du pivot, quatre répétitions ne produisent pas nécessairement un carré."
+  },
+  {
+    "id": 6,
+    "slug": "distance",
+    "title": "Lire une distance ultrasonore",
+    "question": "La valeur affichée est-elle toujours une mesure exploitable ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\nlet distance = 0\nbasic.forever(function () {\ndistance = maqueen.Ultrasonic()\nbasic.showNumber(distance)\nbasic.pause(200)\n})",
+    "algo": "Toujours :\n  Lire une distance en centimètres et la mémoriser.\n  Afficher cette valeur.\n  Attendre 200 ms puis recommencer.",
+    "tests": [
+      "Présenter une surface plane à 10, 20 et 40 cm.",
+      "Comparer avec une règle ; noter les valeurs et les écarts.",
+      "Retirer la cible puis incliner une surface : observer les valeurs sans écho."
+    ],
+    "lesson": "Séparer grandeur physique, valeur numérique et interprétation. Demander un tableau distance de référence / affichage. Discuter la qualité de la mesure avant toute décision.",
+    "change": "Changer la forme ou l’orientation de la cible, sans changer le code.",
+    "limit": "L’affichage des nombres est bloquant et ralentit la boucle. 500 est une valeur de remplacement possible en absence d’écho dans l’extension utilisée."
+  },
+  {
+    "id": 7,
+    "slug": "arret-obstacle",
+    "title": "Décider de s’arrêter devant un obstacle",
+    "question": "Comment transformer une mesure en décision répétée ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\nlet actif = false\nlet distance = 0\ninput.onButtonPressed(Button.A, function () {\nactif = true\n})\ninput.onButtonPressed(Button.B, function () {\nactif = false\nmaqueen.motorStop(maqueen.Motors.All)\n})\nbasic.forever(function () {\nif (actif) {\ndistance = maqueen.Ultrasonic()\nif (distance <= 0 || distance >= 500 || distance <= 20) {\nmaqueen.motorStop(maqueen.Motors.All)\nactif = false\n} else {\nmaqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, 80)\n}\n}\nbasic.pause(50)\n})",
+    "algo": "Au démarrage, rester arrêté.\nA autorise le déplacement ; B désactive et arrête.\nToutes les 50 ms, si le robot est actif :\n  Lire la distance.\n  Si la valeur est invalide ou inférieure ou égale à 20 cm, arrêter et désactiver.\n  Sinon avancer.",
+    "tests": [
+      "Allumer face à une cible plane à 50 cm puis presser A.",
+      "Vérifier l’arrêt avant la cible et mesurer la distance résiduelle.",
+      "Presser B pendant une avance ; tester aussi l’absence d’écho."
+    ],
+    "lesson": "Faire expliciter les conditions et la variable booléenne. Le robot ne repart pas tout seul après l’arrêt : il faut A. Demander aux collègues de justifier cette décision.",
+    "change": "Comparer deux seuils, 15 et 25 cm, à vitesse inchangée.",
+    "limit": "Le seuil ne garantit pas une distance finale exacte. 500 entraîne ici un arrêt volontaire : ce choix réduit la mobilité en milieu ouvert."
+  },
+  {
+    "id": 8,
+    "slug": "evitement",
+    "title": "Enchaîner une manœuvre d’évitement",
+    "question": "Éviter un obstacle signifie-t-il connaître le bon chemin ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\ninput.onButtonPressed(Button.A, function () {\nlet distance = maqueen.Ultrasonic()\nif (distance > 0 && distance < 500 && distance <= 20) {\nmaqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CCW, 60)\nbasic.pause(300)\nmaqueen.motorStop(maqueen.Motors.All)\nmaqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 60)\nmaqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, 60)\nbasic.pause(400)\nmaqueen.motorStop(maqueen.Motors.All)\n} else {\nmaqueen.motorStop(maqueen.Motors.All)\n}\n})",
+    "algo": "Quand A est pressé :\n  Lire la distance une seule fois.\n  Si la mesure est valide et la cible à 20 cm ou moins :\n    Reculer pendant 300 ms.\n    Pivoter à droite pendant 400 ms.\n    Arrêter.\n  Sinon rester arrêté.",
+    "tests": [
+      "Placer une cible à 15 cm et dégager l’arrière.",
+      "Appuyer sur A et observer les deux phases.",
+      "Répéter avec une cible à 40 cm : aucun mouvement attendu."
+    ],
+    "lesson": "Isoler une manœuvre avant de construire l’autonomie. Cette fiche Débutant teste une séquence ; la surveillance permanente sera traitée en Expert. Faire verbaliser les limites.",
+    "change": "Inverser les moteurs du pivot et prévoir la direction.",
+    "limit": "Aucune surveillance du capteur pendant les pauses. Le robot ne détecte pas les obstacles derrière lui. Tester dans une zone dégagée."
+  },
+  {
+    "id": 9,
+    "slug": "capteurs-ligne",
+    "title": "Lire les deux capteurs de ligne",
+    "question": "Que savent réellement les deux capteurs ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\nlet gauche = 0\nlet droite = 0\nbasic.forever(function () {\ngauche = maqueen.readPatrol(maqueen.Patrol.PatrolLeft)\ndroite = maqueen.readPatrol(maqueen.Patrol.PatrolRight)\nserial.writeValue(\"gauche\", gauche)\nserial.writeValue(\"droite\", droite)\nbasic.showNumber(2 * gauche + droite)\nbasic.pause(200)\n})",
+    "algo": "Toujours :\n  Lire gauche et droite (0 = noir, 1 = blanc).\n  Envoyer chaque valeur sur le port série.\n  Afficher le code 2 × gauche + droite.\n  Attendre 200 ms.",
+    "tests": [
+      "Maintenir le robot immobile sur fond blanc : code 3.",
+      "Placer seulement gauche sur noir : code 1 ; seulement droite : code 2.",
+      "Placer les deux sur noir : code 0. Consigner les quatre cas."
+    ],
+    "lesson": "Construire une table de vérité à partir d’observations. Faire expliquer que 0 ne veut pas dire capteur cassé. Le nombre affiché code deux états, pas une distance.",
+    "change": "Donner une combinaison et demander de prévoir le code.",
+    "limit": "Ce sont deux informations binaires. Aucun niveau de gris continu ni couleur RGB n’est mesuré par ces blocs."
+  },
+  {
+    "id": 10,
+    "slug": "suivi-ligne",
+    "title": "Suivre une ligne avec une table de décision",
+    "question": "Quelle action associer à chaque couple de capteurs ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\nlet gauche = 0\nlet droite = 0\nbasic.forever(function () {\ngauche = maqueen.readPatrol(maqueen.Patrol.PatrolLeft)\ndroite = maqueen.readPatrol(maqueen.Patrol.PatrolRight)\nif (gauche == 0 && droite == 0) {\nmaqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, 60)\n} else if (gauche == 0 && droite == 1) {\nmaqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 0)\nmaqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 60)\n} else if (gauche == 1 && droite == 0) {\nmaqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 60)\nmaqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 0)\n} else {\nmaqueen.motorStop(maqueen.Motors.All)\n}\nbasic.pause(20)\n})",
+    "algo": "Toujours, toutes les 20 ms :\n  Lire les deux capteurs.\n  Noir/noir : avancer à 60.\n  Noir/blanc : ralentir la roue gauche à 0 pour corriger à gauche.\n  Blanc/noir : ralentir la roue droite à 0 pour corriger à droite.\n  Blanc/blanc : arrêter.",
+    "tests": [
+      "Utiliser une ligne noire assez large pour être sous les deux capteurs au centre.",
+      "Vérifier manuellement les quatre commandes roues levées.",
+      "Faire suivre un tracé à courbes larges ; noter les pertes de ligne."
+    ],
+    "lesson": "Partir de la table de décision et demander de la traduire en conditions. Comparer intention et observation. Le programme s’arrête si la ligne est perdue.",
+    "change": "Comparer vitesse 40 et 60 sur le même tracé.",
+    "limit": "Démarrage automatique. Placer le robot avant de l’allumer. Une ligne étroite entre les capteurs est vue blanc/blanc et provoque l’arrêt."
+  },
+  {
+    "id": 11,
+    "slug": "etalonnage",
+    "title": "Étalonner une distance visée",
+    "question": "Comment passer d’une intention en centimètres à une commande en durée ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\nlet duree = 1000\nlet vitesse = 80\ninput.onButtonPressed(Button.A, function () {\nmaqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, vitesse)\nbasic.pause(duree)\nmaqueen.motorStop(maqueen.Motors.All)\n})\ninput.onButtonPressed(Button.B, function () {\nduree += 100\nbasic.showNumber(duree)\n})",
+    "algo": "Initialiser durée à 1000 ms et vitesse à 80.\nA lance une avance de la durée choisie puis arrête.\nB augmente la durée de 100 ms et affiche la nouvelle valeur.",
+    "tests": [
+      "Mesurer cinq essais à durée constante et calculer moyenne et dispersion.",
+      "Si 1000 ms donne une moyenne de 32 cm, estimer 1563 ms pour viser 50 cm.",
+      "Tester l’estimation, puis refaire avec piles moins chargées."
+    ],
+    "lesson": "Faire construire un modèle local durée/distance et critiquer sa validité. La formule t_cible = t_essai × distance_cible / distance_moyenne est une estimation, à vérifier.",
+    "change": "Modifier la durée directement dans la variable pour affiner sans pas de 100.",
+    "limit": "Pas d’encodeurs : aucune mesure de distance parcourue dans le programme. B pendant A ne change pas la pause déjà engagée ; attendre l’arrêt pour régler."
+  },
+  {
+    "id": 12,
+    "slug": "hysteresis",
+    "title": "Stabiliser une décision avec une hystérésis",
+    "question": "Comment éviter une alternance marche/arrêt près d’un seuil ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\nlet marche = false\nlet distance = 0\nbasic.forever(function () {\ndistance = maqueen.Ultrasonic()\nif (distance <= 0 || distance >= 500) {\nmarche = false\n} else if (distance <= 15) {\nmarche = false\n} else if (distance >= 25) {\nmarche = true\n}\nif (marche) {\nmaqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, 50)\n} else {\nmaqueen.motorStop(maqueen.Motors.All)\n}\nbasic.pause(50)\n})",
+    "algo": "Toujours :\n  Lire la distance.\n  Mesure invalide ou distance ≤ 15 cm : mémoriser arrêt.\n  Distance ≥ 25 cm : mémoriser marche.\n  Entre 15 et 25 cm : conserver l’état précédent.\n  Commander les moteurs selon l’état, puis attendre 50 ms.",
+    "tests": [
+      "Roues levées : approcher puis éloigner une cible.",
+      "Vérifier arrêt à 15 cm, reprise à 25 cm.",
+      "À 20 cm, comparer selon l’état précédent."
+    ],
+    "lesson": "Faire expliquer le rôle de la mémoire dans une décision. Proposer deux historiques aboutissant à la même mesure de 20 cm mais à des commandes différentes.",
+    "change": "Resserrer la bande à 18–22 cm et comparer les oscillations.",
+    "limit": "Le robot démarre automatiquement si une cible valide est loin. Ce contrôleur illustre une politique ; ce n’est pas un système de sécurité certifié."
+  },
+  {
+    "id": 13,
+    "slug": "fonctions",
+    "title": "Organiser un parcours avec des fonctions",
+    "question": "Comment rendre un programme modifiable sans répéter les commandes ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\nlet coteMs = 1000\nlet virageMs = 400\nlet nombreCotes = 4\nfunction avancer() {\nmaqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, 80)\nbasic.pause(coteMs)\nmaqueen.motorStop(maqueen.Motors.All)\n}\nfunction tournerDroite() {\nmaqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 80)\nmaqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, 80)\nbasic.pause(virageMs)\nmaqueen.motorStop(maqueen.Motors.All)\n}\ninput.onButtonPressed(Button.A, function () {\nfor (let index = 0; index < nombreCotes; index++) {\navancer()\nbasic.pause(200)\ntournerDroite()\nbasic.pause(200)\n}\n})",
+    "algo": "Initialiser trois paramètres : durée d’avance, durée de pivot, nombre de côtés.\nDéfinir avancer et tournerDroite.\nQuand A est pressé, répéter le nombre de côtés :\n  Appeler avancer, attendre, appeler tournerDroite, attendre.",
+    "tests": [
+      "Comparer avec le carré de la fiche 05.",
+      "Changer seulement coteMs et vérifier ce qui varie.",
+      "Pour six côtés, étalonner un pivot de 60° avant de changer nombreCotes."
+    ],
+    "lesson": "Travailler abstraction, décomposition et paramètres. Faire défendre les noms de fonctions. Exiger un protocole de validation plutôt qu’un programme simplement plus long.",
+    "change": "Préparer un hexagone avec un pivot recalibré.",
+    "limit": "nombreCotes ne recalcule pas automatiquement le virage. Le rapport durée/angle doit être testé, pas supposé exact."
+  },
+  {
+    "id": 14,
+    "slug": "machine-etats",
+    "title": "Éviter un obstacle sans longues pauses",
+    "question": "Comment continuer à lire les événements pendant une manœuvre ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\nlet actif = false\nlet etat = 0\nlet debut = 0\nlet distance = 0\ninput.onButtonPressed(Button.A, function () {\netat = 0\nactif = true\n})\ninput.onButtonPressed(Button.B, function () {\nactif = false\nmaqueen.motorStop(maqueen.Motors.All)\n})\nbasic.forever(function () {\nif (actif) {\nif (etat == 0) {\ndistance = maqueen.Ultrasonic()\nif (distance <= 0 || distance >= 500) {\nactif = false\nmaqueen.motorStop(maqueen.Motors.All)\n} else if (distance <= 20) {\netat = 1\ndebut = input.runningTime()\nmaqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CCW, 60)\n} else {\nmaqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, 60)\n}\n} else if (etat == 1) {\nif (input.runningTime() - debut >= 300) {\netat = 2\ndebut = input.runningTime()\nmaqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 60)\nmaqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, 60)\n}\n} else if (input.runningTime() - debut >= 400) {\nmaqueen.motorStop(maqueen.Motors.All)\netat = 0\n}\n}\nbasic.pause(20)\n})",
+    "algo": "A active et remet l’état à 0 ; B arrête et désactive.\nToutes les 20 ms, si actif :\n  État 0 : mesurer ; avancer si libre, arrêter si invalide.\n    Si obstacle proche, commencer le recul et mémoriser l’heure (état 1).\n  État 1 : après 300 ms, commencer le pivot et mémoriser l’heure (état 2).\n  État 2 : après 400 ms, arrêter puis revenir à l’état 0.",
+    "tests": [
+      "Comparer le bouton B pendant cette manœuvre et pendant la fiche 08.",
+      "Vérifier successivement avance, recul, pivot, nouvelle mesure.",
+      "Retirer la cible pour tester la politique absence d’écho."
+    ],
+    "lesson": "Faire formaliser trois états et leurs transitions avant les blocs. Demander ce que garde debut et pourquoi une différence de temps remplace une longue pause.",
+    "change": "Modifier une durée de transition puis vérifier seulement cette phase.",
+    "limit": "L’ultrason n’est lu qu’en état 0 ; B reste pris en compte entre les tours de boucle. Le recul ne dispose pas de capteur arrière."
+  },
+  {
+    "id": 15,
+    "slug": "ligne-obstacle",
+    "title": "Donner la priorité à l’obstacle",
+    "question": "Comment arbitrer deux informations qui demandent des actions différentes ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\nlet gauche = 0\nlet droite = 0\nlet distance = 0\nbasic.forever(function () {\ndistance = maqueen.Ultrasonic()\nif (distance <= 0 || distance >= 500 || distance <= 20) {\nmaqueen.motorStop(maqueen.Motors.All)\n} else {\ngauche = maqueen.readPatrol(maqueen.Patrol.PatrolLeft)\ndroite = maqueen.readPatrol(maqueen.Patrol.PatrolRight)\nif (gauche == 0 && droite == 0) {\nmaqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, 60)\n} else if (gauche == 0 && droite == 1) {\nmaqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 0)\nmaqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 60)\n} else if (gauche == 1 && droite == 0) {\nmaqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 60)\nmaqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 0)\n} else {\nmaqueen.motorStop(maqueen.Motors.All)\n}\n}\nbasic.pause(20)\n})",
+    "algo": "Toujours :\n  Lire la distance.\n  Si invalide ou obstacle à 20 cm ou moins : arrêter.\n  Sinon appliquer la table de suivi de ligne.\n  Attendre 20 ms puis recommencer.",
+    "tests": [
+      "Tester séparément la distance et la ligne avant de combiner.",
+      "Présenter un obstacle alors que les deux capteurs voient noir.",
+      "Retirer l’obstacle : reprise si la mesure redevient valide et la ligne est visible."
+    ],
+    "lesson": "Faire expliciter l’ordre des priorités. Comparer deux programmes dont les conditions sont inversées. Évaluer l’argumentation et un test de conflit, pas seulement le trajet final.",
+    "change": "Prévoir le comportement sur ligne perdue et obstacle absent, puis tester.",
+    "limit": "Démarrage et reprise automatiques. Sans cible ultrasonore exploitable, le robot reste arrêté. Le temps de cycle inclut le temps de mesure ultrasonore."
+  },
+  {
+    "id": 16,
+    "slug": "defi-autonome",
+    "title": "Construire un robot de livraison sur piste",
+    "question": "Comment reconnaître l’arrivée sans confondre un virage avec un arrêt ?",
+    "code": "maqueen.motorStop(maqueen.Motors.All)\nlet actif = false\nlet gauche = 0\nlet droite = 0\nlet distance = 0\nlet debutBlanc = 0\ninput.onButtonPressed(Button.A, function () {\nactif = true\ndebutBlanc = 0\n})\ninput.onButtonPressed(Button.B, function () {\nactif = false\nmaqueen.motorStop(maqueen.Motors.All)\n})\nbasic.forever(function () {\nif (actif) {\ndistance = maqueen.Ultrasonic()\ngauche = maqueen.readPatrol(maqueen.Patrol.PatrolLeft)\ndroite = maqueen.readPatrol(maqueen.Patrol.PatrolRight)\nif (distance <= 0 || distance >= 500 || distance <= 20) {\nmaqueen.motorStop(maqueen.Motors.All)\nactif = false\n} else if (gauche == 1 && droite == 1) {\nmaqueen.motorStop(maqueen.Motors.All)\nif (debutBlanc == 0) {\ndebutBlanc = input.runningTime()\n}\nif (input.runningTime() - debutBlanc >= 500) {\nactif = false\nbasic.showIcon(IconNames.Yes)\n}\n} else {\ndebutBlanc = 0\ngauche = maqueen.readPatrol(maqueen.Patrol.PatrolLeft)\ndroite = maqueen.readPatrol(maqueen.Patrol.PatrolRight)\nif (gauche == 0 && droite == 0) {\nmaqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, 60)\n} else if (gauche == 0 && droite == 1) {\nmaqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 0)\nmaqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 60)\n} else if (gauche == 1 && droite == 0) {\nmaqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 60)\nmaqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 0)\n} else {\nmaqueen.motorStop(maqueen.Motors.All)\n}\n}\n}\nbasic.pause(20)\n})",
+    "algo": "A active ; B arrête.\nToujours, si actif :\n  Lire distance et capteurs.\n  Obstacle ou mesure invalide : arrêter et désactiver.\n  Blanc/blanc : arrêter immédiatement et chronométrer cet état.\n    Après 500 ms consécutives, désactiver et afficher une coche.\n  Sinon remettre le chronomètre à zéro et suivre la ligne.\n  Attendre 20 ms.",
+    "tests": [
+      "Définir une piste noire large finissant sur une zone blanche, avec surfaces donnant un écho valide.",
+      "Tester arrivée, perte accidentelle, obstacle et bouton B séparément.",
+      "Montrer qu’une perte de piste persistante produit aussi la coche : discuter le critère."
+    ],
+    "lesson": "Situation-problème : transporter un petit objet et prouver l’arrivée. Fournir le cahier des charges, puis laisser concevoir des variantes. Le code de référence est critiquable : la coche signifie blanc persistant, pas livraison prouvée. Demander une amélioration et ses tests.",
+    "change": "Ajouter un marqueur d’arrivée distinct ou une confirmation humaine ; justifier le nouveau critère.",
+    "limit": "Sans information supplémentaire, arrivée et perte de ligne sont indiscernables. Le robot s’arrête sur blanc et ne cherche pas la piste. Aucun essai physique n’a été réalisé ici."
+  }
+]

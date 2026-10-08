@@ -1,0 +1,10 @@
+FORMATION MAQUEEN CLASSIQUE ROB0148
+
+Ouvrir formation/maqueen-classique/index.html après décompression.
+25 nouvelles pages, 16 programmes HEX et TypeScript, captures MakeCode
+et vues SVG des véritables blocs.
+L’atelier Maqueen et son tutoriel smartphone existants sont conservés
+et intégrés par une navigation réciproque.
+Aucun essai sur robot physique : suivre les protocoles des fiches.
+Pour installer : copier les fichiers dans le dépôt en conservant les chemins.
+Les autres rubriques du site restent disponibles dans le dépôt complet.
