@@ -9,14 +9,14 @@ function budget(){
   var per=0,com=0,i;
   for(i=1;i<=8;i++){var o=st['ob'+i+'o'],c=num(st['ob'+i+'p'])*(st['ob'+i+'q']===undefined||st['ob'+i+'q']===''?1:num(st['ob'+i+'q']));var line=(o==='acheté')?c:0;per+=line;var el=document.querySelector('[data-line=ob'+i+']');if(el)el.textContent=eur(line)}
   for(i=1;i<=4;i++){var c2=num(st['cm'+i+'p'])*(st['cm'+i+'q']===undefined||st['cm'+i+'q']===''?1:num(st['cm'+i+'q']));com+=c2;var el2=document.querySelector('[data-line=cm'+i+']');if(el2)el2.textContent=eur(c2)}
-  var nb=num(st.nbobj)||1,tot=per*nb+com;
+  var nb=1,tot=com;
   return {per:per,com:com,nb:nb,tot:tot};
 }
 function showBudget(){
   var b=budget();var s=document.getElementById('bsum');if(!s)return;
   [['obj',b.per,5],['tot',b.tot,50]].forEach(function(r){var e=s.querySelector('[data-bs='+r[0]+']');e.querySelector('b').textContent=eur(r[1]);e.className='bs '+(r[1]>r[2]?'over':(r[1]>0?'ok':''));e.querySelector('.bm').textContent=(r[1]>r[2]?'dépasse le maximum de ':'maximum ')+r[2]+' €'});
 }
-function echo(){var e=document.getElementById('echo-budget');if(!e)return;var b=budget();e.textContent='Vos totaux de l’étape 4 : un objet coûte '+eur(b.per)+' (maximum 5 €) ; matériel total '+eur(b.tot)+' pour '+b.nb+' objet'+(b.nb>1?'s':'')+' (maximum 50 €).';e.className='callout'+((b.per>5||b.tot>50)?' over':'')}
+function echo(){var e=document.getElementById('echo-budget');if(!e)return;var b=budget();e.textContent='Vos totaux de l’étape 4 : un objet coûte '+eur(b.per)+' (maximum 5 €) ; matériel et outils du poste '+eur(b.tot)+' (maximum 50 €).';e.className='callout'+((b.per>5||b.tot>50)?' over':'')}
 function cardCount(){var c=document.getElementById('ccount');if(!c)return;var n=document.querySelectorAll('input[data-card]:checked').length;c.textContent=n+(n>1?' cartes cochées':' carte cochée')+(n>6?' : essayez de n’en garder que 6 au plus':'')}
 [].forEach.call(document.querySelectorAll('[data-k]'),function(el){
   var k=el.getAttribute('data-k');
@@ -47,7 +47,7 @@ if(window.SECT){
         var b=budget();l.textContent='Budget';
         var rows=[];for(var i=1;i<=8;i++){if(st['ob'+i+'d'])rows.push('• '+st['ob'+i+'d']+' ('+(st['ob'+i+'o']||'origine non précisée')+', '+eur(num(st['ob'+i+'p']))+' × '+(st['ob'+i+'q']||1)+')')}
         var com=[];for(var j=1;j<=4;j++){if(st['cm'+j+'d'])com.push('• '+st['cm'+j+'d']+' ('+eur(num(st['cm'+j+'p']))+' × '+(st['cm'+j+'q']||1)+')')}
-        var t='Pour un objet :\n'+(rows.join('\n')||'—')+'\nCoût d’un objet : '+eur(b.per)+' (maximum 5 €)\n\nMatériel partagé :\n'+(com.join('\n')||'—')+'\n\nNombre d’objets : '+b.nb+'\nMatériel total : '+eur(b.tot)+' (maximum 50 €)';
+        var t='Pour un objet :\n'+(rows.join('\n')||'—')+'\nCoût d’un objet : '+eur(b.per)+' (maximum 5 €)\n\nMatériel et outils du poste de travail :\n'+(com.join('\n')||'—')+'\nTotal poste : '+eur(b.tot)+' (maximum 50 €)';
         a.className='fv'+((b.per>5||b.tot>50)?' over':'');a.textContent=t;txt+='\nBudget\n'+t+'\n';
       }else if(f[0]==='@cards'){
         l.textContent=f[1];var sel=(window.CARDS||[]).filter(function(c){return st['card_'+c[0]]==='1'});

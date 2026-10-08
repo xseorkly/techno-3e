@@ -165,3 +165,4 @@ input.tx{padding:9px 11px;border:1.5px solid var(--line);border-radius:10px;font
 @media(max-width:600px){.srow{grid-template-columns:1fr}}
 .callout.over{border-color:var(--mag);background:var(--magp);color:var(--mag);font-weight:600}
 .fv{white-space:pre-wrap}
+.mn:empty{display:none}
