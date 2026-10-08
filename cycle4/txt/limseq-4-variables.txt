@@ -1,0 +1,17 @@
+Séquence (4e) – Variables et données en programmation
+=====================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Limoges
+Statut : academic
+Source originale : https://pedagogie.ac-limoges.fr/techno/
+
+RÉSUMÉ
+Introduire la notion de variable en programmation à travers des activités concrètes.
+
+CONTENU INDEXÉ
+Cette séquence académique travaille la notion de variables et de données en programmation, en lien avec le nouveau programme 2024.
+
+MOTS-CLÉS
+variables, programmation, données

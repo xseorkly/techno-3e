@@ -1,0 +1,28 @@
+SFC1l — Représentation des booléens, des mots et des nombres entiers naturels
+=============================================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Découvrir comment différents types d’informations peuvent être représentés numériquement, notamment les booléens, les caractères et les entiers.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : SFC1l
+Thème : SFC
+Compétence : SFC1
+Sous-thème : T9 — Structuration et traitement des données
+Connaissance : Représentation des booléens, des mots et des nombres entiers naturels
+Date de mise à disposition indiquée par Bordeaux : 19/06/2024.
+
+À retenir : Découvrir comment différents types d’informations peuvent être représentés numériquement, notamment les booléens, les caractères et les entiers.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+SFC1l, SFC, SFC1, T9 — Structuration et traitement des données, fiche connaissance, Bordeaux, Représentation des booléens, des mots et des nombres entiers naturels

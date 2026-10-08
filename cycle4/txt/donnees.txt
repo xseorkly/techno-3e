@@ -1,0 +1,21 @@
+Données : fichiers, stockage, représentation et traitement
+==========================================================
+
+Type : Connaissances
+Niveau : Cycle 4
+Source : Programme officiel 2024
+Statut : official
+Source originale : https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes//16802-programme-de-technologie-c4.pdf
+
+RÉSUMÉ
+Le cycle 4 aborde les fichiers, l’arborescence, les formats, le bit et l’octet, la structuration des données et leur traitement dans un tableur.
+
+CONTENU INDEXÉ
+Les élèves travaillent les fichiers et dossiers, l’arborescence, les extensions et formats, les droits de lecture/écriture et les unités de quantité d’information. Ils apprennent à décrire des objets à l’aide de descripteurs et de types de données, puis à structurer et traiter des données (mise en forme, calculs, filtre, tri) avec un tableur.
+
+La représentation binaire est abordée à travers le bit, les booléens, les mots et les nombres entiers naturels.
+
+Ressources associées : RNR 5e « Fichiers et sécurité informatique », RNR 4e système d’arrosage et podomètre, Toulouse « Fichier informatique / Stockage », « Représentation des données », « Tableur / Traitement des données ».
+
+MOTS-CLÉS
+données, fichiers, arborescence, bit, octet, tableur, CSV, tri, filtre, stockage, descripteur

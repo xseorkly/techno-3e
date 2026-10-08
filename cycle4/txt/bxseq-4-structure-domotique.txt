@@ -1,0 +1,17 @@
+Séquence 5 (4e) – Comprendre la structure et le fonctionnement de la maison connectée
+=====================================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2025/06/12/exemples-de-sequences-4eme/
+
+RÉSUMÉ
+Analyser la chaîne d'énergie et la chaîne d'information d'une maquette de maison domotique.
+
+CONTENU INDEXÉ
+Une maquette de maison équipée de deux cartes Micro:bit, de capteurs (PIR, luminosité) et de servomoteurs permet d'étudier les chaînes d'énergie et d'information d'un système domotique complet.
+
+MOTS-CLÉS
+domotique, chaîne d'énergie, chaîne d'information, Micro:bit, Makecode

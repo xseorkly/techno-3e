@@ -1,0 +1,17 @@
+Séquence 12 (5e) – La simulation et la validation de la structure d'un OST
+==========================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/exemples-de-sequences-academie-bordeaux/
+
+RÉSUMÉ
+Utiliser le logiciel ModelSmart 3D pour valider le comportement mécanique et les performances d'une structure.
+
+CONTENU INDEXÉ
+Avec le logiciel de simulation ModelSmart 3D, les élèves valident le comportement mécanique d'un matériau et les performances d'un objet technique avant sa fabrication.
+
+MOTS-CLÉS
+simulation mécanique, validation, ModelSmart 3D, structure

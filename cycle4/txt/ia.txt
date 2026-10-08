@@ -1,0 +1,21 @@
+Intelligence artificielle : usages, apprentissage et biais
+==========================================================
+
+Type : Connaissances
+Niveau : Cycle 4
+Source : Programme + guide 2024
+Statut : official
+Source originale : https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes/college/cycle-4/17103-guide-daccompagnement-du-programme-de-technologie-c4-mai-2024.pdf
+
+RÉSUMÉ
+L’IA fait partie des nouveaux contenus : comprendre ses usages, les grands types d’apprentissage et les biais, sans faire de la création de modèles une fin en soi.
+
+CONTENU INDEXÉ
+Le programme cite les grands types d’apprentissage des intelligences artificielles, leurs usages possibles (par exemple géolocalisation, identification, calcul ou traduction) et leurs incidences sociétales, notamment les biais.
+
+Le guide d’accompagnement recommande une entrée par les usages et surtout par les données. L’objectif est de construire une première culture de l’IA et un regard critique. La génération d’un modèle complexe n’est pas l’objectif d’apprentissage : un outil simple peut être mobilisé pour permettre aux élèves de se concentrer sur les données, les résultats et les biais.
+
+Ressources associées : RNR 5e « Assister le robot avec l’IA » ; RNR 4e « Sécuriser l’accès aux casiers à l’aide de l’IA » ; RNR 3e « Suivre un animal à distance » ; fiches Toulouse IA ; séquences académiques sur reconnaissance d’images et machine learning.
+
+MOTS-CLÉS
+IA, intelligence artificielle, machine learning, apprentissage supervisé, biais, données, reconnaissance faciale, prompts

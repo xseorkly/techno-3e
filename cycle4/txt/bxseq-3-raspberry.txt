@@ -1,0 +1,17 @@
+Séquence 3 bis (3e) – L'OST idéal : l'ordinateur Raspberry Pi
+=============================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2026/06/19/exemples-de-sequences-3eme/
+
+RÉSUMÉ
+Étudier le Raspberry Pi comme exemple d'objet technique répondant à un choix de développement durable.
+
+CONTENU INDEXÉ
+En manipulant un Raspberry Pi (carte microSD, écran HDMI, clavier, souris), les élèves analysent les critères de choix et de performance de cet ordinateur monocarte dans une perspective de sobriété numérique.
+
+MOTS-CLÉS
+Raspberry Pi, développement durable, performance, sobriété numérique

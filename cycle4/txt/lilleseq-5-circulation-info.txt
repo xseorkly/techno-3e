@@ -1,0 +1,17 @@
+Séquence (5e) – Circulation de l'information
+============================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Lille
+Statut : academic
+Source originale : https://pedagogie.ac-lille.fr/technologie/2024/
+
+RÉSUMÉ
+Comprendre comment l'information circule dans un réseau informatique.
+
+CONTENU INDEXÉ
+Cette séquence académique aborde la circulation de l'information dans un réseau, en lien avec la chaîne d'information du programme 2024.
+
+MOTS-CLÉS
+circulation de l'information, réseau, chaîne d'information

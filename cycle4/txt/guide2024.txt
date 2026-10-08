@@ -1,0 +1,25 @@
+Guide d’accompagnement du programme — mai 2024
+==============================================
+
+Type : Guide
+Niveau : Cycle 4
+Source : Éduscol STI
+Statut : official
+Source originale : https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes/college/cycle-4/17103-guide-daccompagnement-du-programme-de-technologie-c4-mai-2024.pdf
+
+RÉSUMÉ
+Guide de mise en œuvre : ambition de la discipline, compétences, MEI, informatique, FabLab, équipements, IA, cybersécurité, réparabilité et conception de séquences.
+
+CONTENU INDEXÉ
+Le guide ne remplace pas le programme : il aide à se l’approprier et à construire les progressions. Il développe notamment :
+• les finalités et dimensions de la Technologie ;
+• la logique spiralaire et les compétences ;
+• le triptyque matière-énergie-information ;
+• la place de l’informatique, des données et de la programmation ;
+• le choix des OST et le FabLab ;
+• les équipements recommandés ;
+• l’IA, la cybersécurité et la réparabilité ;
+• une méthode complète pour concevoir un enseignement et formaliser les connaissances.
+
+MOTS-CLÉS
+guide, accompagnement, MEI, FabLab, équipement, IA, cybersécurité, réparabilité, séquence

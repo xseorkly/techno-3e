@@ -1,0 +1,28 @@
+SFC3h — Déclenchement d’une séquence d’instructions par un événement
+====================================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Associer un événement à une réaction programmée afin de rendre le système interactif.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : SFC3h
+Thème : SFC
+Compétence : SFC3
+Sous-thème : T12 — La programmation d’une nouvelle fonctionnalité
+Connaissance : Déclenchement d’une séquence d’instructions par un événement
+Date de mise à disposition indiquée par Bordeaux : 20/06/2024.
+
+À retenir : Associer un événement à une réaction programmée afin de rendre le système interactif.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+SFC3h, SFC, SFC3, T12 — La programmation d’une nouvelle fonctionnalité, fiche connaissance, Bordeaux, Déclenchement d’une séquence d’instructions par un événement

@@ -1,0 +1,28 @@
+CCRI3f — La structuration d’un programme : organisation, modularité et commentaires
+===================================================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Organiser un programme en parties cohérentes, utiliser la modularité et ajouter des commentaires utiles pour faciliter lecture, maintenance et collaboration.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : CCRI3f
+Thème : CCRI
+Compétence : CCRI3
+Sous-thème : T21 — La programmation des OST
+Connaissance : La structuration d’un programme : organisation, modularité et commentaires
+Date de mise à disposition indiquée par Bordeaux : 20/06/2024.
+
+À retenir : Organiser un programme en parties cohérentes, utiliser la modularité et ajouter des commentaires utiles pour faciliter lecture, maintenance et collaboration.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+CCRI3f, CCRI, CCRI3, T21 — La programmation des OST, fiche connaissance, Bordeaux, La structuration d’un programme, organisation, modularité et commentaires

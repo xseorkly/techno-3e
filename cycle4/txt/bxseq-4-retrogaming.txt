@@ -1,0 +1,17 @@
+Séquence 9 (4e) – Explorer le rétro gaming en créant un jeu vidéo (concours)
+============================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2025/06/12/exemples-de-sequences-4eme/
+
+RÉSUMÉ
+Programmer un jeu vidéo de type rétro sur une console Game Go avec Arcade Makecode.
+
+CONTENU INDEXÉ
+Dans le cadre d'un concours, les élèves programment avec Arcade Makecode un jeu vidéo façon rétro-gaming, exécutable sur une console de jeu type Game Go.
+
+MOTS-CLÉS
+jeu vidéo, rétro gaming, programmation, Arcade Makecode, concours

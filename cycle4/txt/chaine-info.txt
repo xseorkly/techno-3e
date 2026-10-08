@@ -1,0 +1,19 @@
+Chaîne d’information, capteurs, traitement et IHM
+=================================================
+
+Type : Connaissances
+Niveau : Cycle 4
+Source : Programme 2024
+Statut : official
+Source originale : https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes//16802-programme-de-technologie-c4.pdf
+
+RÉSUMÉ
+La chaîne d’information relie acquisition, traitement, communication et commande avec capteurs, microcontrôleurs et interfaces humain-machine.
+
+CONTENU INDEXÉ
+Les élèves identifient les constituants de la chaîne d’information d’un objet ou système technique : capteurs, unité de traitement/microcontrôleur, éléments d’interface humain-machine et moyens de communication. Les activités associent acquisition de données, transformation en information, programmation et interaction avec une chaîne d’énergie.
+
+Ressources : séquence RNR 5e « Chaîne d’information », station météo, parking intelligent, station de vélos, alarmes et systèmes connectés.
+
+MOTS-CLÉS
+chaîne d’information, capteur, microcontrôleur, IHM, acquisition, traitement, communication, actionneur

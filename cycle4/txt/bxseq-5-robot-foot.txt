@@ -1,0 +1,17 @@
+Séquence 11 (5e) – Programmation d'un robot pour jouer au foot
+==============================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/exemples-de-sequences-academie-bordeaux/
+
+RÉSUMÉ
+Programmer un robot Maqueen pour participer au concours Yes We Play Soccer.
+
+CONTENU INDEXÉ
+Dans le cadre du concours académique Yes We Play Soccer, les élèves programment avec Micro:bit un robot Maqueen équipé de son guide de balle pour marquer des buts.
+
+MOTS-CLÉS
+programmation robot, concours Yes We Play Soccer, robot Maqueen, Micro:bit

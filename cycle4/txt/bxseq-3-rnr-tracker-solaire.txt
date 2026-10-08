@@ -1,0 +1,17 @@
+Séquence RNR (3e) – Tracker solaire
+===================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://sti.eduscol.education.fr/ressources_pedagogiques/la-station-meteo
+
+RÉSUMÉ
+Concevoir un tracker solaire asservi qui oriente un panneau vers la lumière.
+
+CONTENU INDEXÉ
+Sur une maquette de tracker solaire pilotée par Micro:bit V2, deux capteurs de luminosité et un moteur pas à pas, les élèves programment un asservissement qui oriente le panneau vers la source lumineuse.
+
+MOTS-CLÉS
+tracker solaire, asservissement, panneau photovoltaïque, Micro:bit V2, programmation

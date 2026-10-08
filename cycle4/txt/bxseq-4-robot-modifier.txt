@@ -1,0 +1,17 @@
+Séquence 10 (4e) – Modifier un robot pour réaliser des missions (Challenge robotique de ZAP)
+============================================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2025/06/12/exemples-de-sequences-4eme/
+
+RÉSUMÉ
+Adapter un robot mBot pour répondre au cahier des charges d'un challenge robotique inter-collèges.
+
+CONTENU INDEXÉ
+En vue d'un challenge robotique de zone (ZAP), les élèves modifient un robot mBot pour qu'il réponde au cahier des charges et parcoure un circuit donné.
+
+MOTS-CLÉS
+gestion de projet, robot mBot, challenge robotique, cahier des charges

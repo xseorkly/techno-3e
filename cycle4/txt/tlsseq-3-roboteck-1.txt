@@ -1,0 +1,17 @@
+Séquence 3e – Projet Roboteck, étape 1 : concept et design
+==========================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequence-3eme-projet-roboteck-etape-1-concept-et-design
+
+RÉSUMÉ
+Concevoir le concept et le design d'un robot pour le concours académique Roboteck.
+
+CONTENU INDEXÉ
+Premier jalon du concours Roboteck (défi robotique académique de fin de cycle 4) : les élèves définissent le concept et le design de leur robot en équipe.
+
+MOTS-CLÉS
+robotique, concours Roboteck, design, conception

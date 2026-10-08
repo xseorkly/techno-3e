@@ -1,0 +1,17 @@
+Séquence (5e) – Programmer une lampe automatique
+================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie d'Amiens
+Statut : academic
+Source originale : https://sti.ac-amiens.fr/1143-liste-des-sequences-proposees.html
+
+RÉSUMÉ
+Programmer une lampe qui s'allume automatiquement grâce à un capteur.
+
+CONTENU INDEXÉ
+Les élèves programment un algorithme simple pour automatiser l'allumage d'une lampe à partir d'un capteur de luminosité ou de présence.
+
+MOTS-CLÉS
+algorithme, programmation, capteur, automatisme

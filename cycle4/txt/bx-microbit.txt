@@ -1,0 +1,19 @@
+micro:bit V1 et V2
+==================
+
+Type : Robotique / programmation
+Niveau : Cycle 4
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2023/01/10/microbit-v1-et-v2/
+
+RÉSUMÉ
+Ressources de prise en main et d’exploitation pédagogique de la carte micro:bit, de ses entrées/sorties, capteurs et extensions.
+
+CONTENU INDEXÉ
+Ressources de prise en main et d’exploitation pédagogique de la carte micro:bit, de ses entrées/sorties, capteurs et extensions.
+
+Ressource académique à adapter au contexte de l’établissement et à la progression de l’équipe.
+
+MOTS-CLÉS
+micro:bit, programmation, capteurs, actionneurs

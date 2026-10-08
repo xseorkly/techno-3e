@@ -1,0 +1,17 @@
+Académie de Toulouse — lecture simplifiée du programme 2024
+===========================================================
+
+Type : Programme
+Niveau : Cycle 4
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/programmes-technologie-2024
+
+RÉSUMÉ
+Lecture du programme structurée en trois entrées OST, SFC et CCRI, avec fichiers sources LibreOffice et Excel.
+
+CONTENU INDEXÉ
+La page rappelle le calendrier d’entrée en vigueur : 5e en 2024-2025, 4e en 2025-2026 et 3e en 2026-2027. Elle propose une lecture simplifiée du programme selon les trois thèmes OST, SFC et CCRI, ainsi que des fichiers sources LibreOffice et Excel. Elle renvoie également vers le guide d’accompagnement. Les textes du site de l’académie de Toulouse sont annoncés sous licence Etalab 2.0 sauf mention contraire.
+
+MOTS-CLÉS
+Toulouse, OST, SFC, CCRI, Excel, LibreOffice, programme 2024

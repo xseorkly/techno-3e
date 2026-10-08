@@ -1,0 +1,17 @@
+Séquence 11 (4e) – Fabriquer un prototype de robot (Challenge robotique de ZAP)
+===============================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2025/06/12/exemples-de-sequences-4eme/
+
+RÉSUMÉ
+Fabriquer au FabLab les éléments d'un prototype de robot pour le challenge robotique.
+
+CONTENU INDEXÉ
+Les élèves utilisent les machines du FabLab (impression 3D, découpe) et choisissent des matériaux pour fabriquer un prototype de robot destiné au challenge robotique de zone.
+
+MOTS-CLÉS
+fabrication, FabLab, prototype, robot, challenge robotique

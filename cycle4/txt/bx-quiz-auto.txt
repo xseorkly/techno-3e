@@ -1,0 +1,19 @@
+Quiz auto-correctifs
+====================
+
+Type : Quiz
+Niveau : Cycle 4
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2026/01/04/quiz-auto-correctifs/
+
+RÉSUMÉ
+Quiz auto-correctifs pour l’entraînement et la vérification rapide de connaissances du programme.
+
+CONTENU INDEXÉ
+Quiz auto-correctifs pour l’entraînement et la vérification rapide de connaissances du programme.
+
+Ressource académique à adapter au contexte de l’établissement et à la progression de l’équipe.
+
+MOTS-CLÉS
+quiz, auto-correctif, évaluation formative

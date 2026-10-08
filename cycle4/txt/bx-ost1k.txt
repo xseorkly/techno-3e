@@ -1,0 +1,28 @@
+OST1k — Incidences liées au stockage, au flux des données et aux réseaux d’information
+======================================================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Relier usages numériques, stockage, transferts de données et infrastructures réseau à leurs besoins matériels, énergétiques et environnementaux.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : OST1k
+Thème : OST
+Compétence : OST1
+Sous-thème : T2 — Usages et impacts sociétaux du numérique
+Connaissance : Incidences liées au stockage, au flux des données et aux réseaux d’information
+Date de mise à disposition indiquée par Bordeaux : 18/06/2024.
+
+À retenir : Relier usages numériques, stockage, transferts de données et infrastructures réseau à leurs besoins matériels, énergétiques et environnementaux.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+OST1k, OST, OST1, T2 — Usages et impacts sociétaux du numérique, fiche connaissance, Bordeaux, Incidences liées au stockage, au flux des données et aux réseaux d’information

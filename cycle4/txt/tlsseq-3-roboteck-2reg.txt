@@ -1,0 +1,17 @@
+Séquence 3e – Projet Roboteck, étape 2 : analyse du règlement
+=============================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequence-3eme-projet-roboteck-etape-2-analyse-du-reglement
+
+RÉSUMÉ
+Analyser le règlement du concours Roboteck pour cadrer le projet.
+
+CONTENU INDEXÉ
+Les élèves étudient en détail le règlement du concours académique Roboteck afin d'en tirer les contraintes de conception de leur robot.
+
+MOTS-CLÉS
+robotique, concours Roboteck, règlement, cahier des charges

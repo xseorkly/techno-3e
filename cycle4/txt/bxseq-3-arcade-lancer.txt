@@ -1,0 +1,17 @@
+Projet CCRI – Borne d'arcade : lancer le projet (3e)
+====================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2026/06/19/exemples-de-sequences-3eme/
+
+RÉSUMÉ
+Lancer un projet de conception d'une borne d'arcade de salon avec Raspberry Pi.
+
+CONTENU INDEXÉ
+Premier volet d'un projet complet : les élèves définissent le cahier des charges d'une borne d'arcade de salon fonctionnant sur Raspberry Pi 0 WH, avec écran, joystick et boutons arcade.
+
+MOTS-CLÉS
+borne d'arcade, Raspberry Pi, gestion de projet, MakeCode Arcade

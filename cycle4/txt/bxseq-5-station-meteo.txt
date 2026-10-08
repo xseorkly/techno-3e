@@ -1,0 +1,17 @@
+Séquence 7 (5e) – Le fonctionnement d'une station météo connectée
+=================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/exemples-de-sequences-academie-bordeaux/
+
+RÉSUMÉ
+Découvrir la chaîne d'information et la structuration des données à partir d'une station météo connectée.
+
+CONTENU INDEXÉ
+Une station météo associée à une carte Weather:bit permet d'identifier les constituants de la chaîne d'information et la structuration des données recueillies par les capteurs.
+
+MOTS-CLÉS
+station météo, chaîne d'information, données, Weather:bit, Vittascience

@@ -1,0 +1,17 @@
+Projet CCRI – Jeu de société sur le développement durable : lancer le projet (3e)
+=================================================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2026/06/19/exemples-de-sequences-3eme/
+
+RÉSUMÉ
+Lancer un projet de conception d'un jeu de société pédagogique sur le développement durable.
+
+CONTENU INDEXÉ
+Premier volet d'un projet complet : les élèves conçoivent le cahier des charges d'un jeu de société sur le thème du développement durable, avant de le fabriquer, le tester et y intégrer une part de programmation.
+
+MOTS-CLÉS
+jeu de société, développement durable, gestion de projet, conception

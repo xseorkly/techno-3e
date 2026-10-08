@@ -1,0 +1,17 @@
+Séquence découverte du robot mBot
+=================================
+
+Type : Séquences
+Niveau : Cycle 4
+Source : Site personnel — Gilles Ruscassié
+Statut : personal
+Source originale : https://disciplines.ac-toulouse.fr/sii/sites/default/files/techno_college/cycle4/sequences_mutualisees/mbot.zip
+
+RÉSUMÉ
+Séquence de découverte du robot mBot, mutualisée par un enseignant sur le site académique de Toulouse.
+
+CONTENU INDEXÉ
+Gilles Ruscassié propose une séquence de découverte du robot mBot, téléchargeable depuis la page de mutualisation du site académique de Toulouse.
+
+MOTS-CLÉS
+robot mBot, découverte, robotique

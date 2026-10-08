@@ -1,0 +1,17 @@
+Séquence (4e) – Garer sa voiture pour moins polluer (parking intelligent, réalité virtuelle)
+============================================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie d'Orléans-Tours
+Statut : academic
+Source originale : https://pedagogie.ac-orleans-tours.fr/technologie/productions_academiques_cycle_3_et_cycle_4/
+
+RÉSUMÉ
+Concevoir la maquette d'un parking intelligent et explorer la réalité virtuelle pour limiter la pollution.
+
+CONTENU INDEXÉ
+Trois séquences proposent aux élèves de répondre à des problématiques de stationnement et de pollution, en concevant la maquette d'un parking intelligent et en explorant la réalité virtuelle.
+
+MOTS-CLÉS
+parking intelligent, réalité virtuelle, pollution, mobilité

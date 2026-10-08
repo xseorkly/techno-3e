@@ -1,0 +1,17 @@
+Une séance, deux points de vue : enseignant et élève
+====================================================
+
+Type : Démarche
+Niveau : Cycle 4
+Source : Ressource personnelle (formation ZESE)
+Statut : personal
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2019/02/22/creer-des-seances/
+
+RÉSUMÉ
+Schéma qui met en regard la logique de construction d'une séance par l'enseignant et la manière dont elle est vécue par l'élève, pour vérifier la cohérence entre les deux.
+
+CONTENU INDEXÉ
+Outil de formation qui superpose deux lectures d'une même séance. Côté enseignant : partir des compétences et connaissances du programme à faire acquérir, prévoir une structuration des connaissances (synthèse), puis une évaluation sommative centrée sur ces compétences et connaissances, en tenant compte des repères de progressivité. Côté élève : la séance commence par un problème technologique posé qu'il faut s'approprier, émettre des hypothèses et chercher à résoudre, à travers des activités d'apprentissage et des supports (investigation, réflexion, action, évaluations formatives, bilan). L'intérêt de ce double regard est de vérifier qu'une séance pensée « en descendant » depuis le programme reste bien vécue « en montant » comme une résolution de problème par l'élève.
+
+MOTS-CLÉS
+séance, démarche, problème technologique, structuration des connaissances, formation

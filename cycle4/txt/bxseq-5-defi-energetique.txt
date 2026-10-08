@@ -1,0 +1,17 @@
+Séquence 6 (5e) – Un défi énergétique en zone isolée (alimenter un habitat)
+===========================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/exemples-de-sequences-academie-bordeaux/
+
+RÉSUMÉ
+Concevoir l'alimentation en énergie d'un habitat isolé à l'aide d'une maquette avec panneaux solaires et éolienne.
+
+CONTENU INDEXÉ
+Sur une maquette d'habitat équipée d'une carte Solar:bit, les élèves identifient les constituants de la chaîne d'énergie et comparent panneaux solaires, éolienne et dynamo pour alimenter un site isolé.
+
+MOTS-CLÉS
+chaîne d'énergie, énergie renouvelable, maquette habitat, Solar:bit, Microbit

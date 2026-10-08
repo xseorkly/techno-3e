@@ -1,0 +1,28 @@
+OST1j — Ordres de grandeur de la taille des fichiers image, son et vidéo
+========================================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Comparer les ordres de grandeur des tailles de fichiers pour comprendre pourquoi une image, un son et surtout une vidéo n’occupent pas le même espace de stockage.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : OST1j
+Thème : OST
+Compétence : OST1
+Sous-thème : T2 — Usages et impacts sociétaux du numérique
+Connaissance : Ordres de grandeur de la taille des fichiers image, son et vidéo
+Date de mise à disposition indiquée par Bordeaux : 18/06/2024.
+
+À retenir : Comparer les ordres de grandeur des tailles de fichiers pour comprendre pourquoi une image, un son et surtout une vidéo n’occupent pas le même espace de stockage.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+OST1j, OST, OST1, T2 — Usages et impacts sociétaux du numérique, fiche connaissance, Bordeaux, Ordres de grandeur de la taille des fichiers image, son et vidéo

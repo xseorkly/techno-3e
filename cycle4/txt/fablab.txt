@@ -1,0 +1,21 @@
+FabLab, prototypage et fabrication
+==================================
+
+Type : Équipement
+Niveau : Cycle 4
+Source : Guide d’accompagnement 2024
+Statut : official
+Source originale : https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes/college/cycle-4/17103-guide-daccompagnement-du-programme-de-technologie-c4-mai-2024.pdf
+
+RÉSUMÉ
+Le guide présente le FabLab comme un espace flexible pour les projets, le prototypage, la fabrication et le développement de compétences collaboratives.
+
+CONTENU INDEXÉ
+Le FabLab est présenté comme un espace de technologie équipé de moyens de conception, fabrication et prototypage, pouvant être organisé selon une logique de classe flexible. Il facilite la réalisation de projets, la coopération et la créativité.
+
+Le guide insiste sur la sécurité des élèves et la conformité des équipements. Parmi les moyens de fabrication numérique recommandés figurent notamment l’impression 3D et la découpe laser, complétées par des outils de prototypage électronique, des cartes programmables, capteurs, actionneurs et modules de communication.
+
+Le FabLab peut également soutenir les activités de dépannage/réparation et la fabrication d’une pièce de remplacement.
+
+MOTS-CLÉS
+FabLab, fabrication, prototypage, impression 3D, découpe laser, sécurité, classe flexible, microcontrôleur

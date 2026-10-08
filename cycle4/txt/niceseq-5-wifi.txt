@@ -1,0 +1,17 @@
+Séquence (5e) – Comment sont cryptées les données de mon réseau Wi-Fi ?
+=======================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Nice
+Statut : academic
+Source originale : https://www.pedagogie.ac-nice.fr/sii/enseigner/college/
+
+RÉSUMÉ
+Comprendre les principes du chiffrement des données sur un réseau Wi-Fi domestique.
+
+CONTENU INDEXÉ
+Cette séquence récente (avril 2026) fait découvrir aux élèves les principes du chiffrement qui protège les données échangées sur leur réseau Wi-Fi personnel.
+
+MOTS-CLÉS
+cybersécurité, chiffrement, réseau Wi-Fi, données

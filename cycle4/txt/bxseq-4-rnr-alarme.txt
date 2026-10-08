@@ -1,0 +1,17 @@
+Séquence RNR (4e) – Découverte et analyse d'un système connecté : alarme et gestion de l'énergie
+================================================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://sti.eduscol.education.fr/ressources_pedagogiques/decouverte-et-analyse-dun-systeme-connecte-alarme-et-gestion-de-lenergie
+
+RÉSUMÉ
+Version publiée au RNR national : découverte d'un système d'alarme connecté avec capteurs et actionneurs Tapo.
+
+CONTENU INDEXÉ
+Composée de trois séquences, cette ressource publiée sur le RNR fait découvrir et analyser un système connecté (alarme, gestion de l'énergie) à l'aide d'une tablette et d'un kit Tapo (hub, capteur, actionneurs).
+
+MOTS-CLÉS
+système connecté, alarme, gestion de l'énergie, RNR, Tapo

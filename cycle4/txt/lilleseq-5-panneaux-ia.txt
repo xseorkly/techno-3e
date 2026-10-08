@@ -1,0 +1,17 @@
+Séquence (5e) – Reconnaissance des panneaux de circulation par IA
+=================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Lille
+Statut : academic
+Source originale : https://pedagogie.ac-lille.fr/technologie/2024/
+
+RÉSUMÉ
+Utiliser la reconnaissance d'image pour identifier automatiquement des panneaux de signalisation.
+
+CONTENU INDEXÉ
+Les élèves utilisent des techniques de reconnaissance d'image par intelligence artificielle pour identifier automatiquement des panneaux du code de la route.
+
+MOTS-CLÉS
+intelligence artificielle, reconnaissance d'image, panneaux de signalisation, code de la route

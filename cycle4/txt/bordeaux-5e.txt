@@ -1,0 +1,17 @@
+Académie de Bordeaux — exemples de séquences 5e
+===============================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/exemples-de-sequences-academie-bordeaux/
+
+RÉSUMÉ
+Séquences 5e mutualisées et régulièrement mises à jour, à adapter au matériel et à la progression locale.
+
+CONTENU INDEXÉ
+Exemples : exploiter le réseau informatique avec le matériel du collège et Filius ; usages du numérique ; évolution des OST ; interaction d’un objet avec son environnement ; critères de choix ; chaînes d’énergie ; station météo ; réparation et impression 3D ; programmation micro:bit ; conception/fabrication d’un prototype ; robotique. Le site rappelle que les séquences doivent être adaptées aux équipements, aux élèves et à la progression de l’équipe.
+
+MOTS-CLÉS
+Bordeaux, 5e, Filius, réseau, micro:bit, station météo, robotique, impression 3D

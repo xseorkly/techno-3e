@@ -1,0 +1,21 @@
+Cybersécurité, données personnelles et cyberviolence
+====================================================
+
+Type : Connaissances
+Niveau : Cycle 4
+Source : Programme + guide 2024
+Statut : official
+Source originale : https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes//16802-programme-de-technologie-c4.pdf
+
+RÉSUMÉ
+Le programme associe sécurité numérique, protection des données, authentification, propriété intellectuelle, traces numériques et prévention de la cyberviolence.
+
+CONTENU INDEXÉ
+Les élèves apprennent à identifier et appliquer des règles de sécurisation d’un environnement numérique : protection des données personnelles, identification et authentification, traces numériques (cookies/témoins de connexion, géolocalisation), respect de la propriété intellectuelle. Le programme aborde aussi la cyberviolence, l’usurpation d’identité et les usages détournés.
+
+Le guide inscrit ces apprentissages dans la citoyenneté numérique et la responsabilité individuelle.
+
+Ressources associées : RNR 5e « Fichiers et sécurité informatique » et une séquence sur les risques de la transformation numérique ; RNR 4e « Cybersécurité et sécurisation de la communication entre deux robots », usage raisonné des objets communicants et cookies ; RNR 3e « Assistant vocal » ; fiches Toulouse et Bordeaux sur cybersécurité/cyberviolence.
+
+MOTS-CLÉS
+cybersécurité, cyberviolence, données personnelles, cookies, authentification, identité numérique, géolocalisation, RFID, DDoS

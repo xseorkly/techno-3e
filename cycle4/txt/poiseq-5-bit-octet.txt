@@ -1,0 +1,17 @@
+Séquence (5e) – Extensions de fichiers, bit, octet et sécurité des données
+==========================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Poitiers
+Statut : academic
+Source originale : https://eduscol.education.fr/sti/ressources_pedagogiques/sequences-pour-la-5eme-et-le-programme-2024
+
+RÉSUMÉ
+Découvrir les extensions de fichiers, les unités bit/octet et les bases de la sécurité des données.
+
+CONTENU INDEXÉ
+Aurélien Michaud et Bruce Paillat font découvrir aux élèves les extensions de fichiers, le bit, l'octet et ses multiples, ainsi que les bases de la sécurité des données.
+
+MOTS-CLÉS
+bit, octet, extension de fichier, sécurité informatique

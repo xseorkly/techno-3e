@@ -1,0 +1,19 @@
+Tinkercad Classrooms
+====================
+
+Type : Modélisation
+Niveau : Cycle 4
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2020/04/01/tinkercad-classrooms-gerer-ses-classes-a-distance/
+
+RÉSUMÉ
+Ressources pour gérer des classes et utiliser Tinkercad en modélisation 3D et prototypage.
+
+CONTENU INDEXÉ
+Ressources pour gérer des classes et utiliser Tinkercad en modélisation 3D et prototypage.
+
+Ressource académique à adapter au contexte de l’établissement et à la progression de l’équipe.
+
+MOTS-CLÉS
+Tinkercad, 3D, classes, prototypage

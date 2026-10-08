@@ -1,0 +1,17 @@
+Académie de Toulouse — séquences mutualisées
+============================================
+
+Type : Séquences
+Niveau : Cycle 4
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequences-mutualisees
+
+RÉSUMÉ
+Banque mutualisée filtrable par niveau, compétences du programme et CRCN.
+
+CONTENU INDEXÉ
+La banque académique permet de croiser niveau (5e/4e/3e), compétences du programme et CRCN. Elle propose des études et projets sur la robotique, l’IA, la réparabilité, le réseau local, les données, les systèmes connectés, l’énergie, l’environnement et la conception. Elle sert de complément aux ressources nationales RNR.
+
+MOTS-CLÉS
+Toulouse, séquences, CRCN, robotique, IA, réseau, réparabilité, données, énergie

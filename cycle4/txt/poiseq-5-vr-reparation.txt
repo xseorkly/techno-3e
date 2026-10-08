@@ -1,0 +1,17 @@
+Séquence (5e) – Atelier de Réparation Virtuelle
+===============================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Poitiers
+Statut : academic
+Source originale : https://eduscol.education.fr/sti/ressources_pedagogiques/sequences-pour-la-5eme-et-le-programme-2024
+
+RÉSUMÉ
+Explorer et résoudre une panne dans un environnement de réalité virtuelle.
+
+CONTENU INDEXÉ
+Franck Rotrou propose une séquence conçue pour le programme 2024 qui invite les élèves dans le monde de la réalité virtuelle (VR) pour explorer et résoudre une situation de panne.
+
+MOTS-CLÉS
+réalité virtuelle, réparation, VR, dépannage

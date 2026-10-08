@@ -1,0 +1,17 @@
+Séquence 4e – Comment préserver nos ressources marines ?
+========================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequence-4eme-comment-preserver-nos-ressources-marines
+
+RÉSUMÉ
+Découvrir le principe du machine learning en entraînant un modèle d'IA sur un exemple de préservation marine.
+
+CONTENU INDEXÉ
+À travers un exemple concret lié à la préservation des ressources marines, les élèves utilisent, entraînent puis renforcent un modèle d'intelligence artificielle pour découvrir le principe du machine learning.
+
+MOTS-CLÉS
+machine learning, intelligence artificielle, environnement marin, modèle IA

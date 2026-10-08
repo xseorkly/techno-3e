@@ -1,0 +1,21 @@
+Algorithmique et programmation
+==============================
+
+Type : Connaissances
+Niveau : Cycle 4
+Source : Programme 2024
+Statut : official
+Source originale : https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes//16802-programme-de-technologie-c4.pdf
+
+RÉSUMÉ
+La programmation progresse des blocs vers des structures plus riches et une initiation au textuel en fin de 3e.
+
+CONTENU INDEXÉ
+Le programme mobilise variables, opérateurs arithmétiques et logiques, conditions, boucles, listes, événements, entrées/sorties, séquences d’instructions et modularité. Les élèves modifient puis conçoivent des programmes liés à une fonctionnalité réelle d’un OST.
+
+La programmation graphique par blocs est largement mobilisée ; un lien avec la programmation textuelle est prévu en fin de 3e. Des ressources 3e proposent une initiation à MicroPython.
+
+Supports fréquents : micro:bit, mBot, station météo, serrures/portes, parking intelligent, robots, capteurs et systèmes connectés.
+
+MOTS-CLÉS
+programmation, algorithme, variable, condition, boucle, liste, événement, blocs, MicroPython, micro:bit, mBot

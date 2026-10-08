@@ -1,0 +1,17 @@
+Séquence (5e) – Un radar sonore pour l'accessibilité
+====================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie d'Amiens
+Statut : academic
+Source originale : https://sti.ac-amiens.fr/1143-liste-des-sequences-proposees.html
+
+RÉSUMÉ
+Concevoir un radar sonore à capteur ultrason pour aider les personnes malvoyantes.
+
+CONTENU INDEXÉ
+En lien avec la technologie et le handicap, les élèves conçoivent un radar sonore à base de capteur ultrason pour faciliter le déplacement des personnes malvoyantes.
+
+MOTS-CLÉS
+handicap, accessibilité, capteur ultrason, inclusion

@@ -1,0 +1,17 @@
+Séquence (4e) – Comment les données d'entraînement influencent les prédictions ?
+================================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Nice
+Statut : academic
+Source originale : https://www.pedagogie.ac-nice.fr/sii/enseigner/college/
+
+RÉSUMÉ
+Comprendre comment la qualité des données d'entraînement influe sur les prédictions d'un modèle d'IA.
+
+CONTENU INDEXÉ
+Cette séquence explore comment les données utilisées pour entraîner un modèle d'intelligence artificielle influencent la qualité de ses prédictions.
+
+MOTS-CLÉS
+intelligence artificielle, apprentissage automatique, données d'entraînement

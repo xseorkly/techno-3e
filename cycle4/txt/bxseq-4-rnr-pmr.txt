@@ -1,0 +1,17 @@
+Séquence RNR (4e) – Système d'assistance pour personnes à mobilité réduite (PMR)
+================================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://sti.eduscol.education.fr/ressources_pedagogiques/comment-ameliorer-un-dispositif-douverture-de-porte-de-maison-pour-personne
+
+RÉSUMÉ
+Version publiée au RNR national : concevoir un dispositif d'ouverture de porte pour personne à mobilité réduite.
+
+CONTENU INDEXÉ
+Avec une maquette équipée d'une carte Micro:bit V2, de capteurs/actionneurs Grove, d'une caméra Huskylens et de pièces imprimées en 3D, les élèves conçoivent un système d'assistance à l'ouverture de porte pour personnes à mobilité réduite.
+
+MOTS-CLÉS
+handicap, accessibilité, PMR, Micro:bit V2, Huskylens, impression 3D

@@ -1,0 +1,28 @@
+SFC1j — Vocabulaire des données : objet, descripteur, collection, type et données structurées
+=============================================================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Employer le vocabulaire permettant de décrire un jeu de données et distinguer différents types comme texte, nombre et booléen.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : SFC1j
+Thème : SFC
+Compétence : SFC1
+Sous-thème : T9 — Structuration et traitement des données
+Connaissance : Vocabulaire des données : objet, descripteur, collection, type et données structurées
+Date de mise à disposition indiquée par Bordeaux : 06/03/2025.
+
+À retenir : Employer le vocabulaire permettant de décrire un jeu de données et distinguer différents types comme texte, nombre et booléen.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+SFC1j, SFC, SFC1, T9 — Structuration et traitement des données, fiche connaissance, Bordeaux, Vocabulaire des données, objet, descripteur, collection, type et données structurées

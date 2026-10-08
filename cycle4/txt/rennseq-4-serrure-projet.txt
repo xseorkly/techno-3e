@@ -1,0 +1,17 @@
+Séquence (4e) – Projet maquette de serrure connectée (9 séances)
+================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Rennes
+Statut : academic
+Source originale : https://sti.eduscol.education.fr/ressources_pedagogiques/sequences-pour-la-4eme-la-rentree-2025
+
+RÉSUMÉ
+Mener un projet complet de la présentation à la réalisation d'une maquette de serrure connectée.
+
+CONTENU INDEXÉ
+Séverin Druart et Guillaume Debert proposent un projet en 9 séances (9 heures), décomposé en 5 parties allant de la présentation du projet à la réalisation d'une maquette de serrure connectée.
+
+MOTS-CLÉS
+serrure connectée, projet long, maquette, programmation

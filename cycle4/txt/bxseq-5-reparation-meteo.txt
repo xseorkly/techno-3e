@@ -1,0 +1,17 @@
+Séquence 8 (5e) – La réparation de la fixation d'une station météo
+==================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/exemples-de-sequences-academie-bordeaux/
+
+RÉSUMÉ
+Réparer et réimprimer en 3D une pièce de fixation cassée de la station météo.
+
+CONTENU INDEXÉ
+Confrontés à une fixation de station météo endommagée, les élèves diagnostiquent la panne puis conçoivent et impriment en 3D une pièce de remplacement (Tinkercad + imprimante 3D).
+
+MOTS-CLÉS
+réparabilité, dépannage, impression 3D, Tinkercad, station météo

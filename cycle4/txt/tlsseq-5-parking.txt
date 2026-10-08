@@ -1,0 +1,17 @@
+Séquence 5e – Comment connaître le nombre de places disponibles dans un parking ?
+=================================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequence-5eme-comment-connaitre-le-nombre-de-places-disponibles-dans-un-parking
+
+RÉSUMÉ
+Analyser et améliorer le programme de gestion intelligente d'un parking, avec son impact environnemental.
+
+CONTENU INDEXÉ
+Les élèves analysent le fonctionnement d'un système de comptage de places de parking, améliorent le programme associé et évaluent l'impact environnemental de cette solution technique.
+
+MOTS-CLÉS
+parking intelligent, capteurs, impact environnemental, programmation

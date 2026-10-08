@@ -1,0 +1,28 @@
+SFC1d — Les mécanismes de transmission et de transformation de mouvements
+=========================================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Comparer engrenages, courroies et chaînes et comprendre comment un mécanisme transmet ou transforme un mouvement, éventuellement en modifiant vitesse et couple.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : SFC1d
+Thème : SFC
+Compétence : SFC1
+Sous-thème : T6 — Fonctions, solutions, constituants de la chaîne d’énergie
+Connaissance : Les mécanismes de transmission et de transformation de mouvements
+Date de mise à disposition indiquée par Bordeaux : 19/06/2024.
+
+À retenir : Comparer engrenages, courroies et chaînes et comprendre comment un mécanisme transmet ou transforme un mouvement, éventuellement en modifiant vitesse et couple.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+SFC1d, SFC, SFC1, T6 — Fonctions, solutions, constituants de la chaîne d’énergie, fiche connaissance, Bordeaux, Les mécanismes de transmission et de transformation de mouvements

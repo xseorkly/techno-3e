@@ -1,0 +1,19 @@
+Filius — simulation de réseaux
+==============================
+
+Type : Logiciel
+Niveau : Cycle 4
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2019/09/25/filius-un-logiciel-de-simulation-de-reseau-simple-et-accessible/
+
+RÉSUMÉ
+Ressource consacrée à Filius pour créer et simuler des réseaux locaux et Internet, configurer des adresses IP et tester les communications.
+
+CONTENU INDEXÉ
+Ressource consacrée à Filius pour créer et simuler des réseaux locaux et Internet, configurer des adresses IP et tester les communications.
+
+Ressource académique à adapter au contexte de l’établissement et à la progression de l’équipe.
+
+MOTS-CLÉS
+Filius, réseau, IP, simulation, ping

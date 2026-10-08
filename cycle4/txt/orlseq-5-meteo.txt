@@ -1,0 +1,17 @@
+Séquence (5e) – Station météo connectée (2 séquences)
+=====================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie d'Orléans-Tours
+Statut : academic
+Source originale : https://pedagogie.ac-orleans-tours.fr/technologie/productions_academiques_cycle_3_et_cycle_4/
+
+RÉSUMÉ
+Explorer le parcours des données d'une station météo connectée, de la collecte à l'affichage.
+
+CONTENU INDEXÉ
+Matthieu Pasdeloup propose deux séquences où les élèves explorent le parcours des données d'une station météo, de la collecte par les capteurs jusqu'à l'affichage sur une application smartphone.
+
+MOTS-CLÉS
+station météo, capteurs, IoT, architecture réseau, données

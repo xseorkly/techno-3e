@@ -1,0 +1,28 @@
+OST1b — La fonction technique, le principe technique
+====================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+La fonction technique exprime ce que doit assurer une partie du système ; le principe technique décrit le phénomène ou la solution générale utilisée pour réaliser cette fonction.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : OST1b
+Thème : OST
+Compétence : OST1
+Sous-thème : T1 — L’évolution des OST
+Connaissance : La fonction technique, le principe technique
+Date de mise à disposition indiquée par Bordeaux : 17/06/2024.
+
+À retenir : La fonction technique exprime ce que doit assurer une partie du système ; le principe technique décrit le phénomène ou la solution générale utilisée pour réaliser cette fonction.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+OST1b, OST, OST1, T1 — L’évolution des OST, fiche connaissance, Bordeaux, La fonction technique, le principe technique

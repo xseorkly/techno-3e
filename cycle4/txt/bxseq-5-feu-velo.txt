@@ -1,0 +1,17 @@
+Séquence 9 bis (5e) – La programmation d'un feu arrière de vélo intelligent
+===========================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/exemples-de-sequences-academie-bordeaux/
+
+RÉSUMÉ
+Programmer un feu arrière de vélo qui s'allume automatiquement selon les conditions de luminosité.
+
+CONTENU INDEXÉ
+Sur le même principe que le lampadaire intelligent, les élèves programment avec Micro:bit et Makecode un feu arrière de vélo qui réagit à son environnement pour améliorer la sécurité du cycliste.
+
+MOTS-CLÉS
+programmation, vélo connecté, sécurité routière, Micro:bit, Makecode

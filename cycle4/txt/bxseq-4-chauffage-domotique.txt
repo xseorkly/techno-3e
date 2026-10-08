@@ -1,0 +1,17 @@
+Séquence 4 (4e) – Gestion du chauffage avec un système domotique
+================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2025/06/12/exemples-de-sequences-4eme/
+
+RÉSUMÉ
+Piloter un radiateur électrique connecté pour comprendre le choix d'un OST en contexte de développement durable.
+
+CONTENU INDEXÉ
+Avec un radiateur électrique, un capteur de température et un hub Tapo, les élèves étudient la performance et le choix d'un système de chauffage domotique dans une logique de développement durable.
+
+MOTS-CLÉS
+domotique, chauffage connecté, développement durable, performance, Tapo

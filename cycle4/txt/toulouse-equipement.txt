@@ -1,0 +1,17 @@
+Académie de Toulouse — guide d’équipement laboratoire 2024
+==========================================================
+
+Type : Équipement
+Niveau : Cycle 4
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/Guide-Equip-2024
+
+RÉSUMÉ
+Guide récent d’aménagement et d’équipement du laboratoire, avec une version « Les essentiels ».
+
+CONTENU INDEXÉ
+Le guide vise l’actualisation des laboratoires au regard du programme 2024. Il s’adresse aux équipes enseignantes et aux décideurs chargés d’équiper les espaces. Les priorités portent sur la mesure et l’acquisition de données, l’environnement informatique, les logiciels de modélisation/simulation, les cartes programmables et capteurs/actionneurs, ainsi que les équipements de fabrication et de prototypage. Une version « Les essentiels » aide à prioriser les achats lorsqu’un laboratoire est déjà partiellement équipé.
+
+MOTS-CLÉS
+Toulouse, équipement, laboratoire, essentiels, capteurs, simulation, FabLab, programmation

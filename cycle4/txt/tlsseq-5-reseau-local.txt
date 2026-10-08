@@ -1,0 +1,17 @@
+Séquence 5e – Comment faire circuler les informations dans un réseau local ?
+============================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequence-5eme-comment-faire-circuler-les-informations-dans-un-reseau-local
+
+RÉSUMÉ
+Visiter le réseau réel du collège puis le reproduire virtuellement avec Filius pour comprendre l'adressage IP.
+
+CONTENU INDEXÉ
+Après une visite du réseau réel du collège pour en repérer les éléments, les élèves reproduisent virtuellement ce schéma avec Filius afin d'aborder les notions d'adresse IP et de communication.
+
+MOTS-CLÉS
+réseau local, Filius, adresse IP, circulation de l'information

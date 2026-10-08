@@ -1,0 +1,19 @@
+RNR Éduscol STI — 26 séquences pour la 5e
+=========================================
+
+Type : Séquences
+Niveau : 5e
+Source : RNR Éduscol STI
+Statut : national
+Source originale : https://sti.eduscol.education.fr/ressources_pedagogiques/sequences-pour-la-5eme-et-le-programme-2024
+
+RÉSUMÉ
+Banque nationale de 26 séquences 5e alignées sur le programme 2024, accompagnée d’un tableau de progression.
+
+CONTENU INDEXÉ
+Le RNR annonce 26 séquences pour la 5e. Elles couvrent notamment : trottinette (assemblage, choix, réparation), voiture autonome avec mBot, tri de plastiques, atelier de réparation virtuelle, réseau informatique, réduction des émissions de CO₂, régulation thermique d’une salle, seconde vie des objets, réparation d’un portail automatique, parking intelligent, installation solaire, fichiers et sécurité informatique, minuteur programmable, matériaux, robot suiveur de ligne, IA et reconnaissance, risques du numérique, éclairage automatisé, chaîne d’énergie, chaîne d’information, mesure de distance avec mBot, station météo, indice de réparabilité d’une trottinette, parking intelligent pour trottinettes, robot livreur et amélioration d’un éclairage d’escalier.
+
+Le tableau de progression permet de choisir les séquences en fonction des attendus travaillés.
+
+MOTS-CLÉS
+5e, 26 séquences, RNR, trottinette, mBot, réseau, CO2, réparation, parking, solaire, cybersécurité, IA, chaîne d’énergie, chaîne d’information, station météo

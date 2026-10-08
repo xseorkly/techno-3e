@@ -1,0 +1,17 @@
+Séquence 4e – Jeu vidéo, partie 2 : recherche des solutions
+===========================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequence-4eme-jeu-video-partie-2-recherche-des-solutions
+
+RÉSUMÉ
+Rechercher des images libres de droits et programmer les premiers éléments du jeu vidéo.
+
+CONTENU INDEXÉ
+Les élèves recherchent des images libres de droits en lien avec la thématique de leur jeu vidéo et poursuivent le développement en se répartissant les tâches restantes.
+
+MOTS-CLÉS
+jeu vidéo, images libres de droits, programmation, droit d'auteur

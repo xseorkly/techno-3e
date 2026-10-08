@@ -1,0 +1,28 @@
+SFC1p — Le rôle et la structure d’une adresse IP et des tables de routage
+=========================================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Une adresse IP identifie un équipement sur un réseau ; les tables de routage aident les routeurs à choisir le chemin des paquets vers leur destination.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : SFC1p
+Thème : SFC
+Compétence : SFC1
+Sous-thème : T10 — La circulation de l’information dans un réseau informatique
+Connaissance : Le rôle et la structure d’une adresse IP et des tables de routage
+Date de mise à disposition indiquée par Bordeaux : 17/06/2024.
+
+À retenir : Une adresse IP identifie un équipement sur un réseau ; les tables de routage aident les routeurs à choisir le chemin des paquets vers leur destination.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+SFC1p, SFC, SFC1, T10 — La circulation de l’information dans un réseau informatique, fiche connaissance, Bordeaux, Le rôle et la structure d’une adresse IP et des tables de routage

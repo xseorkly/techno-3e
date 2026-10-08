@@ -1,0 +1,28 @@
+SFC1m — Mise en forme et traitement de données dans un tableur
+==============================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Utiliser un tableur pour organiser, calculer, filtrer, trier et représenter des données afin de répondre à une question.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : SFC1m
+Thème : SFC
+Compétence : SFC1
+Sous-thème : T9 — Structuration et traitement des données
+Connaissance : Mise en forme et traitement de données dans un tableur
+Date de mise à disposition indiquée par Bordeaux : 19/06/2024.
+
+À retenir : Utiliser un tableur pour organiser, calculer, filtrer, trier et représenter des données afin de répondre à une question.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+SFC1m, SFC, SFC1, T9 — Structuration et traitement des données, fiche connaissance, Bordeaux, Mise en forme et traitement de données dans un tableur

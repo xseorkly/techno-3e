@@ -1,0 +1,17 @@
+Séquence (5e) – Réparer une barrière intelligente de parking à vélo/trottinette
+===============================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Rennes
+Statut : academic
+Source originale : https://eduscol.education.fr/sti/ressources_pedagogiques/sequences-pour-la-5eme-et-le-programme-2024
+
+RÉSUMÉ
+Diagnostiquer et réparer, en fabriquant une pièce, une barrière automatisée de parking à vélos.
+
+CONTENU INDEXÉ
+Guillaume Debert et Séverin Druart proposent une séquence de 5 séances où les élèves réparent une barrière « intelligente » de parking à vélo et à trottinette en identifiant visuellement les pannes.
+
+MOTS-CLÉS
+réparabilité, dépannage, parking à vélos, capteur, fabrication de pièce

@@ -1,0 +1,17 @@
+Académie de Poitiers — InfoTechno #03 : c'est quoi l'indice de réparabilité ?
+=============================================================================
+
+Type : Connaissances
+Niveau : Cycle 4
+Source : Académie de Poitiers
+Statut : academic
+Source originale : https://etab.ac-poitiers.fr/coll-celles-sur-belle/spip.php?article2570
+
+RÉSUMÉ
+Fiche courte expliquant l'indice de réparabilité introduit par la loi AGEC : note sur 10, code couleur du rouge au vert, critères pris en compte (documentation, démontabilité, disponibilité des pièces, prix).
+
+CONTENU INDEXÉ
+Fiche « InfoTechno » de l'académie de Poitiers : depuis 2021, l'indice de réparabilité est affiché sur certains produits (smartphones, ordinateurs portables, lave-linge) pour informer les consommateurs sur la facilité de réparation d'un appareil. Il est noté sur 10 et associé à un code couleur allant du rouge (très difficile à réparer, 0 à 4) au vert (très facile à réparer, 8 à 10), en fonction de critères comme la documentation disponible, la démontabilité, la disponibilité des pièces détachées et le prix. Une ressource courte et directement utilisable pour introduire la notion en classe.
+
+MOTS-CLÉS
+réparabilité, indice de réparabilité, AGEC, développement durable, économie circulaire

@@ -1,0 +1,17 @@
+Séquence 1b (3e) – Le système de navigation
+===========================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2026/06/19/exemples-de-sequences-3eme/
+
+RÉSUMÉ
+Comparer GPS, carte routière et application de navigation pour comprendre l'évolution du guidage.
+
+CONTENU INDEXÉ
+À partir d'applications de navigation sur smartphone, de GPS et de cartes routières, les élèves analysent l'évolution des systèmes de guidage et le rôle de l'intelligence artificielle.
+
+MOTS-CLÉS
+GPS, navigation, cartographie, évolution technologique

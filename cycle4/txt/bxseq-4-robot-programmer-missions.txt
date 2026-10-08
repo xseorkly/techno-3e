@@ -1,0 +1,17 @@
+Séquence 12a (4e) – Programmer un robot pour réaliser des missions (Challenge robotique de ZAP)
+===============================================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2025/06/12/exemples-de-sequences-4eme/
+
+RÉSUMÉ
+Programmer un robot mBot pour accomplir les missions du challenge robotique de zone.
+
+CONTENU INDEXÉ
+Les élèves programment un robot mBot afin qu'il réalise les missions définies par le cahier des charges du challenge robotique inter-collèges.
+
+MOTS-CLÉS
+programmation, robot mBot, challenge robotique, missions

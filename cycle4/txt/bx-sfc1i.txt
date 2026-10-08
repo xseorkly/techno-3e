@@ -1,0 +1,28 @@
+SFC1i — Capteurs, microcontrôleur et interface humain-machine
+=============================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Décrire comment un système acquiert une information avec des capteurs, la traite avec un microcontrôleur et communique avec l’utilisateur par une IHM.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : SFC1i
+Thème : SFC
+Compétence : SFC1
+Sous-thème : T8 — Fonctions, solutions, constituants de la chaîne d’information
+Connaissance : Capteurs, microcontrôleur et interface humain-machine
+Date de mise à disposition indiquée par Bordeaux : 30/03/2026.
+
+À retenir : Décrire comment un système acquiert une information avec des capteurs, la traite avec un microcontrôleur et communique avec l’utilisateur par une IHM.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+SFC1i, SFC, SFC1, T8 — Fonctions, solutions, constituants de la chaîne d’information, fiche connaissance, Bordeaux, Capteurs, microcontrôleur et interface humain-machine

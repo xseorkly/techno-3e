@@ -1,0 +1,17 @@
+Séquence 3e – Projet Roboteck, étape 5 : présentation
+=====================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequence-3eme-projet-roboteck-etape-5-presentation
+
+RÉSUMÉ
+Préparer la présentation finale du robot pour le concours académique Roboteck.
+
+CONTENU INDEXÉ
+Dernier jalon du projet : les élèves préparent la communication et la présentation de leur robot pour le concours académique Roboteck.
+
+MOTS-CLÉS
+robotique, concours Roboteck, présentation, communication

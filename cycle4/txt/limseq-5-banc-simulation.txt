@@ -1,0 +1,17 @@
+Séquence (5e) – Choisir l'implantation du banc solaire par simulation
+=====================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Limoges
+Statut : academic
+Source originale : https://pedagogie.ac-limoges.fr/techno/
+
+RÉSUMÉ
+Simuler différentes implantations du banc solaire pour optimiser sa production d'énergie.
+
+CONTENU INDEXÉ
+À l'aide d'un logiciel de simulation, les élèves comparent plusieurs implantations possibles du banc solaire connecté pour choisir la plus efficace énergétiquement.
+
+MOTS-CLÉS
+panneau solaire, simulation, implantation, énergie

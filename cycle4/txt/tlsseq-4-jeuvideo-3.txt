@@ -1,0 +1,17 @@
+Séquence 4e – Jeu vidéo, partie 3 : réalisation et tests sur simulateurs
+========================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequence-4eme-jeu-video-partie-3-realisation-et-tests-sur-simulateurs
+
+RÉSUMÉ
+Adapter la programmation Scratch pour un pilotage par capteur d'inclinaison ou joystick.
+
+CONTENU INDEXÉ
+Les élèves adaptent leur programme (Scratch) pour permettre un pilotage via un joystick ou un capteur d'inclinaison, en travaillant la conversion analogique-numérique.
+
+MOTS-CLÉS
+jeu vidéo, Scratch, capteur d'inclinaison, conversion analogique-numérique, joystick

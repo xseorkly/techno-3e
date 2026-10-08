@@ -1,0 +1,17 @@
+Séquence 11 bis (5e) – Éclairage automatisé d'une résidence
+===========================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/exemples-de-sequences-academie-bordeaux/
+
+RÉSUMÉ
+Programmer l'éclairage automatisé d'une maquette de résidence avec un lampadaire connecté.
+
+CONTENU INDEXÉ
+Les élèves programment un lampadaire Lamp:bit (Makecode) pour automatiser l'éclairage d'une maquette de résidence en fonction de la luminosité ambiante.
+
+MOTS-CLÉS
+éclairage automatisé, domotique, Lamp:bit, Makecode, Micro:bit

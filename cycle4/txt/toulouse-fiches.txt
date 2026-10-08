@@ -1,0 +1,19 @@
+Académie de Toulouse — fiches de connaissances 2024
+===================================================
+
+Type : Connaissances
+Niveau : Cycle 4
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/CF-2024
+
+RÉSUMÉ
+Banque de fiches de connaissances et podcasts organisée par thèmes OST, SFC et CCRI.
+
+CONTENU INDEXÉ
+La banque couvre notamment : famille et lignée ; intelligence artificielle ; cybersécurité et cyberviolence ; cahier des charges ; contraintes et interacteurs ; critères de choix et de performance ; fichiers et stockage ; représentation des données ; modes de représentation ; notice ; indice de réparabilité ; cycle de vie et incidence environnementale ; grandeurs et protocole ; énergie ; chaîne d’énergie ; transmission et mouvement ; matériaux ; procédés de mise en forme ; chaîne d’information ; tableur et traitement des données ; réseau local et adresse IP ; réseau Internet ; liaison et débit ; algorithmique et programmation ; programmation et IHM ; sous-programmes et structuration ; planification ; étapes et revue de projet ; éco-conception.
+
+De nombreuses fiches existent aussi en podcast vidéo court.
+
+MOTS-CLÉS
+Toulouse, fiches, podcasts, adresse IP, réseau Internet, débit, IA, cybersécurité, réparabilité, énergie, programmation, éco-conception

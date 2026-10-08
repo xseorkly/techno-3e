@@ -1,0 +1,17 @@
+Séquence (4e) – Applications nomades : les unités de conversion en cuisine
+==========================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie d'Orléans-Tours
+Statut : academic
+Source originale : https://pedagogie.ac-orleans-tours.fr/technologie/productions_academiques_cycle_3_et_cycle_4/
+
+RÉSUMÉ
+Construire une famille d'applications mobiles de conversion d'unités culinaires.
+
+CONTENU INDEXÉ
+Deux séquences autour d'une situation déclenchante commune amènent les élèves à construire une famille d'applications ayant pour problématique les unités de conversion utiles en cuisine.
+
+MOTS-CLÉS
+application mobile, programmation par blocs, conversion d'unités, situation déclenchante

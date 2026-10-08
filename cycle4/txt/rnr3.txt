@@ -1,0 +1,23 @@
+RNR Éduscol STI — séquences pour la 3e rentrée 2026
+===================================================
+
+Type : Séquences
+Niveau : 3e
+Source : RNR Éduscol STI
+Statut : national
+Source originale : https://sti.eduscol.education.fr/ressources_pedagogiques/sequences-pour-la-3eme-la-rentree-2026
+
+RÉSUMÉ
+Premières séquences nationales pour la 3e : suivi animal, assistant vocal et station météo connectée, avec progression associée.
+
+CONTENU INDEXÉ
+Ressources publiées pour la rentrée 2026 :
+• Suivre un animal à distance — analyse fonctionnelle, reconnaissance par IA supervisée.
+• Suivre un animal à distance — programmation/amélioration, transmission d’information à distance, programmation par blocs et initiation à MicroPython, modification d’une fixation solaire.
+• Assistant vocal — fonctionnement, données, traces numériques, vie privée, authentification, cybersécurité, variables et conditions.
+• Station météo connectée — parcours des données, architecture réseau, manipulation des formats, modification de programme et activité débranchée de routage des paquets sur Internet.
+
+La page fournit aussi le tableau de progression 3e et une version à compléter.
+
+MOTS-CLÉS
+3e, RNR, animal, IA, MicroPython, assistant vocal, station météo, réseau, routage, cybersécurité, données

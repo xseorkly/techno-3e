@@ -1,0 +1,17 @@
+Séquence 5 (3e) – La vie du VAE racontée par ses données
+========================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2026/06/19/exemples-de-sequences-3eme/
+
+RÉSUMÉ
+Exploiter les données d'un vélo à assistance électrique simulé pour en comprendre le fonctionnement.
+
+CONTENU INDEXÉ
+À partir d'une simulation numérique de VAE et d'un tableur, les élèves structurent et interprètent les données de fonctionnement du vélo à assistance électrique.
+
+MOTS-CLÉS
+VAE, données, simulation numérique, tableur

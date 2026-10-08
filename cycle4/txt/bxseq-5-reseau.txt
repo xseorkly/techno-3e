@@ -1,0 +1,17 @@
+Séquence 1 (5e) – Exploiter le réseau informatique pour travailler
+==================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/exemples-de-sequences-academie-bordeaux/
+
+RÉSUMÉ
+Découvrir la circulation de l'information dans le réseau du collège, avec une reproduction virtuelle sous Filius.
+
+CONTENU INDEXÉ
+Les élèves observent le réseau réel du collège pour en repérer les éléments (terminaux, commutateur, routeur) avant de le reproduire virtuellement avec le logiciel Filius, afin d'aborder l'adressage IP et la communication entre postes.
+
+MOTS-CLÉS
+réseau local, adresse IP, Filius, circulation de l'information

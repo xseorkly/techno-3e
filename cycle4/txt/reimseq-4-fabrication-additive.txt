@@ -1,0 +1,17 @@
+Séquence (4e) – Modifier et produire des pièces par fabrication additive
+========================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Reims
+Statut : academic
+Source originale : https://pedagogie.ac-reims.fr/index.php/ecole-college/cycle4/technologie-cycle4
+
+RÉSUMÉ
+Utiliser la carte Micro:bit et l'impression 3D pour modifier des objets du quotidien.
+
+CONTENU INDEXÉ
+Jean-Paul Bricard propose une séquence de 4 séances construite pour permettre aux élèves de modifier et produire des pièces par fabrication additive, à partir d'objets du quotidien.
+
+MOTS-CLÉS
+micro:bit, impression 3D, fabrication additive, programmation

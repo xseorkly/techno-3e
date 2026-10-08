@@ -1,0 +1,28 @@
+OST1e — Les grands types d’apprentissage des intelligences artificielles et leurs usages possibles
+==================================================================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Repérer des usages de l’IA et comprendre, à un premier niveau, que ses performances dépendent d’un apprentissage à partir de données et d’exemples.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : OST1e
+Thème : OST
+Compétence : OST1
+Sous-thème : T1 — L’évolution des OST
+Connaissance : Les grands types d’apprentissage des intelligences artificielles et leurs usages possibles
+Date de mise à disposition indiquée par Bordeaux : 17/06/2024.
+
+À retenir : Repérer des usages de l’IA et comprendre, à un premier niveau, que ses performances dépendent d’un apprentissage à partir de données et d’exemples.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+OST1e, OST, OST1, T1 — L’évolution des OST, fiche connaissance, Bordeaux, Les grands types d’apprentissage des intelligences artificielles et leurs usages possibles

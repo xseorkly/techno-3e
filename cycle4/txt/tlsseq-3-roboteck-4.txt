@@ -1,0 +1,17 @@
+Séquence 3e – Projet Roboteck, étape 4 : fabrication et tests
+=============================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequence-3eme-projet-roboteck-etape-4-fabrication-et-tests
+
+RÉSUMÉ
+Fabriquer et tester le robot conçu pour le concours Roboteck.
+
+CONTENU INDEXÉ
+Les élèves fabriquent les pièces de leur robot puis procèdent aux premiers tests avant la présentation finale du concours Roboteck.
+
+MOTS-CLÉS
+robotique, concours Roboteck, fabrication, tests

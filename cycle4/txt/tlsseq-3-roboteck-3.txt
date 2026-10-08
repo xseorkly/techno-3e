@@ -1,0 +1,17 @@
+Séquence 3e – Projet Roboteck, étape 3 : recherche des solutions
+================================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequence-3eme-projet-roboteck-etape-3-recherche-des-solutions
+
+RÉSUMÉ
+Rechercher des solutions techniques et programmer les premiers éléments du robot Roboteck.
+
+CONTENU INDEXÉ
+Les élèves recherchent des solutions techniques répondant au règlement du concours et amorcent la programmation du robot.
+
+MOTS-CLÉS
+robotique, concours Roboteck, recherche de solutions, programmation

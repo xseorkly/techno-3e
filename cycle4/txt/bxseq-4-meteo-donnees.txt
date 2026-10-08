@@ -1,0 +1,17 @@
+Séquence 6 (4e) – La station météo et la gestion des données
+============================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2025/06/12/exemples-de-sequences-4eme/
+
+RÉSUMÉ
+Approfondir la structuration et le traitement des données à partir d'une station météo connectée.
+
+CONTENU INDEXÉ
+En 4e, la station météo Weather:bit est réexploitée pour approfondir la structuration et le traitement des données collectées par les capteurs.
+
+MOTS-CLÉS
+station météo, traitement de données, Weather:bit

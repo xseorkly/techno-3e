@@ -1,0 +1,17 @@
+Académie de Toulouse — Séquence 5e « Ma trottinette est-elle réparable ? »
+==========================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequence-5eme-ma-trottinette-est-elle-reparable-comment-assurer-sa-reparation
+
+RÉSUMÉ
+Scénario complet en 5e : les élèves découvrent l'indice de réparabilité via une trottinette électrique, puis modélisent et impriment en 3D une pièce de remplacement en étudiant sa chaîne d'énergie.
+
+CONTENU INDEXÉ
+Séquence mutualisée par l'académie de Toulouse (SII) : les élèves partent du cas d'une trottinette électrique pour découvrir l'indice de réparabilité comme critère de choix d'un objet, puis mettent en œuvre une démarche complète de réparation. Ils modélisent et impriment en 3D une pièce de remplacement, tout en enquêtant sur la chaîne d'énergie du véhicule pour comprendre son fonctionnement global. La ressource croise ainsi la loi anti-gaspillage, la modélisation 3D et l'analyse système ; fiches élève et documents complets sont fournis.
+
+MOTS-CLÉS
+réparabilité, 5e, trottinette, chaîne d'énergie, impression 3D, indice de réparabilité

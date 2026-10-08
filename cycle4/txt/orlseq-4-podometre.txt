@@ -1,0 +1,17 @@
+Séquence (4e) – Apprendre avec les données : le podomètre
+=========================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie d'Orléans-Tours
+Statut : academic
+Source originale : https://sti.eduscol.education.fr/ressources_pedagogiques/sequences-pour-la-4eme-la-rentree-2025
+
+RÉSUMÉ
+Explorer les fonctionnalités d'un podomètre à carte Micro:bit pour comprendre le traitement des données.
+
+CONTENU INDEXÉ
+Christina Luquet propose une séquence où les élèves explorent les fonctionnalités d'un podomètre intégré à une carte Micro:bit pour comprendre la collecte et le traitement des données.
+
+MOTS-CLÉS
+podomètre, Micro:bit, données, capteur de mouvement

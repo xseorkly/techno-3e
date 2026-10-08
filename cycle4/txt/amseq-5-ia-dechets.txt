@@ -1,0 +1,17 @@
+Séquence (5e) – L'IA au service du tri des déchets
+==================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie d'Amiens
+Statut : academic
+Source originale : https://sti.ac-amiens.fr/1143-liste-des-sequences-proposees.html
+
+RÉSUMÉ
+Utiliser la reconnaissance d'image par IA pour automatiser le tri des déchets dans des poubelles connectées.
+
+CONTENU INDEXÉ
+Cette séquence explore comment l'intelligence artificielle, via la reconnaissance d'image, peut automatiser le tri sélectif dans des poubelles connectées.
+
+MOTS-CLÉS
+intelligence artificielle, tri sélectif, développement durable, reconnaissance d'image

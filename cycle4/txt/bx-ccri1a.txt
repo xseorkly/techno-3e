@@ -1,0 +1,28 @@
+CCRI1a — Diagramme de planification des tâches : tâches, durées et contraintes
+==============================================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Organiser un projet en tâches, estimer leurs durées et repérer les dépendances pour planifier le travail de l’équipe.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : CCRI1a
+Thème : CCRI
+Compétence : CCRI1
+Sous-thème : T13 — La gestion de projet technique
+Connaissance : Diagramme de planification des tâches : tâches, durées et contraintes
+Date de mise à disposition indiquée par Bordeaux : 20/06/2024.
+
+À retenir : Organiser un projet en tâches, estimer leurs durées et repérer les dépendances pour planifier le travail de l’équipe.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+CCRI1a, CCRI, CCRI1, T13 — La gestion de projet technique, fiche connaissance, Bordeaux, Diagramme de planification des tâches, tâches, durées et contraintes

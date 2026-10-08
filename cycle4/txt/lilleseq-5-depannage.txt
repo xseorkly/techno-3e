@@ -1,0 +1,17 @@
+Séquence (5e) – Dépannage et réparation
+=======================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Lille
+Statut : academic
+Source originale : https://pedagogie.ac-lille.fr/technologie/2024/
+
+RÉSUMÉ
+Mettre en œuvre une démarche de diagnostic et de réparation d'un objet technique.
+
+CONTENU INDEXÉ
+Séquence académique centrée sur le dépannage et la réparation, avec une démarche de diagnostic de panne suivie d'une remise en état.
+
+MOTS-CLÉS
+dépannage, réparation, diagnostic

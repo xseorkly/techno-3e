@@ -1,0 +1,28 @@
+SFC3g — Événement
+=================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Un événement est un fait détecté par le programme, par exemple l’appui sur un bouton ou la réception d’un message.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : SFC3g
+Thème : SFC
+Compétence : SFC3
+Sous-thème : T12 — La programmation d’une nouvelle fonctionnalité
+Connaissance : Événement
+Date de mise à disposition indiquée par Bordeaux : 20/06/2024.
+
+À retenir : Un événement est un fait détecté par le programme, par exemple l’appui sur un bouton ou la réception d’un message.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+SFC3g, SFC, SFC3, T12 — La programmation d’une nouvelle fonctionnalité, fiche connaissance, Bordeaux, Événement

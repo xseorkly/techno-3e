@@ -1,0 +1,19 @@
+Énergie et chaîne d’énergie
+===========================
+
+Type : Connaissances
+Niveau : Cycle 4
+Source : Programme 2024
+Statut : official
+Source originale : https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes//16802-programme-de-technologie-c4.pdf
+
+RÉSUMÉ
+Les élèves décrivent les transformations et flux d’énergie d’un OST, identifient les constituants de la chaîne d’énergie et comparent des performances.
+
+CONTENU INDEXÉ
+Le thème SFC mobilise le triptyque matière-énergie-information. Pour l’énergie, les activités visent à identifier les formes d’énergie, leurs conversions, les flux et les fonctions des constituants d’une chaîne d’énergie.
+
+Les systèmes étudiés peuvent être des installations solaires, des éclairages automatisés, des stations de vélos électriques ou des systèmes connectés. Les mesures et simulations servent à vérifier les performances et à justifier des choix techniques ou environnementaux.
+
+MOTS-CLÉS
+énergie, chaîne d’énergie, conversion, flux, panneau solaire, rendement, performance

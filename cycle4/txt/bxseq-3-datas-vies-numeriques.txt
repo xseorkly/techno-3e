@@ -1,0 +1,17 @@
+Séquence 2b (3e) – Datas : le poids caché de nos vies numériques
+================================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2026/06/19/exemples-de-sequences-3eme/
+
+RÉSUMÉ
+Découvrir le fonctionnement d'un centre de données pour comprendre l'empreinte numérique.
+
+CONTENU INDEXÉ
+À l'aide d'un simulateur de « salle de contrôle des données », les élèves explorent le fonctionnement d'un datacenter et prennent conscience du poids caché de leurs usages numériques.
+
+MOTS-CLÉS
+données, datacenter, empreinte numérique, smartphone

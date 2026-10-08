@@ -1,0 +1,17 @@
+Séquence 4e – Comment sécuriser l'accès au casier à l'aide de l'IA ?
+====================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequence-4eme-comment-securiser-lacces-au-casier-laide-de-lia
+
+RÉSUMÉ
+Utiliser l'IA générative pour créer une banque d'images et sécuriser l'accès aux casiers des élèves.
+
+CONTENU INDEXÉ
+Prenant appui sur la gestion des accès aux casiers du collège, les élèves utilisent l'IA générative pour créer une banque d'images avant de programmer un système de reconnaissance.
+
+MOTS-CLÉS
+intelligence artificielle générative, sécurité, casiers, reconnaissance d'image

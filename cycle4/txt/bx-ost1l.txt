@@ -1,0 +1,28 @@
+OST1l — Cybersécurité : données personnelles, traces numériques, identification, authentification et propriété intellectuelle
+=============================================================================================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Adopter des pratiques de cybersécurité : protéger ses données, distinguer identification et authentification, repérer les traces numériques et respecter la propriété intellectuelle.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : OST1l
+Thème : OST
+Compétence : OST1
+Sous-thème : T2 — Usages et impacts sociétaux du numérique
+Connaissance : Cybersécurité : données personnelles, traces numériques, identification, authentification et propriété intellectuelle
+Date de mise à disposition indiquée par Bordeaux : 18/06/2024.
+
+À retenir : Adopter des pratiques de cybersécurité : protéger ses données, distinguer identification et authentification, repérer les traces numériques et respecter la propriété intellectuelle.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+OST1l, OST, OST1, T2 — Usages et impacts sociétaux du numérique, fiche connaissance, Bordeaux, Cybersécurité, données personnelles, traces numériques, identification, authentification et propriété intellectuelle

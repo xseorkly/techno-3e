@@ -1,0 +1,17 @@
+Académie de Bordeaux — fiches de connaissances
+==============================================
+
+Type : Connaissances
+Niveau : Cycle 4
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Fiches de structuration des connaissances alignées sur les trois thèmes du programme 2024.
+
+CONTENU INDEXÉ
+Les fiches sont prévues pour consolider les apprentissages en fin d’activité et construire une continuité sur tout le cycle. Elles sont classées par thème (OST, SFC, CCRI), compétence, sous-thème et connaissance. La banque couvre notamment évolution des OST, IA, contraintes sociétales, matériaux, moyens de fabrication, programmation, validation, projet et de nombreuses notions du programme. Les auteurs signalent qu’elles évoluent en fonction des retours de terrain.
+
+MOTS-CLÉS
+Bordeaux, fiches, OST, SFC, CCRI, IA, programmation, matériaux

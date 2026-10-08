@@ -1,0 +1,17 @@
+Séquence (5e) – Indice énergétique et réparabilité (machine à laver)
+====================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie d'Amiens
+Statut : academic
+Source originale : https://sti.ac-amiens.fr/1143-liste-des-sequences-proposees.html
+
+RÉSUMÉ
+Étudier l'indice énergétique et l'indice de réparabilité à travers l'exemple du lave-linge.
+
+CONTENU INDEXÉ
+L'exemple du lave-linge permet d'introduire l'indice énergétique et l'indice de réparabilité comme critères de choix responsables d'un objet technique.
+
+MOTS-CLÉS
+réparabilité, indice énergétique, développement durable, électroménager

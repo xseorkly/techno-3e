@@ -1,0 +1,17 @@
+Séquence 3 (4e) – Comprendre les enjeux de la maison connectée (gestion de l'éclairage)
+=======================================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2025/06/12/exemples-de-sequences-4eme/
+
+RÉSUMÉ
+Piloter l'éclairage d'une maison connectée avec des ampoules et prises Tapo.
+
+CONTENU INDEXÉ
+À l'aide de lampes classiques et d'un kit domotique Tapo (lampe, prise, hub connectés), les élèves explorent comment un OST s'intègre dans son environnement pour gérer l'éclairage.
+
+MOTS-CLÉS
+maison connectée, domotique, éclairage, Tapo

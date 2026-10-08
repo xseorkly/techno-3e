@@ -1,0 +1,28 @@
+SFC2g — Les modes de sollicitation des matériaux : flexion et torsion
+=====================================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Reconnaître flexion et torsion, observer leurs effets et relier le comportement obtenu aux propriétés du matériau et à la forme de la pièce.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : SFC2g
+Thème : SFC
+Compétence : SFC2
+Sous-thème : T11 — Le dépannage et la réparation
+Connaissance : Les modes de sollicitation des matériaux : flexion et torsion
+Date de mise à disposition indiquée par Bordeaux : 20/06/2024.
+
+À retenir : Reconnaître flexion et torsion, observer leurs effets et relier le comportement obtenu aux propriétés du matériau et à la forme de la pièce.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+SFC2g, SFC, SFC2, T11 — Le dépannage et la réparation, fiche connaissance, Bordeaux, Les modes de sollicitation des matériaux, flexion et torsion

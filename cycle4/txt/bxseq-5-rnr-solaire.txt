@@ -1,0 +1,17 @@
+Séquence RNR (5e) – Exploiter les données d'une installation solaire en autoconsommation
+========================================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://sti.eduscol.education.fr/ressources_pedagogiques/comment-ameliorer-un-dispositif-douverture-de-porte-de-maison-pour-personne
+
+RÉSUMÉ
+Version publiée au RNR national sur l'exploitation des données d'un module solaire en autoconsommation.
+
+CONTENU INDEXÉ
+Cette séquence, équivalente aux séquences 10a-10b-12 de Bordeaux, exploite les données d'un module solaire (carte Micro:bit, capteurs, mécanisme d'inclinaison) pour comprendre l'autoconsommation énergétique.
+
+MOTS-CLÉS
+énergie solaire, autoconsommation, RNR, données, Micro:bit

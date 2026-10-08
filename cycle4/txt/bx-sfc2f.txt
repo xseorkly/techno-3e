@@ -1,0 +1,28 @@
+SFC2f — Moyens de prototypage électronique
+==========================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Utiliser plaque d’essai, fils, composants et alimentation pour réaliser rapidement un montage électronique testable et modifiable.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : SFC2f
+Thème : SFC
+Compétence : SFC2
+Sous-thème : T11 — Le dépannage et la réparation
+Connaissance : Moyens de prototypage électronique
+Date de mise à disposition indiquée par Bordeaux : 20/06/2024.
+
+À retenir : Utiliser plaque d’essai, fils, composants et alimentation pour réaliser rapidement un montage électronique testable et modifiable.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+SFC2f, SFC, SFC2, T11 — Le dépannage et la réparation, fiche connaissance, Bordeaux, Moyens de prototypage électronique

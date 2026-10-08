@@ -1,0 +1,28 @@
+OST1i — Unité de quantité d’information : bit, octet et multiples
+=================================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Le bit est l’unité élémentaire d’information ; huit bits forment un octet. Les multiples permettent d’exprimer la taille des fichiers et des capacités de stockage.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : OST1i
+Thème : OST
+Compétence : OST1
+Sous-thème : T2 — Usages et impacts sociétaux du numérique
+Connaissance : Unité de quantité d’information : bit, octet et multiples
+Date de mise à disposition indiquée par Bordeaux : 18/06/2024.
+
+À retenir : Le bit est l’unité élémentaire d’information ; huit bits forment un octet. Les multiples permettent d’exprimer la taille des fichiers et des capacités de stockage.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+OST1i, OST, OST1, T2 — Usages et impacts sociétaux du numérique, fiche connaissance, Bordeaux, Unité de quantité d’information, bit, octet et multiples

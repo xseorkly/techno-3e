@@ -1,0 +1,28 @@
+OST1h — Système d’information et stockage des données : extension, format et droits sur les fichiers
+====================================================================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Comprendre le rôle de l’extension et du format d’un fichier, ainsi que les droits de lecture et d’écriture qui contrôlent l’accès aux données.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : OST1h
+Thème : OST
+Compétence : OST1
+Sous-thème : T2 — Usages et impacts sociétaux du numérique
+Connaissance : Système d’information et stockage des données : extension, format et droits sur les fichiers
+Date de mise à disposition indiquée par Bordeaux : 17/06/2024.
+
+À retenir : Comprendre le rôle de l’extension et du format d’un fichier, ainsi que les droits de lecture et d’écriture qui contrôlent l’accès aux données.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+OST1h, OST, OST1, T2 — Usages et impacts sociétaux du numérique, fiche connaissance, Bordeaux, Système d’information et stockage des données, extension, format et droits sur les fichiers

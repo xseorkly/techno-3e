@@ -1,0 +1,17 @@
+Séquence (5e) – Le banc est-il adapté au besoin du collège ?
+============================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Limoges
+Statut : academic
+Source originale : https://pedagogie.ac-limoges.fr/techno/
+
+RÉSUMÉ
+Analyser le besoin et rédiger un cahier des charges pour un banc solaire connecté à installer au collège.
+
+CONTENU INDEXÉ
+Les élèves analysent le besoin réel du collège et rédigent un cahier des charges pour un banc solaire équipé d'une borne Wifi.
+
+MOTS-CLÉS
+besoin, cahier des charges, mobilier connecté, analyse fonctionnelle

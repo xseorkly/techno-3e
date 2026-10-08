@@ -1,0 +1,17 @@
+Séquence (5e) – Initiation à la robotique
+=========================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie d'Orléans-Tours
+Statut : academic
+Source originale : https://pedagogie.ac-orleans-tours.fr/technologie/productions_academiques_cycle_3_et_cycle_4/
+
+RÉSUMÉ
+Explorer, programmer et dépanner un robot pour se familiariser avec les principes de la robotique.
+
+CONTENU INDEXÉ
+Christina Luquet propose une séquence conçue pour le programme 2024 qui familiarise les élèves de 5e aux principes de la robotique à travers l'exploration, la programmation et le dépannage.
+
+MOTS-CLÉS
+robotique, initiation, programmation, dépannage

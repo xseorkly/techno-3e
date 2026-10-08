@@ -1,0 +1,17 @@
+Séquence 3e – Comment les voitures peuvent-elles se piloter de façon autonome ?
+===============================================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequence-3eme-comment-les-voitures-peuvent-elles-se-piloter-de-facon-autonome
+
+RÉSUMÉ
+Comprendre les algorithmes de perception et de décision d'une voiture autonome, et les enjeux de cybersécurité associés.
+
+CONTENU INDEXÉ
+Les élèves étudient comment les voitures autonomes perçoivent leur environnement et prennent des décisions en temps réel grâce à des algorithmes, tout en abordant les enjeux de sécurisation des données.
+
+MOTS-CLÉS
+voiture autonome, algorithme, cybersécurité, intelligence artificielle

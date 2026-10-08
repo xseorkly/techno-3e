@@ -1,0 +1,17 @@
+Séquence 9 (5e) – La programmation d'un lampadaire intelligent
+==============================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/exemples-de-sequences-academie-bordeaux/
+
+RÉSUMÉ
+Programmer un lampadaire réagissant à la luminosité ambiante avec Micro:bit et Makecode.
+
+CONTENU INDEXÉ
+À l'aide d'une carte Lamp:bit et de Makecode, les élèves programment une nouvelle fonctionnalité pour un lampadaire qui s'adapte automatiquement à la luminosité.
+
+MOTS-CLÉS
+programmation, lampadaire intelligent, Micro:bit, Makecode, capteur de luminosité

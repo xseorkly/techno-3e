@@ -1,0 +1,23 @@
+Programme officiel 2024 — Technologie cycle 4
+=============================================
+
+Type : Programme
+Niveau : Cycle 4
+Source : Ministère / Éduscol
+Statut : official
+Source originale : https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes//16802-programme-de-technologie-c4.pdf
+
+RÉSUMÉ
+Le programme 2024 structure la Technologie autour de trois thèmes et neuf compétences, avec des repères de progressivité en 5e, 4e et 3e.
+
+CONTENU INDEXÉ
+Le programme 2024 organise les apprentissages dans une logique spiralaire de complexité croissante. Les trois thèmes doivent être associés au cours des séquences :
+
+1. OST — Les objets et les systèmes techniques : leurs usages et leurs interactions à découvrir et analyser.
+2. SFC — Structure, fonctionnement, comportement : des objets et des systèmes techniques à comprendre.
+3. CCRI — Création, conception, réalisation, innovations : des objets à concevoir et à réaliser.
+
+La matière, l'énergie et l'information (MEI) structurent l'analyse des systèmes. Le programme renforce aussi la pensée informatique : données, algorithmes, langages et machines. Les repères annuels précisent ce qui est attendu en 5e, 4e et 3e.
+
+MOTS-CLÉS
+programme, BO, OST, SFC, CCRI, MEI, progressivité, 5e, 4e, 3e, compétences

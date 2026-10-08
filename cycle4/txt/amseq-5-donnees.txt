@@ -1,0 +1,17 @@
+Séquence (5e) – Comment organiser, stocker et échanger ses données ?
+====================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie d'Amiens
+Statut : academic
+Source originale : https://sti.ac-amiens.fr/1143-liste-des-sequences-proposees.html
+
+RÉSUMÉ
+Structurer, stocker et échanger des données dans une arborescence de fichiers.
+
+CONTENU INDEXÉ
+Les élèves apprennent à organiser, stocker et échanger leurs données numériques en structurant une arborescence de fichiers.
+
+MOTS-CLÉS
+données, stockage, arborescence de fichiers

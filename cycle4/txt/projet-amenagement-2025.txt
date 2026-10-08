@@ -1,0 +1,17 @@
+Projet d'aménagement du programme de technologie (CSP, juin 2025 — non adopté)
+==============================================================================
+
+Type : Programme
+Niveau : Cycle 4
+Source : Conseil supérieur des programmes
+Statut : draft
+Source originale : https://www.education.gouv.fr/sites/default/files/2025-06/csp---projet-d-am-nagement-des-programmes-de-technologie-pour-le-cycle-4-441411.pdf
+
+RÉSUMÉ
+Le CSP a adopté le 26 juin 2025 un projet d'ajustement du programme 2024, soumis à consultation nationale du 18 mai au 19 juin 2026 (consultation aujourd'hui close, texte non encore publié au BO).
+
+CONTENU INDEXÉ
+Ce projet ne modifie ni les trois thèmes ni les neuf compétences de fin de cycle 4, qui restent formulées à l'identique. Il ajoute en revanche plusieurs éléments au texte du programme lui-même : une section explicite de mise en relation avec le socle commun (codes ECC par thème), un nouveau volet sur les compétences psychosociales (communication, gestion des émotions, coopération, avec des exemples d'activités comme débats ou jeux de rôle), une présentation regroupée des compétences numériques du CRCN (au lieu d'encarts dispersés), un développement important de la « pensée informatique » (abstraction, décomposition, modélisation, algorithme, simulation), des encadrés « points de vigilance » pour guider la mise en œuvre, et des tableaux « objectifs d'apprentissage / exemples de réussite » avec des situations concrètes par niveau. Il supprime en contrepartie les encarts « liens avec d'autres disciplines » qui existaient dans le texte de 2024. Important : à la date de cette indexation, ce texte est un projet du CSP soumis à consultation de la communauté éducative — il n'a pas de valeur réglementaire et ne remplace pas le programme en vigueur (BO n°9 du 29 février 2024) tant qu'il n'a pas été publié au Bulletin officiel.
+
+MOTS-CLÉS
+projet de programme, CSP, socle commun, compétences psychosociales, CRCN, pensée informatique, 2025, 2026

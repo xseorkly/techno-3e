@@ -1,0 +1,28 @@
+CCRI3e — La modularité : sous-programme et fonction
+===================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Découper un programme en sous-programmes ou fonctions pour réutiliser du code, simplifier les tests et rendre l’ensemble plus lisible.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : CCRI3e
+Thème : CCRI
+Compétence : CCRI3
+Sous-thème : T21 — La programmation des OST
+Connaissance : La modularité : sous-programme et fonction
+Date de mise à disposition indiquée par Bordeaux : 27/02/2025.
+
+À retenir : Découper un programme en sous-programmes ou fonctions pour réutiliser du code, simplifier les tests et rendre l’ensemble plus lisible.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+CCRI3e, CCRI, CCRI3, T21 — La programmation des OST, fiche connaissance, Bordeaux, La modularité, sous-programme et fonction

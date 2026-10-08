@@ -1,0 +1,19 @@
+Exemples de séquences 5e — Bordeaux
+===================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/exemples-de-sequences-academie-bordeaux/
+
+RÉSUMÉ
+Banque de séquences 5e : réseau/Filius, numérique, OST, énergie, météo connectée, réparation, micro:bit, fabrication et robotique.
+
+CONTENU INDEXÉ
+Banque de séquences 5e : réseau/Filius, numérique, OST, énergie, météo connectée, réparation, micro:bit, fabrication et robotique.
+
+Ressource académique à adapter au contexte de l’établissement et à la progression de l’équipe.
+
+MOTS-CLÉS
+5e, séquences, Filius, micro:bit, robotique

@@ -1,0 +1,17 @@
+Séquence (4e) – Réguler la température de la salle de classe
+============================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Besançon
+Statut : academic
+Source originale : https://sti.eduscol.education.fr/ressources_pedagogiques/sequences-pour-la-4eme-la-rentree-2025
+
+RÉSUMÉ
+Aider le professeur à réguler automatiquement la température de la classe grâce à un capteur.
+
+CONTENU INDEXÉ
+Cette séquence de 4 séances propose aux élèves de répondre à la problématique : comment aider le professeur à réguler la température de la salle de classe ?
+
+MOTS-CLÉS
+régulation thermique, capteur de température, chaîne d'information

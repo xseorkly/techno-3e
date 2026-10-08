@@ -1,0 +1,17 @@
+Séquence RNR (5e) – Assemblage d'une station météo et fabrication des supports
+==============================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://sti.eduscol.education.fr/ressources_pedagogiques/la-station-meteo
+
+RÉSUMÉ
+Version publiée au RNR national : assemblage complet d'une station météorologique avec fabrication des pièces de support.
+
+CONTENU INDEXÉ
+Équivalente aux séquences 10a-10b-12 de Bordeaux, cette version publiée sur le Réseau National de Ressources détaille le prototypage, l'assemblage et la programmation d'une station météo complète (Weather:bit, Tinkercad, impression 3D).
+
+MOTS-CLÉS
+station météo, RNR, fabrication, assemblage, programmation

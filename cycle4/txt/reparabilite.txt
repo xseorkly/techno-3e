@@ -1,0 +1,23 @@
+Réparabilité, dépannage, réparation et durabilité
+=================================================
+
+Type : Connaissances
+Niveau : Cycle 4
+Source : Programme + guide 2024
+Statut : official
+Source originale : https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes/college/cycle-4/17103-guide-daccompagnement-du-programme-de-technologie-c4-mai-2024.pdf
+
+RÉSUMÉ
+La réparabilité devient un axe fort : diagnostiquer, réparer, fabriquer une pièce de remplacement et relier ces activités au cycle de vie et à l’économie circulaire.
+
+CONTENU INDEXÉ
+Le programme demande de faire progresser les élèves du repérage visuel d’une pièce défectueuse et de la réparation guidée vers la formulation d’hypothèses, la conception d’un protocole de dépannage et la réalisation d’une pièce sur mesure.
+
+Connaissances : fiabilité, durabilité, indice de réparabilité, sécurité en atelier, outillage manuel et moyens de prototypage/fabrication, caractéristiques des composants de remplacement.
+
+Le guide relie la réparabilité à l’allongement de la durée d’usage, à l’économie circulaire et à la réduction des déchets. Il donne la réparabilité comme exemple complet pour concevoir une séquence et formaliser les connaissances.
+
+Ressources : trottinette réparable, objets du quotidien, portail automatique, chasse d’eau, réparation virtuelle, FabLab et impression 3D.
+
+MOTS-CLÉS
+réparabilité, réparation, dépannage, durabilité, indice de réparabilité, économie circulaire, impression 3D, FabLab

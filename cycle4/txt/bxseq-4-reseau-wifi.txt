@@ -1,0 +1,17 @@
+Séquence 7 (4e) – Créer un réseau local associé à une borne Wifi
+================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2025/06/12/exemples-de-sequences-4eme/
+
+RÉSUMÉ
+Simuler un réseau local avec une borne Wifi réelle et le logiciel Filius.
+
+CONTENU INDEXÉ
+Avec une borne Wifi réelle et des ordinateurs portables, doublés d'une simulation Filius, les élèves étudient la circulation de l'information dans un réseau informatique local.
+
+MOTS-CLÉS
+réseau local, Wifi, Filius, circulation de l'information

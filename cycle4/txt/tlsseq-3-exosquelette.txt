@@ -1,0 +1,17 @@
+Séquence 3e – Biomécanique / Exosquelette (main du Minotaure)
+=============================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequence-3eme-biomecanique-exosquelette
+
+RÉSUMÉ
+Analyser puis reprogrammer le pilotage d'une maquette de main articulée inspirée du Minotaure de la compagnie La Machine.
+
+CONTENU INDEXÉ
+À partir d'une maquette reproduisant la main du Minotaure (compagnie La Machine), les élèves analysent le pilotage par joystick puis programment une interface plus intuitive avec un capteur de mouvement.
+
+MOTS-CLÉS
+biomécanique, exosquelette, capteur de mouvement, programmation, La Machine

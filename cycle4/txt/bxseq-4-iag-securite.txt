@@ -1,0 +1,17 @@
+Séquence 1 (4e) – L'intelligence artificielle générative et la sécurité des données
+===================================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2025/06/12/exemples-de-sequences-4eme/
+
+RÉSUMÉ
+Approfondir les enjeux de sécurité des données liés à l'usage de l'IA générative.
+
+CONTENU INDEXÉ
+Cette séquence prolonge la découverte de l'IA générative en travaillant spécifiquement la sécurité des données personnelles et les impacts sociétaux du numérique.
+
+MOTS-CLÉS
+IA générative, sécurité des données, usages numériques

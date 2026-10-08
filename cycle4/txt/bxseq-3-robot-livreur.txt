@@ -1,0 +1,17 @@
+Séquence 4b (3e) – Le robot livreur
+===================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2026/06/19/exemples-de-sequences-3eme/
+
+RÉSUMÉ
+Étudier un robot mBot dans le rôle d'un robot livreur autonome.
+
+CONTENU INDEXÉ
+Le robot mBot, équipé de capteurs ultrason et de suivi de ligne, est ici étudié dans le contexte d'un robot livreur pour analyser ses chaînes fonctionnelles.
+
+MOTS-CLÉS
+robot livreur, robot mBot, capteurs, chaîne d'énergie

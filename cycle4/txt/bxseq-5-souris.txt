@@ -1,0 +1,17 @@
+Séquence 4 (5e) – La souris : son interaction avec son environnement
+====================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/exemples-de-sequences-academie-bordeaux/
+
+RÉSUMÉ
+Comparer plusieurs modèles de souris d'ordinateur pour analyser l'interaction entre un OST et son utilisateur.
+
+CONTENU INDEXÉ
+À partir de plusieurs modèles de souris, les élèves décrivent l'expérience utilisateur et les interactions entre l'objet technique, son environnement et la personne qui l'utilise.
+
+MOTS-CLÉS
+interaction utilisateur, ergonomie, souris d'ordinateur

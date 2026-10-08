@@ -1,0 +1,17 @@
+Séquence 3e – Projet Roboteck, étape 2 : organisation
+=====================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Toulouse
+Statut : academic
+Source originale : https://pedagogie.ac-toulouse.fr/sii/sequence-3eme-projet-roboteck-etape-2-organisation
+
+RÉSUMÉ
+Organiser le travail d'équipe pour le projet du concours Roboteck.
+
+CONTENU INDEXÉ
+Les élèves organisent la répartition des tâches et la gestion des données du projet en vue du concours Roboteck.
+
+MOTS-CLÉS
+robotique, concours Roboteck, gestion de projet, collaboration

@@ -1,0 +1,19 @@
+Banques d’objets 3D
+===================
+
+Type : Modélisation
+Niveau : Cycle 4
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2025/02/27/banque-dobjets-3d-des-ressources-incontournables-en-technologie/
+
+RÉSUMÉ
+Sélection de banques de modèles 3D utiles pour la conception, le prototypage et la fabrication additive en technologie.
+
+CONTENU INDEXÉ
+Sélection de banques de modèles 3D utiles pour la conception, le prototypage et la fabrication additive en technologie.
+
+Ressource académique à adapter au contexte de l’établissement et à la progression de l’équipe.
+
+MOTS-CLÉS
+3D, objets 3D, modélisation, impression 3D

@@ -1,0 +1,19 @@
+Projet technologique, conception et éco-conception
+==================================================
+
+Type : Connaissances
+Niveau : Cycle 4
+Source : Programme 2024
+Statut : official
+Source originale : https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes//16802-programme-de-technologie-c4.pdf
+
+RÉSUMÉ
+Le thème CCRI fait concevoir, réaliser, programmer, simuler et valider des solutions répondant à un besoin et à des exigences.
+
+CONTENU INDEXÉ
+Les élèves passent progressivement d’une modification guidée à une démarche de conception plus autonome. Ils travaillent le besoin, les exigences, le cahier des charges, la planification, la modélisation, la simulation, le prototypage, la fabrication, les essais et la revue de projet.
+
+L’éco-conception et le développement durable sont intégrés aux choix de solutions. La démarche de projet mobilise les deux autres thèmes : usages/impacts et structure/fonctionnement.
+
+MOTS-CLÉS
+projet, conception, cahier des charges, exigences, planification, revue de projet, écoconception, prototype

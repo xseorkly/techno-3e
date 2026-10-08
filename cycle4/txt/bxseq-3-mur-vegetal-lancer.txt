@@ -1,0 +1,17 @@
+Projet CCRI – Mur végétal connecté : lancer le projet (3e)
+==========================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2026/06/19/exemples-de-sequences-3eme/
+
+RÉSUMÉ
+Lancer un projet de mur végétal connecté avec arrosage automatisé.
+
+CONTENU INDEXÉ
+Premier volet d'un projet complet utilisant un Smart Home Kit Elecfreaks (Micro:bit, capteurs, actionneurs) et des bacs imprimés en 3D pour concevoir un mur végétal à l'arrosage automatisé.
+
+MOTS-CLÉS
+mur végétal, arrosage automatique, Smart Home Kit, impression 3D, gestion de projet

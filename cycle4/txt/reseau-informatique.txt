@@ -1,0 +1,26 @@
+Réseau informatique : réseau local, adresse IP, Internet, routage et débit
+==========================================================================
+
+Type : Connaissances
+Niveau : Cycle 4
+Source : Programme officiel 2024
+Statut : official
+Source originale : https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes//16802-programme-de-technologie-c4.pdf
+
+RÉSUMÉ
+Le programme fait travailler le réseau local, l’adressage IP, la communication entre terminaux, Internet, le routage et le débit.
+
+CONTENU INDEXÉ
+Connaissances du programme : réseau local et réseau mondial Internet ; rôle d’un terminal, d’une carte réseau, des liaisons filaires ou sans fil, du commutateur, du routeur et du serveur ; rôle et structure d’une adresse IP ; rôle des tables de routage ; débit et ordres de grandeur associés.
+
+Progression pédagogique lisible dans le programme :
+• 5e : identifier les composants d’un réseau local, les liaisons et la topologie ; comprendre qu’un terminal doit être identifié pour communiquer.
+• 4e : paramétrer une adresse IP fixe et résoudre des problèmes de communication entre terminaux ; compléter une simulation de réseau.
+• 3e : représenter la circulation d’une information sur Internet et justifier l’emploi d’un protocole de routage entre plusieurs réseaux à partir d’une table de routage donnée.
+
+CRCN : information et données ; partager et publier ; collaborer ; évoluer dans un environnement numérique.
+
+Ressources associées dans le portail : séquence nationale 5e « Le réseau informatique », séquence Bordeaux 5e avec Filius, séquence 3e « Station météo connectée » avec activité débranchée de routage, fiches Toulouse « Réseau local / Adresse IP », « Réseau Internet » et « Liaison et débit ».
+
+MOTS-CLÉS
+réseau, adresse IP, IP, routeur, routage, table de routage, débit, Internet, commutateur, serveur, Filius, T10

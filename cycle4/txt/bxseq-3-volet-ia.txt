@@ -1,0 +1,17 @@
+Séquence 8 (3e) – Le volet à lames orientables à l'ère de l'IA
+==============================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2026/06/19/exemples-de-sequences-3eme/
+
+RÉSUMÉ
+Programmer un volet à lames orientables piloté par capteur de luminosité et caméra intelligente.
+
+CONTENU INDEXÉ
+Sur une maquette de volet pilotée par Micro:bit (shield MakerBit), capteur de luminosité et caméra Huskylens, les élèves programment une nouvelle fonctionnalité intégrant l'intelligence artificielle.
+
+MOTS-CLÉS
+volet connecté, intelligence artificielle, Huskylens, Micro:bit, programmation

@@ -1,0 +1,28 @@
+SFC3k — Lien entre programmation graphique par blocs et programmation textuelle
+===============================================================================
+
+Type : Fiche connaissance
+Niveau : Cycle 4
+Source : Académie de Bordeaux — Fiches connaissances
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/fiches-connaissances/
+
+RÉSUMÉ
+Mettre en correspondance une logique écrite en blocs avec sa traduction dans un langage textuel, notamment en fin de 3e.
+
+CONTENU INDEXÉ
+Fiche de structuration des connaissances du programme 2024.
+
+Code : SFC3k
+Thème : SFC
+Compétence : SFC3
+Sous-thème : T12 — La programmation d’une nouvelle fonctionnalité
+Connaissance : Lien entre programmation graphique par blocs et programmation textuelle
+Date de mise à disposition indiquée par Bordeaux : 20/06/2024.
+
+À retenir : Mettre en correspondance une logique écrite en blocs avec sa traduction dans un langage textuel, notamment en fin de 3e.
+
+Cette fiche locale est une synthèse de repérage pour la recherche hors ligne. Elle ne remplace pas la fiche académique originale, qui peut évoluer.
+
+MOTS-CLÉS
+SFC3k, SFC, SFC3, T12 — La programmation d’une nouvelle fonctionnalité, fiche connaissance, Bordeaux, Lien entre programmation graphique par blocs et programmation textuelle

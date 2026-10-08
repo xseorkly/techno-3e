@@ -1,0 +1,17 @@
+Séquence (4e) – Serrure connectée : le codage des données
+=========================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Lyon
+Statut : academic
+Source originale : https://sti.eduscol.education.fr/ressources_pedagogiques/sequences-pour-la-4eme-la-rentree-2025
+
+RÉSUMÉ
+Découvrir comment les données sont codées dans un système numérique, à travers une serrure connectée.
+
+CONTENU INDEXÉ
+Julien Launay propose une séquence pour les élèves de 4e, basée sur une maquette de serrure connectée, pour faire découvrir comment les données et les informations sont codées dans un système numérique.
+
+MOTS-CLÉS
+serrure connectée, codage des données, sécurité, capteur

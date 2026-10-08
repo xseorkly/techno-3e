@@ -1,0 +1,17 @@
+Vocabulaire didactique et pédagogique en technologie
+====================================================
+
+Type : Vocabulaire
+Niveau : Cycle 4
+Source : Ressource personnelle (synthèse de formation)
+Statut : personal
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/demarches-pedagogiques-en-technologie/
+
+RÉSUMÉ
+Clarifie des notions souvent confondues : situation-problème, contextualisation, question problématique, situation déclenchante et résolution de problème.
+
+CONTENU INDEXÉ
+Synthèse de formation qui précise le vocabulaire didactique couramment utilisé en technologie. La situation-problème (notion développée par Meirieu, reliée à la pédagogie active de Freinet) est une situation d'apprentissage où l'élève ne peut résoudre la tâche proposée sans effectuer un apprentissage précis : elle se place généralement en début de séquence. La contextualisation consiste à construire une mise en situation authentique pour l'élève (issue de sa vie quotidienne ou professionnelle future) qui sert de support aux apprentissages visés. La question problématique complète cette contextualisation par un obstacle à surmonter : elle doit être déstabilisante pour l'élève tout en restant à sa portée (zone proximale de développement), sans quoi elle ne stimule ni curiosité ni désir d'apprendre. La situation déclenchante fait émerger les représentations initiales des élèves à partir d'un fait ou d'un phénomène observable, sans nécessairement constituer la situation-problème elle-même. Enfin, la résolution de problème (adaptée des sciences de l'ingénieur) fait suivre à l'élève une méthode explicite : analyse du besoin, appropriation du cahier des charges, recherche de solutions, conception, prototypage, test et validation.
+
+MOTS-CLÉS
+vocabulaire, situation-problème, contextualisation, question problématique, Meirieu, didactique

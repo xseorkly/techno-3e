@@ -1,0 +1,17 @@
+Séquence 12b (4e) – Développer ses réflexes
+===========================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2025/06/12/exemples-de-sequences-4eme/
+
+RÉSUMÉ
+Programmer un jeu de réflexes avec une carte Micro:bit.
+
+CONTENU INDEXÉ
+Cette courte séquence de programmation utilise une carte Micro:bit pour créer un petit jeu permettant de développer les réflexes des élèves.
+
+MOTS-CLÉS
+programmation, Micro:bit, jeu de réflexes

@@ -1,0 +1,19 @@
+OnShape — modeleur paramétrique
+===============================
+
+Type : Modélisation
+Niveau : Cycle 4
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2023/06/07/onshape/
+
+RÉSUMÉ
+Ressources pour la modélisation 3D paramétrique et la conception collaborative.
+
+CONTENU INDEXÉ
+Ressources pour la modélisation 3D paramétrique et la conception collaborative.
+
+Ressource académique à adapter au contexte de l’établissement et à la progression de l’équipe.
+
+MOTS-CLÉS
+OnShape, 3D, CAO, modélisation

@@ -1,0 +1,19 @@
+RNR Éduscol STI — séquences pour la 4e
+======================================
+
+Type : Séquences
+Niveau : 4e
+Source : RNR Éduscol STI
+Statut : national
+Source originale : https://sti.eduscol.education.fr/ressources_pedagogiques/sequences-pour-la-4eme-la-rentree-2025
+
+RÉSUMÉ
+Banque nationale pour la 4e, avec progression et version à compléter pour construire la programmation locale.
+
+CONTENU INDEXÉ
+Séquences recensées : transformation/amélioration d’une trottinette ; serrure connectée et codage de l’information ; arrosage automatique et exploitation de données ; audioguide ; nuisances sonores ; avertisseur sonore de trottinette ; podomètre et données ; station de vélos électriques ; cybersécurité et communication sécurisée entre robots ; barrière automatique de parking ; amélioration de jeux de table ; réparation d’une chasse d’eau ; détection d’un séisme avec micro:bit ; sécurisation de casiers à l’aide de l’IA ; usage raisonné des objets communicants (cookies, géolocalisation, RFID, DDoS) ; usage sécurisé et raisonné du numérique ; porte automatique pour personne à mobilité réduite ; alarme connectée et gestion de l’énergie ; mangeoire connectée.
+
+La page RNR propose aussi un tableau de progression et une version à compléter.
+
+MOTS-CLÉS
+4e, RNR, trottinette, serrure connectée, données, audioguide, podomètre, cybersécurité, micro:bit, IA, RFID, DDoS, alarme, mangeoire

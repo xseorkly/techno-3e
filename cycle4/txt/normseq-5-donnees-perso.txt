@@ -1,0 +1,17 @@
+Séquence (5e) – Transférer des données personnelles en toute sécurité
+=====================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Normandie
+Statut : academic
+Source originale : https://sii-technologie.ac-normandie.fr/mot/cycle-4
+
+RÉSUMÉ
+Sécuriser le transfert de données personnelles entre le collège et la maison (TraAM cybersécurité).
+
+CONTENU INDEXÉ
+Issue des TraAM cybersécurité de l'académie de Normandie, cette séquence questionne comment transférer des données personnelles du collège à la maison (ou inversement) en toute sécurité.
+
+MOTS-CLÉS
+cybersécurité, données personnelles, RGPD, réseau, TraAM

@@ -1,0 +1,19 @@
+Matériaux, sollicitations et procédés de fabrication
+====================================================
+
+Type : Connaissances
+Niveau : Cycle 4
+Source : Programme 2024
+Statut : official
+Source originale : https://sti.eduscol.education.fr/sites/eduscol.education.fr.sti/files/textes//16802-programme-de-technologie-c4.pdf
+
+RÉSUMÉ
+Les élèves relient choix de matériaux, propriétés, sollicitations, procédés de mise en forme et impacts environnementaux.
+
+CONTENU INDEXÉ
+Les activités sur les matériaux visent à caractériser leurs propriétés et leur comportement, notamment sous différentes sollicitations, à choisir un matériau selon des critères et à relier ce choix aux procédés de fabrication. Le guide insiste sur la simulation et les protocoles d’essais.
+
+Les fiches Toulouse couvrent notamment caractéristiques des matériaux, procédés de mise en forme et transmission/mouvement. Les projets de réparation et prototypage donnent un contexte concret à ces connaissances.
+
+MOTS-CLÉS
+matériaux, flexion, torsion, propriétés, procédé, mise en forme, fabrication additive, découpe laser

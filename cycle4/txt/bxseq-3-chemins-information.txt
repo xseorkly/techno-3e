@@ -1,0 +1,17 @@
+Séquence 6 (3e) – Les chemins de l'information
+==============================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2026/06/19/exemples-de-sequences-3eme/
+
+RÉSUMÉ
+Représenter la circulation de l'information sur un réseau à l'aide de Filius.
+
+CONTENU INDEXÉ
+Avec le logiciel Filius et un réseau virtuel, les élèves représentent et justifient les chemins empruntés par l'information dans un réseau informatique.
+
+MOTS-CLÉS
+réseau informatique, Filius, circulation de l'information, routage

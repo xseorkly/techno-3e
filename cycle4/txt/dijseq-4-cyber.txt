@@ -1,0 +1,17 @@
+Séquence (4e) – Cybersécurité : identification et protection des données personnelles
+=====================================================================================
+
+Type : Séquences
+Niveau : 4e
+Source : Académie de Dijon
+Statut : academic
+Source originale : https://sti.eduscol.education.fr/ressources_pedagogiques/sequences-pour-la-4eme-la-rentree-2025
+
+RÉSUMÉ
+Découvrir les notions d'identification, de protection des données et d'outils de cryptage.
+
+CONTENU INDEXÉ
+Younesse El-Mourtadi et Sébastien Ponsot proposent une séquence de 3 séances sur le thème de la cybersécurité, où les élèves découvrent identification, protection des données personnelles et outils de cryptage.
+
+MOTS-CLÉS
+cybersécurité, protection des données, identification, cryptage

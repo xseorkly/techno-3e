@@ -1,0 +1,17 @@
+Séquence (5e) – Comment fonctionne l'imprimante 3D du collège ?
+===============================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie d'Amiens
+Statut : academic
+Source originale : https://sti.ac-amiens.fr/1143-liste-des-sequences-proposees.html
+
+RÉSUMÉ
+Découvrir le fonctionnement de l'imprimante 3D du laboratoire de technologie.
+
+CONTENU INDEXÉ
+Cette séquence fait découvrir aux élèves le principe de fonctionnement d'une imprimante 3D et les usages possibles en fabrication numérique.
+
+MOTS-CLÉS
+impression 3D, fabrication numérique, FabLab

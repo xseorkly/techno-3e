@@ -1,0 +1,17 @@
+Séquence 7 (3e) – En panne ! Diagnostique, répare, fabrique la pièce manquante
+==============================================================================
+
+Type : Séquences
+Niveau : 3e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2026/06/19/exemples-de-sequences-3eme/
+
+RÉSUMÉ
+Diagnostiquer la panne d'un distributeur automatique de savon et fabriquer la pièce de remplacement.
+
+CONTENU INDEXÉ
+Face à un distributeur automatique de savon en panne, les élèves utilisent du matériel de prototypage électronique, un voltmètre puis Onshape et une imprimante 3D pour diagnostiquer et réparer l'objet.
+
+MOTS-CLÉS
+réparabilité, diagnostic de panne, impression 3D, Onshape, prototypage électronique

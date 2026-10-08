@@ -1,0 +1,17 @@
+Séquence 10a/10b (5e) – Conception et fabrication d'un guide de balle pour robot
+================================================================================
+
+Type : Séquences
+Niveau : 5e
+Source : Académie de Bordeaux
+Statut : academic
+Source originale : https://ent2d.ac-bordeaux.fr/disciplines/sti-college/2024/06/13/exemples-de-sequences-academie-bordeaux/
+
+RÉSUMÉ
+Concevoir puis fabriquer par impression 3D ou découpe laser un guide de balle pour un robot footballeur.
+
+CONTENU INDEXÉ
+Les élèves choisissent des matériaux, prototypent et fabriquent (impression 3D, découpe laser ou outillage classique) un guide de balle destiné à équiper un robot Maqueen pour jouer au football.
+
+MOTS-CLÉS
+gestion de projet, fabrication, impression 3D, découpe laser, robot Maqueen
