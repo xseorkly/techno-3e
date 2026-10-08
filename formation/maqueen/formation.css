@@ -45,3 +45,15 @@ details.classe summary{cursor:pointer;list-style:none}details.classe summary b{d
 .pager{margin-top:34px}
 @media(max-width:760px){.steps3,.words,.facts{grid-template-columns:1fr}.bcard{padding:14px}.bcard.d1{margin-left:10px}.bcard.d2{margin-left:20px}.bcard.d3{margin-left:30px}.card{padding:20px}.fnum{font-size:22px;min-width:34px}}
 @media print{.bcard{break-inside:avoid}.nav,.pager{display:none}}
+
+/* === Maqueen merged === */
+.hint{display:inline-block;background:var(--amberp);color:#684800;border-radius:6px;padding:1px 7px;font-size:13px;font-weight:700;margin-left:6px}
+.path{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.pstep{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+.pstep:hover{border-color:var(--teal)}.pn{font:700 28px Archivo,sans-serif;color:var(--teal)}.pa{color:var(--mag);font-weight:700;font-size:14px;margin-top:auto}
+.classedl>div{padding:10px 0;border-bottom:1px solid var(--line)}.classedl dt{font:700 12px Archivo,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--teal)}.classedl dd{margin:3px 0 0}
+.sit .probleme{font:600 19px/1.4 Archivo,sans-serif;background:var(--pale);border-radius:12px;padding:14px 16px}
+.parts-table td:first-child,.cmp td:first-child{width:auto}.cmp th:first-child{width:18%}.cmp td,.cmp th{font-size:15px}
+pre.code,.code{background:#14262B;color:#E8F3F2;border-radius:12px;padding:16px;overflow-x:auto;font:14px/1.5 ui-monospace,Menlo,monospace;white-space:pre}
+form.canevas{display:grid;gap:12px}form.canevas label{font-weight:600;display:grid;gap:5px}form.canevas textarea{font:inherit;border:1px solid #B8C7C8;border-radius:10px;padding:10px;width:100%;resize:vertical}
+@media(max-width:900px){.path{grid-template-columns:1fr}}
