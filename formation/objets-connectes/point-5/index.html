@@ -115,21 +115,39 @@ function envoyer(valeur) {
 <section class="section">
 <h2>6. Programmer la lecture de la commande</h2>
 <div class="card">
-<h3>Logique générale</h3>
+<h3>Logique générale (version de classe sécurisée)</h3>
+<p>La version « simple » (lire, puis activer ou arrêter) a un défaut : <strong>si la lecture échoue, le dernier ordre reste actif</strong>. Un moteur lancé peut donc continuer à tourner quand le Wi‑Fi tombe ou que ThingSpeak ne répond plus. La version ci-dessous prévoit un état de repli, un délai maximal et un arrêt manuel.</p>
 <pre>AU DÉMARRAGE
   initialiser ESP8266 : Tx P16 / Rx P15 / 115200
   se connecter au Wi‑Fi
+  arrêter l’actionneur            (état de repli = arrêt)
+  échecs ← 0
+  armé ← faux                     (on n’accepte « 1 » qu’après avoir lu « 0 »)
 
 TOUJOURS
+  SI bouton A pressé
+      arrêter l’actionneur ; armé ← faux     (arrêt manuel, prioritaire)
+
   commande ← lire ThingSpeak canal ID champ 4 clé READ_API_KEY
 
   SI lecture réussie
-      SI commande = 1
-          activer l’actionneur
-      SINON
-          arrêter l’actionneur
+      échecs ← 0
+      SI commande = 0
+          arrêter l’actionneur ; armé ← vrai
+      SINON SI commande = 1 ET armé
+          activer l’actionneur ; (relancer un minuteur de 10 s)
+  SINON
+      échecs ← échecs + 1
+      SI échecs ≥ 3
+          arrêter l’actionneur ; afficher « ! » sur la matrice
 
+  SI le minuteur de 10 s est écoulé
+      arrêter l’actionneur ; armé ← faux     (une commande doit être renouvelée)
+
+  afficher l’état réel de l’actionneur sur la matrice
   attendre 2 secondes</pre>
+<div class="callout"><strong>Pourquoi ces ajouts ?</strong> <em>État de repli</em> : en cas de doute, l’actionneur s’arrête. <em>Armement</em> : un « 1 » oublié dans le champ depuis la veille ne relance pas le moteur au démarrage. <em>Délai maximal</em> : une commande « marche » n’est valable que 10 secondes, il faut la renouveler. <em>Retour d’état</em> : la matrice affiche ce que fait vraiment l’actionneur, pas ce que demande le cloud. <em>Arrêt manuel</em> : le bouton A coupe toujours, sans dépendre d’Internet.</div>
+<p class="small">Cette logique est une proposition de conception à traduire et tester : elle n’a pas été essayée sur le matériel réel. Gardez aussi une <strong>alternative hors cloud</strong> pour la classe (commande locale par boutons ou par radio entre deux micro:bit), car l’extension est expérimentale.</p>
 </div>
 </section>
 
@@ -151,6 +169,7 @@ TOUJOURS
 <div class="step"><div class="num">B</div><h3>ThingSpeak</h3><p>Écrivez manuellement 0 puis 1 dans le champ et vérifiez l’historique.</p></div>
 <div class="step"><div class="num">C</div><h3>Lecture</h3><p>Affichez d’abord la valeur 0 ou 1 sur la matrice micro:bit.</p></div>
 <div class="step"><div class="num">D</div><h3>Action</h3><p>Seulement après, branchez M1, P0 ou S1 et testez le comportement.</p></div>
+<div class="step"><div class="num">E</div><h3>Panne</h3><p>Moteur en marche, coupez le Wi‑Fi (ou débranchez la box). L’actionneur doit s’arrêter au bout de quelques secondes et la matrice doit afficher « ! ». Appuyez aussi sur le bouton A : arrêt immédiat. Premiers essais <strong>roues ou hélice levées</strong>.</p></div>
 </div>
 </section>
 
