@@ -160,3 +160,10 @@ details.obj summary::-webkit-details-marker{display:none}
 details.obj[open]{border-color:var(--teal)}
 .printsheet{display:grid;gap:10px}.pc{border:2px solid #000;padding:14px;min-height:110px;display:grid;gap:4px;align-content:start}.pc span{color:#555;font-size:14px}
 @media print{.shead .back,.actions,.footer{display:none}.pc{min-height:90px}}
+
+details.seq{border:1.5px solid var(--line);border-radius:12px;background:#fff;margin:8px 0}
+details.seq summary{display:grid;gap:2px;padding:12px 14px;cursor:pointer;list-style:none}
+details.seq summary::-webkit-details-marker{display:none}
+details.seq[open]{border-color:var(--teal)}.seqin{padding:0 14px 12px}
+.cell:nth-child(7){grid-column:auto}
+.pbreak{page-break-before:always;margin-top:24px}
