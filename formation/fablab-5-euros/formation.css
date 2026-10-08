@@ -157,3 +157,11 @@ table.budget th{font-size:13px;text-align:left;padding:6px}
 .bs.over{border-color:var(--mag);background:var(--magp)}.bs.over b,.bs.over .bm{color:var(--mag);font-weight:700}
 .fv.over{color:var(--mag);font-weight:600}
 @media(max-width:700px){table.budget{min-width:640px}}
+
+input.tx{padding:9px 11px;border:1.5px solid var(--line);border-radius:10px;font:inherit;width:100%;box-sizing:border-box;background:#fff}
+.seance{padding:14px;border:1.5px solid var(--line);border-radius:14px;background:#fff;margin:10px 0;display:grid;gap:8px}
+.seance h3{margin:0;font:700 17px Archivo,sans-serif;color:var(--teal)}
+.srow{display:grid;grid-template-columns:3fr 1fr;gap:10px}
+@media(max-width:600px){.srow{grid-template-columns:1fr}}
+.callout.over{border-color:var(--mag);background:var(--magp);color:var(--mag);font-weight:600}
+.fv{white-space:pre-wrap}

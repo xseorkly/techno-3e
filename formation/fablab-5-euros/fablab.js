@@ -16,15 +16,17 @@ function showBudget(){
   var b=budget();var s=document.getElementById('bsum');if(!s)return;
   [['obj',b.per,5],['tot',b.tot,50]].forEach(function(r){var e=s.querySelector('[data-bs='+r[0]+']');e.querySelector('b').textContent=eur(r[1]);e.className='bs '+(r[1]>r[2]?'over':(r[1]>0?'ok':''));e.querySelector('.bm').textContent=(r[1]>r[2]?'dépasse le maximum de ':'maximum ')+r[2]+' €'});
 }
+function echo(){var e=document.getElementById('echo-budget');if(!e)return;var b=budget();e.textContent='Vos totaux de l’étape 4 : un objet coûte '+eur(b.per)+' (maximum 5 €) ; matériel total '+eur(b.tot)+' pour '+b.nb+' objet'+(b.nb>1?'s':'')+' (maximum 50 €).';e.className='callout'+((b.per>5||b.tot>50)?' over':'')}
 function cardCount(){var c=document.getElementById('ccount');if(!c)return;var n=document.querySelectorAll('input[data-card]:checked').length;c.textContent=n+(n>1?' cartes cochées':' carte cochée')+(n>6?' : essayez de n’en garder que 6 au plus':'')}
 [].forEach.call(document.querySelectorAll('[data-k]'),function(el){
   var k=el.getAttribute('data-k');
-  if(el.type==='checkbox'){el.checked=(st[k]==='1');el.addEventListener('change',function(){st[k]=el.checked?'1':'';save();cardCount()});}
+  if(el.type==='radio'){el.checked=(st[k]===el.value);el.addEventListener('change',function(){if(el.checked){st[k]=el.value;save()}});}
+  else if(el.type==='checkbox'){el.checked=(st[k]==='1');el.addEventListener('change',function(){st[k]=el.checked?'1':'';save();cardCount()});}
   else{if(st[k]!==undefined)el.value=st[k];if(el.tagName==='TEXTAREA')grow(el);
     var ev=(el.tagName==='SELECT')?'change':'input';
     el.addEventListener(ev,function(){st[k]=el.value;if(el.tagName==='TEXTAREA')grow(el);save();showBudget()});}
 });
-showBudget();cardCount();
+showBudget();cardCount();echo();
 var tb=document.getElementById('tmr');
 if(tb){
   var out=document.getElementById('tmrout'),iv=null;
@@ -51,6 +53,14 @@ if(window.SECT){
         l.textContent=f[1];var sel=(window.CARDS||[]).filter(function(c){return st['card_'+c[0]]==='1'});
         var t2=sel.length?sel.map(function(c){return c[0]+' · '+c[1]+' — '+c[2]}).join('\n'):'— (aucune carte cochée)';
         a.className='fv'+(sel.length?'':' empty');a.textContent=t2;txt+='\n'+f[1]+'\n'+t2+'\n';
+      }else if(f[0].indexOf('@checks:')===0){
+        var pp=f[0].split(':'),pre=pp[1],cnt=parseInt(pp[2],10),lst=(window.LISTS&&window.LISTS[pre])||[],pk=[];
+        for(var q=0;q<cnt;q++){if(st[pre+q]==='1')pk.push('• '+(lst[q]||('élément '+(q+1))))}
+        l.textContent=f[1];var t3=pk.length?pk.join('\n'):'— (rien de coché)';a.className='fv'+(pk.length?'':' empty');a.textContent=t3;txt+='\n'+f[1]+'\n'+t3+'\n';
+      }else if(f[0]==='@seances'){
+        l.textContent=f[1];var sp=[],tm=0;
+        for(var z=1;z<=5;z++){if(st['se'+z+'t']||st['se'+z+'e']||st['se'+z+'p']){tm+=num(st['se'+z+'d']);sp.push('Séance '+z+' : '+(st['se'+z+'t']||'(sans titre)')+' ('+(st['se'+z+'d']||'?')+' min)\n  Élève : '+(st['se'+z+'e']||'—')+'\n  Enseignant : '+(st['se'+z+'p']||'—')+'\n  Trace : '+(st['se'+z+'r']||'—'))}}
+        var t4=sp.length?sp.join('\n\n')+'\n\nTotal : '+tm+' min':'— (aucune séance décrite)';a.className='fv'+(sp.length?'':' empty');a.textContent=t4;txt+='\n'+f[1]+'\n'+t4+'\n';
       }else{
         l.textContent=f[1];var v=(st[f[0]]||'').trim();a.className='fv'+(v?'':' empty');a.textContent=v||'— (non rempli)';txt+='\n'+f[1]+'\n'+(v||'—')+'\n';
       }
