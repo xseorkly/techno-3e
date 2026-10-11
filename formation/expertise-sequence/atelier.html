@@ -1,0 +1,160 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fiche du groupe — Expertiser une séquence</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="formation.css">
+<style>
+.manche{border-left:6px solid var(--teal)}
+.mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.mhead h2{margin:4px 0}
+.timer{border:2px solid var(--teal);background:#fff;color:var(--teal2);border-radius:999px;padding:7px 14px;font:700 15px Archivo,sans-serif;cursor:pointer;min-width:118px}
+.timer.run{background:var(--teal);color:#fff}.timer.end{border-color:var(--mag);background:var(--mag);color:#fff}
+.f{margin:14px 0}.f>strong{display:block}.f small{display:block;color:var(--muted);margin:2px 0 7px}
+.f textarea,.f input[type=text]{width:100%;border:1px solid #b9c9ca;border-radius:9px;padding:10px;font:inherit;background:#fff}
+.f textarea{min-height:64px;resize:vertical}
+.pick{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.pick label{display:block;border:2px solid var(--line);border-radius:12px;padding:10px;cursor:pointer;background:#fff;font-size:15px;line-height:1.3}
+.pick input{position:absolute;opacity:0}
+.pick label b{display:block;font:700 20px Archivo,sans-serif;color:var(--teal)}
+.pick label:has(input:checked){border-color:var(--teal);background:var(--pale)}
+.pick label:has(input:focus-visible){outline:3px solid var(--mag)}
+.gq{display:none;margin-top:12px;background:#f7fbfb;border-left:4px solid var(--teal);padding:11px 13px;border-radius:8px}
+.lensblock{border:1px solid var(--line);border-top:6px solid var(--c);border-radius:14px;padding:6px 16px 10px;margin:16px 0;background:#fff}
+.lensblock h3{color:var(--c);margin:10px 0 0}.lensblock .sous{margin:0;color:var(--muted);font-style:italic}
+.qrow{padding:12px 0;border-top:1px dashed var(--line)}.qrow:first-of-type{border-top:0}
+.qrow .qt{font-weight:700}.qrow .qa{color:var(--muted);font-size:15px;margin:2px 0 8px}
+.seg{display:inline-flex;border:1px solid #b9c9ca;border-radius:10px;overflow:hidden;margin-bottom:8px;flex-wrap:wrap}
+.seg button{border:0;background:#fff;padding:7px 12px;font:600 14px "Source Sans 3",sans-serif;cursor:pointer;border-right:1px solid #dbe5e5}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true][data-v=solide]{background:#2e7d4f;color:#fff}
+.seg button[aria-pressed=true][data-v=renforcer]{background:#d98b00;color:#fff}
+.seg button[aria-pressed=true][data-v=absent]{background:#b3261e;color:#fff}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 8px}
+.chips button{border:2px solid var(--c);color:var(--c);background:#fff;border-radius:999px;padding:4px 11px;font:700 13px Archivo,sans-serif;cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--c);color:#fff}
+.modif{border:1px solid var(--line);border-radius:12px;padding:4px 14px;margin:12px 0;background:#fcfdfd}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.danger{background:#fff;color:#b3261e;border:1px solid #e3b5b1!important}
+.saved{color:var(--muted);font-size:14px;margin-left:auto;align-self:center}
+/* écran de restitution */
+#resti{position:fixed;inset:0;background:#f4f7f7;z-index:10000;overflow:auto;display:none;padding:28px}
+#resti.open{display:block}
+.rs{max-width:1200px;margin:auto}
+.rs h1{font:700 clamp(28px,4vw,46px)/1.1 Archivo,sans-serif;margin:6px 0 4px}
+.rs .meta{color:var(--muted);font-size:18px}
+.rs-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+.rs-box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;font-size:20px;line-height:1.4}
+.rs-box h2{font:700 14px Archivo,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+.rs-box.wide{grid-column:1/-1}
+.rs-box .lab{display:inline-block;color:#fff;border-radius:999px;padding:2px 10px;font:700 13px Archivo,sans-serif;margin-right:6px;vertical-align:2px}
+.rs-dots{display:flex;gap:10px;flex-wrap:wrap}
+.rs-dot{display:flex;align-items:center;gap:7px;font-size:16px}.rs-dot i{width:16px;height:16px;border-radius:50%;background:#ccc;display:inline-block}
+.rs-close{position:fixed;top:14px;right:18px}
+.empty{color:#9aa9ad;font-style:italic}
+@media(max-width:860px){.pick{grid-template-columns:1fr 1fr}.rs-grid{grid-template-columns:1fr}}
+@media print{.fnav,.nav,.timer,.actions,#correction-root,.formation-print-tools{display:none!important}.card,.hero{box-shadow:none}.f textarea{min-height:0;border:0;padding:0}body{font-size:13px}.page{padding:0}.lensblock,.modif{break-inside:avoid}}
+</style>
+<script>if(sessionStorage.getItem('formation_teachers_unlocked_v1')!=='1')location.replace('../index.html');</script><style id="navbar-css">.fnav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:4px 14px;background:transparent;font:500 13px/1.3 "Source Sans 3",Arial,sans-serif}.fnav a{color:#5b6b6a!important;text-decoration:none!important;padding:2px 0;background:none;border-radius:0}.fnav a:hover,.fnav a:focus-visible{color:#0f6b66!important;text-decoration:underline!important}@media print{.fnav{display:none}}</style></head>
+<body><nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a><a href="index.html">↑ Présentation de l’atelier</a></nav>
+<main class="page">
+<header class="hero">
+  <div class="brand">Expertiser une séquence · Fiche du groupe · 60 min</div>
+  <h1>Lundi, c’est vous qui la menez</h1>
+  <p class="lead">Trois manches pour passer d’une séquence que vous n’avez pas écrite à une décision que vous pouvez défendre devant vos collègues. Tout s’enregistre dans ce navigateur : gardez le même ordinateur.</p>
+</header>
+
+<section class="section"><div class="card mission">
+  <span class="kicker">Avant de commencer</span>
+  <h2>Notre groupe</h2>
+  <div class="f"><strong>Notre séquence</strong><div class="pick" id="pick"></div><div class="gq" id="gq"></div></div>
+  <div class="f"><strong>Membres du groupe</strong><input type="text" data-f="membres" placeholder="Prénoms"></div>
+</div></section>
+
+<section class="section"><div class="card manche">
+  <div class="mhead"><div><span class="kicker">Manche 1 · 10 min</span><h2>Lisez la séquence comme un élève</h2></div><button class="timer" type="button" data-min="10">▶ 10:00</button></div>
+  <p>Parcourez les documents élèves dans l’ordre, sans rien corriger. Deux phrases suffisent.</p>
+  <div class="f"><strong>Ce que l’élève fait</strong><small>« Dans cette séquence, l’élève… » (ce qu’il voit, reçoit, fait et produit)</small><textarea data-f="fait"></textarea></div>
+  <div class="f"><strong>Ce que l’élève doit apprendre</strong><small>« À la fin, l’élève est capable de… » Une seule phrase, avec un verbe : expliquer, choisir, justifier, concevoir…</small><textarea data-f="apprendre"></textarea></div>
+</div></section>
+
+<section class="section"><div class="card manche">
+  <div class="mhead"><div><span class="kicker">Manche 2 · 30 min</span><h2>Trois lunettes, six questions</h2></div><button class="timer" type="button" data-min="30">▶ 30:00</button></div>
+  <p>Pour chaque question : un verdict, puis <strong>l’indice</strong> qui le justifie (une consigne, un document, une production). Une ligne suffit. Environ 5 minutes par question.</p>
+  <div id="lensWork"></div>
+</div></section>
+
+<section class="section"><div class="card manche">
+  <div class="mhead"><div><span class="kicker">Manche 3 · 20 min</span><h2>Décidez</h2></div><button class="timer" type="button" data-min="20">▶ 20:00</button></div>
+  <p>Partez de vos verdicts « à renforcer » ou « absent ». Choisissez ce qui aura le plus d’effet sur l’apprentissage.</p>
+  <div class="f"><strong>On garde…</strong><small>Ce qui fait réellement apprendre, et que vous ne toucheriez pas.</small><textarea data-f="garde"></textarea></div>
+  <div class="modif" id="m1"><div class="f"><strong>On modifie… (modification 1)</strong><small>Précisément : quelle consigne, quel moment, quel document change ?</small><textarea data-f="m1"></textarea></div><div class="f"><strong>Lunette qui la justifie</strong><div class="chips" data-chip="m1l"></div><input type="text" data-f="m1p" placeholder="Parce que… (l’obstacle ou la difficulté traités)"></div></div>
+  <div class="modif" id="m2"><div class="f"><strong>Modification 2 (facultative)</strong><textarea data-f="m2"></textarea></div><div class="f"><strong>Lunette qui la justifie</strong><div class="chips" data-chip="m2l"></div><input type="text" data-f="m2p" placeholder="Parce que…"></div></div>
+  <div class="f"><strong>On saura que ça marche si…</strong><small>La preuve que vous chercherez chez <em>chaque</em> élève, pas seulement chez le groupe.</small><textarea data-f="preuve"></textarea></div>
+  <div class="f" style="background:#fdf6f9;border-radius:12px;padding:12px 14px"><strong>Notre question primordiale</strong><small>« Quand on récupère une activité qu’on n’a pas conçue, il faut d’abord se demander : … » Elle rejoindra l’aide-mémoire collectif.</small><input type="text" data-f="primordiale" placeholder="Il faut d’abord se demander…"><div class="chips" data-chip="primL" style="margin-top:8px"></div></div>
+</div></section>
+
+<section class="section"><div class="card mirror">
+  <span class="kicker">Restitution · 4 min</span>
+  <h2>Votre écran est prêt</h2>
+  <p>Il reprend automatiquement vos réponses : la séquence, ce que vous gardez, vos modifications et votre question primordiale.</p>
+  <div class="actions"><button class="btn primary" type="button" id="openResti">Afficher notre restitution en plein écran</button><button class="btn secondary" type="button" onclick="print()">Imprimer la fiche</button><button class="btn secondary" type="button" id="exportJson">Télécharger (JSON)</button><button class="btn danger" type="button" id="reset">Effacer la fiche</button><span class="saved" id="saved"></span></div>
+</div></section>
+
+<div id="correction-root"></div>
+<div class="footer">Le but n’est pas de trouver des défauts : c’est de pouvoir expliquer, preuves à l’appui, pourquoi une séquence fait apprendre et comment la renforcer.</div>
+</main>
+
+<div id="resti" role="dialog" aria-modal="true" aria-label="Écran de restitution"><button class="btn secondary rs-close" type="button" id="closeResti">✕ Fermer</button><div class="rs" id="rsBody"></div></div>
+
+<script src="sequences.js"></script>
+<script>
+(()=>{
+const E=window.EXPERTISE,K='expertise90_fiche_v1';
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let st={};try{st=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(st));document.getElementById('saved').textContent='Enregistré à '+new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}catch(e){document.getElementById('saved').textContent='Enregistrement impossible dans ce navigateur'}};
+const L=Object.fromEntries(E.lunettes.map(l=>[l.id,l]));
+const VERD={solide:['Solide','#2e7d4f'],renforcer:['À renforcer','#d98b00'],absent:['Absent','#b3261e']};
+
+/* choix de la séquence */
+const pick=document.getElementById('pick');
+pick.innerHTML=E.sequences.map(s=>`<label><input type="radio" name="seq" value="${s.id}"><b>${s.id}</b>${esc(s.titre)}</label>`).join('');
+const showGq=()=>{const s=E.sequences.find(x=>String(x.id)===String(st.seq));const g=document.getElementById('gq');if(!s){g.style.display='none';return}g.style.display='block';g.innerHTML=`<strong>Question de votre groupe :</strong> ${esc(s.question)} <a href="${E.source}" target="_blank" rel="noopener">Ouvrir la séquence ↗</a>`};
+pick.querySelectorAll('input').forEach(r=>{r.checked=String(st.seq)===r.value;r.addEventListener('change',()=>{st.seq=r.value;save();showGq()})});showGq();
+
+/* lunettes */
+document.getElementById('lensWork').innerHTML=E.lunettes.map(l=>`<div class="lensblock" style="--c:${l.couleur}"><h3>Lunette ${esc(l.nom.toLowerCase())}</h3><p class="sous">${esc(l.sous)}</p>${l.questions.map(q=>`<div class="qrow"><div class="qt">${q.id} · ${esc(q.titre)}</div><div class="qa">${esc(q.aide)}</div><div class="seg" role="group" aria-label="Verdict ${q.id}" data-seg="${q.id}">${Object.entries(VERD).map(([v,[t]])=>`<button type="button" data-v="${v}" aria-pressed="false">${t}</button>`).join('')}</div><div class="f" style="margin:0"><input type="text" data-f="${q.id}_i" placeholder="Notre indice dans la séquence…"></div></div>`).join('')}</div>`).join('');
+document.querySelectorAll('[data-seg]').forEach(g=>{const k=g.dataset.seg+'_v';const paint=()=>g.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',st[k]===b.dataset.v));paint();g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[k]=st[k]===b.dataset.v?'':b.dataset.v;paint();save()})});
+
+/* puces de lunette */
+document.querySelectorAll('[data-chip]').forEach(c=>{const k=c.dataset.chip;c.innerHTML=E.lunettes.map(l=>`<button type="button" style="--c:${l.couleur}" data-v="${l.id}" aria-pressed="false">${esc(l.nom)}</button>`).join('');const paint=()=>c.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',st[k]===b.dataset.v));paint();c.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[k]=st[k]===b.dataset.v?'':b.dataset.v;paint();save()})});
+
+/* champs texte */
+document.querySelectorAll('[data-f]').forEach(el=>{el.value=st[el.dataset.f]||'';el.addEventListener('input',()=>{st[el.dataset.f]=el.value;save()})});
+
+/* minuteurs */
+document.querySelectorAll('.timer').forEach(b=>{let left=b.dataset.min*60,id=null;const fmt=()=>`${String(Math.floor(left/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}`;
+b.addEventListener('click',()=>{if(left<=0){left=b.dataset.min*60;b.classList.remove('end');b.textContent='▶ '+fmt();return}
+if(id){clearInterval(id);id=null;b.classList.remove('run');b.textContent='▶ '+fmt();return}
+b.classList.add('run');b.textContent='❚❚ '+fmt();id=setInterval(()=>{left--;b.textContent='❚❚ '+fmt();if(left<=0){clearInterval(id);id=null;b.classList.remove('run');b.classList.add('end');b.textContent='Temps écoulé'}},1000)})});
+
+/* restitution */
+const val=(k)=>st[k]&&String(st[k]).trim()?esc(st[k]):'<span class="empty">à compléter</span>';
+const lab=(k)=>st[k]&&L[st[k]]?`<span class="lab" style="background:${L[st[k]].couleur}">${esc(L[st[k]].nom)}</span>`:'';
+function render(){const s=E.sequences.find(x=>String(x.id)===String(st.seq));
+const dots=E.lunettes.map(l=>l.questions.map(q=>{const v=st[q.id+'_v'];return `<span class="rs-dot"><i style="background:${v?VERD[v][1]:'#ccc'}"></i>${q.id} ${esc(q.titre)}</span>`}).join('')).join('');
+const m2=st.m2&&st.m2.trim()?`<p style="margin:12px 0 0">${lab('m2l')}${esc(st.m2)}${st.m2p?` <em>— parce que ${esc(st.m2p)}</em>`:''}</p>`:'';
+document.getElementById('rsBody').innerHTML=`<div class="kicker">Groupe ${s?s.id:'?'} · Restitution · 4 min</div><h1>${s?esc(s.titre):'Séquence non choisie'}</h1><div class="meta">${s?esc(s.code)+' · ':''}${esc(st.membres||'')}</div>
+<div class="rs-grid">
+<div class="rs-box"><h2>1 · Notre séquence</h2><p style="margin:0"><strong>L’élève fait :</strong> ${val('fait')}</p><p style="margin:10px 0 0"><strong>Il doit apprendre :</strong> ${val('apprendre')}</p></div>
+<div class="rs-box"><h2>2 · Ce qu’on garde</h2>${val('garde')}</div>
+<div class="rs-box wide"><h2>3 · Ce qu’on modifie</h2><p style="margin:0">${lab('m1l')}${val('m1')}${st.m1p?` <em>— parce que ${esc(st.m1p)}</em>`:''}</p>${m2}<p style="margin:12px 0 0"><strong>On saura que ça marche si…</strong> ${val('preuve')}</p></div>
+<div class="rs-box wide" style="background:#fdf6f9"><h2>4 · Notre question primordiale</h2><p style="margin:0;font-size:24px;font-weight:600">${lab('primL')}${val('primordiale')}</p></div>
+<div class="rs-box wide"><h2>Nos verdicts</h2><div class="rs-dots">${dots}</div></div></div>`}
+const R=document.getElementById('resti');
+document.getElementById('openResti').onclick=()=>{render();R.classList.add('open');document.getElementById('closeResti').focus()};
+document.getElementById('closeResti').onclick=()=>R.classList.remove('open');
+document.addEventListener('keydown',e=>{if(e.key==='Escape')R.classList.remove('open')});
+document.getElementById('exportJson').onclick=()=>{const s=E.sequences.find(x=>String(x.id)===String(st.seq));const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({atelier:'Expertiser une séquence',date:new Date().toISOString(),sequence:s?s.titre:null,...st},null,2)],{type:'application/json'}));a.download=`expertise-groupe-${st.seq||'x'}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+document.getElementById('reset').onclick=()=>{if(!confirm('Effacer toutes les réponses de cette fiche ?'))return;st={};try{localStorage.removeItem(K)}catch(e){}location.reload()};
+})();
+</script>
+<script src="corrections.js"></script>
+<script src="../common-tools.js"></script>
+</body></html>
