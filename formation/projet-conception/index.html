@@ -1,492 +1,70 @@
 <!doctype html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Du projet à la conception — Classe puzzle sur nos six séquences</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Du projet à la conception · Atelier de 90 minutes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../expertise-sequence/formation.css">
 <script>if(sessionStorage.getItem('formation_teachers_unlocked_v1')!=='1')location.replace('../index.html');</script>
-<style id="navbar-css">.fnav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:4px 14px;background:transparent;font:500 13px/1.3 "Source Sans 3",Arial,sans-serif}.fnav a{color:#5b6b6a!important;text-decoration:none!important;padding:2px 0;background:none;border-radius:0}.fnav a:hover,.fnav a:focus-visible{color:#0f6b66!important;text-decoration:underline!important}@media print{.fnav{display:none}}</style>
 <style>
-.hero{padding:26px 30px}.hero h1{margin:14px 0 8px;font-size:clamp(32px,5vw,54px)}
-.fil{position:relative;z-index:1;font:700 clamp(18px,2.2vw,23px)/1.3 Archivo,sans-serif;color:var(--mag);margin:10px 0 4px;max-width:60ch}
-.chips{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.chip{display:inline-block;padding:5px 11px;border-radius:999px;background:var(--pale);color:var(--teal2);font-weight:700;font-size:15px}
-.chip.m{background:var(--magp);color:var(--mag)}
-/* barre d'étapes */
-.stepper{position:sticky;top:0;z-index:20;background:rgba(244,247,247,.96);backdrop-filter:blur(6px);margin:14px -22px 0;padding:8px 22px;border-bottom:1px solid var(--line)}
-.stepper .row{display:flex;gap:6px;align-items:stretch;overflow-x:auto;scrollbar-width:thin}
-.stepper a{flex:1 0 auto;display:flex;flex-direction:column;justify-content:center;min-width:92px;padding:7px 10px;border-radius:10px;background:#fff;border:1px solid var(--line);color:var(--ink);text-decoration:none;font:700 14px/1.15 Archivo,sans-serif}
-.stepper a small{font:600 12px "Source Sans 3",sans-serif;color:var(--muted)}
-.stepper a.on{background:var(--c,var(--teal));border-color:var(--c,var(--teal));color:#fff}.stepper a.on small{color:#fff;opacity:.9}
-.stepper .tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px;font-size:14px;color:var(--muted)}
-.timer{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 4px 3px 12px;font:700 15px Archivo,sans-serif;color:var(--teal2)}
-.timer button{border:0;border-radius:999px;background:var(--pale);color:var(--teal2);font:700 13px "Source Sans 3",sans-serif;padding:4px 9px;cursor:pointer}
-.timer.done{border-color:var(--mag);color:var(--mag)}
-.me{margin-left:auto;font-weight:600}.me b{color:var(--teal2)}
-.view{display:none}.view.on{display:block}
-.vhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:22px 0 4px}
-.vhead h2{margin:0;font-size:clamp(26px,3.6vw,38px)}
-.vhead .time{font-weight:700;color:var(--mag)}
-.lead2{color:var(--muted);font-size:18px;max-width:75ch;margin:4px 0 0}
-.pager{display:flex;justify-content:space-between;gap:10px;margin:26px 0 0;flex-wrap:wrap}
-.pager .btn{font-size:17px;padding:12px 18px}
-/* circuit */
-.circuit{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:12px 0}
-.circuit div{position:relative;background:#fff;border:1px solid var(--line);border-top:5px solid var(--c);border-radius:12px;padding:10px 12px}
-.circuit b{display:block;font:700 16px Archivo,sans-serif;color:var(--c)}
-.circuit span{display:block;font-size:14px;color:var(--muted);line-height:1.3}
-.circuit i{font-style:normal;font:700 13px Archivo;color:var(--ink)}
-/* organisation */
-.calc{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.calc input[type=number]{width:96px;font:700 22px Archivo,sans-serif;padding:8px 10px;border:2px solid var(--teal);border-radius:10px;color:var(--teal2)}
-textarea.names{width:100%;min-height:110px;border:1px solid #b9c9ca;border-radius:10px;padding:10px;font:inherit}
-.summary{background:var(--pale);color:var(--teal2);border-radius:12px;padding:12px 14px;font-weight:600;margin:12px 0}
-.gtab{width:100%;border-collapse:collapse;font-size:15px}
-.gtab th,.gtab td{border:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
-.gtab th{background:var(--pale);color:var(--teal2)}
-.pb{display:inline-block;min-width:22px;text-align:center;border-radius:6px;color:#fff;font:700 12px Archivo;padding:1px 5px;margin-right:4px}
-.pb.A{background:#245d8a}.pb.B{background:#9a6900}.pb.C{background:#c2185b}
-.who{white-space:nowrap}
-.postes3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:10px 0}
-.postes3>div{background:#fff;border:1px solid var(--line);border-top:5px solid var(--c);border-radius:12px;padding:10px 12px}
-.postes3 h4{margin:0 0 6px;font:700 15px Archivo,sans-serif;color:var(--c)}
-.postes3 p{margin:4px 0;font-size:14.5px;color:var(--ink)}
-.scroll{overflow-x:auto}
-.route{display:grid;gap:8px;margin:12px 0}
-.route div{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-left:6px solid var(--c);border-radius:10px;padding:9px 12px}
-.route b{font:700 15px Archivo,sans-serif;color:var(--c)}
-.route span{font-size:16px}
-.route strong{color:var(--ink)}
-select.big{font:inherit;font-size:17px;padding:9px 10px;border-radius:10px;border:1px solid #b9c9ca;min-width:240px;max-width:100%}
-/* séquences */
-.seqs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0}
-.sq{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
-.sq .n{font:700 13px Archivo,sans-serif;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
-.sq h4{margin:2px 0 4px;font:700 17px Archivo,sans-serif}
-.sq p{margin:0 0 8px;font-size:14px;color:var(--muted)}
-.sq select{width:100%;font:inherit;font-size:15px;padding:6px;border-radius:8px;border:1px solid #b9c9ca}
-/* postes */
-.ptabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.ptabs button{flex:1 1 200px;border:2px solid var(--c);background:#fff;color:var(--c);border-radius:12px;padding:10px 12px;font:700 16px Archivo,sans-serif;cursor:pointer;text-align:left}
-.ptabs button small{display:block;font:600 13px "Source Sans 3",sans-serif;opacity:.85}
-.ptabs button[aria-pressed=true]{background:var(--c);color:#fff}
-.pcard{border-left:6px solid var(--c)}
-.pcard h3{font-size:clamp(22px,3vw,30px);margin:.2em 0;color:var(--c)}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
-.slist{background:#fbfdfd;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
-.slist h4{margin:0 0 6px;font:700 16px Archivo,sans-serif}
-.slist ol{margin:0;padding-left:1.4em;font-size:15px}.slist li{margin:3px 0}
-.slist a{color:var(--teal2);font-weight:600}
-.slist small{color:var(--muted)}
-.deroule{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:10px 0}
-.deroule span{background:var(--pale);color:var(--teal2);border-radius:9px;padding:8px;text-align:center;font-weight:700;font-size:14.5px}
-.plat{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
-.plat th,.plat td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:middle}
-.plat th{background:var(--pale);color:var(--teal2)}
-.plat td small{display:block;color:var(--muted);font-size:13px}
-.plat select{font:inherit;font-size:14.5px;padding:4px 6px;border-radius:7px;border:1px solid #b9c9ca;width:100%}
-.plat select[data-v="1"]{background:#fdf3f7}.plat select[data-v="2"]{background:#fffaeb}.plat select[data-v="3"]{background:#e6f4f2;font-weight:700}
-.q{margin:12px 0;padding:14px 15px;border:1px solid var(--line);border-radius:12px;background:#fbfdfd}
-.q .tag{display:inline-flex;gap:6px;align-items:center;font:700 12px Archivo,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--c,#5a6c71);border-radius:6px;padding:2px 8px;margin-bottom:6px}
-.q strong{display:block;font-size:17.5px;line-height:1.4;margin-bottom:6px}
-.q .help{font-size:15px;color:var(--muted);margin:6px 0}
-.q .look{font-size:14.5px;font-weight:700;color:var(--teal2)}
-.q textarea,.fld textarea{width:100%;border:1px solid #b9c9ca;border-radius:9px;padding:10px;font:inherit;background:#fff;min-height:84px;resize:vertical}
-.q details{margin-top:6px}.q summary{cursor:pointer;color:var(--teal2);font-weight:700;font-size:15px}
-.expert{border:3px solid var(--c);border-radius:16px;padding:14px 16px;background:#fff;margin-top:14px}
-.expert h3{margin:0 0 4px;color:var(--c)}
-.fld{margin:10px 0}.fld label{display:block;font-weight:700;margin-bottom:4px}
-.rule{background:var(--magp);border:1px solid #f0c3d6;color:#7a1240;border-radius:12px;padding:12px 16px;margin:12px 0}
-.rule b{display:block}.rule ul{margin:.4em 0 0;padding-left:1.2em}
-.mycard{background:#fff;border:1px dashed var(--c);border-radius:12px;padding:10px 14px;font-size:15.5px}
-.mycard p{margin:4px 0;color:var(--ink)}
-.curve{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;align-items:end;margin:12px 0}
-.curve .col{display:flex;flex-direction:column;align-items:center;gap:6px}
-.curve .bar{width:100%;max-width:70px;height:130px;background:#eef3f3;border-radius:10px;position:relative;overflow:hidden}
-.curve .bar i{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(180deg,#c2185b,#0e6e6b);border-radius:10px;transition:height .2s}
-.curve input{width:100%}
-.curve b{font:700 14px Archivo;text-align:center}.curve small{font-size:12px;color:var(--muted);text-align:center;line-height:1.2}
-.kgrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin:10px 0}
-.kgrid button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 4px;font:700 14px Archivo,sans-serif;cursor:pointer;color:var(--ink)}
-.kgrid button[aria-pressed=true]{background:var(--teal);border-color:var(--teal);color:#fff}
-.contrat{border:3px solid var(--teal);border-radius:16px;padding:14px 16px;background:#fff}
-.contrat .k{font:700 13px Archivo,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--mag)}
-.contrat h3{margin:4px 0 6px;font-size:clamp(20px,2.6vw,27px)}
-.contrat p{color:var(--ink);margin:4px 0}
-.ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:10px 0}
-.ways div{background:var(--pale);border-radius:10px;padding:10px 12px;color:var(--teal2);font-size:15.5px}.ways b{display:block;font-family:Archivo,sans-serif}
-.objs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:10px 0}
-.obj{background:#fff;border:1px solid var(--line);border-left:5px solid var(--mag);border-radius:10px;padding:12px 14px;font-weight:600}
-.meet{font:700 clamp(19px,2.4vw,24px)/1.35 Archivo,sans-serif;color:var(--ink);background:var(--magp);border-radius:14px;padding:14px 18px;margin:10px 0}
-.recap{background:var(--amberp);border-left:4px solid var(--amber);border-radius:8px;padding:10px 14px;color:#4a3800;margin:8px 0}
-.lock-row{display:flex;gap:8px;flex-wrap:wrap}.lock-row input{flex:1;min-width:180px;border:1px solid #b9c9ca;border-radius:9px;padding:10px;font:inherit}
-.formateur{margin-top:12px}
-.formateur h3{color:var(--teal2);margin-top:18px}
-.formateur .lect{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0}
-.formateur table{width:100%;border-collapse:collapse;font-size:15px}.formateur td,.formateur th{border:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}.formateur th{background:var(--pale)}
-/* projection */
-.proj{position:fixed;inset:0;z-index:100;background:#0d2a2c;color:#fff;display:none;flex-direction:column;padding:2.5vh 3vw;overflow:auto}
-.proj.open{display:flex}
-.proj .ph{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.proj .ph h2{margin:0;font-size:clamp(26px,3.4vw,46px);flex:1}
-.proj .big{font:700 clamp(40px,6vw,88px) Archivo;color:#ffd54f}
-.proj button{border:0;border-radius:10px;padding:10px 14px;background:#2b4146;color:#fff;font:700 16px Archivo;cursor:pointer}
-.proj .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:2vh}
-.proj .grid div{background:#16393c;border-radius:12px;padding:12px 14px;border-top:5px solid var(--c,#4fb3ad)}
-.proj .grid b{display:block;font:700 clamp(18px,1.7vw,24px) Archivo;color:var(--c2,#9fe0da)}
-.proj .grid span{display:block;font-size:clamp(15px,1.3vw,19px);line-height:1.35}
-.proj .tabs{display:flex;gap:8px;flex-wrap:wrap}
-.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--teal2);color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;z-index:200;display:none}
-.toast.on{display:block}
-.prt{display:none}
-@media(max-width:600px){.stepper a{min-width:auto;padding:6px 9px}.stepper a small{display:none}#projBtn{display:none}.stepper .tools{flex-wrap:nowrap}.me{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
-@media(max-width:860px){.circuit,.postes3,.seqs,.two,.ways,.objs{grid-template-columns:1fr}.deroule{grid-template-columns:1fr 1fr}.kgrid{grid-template-columns:repeat(3,1fr)}.curve{grid-template-columns:repeat(3,1fr)}.route div{grid-template-columns:1fr}.stepper{margin:10px -22px 0}}
-@media print{.stepper,.pager,.nav,.noprint,.ptabs,.proj,.toast,.fnav{display:none!important}.view{display:none!important}.prt{display:block!important}body{background:#fff}.card,.hero{box-shadow:none}}
-</style>
-</head>
-<body><nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a></nav>
-<main class="page">
-
-<header class="hero">
-  <div class="brand">Atelier transversal · Classe puzzle · 90 min</div>
-  <h1>Du projet à la conception</h1>
-  <p class="fil">Dans nos six séquences de 3e, à quel moment l’élève prend-il une décision qu’un autre élève aurait pu prendre autrement ?</p>
-  <p class="lead">Vous travaillez sur de vraies séquences, celles du site Technologie 3e. Vous devenez experts de deux d’entre elles, vous les expliquez à votre groupe, puis vous en transformez une sous contraintes et vous la défendez face à un autre groupe.</p>
-  <div class="chips"><span class="chip">6 séquences · 42 séances</span><span class="chip">3 postes d’experts</span><span class="chip m">Groupes de base de 3 ou 4</span></div>
-</header>
-
-<nav class="stepper" aria-label="Étapes de l’atelier">
-  <div class="row" id="steps"></div>
-  <div class="tools"><span class="timer" id="timer"><span id="tleft">05:00</span><button type="button" id="tgo">▶</button><button type="button" id="treset" aria-label="Remettre le minuteur à zéro">↺</button></span><button class="btn secondary small" type="button" id="projBtn" style="padding:5px 10px;font-size:14px">⛶ Projeter</button><span class="me" id="meBox"></span></div>
-</nav>
-
-<!-- ================= ORGANISATION ================= -->
-<section class="view" id="v-organisation">
-  <div class="vhead"><h2>Organisation</h2><span class="time">avant de commencer</span></div>
-  <p class="lead2">Le formateur saisit le nombre de participants (ou leurs noms). Tout le reste se calcule : groupes de base, postes d’experts, tables, contrats et confrontations. Chaque participant retrouve ensuite sa feuille de route.</p>
-
-  <div class="section"><div class="card mission">
-    <span class="kicker">Le circuit</span><h2>Cinq étapes, trois déplacements</h2>
-    <div class="circuit" id="circuit"></div>
-    <p style="margin:6px 0 0">Le principe de la classe puzzle : <strong>chacun devient expert d’un poste</strong> (deux séquences), puis revient dans son groupe de base où il est <strong>le seul à connaître ce poste</strong>. Le groupe a besoin de chacun pour transformer une séquence.</p>
-  </div></div>
-
-  <div class="section"><div class="card">
-    <span class="kicker">Formateur · 1 min</span><h2>Combien êtes-vous ?</h2>
-    <div class="calc"><label for="nPart"><strong>Participants</strong></label><input id="nPart" type="number" min="6" max="40" value="22"><span style="color:var(--muted)">ou collez les noms (un par ligne) :</span></div>
-    <textarea class="names" id="noms" placeholder="Un nom par ligne (facultatif). L’ordre décide des groupes : alternez les profils si vous le souhaitez."></textarea>
-    <div class="calc" style="margin-top:8px"><button class="btn secondary small" type="button" id="mix">🔀 Mélanger les noms</button><button class="btn secondary small" type="button" id="share">🔗 Copier le lien pour les participants</button><button class="btn primary small" type="button" id="projOrga">⛶ Projeter l’organisation</button></div>
-    <div class="summary" id="summary"></div>
-    <h3>Les groupes de base</h3>
-    <div class="scroll"><table class="gtab" id="gtab"></table></div>
-    <h3>Les postes d’experts</h3>
-    <div class="postes3" id="ptab"></div>
-  </div></div>
-
-  <div class="section"><div class="card mirror">
-    <span class="kicker">Chaque participant</span><h2>Ma feuille de route</h2>
-    <p>Choisissez votre nom : la page vous dit où aller à chaque étape, ouvre votre poste et votre contrat automatiquement.</p>
-    <select class="big" id="meSel" aria-label="Mon nom"></select>
-    <div class="route" id="route"></div>
-  </div></div>
-
-  <div class="section"><div class="card science noprint">
-    <span class="kicker">Formateur</span><h2>Lecture du formateur</h2>
-    <p>Ce que chaque poste doit faire émerger, le déroulé minute par minute, les relances et des réponses aux objections. Accès avec le mot de passe du formateur.</p>
-    <div class="lock-row"><input type="password" id="fPass" placeholder="Mot de passe formateur" autocomplete="off"><button class="btn primary" type="button" id="fOpen">Ouvrir</button></div>
-    <p id="fStatus" style="color:var(--mag);font-weight:700;margin:6px 0 0"></p>
-    <div class="formateur" id="fBox"></div>
-  </div></div>
-</section>
-
-<!-- ================= 1 LANCEMENT ================= -->
-<section class="view" id="v-lancement">
-  <div class="vhead"><h2>1 · Lancement</h2><span class="time">5 min · table de base · seul·e</span></div>
-  <p class="lead2">Avant d’ouvrir les séquences, notez votre intuition. Vous la comparerez à ce que votre groupe aura trouvé.</p>
-  <div class="section"><div class="card">
-    <span class="kicker">Seul·e · 3 min</span><h2>Les six séquences : où y a-t-il de la conception ?</h2>
-    <p>D’après ce que vous savez ou devinez de chaque séquence, sans l’ouvrir.</p>
-    <div class="seqs" id="seqs"></div>
-    <div class="q"><strong>Concevoir, pour un élève de 3e, c’est… (une phrase)</strong><textarea id="def1" data-save placeholder="Concevoir, c’est…"></textarea></div>
-  </div></div>
-  <div class="section"><div class="card mission">
-    <span class="kicker">Ensuite · 2 min</span><h2>Rejoignez votre poste d’experts</h2>
-    <div id="goPoste"></div>
-  </div></div>
-</section>
-
-<!-- ================= 2 EXPERTS ================= -->
-<section class="view" id="v-experts">
-  <div class="vhead"><h2>2 · Groupes d’experts</h2><span class="time">25 min · poste A, B ou C</span></div>
-  <p class="lead2">À votre poste, vous analysez deux séquences réelles. Dans 25 minutes, vous serez le seul expert de ce poste dans votre groupe de base : ce que vous ne rapportez pas, votre groupe ne le saura pas.</p>
-  <div class="ptabs" id="ptabs"></div>
-  <div id="posteBox"></div>
-</section>
-
-<!-- ================= 3 RETOUR ================= -->
-<section class="view" id="v-retour">
-  <div class="vhead"><h2>3 · Retour en groupe de base</h2><span class="time">25 min · table de base</span></div>
-  <p class="lead2">Trois experts, trois postes. D’abord vous mettez en commun, ensuite vous transformez une séquence avec un contrat imposé.</p>
-
-  <div class="section"><div class="card">
-    <span class="kicker">a · Restitution · 9 min</span><h2>Chaque expert présente son poste en 3 minutes</h2>
-    <p>Dans l’ordre A, B, C. Les autres posent chacun <strong>une</strong> question avant de passer au suivant. Pas de diaporama : la carte d’expert suffit.</p>
-    <div class="mycard" id="myCard"></div>
-    <div class="two">
-      <div class="q"><strong>Ce que je retiens du premier autre poste</strong><textarea id="ret1" data-save></textarea></div>
-      <div class="q"><strong>Ce que je retiens du second autre poste</strong><textarea id="ret2" data-save></textarea></div>
-    </div>
-  </div></div>
-
-  <div class="section"><div class="card">
-    <span class="kicker">b · La courbe de l’année · 3 min</span><h2>Où les élèves décident-ils, de septembre à juin ?</h2>
-    <p>Réglez ensemble, pour chaque séquence, la part des décisions de conception réellement laissées aux élèves (0 : aucune · 4 : beaucoup).</p>
-    <div class="curve" id="curve"></div>
-    <div class="q"><strong>Cette courbe est-elle une progression voulue ? Où placeriez-vous la première vraie décision de conception de l’année, et laquelle ?</strong><textarea id="courbeQ" data-save></textarea></div>
-  </div></div>
-
-  <div class="section"><div class="card mirror">
-    <span class="kicker">c · Transformer · 13 min</span><h2>Votre contrat</h2>
-    <p>Chaque contrat existe en deux versions opposées, α et β, confiées à deux groupes qui se rencontreront à l’étape suivante. Votre contrat est choisi automatiquement si vous avez sélectionné votre nom.</p>
-    <div class="kgrid" id="kgrid"></div>
-    <div id="contratBox"></div>
-  </div></div>
-</section>
-
-<!-- ================= 4 CONFRONTATION ================= -->
-<section class="view" id="v-confrontation">
-  <div class="vhead"><h2>4 · Confrontation</h2><span class="time">15 min · deux groupes, même séquence, contrats opposés</span></div>
-  <div class="meet" id="meet"></div>
-  <div class="section"><div class="card">
-    <span class="kicker">Déroulé</span>
-    <div class="deroule"><span>3 min · le groupe α présente</span><span>3 min · le groupe β présente</span><span>6 min · objections croisées</span><span>3 min · ce que l’autre contrat nous apprend</span></div>
-    <h3>Objections croisées</h3>
-    <p>Chaque groupe tire deux objections et les oppose à l’autre groupe, en jouant un collègue sceptique qui connaît bien sa classe. Réponse en deux phrases maximum, par l’une de ces trois manières :</p>
-    <div class="ways"><div><b>Une contrainte</b>Ce que l’on garde imposé, et pourquoi c’est ce cadre qui rend la décision possible.</div><div><b>Un test</b>Ce que l’on mesure, et comment l’échec d’un essai devient une information.</div><div><b>Une aide graduée</b>La relance, l’exemple partiel, le coup de pouce, sans reprendre la décision.</div></div>
-    <button class="btn primary" type="button" id="draw">🎲 Tirer deux objections</button>
-    <div class="objs" id="objs"></div>
-    <p style="font-size:15px;color:var(--muted)">« On verra » et « ça dépend des élèves » ne sont pas des réponses.</p>
-  </div></div>
-  <div class="section"><div class="card mirror">
-    <span class="kicker">Ensemble · 3 min</span><h2>Ce que l’autre contrat nous apprend</h2>
-    <div class="q"><strong>Lequel des deux contrats rend le savoir visé le plus nécessaire pour réussir ? Pourquoi ?</strong><textarea id="c1" data-save></textarea></div>
-    <div class="q"><strong>Lequel est faisable lundi, avec votre classe la plus difficile ? Qu’est-ce qui le rend faisable ?</strong><textarea id="c2" data-save></textarea></div>
-    <div class="q"><strong>Peut-on combiner les deux versions sans libérer plus de deux cartes ni ajouter de temps ? Si oui, comment ; sinon, que faut-il sacrifier ?</strong><textarea id="c3" data-save></textarea></div>
-  </div></div>
-</section>
-
-<!-- ================= 5 BILAN ================= -->
-<section class="view" id="v-bilan">
-  <div class="vhead"><h2>5 · Bilan</h2><span class="time">20 min · plénière puis seul·e</span></div>
-  <div class="section"><div class="card science">
-    <span class="kicker">Plénière · 12 min</span><h2>Ce que nos six séquences nous apprennent</h2>
-    <p>Le formateur projette le bilan. Chaque confrontation donne en une phrase le contrat qui a gagné, et pourquoi.</p>
-    <a class="btn primary" href="bilan.html">▶ Projeter le bilan</a>
-  </div></div>
-  <div class="section"><div class="card mirror">
-    <span class="kicker">Seul·e · 8 min</span><h2>Relire, puis transférer</h2>
-    <div class="recap" id="recap"></div>
-    <div class="q"><strong>Concevoir, pour un élève de 3e, c’est… (votre phrase aujourd’hui). Qu’est-ce qui a changé ?</strong><textarea id="def2" data-save></textarea></div>
-    <div class="q"><strong>Dans votre propre séquence, quelle carte est dans la mauvaise zone ? Laquelle déplacez-vous, et que supprimez-vous pour lui faire de la place ?</strong><textarea id="b2" data-save></textarea></div>
-    <div class="q"><strong>La question de transfert que vous poserez à vos élèves trois semaines après la fin du projet</strong><p class="help">Une situation nouvelle, qu’on ne réussit que si l’on a compris la décision prise pendant le projet.</p><textarea id="b3" data-save></textarea></div>
-    <div class="pager" style="margin-top:10px"><button class="btn primary" type="button" id="printAll">🖨 Imprimer ou enregistrer toutes mes réponses</button><button class="btn secondary" type="button" id="clearAll">Effacer mes réponses</button></div>
-  </div></div>
-</section>
-
-<div class="pager noprint" id="pager"></div>
-<div class="prt" id="prt"></div>
-<div class="footer">Atelier « Du projet à la conception » · Classe puzzle sur les séquences du site Technologie 3e · Formation enseignants de technologie · Fehmi KLABI</div>
-</main>
-
-<div class="proj" id="proj" role="dialog" aria-label="Projection">
-  <div class="ph"><h2 id="projTitle"></h2><span class="big" id="projTime"></span><button type="button" id="projGo">▶ / ❚❚</button><button type="button" id="projClose">✕ Fermer</button></div>
-  <div class="tabs" id="projTabs"></div>
-  <div id="projBody"></div>
-</div>
-<div class="toast" id="toast"></div>
-
-<script src="data.js?v=1"></script>
-<script src="formateur.js?v=1"></script>
-<script>
-(()=>{
-const P=window.PC,$=id=>document.getElementById(id),PFX='pc3_';
-const get=(k,d)=>P.read(PFX+k,d),set=(k,v)=>P.write(PFX+k,v);
-const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const toast=t=>{const e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),2200)};
-const VIEWS=['organisation',...P.ETAPES.map(e=>e.id)];
-const PC={A:'#245d8a',B:'#9a6900',C:'#c2185b'};
-
-/* ---------- import d'une organisation partagée ---------- */
-(function(){const m=location.hash.match(/o=([^&]+)/);if(m){const o=P.dec(m[1]);if(o){P.setOrga({n:o.n||22,noms:o.noms||''});toast('Organisation chargée : choisissez votre nom.');}history.replaceState(null,'','#organisation')}})();
-
-/* ---------- état ---------- */
-let plan=P.plan();const me=()=>{const n=get('me','');const r=n?P.route(plan,n):null;return r};
-function myPoste(){const r=me();return get('poste',r?r.moi.poste:'A')}
-function myContrat(){const r=me();return get('contrat',r?`${r.groupe.contrat}${r.groupe.variante}`:'0a')}
-
-/* ---------- barre d'étapes ---------- */
-function drawSteps(cur){
-  $('steps').innerHTML=`<a href="#organisation" class="${cur==='organisation'?'on':''}" style="--c:#5a6c71">⚙ Organisation<small>avant</small></a>`+P.ETAPES.map(e=>`<a href="#${e.id}" class="${cur===e.id?'on':''}" style="--c:${e.c}">${e.n} · ${e.t}<small>${e.min} min</small></a>`).join('');
-  const i=VIEWS.indexOf(cur),prev=VIEWS[i-1],next=VIEWS[i+1],lab=v=>v==='organisation'?'Organisation':(P.ETAPES.find(e=>e.id===v)||{}).t;
-  $('pager').innerHTML=(prev?`<a class="btn secondary" href="#${prev}">← ${lab(prev)}</a>`:'<span></span>')+(next?`<a class="btn primary" href="#${next}">${lab(next)} →</a>`:'<a class="btn primary" href="bilan.html">▶ Projeter le bilan</a>');
-  const r=me();$('meBox').innerHTML=r?`Vous : <b>${esc(r.moi.nom)}</b> · groupe ${r.groupe.g} · poste ${r.moi.poste}`:'<a href="#organisation" style="color:var(--teal2);font-weight:700">Choisir mon nom →</a>';
-}
-
-/* ---------- minuteur ---------- */
-let tRem=0,tRun=false,tInt=null,tStep=null;
-const fmt=s=>`${String(Math.floor(Math.max(0,s)/60)).padStart(2,'0')}:${String(Math.max(0,s)%60).padStart(2,'0')}`;
-function tSet(view){const e=P.ETAPES.find(x=>x.id===view);if(!e||tStep===view)return;tStep=view;tStop();tRem=e.min*60;tShow()}
-function tShow(){$('tleft').textContent=fmt(tRem);$('timer').classList.toggle('done',tRem<=0);$('projTime').textContent=fmt(tRem);$('tgo').textContent=tRun?'❚❚':'▶'}
-function tStart(){if(tRun)return;tRun=true;tInt=setInterval(()=>{tRem--;if(tRem<=0){tRem=0;tStop()}tShow()},1000);tShow()}
-function tStop(){tRun=false;clearInterval(tInt);tShow()}
-$('tgo').onclick=$('projGo').onclick=()=>tRun?tStop():tStart();
-$('treset').onclick=()=>{const e=P.ETAPES.find(x=>x.id===tStep)||P.ETAPES[0];tStop();tRem=e.min*60;tShow()};
-
-/* ---------- ORGANISATION ---------- */
-$('circuit').innerHTML=P.ETAPES.map(e=>`<div style="--c:${e.c}"><b>${e.n} · ${e.t}</b><span>${e.lieu}</span><i>${e.min} min</i></div>`).join('');
-function drawOrga(){
-  const o=P.orga();plan=P.plan(o);
-  if(document.activeElement!==$('nPart'))$('nPart').value=plan.N;$('nPart').disabled=(o.noms||'').split(/\n|;/).filter(s=>s.trim()).length>=6;
-  if(document.activeElement!==$('noms'))$('noms').value=o.noms||'';
-  const g3=plan.groupes.filter(x=>x.membres.length===3).length,g4=plan.G-g3;
-  $('summary').innerHTML=`${plan.N} participants → <strong>${plan.G} groupes de base</strong> (${[g3?g3+' de 3':'',g4?g4+' de 4':''].filter(Boolean).join(', ')}) · Experts : A ${plan.cnt.A} · B ${plan.cnt.B} · C ${plan.cnt.C} · <strong>${plan.tablesExperts} tables d’experts</strong>${plan.tablesExperts>plan.G?' (prévoir une table de plus)':''}`;
-  const K=P.CONTRATS;
-  $('gtab').innerHTML=`<thead><tr><th>Groupe · table</th><th>Membres et poste d’experts</th><th>Contrat (étape 3)</th><th>Confrontation (étape 4)</th></tr></thead><tbody>${plan.groupes.map(x=>{const c=K[x.contrat],v=c[x.variante];return `<tr><td><strong>Groupe ${x.g}</strong><br>table ${x.g}</td><td>${x.membres.map(m=>`<span class="who"><span class="pb ${m.poste}">${m.poste}</span>${esc(m.nom)} <small style="color:var(--muted)">→ table ${m.tableExpert}</small></span>`).join('<br>')}</td><td><strong>${c.k}${x.variante==='a'?'α':'β'}</strong> · ${esc(c.ou)}<br><small>${esc(v.t)}</small></td><td>${x.hote?`accueille ${x.avec.length?'le groupe '+x.avec.join(' et '):'(seul : avec le formateur)'} à la table ${x.g}`:`va à la table ${x.va}`}</td></tr>`}).join('')}</tbody>`;
-  $('ptab').innerHTML=['A','B','C'].map(k=>`<div style="--c:${PC[k]}"><h4>Poste ${k} · ${esc(P.POSTES[k].t)}</h4><p style="color:var(--muted)">Séquences ${P.POSTES[k].seqs.join(' et ')}</p>${plan.postes[k].map(t=>`<p><strong>Table ${t.table}</strong> : ${t.membres.map(esc).join(', ')}</p>`).join('')}</div>`).join('');
-  const cur=get('me','');$('meSel').innerHTML=`<option value="">— Choisir mon nom —</option>`+plan.noms.map(n=>`<option ${n===cur?'selected':''}>${esc(n)}</option>`).join('');
-  drawRoute();
-}
-function drawRoute(){
-  const r=me();if(!r){$('route').innerHTML='';return}
-  const x=r.groupe,c=P.CONTRATS[x.contrat],E=P.ETAPES;
-  const conf=x.hote?(x.avec.length?`Restez à votre table ${x.g} : vous accueillez le groupe ${x.avec.join(' et le groupe ')}.`:'Restez à votre table : le formateur joue l’autre groupe.'):`Allez avec votre groupe à la <strong>table ${x.va}</strong>.`;
-  $('route').innerHTML=[
-    [E[0],`<strong>Table ${x.g}</strong> avec ${x.membres.filter(m=>m!==r.moi).map(m=>esc(m.nom)).join(', ')}.`],
-    [E[1],`<strong>Poste ${r.moi.poste}, table ${r.moi.tableExpert}</strong> · ${esc(P.POSTES[r.moi.poste].t)} (séquences ${P.POSTES[r.moi.poste].seqs.join(' et ')}).`],
-    [E[2],`Retour <strong>table ${x.g}</strong> · contrat <strong>${c.k}${x.variante==='a'?'α':'β'}</strong> : ${esc(c[x.variante].t)}.`],
-    [E[3],conf],
-    [E[4],'Plénière, face à l’écran.']
-  ].map(([e,t])=>`<div style="--c:${e.c}"><b>${e.n} · ${e.t} · ${e.min} min</b><span>${t}</span></div>`).join('');
-}
-$('nPart').addEventListener('input',e=>{P.setOrga({...P.orga(),n:+e.target.value||22});drawOrga()});
-$('noms').addEventListener('input',e=>{P.setOrga({...P.orga(),noms:e.target.value});drawOrga()});
-$('mix').onclick=()=>{const o=P.orga(),l=(o.noms||'').split(/\n|;/).map(s=>s.trim()).filter(Boolean);if(l.length<6){toast('Collez d’abord au moins six noms.');return}for(let i=l.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[l[i],l[j]]=[l[j],l[i]]}P.setOrga({...o,noms:l.join('\n')});drawOrga()};
-$('share').onclick=()=>{const u=location.href.split('#')[0]+'#o='+P.enc(P.orga());(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>toast('Lien copié : envoyez-le aux participants.')).catch(()=>prompt('Copiez ce lien :',u))};
-$('meSel').onchange=e=>{set('me',e.target.value);const r=me();if(r){set('poste',r.moi.poste);set('contrat',`${r.groupe.contrat}${r.groupe.variante}`)}drawRoute();drawSteps('organisation')};
-
-/* ---------- LANCEMENT ---------- */
-const NIV=['—','Beaucoup de conception','Un peu','Presque pas'];
-$('seqs').innerHTML=[1,2,3,4,5,6].map(n=>{const s=P.SEQ[n];return `<div class="sq"><span class="n">Séquence ${n} · ${s.s.length} séances</span><h4>${esc(s.t)}</h4><p>${esc(s.th)}</p><select data-save id="int${n}" aria-label="Séquence ${n}">${NIV.map((t,i)=>`<option value="${i}">${t}</option>`).join('')}</select></div>`}).join('');
-function drawGo(){const r=me();$('goPoste').innerHTML=r?`<p style="font-size:19px;color:var(--ink)">Vous allez au <strong>poste ${r.moi.poste}</strong>, <strong>table ${r.moi.tableExpert}</strong> : ${esc(P.POSTES[r.moi.poste].t)}. Emportez votre appareil.</p><a class="btn primary" href="#experts">Ouvrir mon poste →</a>`:`<p>Votre poste est indiqué dans l’organisation projetée. Choisissez-le à l’étape suivante.</p><a class="btn primary" href="#experts">Aller aux postes →</a>`}
-
-/* ---------- EXPERTS ---------- */
-function drawPtabs(){const p=myPoste();$('ptabs').innerHTML=['A','B','C'].map(k=>`<button type="button" data-p="${k}" aria-pressed="${k===p}" style="--c:${PC[k]}">Poste ${k}<small>${esc(P.POSTES[k].t)} · séquences ${P.POSTES[k].seqs.join(' et ')}</small></button>`).join('');$('ptabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{set('poste',b.dataset.p);drawPtabs();drawPoste()})}
-function drawPoste(){
-  const k=myPoste(),Pt=P.POSTES[k],[s1,s2]=Pt.seqs;
-  const sl=n=>`<div class="slist"><h4>Séquence ${n} · ${esc(P.SEQ[n].t)}</h4><ol>${P.SEQ[n].s.map((x,i)=>`<li><a href="${P.S+x[2]}" target="_blank" rel="noopener">${esc(x[0])} ↗</a> <small>${x[1]}</small></li>`).join('')}</ol></div>`;
-  const sel=(n,c)=>{const id=`pl${k}_${n}_${c}`,v=get('f_'+id,'0');return `<select data-save id="${id}" data-v="${v}" aria-label="Séquence ${n}, carte ${c}">${P.ZONES.map((z,i)=>`<option value="${i}" ${String(i)===String(v)?'selected':''}>${z}</option>`).join('')}</select>`};
-  $('posteBox').innerHTML=`<div class="card pcard" style="--c:${Pt.c}">
-    <span class="kicker">Poste ${k}</span><h3>${esc(Pt.t)}</h3><p style="color:var(--ink);font-size:17px">${esc(Pt.enjeu)}</p>
-    <div class="deroule"><span>3 min · ouvrir les séances</span><span>7 min · le plateau</span><span>10 min · les questions</span><span>5 min · la carte d’expert</span></div>
-    <div class="two">${sl(s1)}${sl(s2)}</div>
-    <h3 style="font-size:22px;color:var(--ink)">Le plateau « Qui décide ? »</h3>
-    <p>Pour chaque carte, qui prend la décision dans la séquence, telle qu’elle est écrite ? Répartissez-vous les deux séquences, puis comparez. Cherchez la preuve dans les fiches.</p>
-    <div class="scroll"><table class="plat"><thead><tr><th>Carte</th><th>Séquence ${s1}</th><th>Séquence ${s2}</th></tr></thead><tbody>${P.CARTES.map(c=>`<tr><td><strong>${c.n} · ${esc(c.t)}</strong><small>${esc(c.q)}</small></td><td>${sel(s1,c.n)}</td><td>${sel(s2,c.n)}</td></tr>`).join('')}</tbody></table></div>
-    <h3 style="font-size:22px;color:var(--ink);margin-top:18px">Six questions, une par lecteur</h3>
-    <p>Chacun prend deux questions (lecteur 1 : questions 1 et 4 · lecteur 2 : 2 et 5 · lecteur 3 : 3 et 6). À 4 ou 5, les autres jouent les sceptiques : ils contestent chaque réponse. Répondez en citant la séance.</p>
-    ${Pt.q.map((q,i)=>{const [sn,si]=q.w;return `<div class="q" style="--c:${Pt.c}"><span class="tag">${q.k} · lecteur ${i%3+1}</span><strong>${esc(q.t)}</strong><a class="look" href="${P.L(sn,si)}" target="_blank" rel="noopener">Où regarder : séquence ${sn}, ${esc(P.SEQ[sn].s[si-1][0])} ↗</a><details><summary>Pour aller plus loin</summary><p class="help">${esc(q.h)}</p></details><textarea data-save id="q${q.k}" placeholder="Notre réponse, avec la séance citée…"></textarea></div>`}).join('')}
-    <div class="expert" style="--c:${Pt.c}"><h3>Ma carte d’expert</h3><p class="help" style="margin-top:0">C’est tout ce que vous emportez dans votre groupe de base. Quatre réponses courtes.</p>
-      <div class="fld"><label for="ex${k}1">Le moment où les élèves décident vraiment (séance, décision)</label><textarea data-save id="ex${k}1"></textarea></div>
-      <div class="fld"><label for="ex${k}2">La décision reprise ou confisquée qui porterait le plus d’apprentissage</label><textarea data-save id="ex${k}2"></textarea></div>
-      <div class="fld"><label for="ex${k}3">Le dilemme que notre table n’a pas tranché</label><textarea data-save id="ex${k}3"></textarea></div>
-      <div class="fld"><label for="ex${k}4">Ma phrase pour convaincre mon groupe</label><textarea data-save id="ex${k}4"></textarea></div>
-    </div></div>`;
-  bindSave($('posteBox'));
-  $('posteBox').querySelectorAll('.plat select').forEach(s=>s.addEventListener('change',()=>s.dataset.v=s.value));
-}
-
-/* ---------- RETOUR ---------- */
-function drawMyCard(){const k=myPoste(),L=['Où ils décident','La décision confisquée','Le dilemme','Ma phrase'];const v=[1,2,3,4].map(i=>get('f_ex'+k+i,''));$('myCard').style.setProperty('--c',PC[k]);$('myCard').innerHTML=`<strong>Ma carte d’expert · poste ${k}</strong>`+(v.some(Boolean)?v.map((t,i)=>t?`<p><b>${L[i]} :</b> ${esc(t)}</p>`:'').join(''):'<p style="color:var(--muted)">Votre carte est vide : remplissez-la à l’étape 2.</p>')}
-function drawCurve(){$('curve').innerHTML=[1,2,3,4,5,6].map(n=>{const v=+get('f_cv'+n,0);return `<div class="col"><div class="bar"><i id="bar${n}" style="height:${v*25}%"></i></div><input type="range" min="0" max="4" step="1" value="${v}" data-save id="cv${n}" aria-label="Séquence ${n}"><b>S${n}</b><small>${esc(P.SEQ[n].t)}</small></div>`}).join('');$('curve').querySelectorAll('input').forEach(i=>i.addEventListener('input',()=>{$('bar'+i.id.slice(2)).style.height=i.value*25+'%'}))}
-function drawK(){const cur=myContrat();$('kgrid').innerHTML=P.CONTRATS.map((c,i)=>['a','b'].map(v=>`<button type="button" data-k="${i}${v}" aria-pressed="${cur===i+v}">${c.k}${v==='a'?'α':'β'}</button>`).join('')).join('');$('kgrid').querySelectorAll('button').forEach(b=>b.onclick=()=>{set('contrat',b.dataset.k);drawK();drawContrat()})}
-function drawContrat(){
-  const id=myContrat(),c=P.CONTRATS[+id[0]],v=c[id[1]],o=c[id[1]==='a'?'b':'a'],[sn,si]=c.lien,sfx=id;
-  const F=[['T1','La décision rendue aux élèves, et ce qu’ils devront comprendre pour la prendre'],['T2','Ce que nous supprimons ou réduisons pour trouver le temps (en minutes, séance par séance)'],['T3','La nouvelle consigne élève, mot pour mot'],['T4','Trois productions d’élèves que nous attendons, dont une fausse mais plausible'],['T5','La relance pour la production fausse, sans donner la réponse'],['T6','La preuve individuelle : la question posée seul, plus tard, sur une situation nouvelle']];
-  $('contratBox').innerHTML=`<div class="contrat"><span class="k">Contrat ${c.k}${id[1]==='a'?'α':'β'} · ${esc(c.ou)}</span><h3>${esc(v.t)}</h3><p>${esc(v.d)}</p><p style="color:var(--muted);font-size:15px">Carte(s) en jeu : ${esc(v.cartes)} · Le contrat opposé : « ${esc(o.t)} »</p><a class="look" style="font-weight:700;color:var(--teal2)" href="${P.L(sn,si)}" target="_blank" rel="noopener">Ouvrir la séance concernée ↗</a></div>
-  <div class="rule"><b>La règle du jeu</b><ul><li>au plus <strong>deux cartes</strong> changent de zone ;</li><li><strong>même durée</strong> totale, même matériel : tout temps nouveau se prend ailleurs ;</li><li>vous écrivez <strong>ce que vous supprimez</strong>, en minutes.</li></ul></div>
-  ${F.map(([k,t])=>`<div class="q"><strong>${t}</strong><textarea data-save id="${k}_${sfx}"></textarea></div>`).join('')}`;
-  bindSave($('contratBox'));
-}
-
-/* ---------- CONFRONTATION ---------- */
-function drawMeet(){const r=me();if(!r){$('meet').innerHTML='Retrouvez sur l’organisation projetée le groupe avec lequel vous vous confrontez : même séquence, contrat opposé.';return}const x=r.groupe,c=P.CONTRATS[x.contrat];$('meet').innerHTML=(x.hote?(x.avec.length?`Votre groupe (${c.k}${x.variante==='a'?'α':'β'}) reste à la table ${x.g} et accueille le groupe ${x.avec.join(' et le groupe ')}.`:'Votre groupe est seul : le formateur joue l’autre contrat.'):`Votre groupe (${c.k}${x.variante==='a'?'α':'β'}) va à la table ${x.va}.`)+`<br><span style="font-size:.8em;font-weight:600;color:var(--muted)">${esc(c.ou)} · α « ${esc(c.a.t)} » contre β « ${esc(c.b.t)} »</span>`}
-$('draw').onclick=()=>{const a=[...P.OBJECTIONS.keys()].sort(()=>Math.random()-.5).slice(0,2);set('obj',a);drawObjs()};
-function drawObjs(){const a=get('obj',[]);$('objs').innerHTML=a.map(i=>`<div class="obj">« ${esc(P.OBJECTIONS[i])} »</div>`).join('')}
-
-/* ---------- BILAN ---------- */
-function drawRecap(){const v=[1,2,3,4,5,6].map(n=>`S${n} : ${['—','beaucoup','un peu','presque pas'][+get('f_int'+n,0)]}`).join(' · ');const c=[1,2,3,4,5,6].map(n=>`S${n} ${get('f_cv'+n,0)}/4`).join(' · ');$('recap').innerHTML=`<strong>Votre intuition au début :</strong> ${v}<br><strong>La courbe de votre groupe :</strong> ${c}<br><strong>Votre première définition :</strong> ${esc(get('f_def1','')||'—')}`}
-$('clearAll').onclick=()=>{if(!confirm('Effacer toutes vos réponses sur cet appareil ? (L’organisation est conservée.)'))return;Object.keys(localStorage).filter(k=>k.startsWith(PFX+'f_')||k===PFX+'obj').forEach(k=>localStorage.removeItem(k));location.reload()};
-$('printAll').onclick=()=>{
-  const r=me(),k=myPoste(),id=myContrat(),c=P.CONTRATS[+id[0]],val=x=>esc(get('f_'+x,''))||'<span style="color:#999">—</span>';
-  const blk=(t,h)=>`<h3 style="margin:14px 0 4px;font-family:Archivo,sans-serif">${t}</h3>${h}`;
-  $('prt').innerHTML=`<h1 style="font-family:Archivo,sans-serif">Du projet à la conception · mes réponses</h1><p>${r?esc(r.moi.nom)+' · groupe '+r.groupe.g+' · ':''}poste ${k} · contrat ${c.k}${id[1]==='a'?'α':'β'}</p>`
-   +blk('1 · Lancement',`<p>${[1,2,3,4,5,6].map(n=>`S${n} : ${['—','beaucoup','un peu','presque pas'][+get('f_int'+n,0)]}`).join(' · ')}</p><p><b>Concevoir, c’est :</b> ${val('def1')}</p>`)
-   +blk('2 · Poste '+k+' · '+esc(P.POSTES[k].t),P.POSTES[k].q.map(q=>`<p><b>${q.k}.</b> ${esc(q.t)}<br>${val('q'+q.k)}</p>`).join('')+`<p><b>Carte d’expert :</b> ${[1,2,3,4].map(i=>val('ex'+k+i)).join(' / ')}</p>`)
-   +blk('3 · Retour',`<p><b>Autres postes :</b> ${val('ret1')} / ${val('ret2')}</p><p><b>Courbe :</b> ${[1,2,3,4,5,6].map(n=>`S${n} ${get('f_cv'+n,0)}/4`).join(' · ')} — ${val('courbeQ')}</p><p><b>Contrat ${c.k}${id[1]==='a'?'α':'β'} :</b> ${esc(c[id[1]].t)}</p>`+['T1','T2','T3','T4','T5','T6'].map(t=>`<p>${t} : ${val(t+'_'+id)}</p>`).join(''))
-   +blk('4 · Confrontation',['c1','c2','c3'].map(x=>`<p>${val(x)}</p>`).join(''))
-   +blk('5 · Bilan',`<p><b>Concevoir, aujourd’hui :</b> ${val('def2')}</p><p><b>Ma carte à déplacer :</b> ${val('b2')}</p><p><b>Question de transfert :</b> ${val('b3')}</p>`);
-  print();
-};
-
-/* ---------- sauvegarde des champs ---------- */
-const fit=t=>{t.style.height='auto';t.style.height=Math.max(84,t.scrollHeight+2)+'px'};
-function bindSave(root){root.querySelectorAll('[data-save]').forEach(el=>{if(el.dataset.bound)return;el.dataset.bound=1;const v=get('f_'+el.id,null);if(v!==null&&el.tagName!=='SELECT')el.value=v;else if(v!==null)el.value=v;const h=()=>{set('f_'+el.id,el.value);if(el.tagName==='TEXTAREA')fit(el)};el.addEventListener('input',h);el.addEventListener('change',h);if(el.tagName==='TEXTAREA')requestAnimationFrame(()=>fit(el))})}
-
-/* ---------- projection ---------- */
-let projMode='orga';
-function drawProj(){
-  const cur=(location.hash.slice(1)||'organisation');const e=P.ETAPES.find(x=>x.id===cur);
-  $('projTabs').innerHTML=[['orga','Groupes de base'],['postes','Postes d’experts'],['etape','Étape en cours']].map(([m,t])=>`<button type="button" data-m="${m}" style="${projMode===m?'background:#0e6e6b':''}">${t}</button>`).join('');
-  $('projTabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{projMode=b.dataset.m;drawProj()});
-  if(projMode==='orga'){$('projTitle').textContent='Groupes de base · contrats · confrontations';$('projBody').innerHTML=`<div class="grid">${plan.groupes.map(x=>{const c=P.CONTRATS[x.contrat];return `<div><b>Groupe ${x.g} · table ${x.g}</b>${x.membres.map(m=>`<span><span class="pb ${m.poste}">${m.poste}</span>${esc(m.nom)} → table ${m.tableExpert}</span>`).join('')}<span style="margin-top:6px;color:#ffd54f">${c.k}${x.variante==='a'?'α':'β'} · ${esc(c[x.variante].t)}</span><span style="color:#9fe0da">${x.hote?'Accueille le groupe '+(x.avec.join(' et ')||'—'):'Va à la table '+x.va}</span></div>`}).join('')}</div>`}
-  else if(projMode==='postes'){$('projTitle').textContent='Étape 2 · Où sont les experts ?';$('projBody').innerHTML=`<div class="grid">${['A','B','C'].flatMap(k=>plan.postes[k].map(t=>`<div style="--c:${PC[k]};--c2:#fff"><b>Table ${t.table} · poste ${k}</b><span style="color:#ffd54f">${esc(P.POSTES[k].t)}</span>${t.membres.map(n=>`<span>${esc(n)}</span>`).join('')}</div>`)).join('')}</div>`}
-  else{const E=e||P.ETAPES[0];$('projTitle').textContent=`${E.n} · ${E.t} · ${E.min} min`;const txt={lancement:['Seul·e, sans ouvrir les séquences : où y a-t-il de la conception ?','Une phrase : concevoir, pour un élève de 3e, c’est…','Puis rejoignez votre poste d’experts.'],experts:['3 min : ouvrir les séances','7 min : le plateau « Qui décide ? »','10 min : six questions, deux par lecteur','5 min : la carte d’expert'],retour:['9 min : chaque expert présente son poste (A, B, C)','3 min : la courbe de l’année','13 min : le contrat · 2 cartes maximum · même durée · ce que l’on supprime'],confrontation:['3 min : le groupe α présente','3 min : le groupe β présente','6 min : objections croisées','3 min : ce que l’autre contrat nous apprend'],bilan:['Une phrase par confrontation : quel contrat a gagné, et pourquoi ?','Le bilan projeté','Seul·e : relire, puis transférer à sa propre séquence']}[E.id]||[];$('projBody').innerHTML=`<div class="grid">${txt.map((t,i)=>`<div><b>${i+1}</b><span style="font-size:clamp(20px,2vw,28px)">${esc(t)}</span></div>`).join('')}</div>`}
-}
-function openProj(m){if(m)projMode=m;drawProj();$('proj').classList.add('open');try{document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen().catch(()=>{})}catch(e){}}
-$('projBtn').onclick=()=>openProj((location.hash.slice(1)||'organisation')==='organisation'?'orga':((location.hash.slice(1)==='experts')?'postes':'etape'));
-$('projOrga').onclick=()=>openProj('orga');
-$('projClose').onclick=()=>{$('proj').classList.remove('open');if(document.fullscreenElement)document.exitFullscreen().catch(()=>{})};
-document.addEventListener('keydown',e=>{if(e.key==='Escape')$('projClose').click()});
-
-/* ---------- lecture du formateur (chiffrée) ---------- */
-const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
-async function decrypt(pw){const E=window.PC_FORM;const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64(E.salt),iterations:150000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);return new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(E.iv)},key,b64(E.ct)))}
-async function openF(pw){$('fStatus').textContent='Vérification…';try{$('fBox').innerHTML=await decrypt(pw);$('fStatus').textContent='';try{sessionStorage.setItem('pc3_f',pw)}catch(e){}}catch(e){$('fStatus').textContent='Mot de passe incorrect.'}}
-$('fOpen').onclick=()=>{const v=$('fPass').value.trim();if(v)openF(v)};$('fPass').addEventListener('keydown',e=>{if(e.key==='Enter')$('fOpen').click()});
-try{const s=sessionStorage.getItem('pc3_f');if(s)openF(s)}catch(e){}
-
-/* ---------- routage ---------- */
-function route_(){
-  let v=location.hash.slice(1);if(!VIEWS.includes(v))v='organisation';
-  VIEWS.forEach(x=>$('v-'+x).classList.toggle('on',x===v));
-  drawSteps(v);if(v!=='organisation')tSet(v);
-  if(v==='organisation')drawOrga();
-  if(v==='lancement'){drawGo()}
-  if(v==='experts'){drawPtabs();drawPoste()}
-  if(v==='retour'){drawMyCard();drawCurve();drawK();drawContrat();bindSave($('v-retour'))}
-  if(v==='confrontation'){drawMeet();drawObjs()}
-  if(v==='bilan')drawRecap();
-  bindSave($('v-'+v));
-  if($('proj').classList.contains('open'))drawProj();
-  if(first){first=false}else{const st=document.querySelector('.stepper');window.scrollTo(0,Math.max(0,st.offsetTop-2))}
-}
-let first=true;window.addEventListener('hashchange',route_);
-bindSave(document);tStep=null;tRem=P.ETAPES[0].min*60;tShow();route_();
+:root{scroll-padding-top:20px}.hero h1{font-size:clamp(32px,5vw,52px)}.hero .lead{max-width:80ch}.nav{position:sticky;top:0;z-index:3;background:#f4f7f7;padding:9px 0;border-bottom:1px solid var(--line)}
+.nav a{font-size:15px}.timing{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.timing div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}.timing b{color:var(--teal2);display:block}.timing span{font-size:14px;color:var(--muted)}
+.choice{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.choice label{display:block;cursor:pointer;border:2px solid var(--line);background:#fff;padding:13px;border-radius:12px}.choice label:has(input:checked){border-color:var(--teal);background:#edf7f6}.choice input{margin-right:8px}.choice strong{display:block;margin-top:5px}.choice small{display:block;color:var(--muted)}
+.field{margin:18px 0}.field label{display:block;font-weight:700;margin-bottom:5px;font-size:18px}.field .help{margin:3px 0 8px;color:var(--muted);font-size:15.5px}.field textarea,.field input{width:100%;font:inherit;border:1px solid #b9c9ca;border-radius:10px;padding:12px;background:#fff}.field textarea{min-height:95px;resize:vertical}.example{padding:12px 15px;border-left:4px solid var(--blue);background:var(--bluep);border-radius:8px;font-size:15.5px}.pill{display:inline-block;background:var(--pale);color:var(--teal2);border-radius:8px;padding:4px 9px;font-weight:700;font-size:13px;margin:3px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}.actions button{font:inherit}.section h2{margin-bottom:6px}.intro{font-size:17px;color:var(--muted)}.linklist{margin:12px 0;padding-left:23px}.linklist a{color:var(--teal2);font-weight:600}.linklist li{margin:6px 0}.smallnote{color:var(--muted);font-size:14px}.recap{background:#f5faf9;border:1px solid var(--line);padding:15px;border-radius:12px}.recap h3{margin-top:0}.recap dl{margin:0}.recap dt{font-weight:700;margin-top:12px}.recap dd{margin:4px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}.result{font-weight:700;color:var(--teal2)}#printArea{display:none}@media(max-width:760px){.timing,.choice{grid-template-columns:1fr}}@media print{.noprint{display:none!important}body{background:#fff}.page{max-width:none;padding:0}#printArea{display:block}.print-sheet{font-size:13px;line-height:1.4}.print-sheet h1{font-size:24px}.print-sheet h2{font-size:17px;margin:14px 0 4px}.print-sheet p{white-space:pre-wrap;overflow-wrap:anywhere;margin:4px 0}.print-sheet section{break-inside:avoid;border-bottom:1px solid #ccc;padding-bottom:7px}}
+</style></head><body><main class="page">
+<div class="noprint"><p><a href="../index.html">← Formation enseignants</a></p>
+<header class="hero"><span class="brand">Atelier transversal · 90 minutes · Travail en petits groupes</span>
+<h1>Du projet à la conception</h1>
+<p class="lead"><strong>Question de départ :</strong> dans nos séquences de technologie, que décidons-nous à la place des élèves ? Quelles décisions pourrions-nous leur confier pour qu'ils mobilisent leurs connaissances, justifient leurs choix et apprennent réellement à concevoir ?</p>
+<p class="identity">Votre mission : choisir une séquence, repérer un moment précis, proposer <strong>une seule modification réaliste</strong> et en démontrer l'intérêt à partir de faits et d'arguments didactiques, pédagogiques et cognitifs.</p></header>
+<nav class="nav" aria-label="Accès aux étapes"><a href="#objectif">Comprendre</a><a href="#choix">Choisir</a><a href="#analyse">Analyser</a><a href="#transformation">Transformer</a><a href="#restitution">Restituer</a></nav>
+<section class="section" id="objectif"><div class="card mission"><span class="kicker">Avant de commencer · 10 minutes</span><h2>1 · Comprendre ce que signifie concevoir</h2>
+<p>Réaliser, ce peut être exécuter une procédure déjà écrite. Concevoir, c'est rechercher une réponse à un problème en <strong>prenant des décisions justifiées</strong> : définir des critères, comparer des solutions, choisir des paramètres, organiser des tests ou améliorer une proposition.</p>
+<div class="situation"><strong>Exemple : un système d'arrosage automatique</strong><p>Si le professeur impose un seuil d'humidité de 50 %, l'élève peut programmer correctement sans savoir pourquoi ce seuil est pertinent. Si l'élève doit exploiter des mesures, choisir un seuil, justifier son choix et vérifier le comportement du système, il mobilise des connaissances sur la mesure, les seuils et les tests.</p></div>
+<p><strong>Attention :</strong> donner une liberté de choix ne suffit pas. Une décision n'a de valeur pédagogique que si elle oblige à mobiliser des connaissances et si l'enseignant peut observer ce qui a été compris.</p>
+<div class="timing"><div><b>10 + 15 min</b><span>Comprendre, choisir et relever les faits</span></div><div><b>25 + 15 min</b><span>Transformer et justifier la modification</span></div><div><b>15 + 10 min</b><span>Présenter et construire la synthèse</span></div></div></div></section>
+<section class="section" id="choix"><div class="card"><span class="kicker">Choisir et examiner · 15 minutes</span><h2>2 · Choisissez une séquence parmi les six</h2>
+<p class="intro">En groupe, choisissez une seule séquence. Ouvrez ses séances et concentrez-vous sur <strong>un moment où l'élève pourrait prendre une décision utile à l'apprentissage</strong>. Vous n'avez pas à étudier toutes les séances en détail ni à réécrire la séquence.</p>
+<div class="choice" id="seqChoices"></div><div id="seqDetail" class="sourcebox" aria-live="polite"><strong>Sélectionnez une séquence.</strong></div>
+<div class="field"><label for="groupe">Nom du groupe et rapporteur</label><input id="groupe" data-field placeholder="Ex. Groupe 2 — Rapporteur : …"></div>
+<div class="field"><label for="moment">Quelle séance et quel passage précis avez-vous choisi ?</label><p class="help">Indiquez le titre de la séance, la consigne ou l'exercice concerné. Cela permettra aux autres collègues de retrouver votre exemple.</p><textarea id="moment" data-field placeholder="Séance … ; question ou consigne …"></textarea></div>
+</div></section>
+<section class="section" id="analyse"><div class="card didactic"><span class="kicker">Observer les faits · puis préparer la modification</span><h2>3 · Analysez ce qui se passe réellement</h2>
+<p>Commencez par <strong>des faits vérifiables dans la séquence</strong>, et non par une impression générale. Citez une consigne, une réponse attendue, un document d'aide ou une étape imposée.</p>
+<div class="field"><label for="faits">A · Quels faits avez-vous relevés ?</label><p class="help">Que demande exactement la fiche ? Quelle décision est imposée, guidée ou laissée à l'élève ? Appuyez-vous sur un exemple précis.</p><textarea id="faits" data-field placeholder="Dans la séance…, la consigne fournit déjà… ; les élèves doivent seulement…"></textarea></div>
+<div class="field"><label for="apprendre">B · Que les élèves devraient-ils comprendre pour décider eux-mêmes ?</label><p class="help"><strong>Regard didactique :</strong> nommez la connaissance ou le concept en jeu et l'obstacle possible. Ne confondez pas l'objet produit avec le savoir construit.</p><textarea id="apprendre" data-field placeholder="Ils devraient comprendre… ; une confusion possible serait…"></textarea></div>
+<div class="example"><strong>Exemple :</strong> « Le programme fonctionne » est un résultat observable. « L'élève sait expliquer pourquoi le seuil déclenche l'arrosage et peut le modifier selon des mesures » est un apprentissage à vérifier.</div>
+</div></section>
+<section class="section" id="transformation"><div class="card science"><span class="kicker">Transformer · 25 minutes, puis finaliser · 15 minutes</span><h2>4 · Proposez une seule modification, puis justifiez-la</h2>
+<p>Ne refaites pas toute la séquence. Choisissez <strong>une consigne, un choix technique, un protocole de test ou un moment de discussion</strong> à modifier. La proposition doit être faisable avec les moyens de votre établissement et sans rallonger la durée totale.</p>
+<div class="field"><label for="modif">C · Quelle modification concrète proposez-vous ?</label><p class="help">Rédigez si possible la nouvelle consigne que vous donneriez aux élèves. Précisez ce que vous retirez ou simplifiez pour libérer du temps.</p><textarea id="modif" data-field placeholder="Au lieu de fournir…, nous demanderons aux élèves de… ; pour cela, nous réduirons…"></textarea></div>
+<div class="field"><label for="didactique">D · Pourquoi cette modification est-elle utile sur le plan didactique ?</label><p class="help">Quel savoir devient nécessaire pour réussir ? Quelle erreur ou confusion peut désormais être discutée ?</p><textarea id="didactique" data-field placeholder="Pour choisir…, les élèves devront comprendre…"></textarea></div>
+<div class="field"><label for="pedagogie">E · Comment allez-vous accompagner les élèves ?</label><p class="help"><strong>Regard pédagogique :</strong> organisation du travail, relance sans donner la réponse, aides graduées, échanges entre élèves, différenciation et gestion du temps.</p><textarea id="pedagogie" data-field placeholder="Si un groupe bloque, nous demanderons… ; une aide progressive sera…"></textarea></div>
+<div class="field"><label for="cognitif">F · Quelles conditions favorisent l'apprentissage ?</label><p class="help"><strong>Regard des sciences cognitives :</strong> connaissances préalables, charge cognitive, feedback (information utile pour progresser), métacognition (expliciter comment on a raisonné), récupération en mémoire et réinvestissement ultérieur. Choisissez seulement les leviers pertinents et expliquez leur utilité.</p><textarea id="cognitif" data-field placeholder="Pour limiter la charge cognitive, nous… ; le feedback portera sur… ; plus tard, les élèves devront…"></textarea></div>
+<div class="field"><label for="preuve">G · Quelle preuve permettra de dire que chaque élève a compris ?</label><p class="help">Prévoyez une tâche individuelle, une justification ou une situation légèrement nouvelle. La réussite immédiate du prototype ne suffit pas à démontrer un apprentissage durable.</p><textarea id="preuve" data-field placeholder="Individuellement, une semaine plus tard, l'élève devra…"></textarea></div>
+<div class="field"><label for="faisabilite">H · Votre modification est-elle réaliste ?</label><p class="help">Précisez le temps, le matériel, les contraintes de classe et ce que vous conserverez de la séquence d'origine.</p><textarea id="faisabilite" data-field placeholder="Même matériel ; … minutes récupérées sur… ; vigilance : …"></textarea></div>
+</div></section>
+<section class="section" id="restitution"><div class="card mirror"><span class="kicker">Présenter · 15 minutes puis synthèse · 10 minutes</span><h2>5 · Préparez votre restitution collective</h2>
+<p><strong>Chaque groupe dispose de 3 minutes maximum.</strong> Les autres collègues n'ont pas nécessairement étudié votre séquence : présentez d'abord son contexte en une phrase, puis expliquez votre raisonnement.</p>
+<ol><li><strong>Le constat factuel :</strong> ce que fait actuellement l'élève et ce qui est décidé à sa place.</li><li><strong>L'enjeu didactique :</strong> la connaissance à construire et l'obstacle identifié.</li><li><strong>La modification proposée :</strong> ce que vous changez concrètement et pourquoi.</li><li><strong>Les appuis pédagogiques et cognitifs :</strong> comment vous accompagnerez l'apprentissage.</li><li><strong>La preuve :</strong> comment vous saurez que l'élève a compris, y compris plus tard.</li></ol>
+<p>Après les présentations, nous confronterons les propositions pour dégager des principes communs : quelles décisions confier aux élèves, quel guidage maintenir, comment rendre leurs raisonnements visibles et comment vérifier les apprentissages ?</p>
+<div class="field"><label for="synthese">Notre message essentiel aux collègues (2 à 3 phrases)</label><textarea id="synthese" data-field placeholder="Notre constat principal… ; nous proposons… ; nous vérifierons…"></textarea></div>
+<div class="field"><label for="question">La question que nous souhaitons soumettre aux autres groupes</label><textarea id="question" data-field placeholder="Comment feriez-vous pour… ?"></textarea></div>
+<div class="actions"><button class="btn primary" id="download" type="button">↓ Télécharger notre fiche en JSON</button><button class="btn secondary" id="print" type="button">🖨 Générer et imprimer la fiche bilan</button></div>
+<p class="smallnote">Vos réponses sont enregistrées automatiquement <strong>dans ce navigateur</strong> sur cet appareil. Pour conserver ou partager le travail, téléchargez le JSON ou imprimez la fiche. Les réponses ne sont pas envoyées automatiquement sur un serveur.</p>
+<p id="status" class="result" role="status"></p></div></section>
+<footer class="footer">Formation enseignants de technologie · Du projet à la conception · Atelier collectif de 90 minutes</footer></div>
+<div id="printArea"></div></main><script src="data.js?v=1"></script><script>
+(function(){'use strict';const $=id=>document.getElementById(id),KEY='pc3_simplifie_v1_',ids=['groupe','moment','faits','apprendre','modif','didactique','pedagogie','cognitif','preuve','faisabilite','synthese','question'];
+const seqs=window.PC.SEQ,focus={1:"Distinguer l'analyse d'une innovation et la conception d'une solution argumentée.",2:"Comparer configurer un réseau fourni et décider de son architecture ou de ses tests.",3:"Identifier ce qui reste à concevoir quand les étapes de programmation sont déjà données.",4:"Décider d'un seuil ou d'un protocole de test à partir de mesures.",5:"Choisir des critères, comparer des solutions et vérifier les exigences d'un objet.",6:"Articuler besoin, choix techniques, prototype et essais dans un projet ouvert."};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let chosen=localStorage.getItem(KEY+'seq')||'';
+$('seqChoices').innerHTML=Object.entries(seqs).map(([n,s])=>'<label><input type="radio" name="sequence" value="'+n+'" '+(chosen===n?'checked':'')+'><strong>Séquence '+n+' · '+esc(s.t)+'</strong><small>'+esc(focus[n])+'</small></label>').join('');
+function showSeq(){const s=seqs[chosen];if(!s){$('seqDetail').innerHTML='<strong>Sélectionnez une séquence pour afficher ses séances.</strong>';return}const items=s.s.map((v,i)=>'<li><a href="../../'+encodeURI(v[2])+'" target="_blank" rel="noopener">Séance '+(i+1)+' · '+esc(v[0])+' ↗</a> <span class="smallnote">('+esc(v[1])+')</span></li>').join('');$('seqDetail').innerHTML='<h3>Séquence '+chosen+' · '+esc(s.t)+'</h3><p>'+esc(focus[chosen])+'</p><p><strong>Ouvrez les séances qui vous intéressent :</strong></p><ol class="linklist">'+items+'</ol><p class="smallnote">Vous pouvez ouvrir les fiches dans un autre onglet, puis revenir ici pour remplir votre analyse.</p>'}
+document.querySelectorAll('input[name=sequence]').forEach(el=>el.addEventListener('change',()=>{chosen=el.value;localStorage.setItem(KEY+'seq',chosen);showSeq()}));showSeq();
+ids.forEach(id=>{const el=$(id);el.value=localStorage.getItem(KEY+id)||'';el.addEventListener('input',()=>localStorage.setItem(KEY+id,el.value))});
+const titles={groupe:'Groupe et rapporteur',moment:'Séance et passage étudiés',faits:'A · Constat factuel',apprendre:'B · Apprentissages et obstacles',modif:'C · Modification proposée',didactique:'D · Justification didactique',pedagogie:'E · Accompagnement pédagogique',cognitif:'F · Appuis des sciences cognitives',preuve:'G · Preuve individuelle d’apprentissage',faisabilite:'H · Faisabilité',synthese:'Message essentiel à partager',question:'Question posée aux collègues'};
+function data(){return {format:'techno-3e-projet-conception',version:1,date:new Date().toISOString(),sequence:chosen?{numero:Number(chosen),titre:seqs[chosen].t}:null,reponses:Object.fromEntries(ids.map(id=>[id,$(id).value.trim()]))}}
+$('download').onclick=()=>{const b=new Blob([JSON.stringify(data(),null,2)],{type:'application/json;charset=utf-8'});const u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='fiche-conception-groupe.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);$('status').textContent='Fiche JSON générée.'};
+$('print').onclick=()=>{const d=data();let h='<div class="print-sheet"><h1>Du projet à la conception · Fiche collective</h1><p><strong>Séquence :</strong> '+esc(d.sequence?d.sequence.numero+' · '+d.sequence.titre:'Non choisie')+'</p>';for(const id of ids){h+='<section><h2>'+esc(titles[id])+'</h2><p>'+esc(d.reponses[id]||'Non renseigné')+'</p></section>'}h+='</div>';$('printArea').innerHTML=h;window.print();$('status').textContent='Fiche imprimable préparée.'};
 })();
-</script>
-</body>
-</html>
+</script></body></html>
