@@ -1,0 +1,52 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Groupe mixte — Ateliers didactiques</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css"><link rel="stylesheet" href="puzzle.css">
+<script>if(sessionStorage.getItem('formation_teachers_unlocked_v1')!=='1')location.replace('../index.html');</script><style id="navbar-css">.fnav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:4px 14px;background:transparent;font:500 13px/1.3 "Source Sans 3",Arial,sans-serif}.fnav a{color:#5b6b6a!important;text-decoration:none!important;padding:2px 0;background:none;border-radius:0}.fnav a:hover,.fnav a:focus-visible{color:#0f6b66!important;text-decoration:underline!important}@media print{.fnav{display:none}}</style></head>
+<body><nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a><a href="index.html">↑ Classe puzzle</a></nav>
+<main class="page">
+<header class="hero">
+  <div class="brand">Classe puzzle · Groupe mixte · 25 min</div>
+  <h1>Trois experts, un principe commun</h1>
+  <p class="lead">Autour de la table, un expert de chaque parcours. Vous cherchez ce qui fait apprendre <strong>quel que soit le thème</strong>.</p>
+  <div class="hook"><small>Notre fil rouge</small><span id="fil"></span></div>
+</header>
+
+<section class="section"><div class="card">
+  <div class="f" style="margin-top:0"><strong>Groupe mixte n°</strong><input type="text" data-f="numero" placeholder="Ex. 2" style="max-width:120px"></div>
+  <div class="f"><strong>Membres</strong><input type="text" data-f="membres" placeholder="Prénoms (R, D, S)"></div>
+</div></section>
+
+<section class="section"><div class="card manche">
+  <div class="mhead"><div><span class="kicker">Temps 1 · 15 min</span><h2>Le tour des experts</h2></div><button class="timer" type="button" data-min="15"></button></div>
+  <p>Chaque expert présente son parcours en 5 minutes à partir de son écran « Notre message d’expert ». Les autres notent l’essentiel, en quelques mots par case.</p>
+  <table class="grid3x3"><thead><tr><th style="background:#5a6c71">Parcours</th><th id="h0"></th><th id="h1"></th><th id="h2"></th></tr></thead><tbody id="tbody"></tbody></table>
+</div></section>
+
+<section class="section"><div class="card manche" style="border-left-color:var(--mag)">
+  <div class="mhead"><div><span class="kicker">Temps 2 · 10 min</span><h2>Ce qui revient d’un parcours à l’autre</h2></div><button class="timer" type="button" data-min="10"></button></div>
+  <div id="common"></div>
+  <div class="f" style="background:#fdf6f9;border-radius:12px;padding:12px 14px"><strong>Notre principe commun</strong><small>Une phrase qui répond au fil rouge, valable pour les trois parcours.</small><input type="text" data-f="principe" placeholder="La difficulté fait apprendre quand…"></div>
+  <div class="f"><strong>Notre question à la salle</strong><input type="text" data-f="question"></div>
+</div></section>
+
+<section class="section"><div class="card mirror">
+  <span class="kicker">Plénière · 2 min par groupe</span>
+  <h2>Votre écran de restitution</h2>
+  <div class="actions"><button class="btn primary" type="button" id="open">Afficher notre restitution</button><button class="btn secondary" type="button" onclick="print()">Imprimer la fiche</button><button class="btn danger" type="button" id="reset">Effacer</button><span class="saved" id="saved"></span></div>
+</div></section>
+<div class="footer">Ensuite, chacun prend 5 minutes pour son engagement individuel sur la <a href="index.html#engagement">page de l’atelier</a>.</div>
+</main>
+<div class="full" id="resti" role="dialog" aria-modal="true" aria-label="Restitution du groupe mixte"><button class="btn secondary fs-close" type="button">✕ Fermer</button><div class="fs"></div></div>
+<script src="data.js"></script><script src="puzzle.js"></script>
+<script>
+(()=>{const P=window.PUZZLE,esc=PZ.esc;
+document.getElementById('fil').textContent=P.filRouge;
+P.lunettes.forEach((l,i)=>{const h=document.getElementById('h'+i);h.textContent=l.nom+' · '+l.titre;h.style.background=l.couleur});
+document.getElementById('tbody').innerHTML=P.parcours.map(p=>`<tr><td class="p"><span class="badge" style="--c:${p.couleur};min-width:28px;height:28px;font-size:14px">${p.lettre}</span> ${esc(p.nom)}</td>${P.lunettes.map(l=>`<td><textarea data-f="${p.lettre}_${l.id}" aria-label="${esc(p.nom)} · ${esc(l.titre)}"></textarea></td>`).join('')}</tr>`).join('');
+document.getElementById('common').innerHTML=P.lunettes.map(l=>`<div class="lensq" style="--c:${l.couleur}"><div class="f"><span class="lens-tag">${esc(l.nom)}</span> <strong style="display:inline">${esc(l.titre)} : qu’est-ce qui revient dans les trois parcours ?</strong><textarea data-f="commun_${l.id}"></textarea></div></div>`).join('');
+const S=PZ.store('puzzle_mixte_v1');S.bind();PZ.timers();
+const open=PZ.full('resti',()=>{const st=S.st;return `<div class="kicker">Groupe mixte ${esc(st.numero||'')} · 2 min</div><h1>${PZ.val(st,'principe')}</h1><div class="meta">${esc(st.membres||'')}</div><div class="fs-grid">${P.lunettes.map(l=>`<div class="fs-box" style="--c:${l.couleur}"><h2>${esc(l.nom)} · ${esc(l.titre)}</h2>${PZ.val(st,'commun_'+l.id)}</div>`).join('')}<div class="fs-box wide" style="--c:var(--mag);background:#fdf6f9"><h2>Notre question à la salle</h2><span style="font-size:24px;font-weight:600">${PZ.val(st,'question')}</span></div></div>`});
+document.getElementById('open').onclick=open;
+document.getElementById('reset').onclick=()=>{if(confirm('Effacer la fiche du groupe mixte ?')){S.reset();location.reload()}};
+})();
+</script>
+<script src="../common-tools.js"></script>
+</body></html>

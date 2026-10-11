@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ateliers didactiques — Classe puzzle 90 min</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css"><link rel="stylesheet" href="puzzle.css">
+<script>if(sessionStorage.getItem('formation_teachers_unlocked_v1')!=='1')location.replace('../index.html');</script><style id="navbar-css">.fnav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:4px 14px;background:transparent;font:500 13px/1.3 "Source Sans 3",Arial,sans-serif}.fnav a{color:#5b6b6a!important;text-decoration:none!important;padding:2px 0;background:none;border-radius:0}.fnav a:hover,.fnav a:focus-visible{color:#0f6b66!important;text-decoration:underline!important}@media print{.fnav{display:none}}</style></head>
+<body><nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a></nav>
+<main class="page">
+<header class="hero">
+  <div class="brand">Classe puzzle · 90 min · Parcours didactiques</div>
+  <h1>Trois parcours, une question</h1>
+  <p class="lead">Réseaux, Données &amp; décision, Analyse fonctionnelle &amp; SysML. Chaque groupe devient <strong>expert</strong> d’un parcours en vivant un défi comme des élèves. Puis les experts se croisent pour dégager ce qui fait apprendre, quel que soit le thème.</p>
+  <div class="hook"><small>Notre fil rouge</small><span id="fil"></span></div>
+  <p class="identity">Fehmi KLABI · Formation enseignants de technologie</p>
+</header>
+
+<nav class="nav"><a href="../index.html">← Espace formation</a><a class="btn primary" href="groupe-mixte.html">Fiche du groupe mixte →</a></nav>
+
+<section class="section"><div class="card mission">
+  <span class="kicker">Déroulement · 90 minutes</span>
+  <h2>Devenir expert, puis croiser les regards</h2>
+  <div class="timeline" aria-label="Déroulement de l’atelier">
+    <div class="t-all" style="flex:5">Lancer<span>5 min</span></div>
+    <div class="t-exp" style="flex:35">① Groupes experts<span>20 min pour vivre le défi · 15 min pour l’analyser</span></div>
+    <div class="t-mix" style="flex:25">② Groupes mixtes<span>3 experts × 5 min · 10 min de mise en commun</span></div>
+    <div class="t-ple" style="flex:20">③ Plénière<span>restitutions et clôture</span></div>
+    <div class="t-all" style="flex:5">Engagement<span>5 min</span></div>
+  </div>
+  <p style="margin-bottom:0">Les trois mêmes questions guident tous les groupes, quel que soit le parcours : <strong>l’obstacle</strong> (lunette didactique), <strong>l’aide minimale</strong> (lunette pédagogique), <strong>la trace</strong> de compréhension (lunette cognitive).</p>
+</div></section>
+
+<section class="section">
+  <h2>① Groupes experts · 35 min</h2>
+  <p>Chaque groupe ouvre la fiche d’expert de son parcours. Il vit un défi court comme des élèves, puis l’analyse comme des enseignants.</p>
+  <div class="cols3" id="parcours"></div>
+</section>
+
+<section class="section"><div class="card">
+  <span class="kicker">Pendant le défi · 20 min</span>
+  <h2>Trois rôles dans chaque groupe expert</h2>
+  <p>Le miroir ne fonctionne que si quelqu’un observe : un enseignant à l’aise sur le thème ne vivra pas l’obstacle de l’élève, mais il pourra le voir chez un collègue.</p>
+  <div class="roles" id="roles"></div>
+</div></section>
+
+<section class="section"><div class="card mission">
+  <span class="kicker">② Groupes mixtes · 25 min</span>
+  <h2>Un expert de chaque parcours autour de la table</h2>
+  <p>Chaque expert présente en 5 minutes l’obstacle, l’aide et la trace de son parcours, à partir de l’écran « Notre message d’expert » de sa fiche. Le groupe cherche ensuite ce qui revient d’un thème à l’autre et formule <strong>un principe commun</strong> en réponse au fil rouge.</p>
+  <a class="btn primary" href="groupe-mixte.html">Ouvrir la fiche du groupe mixte →</a>
+</div></section>
+
+<section class="section"><div class="card">
+  <span class="kicker">Organisation</span>
+  <h2>Constituer les groupes</h2>
+  <div class="calc"><label for="n"><strong>Nombre de participants</strong></label><input id="n" type="number" min="6" max="40" value="12"></div>
+  <div class="calc-out" id="calcOut"></div>
+</div></section>
+
+<section class="section"><div class="card mirror">
+  <span class="kicker">③ Plénière · 20 min</span>
+  <h2>Restitutions, puis clôture commune</h2>
+  <p>Chaque groupe mixte projette son écran et présente en 2 minutes son principe commun et sa question à la salle. Le formateur termine avec le diaporama de clôture commun : obstacles, aides, traces, et la question à emporter.</p>
+</div></section>
+
+<section class="section" id="engagement"><div class="card science">
+  <span class="kicker">Engagement individuel · 5 min</span>
+  <h2>Et dans ma classe ?</h2>
+  <p>Une seule décision, pour votre prochaine séquence. Elle reste dans ce navigateur ; imprimez-la ou enregistrez-la en PDF.</p>
+  <div class="f"><strong>Dans ma prochaine séquence, je change…</strong><input type="text" data-f="change" placeholder="Une modification précise"></div>
+  <div class="f"><strong>…pour faire face à cet obstacle :</strong><input type="text" data-f="obstacle"></div>
+  <div class="f"><strong>Je saurai que ça marche si…</strong><input type="text" data-f="preuve" placeholder="La trace que je recueillerai chez chaque élève"></div>
+  <div class="actions"><button class="btn secondary" type="button" onclick="print()">Imprimer mon engagement</button><span class="saved" id="saved"></span></div>
+</div></section>
+
+<section class="section">
+  <h2>Pour aller plus loin : les parcours complets</h2>
+  <p>Chaque parcours existe aussi en version longue (4 séances de 2 h), à suivre en autoformation ou pour préparer une séquence. L’atelier de 90 min n’en utilise qu’un défi.</p>
+  <div class="cols3" id="complets"></div>
+</section>
+
+<div class="footer">Les défis sont extraits des parcours complets. Repères scientifiques : Bjork &amp; Bjork (2011), Kapur (2008), Rozenblit &amp; Keil (2002), Kalyuga et al. (2003), Sweller et al. (1998).</div>
+</main>
+<script src="data.js"></script><script src="puzzle.js"></script>
+<script>
+(()=>{const P=window.PUZZLE,esc=PZ.esc;
+document.getElementById('fil').textContent=P.filRouge;
+document.getElementById('parcours').innerHTML=P.parcours.map(p=>`<article class="box pbox" style="--c:${p.couleur}"><span class="badge">${p.lettre}</span><h3>${esc(p.nom)}</h3><p style="margin:4px 0;color:var(--muted)">Défi : « ${esc(p.accroche)} »</p><a class="btn primary" style="margin-top:10px" href="expert.html#${p.id}">Fiche d’expert ${p.lettre} →</a></article>`).join('');
+document.getElementById('roles').innerHTML=P.roles.map(r=>`<div><b>${esc(r.nom)}</b><em>${esc(r.qui)}</em>${esc(r.fait)}</div>`).join('');
+document.getElementById('complets').innerHTML=P.parcours.map(p=>`<a class="box pbox" style="--c:${p.couleur};text-decoration:none;color:inherit" href="${p.lien}"><span class="kicker">Parcours complet · 8 h</span><h3>${esc(p.nom)}</h3><p style="font-size:15px;color:var(--muted)">${esc(p.pourEleves)}</p><span class="go">Ouvrir →</span></a>`).join('');
+const calc=()=>{let n=Math.max(6,Math.min(40,parseInt(document.getElementById('n').value)||0));const b=Math.floor(n/3),r=n%3;const sizes=[b+(r>0?1:0),b+(r>1?1:0),b];
+const exp=sizes.map((s,i)=>{const g=s<=5?1:Math.ceil(s/4);return `<li><strong>${P.parcours[i].lettre} · ${esc(P.parcours[i].nom)}</strong> : ${s} personnes → ${g===1?'1 groupe':g+' groupes'} expert${g>1?'s':''}</li>`}).join('');
+const mix=b,rest=mix<=6?'2 min par groupe mixte en plénière.':`${mix} groupes mixtes : 6 présentent en 2 min, les autres complètent.`;
+document.getElementById('calcOut').innerHTML=`<ul style="margin:0 0 8px">${exp}</ul><p style="margin:0"><strong>${mix} groupes mixtes</strong> d’au moins 3 personnes (un expert R, D et S)${r?`, ${r} groupe${r>1?'s':''} avec un expert de plus`:''}. ${rest}</p><p style="margin:8px 0 0;color:var(--muted);font-size:15px">Astuce : donnez à chacun une étiquette « lettre + numéro » (R1, D1, S1…). Les numéros identiques forment les groupes mixtes.</p>`};
+document.getElementById('n').addEventListener('input',calc);calc();
+PZ.store('puzzle_engagement_v1').bind();
+})();
+</script>
+<script src="../common-tools.js"></script>
+</body></html>

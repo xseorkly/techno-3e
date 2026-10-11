@@ -1,0 +1,58 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fiche d’expert — Ateliers didactiques</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css"><link rel="stylesheet" href="puzzle.css">
+<style>.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tabs a{display:inline-flex;gap:8px;align-items:center;border:2px solid var(--c);color:var(--c);background:#fff;border-radius:999px;padding:7px 14px;font:700 15px Archivo,sans-serif;text-decoration:none}.tabs a[aria-current=page]{background:var(--c);color:#fff}.qlist{counter-reset:q}.qlist .f>strong:before{counter-increment:q;content:counter(q) ". "}</style>
+<script>if(sessionStorage.getItem('formation_teachers_unlocked_v1')!=='1')location.replace('../index.html');</script><style id="navbar-css">.fnav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:4px 14px;background:transparent;font:500 13px/1.3 "Source Sans 3",Arial,sans-serif}.fnav a{color:#5b6b6a!important;text-decoration:none!important;padding:2px 0;background:none;border-radius:0}.fnav a:hover,.fnav a:focus-visible{color:#0f6b66!important;text-decoration:underline!important}@media print{.fnav{display:none}}</style></head>
+<body><nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a><a href="index.html">↑ Classe puzzle</a></nav>
+<main class="page" id="root"></main>
+<div class="full" id="msg" role="dialog" aria-modal="true" aria-label="Notre message d’expert"><button class="btn secondary fs-close" type="button">✕ Fermer</button><div class="fs"></div></div>
+<script src="data.js"></script><script src="puzzle.js"></script>
+<script>
+(()=>{const P=window.PUZZLE,esc=PZ.esc,root=document.getElementById('root');
+function draw(){
+  const id=(location.hash||'#reseaux').slice(1);const p=P.parcours.find(x=>x.id===id)||P.parcours[0];
+  document.title='Fiche d’expert '+p.lettre+' — '+p.nom;
+  const S=PZ.store('puzzle_expert_'+p.id);
+  root.innerHTML=`
+  <header class="hero" style="--c:${p.couleur}">
+    <div class="brand">Classe puzzle · Groupe expert · 35 min</div>
+    <h1><span class="badge" style="vertical-align:middle;font-size:24px;height:46px;min-width:46px">${p.lettre}</span> ${esc(p.accroche)}</h1>
+    <p class="lead">Parcours <strong>${esc(p.nom)}</strong>. Vous vivez d’abord le défi comme des élèves, puis vous l’analysez comme des enseignants. Dans 35 minutes, chacun de vous sera l’expert de ce parcours dans un groupe mixte.</p>
+  </header>
+  <nav class="tabs" aria-label="Choisir le parcours">${P.parcours.map(x=>`<a href="#${x.id}" style="--c:${x.couleur}" ${x.id===p.id?'aria-current="page"':''}>${x.lettre} · ${esc(x.nom)}</a>`).join('')}</nav>
+  <section class="section"><div class="card"><div class="f" style="margin:0"><strong>Membres du groupe expert</strong><input type="text" data-f="membres" placeholder="Prénoms, avec le rôle de chacun : élève, observateur, enseignant"></div></div></section>
+
+  <section class="section"><div class="card manche">
+    <div class="mhead"><div><span class="kicker">Temps 1 · 20 min · Posture d’élève</span><h2>Vivez le défi</h2></div><button class="timer" type="button" data-min="20"></button></div>
+    <p><strong>Rôles :</strong> ${P.roles.map(r=>`<b>${esc(r.nom)}</b> (${esc(r.qui)})`).join(' · ')}. Les élèves cherchent à voix haute ; l’observateur note sans parler ; l’enseignant garde les aides.</p>
+    <div class="situation">${p.contexte}</div>
+    <div class="qlist">${p.questions.map((q,i)=>`<div class="f"><strong>${esc(q)}</strong><textarea data-f="q${i+1}"></textarea></div>`).join('')}</div>
+    ${p.revelation?`<details class="reserved"><summary>Joueur enseignant : la révélation, à lire après la question 1</summary><div class="reveal">${p.revelation}</div></details>`:''}
+    <details class="reserved"><summary>Réservé au joueur enseignant : les aides graduées</summary><p>Donnez-les une par une, uniquement si le groupe est bloqué. Notez celle qui a suffi.</p><ol>${p.aides.map(a=>`<li>${esc(a)}</li>`).join('')}</ol><p><strong>Ce qui est attendu :</strong> ${esc(p.attendu)}</p></details>
+    <div class="f" style="background:#f7fbfb;border-radius:12px;padding:12px 14px"><strong>Notes de l’observateur</strong><small>Hésitations, phrases exactes, erreurs, aides données, moment où ça se débloque.</small><textarea data-f="obs" style="min-height:110px"></textarea></div>
+  </div></section>
+
+  <section class="section"><div class="card manche" style="border-left-color:var(--mag)">
+    <div class="mhead"><div><span class="kicker">Temps 2 · 15 min · Posture d’enseignant</span><h2>Analysez ce que vous avez vécu</h2></div><button class="timer" type="button" data-min="15"></button></div>
+    <div class="card eclairage" style="box-shadow:none;margin:12px 0"><span class="kicker" style="color:var(--amber)">Éclairage cognitif de ce parcours</span><h3 style="margin:6px 0">${esc(p.eclairage.titre)}</h3><p style="color:var(--ink)">${esc(p.eclairage.texte)}</p><p style="margin-bottom:0"><strong>À retenir :</strong> ${esc(p.eclairage.retenir)}</p></div>
+    ${P.lunettes.map(l=>`<div class="lensq" style="--c:${l.couleur}"><div class="f"><span class="lens-tag">${esc(l.nom)}</span> <strong style="display:inline">${esc(l.titre)}</strong><small>${esc(l.question)}</small><textarea data-f="${l.id}"></textarea></div></div>`).join('')}
+    <div class="f" style="background:#fdf6f9;border-radius:12px;padding:12px 14px"><strong>Notre message d’expert</strong><small>En une phrase : ce que les autres parcours doivent retenir du nôtre pour répondre au fil rouge.</small><input type="text" data-f="message"></div>
+    <div class="split"><div class="for-el"><strong>Pour vos élèves de 3e : l’essentiel</strong>${esc(p.pourEleves)}</div><div class="for-vous"><strong>Pour vous : culture de l’enseignant</strong>${esc(p.pourVous)}</div></div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:0">Proposition du formateur, à ajuster au programme et à vos élèves.</p>
+  </div></section>
+
+  <section class="section"><div class="card mirror">
+    <span class="kicker">Avant de rejoindre le groupe mixte</span>
+    <h2>Votre écran d’expert est prêt</h2>
+    <p>Chaque membre emporte ce message : il présentera le parcours en 5 minutes dans son groupe mixte.</p>
+    <div class="actions"><button class="btn primary" type="button" id="openMsg">Afficher notre message d’expert</button><button class="btn secondary" type="button" onclick="print()">Imprimer la fiche</button><a class="btn secondary" href="${p.lien}">Parcours complet (8 h) ↗</a><button class="btn danger" type="button" id="reset">Effacer</button><span class="saved" id="saved"></span></div>
+  </div></section>
+  <div class="footer">Défi extrait du parcours complet « ${esc(p.nom)} ». Fil rouge : ${esc(P.filRouge)}</div>`;
+  S.bind(root);PZ.timers();
+  const open=PZ.full('msg',()=>{const st=S.st;return `<div class="kicker">Expert ${p.lettre} · ${esc(p.nom)} · 5 min</div><h1>« ${esc(p.accroche)} »</h1><div class="meta">${esc(st.membres||'')}</div><div class="fs-grid">${P.lunettes.map(l=>`<div class="fs-box" style="--c:${l.couleur}"><h2>${esc(l.nom)} · ${esc(l.titre)}</h2>${PZ.val(st,l.id)}</div>`).join('')}<div class="fs-box wide" style="--c:var(--mag);background:#fdf6f9"><h2>Notre message d’expert</h2><span style="font-size:24px;font-weight:600">${PZ.val(st,'message')}</span></div><div class="fs-box wide" style="--c:var(--amber)"><h2>Éclairage cognitif</h2>${esc(p.eclairage.retenir)}</div></div>`});
+  document.getElementById('openMsg').onclick=open;
+  document.getElementById('reset').onclick=()=>{if(confirm('Effacer toutes les réponses de cette fiche d’expert ?')){S.reset();draw()}};
+}
+window.addEventListener('hashchange',()=>{draw();scrollTo(0,0)});draw();
+})();
+</script>
+<script src="../common-tools.js"></script>
+</body></html>
