@@ -17,6 +17,7 @@
 .rot td.a{color:#fff;font-weight:700}
 .rot .new{background:#fdf6f9;color:var(--mag);font-weight:700;border-radius:6px;padding:0 4px}
 .rot .g{text-decoration:underline;text-decoration-thickness:2px}
+.calc input{width:110px;border:1px solid #b9c9ca;border-radius:9px;padding:9px;font:inherit}
 .moves{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
 .moves>div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
 .moves ul{margin:6px 0 0;padding-left:18px}
@@ -53,7 +54,7 @@
     <div><em>Tour 3 · 20 min</em><b>La trace</b>Un autre arrivant conteste le travail. La table écrit la trace et son message.</div>
     <div><em>Bilan · 25 min</em><b>Présenter</b>7 min de préparation, puis 2 à 3 min par table.</div>
   </div>
-  <p style="margin:12px 0 0">Le <strong>gardien</strong> de chaque table (la première personne) ne bouge jamais : il assure la continuité. L’ordinateur reste à la table.</p>
+  <p style="margin:12px 0 0">Dans chaque table, la personne <strong>n°1</strong> est le gardien : elle ne bouge jamais. La <strong>n°2</strong> part avant le tour 2, la <strong>n°3</strong> avant le tour 3. Les autres restent. L’ordinateur reste à la table.</p>
 </div></section>
 
 <section class="section">
@@ -66,8 +67,10 @@
   <span class="kicker">Pour le formateur</span>
   <h2>Qui est où, à chaque tour ?</h2>
   <div class="orga-in">
-    <div><strong>Nombre de tables</strong><div class="nbt" id="nbt"></div><p style="font-size:15px;color:var(--muted)">Les tables 1 et 4 font l’atelier 1, les tables 2 et 5 l’atelier 2, les tables 3 et 6 l’atelier 3.</p></div>
-    <div><strong>Les participants</strong> (un nom par ligne, dans l’ordre que vous voulez)<textarea id="noms" placeholder="Anne&#10;Karim&#10;Sofia&#10;…"></textarea></div>
+    <div><strong>1 · Nombre de participants</strong><div class="calc" style="margin-top:6px"><input id="nPart" type="number" min="6" max="40"></div>
+      <p id="resume" style="font-size:16px;margin:10px 0"></p>
+      <strong>Nombre de tables</strong> <span style="font-size:14px;color:var(--muted)">(calculé : groupes de 4, parfois 3 ou 5)</span><div class="nbt" id="nbt"></div></div>
+    <div><strong>2 · Les noms</strong> (facultatif, un par ligne) <span style="font-size:14px;color:var(--muted)">: sinon, chacun reçoit un numéro de participant.</span><textarea id="noms" placeholder="Anne&#10;Karim&#10;Sofia&#10;…"></textarea></div>
   </div>
   <div id="tableau"></div>
   <div class="moves" id="moves"></div>
@@ -85,15 +88,19 @@ document.getElementById('fil').textContent=P.filRouge;
 document.getElementById('complets').innerHTML=A.map(a=>`<a href="${a.lien}">${esc(a.nom)}</a>`).join(' · ');
 const noms=document.getElementById('noms');
 function tableHTML(p,tours){const newc=t=>t?new Set(p.moves[t].map(m=>m.nom)):new Set();
-  return `<div style="overflow-x:auto"><table class="rot"><thead><tr><th>Table</th><th>Atelier</th>${tours.map(t=>`<th>Tour ${t+1}</th>`).join('')}</tr></thead><tbody>${p.tables.map((m,i)=>{const ai=ROT.atelierDe(i+1),a=A[ai];return `<tr><th>Table ${i+1}</th><td class="a" style="background:${a.couleur}">${ai+1} · ${esc(a.nom)}</td>${tours.map(t=>`<td>${p.tours[t][i].map(n=>{const g=n===m[0],nw=newc(t).has(n);return `<span class="${nw?'new':''} ${g?'g':''}">${esc(n)}${nw?' (arrive)':''}${g?' (gardien)':''}</span>`}).join(', ')}</td>`).join('')}</tr>`}).join('')}</tbody></table></div>`}
-function draw(){const p=ROT.plan();
-  document.getElementById('nbt').innerHTML=[3,4,5,6,7,8].map(n=>`<button type="button" data-n="${n}" aria-pressed="${p.T===n}">${n}</button>`).join('');
+  return `<div style="overflow-x:auto"><table class="rot"><thead><tr><th>Table</th><th>Atelier</th>${tours.map(t=>`<th>Tour ${t+1}</th>`).join('')}</tr></thead><tbody>${p.tables.map((m,i)=>{const ai=ROT.atelierDe(i+1),a=A[ai];return `<tr><th>Table ${i+1}</th><td class="a" style="background:${a.couleur}">${ai+1} · ${esc(a.nom)}</td>${tours.map(t=>`<td>${p.tours[t][i].map(n=>{const g=n===m[0],nw=newc(t).has(n),pos=m.indexOf(n)+1;return `<span class="${nw?'new':''} ${g?'g':''}">${pos?'n°'+pos+' ':''}${esc(n)}${nw?' (arrive)':''}${g?' (gardien)':''}</span>`}).join(', ')}</td>`).join('')}</tr>`}).join('')}</tbody></table></div>`}
+function draw(){const o=ROT.orga(),p=ROT.plan(o);
+  const nP=document.getElementById('nPart');if(document.activeElement!==nP)nP.value=p.N;nP.disabled=!!(o.noms||'').trim();
+  const sizes={};p.tables.forEach(t=>sizes[t.length]=(sizes[t.length]||0)+1);
+  document.getElementById('resume').innerHTML=`<strong>${p.N} participants → ${p.T} tables</strong> : ${Object.keys(sizes).sort((a,b)=>b-a).map(k=>`${sizes[k]} table${sizes[k]>1?'s':''} de ${k}`).join(', ')}.`;
+  document.getElementById('nbt').innerHTML=`<button type="button" data-n="0" aria-pressed="${p.auto}" style="width:auto;padding:0 12px;font-size:15px">Auto (${ROT.nbTablesAuto(p.N)})</button>`+[3,4,5,6,7,8].map(n=>`<button type="button" data-n="${n}" aria-pressed="${!p.auto&&p.T===n}">${n}</button>`).join('');
   document.querySelectorAll('#nbt button').forEach(b=>b.onclick=()=>{ROT.setOrga({...ROT.orga(),nb:+b.dataset.n});draw()});
   document.getElementById('ateliers').innerHTML=A.map((a,ai)=>{const ts=[];for(let k=1;k<=p.T;k++)if(ROT.atelierDe(k)===ai)ts.push(k);
     return `<article class="at" style="--c:${a.couleur}"><span class="n">Atelier ${ai+1}</span><h3>${esc(a.nom)}</h3><p class="acc">« ${esc(a.accroche)} »</p><div class="tables">${ts.map(k=>`<a href="atelier.html#t${k}">Table ${k} →</a>`).join('')}</div></article>`}).join('');
   document.getElementById('tableau').innerHTML=tableHTML(p,[0,1,2]);
-  document.getElementById('moves').innerHTML=[1,2].map(t=>`<div><strong>Avant le tour ${t+1}</strong> (à ${t===1?'25':'45'} min)<ul>${p.moves[t].map(m=>`<li>${esc(m.nom)} : table ${m.de} → <strong>table ${m.vers}</strong></li>`).join('')}</ul></div>`).join('');
+  document.getElementById('moves').innerHTML=[1,2].map(t=>`<div><strong>Avant le tour ${t+1}</strong> (à ${t===1?'25':'45'} min) : la n°${t+1} de chaque table part<ul>${p.moves[t].map(m=>`<li>${esc(m.nom)} : table ${m.de} → <strong>table ${m.vers}</strong></li>`).join('')}</ul></div>`).join('');
 }
+document.getElementById('nPart').addEventListener('input',e=>{ROT.setOrga({...ROT.orga(),n:+e.target.value||20});draw()});
 noms.value=ROT.orga().noms||'';
 noms.addEventListener('input',()=>{ROT.setOrga({...ROT.orga(),noms:noms.value});draw()});
 let tProj=0;

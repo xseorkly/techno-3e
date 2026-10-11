@@ -13,7 +13,7 @@ window.PUZZLE = {
   parcours: [
     {
       id: 'reseaux', lettre: 'R', nom: 'Réseaux', couleur: '#0e6e6b',
-      accroche: 'Le réseau fonctionne… ou pas',
+      accroche: 'Le site existe… mais où est-il ?',
       lien: '../reseaux/index.html',
       contexte: '<p><strong>Situation.</strong> PC1 et PC2 communiquent. PC3 n’arrive pas à joindre PC1. Le smartphone joint PC1, mais pas le serveur Web situé sur un autre réseau. Un collègue affirme : « C’est le DNS, et il faut changer le switch. »</p><div class="docs"><div><strong>Relevé 1</strong><br>PC1 : 192.168.10.21 /24<br>PC2 : 192.168.10.22 /24<br>PC3 : 192.168.20.23 /24</div><div><strong>Relevé 2</strong><br>Smartphone : 192.168.10.80 /24<br>Passerelle : non renseignée<br>DNS : 192.168.10.1</div></div>',
       questions: [
@@ -25,9 +25,10 @@ window.PUZZLE = {
       ],
       revelation: '',
       aides: [
-        'Relance : « Qu’est-ce qui, dans l’adresse, indique le réseau ? Comparez cette partie pour chaque machine. »',
-        'Indice : « /24 : combien d’octets désignent le réseau ? Que valent-ils pour PC1 et pour PC3 ? »',
-        'Exemple : « Deux maisons rue des Lilas et une rue des Roses : qui faut-il pour aller d’une rue à l’autre ? »'
+        'Relance : « Comparez les documents ligne par ligne. Qu’est-ce qui change d’un poste à l’autre ? »',
+        'Indice : « Le poste connaît le nom du site. Connaît-il l’adresse à joindre ? Qui pourrait la lui fournir ? »',
+        'Indice : « Avec /24, quelle partie de l’adresse désigne le réseau ? Comparez-la pour PC1 et pour PC3. »',
+        'Exemple : « Deux maisons rue des Lilas, une rue des Roses : qui faut-il pour passer d’une rue à l’autre ? »'
       ],
       attendu: 'Avec /24, les trois premiers octets désignent le réseau : PC1, PC2 et le smartphone sont sur 192.168.10, PC3 sur 192.168.20. PC3 ne peut joindre PC1 qu’à travers un routeur. Sans passerelle, le smartphone ne sort pas de son réseau : il joint PC1 (même réseau) mais pas le serveur distant. Test : ping de l’adresse IP de PC1 depuis PC3 (échec sans passerelle ni routeur) : ni nom, ni DNS, ni switch en jeu. Le DNS associe un nom à une adresse ; l’acheminement fait voyager les paquets jusqu’à cette adresse.',
       eclairage: {titre: 'Représentations initiales et changement conceptuel',
@@ -38,7 +39,7 @@ window.PUZZLE = {
     },
     {
       id: 'donnees-decision', lettre: 'D', nom: 'Données & décision', couleur: '#245d8a',
-      accroche: 'Mon IA a 99 % de réussite. Vraiment ?',
+      accroche: 'Quand la donnée nous trompe',
       lien: '../donnees-decision/index.html',
       contexte: '<p><strong>Situation.</strong> Deux fabricants proposent au collège un détecteur d’incendie « intelligent ».<br><strong>Détecteur A :</strong> « 99 % de réussite sur 10 000 situations testées. »<br><strong>Détecteur B :</strong> « 95 % de réussite sur les mêmes 10 000 situations. »</p>',
       questions: [
@@ -50,9 +51,10 @@ window.PUZZLE = {
       ],
       revelation: 'Sur les 10 000 situations, 9 900 sont « pas d’incendie » et 100 sont « incendie ».<br><strong>A</strong> répond <strong>toujours</strong> « pas d’incendie ».<br><strong>B</strong> détecte 90 des 100 incendies, et donne 495 fausses alertes sur les 9 900 situations sans incendie.',
       aides: [
-        'Relance : « Sur les 100 incendies, combien chaque détecteur en a-t-il signalé ? »',
-        'Indice : « Faites un tableau à quatre cases : incendie ou non, alerte ou non. Remplissez-le pour A, puis pour B. »',
-        'Exemple : « Un test qui dit toujours "pas malade" pour une maladie rare obtient un excellent score. À quoi sert-il ? »'
+        'Relance : « 374 : la carte mesure-t-elle une température, une tension ou autre chose ? »',
+        'Indice : « Combien de volts vaut un pas du convertisseur ? Et combien de degrés ? »',
+        'Relance : « Que se passe-t-il à chaque nouvelle mesure quand la valeur oscille autour de 28 °C ? »',
+        'Indice : « Sur les 100 incendies, combien le système en a-t-il détectés ? »'
       ],
       attendu: 'A : 9 900 / 10 000 = 99 % de réussite, 0 incendie détecté sur 100. B : 90 + 9 405 = 9 495 bonnes réponses, soit environ 95 % ; 90 % des incendies détectés ; 90 alertes vraies sur 585, soit environ 15 % : environ 85 % des alertes sont fausses. Une fausse alerte coûte une évacuation, une alerte manquée peut coûter des vies : le critère dépend du coût de chaque erreur, et ce choix est humain (collège, fabricant), pas « décidé » par le programme. Relever le seuil réduit les fausses alertes mais fait manquer des incendies.',
       eclairage: {titre: 'Intuition trompeuse et difficulté productive',
@@ -76,8 +78,9 @@ window.PUZZLE = {
       revelation: '',
       aides: [
         'Relance : « Cette phrase dit-elle pourquoi l’objet existe, ce qu’il doit faire, ou comment il le fait ? »',
-        'Indice : « Partez de "dévisser" et suivez-le dans chaque diagramme : où disparaît-il ? »',
-        'Exemple : « Exigence vérifiable : "autonomie ≥ 200 vis de 4 × 40 dans du pin, batterie neuve chargée" : critère, niveau, condition. »'
+        'Indice : « Si l’on remplaçait le moteur par une autre solution qui rend le même service, la phrase resterait-elle vraie ? »',
+        'Relance : « Suivez l’énergie depuis la batterie : à chaque élément, qu’est-ce qui change, qu’est-ce qui est transmis ? »',
+        'Indice : « Partez de "dévisser" : dans quel diagramme cette exigence disparaît-elle ? »'
       ],
       attendu: 'B est la fonction (service rendu) ; A et C décrivent des solutions. Test : si l’on remplace la technologie et que la phrase reste vraie, c’est une fonction. Incohérences : l’exigence d’inversion n’a ni signal dans l’IBD (ajouter un sélecteur de sens relié à la commande) ni état « rotation à gauche » (ajouter l’état et ses transitions, avec arrêt obligatoire avant changement de sens) ; il faut ensuite revérifier le diagramme de séquence et le test associé. Chaîne : visser et dévisser sans effort → cas « dévisser » → exigence « inversion du sens » → bloc commande + sélecteur → signal « sens » → état « rotation gauche » → test : la vis sort à la commande inverse.',
       eclairage: {titre: 'Illusion de familiarité et charge des représentations',

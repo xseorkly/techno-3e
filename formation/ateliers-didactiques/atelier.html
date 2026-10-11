@@ -1,4 +1,4 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Table — Ateliers didactiques</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css"><link rel="stylesheet" href="puzzle.css">
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Table — Ateliers didactiques</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css"><link rel="stylesheet" href="puzzle.css"><link rel="stylesheet" href="contenus.css">
 <style>
 .topbar{position:sticky;top:0;z-index:50;background:rgba(244,247,247,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:0 -22px;padding:10px 22px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .topbar .who{font:700 16px Archivo,sans-serif;margin-right:8px}
@@ -14,32 +14,32 @@ ol.dq{margin:10px 0;padding-left:22px}ol.dq li{margin:6px 0}
 <body><nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a><a href="index.html">↑ Ateliers didactiques</a></nav>
 <main class="page" id="root"></main>
 <div class="full" id="resti" role="dialog" aria-modal="true" aria-label="Présentation de la table"><button class="btn secondary fs-close" type="button">✕ Fermer</button><div class="fs"></div></div>
-<script src="data.js"></script><script src="puzzle.js"></script><script src="rotation.js"></script>
+<script src="data.js"></script><script src="contenus.js"></script><script src="puzzle.js"></script><script src="rotation.js"></script>
 <script>
 (()=>{const P=window.PUZZLE,A=P.parcours,esc=PZ.esc,root=document.getElementById('root');
-const L=Object.fromEntries(P.lunettes.map(l=>[l.id,l]));
+const L=Object.fromEntries(P.lunettes.map(l=>[l.id,l]));let C=[];
+const extra=(key,titre)=>{const h=C.map(pt=>pt[key]?`<div class="partie"><h3 style="font-size:17px">${esc(pt.titre)}</h3>${pt[key]}</div>`:'').join('');return h.trim()?`<details class="sub dossier" style="border-style:solid"><summary style="cursor:pointer;font-weight:700;color:var(--teal2);padding:8px 0">${titre}</summary>${h}</details>`:''};
 const lens=(l,k)=>`<div class="lensq" style="--c:${l.couleur}"><div class="f"><span class="lens-tag">${esc(l.nom)}</span> <strong style="display:inline">${esc(l.titre)}</strong><small>${esc(l.question)}</small><textarea data-k="${k}"></textarea></div></div>`;
 const tableCourante=()=>{const m=location.hash.match(/^#t(\d+)$/);let k=m?+m[1]:0;try{if(k)sessionStorage.setItem('ad_v3_table',k);else k=+sessionStorage.getItem('ad_v3_table')||1}catch(e){k=k||1}return k};
 function draw(){
   const k=tableCourante();
-  const ai=ROT.atelierDe(k),a=A[ai],st=ROT.reponses(k),save=()=>ROT.setReponses(k,st);
+  const ai=ROT.atelierDe(k),a=A[ai],st=ROT.reponses(k),save=()=>ROT.setReponses(k,st);C=(window.CONTENUS||{})[a.id]||[];
   const p=ROT.plan();const known=t=>(ROT.orga().noms&&p.tours[t][k-1])?p.tours[t][k-1].join(', '):'';
   ['m1','m2','m3'].forEach((m,t)=>{if(!st[m]&&known(t))st[m]=known(t)});
   document.title=`Table ${k} · Atelier ${ai+1} · ${a.nom}`;
   root.innerHTML=`
   <div class="topbar" style="--c:${a.couleur}"><span class="who">Table ${k} · Atelier ${ai+1}</span><button type="button" data-go="tour1">Tour 1 · Le défi</button><button type="button" data-go="tour2">Tour 2 · L’obstacle et l’aide</button><button type="button" data-go="tour3">Tour 3 · La trace</button><button type="button" data-go="bilan" style="--c:var(--mag)">Bilan</button></div>
   <header class="hero" style="margin-top:16px"><div class="brand" style="color:${a.couleur}">Table ${k} · Atelier ${ai+1} · ${esc(a.nom)}</div><h1>« ${esc(a.accroche)} »</h1>
-    <p class="lead">Cette table garde son atelier pendant les trois tours. Le gardien reste ; à chaque tour, une nouvelle personne arrive et l’atelier avance d’une étape.</p></header>
+    <p class="lead">Cette table garde son atelier pendant les trois tours. Le gardien (n°1) reste ; à chaque tour, une nouvelle personne arrive et l’atelier avance d’une étape. Le dossier reprend ${C.length} parties du parcours complet.</p></header>
 
   <section class="section"><div class="card tour" id="tour1" style="--c:${a.couleur}">
-    <div class="mhead"><div><span class="kicker">Tour 1 · 20 min · comme des élèves</span><h2>Le défi</h2></div><button class="timer" type="button" data-min="20"></button></div>
-    <div class="f"><strong>Qui est à la table ?</strong><input type="text" data-k="m1" placeholder="Prénoms (le premier est le gardien)"></div>
-    <p><strong>Le défi est volontairement exigeant</strong> : vous n’aurez peut-être pas le temps de tout traiter. Dites ce que vous pensez, même si c’est faux.</p>
-    <div class="situation">${a.contexte}</div>
-    <strong>À traiter :</strong><ol class="dq">${a.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ol>
-    ${a.revelation?`<details class="reserved"><summary>La révélation : à ouvrir après la question 1</summary><div class="reveal">${a.revelation}</div></details>`:''}
+    <div class="mhead"><div><span class="kicker">Tour 1 · 20 min · comme des élèves</span><h2>Le dossier de l’atelier</h2></div><button class="timer" type="button" data-min="20"></button></div>
+    <div class="f"><strong>Qui est à la table ?</strong><input type="text" data-k="m1" placeholder="Prénoms (le n°1 est le gardien)"></div>
+    <div class="callout" style="margin:12px 0"><strong>Ce dossier est volontairement long et exigeant.</strong> Commencez par la partie 1 et avancez aussi loin que possible : vous n’aurez pas le temps de tout faire, et ce n’est pas grave. Dites ce que vous pensez, même si c’est faux.</div>
+    <div class="dossier">${C.map((pt,i)=>`<div class="partie" style="--c:${a.couleur}"><h3>${esc(pt.titre)}</h3><p class="lead2">${pt.lead}</p>
+      <div class="fiche"><div class="pb"><b>Le problème</b><p>${esc(pt.fiche.probleme)}</p></div><div><b>Objectifs</b><ul>${pt.fiche.objectifs.map(o=>`<li>${esc(o)}</li>`).join('')}</ul></div><div><b>Ce que vous allez faire</b>${esc(pt.fiche.faire)}<br><br><b>Production attendue</b>${esc(pt.fiche.production)}</div></div>
+      ${pt.eleve}</div>`).join('')}</div>
     <details class="reserved"><summary>Coup de pouce : seulement si vous êtes bloqués</summary><ol>${a.aides.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></details>
-    <div class="f"><strong>Nos réponses (numérotez-les)</strong><textarea data-k="defi" style="min-height:130px"></textarea></div>
     <div class="f"><strong>Où avons-nous bloqué ?</strong><small>À chaud, avant d’oublier : c’est la matière du tour 2.</small><textarea data-k="bloque"></textarea></div>
   </div></section>
 
@@ -48,6 +48,7 @@ function draw(){
     <div class="f"><strong>Qui est à la table ?</strong><input type="text" data-k="m2" placeholder="Prénoms (marquez le nouvel arrivant)"></div>
     <div class="sub"><span class="t">5 min</span><h3>Accueillez le nouvel arrivant… sans lui montrer vos réponses</h3><p style="margin:4px 0">Posez-lui la question du défi qui vous a le plus bloqués. Observez où il hésite : c’est un élève de plus.</p><div class="f"><textarea data-k="arrivant2" placeholder="Ce qu’il a répondu, où il a bloqué"></textarea></div></div>
     <div class="sub"><span class="t">15 min</span><h3>Analysez, en posture d’enseignant</h3>${lens(L.dida,'dida')}${lens(L.peda,'peda')}</div>
+    ${extra('tour2','Pour aller plus loin : les questions du parcours')}
   </div></section>
 
   <section class="section"><div class="card tour" id="tour3" style="--c:var(--amber)">
@@ -56,7 +57,8 @@ function draw(){
     <div class="sub"><span class="t">5 min</span><h3>Le nouvel arrivant conteste</h3><p style="margin:4px 0">Il lit tout ce qui précède et dit ce qui ne le convainc pas : un obstacle mal identifié, une relance qui donne la réponse…</p><div class="f"><textarea data-k="objections" placeholder="Ses objections, et ce que vous corrigez"></textarea></div></div>
     <div class="sub"><span class="t">15 min</span><h3>Terminez l’atelier</h3>${lens(L.cogn,'cogn')}
       <div class="f" style="background:#fdf6f9;border-radius:12px;padding:12px 14px"><strong>Notre message pour le bilan</strong><small>Ce que cet atelier répond au fil rouge : « la difficulté fait apprendre quand… »</small><input type="text" data-k="message"></div>
-      <details class="reserved" style="border-color:var(--teal)"><summary style="color:var(--teal2)">À la fin : ce qui était attendu dans le défi</summary><p>${esc(a.attendu)}</p></details></div>
+      <details class="reserved" style="border-color:var(--teal)"><summary style="color:var(--teal2)">À la fin : ce qui était attendu dans le dossier</summary>${C.map(pt=>`<p><strong>${esc(pt.titre)}.</strong> ${esc(pt.attendu)}</p>`).join('')}</details></div>
+    ${extra('tour3','Pour aller plus loin : la scénarisation du parcours')}
   </div></section>
 
   <section class="section"><div class="card tour" id="bilan" style="--c:var(--mag)">
@@ -64,7 +66,7 @@ function draw(){
     <p>7 minutes pour relire et corriger, puis 2 à 3 minutes de présentation par table. L’écran reprend automatiquement le travail des trois tours.</p>
     <div class="actions"><button class="btn primary" type="button" id="open">Afficher notre présentation</button><button class="btn secondary" type="button" onclick="print()">Imprimer la fiche de la table</button><a class="btn secondary" href="${a.lien}">Parcours complet (8 h)</a></div>
   </div></section>`;
-  root.querySelectorAll('[data-k]').forEach(el=>{el.value=st[el.dataset.k]||'';el.addEventListener('input',()=>{st[el.dataset.k]=el.value;save()})});
+  root.querySelectorAll('[data-k]').forEach(el=>{const key=el.dataset.k;if(el.type==='radio'){el.checked=st[key]===el.value;el.addEventListener('change',()=>{if(el.checked){st[key]=el.value;save()}});return}el.value=st[key]||'';el.addEventListener('input',()=>{st[key]=el.value;save()})});
   root.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.go).scrollIntoView({behavior:'smooth'}));
   PZ.timers();
   document.getElementById('open').onclick=PZ.full('resti',()=>`<div class="kicker">Table ${k} · Atelier ${ai+1} · ${esc(a.nom)}</div><h1>« ${esc(a.accroche)} »</h1><div class="meta">${esc(st.m3||st.m1||'')}</div><div class="fs-grid">${P.lunettes.map(l=>`<div class="fs-box" style="--c:${l.couleur}"><h2>${esc(l.nom)} · ${esc(l.titre)}</h2>${PZ.val(st,l.id)}</div>`).join('')}<div class="fs-box wide" style="--c:var(--mag);background:#fdf6f9"><h2>Notre message</h2><span style="font-size:24px;font-weight:600">${PZ.val(st,'message')}</span></div></div>`);
