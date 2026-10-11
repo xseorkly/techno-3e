@@ -1,0 +1,545 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bilan — Évaluer pour faire apprendre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<script>if(sessionStorage.getItem('formation_teachers_unlocked_v1')!=='1')location.replace('../index.html');</script>
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#0B1B1E;color:#E8F1F0;font:16px/1.4 "Source Sans 3",Arial,sans-serif}
+.wrap{height:100%;display:grid;grid-template-rows:auto 1fr auto auto}
+.top{display:flex;align-items:center;gap:12px;padding:8px 14px;background:#14262B;font:700 13px Archivo,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#7FD3CC}
+.top a{color:#BFD8D5;text-decoration:none;text-transform:none;letter-spacing:0;font:600 14px "Source Sans 3",sans-serif}.top .sp{flex:1}
+.view{position:relative;overflow:hidden}
+.canvas{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:0 0}
+.sl{position:absolute;inset:0;width:1920px;height:1080px;display:none!important;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.4)}
+.sl.on{display:flex!important}.sl[style*="display:grid"].on{display:grid!important}
+.sl h1,.sl h2,.sl h3,.sl p,.sl ul,.sl ol{margin:0}.sl ul,.sl ol{padding-left:1.2em}.sl table{border-collapse:collapse;width:100%}.sl th,.sl td{border:1px solid #D2DEDE;padding:.35em .6em;text-align:left;vertical-align:top}.sl a{color:inherit}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 14px;background:#14262B}
+.bar button{border:0;border-radius:10px;padding:9px 14px;background:#2B4146;color:#fff;font:700 15px Archivo,sans-serif;cursor:pointer}.bar button.p{background:#0E6E6B}
+.bar .n{font:700 15px Archivo,sans-serif;min-width:70px;text-align:center}.bar .t{flex:1;min-width:160px;opacity:.85}
+.bar select{max-width:280px;border-radius:9px;padding:7px;font:inherit}
+.notes{display:none;max-height:26vh;overflow:auto;padding:12px 16px;background:#F4F7F7;color:#14262B;font-size:16px}.notes.open{display:block}.notes b{display:block;font:700 12px Archivo,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:#0E6E6B;margin-bottom:4px}
+.wrap:fullscreen .top{display:none}
+@media(max-width:700px){.bar .t{display:none}}
+@media print{@page{size:1920px 1080px;margin:0}html,body{height:auto;background:#fff}.top,.bar,.notes{display:none!important}.wrap{display:block}.view{overflow:visible}.canvas{position:static;transform:none!important}.sl{position:relative;display:flex!important;break-after:page;box-shadow:none}.sl[style*="display:grid"]{display:grid!important}}
+</style></head><body>
+<div class="wrap" id="wrap">
+<div class="top"><a href="index.html">← Retour à l'atelier</a><span class="sp"></span><span>Évaluer pour faire apprendre · Bilan</span></div>
+<div class="view" id="view"><div class="canvas" id="cv">
+<section class="sl" data-id="cover" style="background:#14262B;color:#F4F7F7;font-family:'Source Sans 3', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<div style="position:absolute;left:0;top:0;width:24px;height:1080px;background:#C2185B"></div>
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:28px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#7FD3CC">Formation enseignants · Technologie cycle 4 · Programme 2024 · DNB 2027</p>
+<h1 style="font-family:'Archivo', Arial, sans-serif;font-size:132px;font-weight:700;line-height:1.02;color:#F4F7F7">Évaluer pour faire apprendre</h1>
+<p style="font-size:44px;line-height:1.3;color:#BFD8D5;max-width:1400px">Comment construire, placer et exploiter les évaluations en technologie ?</p>
+<p style="font-size:30px;color:#BFD8D5">Fehmi KLABI · Enseignant formateur Technologie · Octobre 2026</p>
+
+</section>
+<section class="sl" data-id="intention" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Ouverture</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">L'évaluation ne se résume ni à la note, ni à une grille</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px">
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #245D8A;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:36px;font-weight:700;color:#245D8A">Éclairer</h3><p style="font-size:27px;line-height:1.35;color:#3E5257">Savoir ce que chaque élève sait, comprend et peut mobiliser.</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #0E6E6B;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:36px;font-weight:700;color:#0A5A58">Faire progresser</h3><p style="font-size:27px;line-height:1.35;color:#3E5257">Repérer les obstacles, ajuster le guidage, les activités et le feedback.</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #C2185B;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:36px;font-weight:700;color:#A3134C">Attester</h3><p style="font-size:27px;line-height:1.35;color:#3E5257">Rendre compte d'un niveau de maîtrise, au moment pertinent.</p></div>
+</div>
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:36px;font-weight:700;line-height:1.3;background:#14262B;color:#F4F7F7;border-radius:14px;padding:28px 36px">Fil rouge : quelles preuves d'apprentissage recueillir, quand, et pour en faire quoi ?</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre</p>
+
+</section>
+<section class="sl" data-id="p1" style="background:#0E6E6B;color:#F4F7F7;font-family:'Source Sans 3', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#BFE7E2">Partie 1</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:104px;font-weight:700;line-height:1.05;color:#F4F7F7">Un cadre institutionnel actualisé</h2>
+<p style="font-size:40px;line-height:1.3;color:#DDF1EE;max-width:1300px">Ce que demandent réellement le programme et les textes en vigueur en 2026-2027</p>
+
+</section>
+<section class="sl" data-id="timeline" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Cadre officiel</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Le programme de 2024 s'applique désormais en entier</h2>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:14px;padding:32px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:88px;font-weight:700;color:#245D8A">5e</p><p style="font-size:28px;color:#3E5257">depuis la rentrée 2024</p></div>
+<div style="flex:1;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:14px;padding:32px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:88px;font-weight:700;color:#0E6E6B">4e</p><p style="font-size:28px;color:#3E5257">depuis la rentrée 2025</p></div>
+<div style="flex:1;background:#14262B;border-radius:14px;padding:32px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:88px;font-weight:700;color:#F27AA8">3e</p><p style="font-size:28px;color:#DDF1EE">depuis la rentrée 2026</p></div>
+</div>
+<p style="font-size:30px;line-height:1.4;color:#3E5257">Conséquence : en 2026-2027, les trois niveaux relèvent du même programme, et le DNB 2027 porte sur le programme de 3e de 2024.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Source : arrêté du 9 février 2024, BO n° 9 du 29 février 2024</p>
+
+</section>
+<section class="sl" data-id="programme" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Programme de 2024</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Ce qu'on évalue : 3 thèmes, 9 compétences</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px">
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #245D8A;border-radius:12px;padding:26px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;color:#245D8A">OST · usages et interactions</h3>
+<p style="font-size:24px;line-height:1.3"><b>1</b> Décrire les liens entre usages et évolutions technologiques des OST</p>
+<p style="font-size:24px;line-height:1.3"><b>2</b> Décrire les interactions entre un OST, son environnement et les utilisateurs</p>
+<p style="font-size:24px;line-height:1.3"><b>3</b> Caractériser et choisir un OST selon différents critères</p>
+</div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #0E6E6B;border-radius:12px;padding:26px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;color:#0A5A58">SFC · comprendre</h3>
+<p style="font-size:24px;line-height:1.3"><b>4</b> Décrire et caractériser l'organisation interne d'un OST et ses échanges (énergies, données)</p>
+<p style="font-size:24px;line-height:1.3"><b>5</b> Identifier un dysfonctionnement d'un objet technique et y remédier</p>
+<p style="font-size:24px;line-height:1.3"><b>6</b> Comprendre et modifier un programme associé à une fonctionnalité d'un OST</p>
+</div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #C2185B;border-radius:12px;padding:26px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;color:#A3134C">CCRI · concevoir</h3>
+<p style="font-size:24px;line-height:1.3"><b>7</b> Imaginer, concevoir et réaliser une ou des solutions en réponse à un besoin</p>
+<p style="font-size:24px;line-height:1.3"><b>8</b> Valider les solutions techniques par des simulations ou des protocoles de tests</p>
+<p style="font-size:24px;line-height:1.3"><b>9</b> Concevoir, écrire, tester et mettre au point un programme</p>
+</div>
+</div>
+<p style="font-size:28px;color:#3E5257">Avant 2024 : une trentaine de compétences. Désormais <b>9</b>, mais à un niveau d'exigence plus élevé.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Source : arrêté du 9 février 2024, BO n° 9 du 29 février 2024</p>
+
+</section>
+<section class="sl" data-id="reperes" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Repères de progressivité</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">On n'évalue pas la même chose en 5e et en 3e</h2>
+<p style="font-size:30px;color:#3E5257">Compétence 4 : décrire l'organisation interne d'un OST. Exemple de la chaîne d'énergie.</p>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;gap:28px;align-items:center;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:22px 30px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:40px;font-weight:700;color:#245D8A;width:90px">5e</p><p style="font-size:28px;line-height:1.35">Associer des solutions techniques à des fonctions ; identifier les constituants de la chaîne d'énergie <b>(organisation fournie)</b> ; indiquer la nature des énergies.</p></div>
+<div style="display:flex;gap:28px;align-items:center;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:22px 30px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:40px;font-weight:700;color:#0E6E6B;width:90px">4e</p><p style="font-size:28px;line-height:1.35">Identifier les constituants et les associer à leurs fonctions ; <b>repérer</b> les transformations et les flux d'énergie.</p></div>
+<div style="display:flex;gap:28px;align-items:center;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:22px 30px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:40px;font-weight:700;color:#C2185B;width:90px">3e</p><p style="font-size:28px;line-height:1.35"><b>Élaborer</b>, à l'aide d'un schéma bloc, la chaîne d'énergie d'un OST.</p></div>
+</div>
+<p style="font-size:30px;font-weight:600;color:#0A5A58">Pour évaluer juste : regarder le verbe, et ce que l'enseignant fournit encore.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Source : programme de technologie, cycle 4, BO n° 9 du 29 février 2024</p>
+
+</section>
+<section class="sl" data-id="niveaux" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Les trois lieux de l'évaluation</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Bulletin, bilan de cycle, brevet</h2>
+<table style="font-size:27px;color:#14262B;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:16px">
+<tr style="background:#E2EFEE"><th style="width:22%">Où ?</th><th style="width:38%">Quoi ?</th><th style="width:40%">Ce qu'il faut savoir</th></tr>
+<tr><td><b>Bilans périodiques</b> (LSU)</td><td>Acquis et progrès par discipline, éléments du programme travaillés</td><td>Chaque trimestre ou semestre, en 5e, 4e et 3e</td></tr>
+<tr><td><b>Bilan de fin de cycle 4</b> (LSU)</td><td>8 composantes du socle, 4 niveaux : insuffisante, fragile, satisfaisante, très bonne</td><td>Toujours obligatoire en fin de 3e ; ne donne plus de points au DNB</td></tr>
+<tr><td><b>DNB</b></td><td>Contrôle continu (40 %) et épreuves terminales (60 %)</td><td>Le contrôle continu = moyennes annuelles de 3e, coefficient égal</td></tr>
+</table>
+<p style="font-size:30px;font-weight:600;color:#A3134C">En 3e, la moyenne annuelle de technologie compte directement pour le brevet.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Sources : education.gouv.fr, Le livret scolaire unique (mis à jour le 10-12-2025) · Éduscol, modalités d'attribution du DNB</p>
+
+</section>
+<section class="sl" data-id="moyenne" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C2185B">DNB 2027 · contrôle continu</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">De quoi doit être faite une moyenne de 3e ?</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px">
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #245D8A;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:34px;font-weight:700;color:#245D8A">Diversifier</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Évaluations écrites ou orales, individuelles ou collectives ; mémorisation, application et réinvestissement.</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #0E6E6B;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:34px;font-weight:700;color:#0A5A58">Multiplier</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Notes de 0 à 20 ; la moyenne est « nécessairement construite à partir d'une pluralité de notes ».</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #C2185B;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:34px;font-weight:700;color:#A3134C">Concerter</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Les équipes veillent à la représentativité ; une commission académique peut harmoniser, à la hausse comme à la baisse.</p></div>
+</div>
+<p style="font-size:30px;line-height:1.4;background:#FFF5D9;border-left:8px solid #9A6900;border-radius:10px;padding:22px 28px">À ne pas confondre : devoir produire des notes ne signifie pas noter chaque essai ni chaque feedback formatif.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Source : note de service MENE2623194N du 11-09-2026, BO spécial n° 4 du 17-09-2026</p>
+
+</section>
+<section class="sl" data-id="langue" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">DNB 2027 · maîtrise de la langue</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">La langue est évaluée dans toutes les disciplines</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:18px">
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;color:#0A5A58">Orthographe</h3><p style="font-size:24px;line-height:1.35;color:#3E5257">Lexicale et grammaticale ; fréquence des erreurs</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;color:#0A5A58">Syntaxe</h3><p style="font-size:24px;line-height:1.35;color:#3E5257">Construction des phrases</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;color:#0A5A58">Lexique</h3><p style="font-size:24px;line-height:1.35;color:#3E5257">Dont les termes techniques exacts</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;color:#0A5A58">Organisation</h3><p style="font-size:24px;line-height:1.35;color:#3E5257">Présentation et enchaînement du raisonnement</p></div>
+</div>
+<div style="background:#FFF5D9;border-left:8px solid #9A6900;border-radius:12px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#6D4B00">En classe, dès la 5e</h3>
+<p style="font-size:28px;line-height:1.4">Faire rédiger des justifications courtes et complètes : une phrase, le mot technique juste, « car » ou « donc ». Évaluer avec la même grille de quatre dimensions.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Source : note de service MENE2623195N, maîtrise de la langue à tous les examens, session 2027</p>
+
+</section>
+<section class="sl" data-id="p2" style="background:#0E6E6B;color:#F4F7F7;font-family:'Source Sans 3', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#BFE7E2">Partie 2</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:104px;font-weight:700;line-height:1.05;color:#F4F7F7">Que veut-on évaluer en technologie ?</h2>
+<p style="font-size:40px;line-height:1.3;color:#DDF1EE;max-width:1300px">Passer de la tâche réalisée à la preuve de l'apprentissage</p>
+
+</section>
+<section class="sl" data-id="fonctions" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Repère pédagogique</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Quatre fonctions, quatre questions</h2>
+<table style="font-size:28px;color:#14262B;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:16px">
+<tr style="background:#E2EFEE"><th style="width:22%">Fonction</th><th style="width:42%">Question posée</th><th style="width:36%">Usage</th></tr>
+<tr><td><b>Diagnostique</b></td><td>Que savent-ils déjà ?</td><td>Ajuster le point de départ</td></tr>
+<tr><td><b>Formative</b></td><td>Où en sont-ils pendant l'apprentissage ?</td><td>Aider, faire retravailler</td></tr>
+<tr><td><b>Formatrice</b></td><td>L'élève sait-il analyser sa production ?</td><td>Autoévaluation sur critères</td></tr>
+<tr><td><b>Sommative</b></td><td>Quelle maîtrise retenir après l'apprentissage ?</td><td>Bilan, éventuellement une note</td></tr>
+</table>
+<p style="font-size:30px;line-height:1.4;color:#3E5257">Une même tâche (quiz, oral, observation) sert l'une ou l'autre <b>selon ce qu'on en fait</b>. Au-dessus : la fonction <b>certificative</b>, celle du brevet.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 2</p>
+
+</section>
+<section class="sl" data-id="doitpas" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Principe pédagogique</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Ce que l'évaluation doit éviter, et rechercher</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">
+<div style="background:#FDF1F5;border:1px solid #F0C3D6;border-radius:14px;padding:30px;display:flex;flex-direction:column;gap:14px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:34px;font-weight:700;color:#A3134C">À proscrire</h3>
+<p style="font-size:26px;line-height:1.3"><b>Sanction</b> : la note sert à tenir la classe.</p>
+<p style="font-size:26px;line-height:1.3"><b>Discriminante</b> : on classe les élèves en public.</p>
+<p style="font-size:26px;line-height:1.3"><b>Carotte</b> : la note devient la seule motivation.</p>
+<p style="font-size:26px;line-height:1.3"><b>Conformité</b> : un objet conforme pris pour de la compréhension.</p>
+</div>
+<div style="background:#E8F4F2;border:1px solid #B8DAD7;border-radius:14px;padding:30px;display:flex;flex-direction:column;gap:14px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:34px;font-weight:700;color:#0A5A58">À rechercher</h3>
+<p style="font-size:26px;line-height:1.3"><b>Positive</b> : des critères compréhensibles, une possibilité de progresser.</p>
+<p style="font-size:26px;line-height:1.3"><b>Formatrice</b> : l'élève apprend à juger sa production.</p>
+<p style="font-size:26px;line-height:1.3"><b>Régulatrice</b> : des informations utiles à l'élève et à l'enseignant.</p>
+</div>
+</div>
+<p style="font-size:30px;font-weight:600;color:#0A5A58">« Positive » ne veut pas dire indulgente : les exigences restent explicites.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 2</p>
+
+</section>
+<section class="sl" data-id="maitriser" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Principe didactique</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Maîtriser, ce n'est pas seulement réussir la tâche</h2>
+<p style="font-size:32px;line-height:1.35;background:#0E6E6B;color:#F4F7F7;border-radius:14px;padding:26px 34px">Maîtriser une compétence, c'est pouvoir <b>mobiliser et réinvestir</b> connaissances, capacités et attitudes pour atteindre un objectif <b>dans une situation donnée</b>.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px">
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:26px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#245D8A">Connaître</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Nommer, expliquer, représenter : seuil, capteur, donnée, chaîne d'information.</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:26px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#0A5A58">Mobiliser</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Choisir, diagnostiquer, justifier, programmer, vérifier dans une situation donnée.</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:26px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#A3134C">Transférer</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Réinvestir l'idée sur un autre OST ou un problème en partie nouveau.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 2</p>
+
+</section>
+<section class="sl" data-id="alignement" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Méthode</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Une évaluation alignée sur l'apprentissage</h2>
+<div style="display:flex;gap:14px;align-items:center">
+<div style="flex:1;background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #245D8A;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700">1 · Cible</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Que doit apprendre l'élève ?</p></div>
+<svg width="48" height="28" viewBox="0 0 100 50" preserveAspectRatio="none" style="flex:none" aria-hidden="true"><polygon points="0,15 60,15 60,0 100,25 60,50 60,35 0,35" fill="#9FB4B6"/></svg>
+<div style="flex:1;background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #0E6E6B;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700">2 · Activité</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">À quoi s'entraîne-t-il ?</p></div>
+<svg width="48" height="28" viewBox="0 0 100 50" preserveAspectRatio="none" style="flex:none" aria-hidden="true"><polygon points="0,15 60,15 60,0 100,25 60,50 60,35 0,35" fill="#9FB4B6"/></svg>
+<div style="flex:1;background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #9A6900;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700">3 · Preuve</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Quelle trace montrera la maîtrise ?</p></div>
+<svg width="48" height="28" viewBox="0 0 100 50" preserveAspectRatio="none" style="flex:none" aria-hidden="true"><polygon points="0,15 60,15 60,0 100,25 60,50 60,35 0,35" fill="#9FB4B6"/></svg>
+<div style="flex:1;background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #C2185B;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700">4 · Critères</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Qu'est-ce qu'une réponse réussie ?</p></div>
+</div>
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:34px;font-weight:700;line-height:1.3;background:#14262B;color:#F4F7F7;border-radius:14px;padding:26px 34px">Test de cohérence : cette consigne peut-elle être réussie par un élève qui n'a pas compris la notion ?</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 2</p>
+
+</section>
+<section class="sl" data-id="notions" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Méthode</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Ne confondons pas quatre notions</h2>
+<p style="font-size:28px;color:#3E5257">Exemple : compétence 8, « valider les solutions techniques par des protocoles de tests ».</p>
+<table style="font-size:28px;color:#14262B;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:16px">
+<tr style="background:#E2EFEE"><th style="width:20%">Notion</th><th style="width:34%">Question</th><th style="width:46%">Exemple</th></tr>
+<tr><td><b>Compétence</b></td><td>Que doit-il savoir mobiliser ?</td><td>Valider une solution par des tests</td></tr>
+<tr><td><b>Connaissance</b></td><td>Que doit-il comprendre ?</td><td>Exigence, mesure, écart, protocole</td></tr>
+<tr><td><b>Critère</b></td><td>À quoi reconnaît-on la qualité ?</td><td>Le protocole permet de conclure</td></tr>
+<tr><td><b>Indicateur</b></td><td>Que peut-on observer ?</td><td>Grandeur et conditions définies ; mesures comparées aux exigences</td></tr>
+</table>
+<p style="font-size:30px;font-weight:600;color:#0A5A58">En pratique : 2 à 4 critères déterminants et observables, plutôt qu'une grille interminable.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 2</p>
+
+</section>
+<section class="sl" data-id="p3" style="background:#0E6E6B;color:#F4F7F7;font-family:'Source Sans 3', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#BFE7E2">Partie 3</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:104px;font-weight:700;line-height:1.05;color:#F4F7F7">Placer l'évaluation dans la séquence</h2>
+<p style="font-size:40px;line-height:1.3;color:#DDF1EE;max-width:1300px">Ni contrôle permanent, ni évaluation surprise finale</p>
+
+</section>
+<section class="sl" data-id="sequence" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">La structure d'une séquence type</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">L'enseignant part de la fin, l'élève part du problème</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #0E6E6B;border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;color:#0A5A58">L'enseignant construit</h3>
+<p style="font-size:26px;line-height:1.35"><b>1</b> Les compétences et connaissances à faire acquérir</p>
+<p style="font-size:26px;line-height:1.35"><b>2</b> La structuration des connaissances (synthèse)</p>
+<p style="font-size:26px;line-height:1.35"><b>3</b> L'évaluation sommative, selon les repères de progressivité</p>
+<p style="font-size:26px;line-height:1.35"><b>4</b> Un problème technologique à identifier et à résoudre</p>
+<p style="font-size:26px;line-height:1.35"><b>5</b> Des activités et des supports adaptés, avec évaluations formatives</p>
+</div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #C2185B;border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;color:#A3134C">L'élève vit</h3>
+<p style="font-size:26px;line-height:1.35"><b>4</b> Un problème posé : se l'approprier, émettre des hypothèses</p>
+<p style="font-size:26px;line-height:1.35"><b>5</b> Des activités qui mènent à la résolution (investigation, action, évaluations formatives)</p>
+<p style="font-size:26px;line-height:1.35"><b>2</b> La structuration des connaissances</p>
+<p style="font-size:26px;line-height:1.35"><b>3</b> L'évaluation centrée sur les compétences du programme</p>
+<p style="font-size:26px;line-height:1.35"><b>1</b> Les compétences acquises</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 3</p>
+
+</section>
+<section class="sl" data-id="placer" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Méthode</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Quatre moments, quatre usages</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:18px">
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #245D8A;border-radius:12px;padding:26px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:2px;color:#245D8A">AVANT</p><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700">Diagnostique</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">5 min · un prérequis à vérifier</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #0E6E6B;border-radius:12px;padding:26px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:2px;color:#0A5A58">PENDANT</p><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700">Formative</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">5 à 10 min · un obstacle à éclairer</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #C2185B;border-radius:12px;padding:26px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:2px;color:#A3134C">APRÈS</p><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700">Bilan de maîtrise</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">15 à 25 min · situation individuelle</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #9A6900;border-radius:12px;padding:26px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:2px;color:#7A5400">PLUS TARD</p><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700">Transfert</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">5 min · une notion à remobiliser</p></div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:24px 30px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;color:#0A5A58">Exemple de diagnostic, avant une séquence réseau</h3>
+<p style="font-size:26px;line-height:1.4">« Deux postes sont reliés au même réseau ; l'un accède à un site, l'autre non. Quelles informations vérifierais-tu ? » On observe les confusions liaison, adressage, DNS et Web, puis on ajuste l'entrée dans la séquence.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 3 · Durées illustratives : le programme ne fixe pas de nombre d'évaluations</p>
+
+</section>
+<section class="sl" data-id="demarches" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Les démarches pédagogiques</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Trois démarches, trois traces à évaluer</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px">
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #245D8A;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#245D8A">Investigation</h3>
+<p style="font-size:26px;line-height:1.35;color:#3E5257">Collective. Appropriation, recherche, hypothèses, vérifications.</p>
+<p style="font-size:26px;line-height:1.35"><b>Trace</b> : l'hypothèse et la vérification.</p>
+</div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #0E6E6B;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#0A5A58">Résolution de problème</h3>
+<p style="font-size:26px;line-height:1.35;color:#3E5257">Individuelle ou collective. Un problème technique, des méthodes formalisées.</p>
+<p style="font-size:26px;line-height:1.35"><b>Trace</b> : la méthode appliquée et justifiée.</p>
+</div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #C2185B;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#A3134C">Projet</h3>
+<p style="font-size:26px;line-height:1.35;color:#3E5257">Collective. Un objectif partagé : fonctions, organisation, planification, étapes.</p>
+<p style="font-size:26px;line-height:1.35"><b>Trace</b> : les choix et leurs tests.</p>
+</div>
+</div>
+<p style="font-size:30px;color:#3E5257">Le programme de 2024 les combine : « faire pour apprendre et apprendre à faire ».</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 3</p>
+
+</section>
+<section class="sl" data-id="structurer" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Des connaissances structurées</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Pas d'évaluation sans structuration</h2>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:30px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:56px;font-weight:700;color:#0E6E6B">1</p><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700">Activité</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">L'élève cherche, manipule, se trompe.</p></div>
+<div style="flex:1;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:30px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:56px;font-weight:700;color:#0E6E6B">2</p><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700">Fiche de structuration</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Ce qu'il faut retenir, au-delà de ce défi.</p></div>
+<div style="flex:1;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:30px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:56px;font-weight:700;color:#0E6E6B">3</p><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700">Évaluation</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Sur une situation nouvelle, pas sur la même.</p></div>
+</div>
+<p style="font-size:30px;font-weight:600;color:#0A5A58">On évalue ce qui a été structuré, sinon on évalue ce que l'élève savait déjà.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 3</p>
+
+</section>
+<section class="sl" data-id="p4" style="background:#0E6E6B;color:#F4F7F7;font-family:'Source Sans 3', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#BFE7E2">Partie 4</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:104px;font-weight:700;line-height:1.05;color:#F4F7F7">Concevoir une évaluation qui informe</h2>
+<p style="font-size:40px;line-height:1.3;color:#DDF1EE;max-width:1300px">Consignes, critères, feedback, différenciation, et la note de 3e</p>
+
+</section>
+<section class="sl" data-id="decisions" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Mode d'emploi</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Six décisions avant toute évaluation</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px">
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:48px;font-weight:700;color:#0E6E6B">01</p><p style="font-size:30px;font-weight:600;line-height:1.3">Choisir un apprentissage précis</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:48px;font-weight:700;color:#0E6E6B">02</p><p style="font-size:30px;font-weight:600;line-height:1.3">Fixer le moment et la fonction</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:48px;font-weight:700;color:#0E6E6B">03</p><p style="font-size:30px;font-weight:600;line-height:1.3">Créer une tâche révélatrice</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:48px;font-weight:700;color:#C2185B">04</p><p style="font-size:30px;font-weight:600;line-height:1.3">Définir les critères de réussite</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:48px;font-weight:700;color:#C2185B">05</p><p style="font-size:30px;font-weight:600;line-height:1.3">Anticiper les erreurs possibles</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:48px;font-weight:700;color:#C2185B">06</p><p style="font-size:30px;font-weight:600;line-height:1.3">Décider quoi faire des résultats</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 4</p>
+
+</section>
+<section class="sl" data-id="consigne" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Méthode</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Écrire une consigne qui prouve la compréhension</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">
+<div style="background:#FDF1F5;border:1px solid #F0C3D6;border-radius:14px;padding:30px;display:flex;flex-direction:column;gap:14px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#A3134C">Peu discriminante</h3>
+<p style="font-size:30px;line-height:1.35;font-style:italic">« Réalise le programme d'arrosage automatique en suivant la fiche. »</p>
+<p style="font-size:26px;line-height:1.35;color:#3E5257">Réussite possible par imitation ou avec l'aide d'un camarade.</p>
+</div>
+<div style="background:#E8F4F2;border:1px solid #B8DAD7;border-radius:14px;padding:30px;display:flex;flex-direction:column;gap:14px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#0A5A58">Plus informative</h3>
+<p style="font-size:30px;line-height:1.35;font-style:italic">« Le capteur indique 28 %. Choisis un seuil, prédis l'état de la pompe, justifie, puis vérifie par deux tests. »</p>
+<p style="font-size:26px;line-height:1.35;color:#3E5257">L'élève rend son raisonnement visible.</p>
+</div>
+</div>
+<p style="font-size:30px;font-weight:600;color:#0A5A58">Question clé : une réponse fausse me dit-elle ce qui n'est pas encore compris ?</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 4</p>
+
+</section>
+<section class="sl" data-id="grille" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Outil · une grille courte</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Quatre niveaux de maîtrise</h2>
+<table style="font-size:27px;color:#14262B;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:14px">
+<tr style="background:#E2EFEE"><th style="width:22%">Maîtrise</th><th style="width:78%">Exploiter des données pour décider (compétence 4)</th></tr>
+<tr><td><b>Insuffisante</b></td><td>Relève quelques valeurs, avec aide ; ne formule pas de décision.</td></tr>
+<tr><td><b>Fragile</b></td><td>Repère des valeurs utiles ; décision partielle ou justification confuse.</td></tr>
+<tr><td><b>Satisfaisante</b></td><td>Trie seul, décide de façon cohérente avec les données et justifie.</td></tr>
+<tr><td><b>Très bonne</b></td><td>Justifie, contrôle la cohérence, discute les limites ou un autre scénario.</td></tr>
+</table>
+<p style="font-size:28px;line-height:1.4;color:#0A5A58"><b>Méthode</b> : écrire chaque niveau avec les mêmes critères (aide, organisation, profondeur), jamais avec des adjectifs vagues (« moyen », « bien »).</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 4 · Exemple illustratif, à adapter</p>
+
+</section>
+<section class="sl" data-id="exemple" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C2185B">Proposition · alignée sur le programme 2024</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Compétence 8 : valider par des tests</h2>
+<table style="font-size:27px;color:#14262B;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:14px">
+<tr style="background:#FBE8F0"><th style="width:22%">Maîtrise</th><th style="width:78%">Critère observable</th></tr>
+<tr><td><b>Insuffisante</b></td><td>Réalise le test fourni et relève le résultat, avec aide.</td></tr>
+<tr><td><b>Fragile</b></td><td>Réalise seul le test fourni et compare le résultat à l'exigence.</td></tr>
+<tr><td><b>Satisfaisante</b></td><td>Propose un protocole (matériel, étapes, mesure) qui vérifie l'exigence.</td></tr>
+<tr><td><b>Très bonne</b></td><td>Répète la mesure, discute sa fiabilité et décide d'une modification.</td></tr>
+</table>
+<p style="font-size:28px;line-height:1.4;color:#3E5257">Le niveau « satisfaisante » correspond à la question 3 du sujet de référence du DNB : proposer un protocole pour vérifier une précision de 25 cm.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 4 · Grille proposée pour la formation, à adapter</p>
+
+</section>
+<section class="sl" data-id="feedback" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Pratique</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Le feedback : dire comment progresser</h2>
+<div style="display:grid;grid-template-columns:1fr 1.4fr;gap:28px">
+<div style="background:#FDF1F5;border:1px solid #F0C3D6;border-radius:14px;padding:30px;display:flex;flex-direction:column;gap:14px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#A3134C">Peu exploitable</h3>
+<p style="font-size:32px;line-height:1.35;font-style:italic">« Bien. 12/20. Revoir la leçon. »</p>
+<p style="font-size:26px;line-height:1.35;color:#3E5257">L'élève ne sait ni quoi corriger, ni comment.</p>
+</div>
+<div style="background:#E8F4F2;border:1px solid #B8DAD7;border-radius:14px;padding:30px;display:flex;flex-direction:column;gap:14px">
+<h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#0A5A58">Exploitable</h3>
+<p style="font-size:28px;line-height:1.4;font-style:italic">« Tu as identifié la donnée du capteur. Le seuil est encore confondu avec la mesure. Essaie avec 20 %, 35 % et 60 %, et indique chaque fois l'état de la pompe. »</p>
+</div>
+</div>
+<div style="display:flex;gap:12px;align-items:center">
+<p style="font-size:28px;font-weight:600;background:#14262B;color:#F4F7F7;border-radius:999px;padding:12px 26px">Observer</p><svg width="44" height="24" viewBox="0 0 100 50" preserveAspectRatio="none" style="flex:none" aria-hidden="true"><polygon points="0,15 60,15 60,0 100,25 60,50 60,35 0,35" fill="#9FB4B6"/></svg>
+<p style="font-size:28px;font-weight:600;background:#14262B;color:#F4F7F7;border-radius:999px;padding:12px 26px">Feedback</p><svg width="44" height="24" viewBox="0 0 100 50" preserveAspectRatio="none" style="flex:none" aria-hidden="true"><polygon points="0,15 60,15 60,0 100,25 60,50 60,35 0,35" fill="#9FB4B6"/></svg>
+<p style="font-size:28px;font-weight:600;background:#14262B;color:#F4F7F7;border-radius:999px;padding:12px 26px">Nouvel essai</p><svg width="44" height="24" viewBox="0 0 100 50" preserveAspectRatio="none" style="flex:none" aria-hidden="true"><polygon points="0,15 60,15 60,0 100,25 60,50 60,35 0,35" fill="#9FB4B6"/></svg>
+<p style="font-size:28px;font-weight:600;background:#0E6E6B;color:#F4F7F7;border-radius:999px;padding:12px 26px">Vérifier le progrès</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 4</p>
+
+</section>
+<section class="sl" data-id="differenciation" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Différenciation</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Adapter l'accès, garder l'exigence</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px">
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #0E6E6B;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#0A5A58">Même cible</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Par exemple : expliquer la logique d'une condition dans un programme.</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #245D8A;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#245D8A">Accès possibles</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Schéma légendé, oral structuré, support adapté, temps ou aide prévus.</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #C2185B;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#A3134C">Preuve conservée</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">La consigne permet toujours de constater le raisonnement de chaque élève.</p></div>
+</div>
+<p style="font-size:30px;line-height:1.4;color:#0A5A58;font-weight:600">Une difficulté de lecture ou de copie ne doit pas masquer un apprentissage technique.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 4</p>
+
+</section>
+<section class="sl" data-id="note" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C2185B">En 3e, la moyenne compte pour le brevet</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Des compétences à la note : cinq règles d'équipe</h2>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;gap:24px;align-items:center;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:16px 28px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:36px;font-weight:700;color:#C2185B;width:50px">1</p><p style="font-size:28px;line-height:1.35"><b>Annoncer</b> la correspondance entre niveaux et points avant l'évaluation.</p></div>
+<div style="display:flex;gap:24px;align-items:center;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:16px 28px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:36px;font-weight:700;color:#C2185B;width:50px">2</p><p style="font-size:28px;line-height:1.35"><b>Noter les bilans</b>, pas chaque essai ni chaque feedback formatif.</p></div>
+<div style="display:flex;gap:24px;align-items:center;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:16px 28px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:36px;font-weight:700;color:#C2185B;width:50px">3</p><p style="font-size:28px;line-height:1.35"><b>Noter l'individu</b>, jamais seulement le produit du groupe.</p></div>
+<div style="display:flex;gap:24px;align-items:center;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:16px 28px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:36px;font-weight:700;color:#C2185B;width:50px">4</p><p style="font-size:28px;line-height:1.35"><b>Ne pas noter l'attitude</b> dans la moyenne de technologie.</p></div>
+<div style="display:flex;gap:24px;align-items:center;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:16px 28px"><p style="font-family:'Archivo', Arial, sans-serif;font-size:36px;font-weight:700;color:#C2185B;width:50px">5</p><p style="font-size:28px;line-height:1.35"><b>Harmoniser</b> grilles et barèmes entre collègues du même niveau.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 4 · Recommandations de formation, à discuter en équipe</p>
+
+</section>
+<section class="sl" data-id="p5" style="background:#0E6E6B;color:#F4F7F7;font-family:'Source Sans 3', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#BFE7E2">Partie 5</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:104px;font-weight:700;line-height:1.05;color:#F4F7F7">Évaluer dans un travail collectif</h2>
+<p style="font-size:40px;line-height:1.3;color:#DDF1EE;max-width:1300px">Garder l'intérêt du groupe sans perdre de vue les acquis de chacun</p>
+
+</section>
+<section class="sl" data-id="groupe" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:30px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Trois objets d'observation</p>
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:46px;font-weight:700;line-height:1.2;color:#0A5A58">« Qu'est-ce que chacun a appris pour lui grâce à sa participation à la tâche commune ? »</p>
+<p style="font-size:26px;color:#5A6C71">Philippe Meirieu</p>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px">
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #245D8A;border-radius:12px;padding:26px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;color:#245D8A">Produit commun</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Prototype, poster, solution, protocole : une évaluation collective.</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #0E6E6B;border-radius:12px;padding:26px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;color:#0A5A58">Contribution</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Décider, argumenter, écouter, coordonner, si c'est explicitement visé.</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #C2185B;border-radius:12px;padding:26px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:30px;font-weight:700;color:#A3134C">Acquis individuels</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Ce que chacun sait expliquer, représenter, corriger ou transférer seul.</p></div>
+</div>
+<p style="font-size:28px;line-height:1.4;color:#3E5257">Une méthode à installer : groupes composés, <b>rôles qui tournent</b> (coordinateur, rapporteur, secrétaire, matériel, temps), grille connue à l'avance.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 5</p>
+
+</section>
+<section class="sl" data-id="corpus" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Analyse du dossier de grilles</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Des ressources utiles, à trier</h2>
+<table style="font-size:26px;color:#14262B;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:14px">
+<tr style="background:#E2EFEE"><th style="width:26%">Document</th><th style="width:36%">Ce qu'il apporte</th><th style="width:38%">Précaution</th></tr>
+<tr><td><b>Grille d'activités de groupe</b> (primaire)</td><td>Niveaux descriptifs : recherche, organisation, communication</td><td>Adapter au cycle 4 ; la propreté n'est pas une preuve disciplinaire</td></tr>
+<tr><td><b>Grilles équipe et oral</b></td><td>Organisation, participation, écoute ; poster sur 12</td><td>Garder les critères liés à l'objectif ; éviter les grilles trop longues</td></tr>
+<tr><td><b>Grille individuelle de groupe</b></td><td>Auto-, co- et évaluation du professeur, répétées</td><td>Ne pas mêler attitude et compétence ; pas de /20 automatique</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 5 · Dossier « Exemples de grilles d'évaluation »</p>
+
+</section>
+<section class="sl" data-id="collab" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Outil adapté · usage formatif d'abord</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Une grille du travail collaboratif</h2>
+<table style="font-size:26px;color:#14262B;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:14px">
+<tr style="background:#E2EFEE"><th style="width:24%">Critère</th><th style="width:38%">Trace observable</th><th style="width:38%">Feedback possible</th></tr>
+<tr><td><b>Contribuer au raisonnement</b></td><td>Propose une hypothèse ou justifie un choix</td><td>« Sur quelles données t'appuies-tu ? »</td></tr>
+<tr><td><b>Participer aux tests</b></td><td>Fait un essai, note le résultat et l'écart</td><td>« Refais ton test dans les mêmes conditions. »</td></tr>
+<tr><td><b>Échanger</b></td><td>Écoute, reformule, répond sur le fond</td><td>« Pourquoi cette option te paraît meilleure ? »</td></tr>
+<tr><td><b>Réguler le projet</b></td><td>Repère une difficulté, propose une action</td><td>« Choisis une priorité vérifiable. »</td></tr>
+</table>
+<p style="font-size:28px;font-weight:600;color:#A3134C">Pour une compétence disciplinaire, toujours une preuve individuelle en complément.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 5</p>
+
+</section>
+<section class="sl" data-id="oral" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Outil adapté · la restitution orale</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Évaluer l'oral sans noter le charisme</h2>
+<table style="font-size:26px;color:#14262B;background:#FFFFFF;border:1px solid #D2DEDE;border-radius:12px;padding:14px">
+<tr style="background:#E2EFEE"><th style="width:26%">Critère</th><th style="width:36%">Ce que l'on cherche</th><th style="width:38%">Indicateur</th></tr>
+<tr><td><b>Exactitude technique</b></td><td>Mots et explications corrects</td><td>Fonction, donnée, seuil, test explicités</td></tr>
+<tr><td><b>Argumentation</b></td><td>Un choix fondé sur des éléments vérifiables</td><td>Résultats mis en relation avec les exigences</td></tr>
+<tr><td><b>Lisibilité</b></td><td>Le support aide à comprendre</td><td>Schéma utile, progression claire</td></tr>
+<tr><td><b>Réponse aux questions</b></td><td>L'élève réinvestit ce qu'il présente</td><td>Justification, correction ou limite reconnue</td></tr>
+</table>
+<p style="font-size:28px;line-height:1.4;color:#3E5257">Au DNB, l'oral compte 8 points d'expression et 12 de maîtrise du sujet : une restitution de projet y prépare directement.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 5 · Source : note de service MENE2623228N</p>
+
+</section>
+<section class="sl" data-id="regards" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Pratique</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Trois regards, pas trois notes à additionner</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px">
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #245D8A;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#245D8A">S'autoévaluer</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">L'élève se situe sur des critères partagés et joint une preuve.</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #0E6E6B;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#0A5A58">Coévaluer</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">Le groupe confronte des faits, sans juger les personnes.</p></div>
+<div style="background:#FFFFFF;border:1px solid #D2DEDE;border-top:8px solid #C2185B;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:'Archivo', Arial, sans-serif;font-size:32px;font-weight:700;color:#A3134C">Évaluer</h3><p style="font-size:26px;line-height:1.35;color:#3E5257">L'enseignant vérifie, régule et établit le bilan des acquis individuels.</p></div>
+</div>
+<p style="font-size:30px;line-height:1.4;background:#E2EFEE;border-radius:12px;padding:22px 28px">Moment utile : comparer les écarts de perception, puis fixer un objectif concret pour la séance suivante.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Partie 5</p>
+
+</section>
+<section class="sl" data-id="synthese" style="background:#14262B;color:#F4F7F7;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:34px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#7FD3CC">À retenir</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;color:#F4F7F7">Six principes pour évaluer en technologie</h2>
+<div style="display:flex;flex-direction:column;gap:14px">
+<p style="font-size:31px;line-height:1.35;color:#DDF1EE"><b style="color:#7FD3CC">1 ·</b> Partir de la cible : une des 9 compétences, au niveau de l'année.</p>
+<p style="font-size:31px;line-height:1.35;color:#DDF1EE"><b style="color:#7FD3CC">2 ·</b> Écrire une consigne qu'on ne réussit pas sans avoir compris.</p>
+<p style="font-size:31px;line-height:1.35;color:#DDF1EE"><b style="color:#7FD3CC">3 ·</b> Évaluer sur une situation nouvelle, après la structuration.</p>
+<p style="font-size:31px;line-height:1.35;color:#DDF1EE"><b style="color:#7FD3CC">4 ·</b> 2 à 4 critères observables, et un feedback suivi d'un nouvel essai.</p>
+<p style="font-size:31px;line-height:1.35;color:#DDF1EE"><b style="color:#7FD3CC">5 ·</b> En groupe, toujours une preuve individuelle.</p>
+<p style="font-size:31px;line-height:1.35;color:#DDF1EE"><b style="color:#7FD3CC">6 ·</b> En 3e, plusieurs notes, représentatives et harmonisées : elles comptent pour le brevet.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#9FB4B6">Évaluer pour faire apprendre · Retour au fil rouge : quelles preuves, quand, pour en faire quoi ?</p>
+
+</section>
+<section class="sl" data-id="sources" style="background:#F4F7F7;color:#14262B;font-family:'Source Sans 3', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'Archivo', Arial, sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0E6E6B">Sources · vérifiées le 11 octobre 2026</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1">Textes et ressources</h2>
+<ul style="font-size:26px;line-height:1.45;color:#3E5257">
+<li>Programme de technologie, cycle 4 : arrêté du 9 février 2024, BO n° 9 du 29 février 2024</li>
+<li>BO spécial n° 4 du 17 septembre 2026 : notes de service MENE2623194N (attribution du DNB), MENE2623228N (épreuves), MENE2623195N (maîtrise de la langue)</li>
+<li><a href="https://eduscol.education.gouv.fr/5604/modalites-d-attribution-du-diplome-national-du-brevet">Éduscol : modalités d'attribution du diplôme national du brevet</a></li>
+<li><a href="https://www.education.gouv.fr/le-livret-scolaire-unique-du-cp-la-troisieme-1979">Le livret scolaire unique du CP à la troisième</a></li>
+<li>Sujet de référence de technologie n° 01, DNB (Éduscol)</li>
+<li>Dossier « Exemples de grilles d'évaluation » : travail en groupe, équipe et oral</li>
+<li><a href="https://xseorkly.github.io/techno-3e/formation/dnb-2027/index.html">Site de formation : la page DNB 2027</a></li>
+</ul>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#5A6C71">Évaluer pour faire apprendre · Fehmi KLABI · 2026-2027</p>
+
+</section>
+</div></div>
+<div class="bar"><button type="button" id="prev" aria-label="Diapositive précédente">←</button><span class="n" id="n"></span><button type="button" id="next" aria-label="Diapositive suivante">→</button><span class="t" id="t"></span><select id="go" aria-label="Aller à une diapositive"></select><button type="button" id="nb">Notes</button><button type="button" id="pr">🖨 PDF</button><button type="button" class="p" id="fs">⛶ Projeter</button></div>
+<div class="notes" id="notes"><b>Notes du formateur</b><span id="nt"></span></div>
+</div>
+<script>
+const M=[{"t": "Évaluer pour faire apprendre", "n": "Ce diaporama réunit deux supports : « Évaluer en technologie » (version historique, mise à jour) et « Évaluer pour faire apprendre » (octobre 2026). Les textes officiels ont été vérifiés le 11 octobre 2026 : programme du BO n° 9 du 29 février 2024, livret scolaire unique, notes de service du 11 septembre 2026 (BO spécial n° 4 du 17 septembre 2026)."}, {"t": "L'évaluation ne se résume ni à la note, ni à une grille", "n": "Annoncer la question fil rouge, qui reviendra à chaque partie. Les trois verbes structurent tout le diaporama : éclairer (diagnostic), faire progresser (formatif), attester (sommatif et certificatif). On y reviendra à la fin."}, {"t": "Un cadre institutionnel actualisé", "n": "Première partie : le cadre, vérifié au 11 octobre 2026."}, {"t": "Le programme de 2024 s'applique désormais en entier", "n": "Application progressive prévue par l'arrêté du 9 février 2024. Veille : un projet d'aménagement du programme a été adopté par le Conseil supérieur des programmes le 26 juin 2025 et soumis à consultation du 18 mai au 19 juin 2026. Il n'est pas en vigueur ; ses « exemples de réussite » peuvent toutefois inspirer l'écriture de critères."}, {"t": "Ce qu'on évalue : 3 thèmes, 9 compétences", "n": "L'ancienne présentation parlait de « 38 compétences, sous-compétences, savoir-faire » en technologie : ce n'est plus à jour. Le programme de 2024 retient neuf compétences de fin de cycle, trois par thème. Les sigles OST, SFC et CCRI sont une commodité de lecture utilisée dans la banque de séquences de Bordeaux, pas une notation officielle. Pour l'évaluation, cela simplifie la grille : neuf compétences à suivre sur trois ans, plutôt qu'une trentaine."}, {"t": "On n'évalue pas la même chose en 5e et en 3e", "n": "Trois niveaux de lecture à ne pas confondre : la compétence (le cap de fin de cycle), les connaissances (ce qu'il faut savoir), les repères (le chemin par année). Une grille d'évaluation de 5e qui exige un schéma bloc construit seul évalue un attendu de 3e. Inversement, en 3e, fournir l'organisation de la chaîne revient à évaluer un attendu de 5e. Le sujet de référence du DNB 2027 demande justement en question 1 de représenter la chaîne d'énergie d'un drone par un schéma bloc."}, {"t": "Bulletin, bilan de cycle, brevet", "n": "Le livret scolaire unique garde ses deux étages : les bilans périodiques, discipline par discipline, et le bilan de fin de cycle sur les huit composantes du socle avec quatre niveaux de maîtrise. Ce qui a changé, c'est le lien avec le brevet : jusqu'à la session 2025, le socle apportait 400 points sur 800. Depuis la session 2026, le contrôle continu repose sur les moyennes annuelles de toutes les disciplines de 3e, à coefficient égal. Conséquence directe : la moyenne de technologie en 3e pèse dans le diplôme. Il faut donc une note lisible, juste et explicable."}, {"t": "De quoi doit être faite une moyenne de 3e ?", "n": "Citations de la note de service sur l'attribution du DNB à partir de la session 2027, qui reprend celle du 2 septembre 2025. L'évaluation est menée dans les différentes situations d'apprentissage qui sollicitent la mémorisation, l'application et le réinvestissement ; elle peut être écrite ou orale, individuelle ou collective ; une moyenne non représentative peut être remplacée par « En attente » et une évaluation spécifique organisée. La note ne fixe aucun nombre national d'évaluations par séquence."}, {"t": "La langue est évaluée dans toutes les disciplines", "n": "Chaque épreuve écrite du DNB réserve au moins deux points à la langue ; en sciences, 1 point par discipline, donc 1 point sur 10 en technologie. Quatre paliers, de « très insuffisant » à « très satisfaisant », communs à toutes les disciplines et pondérés selon les sujets. La langue ne retire pas de points sur une note acquise : elle en réserve une partie. Les aménagements liés à l'orthographe ou à la syntaxe sont pris en compte. La grille officielle des paliers est reproduite dans le diaporama sur les nouveaux programmes et sur la page DNB 2027 du site de formation."}, {"t": "Que veut-on évaluer en technologie ?", "n": "Deuxième partie : le sens de l'évaluation et ce qu'elle doit viser."}, {"t": "Quatre fonctions, quatre questions", "n": "Citation à lire de la version historique : « L'évaluation peut revêtir multiples formes et sens. De sa définition première, détermination d'une valeur, l'évaluation tend à mélanger le rapport au diplôme, l'évaluation certificative, à la norme, l'évaluation sommative, à l'apprentissage, l'évaluation formative, à soi-même, l'évaluation formatrice. Ceci est sans compter toutes les formes d'observation : auto-, co-, hétéro-évaluations. » Delphine Evain, IA-IPR EPS, Nantes, « L'évaluation pilote ». Les fonctions se distinguent par leur usage, pas par l'outil."}, {"t": "Ce que l'évaluation doit éviter, et rechercher", "n": "Fusion des deux supports. L'évaluation sanction est un défaut de gestion de classe : elle tient des élèves jeunes ou très scolaires, puis se retourne contre l'enseignant dès la préadolescence. En 3e, l'enjeu est renforcé : la moyenne compte pour le brevet, elle ne peut donc pas mesurer le comportement. Quelle que soit sa nature, l'évaluation se met au service d'un meilleur apprentissage."}, {"t": "Maîtriser, ce n'est pas seulement réussir la tâche", "n": "Un objet terminé ou un programme qui marche ne suffisent pas. Question utile à poser à chaque évaluation : qu'est-ce que chaque élève sait expliquer ou refaire seul, sans se contenter de suivre le groupe ? Définition de la compétence reprise de la version historique."}, {"t": "Une évaluation alignée sur l'apprentissage", "n": "L'alignement évite les consignes spectaculaires mais peu informatives. Si la réponse au test de cohérence est oui, l'évaluation mesure autre chose que la notion visée : l'imitation, l'aide du camarade, la mémoire de l'activité."}, {"t": "Ne confondons pas quatre notions", "n": "Le critère dit ce qu'est une réponse réussie ; l'indicateur dit ce qu'on voit sur la copie ou dans la classe. Une grille de quinze lignes ne se lit ni par l'élève ni par l'enseignant : elle finit en impression globale."}, {"t": "Placer l'évaluation dans la séquence", "n": "Troisième partie : l'évaluation se prépare dès la conception de la séquence."}, {"t": "L'enseignant part de la fin, l'élève part du problème", "n": "Schéma repris de l'ancienne présentation. L'évaluation sommative est écrite AVANT les activités, juste après la structuration : c'est elle qui garantit l'alignement entre ce qu'on vise, ce qu'on fait faire et ce qu'on mesure. Pour l'élève, l'ordre est inverse : le problème d'abord, l'évaluation après la structuration. Ajout 2024 : écrire l'évaluation sommative en regardant les repères de progressivité du niveau concerné."}, {"t": "Quatre moments, quatre usages", "n": "Calendrier raisonné, durées indicatives. Le diagnostic est une question utile, pas un pré-contrôle noté : il sert à repérer les préconceptions pour construire une situation-problème adaptée. Le transfert, quelques semaines plus tard, vérifie la consolidation : c'est lui qui distingue la performance du jour de l'apprentissage durable."}, {"t": "Trois démarches, trois traces à évaluer", "n": "Descriptions reprises de l'ancienne présentation, avec un ajout : la trace à évaluer. Une démarche de projet ne s'évalue pas sur l'objet fini, mais sur les décisions prises, les critères de choix et les tests qui les valident. C'est la compétence 8 du programme : valider par des protocoles de tests."}, {"t": "Pas d'évaluation sans structuration", "n": "L'ancienne présentation montrait deux exemples de fiches de structuration (cycle 4). Insister : l'évaluation sommative porte sur ce qui a été structuré, et sur une situation différente de l'activité, sinon elle mesure la mémoire de l'activité plutôt que la compétence. C'est aussi ce que fait le DNB : un objet nouveau (le drone), des compétences connues."}, {"t": "Concevoir une évaluation qui informe", "n": "Quatrième partie : les outils concrets."}, {"t": "Six décisions avant toute évaluation", "n": "Une check-list à utiliser avant de préparer toute évaluation. La décision 6 est la plus souvent oubliée : si l'on ne sait pas ce qu'on fera des résultats, l'évaluation n'est qu'un relevé."}, {"t": "Écrire une consigne qui prouve la compréhension", "n": "Passer de « faire » à « expliquer, choisir, tester et justifier ». C'est aussi ce que demande le DNB 2027 : choisir et justifier, concevoir un protocole, et la consigne générale précise que les démarches engagées, même non abouties, sont prises en compte."}, {"t": "Quatre niveaux de maîtrise", "n": "Grille fusionnée : celle de la version historique (« collecter, trier et analyser des données », N1 à N4) et celle d'octobre 2026 (« exploiter des données pour décider »). Les intitulés reprennent les quatre niveaux du livret scolaire, ce qui évite d'avoir deux échelles. Attention : l'échelle « connaissance, compréhension, application, maîtrise » de l'ancienne présentation décrit le niveau cognitif d'une tâche, pas la maîtrise d'un élève ; elle reste utile pour écrire des exercices de difficulté croissante."}, {"t": "Compétence 8 : valider par des tests", "n": "Cette grille n'est pas officielle : elle montre comment écrire des critères observables à partir d'une compétence du programme de 2024. L'aide diminue, l'élève passe d'exécuter un test à le concevoir, puis à décider à partir du résultat. En atelier : écrire la même grille pour une autre compétence."}, {"t": "Le feedback : dire comment progresser", "n": "Le retour doit être spécifique, compréhensible, et suivi d'une action. Un bon feedback nomme ce qui est acquis, pointe un seul obstacle et donne une tâche courte pour le dépasser. Sans nouvel essai, il reste un commentaire."}, {"t": "Adapter l'accès, garder l'exigence", "n": "Distinguer ce qu'on veut mesurer et ce qui pourrait parasiter la mesure. Lien avec le DNB : les aménagements liés à l'orthographe ou à la syntaxe sont pris en compte dans l'évaluation de la langue. Postulats de Burns, repris par Astolfi : tous les élèves n'apprennent ni au même rythme ni de la même façon ; on peut varier les chemins sans varier l'exigence."}, {"t": "Des compétences à la note : cinq règles d'équipe", "n": "Les textes imposent une pluralité de notes de 0 à 20 et la représentativité des moyennes ; ils ne disent pas comment passer des compétences à la note. Ces cinq règles sont des recommandations. Les règles 3 et 4 évitent deux biais : une note collective qui masque les acquis de chacun, et une note qui mesure le comportement, c'est-à-dire l'évaluation sanction."}, {"t": "Évaluer dans un travail collectif", "n": "Cinquième partie : le travail de groupe, très présent en technologie, et l'oral."}, {"t": "groupe", "n": "Point décisif : la qualité du produit collectif ne prouve pas la maîtrise de chaque élève. Les rôles en îlot viennent de la version historique ; ajout : les faire tourner d'une séance à l'autre, sinon le secrétaire écrit toujours et l'évaluation individuelle mesure le rôle plus que la compétence."}, {"t": "Des ressources utiles, à trier", "n": "La grille individuelle note cinq objectifs de 0 à 4 (produire, être autonome, travailler en équipe, créer-inventer, maîtriser son attitude) en trois colonnes. Très bon outil de positionnement et de dialogue ; mais la ligne « maîtriser son attitude », additionnée en note sur 20 dans la moyenne de 3e, reviendrait à l'évaluation sanction. La reporter dans l'appréciation et les compétences psychosociales."}, {"t": "Une grille du travail collaboratif", "n": "Grille construite à partir des documents du dossier, recentrée sur des traces observables plutôt que sur des attitudes. Chaque critère est accompagné du feedback qu'on peut donner sur le moment : la grille sert d'abord à faire progresser."}, {"t": "Évaluer l'oral sans noter le charisme", "n": "Situation authentique : expliquer et défendre un choix technique. Le volet collectif peut porter sur le support ; un court questionnement individuel vérifie les acquis. La grille du poster du dossier (sept critères sur 12 : apparence, équilibre textes et graphiques, lisibilité à 1,5 m, identification, organisation, style, contenu) évalue la communication : la compléter par une question technique individuelle. Oral du DNB : 15 minutes seul, 25 en groupe de trois au maximum, notation individuelle."}, {"t": "Trois regards, pas trois notes à additionner", "n": "Reprend la logique de la grille individuelle du dossier (autoévaluation, co-évaluation, professeur, répétées dans le temps) en changeant son usage : l'écart entre les trois regards devient un objet de dialogue, pas une moyenne de trois notes."}, {"t": "Six principes pour évaluer en technologie", "n": "Revenir à la question fil rouge et aux trois verbes de l'ouverture : éclairer, faire progresser, attester. Proposition d'atelier : chaque groupe prend une séquence de son année et écrit, pour une compétence, la cible, une consigne révélatrice, trois critères et la décision prévue après les résultats."}, {"t": "Textes et ressources", "n": "Pour les établissements à l'étranger, vérifier les consignes de la zone, notamment le choix des disciplines de l'épreuve de sciences. Veille : projet d'aménagement du programme de technologie (CSP, 26 juin 2025 ; consultation du 18 mai au 19 juin 2026), non en vigueur."}];
+(()=>{const S=[...document.querySelectorAll('.sl')],$=id=>document.getElementById(id);let i=0;
+$('go').innerHTML=M.map((m,k)=>`<option value="${k}">${k+1} · ${m.t.replace(/</g,'&lt;')}</option>`).join('');
+function fit(){const v=$('view'),s=Math.min(v.clientWidth/1920,v.clientHeight/1080)*0.98;$('cv').style.transform=`scale(${s}) translate(-960px,-540px)`;$('cv').style.transformOrigin='0 0';$('cv').style.left='50%';$('cv').style.top='50%';$('cv').style.transform=`translate(-50%,-50%) scale(${s})`;$('cv').style.transformOrigin='50% 50%';}
+function show(k){i=Math.max(0,Math.min(S.length-1,k));S.forEach((s,j)=>s.classList.toggle('on',j===i));$('n').textContent=(i+1)+' / '+S.length;$('t').textContent=M[i].t;$('nt').textContent=M[i].n||'—';$('go').value=i;try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
+$('prev').onclick=()=>show(i-1);$('next').onclick=()=>show(i+1);$('go').onchange=e=>show(+e.target.value);
+$('nb').onclick=()=>{$('notes').classList.toggle('open');fit()};$('pr').onclick=()=>print();
+const fs=()=>{if(document.fullscreenElement)document.exitFullscreen();else $('wrap').requestFullscreen&&$('wrap').requestFullscreen().catch(()=>{})};$('fs').onclick=fs;
+$('view').addEventListener('click',e=>{if(e.target.closest('a'))return;const r=$('view').getBoundingClientRect();show(e.clientX-r.left<r.width/3?i-1:i+1)});
+document.addEventListener('keydown',e=>{if(e.target.tagName==='SELECT')return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1)}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1)}else if(e.key==='Home')show(0);else if(e.key==='End')show(S.length-1);else if(e.key==='f'||e.key==='F')fs();else if(e.key==='n'||e.key==='N'){$('notes').classList.toggle('open');fit()}});
+addEventListener('resize',fit);document.addEventListener('fullscreenchange',()=>setTimeout(fit,50));
+const h=parseInt(location.hash.slice(1));show(h>0?h-1:0);fit();})();
+</script></body></html>
