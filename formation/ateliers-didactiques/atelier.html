@@ -1,67 +1,73 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Atelier didactique</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css"><link rel="stylesheet" href="puzzle.css">
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Table — Ateliers didactiques</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css"><link rel="stylesheet" href="puzzle.css">
 <style>
-.topbar{position:sticky;top:0;z-index:50;background:rgba(244,247,247,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:0 -22px 0;padding:10px 22px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.topbar .who{font:700 16px Archivo,sans-serif}
-.topbar .who span{color:var(--muted);font-weight:600}
-.topbar .phase{margin-left:auto;font:700 14px Archivo,sans-serif;color:var(--teal2)}
-.topbar .phase.b{color:var(--mag)}
-.stage{border-left:6px solid var(--c)}
-.stage .num{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--c);color:#fff;font:700 17px Archivo,sans-serif;margin-right:8px}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(244,247,247,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:0 -22px;padding:10px 22px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.topbar .who{font:700 16px Archivo,sans-serif;margin-right:8px}
+.topbar button{border:2px solid var(--c);color:var(--c);background:#fff;border-radius:999px;padding:5px 12px;font:700 14px Archivo,sans-serif;cursor:pointer}
+.tour{border-left:8px solid var(--c);scroll-margin-top:70px}
+.tour .mhead h2{font-size:28px}
+.sub{border:1px dashed var(--line);border-radius:12px;padding:6px 14px;margin:12px 0;background:#fbfdfd}
+.sub h3{margin:8px 0 2px;font-size:17px}
+.sub .t{color:var(--mag);font:700 13px Archivo,sans-serif}
 ol.dq{margin:10px 0;padding-left:22px}ol.dq li{margin:6px 0}
-.next{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;background:var(--c);color:#fff;border-radius:16px;padding:18px 20px;text-decoration:none}
-.next b{font:700 22px Archivo,sans-serif}.next span{opacity:.9}
-.gpick{display:flex;gap:10px;flex-wrap:wrap}
-.gpick button{width:60px;height:60px;border-radius:16px;border:2px solid var(--teal);background:#fff;color:var(--teal2);font:700 24px Archivo,sans-serif;cursor:pointer}
 </style>
 <script>if(sessionStorage.getItem('formation_teachers_unlocked_v1')!=='1')location.replace('../index.html');</script><style id="navbar-css">.fnav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:4px 14px;background:transparent;font:500 13px/1.3 "Source Sans 3",Arial,sans-serif}.fnav a{color:#5b6b6a!important;text-decoration:none!important;padding:2px 0;background:none;border-radius:0}.fnav a:hover,.fnav a:focus-visible{color:#0f6b66!important;text-decoration:underline!important}@media print{.fnav{display:none}}</style></head>
 <body><nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a><a href="index.html">↑ Ateliers didactiques</a></nav>
 <main class="page" id="root"></main>
+<div class="full" id="resti" role="dialog" aria-modal="true" aria-label="Présentation de la table"><button class="btn secondary fs-close" type="button">✕ Fermer</button><div class="fs"></div></div>
 <script src="data.js"></script><script src="puzzle.js"></script><script src="rotation.js"></script>
 <script>
-(()=>{const P=window.PUZZLE,A=P.parcours,esc=PZ.esc,root=document.getElementById('root');let tick=null;
+(()=>{const P=window.PUZZLE,A=P.parcours,esc=PZ.esc,root=document.getElementById('root');
+const L=Object.fromEntries(P.lunettes.map(l=>[l.id,l]));
+const lens=(l,k)=>`<div class="lensq" style="--c:${l.couleur}"><div class="f"><span class="lens-tag">${esc(l.nom)}</span> <strong style="display:inline">${esc(l.titre)}</strong><small>${esc(l.question)}</small><textarea data-k="${k}"></textarea></div></div>`;
+const tableCourante=()=>{const m=location.hash.match(/^#t(\d+)$/);let k=m?+m[1]:0;try{if(k)sessionStorage.setItem('ad_v3_table',k);else k=+sessionStorage.getItem('ad_v3_table')||1}catch(e){k=k||1}return k};
 function draw(){
-  clearInterval(tick);
-  const ai=Math.max(0,A.findIndex(a=>a.id===(location.hash||'#'+A[0].id).slice(1)));const a=A[ai];
-  document.title=`Atelier ${ai+1} · ${a.nom}`;
-  const g=ROT.groupe();
-  if(!g){root.innerHTML=`<header class="hero" style="--c:${a.couleur}"><div class="brand">Atelier ${ai+1} · ${esc(a.nom)}</div><h1>Quel est votre groupe ?</h1><div class="gpick">${[1,2,3,4,5,6].map(n=>`<button type="button" data-g="${n}">${n}</button>`).join('')}</div></header>`;
-    root.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{ROT.setGroupe(+b.dataset.g);draw()});return}
-  const t=ROT.tourDe(g,ai),ord=ROT.ordre(g),st=ROT.reponses(g);
-  if(!st.membres){const m=ROT.membresConnus(g);if(m)st.membres=m}
-  const save=()=>ROT.setReponses(g,st);
-  const nextAi=ord[t];const next=t<3?{href:`atelier.html#${A[nextAi].id}`,txt:`Tour ${t+1} · Atelier ${nextAi+1} · ${A[nextAi].nom}`,c:A[nextAi].couleur}:{href:'bilan.html',txt:'Atelier 4 · Bilan',c:'#c2185b'};
+  const k=tableCourante();
+  const ai=ROT.atelierDe(k),a=A[ai],st=ROT.reponses(k),save=()=>ROT.setReponses(k,st);
+  const p=ROT.plan();const known=t=>(ROT.orga().noms&&p.tours[t][k-1])?p.tours[t][k-1].join(', '):'';
+  ['m1','m2','m3'].forEach((m,t)=>{if(!st[m]&&known(t))st[m]=known(t)});
+  document.title=`Table ${k} · Atelier ${ai+1} · ${a.nom}`;
   root.innerHTML=`
-  <div class="topbar"><span class="who">Groupe ${g} <span>· Tour ${t} sur 3</span></span><button class="timer" type="button" id="timer">▶ 20:00</button><span class="phase" id="phase">Étape 1 · Le défi (12 min)</span></div>
-  <header class="hero" style="margin-top:16px"><div class="brand" style="color:${a.couleur}">Atelier ${ai+1} · ${esc(a.nom)} · 20 min</div><h1>« ${esc(a.accroche)} »</h1>
-    <div class="f" style="position:relative;z-index:1"><strong>Qui passe dans cet atelier ?</strong><input type="text" data-k="membres" placeholder="Prénoms du groupe ${g}"></div></header>
+  <div class="topbar" style="--c:${a.couleur}"><span class="who">Table ${k} · Atelier ${ai+1}</span><button type="button" data-go="tour1">Tour 1 · Le défi</button><button type="button" data-go="tour2">Tour 2 · L’obstacle et l’aide</button><button type="button" data-go="tour3">Tour 3 · La trace</button><button type="button" data-go="bilan" style="--c:var(--mag)">Bilan</button></div>
+  <header class="hero" style="margin-top:16px"><div class="brand" style="color:${a.couleur}">Table ${k} · Atelier ${ai+1} · ${esc(a.nom)}</div><h1>« ${esc(a.accroche)} »</h1>
+    <p class="lead">Cette table garde son atelier pendant les trois tours. Le gardien reste ; à chaque tour, une nouvelle personne arrive et l’atelier avance d’une étape.</p></header>
 
-  <section class="section"><div class="card stage" style="--c:${a.couleur}">
-    <h2><span class="num">1</span>Le défi · 12 min</h2>
-    <p>Vivez-le comme des élèves : dites ce que vous pensez, même si c’est faux. <strong>Le défi est volontairement exigeant</strong> : vous n’aurez peut-être pas le temps de tout traiter. Notez précisément où vous bloquez, c’est la matière de l’étape 2.</p>
+  <section class="section"><div class="card tour" id="tour1" style="--c:${a.couleur}">
+    <div class="mhead"><div><span class="kicker">Tour 1 · 20 min · comme des élèves</span><h2>Le défi</h2></div><button class="timer" type="button" data-min="20"></button></div>
+    <div class="f"><strong>Qui est à la table ?</strong><input type="text" data-k="m1" placeholder="Prénoms (le premier est le gardien)"></div>
+    <p><strong>Le défi est volontairement exigeant</strong> : vous n’aurez peut-être pas le temps de tout traiter. Dites ce que vous pensez, même si c’est faux.</p>
     <div class="situation">${a.contexte}</div>
-    <strong>À discuter :</strong><ol class="dq">${a.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ol>
+    <strong>À traiter :</strong><ol class="dq">${a.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ol>
     ${a.revelation?`<details class="reserved"><summary>La révélation : à ouvrir après la question 1</summary><div class="reveal">${a.revelation}</div></details>`:''}
-    <details class="reserved"><summary>Coup de pouce : seulement si vous êtes bloqués</summary><ol>${a.aides.map(x=>`<li>${esc(x)}</li>`).join('')}</ol><p style="margin:0 0 8px">Notez quel coup de pouce vous a débloqués : il servira à l’étape 2.</p></details>
-    <div class="f"><strong>Nos réponses (numérotez-les)</strong><textarea data-k="${a.id}_defi" style="min-height:130px"></textarea></div>
+    <details class="reserved"><summary>Coup de pouce : seulement si vous êtes bloqués</summary><ol>${a.aides.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></details>
+    <div class="f"><strong>Nos réponses (numérotez-les)</strong><textarea data-k="defi" style="min-height:130px"></textarea></div>
+    <div class="f"><strong>Où avons-nous bloqué ?</strong><small>À chaud, avant d’oublier : c’est la matière du tour 2.</small><textarea data-k="bloque"></textarea></div>
   </div></section>
 
-  <section class="section"><div class="card stage" style="--c:var(--mag)">
-    <h2><span class="num">2</span>Les trois questions · 8 min</h2>
-    <p>Reprenez votre posture d’enseignant. Ce sont les mêmes questions dans les trois ateliers. Pas de généralités : chaque réponse part de ce que vous venez de vivre.</p>
-    ${P.lunettes.map(l=>`<div class="lensq" style="--c:${l.couleur}"><div class="f"><span class="lens-tag">${esc(l.nom)}</span> <strong style="display:inline">${esc(l.titre)}</strong><small>${esc(l.question)}</small><textarea data-k="${a.id}_${l.id}"></textarea></div></div>`).join('')}
-    <p style="margin:6px 0 0"><strong>Éclairage :</strong> ${esc(a.eclairage.retenir)}</p>
-    <details class="reserved" style="border-color:var(--teal)"><summary style="color:var(--teal2)">À la fin : ce qui était attendu</summary><p>${esc(a.attendu)}</p></details>
+  <section class="section"><div class="card tour" id="tour2" style="--c:var(--blue)">
+    <div class="mhead"><div><span class="kicker">Tour 2 · 20 min · une personne arrive</span><h2>L’obstacle et l’aide</h2></div><button class="timer" type="button" data-min="20"></button></div>
+    <div class="f"><strong>Qui est à la table ?</strong><input type="text" data-k="m2" placeholder="Prénoms (marquez le nouvel arrivant)"></div>
+    <div class="sub"><span class="t">5 min</span><h3>Accueillez le nouvel arrivant… sans lui montrer vos réponses</h3><p style="margin:4px 0">Posez-lui la question du défi qui vous a le plus bloqués. Observez où il hésite : c’est un élève de plus.</p><div class="f"><textarea data-k="arrivant2" placeholder="Ce qu’il a répondu, où il a bloqué"></textarea></div></div>
+    <div class="sub"><span class="t">15 min</span><h3>Analysez, en posture d’enseignant</h3>${lens(L.dida,'dida')}${lens(L.peda,'peda')}</div>
   </div></section>
 
-  <section class="section"><a class="next" href="${next.href}" style="--c:${next.c}"><span><span style="display:block;font-size:14px">Quand le formateur annonce la fin du tour</span><b>${esc(next.txt)} →</b></span><span>${t<3?'Tour suivant':'65 → 90 min'}</span></a></section>
-  <p style="text-align:center;margin-top:14px"><a href="index.html">Changer de groupe</a> · <a href="${a.lien}">Parcours complet de cet atelier (8 h)</a></p>`;
+  <section class="section"><div class="card tour" id="tour3" style="--c:var(--amber)">
+    <div class="mhead"><div><span class="kicker">Tour 3 · 20 min · une autre personne arrive</span><h2>La trace et la finalisation</h2></div><button class="timer" type="button" data-min="20"></button></div>
+    <div class="f"><strong>Qui est à la table ?</strong><input type="text" data-k="m3" placeholder="Prénoms (marquez le nouvel arrivant)"></div>
+    <div class="sub"><span class="t">5 min</span><h3>Le nouvel arrivant conteste</h3><p style="margin:4px 0">Il lit tout ce qui précède et dit ce qui ne le convainc pas : un obstacle mal identifié, une relance qui donne la réponse…</p><div class="f"><textarea data-k="objections" placeholder="Ses objections, et ce que vous corrigez"></textarea></div></div>
+    <div class="sub"><span class="t">15 min</span><h3>Terminez l’atelier</h3>${lens(L.cogn,'cogn')}
+      <div class="f" style="background:#fdf6f9;border-radius:12px;padding:12px 14px"><strong>Notre message pour le bilan</strong><small>Ce que cet atelier répond au fil rouge : « la difficulté fait apprendre quand… »</small><input type="text" data-k="message"></div>
+      <details class="reserved" style="border-color:var(--teal)"><summary style="color:var(--teal2)">À la fin : ce qui était attendu dans le défi</summary><p>${esc(a.attendu)}</p></details></div>
+  </div></section>
+
+  <section class="section"><div class="card tour" id="bilan" style="--c:var(--mag)">
+    <div class="mhead"><div><span class="kicker">Bilan · 25 min</span><h2>Présentez votre atelier</h2></div><button class="timer" type="button" data-min="7"></button></div>
+    <p>7 minutes pour relire et corriger, puis 2 à 3 minutes de présentation par table. L’écran reprend automatiquement le travail des trois tours.</p>
+    <div class="actions"><button class="btn primary" type="button" id="open">Afficher notre présentation</button><button class="btn secondary" type="button" onclick="print()">Imprimer la fiche de la table</button><a class="btn secondary" href="${a.lien}">Parcours complet (8 h)</a></div>
+  </div></section>`;
   root.querySelectorAll('[data-k]').forEach(el=>{el.value=st[el.dataset.k]||'';el.addEventListener('input',()=>{st[el.dataset.k]=el.value;save()})});
-  let left=1200;const b=document.getElementById('timer'),ph=document.getElementById('phase');
-  const fmt=()=>`${String(Math.floor(left/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}`;
-  const paint=()=>{if(left<=480&&left>0){ph.textContent='Étape 2 · Les trois questions (8 min)';ph.classList.add('b')}if(left<=0){ph.textContent='Fin du tour : passez à la suite'}};
-  b.onclick=()=>{if(left<=0){left=1200;b.classList.remove('end');ph.classList.remove('b');ph.textContent='Étape 1 · Le défi (12 min)';b.textContent='▶ '+fmt();return}
-    if(tick){clearInterval(tick);tick=null;b.classList.remove('run');b.textContent='▶ '+fmt();return}
-    b.classList.add('run');b.textContent='❚❚ '+fmt();tick=setInterval(()=>{left--;b.textContent='❚❚ '+fmt();paint();if(left<=0){clearInterval(tick);tick=null;b.classList.remove('run');b.classList.add('end');b.textContent='Temps écoulé'}},1000)};
+  root.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.go).scrollIntoView({behavior:'smooth'}));
+  PZ.timers();
+  document.getElementById('open').onclick=PZ.full('resti',()=>`<div class="kicker">Table ${k} · Atelier ${ai+1} · ${esc(a.nom)}</div><h1>« ${esc(a.accroche)} »</h1><div class="meta">${esc(st.m3||st.m1||'')}</div><div class="fs-grid">${P.lunettes.map(l=>`<div class="fs-box" style="--c:${l.couleur}"><h2>${esc(l.nom)} · ${esc(l.titre)}</h2>${PZ.val(st,l.id)}</div>`).join('')}<div class="fs-box wide" style="--c:var(--mag);background:#fdf6f9"><h2>Notre message</h2><span style="font-size:24px;font-weight:600">${PZ.val(st,'message')}</span></div></div>`);
 }
 window.addEventListener('hashchange',()=>{draw();scrollTo(0,0)});draw();
 })();

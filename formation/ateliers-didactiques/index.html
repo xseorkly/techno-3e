@@ -1,26 +1,32 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ateliers didactiques — 90 min</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css"><link rel="stylesheet" href="puzzle.css">
 <style>
-.gpick{display:flex;gap:10px;flex-wrap:wrap}
-.gpick button{width:64px;height:64px;border-radius:16px;border:2px solid var(--teal);background:#fff;color:var(--teal2);font:700 26px Archivo,sans-serif;cursor:pointer}
-.gpick button[aria-pressed=true]{background:var(--teal);color:#fff}
-.route{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:10px}
-.route a{display:grid;grid-template-columns:110px 1fr auto;gap:14px;align-items:center;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-left:8px solid var(--c);border-radius:14px;padding:14px 16px}
-.route a:hover{box-shadow:var(--shadow)}
-.route .when{font:700 14px Archivo,sans-serif;color:var(--muted)}
-.route .when b{display:block;font-size:18px;color:var(--c)}
-.route .what{font:700 20px Archivo,sans-serif}
-.route .what span{display:block;font:400 15px "Source Sans 3",sans-serif;color:var(--muted)}
-.route .go2{font-weight:700;color:var(--c)}
+.ateliers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.at{background:#fff;border:1px solid var(--line);border-top:8px solid var(--c);border-radius:16px;padding:18px;display:flex;flex-direction:column}
+.at .n{font:700 13px Archivo,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+.at h3{margin:4px 0 2px;font-size:22px}
+.at .acc{color:var(--muted);margin:0 0 12px}
+.at .tables{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.at .tables a{display:inline-flex;align-items:center;gap:6px;background:var(--c);color:#fff;border-radius:10px;padding:10px 14px;font:700 16px Archivo,sans-serif;text-decoration:none}
+.tours{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+.tours>div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.tours b{display:block;font:700 15px Archivo,sans-serif;color:var(--teal2)}
+.tours em{display:block;font-style:normal;color:var(--mag);font-weight:700;font-size:14px;margin-bottom:4px}
 .rot{width:100%;border-collapse:collapse;font-size:15px;margin-top:12px}
 .rot th,.rot td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
-.rot th{background:var(--pale);color:var(--teal2)}
-.rot td.a{font-weight:700;color:#fff}
-.orga-in{display:grid;grid-template-columns:2fr 1fr;gap:14px}
+.rot thead th{background:var(--pale);color:var(--teal2)}
+.rot td.a{color:#fff;font-weight:700}
+.rot .new{background:#fdf6f9;color:var(--mag);font-weight:700;border-radius:6px;padding:0 4px}
+.rot .g{text-decoration:underline;text-decoration-thickness:2px}
+.moves{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.moves>div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.moves ul{margin:6px 0 0;padding-left:18px}
+.orga-in{display:grid;grid-template-columns:1fr 2fr;gap:14px;margin-top:12px}
 .orga-in textarea{width:100%;min-height:150px;border:1px solid #b9c9ca;border-radius:9px;padding:10px;font:inherit}
-.orga-in input{width:100px;border:1px solid #b9c9ca;border-radius:9px;padding:9px;font:inherit}
-details.formateur>summary{cursor:pointer;font:700 18px Archivo,sans-serif;color:var(--teal2);padding:4px 0}
-.fs .rot{font-size:20px}
-@media(max-width:760px){.route a{grid-template-columns:1fr}.orga-in{grid-template-columns:1fr}.rot{font-size:13px}}
+.nbt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.nbt button{width:52px;height:52px;border-radius:12px;border:2px solid var(--teal);background:#fff;color:var(--teal2);font:700 20px Archivo,sans-serif;cursor:pointer}
+.nbt button[aria-pressed=true]{background:var(--teal);color:#fff}
+.fs .rot{font-size:18px}
+@media(max-width:860px){.ateliers,.tours,.moves,.orga-in{grid-template-columns:1fr}.rot{font-size:13px}}
 </style>
 <script>if(sessionStorage.getItem('formation_teachers_unlocked_v1')!=='1')location.replace('../index.html');</script><style id="navbar-css">.fnav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:4px 14px;background:transparent;font:500 13px/1.3 "Source Sans 3",Arial,sans-serif}.fnav a{color:#5b6b6a!important;text-decoration:none!important;padding:2px 0;background:none;border-radius:0}.fnav a:hover,.fnav a:focus-visible{color:#0f6b66!important;text-decoration:underline!important}@media print{.fnav{display:none}}</style></head>
 <body><nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a></nav>
@@ -28,79 +34,72 @@ details.formateur>summary{cursor:pointer;font:700 18px Archivo,sans-serif;color:
 <header class="hero">
   <div class="brand">Ateliers didactiques · 90 min</div>
   <h1>Trois ateliers, une question</h1>
-  <p class="lead">Chaque groupe passe par les trois ateliers, 20 minutes chacun, puis prépare son bilan. Dans chaque atelier : un défi exigeant à vivre comme des élèves, puis les trois mêmes questions d’enseignant.</p>
+  <p class="lead">Chaque table travaille <strong>un seul atelier</strong> pendant une heure. Toutes les 20 minutes, une personne change de table : elle apporte un regard neuf, et l’atelier avance d’une étape.</p>
   <div class="hook"><small>Notre fil rouge</small><span id="fil"></span></div>
 </header>
 
 <section class="section"><div class="card mission">
-  <span class="kicker">Le déroulé</span>
-  <div class="timeline" aria-label="Déroulé des 90 minutes">
-    <div class="t-all" style="flex:5">Lancement<span>5 min</span></div>
-    <div class="t-exp" style="flex:20">Tour 1<span>20 min</span></div>
-    <div class="t-mix" style="flex:20">Tour 2<span>20 min</span></div>
-    <div class="t-exp" style="flex:20">Tour 3<span>20 min</span></div>
-    <div class="t-ple" style="flex:25">Bilan<span>10 min de préparation · 15 min de présentation</span></div>
+  <span class="kicker">Le déroulé · 90 min</span>
+  <div class="timeline" aria-label="Déroulé">
+    <div class="t-all" style="flex:5">Accueil<span>5 min</span></div>
+    <div class="t-exp" style="flex:20">Tour 1<span>Le défi</span></div>
+    <div class="t-mix" style="flex:20">Tour 2<span>L’obstacle et l’aide</span></div>
+    <div class="t-exp" style="flex:20">Tour 3<span>La trace</span></div>
+    <div class="t-ple" style="flex:25">Bilan<span>Chaque table présente</span></div>
   </div>
-  <p style="margin:0">Dans chaque atelier : <strong>12 min</strong> pour le défi, <strong>8 min</strong> pour les trois questions. Gardez le même ordinateur pendant toute la séance : vos réponses vous suivent jusqu’au bilan.</p>
-</div></section>
-
-<section class="section"><div class="card">
-  <span class="kicker">Pour chaque groupe</span>
-  <h2>Quel est votre groupe ?</h2>
-  <div class="gpick" id="gpick"></div>
-  <div id="monParcours"></div>
+  <div class="tours">
+    <div><em>Tour 1 · 20 min</em><b>Le défi</b>La table vit un défi exigeant, comme des élèves.</div>
+    <div><em>Tour 2 · 20 min</em><b>L’obstacle et l’aide</b>Un nouvel arrivant tente le défi à froid. La table analyse où l’on bloque et prépare la relance.</div>
+    <div><em>Tour 3 · 20 min</em><b>La trace</b>Un autre arrivant conteste le travail. La table écrit la trace et son message.</div>
+    <div><em>Bilan · 25 min</em><b>Présenter</b>7 min de préparation, puis 2 à 3 min par table.</div>
+  </div>
+  <p style="margin:12px 0 0">Le <strong>gardien</strong> de chaque table (la première personne) ne bouge jamais : il assure la continuité. L’ordinateur reste à la table.</p>
 </div></section>
 
 <section class="section">
-  <h2>Les trois questions, les mêmes dans chaque atelier</h2>
-  <div class="cols3" id="questions"></div>
+  <h2>Les trois ateliers : ouvrez votre table</h2>
+  <div class="ateliers" id="ateliers"></div>
+  <p style="margin-top:12px"><a href="#formateur">Pour le formateur : nombre de tables, noms et rotation ↓</a></p>
 </section>
 
-<section class="section"><div class="card">
-  <details class="formateur" id="formateur">
-    <summary>Pour le formateur : constituer les groupes et projeter la rotation</summary>
-    <div class="orga-in" style="margin-top:12px">
-      <div><strong>Les participants</strong> (un nom par ligne)<textarea id="noms" placeholder="Anne&#10;Karim&#10;Sofia&#10;…"></textarea></div>
-      <div><strong>Nombre de groupes</strong><br><input type="number" id="nb" min="2" max="6"><p id="conseil" style="font-size:15px"></p></div>
-    </div>
-    <div id="table"></div>
-    <div class="actions"><button class="btn primary" type="button" id="projeter">Projeter le tableau de rotation</button></div>
-  </details>
+<section class="section" id="formateur"><div class="card">
+  <span class="kicker">Pour le formateur</span>
+  <h2>Qui est où, à chaque tour ?</h2>
+  <div class="orga-in">
+    <div><strong>Nombre de tables</strong><div class="nbt" id="nbt"></div><p style="font-size:15px;color:var(--muted)">Les tables 1 et 4 font l’atelier 1, les tables 2 et 5 l’atelier 2, les tables 3 et 6 l’atelier 3.</p></div>
+    <div><strong>Les participants</strong> (un nom par ligne, dans l’ordre que vous voulez)<textarea id="noms" placeholder="Anne&#10;Karim&#10;Sofia&#10;…"></textarea></div>
+  </div>
+  <div id="tableau"></div>
+  <div class="moves" id="moves"></div>
+  <div class="actions"><button class="btn primary" type="button" data-proj="0">Projeter : tour 1</button><button class="btn primary" type="button" data-proj="1">Projeter : avant le tour 2</button><button class="btn primary" type="button" data-proj="2">Projeter : avant le tour 3</button></div>
 </div></section>
 
 <p style="color:var(--muted);font-size:15px">Pour aller plus loin, chaque atelier existe en parcours complet de 8 h : <span id="complets"></span>.</p>
 <div class="footer">Fehmi KLABI · Formation enseignants de technologie</div>
 </main>
-<div class="full" id="proj" role="dialog" aria-modal="true" aria-label="Tableau de rotation"><button class="btn secondary fs-close" type="button">✕ Fermer</button><div class="fs"></div></div>
+<div class="full" id="proj" role="dialog" aria-modal="true" aria-label="Rotation"><button class="btn secondary fs-close" type="button">✕ Fermer</button><div class="fs"></div></div>
 <script src="data.js"></script><script src="puzzle.js"></script><script src="rotation.js"></script>
 <script>
 (()=>{const P=window.PUZZLE,A=P.parcours,esc=PZ.esc;
 document.getElementById('fil').textContent=P.filRouge;
-document.getElementById('questions').innerHTML=P.lunettes.map(l=>`<div class="box pbox" style="--c:${l.couleur}"><span class="lens-tag">${esc(l.nom)}</span><h3>${esc(l.titre)}</h3><p style="margin:0;color:var(--muted)">${esc(l.question)}</p></div>`).join('');
-document.getElementById('complets').innerHTML=A.map((a,i)=>`<a href="${a.lien}">${esc(a.nom)}</a>`).join(' · ');
-const horaires=['5 → 25 min','25 → 45 min','45 → 65 min'];
-const nbGroupes=()=>ROT.repartition(ROT.orga()).nb||6;
-function drawPick(){const g=ROT.groupe(),n=Math.max(nbGroupes(),g);
-  document.getElementById('gpick').innerHTML=Array.from({length:n},(_,i)=>`<button type="button" aria-pressed="${g===i+1}" data-g="${i+1}" aria-label="Groupe ${i+1}">${i+1}</button>`).join('');
-  document.querySelectorAll('#gpick button').forEach(b=>b.onclick=()=>{ROT.setGroupe(+b.dataset.g);drawPick()});
-  const box=document.getElementById('monParcours');
-  if(!g){box.innerHTML='<p style="margin:14px 0 0;color:var(--muted)">Touchez le numéro de votre groupe : votre parcours s’affiche ici.</p>';return}
-  const st=ROT.reponses(g);if(!st.membres){const m=ROT.membresConnus(g);if(m){st.membres=m;ROT.setReponses(g,st)}}
-  box.innerHTML=`<div class="f"><strong>Groupe ${g} : qui est là ?</strong><input type="text" id="membres" placeholder="Prénoms" value="${esc(st.membres||'')}"></div>
-  <ol class="route">${ROT.ordre(g).map((ai,t)=>{const a=A[ai];return `<li><a href="atelier.html#${a.id}" style="--c:${a.couleur}"><span class="when"><b>Tour ${t+1}</b>${horaires[t]}</span><span class="what">Atelier ${ai+1} · ${esc(a.nom)}<span>« ${esc(a.accroche)} »</span></span><span class="go2">Ouvrir →</span></a></li>`}).join('')}
-  <li><a href="bilan.html" style="--c:#c2185b"><span class="when"><b>Bilan</b>65 → 90 min</span><span class="what">Atelier 4 · Bilan<span>Ce qui revient dans les trois ateliers, puis 3 min de présentation</span></span><span class="go2">Ouvrir →</span></a></li></ol>`;
-  document.getElementById('membres').addEventListener('input',e=>{const s=ROT.reponses(g);s.membres=e.target.value;ROT.setReponses(g,s)});
+document.getElementById('complets').innerHTML=A.map(a=>`<a href="${a.lien}">${esc(a.nom)}</a>`).join(' · ');
+const noms=document.getElementById('noms');
+function tableHTML(p,tours){const newc=t=>t?new Set(p.moves[t].map(m=>m.nom)):new Set();
+  return `<div style="overflow-x:auto"><table class="rot"><thead><tr><th>Table</th><th>Atelier</th>${tours.map(t=>`<th>Tour ${t+1}</th>`).join('')}</tr></thead><tbody>${p.tables.map((m,i)=>{const ai=ROT.atelierDe(i+1),a=A[ai];return `<tr><th>Table ${i+1}</th><td class="a" style="background:${a.couleur}">${ai+1} · ${esc(a.nom)}</td>${tours.map(t=>`<td>${p.tours[t][i].map(n=>{const g=n===m[0],nw=newc(t).has(n);return `<span class="${nw?'new':''} ${g?'g':''}">${esc(n)}${nw?' (arrive)':''}${g?' (gardien)':''}</span>`}).join(', ')}</td>`).join('')}</tr>`}).join('')}</tbody></table></div>`}
+function draw(){const p=ROT.plan();
+  document.getElementById('nbt').innerHTML=[3,4,5,6,7,8].map(n=>`<button type="button" data-n="${n}" aria-pressed="${p.T===n}">${n}</button>`).join('');
+  document.querySelectorAll('#nbt button').forEach(b=>b.onclick=()=>{ROT.setOrga({...ROT.orga(),nb:+b.dataset.n});draw()});
+  document.getElementById('ateliers').innerHTML=A.map((a,ai)=>{const ts=[];for(let k=1;k<=p.T;k++)if(ROT.atelierDe(k)===ai)ts.push(k);
+    return `<article class="at" style="--c:${a.couleur}"><span class="n">Atelier ${ai+1}</span><h3>${esc(a.nom)}</h3><p class="acc">« ${esc(a.accroche)} »</p><div class="tables">${ts.map(k=>`<a href="atelier.html#t${k}">Table ${k} →</a>`).join('')}</div></article>`}).join('');
+  document.getElementById('tableau').innerHTML=tableHTML(p,[0,1,2]);
+  document.getElementById('moves').innerHTML=[1,2].map(t=>`<div><strong>Avant le tour ${t+1}</strong> (à ${t===1?'25':'45'} min)<ul>${p.moves[t].map(m=>`<li>${esc(m.nom)} : table ${m.de} → <strong>table ${m.vers}</strong></li>`).join('')}</ul></div>`).join('');
 }
-/* formateur */
-const o=ROT.orga();const noms=document.getElementById('noms'),nb=document.getElementById('nb');
-noms.value=o.noms||'';nb.value=o.nb||'';
-function tableHTML(){const r=ROT.repartition(ROT.orga());
-  return `<table class="rot"><thead><tr><th>Groupe</th><th>Membres</th><th>Tour 1 · 5 min</th><th>Tour 2 · 25 min</th><th>Tour 3 · 45 min</th><th>Bilan · 65 min</th></tr></thead><tbody>${r.groupes.map((m,i)=>`<tr><th>Groupe ${i+1}</th><td>${esc(m.join(', '))||'<span class="empty">—</span>'}</td>${ROT.ordre(i+1).map(ai=>`<td class="a" style="background:${A[ai].couleur}">Atelier ${ai+1} · ${esc(A[ai].nom)}</td>`).join('')}<td class="a" style="background:#c2185b">Bilan</td></tr>`).join('')}</tbody></table>`}
-function drawOrga(){const n=ROT.noms(ROT.orga()).length;document.getElementById('conseil').textContent=n?`${n} participants : ${ROT.nbConseille(n)} groupes conseillés (3 à 4 personnes).`:'Saisissez les noms : le nombre de groupes est proposé automatiquement.';document.getElementById('table').innerHTML=tableHTML();drawPick()}
-const upd=()=>{ROT.setOrga({noms:noms.value,nb:parseInt(nb.value)||0});drawOrga()};
-noms.addEventListener('input',upd);nb.addEventListener('input',upd);
-document.getElementById('projeter').onclick=PZ.full('proj',()=>`<div class="kicker">Ateliers didactiques · Rotation</div><h1>Qui va où ?</h1>${tableHTML()}<p class="meta" style="margin-top:14px">Dans chaque atelier : 12 min de défi, puis 8 min pour les trois questions.</p>`);
-drawOrga();
+noms.value=ROT.orga().noms||'';
+noms.addEventListener('input',()=>{ROT.setOrga({...ROT.orga(),noms:noms.value});draw()});
+let tProj=0;
+const projTour=PZ.full('proj',()=>{const p=ROT.plan(),t=tProj;const mv=t?`<div class="moves" style="font-size:20px"><div><strong>Qui change de table</strong><ul>${p.moves[t].map(m=>`<li>${esc(m.nom)} : table ${m.de} → <strong>table ${m.vers}</strong></li>`).join('')}</ul></div><div><strong>Rappel</strong><p>Le gardien reste à sa table. Le nouvel arrivant ne lit rien : la table lui pose d’abord une question du défi.</p></div></div>`:'';return `<div class="kicker">Ateliers didactiques</div><h1>${t?'Avant le tour '+(t+1):'Tour 1 : installez-vous'}</h1>${mv}${tableHTML(p,[t])}`});
+document.querySelectorAll('[data-proj]').forEach(b=>b.onclick=()=>{tProj=+b.dataset.proj;projTour()});
+draw();
 })();
 </script>
 <script src="../common-tools.js"></script>
