@@ -1,0 +1,81 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nouveaux programmes — Diaporama à projeter</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css">
+<style>
+.viewer{background:#14262b;border-radius:18px;padding:14px;box-shadow:var(--shadow)}
+.stage{position:relative;aspect-ratio:16/9;background:#0b1b1e;border-radius:10px;overflow:hidden}
+.stage img{width:100%;height:100%;object-fit:contain;display:block}
+.stage button.zone{position:absolute;top:0;bottom:0;width:30%;background:transparent;border:0;cursor:pointer}
+.stage .zl{left:0}.stage .zr{right:0}
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px;color:#d7ecea}
+.bar button,.bar a{border:0;border-radius:10px;padding:9px 14px;background:#2b4146;color:#fff;font:700 15px Archivo,sans-serif;cursor:pointer;text-decoration:none}
+.bar button.primary{background:var(--teal)}
+.bar .count{font:700 15px Archivo,sans-serif;min-width:80px;text-align:center}
+.bar .ttl{flex:1;min-width:200px;font-size:15px;opacity:.9}
+.notes{display:none;margin-top:12px;background:#fff;border-radius:12px;padding:14px 16px;color:var(--ink)}
+.notes.open{display:block}
+.notes b{display:block;font:700 13px Archivo,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin-bottom:4px}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:14px}
+.thumbs button{border:2px solid transparent;border-radius:10px;padding:0;background:#fff;cursor:pointer;overflow:hidden;text-align:left}
+.thumbs button[aria-current=true]{border-color:var(--mag)}
+.thumbs img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+.thumbs span{display:block;font-size:12px;padding:5px 7px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dl{display:flex;gap:10px;flex-wrap:wrap}
+.viewer:fullscreen{display:flex;flex-direction:column;justify-content:center;border-radius:0;padding:10px}
+.viewer:fullscreen .stage{flex:1;aspect-ratio:auto}
+.viewer:fullscreen .notes{max-height:22vh;overflow:auto}
+@media(max-width:700px){.bar .ttl{display:none}}
+</style>
+<script>if(sessionStorage.getItem('formation_teachers_unlocked_v1')!=='1')location.replace('../index.html');</script><style id="navbar-css">.fnav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:4px 14px;background:transparent;font:500 13px/1.3 "Source Sans 3",Arial,sans-serif}.fnav a{color:#5b6b6a!important;text-decoration:none!important;padding:2px 0;background:none;border-radius:0}.fnav a:hover,.fnav a:focus-visible{color:#0f6b66!important;text-decoration:underline!important}@media print{.fnav{display:none}}</style></head>
+<body><nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a></nav>
+<main class="page">
+<header class="hero">
+  <div class="brand">Information · Diaporama à projeter</div>
+  <h1>Les nouveaux programmes de technologie</h1>
+  <p class="lead">Le programme de cycle 4 (BO n° 9 du 29 février 2024), ce qui change, comment l’enseigner, et le DNB 2027 : 38 diapositives, avec les notes du formateur.</p>
+  <p class="identity">Fehmi KLABI · Formation enseignants de technologie · 2026-2027</p>
+</header>
+
+<section class="section">
+  <div class="viewer" id="viewer">
+    <div class="stage"><img id="img" alt=""><button class="zone zl" type="button" id="zl" aria-label="Diapositive précédente"></button><button class="zone zr" type="button" id="zr" aria-label="Diapositive suivante"></button></div>
+    <div class="bar"><button type="button" id="prev" aria-label="Précédente">←</button><span class="count" id="count"></span><button type="button" id="next" aria-label="Suivante">→</button><span class="ttl" id="ttl"></span><button type="button" id="notesBtn">Notes</button><button type="button" class="primary" id="fs">⛶ Projeter en plein écran</button></div>
+    <div class="notes" id="notes"><b>Notes du formateur</b><span id="notesTxt"></span></div>
+  </div>
+  <p style="color:var(--muted);font-size:15px">Flèches ← → ou barre d’espace pour avancer, <strong>F</strong> pour le plein écran, <strong>N</strong> pour les notes, Échap pour sortir.</p>
+</section>
+
+<section class="section"><div class="card mission">
+  <span class="kicker">Télécharger</span>
+  <h2>Le diaporama en fichier</h2>
+  <p>Version modifiable avec les notes orateur (PowerPoint, importable dans Google Slides), ou version PDF.</p>
+  <div class="dl"><a class="btn primary" href="nouveau_programme_technologie_cycle4_2026-2027.pptx" download>Télécharger le PowerPoint (.pptx)</a><a class="btn secondary" href="nouveau_programme_technologie_cycle4_2026-2027.pdf" target="_blank" rel="noopener">Ouvrir le PDF</a></div>
+</div></section>
+
+<section class="section">
+  <h2>Toutes les diapositives</h2>
+  <div class="thumbs" id="thumbs"></div>
+</section>
+<div class="footer">Sources : arrêté du 9 février 2024 (BO n° 9 du 29 février 2024) · notes de service MENE2623228N et MENE2623195N (septembre 2026) · Éduscol. Voir aussi la page <a href="../dnb-2027/index.html">DNB 2027</a> et le portail <a href="https://programme.teckno.fr" target="_blank" rel="noopener">programme.teckno.fr</a>.</div>
+</main>
+<script src="diapos.js"></script>
+<script>
+(()=>{const D=window.DIAPOS||[],N=D.length||38,$=id=>document.getElementById(id);let i=0;
+const src=k=>`diapos/d-${String(k+1).padStart(2,'0')}.jpg`;
+const esc=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+$('thumbs').innerHTML=Array.from({length:N},(_,k)=>`<button type="button" data-k="${k}" aria-label="Diapositive ${k+1}"><img loading="lazy" src="${src(k)}" alt=""><span>${k+1} · ${esc((D[k]||{}).t)}</span></button>`).join('');
+function show(k){i=Math.max(0,Math.min(N-1,k));$('img').src=src(i);$('img').alt=`Diapositive ${i+1} : ${(D[i]||{}).t||''}`;$('count').textContent=`${i+1} / ${N}`;$('ttl').textContent=(D[i]||{}).t||'';$('notesTxt').textContent=(D[i]||{}).n||'Pas de note pour cette diapositive.';
+  document.querySelectorAll('#thumbs button').forEach(b=>b.setAttribute('aria-current',+b.dataset.k===i));
+  if(i+1<N){const p=new Image();p.src=src(i+1)}
+  try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
+$('prev').onclick=$('zl').onclick=()=>show(i-1);$('next').onclick=$('zr').onclick=()=>show(i+1);
+$('notesBtn').onclick=()=>$('notes').classList.toggle('open');
+const fs=()=>{const v=$('viewer');if(document.fullscreenElement){document.exitFullscreen()}else if(v.requestFullscreen){v.requestFullscreen().catch(()=>{})}};
+$('fs').onclick=fs;
+document.querySelectorAll('#thumbs button').forEach(b=>b.onclick=()=>{show(+b.dataset.k);$('viewer').scrollIntoView({behavior:'smooth'})});
+document.addEventListener('keydown',e=>{if(/INPUT|TEXTAREA/.test(document.activeElement.tagName))return;
+  if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1)}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1)}
+  else if(e.key==='Home')show(0);else if(e.key==='End')show(N-1);else if(e.key==='f'||e.key==='F')fs();else if(e.key==='n'||e.key==='N')$('notes').classList.toggle('open')});
+const h=parseInt(location.hash.slice(1));show(h>0?h-1:0);
+})();
+</script>
+<script src="../common-tools.js"></script>
+</body></html>
