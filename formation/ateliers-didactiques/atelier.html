@@ -37,17 +37,17 @@ function draw(){
 
   <section class="section"><div class="card stage" style="--c:${a.couleur}">
     <h2><span class="num">1</span>Le défi · 12 min</h2>
-    <p>Vivez-le comme des élèves : dites ce que vous pensez, même si c’est faux.</p>
+    <p>Vivez-le comme des élèves : dites ce que vous pensez, même si c’est faux. <strong>Le défi est volontairement exigeant</strong> : vous n’aurez peut-être pas le temps de tout traiter. Notez précisément où vous bloquez, c’est la matière de l’étape 2.</p>
     <div class="situation">${a.contexte}</div>
     <strong>À discuter :</strong><ol class="dq">${a.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ol>
     ${a.revelation?`<details class="reserved"><summary>La révélation : à ouvrir après la question 1</summary><div class="reveal">${a.revelation}</div></details>`:''}
     <details class="reserved"><summary>Coup de pouce : seulement si vous êtes bloqués</summary><ol>${a.aides.map(x=>`<li>${esc(x)}</li>`).join('')}</ol><p style="margin:0 0 8px">Notez quel coup de pouce vous a débloqués : il servira à l’étape 2.</p></details>
-    <div class="f"><strong>Notre réponse au défi</strong><textarea data-k="${a.id}_defi"></textarea></div>
+    <div class="f"><strong>Nos réponses (numérotez-les)</strong><textarea data-k="${a.id}_defi" style="min-height:130px"></textarea></div>
   </div></section>
 
   <section class="section"><div class="card stage" style="--c:var(--mag)">
     <h2><span class="num">2</span>Les trois questions · 8 min</h2>
-    <p>Reprenez votre posture d’enseignant. Ce sont les mêmes questions dans les trois ateliers.</p>
+    <p>Reprenez votre posture d’enseignant. Ce sont les mêmes questions dans les trois ateliers. Pas de généralités : chaque réponse part de ce que vous venez de vivre.</p>
     ${P.lunettes.map(l=>`<div class="lensq" style="--c:${l.couleur}"><div class="f"><span class="lens-tag">${esc(l.nom)}</span> <strong style="display:inline">${esc(l.titre)}</strong><small>${esc(l.question)}</small><textarea data-k="${a.id}_${l.id}"></textarea></div></div>`).join('')}
     <p style="margin:6px 0 0"><strong>Éclairage :</strong> ${esc(a.eclairage.retenir)}</p>
     <details class="reserved" style="border-color:var(--teal)"><summary style="color:var(--teal2)">À la fin : ce qui était attendu</summary><p>${esc(a.attendu)}</p></details>

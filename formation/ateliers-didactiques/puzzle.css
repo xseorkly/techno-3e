@@ -21,7 +21,7 @@
 .timer.run{background:var(--teal);color:#fff}.timer.end{border-color:var(--mag);background:var(--mag);color:#fff}
 .docs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
 .docs>div{background:#f7fbfb;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-family:ui-monospace,Consolas,monospace;font-size:15px}
-.defi-img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:12px;background:#fff;margin:6px 0}
+.defi-img{display:block;max-width:100%;max-height:300px;width:auto;height:auto;border:1px solid var(--line);border-radius:12px;background:#fff;margin:6px 0}
 .reserved{border:2px dashed var(--mag);border-radius:12px;padding:6px 14px;margin:14px 0;background:#fff}
 .reserved summary{cursor:pointer;font-weight:700;color:var(--mag);padding:6px 0}
 .reserved ol{margin:6px 0 10px}

@@ -30,7 +30,7 @@ function draw(){const g=ROT.groupe();
   <section class="section"><div class="card manche" style="border-left-color:var(--mag)">
     <div class="mhead"><div><span class="kicker">Préparation · 10 min</span><h2>Votre bilan en trois phrases</h2></div><button class="timer" type="button" data-min="10"></button></div>
     ${P.lunettes.map(l=>`<div class="lensq" style="--c:${l.couleur}"><div class="f"><span class="lens-tag">${esc(l.nom)}</span> <strong style="display:inline">${esc(l.titre)} : qu’est-ce qui revient dans les trois ateliers ?</strong><input type="text" data-k="bilan_${l.id}"></div></div>`).join('')}
-    <div class="f" style="background:#fdf6f9;border-radius:12px;padding:12px 14px"><strong>Notre réponse au fil rouge</strong><small>La difficulté fait apprendre quand…</small><input type="text" data-k="bilan_principe"></div>
+    <div class="f" style="background:#fdf6f9;border-radius:12px;padding:12px 14px"><strong>Notre réponse au fil rouge</strong><small>« La difficulté fait apprendre quand… » : appuyez-vous sur un exemple précis vécu dans un atelier.</small><input type="text" data-k="bilan_principe"></div>
     <div class="f"><strong>Dans nos classes, nous changerons…</strong><input type="text" data-k="bilan_change"></div>
   </div></section>
   <section class="section"><div class="card mirror"><span class="kicker">Présentation · 3 min par groupe</span><h2>Votre écran est prêt</h2>
