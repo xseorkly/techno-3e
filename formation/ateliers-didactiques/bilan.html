@@ -1,0 +1,46 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Atelier 4 · Bilan</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css"><link rel="stylesheet" href="puzzle.css">
+<style>
+.recap{width:100%;border-collapse:separate;border-spacing:6px;font-size:15px}
+.recap th{text-align:left;color:#fff;border-radius:8px;padding:7px 9px;font:700 13px Archivo,sans-serif}
+.recap td{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 10px;vertical-align:top}
+.recap td.p{font-weight:700;color:#fff;border:0}
+.gpick{display:flex;gap:10px;flex-wrap:wrap}
+.gpick button{width:60px;height:60px;border-radius:16px;border:2px solid var(--teal);background:#fff;color:var(--teal2);font:700 24px Archivo,sans-serif;cursor:pointer}
+@media(max-width:760px){.recap,.recap tbody,.recap tr,.recap td,.recap th{display:block}.recap thead{display:none}}
+</style>
+<script>if(sessionStorage.getItem('formation_teachers_unlocked_v1')!=='1')location.replace('../index.html');</script><style id="navbar-css">.fnav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:4px 14px;background:transparent;font:500 13px/1.3 "Source Sans 3",Arial,sans-serif}.fnav a{color:#5b6b6a!important;text-decoration:none!important;padding:2px 0;background:none;border-radius:0}.fnav a:hover,.fnav a:focus-visible{color:#0f6b66!important;text-decoration:underline!important}@media print{.fnav{display:none}}</style></head>
+<body><nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a><a href="index.html">↑ Ateliers didactiques</a></nav>
+<main class="page" id="root"></main>
+<div class="full" id="resti" role="dialog" aria-modal="true" aria-label="Présentation du bilan"><button class="btn secondary fs-close" type="button">✕ Fermer</button><div class="fs"></div></div>
+<script src="data.js"></script><script src="puzzle.js"></script><script src="rotation.js"></script>
+<script>
+(()=>{const P=window.PUZZLE,A=P.parcours,esc=PZ.esc,root=document.getElementById('root');
+function draw(){const g=ROT.groupe();
+  if(!g){root.innerHTML=`<header class="hero"><div class="brand">Atelier 4 · Bilan</div><h1>Quel est votre groupe ?</h1><div class="gpick">${[1,2,3,4,5,6].map(n=>`<button type="button" data-g="${n}">${n}</button>`).join('')}</div></header>`;root.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{ROT.setGroupe(+b.dataset.g);draw()});return}
+  const st=ROT.reponses(g),save=()=>ROT.setReponses(g,st),ord=ROT.ordre(g);
+  const cell=k=>st[k]&&st[k].trim()?esc(st[k]):'<span class="empty">—</span>';
+  root.innerHTML=`
+  <header class="hero"><div class="brand">Atelier 4 · Bilan · 25 min</div><h1>Groupe ${g} : ce qui revient</h1><p class="lead">${esc(st.membres||'')}</p><div class="hook"><small>Notre fil rouge</small>${esc(P.filRouge)}</div></header>
+  <section class="section"><div class="card manche">
+    <div class="mhead"><div><span class="kicker">Vos trois ateliers, en un coup d’œil</span><h2>Ce que vous avez écrit</h2></div></div>
+    <table class="recap"><thead><tr><th style="background:#5a6c71">Atelier</th>${P.lunettes.map(l=>`<th style="background:${l.couleur}">${esc(l.nom)} · ${esc(l.titre)}</th>`).join('')}</tr></thead>
+    <tbody>${ord.map(ai=>`<tr><td class="p" style="background:${A[ai].couleur}">Atelier ${ai+1}<br>${esc(A[ai].nom)}</td>${P.lunettes.map(l=>`<td>${cell(A[ai].id+'_'+l.id)}</td>`).join('')}</tr>`).join('')}</tbody></table>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:0">Une case vide ? Les réponses sont enregistrées sur l’ordinateur utilisé pendant l’atelier.</p>
+  </div></section>
+  <section class="section"><div class="card manche" style="border-left-color:var(--mag)">
+    <div class="mhead"><div><span class="kicker">Préparation · 10 min</span><h2>Votre bilan en trois phrases</h2></div><button class="timer" type="button" data-min="10"></button></div>
+    ${P.lunettes.map(l=>`<div class="lensq" style="--c:${l.couleur}"><div class="f"><span class="lens-tag">${esc(l.nom)}</span> <strong style="display:inline">${esc(l.titre)} : qu’est-ce qui revient dans les trois ateliers ?</strong><input type="text" data-k="bilan_${l.id}"></div></div>`).join('')}
+    <div class="f" style="background:#fdf6f9;border-radius:12px;padding:12px 14px"><strong>Notre réponse au fil rouge</strong><small>La difficulté fait apprendre quand…</small><input type="text" data-k="bilan_principe"></div>
+    <div class="f"><strong>Dans nos classes, nous changerons…</strong><input type="text" data-k="bilan_change"></div>
+  </div></section>
+  <section class="section"><div class="card mirror"><span class="kicker">Présentation · 3 min par groupe</span><h2>Votre écran est prêt</h2>
+    <div class="actions"><button class="btn primary" type="button" id="open">Afficher notre bilan en plein écran</button><button class="btn secondary" type="button" onclick="print()">Imprimer</button><span class="saved"><a href="index.html">Changer de groupe</a></span></div></div></section>`;
+  root.querySelectorAll('[data-k]').forEach(el=>{el.value=st[el.dataset.k]||'';el.addEventListener('input',()=>{st[el.dataset.k]=el.value;save()})});
+  PZ.timers();
+  document.getElementById('open').onclick=PZ.full('resti',()=>`<div class="kicker">Groupe ${g} · Bilan · 3 min</div><h1>${PZ.val(st,'bilan_principe')}</h1><div class="meta">${esc(st.membres||'')}</div><div class="fs-grid">${P.lunettes.map(l=>`<div class="fs-box" style="--c:${l.couleur}"><h2>${esc(l.nom)} · ${esc(l.titre)}</h2>${PZ.val(st,'bilan_'+l.id)}</div>`).join('')}<div class="fs-box wide" style="--c:var(--mag);background:#fdf6f9"><h2>Dans nos classes, nous changerons…</h2><span style="font-size:24px;font-weight:600">${PZ.val(st,'bilan_change')}</span></div></div>`);
+}
+draw();
+})();
+</script>
+<script src="../common-tools.js"></script>
+</body></html>

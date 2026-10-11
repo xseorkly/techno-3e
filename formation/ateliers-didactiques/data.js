@@ -1,19 +1,14 @@
-/* Classe puzzle « Ateliers didactiques » — données communes (90 min).
-   Une seule source pour la page d'accueil, les fiches d'expert et la fiche du groupe mixte. */
+/* « Ateliers didactiques » (rotation 3 × 20 min + bilan) — données communes (90 min).
+   Une seule source pour la page d'accueil, la page atelier et le bilan. */
 window.PUZZLE = {
   filRouge: 'À quel moment la difficulté aide-t-elle à apprendre, et à quel moment empêche-t-elle de penser ?',
   lunettes: [
     {id: 'dida', nom: 'Didactique', couleur: '#245d8a', pale: '#eaf3fb', titre: 'L’obstacle',
-     question: 'Quelle idée ou quelle représentation a fait obstacle ? Appuyez-vous sur ce que l’observateur a noté.'},
+     question: 'Quelle idée ou quelle représentation vous a fait hésiter ou vous tromper ? Comment un élève risque-t-il de la vivre ?'},
     {id: 'peda', nom: 'Pédagogique', couleur: '#c2185b', pale: '#fbe8f0', titre: 'L’aide minimale',
      question: 'Quelle aide a permis de repartir sans donner la réponse ? Laquelle aurait été trop forte ?'},
     {id: 'cogn', nom: 'Cognitive', couleur: '#9a6900', pale: '#fff5d9', titre: 'La trace',
      question: 'Quelle trace individuelle prouverait qu’un élève a compris, et qu’il saura le réutiliser ailleurs ?'}
-  ],
-  roles: [
-    {nom: 'Élève', qui: '1 ou 2 personnes', fait: 'Cherche à voix haute, sans tricher avec ses connaissances d’enseignant : on dit ce qu’on pense, même si c’est faux.'},
-    {nom: 'Observateur', qui: '1 personne', fait: 'Ne parle pas. Note les hésitations, les phrases exactes, les erreurs et le moment où ça se débloque.'},
-    {nom: 'Enseignant', qui: '1 personne', fait: 'Seul à lire les aides. Les donne une par une, la plus légère d’abord, et seulement si le groupe est bloqué.'}
   ],
   parcours: [
     {
