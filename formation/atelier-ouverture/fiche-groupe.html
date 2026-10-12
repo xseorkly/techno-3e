@@ -1,0 +1,55 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fiche groupe — Atelier d'ouverture</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
+<script>if(location.protocol!=='file:'&&sessionStorage.getItem('formation_teachers_unlocked_v1')!=='1')location.replace('../index.html');</script>
+<style id="navbar-css">.fnav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:4px 14px;background:transparent;font:500 13px/1.3 "Source Sans 3",Arial,sans-serif}.fnav a{color:#5b6b6a!important;text-decoration:none!important;padding:2px 0;background:none;border-radius:0}.fnav a:hover,.fnav a:focus-visible{color:#0f6b66!important;text-decoration:underline!important}@media print{.fnav{display:none}}</style>
+<style>
+.sheet{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px}
+.head{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin-bottom:14px}
+.field{border-bottom:1.5px solid #9fb3b3;padding:4px 0 2px;font-size:14px;color:var(--muted)}
+.cadres{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cadre{border:1.5px solid #9fb3b3;border-radius:12px;padding:12px 14px;break-inside:avoid;display:flex;flex-direction:column}
+.cadre h3{margin:0 0 2px;font-size:17px}.cadre h3 span{color:var(--teal)}
+.cadre .hint{font-size:13.5px;color:var(--muted);margin:0 0 8px}
+.lines{flex:1;min-height:150px;background:repeating-linear-gradient(#fff 0 27px,#e3eaea 27px 28px)}
+.lab{font:700 12px Archivo,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--teal2);margin:6px 0 2px}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;flex:1}
+.tri>div{border:1px dashed #b8c8c8;border-radius:8px;padding:6px 8px;min-height:150px;font-size:13px}
+.tri b{font-family:Archivo,sans-serif;color:var(--teal2)}
+.wide{grid-column:1/-1}
+.phr p{margin:6px 0 0;font-size:14.5px}.phr .lines{min-height:56px}
+@media(max-width:800px){.cadres,.head{grid-template-columns:1fr}.tri{grid-template-columns:1fr}}
+@media print{@page{size:A3 landscape;margin:10mm}.sheet{border:0;padding:0}.cadres{grid-template-columns:1fr 1fr 1fr}.wide{grid-column:auto}.lines{min-height:120px}}
+</style></head><body>
+<nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a><a href="index.html">↑ Retour à l'atelier</a></nav>
+<main class="page">
+<header class="hero noprint"><span class="kicker">Ressource · à imprimer</span><h1>Fiche groupe</h1><p class="lead">Une fiche par groupe, idéalement en A3 paysage. Chaque cadre correspond à une étape de l'atelier. Conservez-la : elle sera reprise en fin de formation.</p></header>
+<nav class="nav noprint"><a class="btn alt" href="index.html">← Atelier</a><button class="btn" onclick="window.print()">Imprimer la fiche</button></nav>
+
+<div class="sheet">
+<div class="head"><div class="field">Objet technique du groupe :</div><div class="field">Groupe :</div><div class="field">Date :</div></div>
+<div class="cadres">
+
+<div class="cadre"><h3><span>1 ·</span> Notre séquence de départ</h3><p class="hint">Sans le programme. Une problématique, 3 ou 4 séances en titres.</p>
+<div class="lab">Problématique</div><div class="lines" style="min-height:56px"></div>
+<div class="lab">Séances</div><div class="lines"></div></div>
+
+<div class="cadre"><h3><span>2 ·</span> Notre séquence sur les repères</h3><p class="hint">Codes des repères réellement visés, par thème.</p>
+<div class="tri"><div><b>OST</b></div><div><b>SFC</b></div><div><b>CCRI</b></div></div>
+<div class="lab">Nombre de thèmes associés : ……&nbsp;&nbsp;·&nbsp;&nbsp;3 cartes vides qui nous interrogent (et que l'objet permettrait de travailler ?) :</div><div class="lines" style="min-height:56px"></div>
+<div class="lab">Post-it mis de côté et pourquoi</div><div class="lines" style="min-height:84px"></div></div>
+
+<div class="cadre wide"><h3><span>3 ·</span> Une même tâche en 5e, 4e et 3e</h3><p class="hint">Repère de 3e choisi : ……………… Pour chaque niveau : ce qui est fourni, ce que l'élève produit, le critère de réussite.</p>
+<div class="tri"><div><b>5e</b></div><div><b>4e</b></div><div><b>3e</b></div></div>
+<div class="lab">Axes de progressivité utilisés</div><div class="lines" style="min-height:56px"></div></div>
+
+<div class="cadre wide"><h3><span>4 ·</span> Notre séquence version 3e</h3><p class="hint">Problématique ancrée dans un enjeu · au moins 2 thèmes · démarche · temps de structuration · trace évaluable (repère + critère observable).</p>
+<div class="lines" style="min-height:210px"></div></div>
+
+<div class="cadre phr wide"><h3><span>5 ·</span> Besoins et bilan</h3><p class="hint">Besoins du groupe (2 ou 3), puis trois phrases individuelles.</p>
+<div class="lab">Nos besoins de formation</div><div class="lines" style="min-height:84px"></div>
+<p><strong>Ce qui m'a surpris dans le programme de 3e…</strong></p><div class="lines"></div>
+<p><strong>Un contenu que je maîtrise peu aujourd'hui…</strong></p><div class="lines"></div>
+<p><strong>Une pratique que je vais faire évoluer…</strong></p><div class="lines"></div></div>
+
+</div></div>
+<div class="footer noprint">Atelier d'ouverture · fiche groupe.</div>
+</main></body></html>
