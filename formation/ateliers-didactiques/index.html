@@ -105,8 +105,7 @@
 <section class="section" id="bilan-formateur"><div class="card science">
   <span class="kicker">Fin de séance</span>
   <h2>Bilan du formateur</h2>
-  <p>Didactique, pédagogie, sciences cognitives : ce que les trois ateliers ont permis d’apprendre. À projeter après les présentations des tables. Saisissez le mot de passe, puis appuyez sur Entrée : le bilan s’ouvre en grand.</p>
-  <div class="lock"><div class="lock-row"><input id="bfPass" type="password" placeholder="Mot de passe du formateur" autocomplete="off"><button class="btn primary" id="bfBtn" type="button">Déverrouiller</button></div><div id="bfStatus" style="margin-top:6px;color:var(--muted)"></div></div>
+  <p>Didactique, pédagogie, sciences cognitives : ce que les trois ateliers ont permis d’apprendre. À projeter après les présentations des tables. Cliquez pour l’ouvrir en grand.</p>
   <div class="actions"><button class="btn primary" type="button" id="bfShow">▶ Projeter le bilan du formateur</button><span style="color:var(--muted)">Flèches ← → pour avancer, Échap pour fermer.</span></div>
 </div></section>
 
@@ -143,25 +142,15 @@ document.querySelectorAll('[data-proj]').forEach(b=>b.onclick=()=>{tProj=+b.data
 draw();
 })();
 
-/* Bilan du formateur : déchiffrement local avec le mot de passe, puis diaporama */
-(()=>{const E=window.BILAN_ENC;if(!E)return;const $=id=>document.getElementById(id);let slides=[],i=0;
-const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
-async function unlock(openAfter){const pw=$('bfPass').value.trim();if(!pw){$('bfStatus').textContent='Saisissez d’abord le mot de passe.';$('bfPass').focus();return false}if(slides.length){if(openAfter)openShow();return true}$('bfStatus').textContent='Vérification…';
-  try{const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
-    const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64(E.salt),iterations:E.iter,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
-    const html=new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(E.iv)},key,b64(E.ct)));
-    $('bstage').innerHTML=html;slides=[...$('bstage').querySelectorAll('.bs')];
-    try{sessionStorage.setItem('ad_bilan_pw',pw)}catch(e){}
-    $('bfStatus').textContent='Bilan déverrouillé.';if(openAfter)openShow();return true;
-  }catch(e){$('bfStatus').textContent=(window.crypto&&crypto.subtle)?'Mot de passe incorrect.':'Ce navigateur ne permet pas de déverrouiller le bilan (ouvrez la page en https).';return false}}
+/* Bilan du formateur : en accès libre, projeté en diaporama */
+(()=>{const H=window.BILAN_HTML;if(!H)return;const $=id=>document.getElementById(id);let slides=[],i=0;
+function unlock(openAfter){if(!slides.length){$('bstage').innerHTML=H;slides=[...$('bstage').querySelectorAll('.bs')]}if(openAfter)openShow();return true}
 const show=n=>{i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('on',k===i));$('bCount').textContent=(i+1)+' / '+slides.length;$('bstage').scrollTop=0};
 function openShow(){$('bshow').classList.add('open');show(0);try{const r=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();r&&r.catch&&r.catch(()=>{})}catch(e){}}
-$('bfBtn').onclick=()=>unlock(true);$('bfPass').addEventListener('keydown',e=>{if(e.key==='Enter')unlock(true)});
 $('bfShow').onclick=()=>unlock(true);
 const close=()=>{$('bshow').classList.remove('open');try{document.fullscreenElement&&document.exitFullscreen()}catch(e){}};
 $('bPrev').onclick=()=>show(i-1);$('bNext').onclick=()=>show(i+1);$('bClose').onclick=close;
 document.addEventListener('keydown',e=>{if(!$('bshow').classList.contains('open'))return;if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();show(i+1)}else if(e.key==='ArrowLeft'||e.key==='PageUp'){show(i-1)}else if(e.key==='Escape'){close()}});
-try{const pw=sessionStorage.getItem('ad_bilan_pw');if(pw){$('bfPass').value=pw;unlock(false)}}catch(e){}
 })();
 </script>
 <script src="../common-tools.js"></script>
