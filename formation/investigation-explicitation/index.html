@@ -1,1 +1,378 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Investigation et explicitation en technologie</title><style>body{font:18px/1.65 system-ui,sans-serif;color:#14262b;background:#f4f7f7;margin:0}main{max-width:920px;margin:30px auto;background:white;padding:clamp(20px,5vw,55px);border-radius:20px}h1,h2{line-height:1.2}h1{font-size:clamp(30px,5vw,49px)}h2{margin-top:38px;color:#0e6e6b}blockquote{border-left:5px solid #0e6e6b;background:#edf5f4;margin:20px 0;padding:15px 22px;font-weight:700}table{width:100%;border-collapse:collapse}td,th{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #dae6e4}a{color:#0e6e6b}.nav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}@media print{main{margin:0;padding:0}body{background:white}.nav{display:none}}</style></head><body><main><nav class="nav"><a href="../index.html">← Accueil formation</a><a href="diaporama.html">Voir le diaporama →</a><a href="#" onclick="window.print();return false">Imprimer / enregistrer PDF</a></nav><p style="color:#b21858;font-weight:700">FICHE DE RÉFÉRENCE · CYCLE 4</p><h1>Démarche implicite, démarche explicite et investigation en technologie</h1><blockquote>On ne donne pas systématiquement le savoir avant de poser le problème. On construit une situation qui rend ce savoir nécessaire.</blockquote><h2>1. Clarifier les termes</h2><p>La démarche d’investigation place l’élève en situation de chercher, formuler des hypothèses, expérimenter, confronter et construire une réponse. Elle ne se confond ni avec un enseignement transmissif ni avec l’absence d’accompagnement. Il faut distinguer l’<strong>enseignement explicite</strong> (une modalité d’enseignement structurée) de l’<strong>explicitation des apprentissages</strong> (rendre visibles les savoirs construits et les critères de réussite).</p><table><thead><tr><th>À laisser découvrir</th><th>À clarifier / structurer</th></tr></thead><tbody><tr><td>Les connaissances nécessaires et les solutions possibles</td><td>Le problème à résoudre et ses contraintes</td></tr><tr><td>Les stratégies et procédures à éprouver</td><td>Les critères permettant de valider une réponse</td></tr><tr><td>Les causes du dysfonctionnement</td><td>La synthèse des connaissances et leur transfert</td></tr></tbody></table><h2>2. Les temps d’une démarche d’investigation</h2><ol><li><strong>Problématiser :</strong> mettre en évidence un problème authentique et faire émerger hypothèses et besoin de savoir.</li><li><strong>Investiguer :</strong> rechercher, manipuler, programmer, observer, mesurer, tester et discuter les propositions.</li><li><strong>Structurer :</strong> confronter les résultats, formaliser les connaissances et proposer un transfert.</li></ol><h2>3. Cas d’étude micro:bit</h2><p><strong>Situation :</strong> un éclairage automatique reste allumé lorsque la pièce est suffisamment lumineuse. « Pourquoi ? Comment corriger le système ? » Les élèves observent, émettent des hypothèses, examinent la mesure du capteur, testent un seuil et une condition, comparent les résultats. La synthèse institutionnalise les notions de capteur, seuil, condition logique et action. La tâche est de réparer le programme ; l’apprentissage est de comprendre comment une condition pilote une action à partir d’une information.</p><h2>4. Posture de l’enseignant</h2><p>Le professeur organise le milieu, veille à ce que la recherche soit possible, apporte des aides graduées et régule les échanges sans livrer systématiquement la solution. Relances utiles : « Qu’as-tu observé ? », « Comment vérifier ton hypothèse ? », « Que se passe-t-il si l’on change un seul paramètre ? », « Comment justifies-tu ton choix ? »</p><h2>5. Grille courte de visite-conseil</h2><table><thead><tr><th>Moment</th><th>Indices observables</th></tr></thead><tbody><tr><td>Problématisation</td><td>Les élèves identifient un problème et savent pourquoi chercher.</td></tr><tr><td>Investigation</td><td>Ils formulent, testent, recherchent et ajustent réellement.</td></tr><tr><td>Confrontation</td><td>Ils justifient et comparent leurs résultats, y compris les erreurs.</td></tr><tr><td>Institutionnalisation</td><td>La classe nomme et structure ce qui a été appris.</td></tr><tr><td>Transfert</td><td>Une autre situation vérifie la réutilisation de la connaissance.</td></tr></tbody></table><h2>6. Atelier entre pairs (15 minutes)</h2><p>À partir d’une consigne directive existante, reformuler une situation-problème, identifier le savoir à construire, imaginer deux relances sans réponse et préparer une trace de synthèse. Puis échanger : qu’avons-nous rendu explicite, et qu’avons-nous volontairement laissé à l’investigation ?</p><blockquote>Faire chercher ne signifie pas laisser les apprentissages implicites. La recherche construit le savoir ; la structuration le rend visible et réutilisable.</blockquote><h2>Repères institutionnels</h2><p>Programme de technologie du cycle 4, Bulletin officiel du 29 février 2024 ; ressources d’accompagnement Éduscol relatives aux démarches, à la résolution de problèmes et à la structuration des connaissances.</p><p><a href="diaporama.html">Lancer le diaporama de formation →</a></p></main></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Enseignement explicite et démarche implicite en technologie — Fiche de référence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14262B;--muted:#4C5E63;--paper:#F4F7F7;--line:#D2DEDE;--teal:#0E6E6B;--teal2:#0A5A58;--pale:#E2EFEE;--mag:#B3164F;--magp:#FBE8F0;--amber:#7A5000;--amberp:#FFF4D6;--green:#1E6B4D;--greenp:#E6F4EC;--blue:#245D8A;--bluep:#EAF3FB}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.62 "Source Sans 3",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:980px;margin:24px auto 60px;background:#fff;padding:clamp(20px,5vw,56px);border-radius:22px;box-shadow:0 14px 40px rgba(20,38,43,.07)}
+h1,h2,h3,h4,.k{font-family:Archivo,"Segoe UI",system-ui,sans-serif}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.12;margin:.2em 0 .4em}
+h2{font-size:clamp(23px,3.2vw,30px);line-height:1.2;margin:2.2em 0 .5em;color:var(--teal2);scroll-margin-top:16px}
+h2 .n{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:var(--teal);color:#fff;font-size:.7em;margin-right:.35em;vertical-align:.12em}
+h3{font-size:1.2rem;margin:1.4em 0 .4em;color:var(--ink)}
+h4{font-size:1rem;margin:.2em 0 .35em;color:var(--teal2)}
+p{margin:.45em 0 .85em}
+a{color:var(--teal2)}
+a:focus-visible,button:focus-visible{outline:3px solid #F2B705;outline-offset:2px;border-radius:6px}
+.k{display:inline-block;font-size:.76rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mag)}
+.lead{font-size:1.18rem;color:var(--muted);max-width:62ch}
+.nav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.95rem;margin-bottom:18px}
+.nav a{text-decoration:none;font-weight:600}
+.toc{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:18px 0 0}
+.toc a{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.9rem;text-decoration:none;background:#fff}
+.quote{border-left:6px solid var(--teal);background:var(--pale);border-radius:0 14px 14px 0;padding:14px 20px;margin:20px 0;font-weight:700;font-size:1.1rem}
+.card{border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin:12px 0;background:#fff}
+.card>:first-child{margin-top:0}.card>:last-child{margin-bottom:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0}
+.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.a{border-top:6px solid var(--mag)}.b{border-top:6px solid var(--green)}
+.tag{display:inline-block;font:700 .74rem Archivo,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:2px 10px;margin-bottom:6px}
+.tag.bad{background:var(--magp);color:var(--mag)}.tag.good{background:var(--greenp);color:var(--green)}.tag.info{background:var(--bluep);color:var(--blue)}
+.result{border-radius:12px;padding:10px 14px;margin-top:10px;font-weight:600}
+.result.bad{background:var(--magp)}.result.good{background:var(--greenp)}
+.call{border-radius:14px;padding:14px 18px;margin:16px 0;border:1px solid}
+.call .k{display:block;margin-bottom:4px}
+.call.retenir{background:var(--amberp);border-color:#EED79A}.call.retenir .k{color:var(--amber)}
+.call.piege{background:var(--magp);border-color:#F0BCD0}.call.piege .k{color:var(--mag)}
+.call.ok{background:var(--greenp);border-color:#B7DCC6}.call.ok .k{color:var(--green)}
+table{width:100%;border-collapse:separate;border-spacing:0;margin:12px 0;font-size:.97rem;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+th{background:var(--pale);text-align:left;padding:10px 12px;font-family:Archivo,system-ui,sans-serif;font-size:.86rem;color:var(--teal2);border-bottom:1px solid var(--line)}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+.wrap{overflow-x:auto}
+.say{font-style:italic;color:var(--teal2)}
+.kid{display:inline-block;background:var(--paper);border:1px solid var(--line);border-radius:14px 14px 14px 4px;padding:4px 12px;margin:3px 4px 3px 0;font-size:.95rem}
+/* Blocs MakeCode */
+.code{background:#F7F8FA;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0;font:600 .95rem/1.3 "Source Sans 3",system-ui,sans-serif}
+.blk{display:inline-block;color:#fff;border-radius:8px;padding:6px 12px;margin:3px 0}
+.ev{background:#1C5FA8}.lg{background:#007A7C}.in{background:#9B1C9B}.ac{background:#5D3FA8}.num{background:#fff;color:#14262B;border-radius:12px;padding:0 9px;margin:0 3px;font-weight:700}
+.num.bug{background:#FFE08A;outline:2px solid var(--mag)}
+.ind{margin-left:26px}
+/* Frise des temps */
+.phase{display:grid;grid-template-columns:120px 1fr;gap:16px;border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0}
+.phase .when{font-family:Archivo,system-ui,sans-serif;font-weight:800;color:var(--teal2)}
+.phase .when span{display:block;font-size:2rem;line-height:1}
+.phase .when small{display:block;font-weight:600;color:var(--muted);font-size:.85rem;margin-top:4px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.cols>div{background:var(--paper);border-radius:12px;padding:10px 14px}
+.cols h4{margin-top:0}
+.aides{counter-reset:a;list-style:none;padding:0;margin:6px 0}
+.aides li{counter-increment:a;position:relative;padding:6px 0 6px 40px}
+.aides li:before{content:counter(a);position:absolute;left:0;top:5px;width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.9rem}
+figure{margin:16px 0}
+figcaption{font-size:.9rem;color:var(--muted)}
+svg text{font-family:"Source Sans 3",system-ui,sans-serif}
+.trace{background:#FFFDF5;border:2px dashed #C9A94A;border-radius:14px;padding:16px 20px;margin:12px 0;font-size:1.02rem}
+.trace h4{color:var(--amber)}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.vs>div{border-radius:14px;padding:14px 16px}
+.vs .bad{background:#FFF6F6;border:1px solid #F2C4C4}.vs .good{background:var(--greenp);border:1px solid #B7DCC6}
+.dlg p{margin:.3em 0}.dlg b{font-family:Archivo,system-ui,sans-serif;font-size:.85rem}
+.foot{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:.88rem;color:var(--muted)}
+@media(max-width:700px){.phase{grid-template-columns:1fr}.vs{grid-template-columns:1fr}body{font-size:17px}}
+@media print{body{background:#fff}main{margin:0;padding:0;box-shadow:none}.nav,.toc{display:none}.phase,.card,table,.trace{break-inside:avoid}}
+</style>
+</head>
+<body>
+<main>
+<nav class="nav" aria-label="Navigation"><a href="../index.html">← Accueil formation</a><a href="diaporama.html">Voir le diaporama →</a><a href="#" onclick="window.print();return false">Imprimer / enregistrer en PDF</a></nav>
+
+<span class="k">Fiche de référence · Cycle 4 · 25 minutes de lecture</span>
+<h1>Enseignement explicite et démarche implicite en technologie</h1>
+<p class="lead">Ce que recouvre chacune des deux démarches, ce qui les distingue vraiment, et ce que cela change pour le savoir construit par les élèves comme pour la conduite de la classe. Le tout illustré sur une même séance : l’arrosage automatique d’une serre connectée.</p>
+<div class="quote">Ce qui n’est pas dit n’est pas appris par tous. L’enseignement explicite rend visibles le but, le raisonnement et le savoir, pour que la réussite ne dépende pas de ce que l’élève sait déjà deviner.</div>
+<ul class="toc" aria-label="Sommaire">
+<li><a href="#scene">0 · Une scène de classe</a></li><li><a href="#def">1 · Deux démarches</a></li><li><a href="#diff">2 · Les différences réelles</a></li>
+<li><a href="#impact">3 · Impact didactique et pédagogique</a></li><li><a href="#invest">4 · Et l’investigation ?</a></li><li><a href="#cas">5 · La serre, minute par minute</a></li>
+<li><a href="#tache">6 · Tâche ≠ apprentissage</a></li><li><a href="#posture">7 · Guider</a></li><li><a href="#grille">8 · Grille d’observation</a></li><li><a href="#atelier">9 · Atelier entre pairs</a></li></ul>
+
+<!-- 0 -->
+<h2 id="scene"><span class="n">0</span>Partons d’une scène de classe</h2>
+<p>Deux professeurs de 3e travaillent sur la même <strong>serre connectée</strong> du collège : une carte micro:bit, un capteur d’humidité du sol, une petite pompe. L’arrosage automatique a un défaut : <strong>la pompe arrose alors que la terre est déjà mouillée</strong>, et l’eau déborde du bac.</p>
+<div class="grid">
+<div class="card a"><span class="tag bad">Classe A · démarche implicite</span>
+<p>« Voici la serre. L’arrosage ne marche pas bien : réparez-le. Vous avez le matériel et 55 minutes. »</p>
+<p>Les groupes cherchent, s’entraident, copient le voisin. Le professeur circule et débloque. À la fin, <strong>22 pompes sur 28 fonctionnent</strong>. « Bravo à tous. »</p>
+<div class="result bad">Une semaine plus tard : « La pompe arrose alors que la terre est mouillée. Pourquoi ? » <br>→ 6 élèves sur 28 savent répondre, presque tous déjà à l’aise en programmation.</div></div>
+<div class="card b"><span class="tag good">Classe B · enseignement explicite</span>
+<p>Le professeur annonce le but et le critère, puis <strong>montre à voix haute</strong> comment il raisonne sur un autre cas (le ventilateur de la serre). La classe fait le premier pas ensemble, puis chaque groupe répare l’arrosage seul.</p>
+<p>Avant de conclure, il vérifie la compréhension de chacun, et la classe écrit ce qu’elle a appris.</p>
+<div class="result good">Une semaine plus tard, même question : <br>→ 22 élèves sur 28 savent répondre, dont la plupart des élèves en difficulté.</div></div>
+</div>
+<div class="call retenir"><span class="k">La question de cette fiche</span>Les deux classes ont <em>fait</em> à peu près la même chose. La différence tient à ce qui a été <strong>rendu visible</strong> : le but (comprendre comment une mesure commande une action, pas seulement « faire marcher la pompe »), la façon de raisonner (mesurer avant de modifier), et le savoir (le seuil). En classe A, chacun devait le deviner : ceux qui le devinent sont ceux qui le savaient déjà.</div>
+<p style="font-size:.9rem;color:var(--muted)">Les chiffres de cette scène sont un exemple construit pour la formation : ils illustrent un écart fréquemment décrit par la recherche, sans prétendre le mesurer.</p>
+
+<!-- 1 -->
+<h2 id="def"><span class="n">1</span>Deux démarches, deux définitions</h2>
+<div class="grid">
+<div class="card" style="border-top:6px solid var(--mag)"><span class="tag bad">La démarche implicite</span>
+<p><strong>Ce que c’est :</strong> on fait faire une activité en supposant que l’élève <strong>comprendra de lui-même</strong> ce qu’il doit apprendre. Le but, les critères, la façon de raisonner et le savoir visé ne sont pas dits : ils sont censés « se dégager » de l’action.</p>
+<p><strong>En technologie, ça ressemble à :</strong> « Réparez l’arrosage. » Personne ne dit que l’enjeu est le seuil, ni comment on cherche une panne, ni ce qu’on retiendra.</p>
+<p><strong>Ce que l’élève croit devoir faire :</strong> « faire marcher la pompe ». Il réussit… ou pas, sans savoir pourquoi.</p>
+<p><strong>Pourquoi c’est tentant :</strong> les élèves sont actifs, la classe est vivante, la réussite de la tâche est visible.</p></div>
+<div class="card" style="border-top:6px solid var(--green)"><span class="tag good">L’enseignement explicite</span>
+<p><strong>Ce que c’est :</strong> une démarche structurée où le professeur <strong>rend visible</strong> ce qu’il faut apprendre et <strong>comment s’y prendre</strong>, puis transfère peu à peu la responsabilité à l’élève.</p>
+<p><strong>Ses étapes :</strong> annoncer le but et le critère · <em>je fais</em> (le professeur montre en pensant à voix haute) · <em>nous faisons</em> (pratique guidée) · <em>vous faites</em> (pratique autonome) · vérifier la compréhension · faire nommer ce qu’on a appris · y revenir plus tard.</p>
+<p><strong>En technologie, ça ressemble à :</strong> le professeur montre comment il diagnostique le ventilateur de la serre, la classe fait le premier pas sur l’arrosage, puis chaque groupe termine seul.</p></div>
+</div>
+<div class="call piege"><span class="k">Trois contresens fréquents</span>
+<strong>« Explicite » ne veut pas dire « cours magistral ».</strong> Les élèves pratiquent beaucoup ; le professeur parle peu, mais au bon moment.<br>
+<strong>Une fiche pas à pas n’est pas de l’enseignement explicite.</strong> Elle rend explicites les <em>gestes</em> (« glissez le bloc si, réglez 300 »), mais laisse implicites le <em>raisonnement</em> et le <em>savoir</em> : c’est une démarche implicite déguisée.<br>
+<strong>« Explicite » ne veut pas dire « donner la réponse ».</strong> On montre une façon de raisonner sur un cas voisin, pas la solution du problème que les élèves vont résoudre.</div>
+
+<!-- 2 -->
+<h2 id="diff"><span class="n">2</span>Les différences réelles</h2>
+<p>Les deux démarches peuvent utiliser le même matériel, le même problème et la même durée. Ce qui change, c’est ce qui est dit, montré et vérifié.</p>
+<div class="wrap"><table>
+<thead><tr><th>Ce qui change</th><th>Démarche implicite</th><th>Enseignement explicite</th></tr></thead>
+<tbody>
+<tr><td><strong>Le but annoncé</strong></td><td>Une tâche : « réparez l’arrosage ».</td><td>Un apprentissage et sa preuve : « comprendre comment une mesure commande la pompe ; vous le prouverez dans trois situations ».</td></tr>
+<tr><td><strong>Le raisonnement</strong></td><td>Chaque élève invente sa méthode, souvent par essais au hasard.</td><td>Le professeur montre sa façon de raisonner (mesurer, comparer au seuil, décider, tester), puis la fait pratiquer.</td></tr>
+<tr><td><strong>Le savoir visé</strong></td><td>N’est jamais nommé ; on espère qu’il émerge.</td><td>Est nommé, écrit et relié à ce que les élèves ont fait.</td></tr>
+<tr><td><strong>La vérification</strong></td><td>À la fin, sur l’objet : « ta pompe marche ? ».</td><td>Pendant la séance, sur la compréhension de chacun : « si le capteur lit 450, la pompe s’allume-t-elle ? ».</td></tr>
+<tr><td><strong>L’erreur</strong></td><td>Corrigée au cas par cas, souvent par le professeur lui-même.</td><td>Repérée tôt (pratique guidée), discutée avec la classe, utilisée pour apprendre.</td></tr>
+<tr><td><strong>La trace écrite</strong></td><td>Absente, ou décrit la manipulation : « j’ai changé le nombre ».</td><td>Formule le savoir : mesure, seuil, condition, action.</td></tr>
+<tr><td><strong>Qui réussit</strong></td><td>Surtout les élèves qui savent déjà « lire » ce que l’école attend.</td><td>Davantage d’élèves, car les attentes sont dites à tous.</td></tr>
+</tbody></table></div>
+
+<!-- 3 -->
+<h2 id="impact"><span class="n">3</span>L’impact didactique et l’impact pédagogique</h2>
+<p><strong>Didactique :</strong> ce qui concerne le <em>savoir</em> (ce qui est appris, les obstacles, la façon dont la notion se construit). <strong>Pédagogique :</strong> ce qui concerne la <em>conduite de la classe</em> (la posture, le temps, l’hétérogénéité, l’engagement).</p>
+<div class="grid">
+<div class="card" style="border-left:6px solid var(--blue)"><span class="tag info">Impact didactique · sur le savoir</span>
+<ul>
+<li><strong>Le malentendu tâche / savoir.</strong> En implicite, l’élève croit que le but est que la pompe marche ; il peut réussir sans rien comprendre du seuil. En explicite, le but annoncé est la notion.</li>
+<li><strong>Le savoir reste attaché à l’objet.</strong> En implicite, l’élève retient « sur la serre, il fallait mettre 300 ». En explicite, la trace généralise : « tout système automatique compare une mesure à un seuil ».</li>
+<li><strong>Les obstacles sont repérés.</strong> En pratique guidée, le professeur voit tôt qui croit que « le capteur commande la pompe » ou qui inverse la condition, et le traite avec toute la classe.</li>
+<li><strong>Le transfert devient possible.</strong> Ce qui a été nommé peut être réutilisé sur la barrière du parking ; ce qui est resté implicite ne se transfère presque pas.</li>
+</ul></div>
+<div class="card" style="border-left:6px solid var(--amber)"><span class="tag" style="background:var(--amberp);color:var(--amber)">Impact pédagogique · sur la classe</span>
+<ul>
+<li><strong>Les inégalités.</strong> Ce qui n’est pas dit profite à ceux qui le savent déjà : la démarche implicite creuse les écarts ; l’enseignement explicite les réduit.</li>
+<li><strong>La charge mentale des débutants.</strong> Chercher sans méthode (capteur, programme, pompe, tuyaux à la fois) surcharge l’élève novice ; le modelage lui donne une méthode, il peut alors réfléchir au problème.</li>
+<li><strong>La posture du professeur.</strong> Il ne « dépanne » plus groupe par groupe : il montre, guide, puis observe et vérifie. Moins d’urgence, plus de régulation.</li>
+<li><strong>L’engagement.</strong> Savoir ce qu’on cherche et à quoi on reconnaît la réussite rassure et engage ; l’implicite décourage vite ceux qui ne savent pas par où commencer.</li>
+</ul></div>
+</div>
+<div class="call retenir"><span class="k">Ce que dit la recherche, en bref</span>
+Les « malentendus » scolaires : l’élève fait la tâche sans voir le savoir qu’elle vise, et ce sont d’abord les élèves les moins familiers des codes scolaires qui en pâtissent (É. Bautier et P. Rayou, <em>Les inégalités d’apprentissage</em>, 2009).<br>
+Pour des élèves débutants sur une notion, une découverte peu guidée est moins efficace qu’un guidage explicite (P. Kirschner, J. Sweller, R. Clark, 2006) ; à l’inverse, un guidage trop fort gêne les élèves déjà experts (« effet d’inversion de l’expertise ») : on réduit l’aide à mesure que l’élève progresse.<br>
+Les étapes de l’enseignement explicite sont résumées dans les « principes d’enseignement » de B. Rosenshine (2012) et, en français, dans les travaux de C. Gauthier, S. Bissonnette et M. Richard.</div>
+<div class="call ok"><span class="k">Et ses limites</span>L’enseignement explicite mal compris devient une suite de consignes à exécuter. Il ne remplace pas le problème : il <strong>outille</strong> l’élève pour le résoudre. Et pour un groupe déjà à l’aise, on raccourcit le modelage et on donne plus d’autonomie.</div>
+
+<!-- 4 -->
+<h2 id="invest"><span class="n">4</span>Et l’investigation, dans tout ça ?</h2>
+<p>La démarche d’investigation n’est pas la démarche implicite. On peut faire <strong>chercher</strong> les élèves sur un vrai problème <strong>dans un cadre explicite</strong> : le problème, les critères et la méthode sont clairs ; la cause et la solution restent à trouver ; le savoir est nommé à la fin. Ce qui pose problème, ce n’est pas de faire chercher, c’est de <strong>ne jamais dire</strong>.</p>
+<div class="wrap"><table>
+<thead><tr><th>On rend explicite</th><th>On laisse chercher</th><th>Dans l’exemple de la serre</th></tr></thead>
+<tbody>
+<tr><td>Le but et le critère de réussite</td><td>La cause de la panne</td><td>Explicite : « la pompe doit arroser la terre sèche et s’arrêter quand elle est humide ». À chercher : pourquoi elle arrose trop (le seuil est trop haut).</td></tr>
+<tr><td>La méthode (montrée sur un autre cas)</td><td>Son application au problème</td><td>Explicite : « on mesure avant de modifier » (montré sur le ventilateur). À chercher : quelles valeurs donne le capteur dans la terre.</td></tr>
+<tr><td>Les contraintes</td><td>La solution</td><td>Explicite : « on garde le capteur et la pompe ». À chercher : quel seuil choisir.</td></tr>
+<tr><td>Le savoir, à la fin</td><td>Le chemin pour y arriver</td><td>Explicite : « la condition compare la mesure à un seuil ». Le chemin : chaque groupe le trouve.</td></tr>
+</tbody></table></div>
+<div class="call piege"><span class="k">Deux dérives opposées</span><strong>Tout donner :</strong> « Mettez le seuil à 300. » L’élève recopie ; il n’a rien à comprendre. C’est explicite sur le geste, implicite sur le savoir.<br><strong>Tout laisser :</strong> « Réparez l’arrosage. » Sans but, sans méthode, sans trace : c’est la démarche implicite.</div>
+
+<!-- 5 -->
+<h2 id="cas"><span class="n">5</span>La serre, minute par minute (55 min)</h2>
+<div class="card" style="border-left:6px solid var(--teal)">
+<h4>Le matériel et la situation</h4>
+<p>Une carte micro:bit, un capteur d’humidité du sol branché sur la broche P0, une pompe à eau commandée par la broche P1 (par un relais). Le capteur donne une valeur de 0 (terre très sèche) à 1023 (capteur dans l’eau).</p>
+<p class="say">« La serre du collège arrose toute seule les semis pendant les vacances. Mais la pompe continue d’arroser alors que la terre est déjà mouillée : l’eau déborde. Avant les vacances, il faut la régler. Vous prouverez qu’elle fonctionne dans trois situations : terre sèche, terre arrosée, capteur sorti de la terre. »</p>
+<p><strong>Le programme fourni</strong> (il contient l’erreur, mais les élèves ne le savent pas) :</p>
+<div class="code" role="img" aria-label="Programme : toujours, si lire la broche analogique P0 inférieur à 700, alors écrire sur la broche P1 la valeur 1, sinon écrire sur la broche P1 la valeur 0">
+<div class="blk ev">toujours</div>
+<div class="ind"><span class="blk lg">si</span> <span class="blk in">lire la broche analogique P0</span> <b>&lt;</b> <span class="num bug">700</span> <span class="blk lg">alors</span></div>
+<div class="ind" style="margin-left:52px"><span class="blk ac">écrire sur la broche P1 la valeur 1</span> <span style="color:var(--muted)">(pompe en marche)</span></div>
+<div class="ind"><span class="blk lg">sinon</span></div>
+<div class="ind" style="margin-left:52px"><span class="blk ac">écrire sur la broche P1 la valeur 0</span> <span style="color:var(--muted)">(pompe arrêtée)</span></div>
+</div>
+<p style="font-size:.92rem;color:var(--muted)">Avec un seuil de 700, la pompe s’arrête seulement quand la terre est presque noyée : c’est l’erreur à découvrir. Les valeurs ci-dessous sont un exemple, relevées avec un capteur résistif ; elles varient selon le capteur et la terre.</p>
+</div>
+
+<p>Chaque étape montre ce que fait la classe B (<strong>enseignement explicite</strong>) et, en regard, ce qui se passerait au même moment en classe A (<strong>démarche implicite</strong>).</p>
+
+<div class="phase">
+<div class="when"><span>1</span>Annoncer<small>0 → 5 min</small></div>
+<div>
+<div class="cols">
+<div><h4>Le professeur</h4>Annonce le but et la preuve : <span class="say">« Aujourd’hui, vous allez comprendre comment une mesure commande une action. Vous aurez réussi si la pompe arrose la terre sèche, s’arrête dans la terre arrosée, et si vous savez expliquer pourquoi. »</span> Puis réactive un prérequis : <span class="say">« Un capteur, ça donne quoi ? »</span></div>
+<div><h4>Les élèves</h4>Répondent sur l’ardoise : « une valeur », « un nombre », « une mesure ». Le professeur voit d’un coup d’œil qui a le prérequis.</div>
+</div>
+<p class="say" style="margin-top:10px;color:var(--mag)">En démarche implicite : « Réparez l’arrosage. » Les élèves ne savent ni ce qu’on attend d’eux au-delà d’une pompe qui marche, ni ce qu’ils devront savoir ensuite.</p>
+</div></div>
+
+<div class="phase">
+<div class="when"><span>2</span>Je fais<small>5 → 13 min · modelage</small></div>
+<div>
+<p>Le professeur raisonne <strong>à voix haute</strong> sur un <strong>autre</strong> défaut de la même serre : le ventilateur se met en marche dès le matin.</p>
+<div class="trace" style="background:#F4F9FF;border-color:#9DBEDD"><h4 style="color:var(--blue)">🗣️ Ce que dit le professeur, devant le programme projeté</h4>
+<p>« Le ventilateur tourne alors qu’il fait frais. Mon premier réflexe serait de changer le ventilateur… mais <strong>je ne modifie rien avant d’avoir mesuré</strong>. »</p>
+<p>« J’affiche la température lue par la carte : <strong>21 °C</strong>. Dans le programme, le seuil est à <strong>18</strong>. 21 est plus grand que 18, donc le programme allume le ventilateur. <strong>Le ventilateur n’est pas en panne : c’est le seuil qui est mal choisi.</strong> »</p>
+<p>« Quelle température la serre doit-elle éviter ? Les semis souffrent au-dessus de 28 °C. Je mets 28, et je <strong>teste trois cas</strong> : 21 °C, rien ne doit se passer ; je chauffe le capteur avec la main jusqu’à 29 °C, le ventilateur doit tourner ; je le laisse refroidir, il doit s’arrêter. »</p></div>
+<p>Au tableau, la méthode reste affichée : <strong>observer → mesurer → comparer au seuil → décider → tester trois cas</strong>.</p>
+<p class="say" style="color:var(--mag)">En démarche implicite : pas de modelage. Chaque élève invente sa méthode ; beaucoup commencent par changer des fils ou des nombres au hasard.</p>
+</div></div>
+
+<div class="phase">
+<div class="when"><span>3</span>Nous faisons<small>13 → 25 min · pratique guidée</small></div>
+<div>
+<p>Toute la classe fait ensemble le <strong>premier pas</strong> sur l’arrosage : afficher la valeur du capteur. Chaque groupe plante le capteur dans deux pots préparés, relève les valeurs, et les annonce. Le professeur les note au tableau.</p>
+<figure>
+<svg viewBox="0 0 860 215" role="img" aria-labelledby="t1 d1" style="width:100%;height:auto">
+<title id="t1">Valeurs du capteur d’humidité et position du seuil</title>
+<desc id="d1">Sur une échelle de 0 à 1023 : terre sèche 150, terre légèrement humide 380, terre bien arrosée 560, capteur dans l’eau 820. Le seuil du programme est à 700 : la terre arrosée, à 560, est en dessous, donc la pompe continue d’arroser. Un seuil vers 300 sépare la terre sèche de la terre arrosée.</desc>
+<rect x="40" y="88" width="524" height="22" fill="#FFE08A"/><rect x="564" y="88" width="241" height="22" fill="#DCE7E6"/>
+<line x1="40" y1="110" x2="805" y2="110" stroke="#14262B" stroke-width="2"/>
+<g font-size="19" fill="#4C5E63" text-anchor="middle"><text x="40" y="134">0</text><text x="414" y="134">500</text><text x="805" y="134">1023</text></g>
+<text x="414" y="84" font-size="16" text-anchor="middle" fill="#7A5000" font-weight="700">pompe en marche (seuil 700)</text>
+<line x1="564" y1="60" x2="564" y2="150" stroke="#B3164F" stroke-width="3" stroke-dasharray="6 5"/>
+<text x="570" y="58" font-size="20" fill="#B3164F" font-weight="700">seuil du programme : 700</text>
+<line x1="264" y1="70" x2="264" y2="150" stroke="#1E6B4D" stroke-width="3"/>
+<text x="102" y="68" font-size="20" fill="#1E6B4D" font-weight="700">seuil corrigé ≈ 300</text>
+<g font-size="19" fill="#14262B">
+<circle cx="152" cy="99" r="7" fill="#245D8A"/><text x="152" y="172" text-anchor="middle">terre sèche : 150</text>
+<circle cx="324" cy="99" r="7" fill="#245D8A"/><text x="350" y="196" text-anchor="middle">légèrement humide : 380</text>
+<circle cx="459" cy="99" r="7" fill="#245D8A"/><text x="480" y="172" text-anchor="middle">terre arrosée : 560</text>
+<circle cx="653" cy="99" r="7" fill="#245D8A"/><text x="690" y="196" text-anchor="middle">dans l’eau : 820</text>
+</g>
+</svg>
+<figcaption>Valeurs relevées par la classe (exemple). La terre arrosée (560) reste sous le seuil de 700 : la pompe continue donc d’arroser. Le savoir se construit ici : <strong>ce n’est pas l’humidité qui commande la pompe, c’est la comparaison entre la mesure et le seuil.</strong></figcaption>
+</figure>
+<p>Le professeur <strong>vérifie et corrige tout de suite</strong>, par des questions à toute la classe : <span class="say">« Avec le seuil 700, que fait la pompe dans la terre arrosée ? »</span> Un groupe répond « elle s’arrête » : on regarde ensemble, 560 &lt; 700, elle tourne. L’erreur est traitée devant tous, avant le travail autonome.</p>
+<p class="say" style="color:var(--mag)">En démarche implicite : pas de temps guidé. Les erreurs de lecture (« plus c’est mouillé, plus le nombre est petit ») restent cachées jusqu’à la fin, ou jusqu’à l’évaluation.</p>
+</div></div>
+
+<div class="phase">
+<div class="when"><span>4</span>Vous faites<small>25 → 43 min · pratique autonome</small></div>
+<div>
+<p>Chaque groupe choisit un seuil, modifie le programme et <strong>prouve</strong> qu’il marche dans les trois situations. Le professeur circule, observe, et n’aide qu’au niveau nécessaire :</p>
+<ol class="aides">
+<li>Renvoyer à la méthode : <span class="say">« Qu’est-ce que j’ai fait en premier, pour le ventilateur ? »</span></li>
+<li>Une question ciblée : <span class="say">« Entre 150 et 560, où mettrais-tu la frontière ? »</span></li>
+<li>Un retour au modèle : refaire avec le groupe le test d’un des trois cas, pas à pas. Le groupe termine seul.</li>
+</ol>
+<p><strong>Les erreurs qu’on voit souvent</strong> : changer le seuil au hasard ; inverser la condition (la pompe arrose la terre mouillée et s’arrête dans la terre sèche) ; choisir un seuil trop proche de 560, la pompe s’allume et s’éteint sans arrêt.</p>
+<p class="say" style="color:var(--mag)">En démarche implicite : le professeur passe de groupe en groupe pour dépanner ; les groupes rapides finissent, les autres attendent son aide, et beaucoup « réussissent » en recopiant.</p>
+</div></div>
+
+<div class="phase">
+<div class="when"><span>5</span>Vérifier et nommer<small>43 → 51 min</small></div>
+<div>
+<p><strong>Vérifier la compréhension de chacun</strong>, sur l’ardoise, en 2 minutes : <span class="say">« Le capteur lit 450. Avec le seuil 300, la pompe tourne-t-elle ? Et avec le seuil 700 ? »</span> Réponse attendue : non avec 300 (450 n’est pas inférieur à 300), oui avec 700. Le professeur voit immédiatement qui a compris.</p>
+<p><strong>Confronter</strong> : trois groupes ont réussi avec 250, 300 et 500. <span class="say">« Lequel choisir pour les vacances ? »</span> Le groupe à 500 explique que sa pompe « hésite » quand l’eau se répand : 500 est trop proche de 560. On retient 300, à mi-chemin entre terre sèche et terre arrosée.</p>
+<div class="trace"><h4>✍️ Trace écrite construite avec la classe</h4>
+<p><strong>Ce que nous avons fait :</strong> nous avons mesuré l’humidité de la terre dans plusieurs situations, puis choisi et testé un seuil.</p>
+<p><strong>Ce que nous avons constaté :</strong> terre sèche ≈ 150, terre arrosée ≈ 560. Avec un seuil de 700, la pompe arrosait aussi la terre mouillée.</p>
+<p><strong>Ce que nous avons compris :</strong> un système automatique <em>compare une mesure à un seuil</em> ; la <em>condition</em> (si… alors… sinon) décide de l’<em>action</em> ; le seuil se choisit à partir de mesures réelles, entre les deux situations à distinguer, et pas trop près de l’une d’elles.</p>
+<p><strong>La méthode :</strong> observer → mesurer → comparer au seuil → décider → tester trois cas.</p></div>
+<p class="say" style="color:var(--mag)">En démarche implicite : « Bravo, 22 pompes marchent. » Pas de vérification individuelle, pas de trace du savoir : la séance s’arrête sur la réussite de l’objet.</p>
+</div></div>
+
+<div class="phase">
+<div class="when"><span>6</span>Transférer<small>51 → 55 min, et la séance suivante</small></div>
+<div>
+<p><span class="say">« La barrière du parking du collège s’ouvre alors qu’aucune voiture n’est là. Elle a un capteur de distance. Que vérifiez-vous en premier ? »</span></p>
+<div class="vs">
+<div class="bad"><span class="tag bad">Il a réussi la tâche</span><p>« Il faut changer le moteur de la barrière. »</p></div>
+<div class="good"><span class="tag good">Il a appris</span><p>« J’affiche la distance mesurée quand il n’y a pas de voiture, et je regarde le seuil dans le programme. »</p></div>
+</div>
+<p>La même question, posée au début de la séance suivante, sert de <strong>révision espacée</strong> : c’est la dernière étape de l’enseignement explicite.</p>
+</div></div>
+
+<!-- 6 -->
+<h2 id="tache"><span class="n">6</span>Tâche ≠ apprentissage : quatre exemples</h2>
+<p>La <strong>tâche</strong>, c’est ce que l’élève fait. L’<strong>apprentissage</strong>, c’est ce qu’il saura réutiliser sur un autre objet. La <strong>preuve</strong>, c’est ce qui permet de vérifier qu’il a appris, et pas seulement réussi. En démarche implicite, seule la tâche est visible ; l’enseignement explicite annonce les trois.</p>
+<div class="wrap"><table>
+<thead><tr><th>La tâche</th><th>L’apprentissage visé</th><th>La preuve qu’il a appris</th></tr></thead>
+<tbody>
+<tr><td>Régler l’arrosage de la serre</td><td>Une condition compare une mesure à un seuil pour décider d’une action</td><td>Il explique pourquoi la barrière s’ouvre sans voiture</td></tr>
+<tr><td>Programmer la barrière automatique</td><td>Un système enchaîne des états (fermée, ouverture, ouverte, fermeture) selon des événements</td><td>Il prévoit ce qui se passe si une voiture arrive pendant la fermeture</td></tr>
+<tr><td>Afficher les mesures de la serre sur un tableau de bord</td><td>Une donnée circule en plusieurs étapes, de la mesure à l’affichage</td><td>Face à un écran vide, il propose quelle étape tester en premier</td></tr>
+<tr><td>Faire suivre une ligne à un robot</td><td>Une boucle relit les capteurs en permanence et corrige la trajectoire</td><td>Il prédit ce que fait le robot si on retire la boucle « toujours »</td></tr>
+</tbody></table></div>
+<div class="call retenir"><span class="k">Le test simple</span>Si un élève peut réussir la tâche sans avoir compris, alors le savoir est resté implicite. Il faut l’annoncer, le montrer et le vérifier.</div>
+
+<!-- 7 -->
+<h2 id="posture"><span class="n">7</span>Guider sans donner la réponse</h2>
+<p>Même moment de la pratique autonome, deux réponses du professeur :</p>
+<div class="vs">
+<div class="bad dlg"><span class="tag bad">L’aide qui pense à la place</span>
+<p><b>Élève :</b> Monsieur, la pompe arrose encore.</p>
+<p><b>Prof :</b> Mets 300 à la place de 700.</p>
+<p><b>Élève :</b> Ah, ça marche ! Merci.</p>
+<p style="margin-top:8px">→ La pompe fonctionne. L’élève ne sait pas pourquoi 300, ni comment il l’aurait trouvé.</p></div>
+<div class="good dlg"><span class="tag good">L’aide qui renvoie à la méthode</span>
+<p><b>Élève :</b> Monsieur, la pompe arrose encore.</p>
+<p><b>Prof :</b> Pour le ventilateur, qu’est-ce que j’ai fait en premier ?</p>
+<p><b>Élève :</b> Vous avez mesuré… Ah, on n’a pas affiché la valeur.</p>
+<p><b>Prof :</b> Et dans la terre arrosée, tu lis combien ?</p>
+<p><b>Élève :</b> 560. Et le seuil est à 700… donc elle tourne !</p>
+<p style="margin-top:8px">→ L’élève réutilise la méthode montrée et trouve lui-même la cause.</p></div>
+</div>
+<h3>Des relances selon la situation</h3>
+<div class="wrap"><table>
+<thead><tr><th>Ce que vous voyez</th><th>Une relance possible</th></tr></thead>
+<tbody>
+<tr><td>Un groupe bloqué, qui attend</td><td>« Quelle est la première étape de la méthode au tableau ? »</td></tr>
+<tr><td>Un groupe qui change le seuil au hasard</td><td>« Avant de changer ce nombre : quelles valeurs donne le capteur dans la terre sèche et dans la terre arrosée ? »</td></tr>
+<tr><td>Un groupe qui change tout en même temps</td><td>« Si tu changes le seuil et la pompe à la fois, comment sauras-tu lequel a marché ? »</td></tr>
+<tr><td>Un groupe qui a trouvé</td><td>« Prouve-le avec les trois cas. Et si on plante le capteur plus profond ? »</td></tr>
+<tr><td>Deux groupes en désaccord</td><td>« Vos deux pompes marchent. Qu’est-ce qui permettrait de choisir pour les vacances ? »</td></tr>
+</tbody></table></div>
+
+<!-- 8 -->
+<h2 id="grille"><span class="n">8</span>Grille courte d’observation (visite-conseil)</h2>
+<p>Pour observer une séance, ou relire la sienne : ce qu’on voit quand l’apprentissage est rendu explicite, et le signal d’une démarche restée implicite.</p>
+<div class="wrap"><table>
+<thead><tr><th>Moment</th><th>Explicite : ça fonctionne quand… (exemple de la serre)</th><th>Signal d’une démarche implicite</th></tr></thead>
+<tbody>
+<tr><td><strong>Annonce</strong></td><td>Les élèves peuvent dire ce qu’ils vont apprendre et comment ils sauront qu’ils ont réussi.</td><td>Ils savent seulement qu’il faut « faire marcher la pompe ».</td></tr>
+<tr><td><strong>Modelage</strong></td><td>Le professeur raisonne à voix haute sur un cas voisin ; la méthode reste affichée.</td><td>Pas de modèle : chacun invente sa méthode, souvent au hasard.</td></tr>
+<tr><td><strong>Pratique guidée</strong></td><td>Le premier pas est fait ensemble ; les erreurs sont repérées et traitées tôt.</td><td>Les erreurs apparaissent seulement à la fin, ou à l’évaluation.</td></tr>
+<tr><td><strong>Pratique autonome</strong></td><td>Les groupes appliquent la méthode ; l’aide renvoie au modèle.</td><td>Le professeur dépanne groupe par groupe ; on recopie le voisin.</td></tr>
+<tr><td><strong>Vérification</strong></td><td>Chaque élève répond (ardoise) à une question qui exige d’avoir compris.</td><td>On vérifie seulement que l’objet fonctionne.</td></tr>
+<tr><td><strong>Trace et transfert</strong></td><td>La trace nomme le savoir ; un autre objet (la barrière) vérifie qu’il se réutilise.</td><td>La trace décrit la manipulation, ou il n’y en a pas.</td></tr>
+</tbody></table></div>
+
+<!-- 9 -->
+<h2 id="atelier"><span class="n">9</span>Atelier entre pairs (15 minutes)</h2>
+<p><strong>Objectif :</strong> transformer une consigne implicite en séance explicite, sans supprimer la recherche des élèves. Voici d’abord un exemple traité.</p>
+<div class="vs">
+<div class="bad"><span class="tag bad">Avant · consigne implicite</span>
+<p>« Voici la serre. L’arrosage ne marche pas bien : réparez-le. »</p></div>
+<div class="good"><span class="tag good">Après · séance explicite</span>
+<p><strong>But annoncé :</strong> comprendre comment une mesure commande une action ; preuve dans trois situations.<br>
+<strong>Je fais :</strong> le diagnostic du ventilateur, à voix haute.<br>
+<strong>Nous faisons :</strong> mesurer ensemble l’humidité de deux pots.<br>
+<strong>Vous faites :</strong> choisir le seuil et le prouver.<br>
+<strong>Vérifier :</strong> « le capteur lit 450, la pompe tourne-t-elle ? »<br>
+<strong>Trace :</strong> mesure, seuil, condition, action.</p></div>
+</div>
+<h3>À vous : choisissez une consigne et transformez-la</h3>
+<div class="grid g3">
+<div class="card"><h4>Barrière automatique</h4><p>« Programmez la barrière du parking pour qu’elle s’ouvre quand une voiture arrive. »</p></div>
+<div class="card"><h4>Tableau de bord de la serre</h4><p>« Envoyez les mesures de la serre sur ThingSpeak et affichez-les. »</p></div>
+<div class="card"><h4>Une consigne à vous</h4><p>Apportez une consigne que vous utilisez en classe : c’est le meilleur matériau.</p></div>
+</div>
+<div class="wrap"><table>
+<thead><tr><th>1 · But et preuve</th><th>2 · Je fais</th><th>3 · Nous faisons</th><th>4 · Vous faites</th><th>5 · Vérifier et nommer</th></tr></thead>
+<tbody><tr><td>Ce que l’élève apprend, et comment on le saura.</td><td>Sur quel cas voisin raisonnez-vous à voix haute ?</td><td>Quel premier pas faites-vous tous ensemble ?</td><td>Quel problème les élèves résolvent-ils seuls ?</td><td>Une question d’ardoise, puis la trace écrite.</td></tr></tbody></table></div>
+<p><strong>Pour l’échange (5 min) :</strong> qu’avons-nous rendu explicite ? Qu’avons-nous laissé chercher ? Un élève qui ne connaît pas les codes de l’école réussirait-il avec notre séance ?</p>
+
+<div class="quote">Faire chercher ne suffit pas : ce qui n’est pas dit n’est pas appris par tous. Enseigner explicitement, c’est rendre visibles le but, la méthode et le savoir, puis retirer l’aide à mesure que l’élève progresse.</div>
+
+<h2 style="font-size:1.2rem">Repères</h2>
+<p>Programme de technologie du cycle 4 (<a href="https://www.education.gouv.fr/bo/2024/Hebdo9/MENE2402802A" target="_blank" rel="noopener">Bulletin officiel n° 9 du 29 février 2024</a>). B. Rosenshine, « Principles of Instruction », <em>American Educator</em>, 2012. P. Kirschner, J. Sweller, R. Clark, « Why minimal guidance during instruction does not work », <em>Educational Psychologist</em>, 2006. É. Bautier, P. Rayou, <em>Les inégalités d’apprentissage</em>, PUF, 2009. C. Gauthier, S. Bissonnette, M. Richard, <em>Enseignement explicite et réussite des élèves</em>, 2013.</p>
+<p><a href="diaporama.html"><strong>Lancer le diaporama de formation →</strong></a></p>
+<p class="foot">Formation des professeurs de technologie · Réseau AEFE · Fehmi KLABI</p>
+</main>
+
+</body>
+</html>
