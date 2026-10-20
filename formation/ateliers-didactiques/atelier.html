@@ -1,4 +1,4 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Table — Ateliers didactiques</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css"><link rel="stylesheet" href="puzzle.css?v=20261011c"><link rel="stylesheet" href="contenus.css?v=20261011c">
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Table — Ateliers didactiques</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css"><link rel="stylesheet" href="puzzle.css?v=20261020a"><link rel="stylesheet" href="contenus.css?v=20261020a">
 <style>
 .topbar{position:sticky;top:0;z-index:50;background:rgba(244,247,247,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:0 -22px;padding:10px 22px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .topbar .who{font:700 16px Archivo,sans-serif;margin-right:8px}
@@ -14,7 +14,7 @@ ol.dq{margin:10px 0;padding-left:22px}ol.dq li{margin:6px 0}
 <body><nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a><a href="index.html">↑ Ateliers didactiques</a></nav>
 <main class="page" id="root"></main>
 <div class="full" id="resti" role="dialog" aria-modal="true" aria-label="Présentation de la table"><button class="btn secondary fs-close" type="button">✕ Fermer</button><div class="fs"></div></div>
-<script src="data.js?v=20261011c"></script><script src="contenus.js?v=20261011c"></script><script src="puzzle.js?v=20261011c"></script><script src="rotation.js?v=20261011c"></script>
+<script src="data.js?v=20261020a"></script><script src="contenus.js?v=20261020a"></script><script src="puzzle.js?v=20261020a"></script><script src="rotation.js?v=20261020a"></script>
 <script>
 (()=>{const P=window.PUZZLE,A=P.parcours,esc=PZ.esc,root=document.getElementById('root');
 const L=Object.fromEntries(P.lunettes.map(l=>[l.id,l]));let C=[];
@@ -28,7 +28,7 @@ function draw(){
   ['m1','m2','m3'].forEach((m,t)=>{if(!st[m]&&known(t))st[m]=known(t)});
   document.title=`Table ${k} · Atelier ${ai+1} · ${a.nom}`;
   root.innerHTML=`
-  <div class="topbar" style="--c:${a.couleur}"><span class="who">Table ${k} · Atelier ${ai+1}</span><button type="button" data-go="tour1">Tour 1 · Le défi</button><button type="button" data-go="tour2">Tour 2 · L’obstacle et l’aide</button><button type="button" data-go="tour3">Tour 3 · La trace</button><button type="button" data-go="bilan" style="--c:var(--mag)">Bilan</button></div>
+  <div class="topbar" style="--c:${a.couleur}"><span class="who">Table ${k} · Atelier ${ai+1}</span><button type="button" data-go="tour1">Tour 1 · Le défi</button><button type="button" data-go="tour2">Tour 2 · L’obstacle et l’aide</button><button type="button" data-go="tour3">Tour 3 · La question différée</button><button type="button" data-go="bilan" style="--c:var(--mag)">Bilan</button></div>
   <header class="hero" style="margin-top:16px"><div class="brand" style="color:${a.couleur}">Table ${k} · Atelier ${ai+1} · ${esc(a.nom)}</div><h1>« ${esc(a.accroche)} »</h1>
     <p class="lead">Cette table garde son atelier pendant les trois tours. Le gardien (n°1) reste ; à chaque tour, une nouvelle personne arrive et l’atelier avance d’une étape. Le dossier reprend ${C.length} parties du parcours complet.</p></header>
 
@@ -52,7 +52,7 @@ function draw(){
   </div></section>
 
   <section class="section"><div class="card tour" id="tour3" style="--c:var(--amber)">
-    <div class="mhead"><div><span class="kicker">Tour 3 · 20 min · une autre personne arrive</span><h2>La trace et la finalisation</h2></div><button class="timer" type="button" data-min="20"></button></div>
+    <div class="mhead"><div><span class="kicker">Tour 3 · 20 min · une autre personne arrive</span><h2>La question différée et la finalisation</h2></div><button class="timer" type="button" data-min="20"></button></div>
     <div class="f"><strong>Qui est à la table ?</strong><input type="text" data-k="m3" placeholder="Prénoms (marquez le nouvel arrivant)"></div>
     <div class="sub"><span class="t">5 min</span><h3>Le nouvel arrivant conteste</h3><p style="margin:4px 0">Il lit tout ce qui précède et dit ce qui ne le convainc pas : un obstacle mal identifié, une relance qui donne la réponse…</p><div class="f"><textarea data-k="objections" placeholder="Ses objections, et ce que vous corrigez"></textarea></div></div>
     <div class="sub"><span class="t">15 min</span><h3>Terminez l’atelier</h3>${lens(L.cogn,'cogn')}
@@ -62,7 +62,7 @@ function draw(){
   </div></section>
 
   <section class="section"><div class="card tour" id="bilan" style="--c:var(--mag)">
-    <div class="mhead"><div><span class="kicker">Bilan · 25 min</span><h2>Présentez votre atelier</h2></div><button class="timer" type="button" data-min="7"></button></div>
+    <div class="mhead"><div><span class="kicker">Bilan · 40 min</span><h2>Présentez votre atelier</h2></div><button class="timer" type="button" data-min="7"></button></div>
     <p>7 minutes pour relire et corriger, puis 2 à 3 minutes de présentation par table. L’écran reprend automatiquement le travail des trois tours.</p>
     <div class="actions"><button class="btn primary" type="button" id="open">Afficher notre présentation</button><button class="btn secondary" type="button" onclick="print()">Imprimer la fiche de la table</button><a class="btn secondary" href="${a.lien}">Parcours complet (8 h)</a></div>
   </div></section>`;

@@ -1,4 +1,4 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ateliers didactiques — 90 min</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css"><link rel="stylesheet" href="puzzle.css?v=20261011c">
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ateliers didactiques — 105 min</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css"><link rel="stylesheet" href="puzzle.css?v=20261020a">
 <style>
 .ateliers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .at{background:#fff;border:1px solid var(--line);border-top:8px solid var(--c);border-radius:16px;padding:18px;display:flex;flex-direction:column}
@@ -49,6 +49,29 @@
 .bnav{display:flex;gap:10px;align-items:center;justify-content:center;padding:10px;border-top:1px solid var(--line);background:#fff}
 .bnav button{border:0;border-radius:10px;padding:10px 16px;background:var(--pale);color:var(--teal2);font:700 18px Archivo,sans-serif;cursor:pointer}
 .bnav span{font:700 16px Archivo,sans-serif;color:var(--muted);min-width:70px;text-align:center}
+.bs .answer{margin:18px 0 0;background:#fff;color:var(--ink);border-left:8px solid #f2b705;border-radius:14px;padding:16px 22px;font:600 clamp(19px,1.9vw,26px)/1.4 "Source Sans 3",sans-serif}
+.bs .answer small,.bs .lq small{display:block;font:700 13px Archivo,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.bs .path{list-style:none;display:flex;gap:12px;flex-wrap:wrap;padding:0;margin:20px 0 0}.bs .path li{flex:1;min-width:200px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);border-radius:14px;padding:12px 16px;font:600 clamp(16px,1.5vw,20px) Archivo,sans-serif;color:#fff}.bs .path b{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#fff;color:var(--teal2);margin-right:10px}
+.bs-ex{border:3px dashed var(--c,var(--teal));border-radius:24px;padding:4vh 4vw;background:#fff}
+.bs-ex h2{font-size:clamp(30px,3.8vw,50px)}.bs-ex .consigne{color:var(--muted);font-style:italic;margin:-8px 0 16px}
+.exnote{display:block;width:100%;box-sizing:border-box;min-height:28vh;border:1.5px solid var(--line);border-radius:14px;padding:14px 18px;font:clamp(18px,1.7vw,24px)/1.45 "Source Sans 3",sans-serif;color:var(--ink);background:#fbfdfd;resize:vertical}
+.exnote.sm{min-height:90px;font-size:clamp(15px,1.3vw,18px);padding:8px 10px}.exnote:focus{outline:3px solid var(--c,var(--teal));outline-offset:2px}
+.exgrid td{padding:4px!important;background:transparent!important;border:0!important}
+.recall{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 14px}.recall span{background:var(--pale);color:var(--teal2);border-radius:999px;padding:8px 16px;font:600 clamp(16px,1.4vw,20px) "Source Sans 3",sans-serif}.recall em{color:var(--muted)}
+.pill{display:inline-grid;place-items:center;min-width:26px;height:26px;border-radius:7px;color:#fff;font:700 14px Archivo,sans-serif;vertical-align:2px;padding:0 4px}.pill.r{background:#0e6e6b}.pill.d{background:#245d8a}.pill.s{background:#9a6900}
+.ateliers3>div{border-top-color:var(--c)}.ateliers3 .pill{float:right}.ateliers3 .acc{font-style:italic;color:var(--muted);margin:-4px 0 8px}
+.bg3 .so{color:var(--teal2);font-weight:600}
+.lq{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 16px;margin:8px 0 0;font-weight:600}
+.lead2{margin:-10px 0 10px;color:var(--muted)}
+.todo{margin-top:18px;background:#fff;border:2px solid var(--c,var(--teal));border-radius:14px;padding:12px 18px}.todo b{display:block;font:700 14px Archivo,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--c,var(--teal));margin-bottom:2px}
+.ladder.mini span{font-size:15px;padding:8px}
+.bt.dt td{color:var(--ink)}.bt.dt tbody th{background:#fff}
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:18px 0 0}.gloss div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px}.gloss dt{font:700 17px Archivo,sans-serif;color:var(--mag)}.gloss dd{margin:2px 0 0;font-size:clamp(15px,1.3vw,18px)}
+.bnav .reset{background:#fff;color:#b3261e;border:1px solid #e1b7b3;font-size:14px}
+.bs:has(>.lq) h2{font-size:clamp(26px,3vw,40px);margin:8px 0 12px}.bs:has(>.lq) .bg2{gap:12px}.bs:has(>.lq) .bg2>div{padding:12px 16px}.bs:has(>.lq) h3{font-size:19px;margin-bottom:4px}.bs:has(>.lq) .bg2 p{font-size:clamp(15px,1.3vw,18px);line-height:1.4;margin:0}.bs:has(>.lq) .ladder{margin-bottom:12px}.bs:has(>.lq) .ladder span{padding:8px;font-size:16px}.bs:has(>.lq) .todo{margin-top:12px;padding:8px 16px}.bs:has(>.lq) .lead2{margin:-4px 0 8px}
+.bt td{font-size:clamp(15px,1.35vw,19px)!important;line-height:1.35!important}
+.pv{display:none}
+@media print{body.bprint>*:not(.bshow){display:none!important}body.bprint .bshow{display:block!important;position:static}body.bprint .bnav{display:none}body.bprint .bstage{padding:0;overflow:visible}body.bprint .bs{display:block!important;break-after:page;margin:0 0 10mm}body.bprint .bs-title{-webkit-print-color-adjust:exact;print-color-adjust:exact}body.bprint .exnote{display:none}body.bprint .pv{display:block;white-space:pre-wrap;border:1px solid #cfdcdc;border-radius:10px;padding:8px 12px;min-height:30mm;font-size:13pt}body.bprint .pv.sm{min-height:12mm}@page{size:A4 landscape;margin:12mm}}
 @media(max-width:860px){.bg2,.bg3{grid-template-columns:1fr}.bt,.bt tbody,.bt tr,.bt td,.bt th{display:block}.bt thead{display:none}}
 
 @media(max-width:860px){.ateliers,.tours,.moves,.orga-in{grid-template-columns:1fr}.rot{font-size:13px}}
@@ -57,7 +80,7 @@
 <body><nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a></nav>
 <main class="page">
 <header class="hero">
-  <div class="brand">Ateliers didactiques · 90 min</div>
+  <div class="brand">Ateliers didactiques · 105 min</div>
   <h1>Trois ateliers, une question</h1>
   <p class="lead">Chaque table travaille <strong>un seul atelier</strong> pendant une heure. Toutes les 20 minutes, une personne change de table : elle apporte un regard neuf, et l’atelier avance d’une étape.</p>
   <div class="hook"><small>Notre fil rouge</small><span id="fil"></span></div>
@@ -65,19 +88,19 @@
 <nav class="nav"><a href="../index.html">← Espace formation</a><a href="#ateliers-entree">Les trois ateliers ↓</a><a href="#formateur">Organisation des tables ↓</a><a class="btn primary" href="#bilan-formateur">Bilan du formateur ↓</a></nav>
 
 <section class="section"><div class="card mission">
-  <span class="kicker">Le déroulé · 90 min</span>
+  <span class="kicker">Le déroulé · 105 min</span>
   <div class="timeline" aria-label="Déroulé">
     <div class="t-all" style="flex:5">Accueil<span>5 min</span></div>
     <div class="t-exp" style="flex:20">Tour 1<span>Le défi</span></div>
     <div class="t-mix" style="flex:20">Tour 2<span>L’obstacle et l’aide</span></div>
-    <div class="t-exp" style="flex:20">Tour 3<span>La trace</span></div>
-    <div class="t-ple" style="flex:25">Bilan<span>Chaque table présente</span></div>
+    <div class="t-exp" style="flex:20">Tour 3<span>La question différée</span></div>
+    <div class="t-ple" style="flex:40">Bilan<span>Tables, puis échange avec le formateur</span></div>
   </div>
   <div class="tours">
     <div><em>Tour 1 · 20 min</em><b>Le défi</b>La table vit un défi exigeant, comme des élèves.</div>
     <div><em>Tour 2 · 20 min</em><b>L’obstacle et l’aide</b>Un nouvel arrivant tente le défi à froid. La table analyse où l’on bloque et prépare la relance.</div>
-    <div><em>Tour 3 · 20 min</em><b>La trace</b>Un autre arrivant conteste le travail. La table écrit la trace et son message.</div>
-    <a href="#bilan-formateur" style="display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:inherit;text-decoration:none"><em>Bilan · 25 min</em><b>Présenter</b>Chaque table présente depuis sa page (bouton « Bilan »), puis le formateur projette son bilan ↓</a>
+    <div><em>Tour 3 · 20 min</em><b>La question différée</b>Un autre arrivant conteste le travail. La table écrit la question différée et son message pour le bilan.</div>
+    <a href="#bilan-formateur" style="display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:inherit;text-decoration:none"><em>Bilan · 40 min</em><b>Présenter et échanger</b>Chaque table présente depuis sa page (bouton « Bilan »), puis le formateur projette son bilan, ponctué de sept échanges avec la salle ↓</a>
   </div>
   <p style="margin:12px 0 0">Dans chaque table, la personne <strong>n°1</strong> est le gardien : elle ne bouge jamais. La <strong>n°2</strong> part avant le tour 2, la <strong>n°3</strong> avant le tour 3. Les autres restent. L’ordinateur reste à la table.</p>
 </div></section>
@@ -105,16 +128,16 @@
 <section class="section" id="bilan-formateur"><div class="card science">
   <span class="kicker">Fin de séance</span>
   <h2>Bilan du formateur</h2>
-  <p>Didactique, pédagogie, sciences cognitives : ce que les trois ateliers ont permis d’apprendre. À projeter après les présentations des tables. Cliquez pour l’ouvrir en grand.</p>
+  <p>Environ 25 minutes, après les présentations des tables : 9 diapositives de contenu et 7 diapositives « Échange », chacune avec une question à la salle et une zone où vous notez les réponses en direct. Les réponses restent enregistrées dans ce navigateur ; celles de l’échange B réapparaissent à l’échange G. Le bouton « Imprimer / PDF » sort tout le bilan, réponses comprises.</p>
   <div class="actions"><button class="btn primary" type="button" id="bfShow">▶ Projeter le bilan du formateur</button><span style="color:var(--muted)">Flèches ← → pour avancer, Échap pour fermer.</span></div>
 </div></section>
 
 <p style="color:var(--muted);font-size:15px">Pour aller plus loin, chaque atelier existe en parcours complet de 8 h : <span id="complets"></span>.</p>
 <div class="footer">Fehmi KLABI · Formation enseignants de technologie</div>
 </main>
-<div class="bshow" id="bshow" role="dialog" aria-modal="true" aria-label="Bilan du formateur"><div class="bstage" id="bstage"></div><div class="bnav"><button type="button" id="bPrev" aria-label="Précédent">←</button><span id="bCount"></span><button type="button" id="bNext" aria-label="Suivant">→</button><button type="button" id="bClose">✕ Fermer</button></div></div>
+<div class="bshow" id="bshow" role="dialog" aria-modal="true" aria-label="Bilan du formateur"><div class="bstage" id="bstage"></div><div class="bnav"><button type="button" id="bPrev" aria-label="Précédent">←</button><span id="bCount"></span><button type="button" id="bNext" aria-label="Suivant">→</button><button type="button" id="bPrint">Imprimer / PDF</button><button type="button" class="reset" id="bReset">Effacer les réponses</button><button type="button" id="bClose">✕ Fermer</button></div></div>
 <div class="full" id="proj" role="dialog" aria-modal="true" aria-label="Rotation"><button class="btn secondary fs-close" type="button">✕ Fermer</button><div class="fs"></div></div>
-<script src="data.js?v=20261011c"></script><script src="puzzle.js?v=20261011c"></script><script src="rotation.js?v=20261011c"></script><script src="bilan-formateur.js?v=20261011c"></script>
+<script src="data.js?v=20261020a"></script><script src="puzzle.js?v=20261020a"></script><script src="rotation.js?v=20261020a"></script><script src="bilan-formateur.js?v=20261020a"></script>
 <script>
 (()=>{const P=window.PUZZLE,A=P.parcours,esc=PZ.esc;
 document.getElementById('fil').textContent=P.filRouge;
@@ -144,13 +167,22 @@ draw();
 
 /* Bilan du formateur : en accès libre, projeté en diaporama */
 (()=>{const H=window.BILAN_HTML;if(!H)return;const $=id=>document.getElementById(id);let slides=[],i=0;
-function unlock(openAfter){if(!slides.length){$('bstage').innerHTML=H;slides=[...$('bstage').querySelectorAll('.bs')]}if(openAfter)openShow();return true}
+const KX='bilan_formateur_echanges_v1';let ex={};try{ex=JSON.parse(localStorage.getItem(KX)||'{}')}catch(e){}
+const saveEx=()=>{try{localStorage.setItem(KX,JSON.stringify(ex))}catch(e){}};
+const esc2=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function syncPv(t){const pv=t.nextElementSibling;if(pv&&pv.classList.contains('pv'))pv.textContent=t.value}
+function recall(){$('bstage').querySelectorAll('[data-recall]').forEach(r=>{const lines=(ex[r.dataset.recall]||'').split('\n').map(x=>x.trim()).filter(Boolean);r.innerHTML=lines.length?lines.map(l=>'<span>'+esc2(l)+'</span>').join(''):'<em>Aucune réponse notée à l’échange B.</em>'})}
+function unlock(openAfter){if(!slides.length){$('bstage').innerHTML=H;slides=[...$('bstage').querySelectorAll('.bs')];
+$('bstage').querySelectorAll('textarea[data-ex]').forEach(t=>{const pv=document.createElement('div');pv.className='pv'+(t.classList.contains('sm')?' sm':'');t.after(pv);t.value=ex[t.dataset.ex]||'';syncPv(t);t.addEventListener('input',()=>{ex[t.dataset.ex]=t.value;syncPv(t);saveEx();recall()})});recall()}
+if(openAfter)openShow();return true}
 const show=n=>{i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('on',k===i));$('bCount').textContent=(i+1)+' / '+slides.length;$('bstage').scrollTop=0};
 function openShow(){$('bshow').classList.add('open');show(0);try{const r=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();r&&r.catch&&r.catch(()=>{})}catch(e){}}
 $('bfShow').onclick=()=>unlock(true);
 const close=()=>{$('bshow').classList.remove('open');try{document.fullscreenElement&&document.exitFullscreen()}catch(e){}};
+$('bPrint').onclick=()=>{document.body.classList.add('bprint');window.print()};addEventListener('afterprint',()=>document.body.classList.remove('bprint'));
+$('bReset').onclick=()=>{if(!confirm('Effacer toutes les réponses notées pendant les échanges ?'))return;ex={};try{localStorage.removeItem(KX)}catch(e){}$('bstage').querySelectorAll('textarea[data-ex]').forEach(t=>{t.value='';syncPv(t)});recall()};
 $('bPrev').onclick=()=>show(i-1);$('bNext').onclick=()=>show(i+1);$('bClose').onclick=close;
-document.addEventListener('keydown',e=>{if(!$('bshow').classList.contains('open'))return;if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();show(i+1)}else if(e.key==='ArrowLeft'||e.key==='PageUp'){show(i-1)}else if(e.key==='Escape'){close()}});
+document.addEventListener('keydown',e=>{if(!$('bshow').classList.contains('open'))return;if(e.target.closest&&e.target.closest('textarea,input')){if(e.key==='Escape')e.target.blur();return}if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();show(i+1)}else if(e.key==='ArrowLeft'||e.key==='PageUp'){show(i-1)}else if(e.key==='Escape'){close()}});
 })();
 </script>
 <script src="../common-tools.js"></script>

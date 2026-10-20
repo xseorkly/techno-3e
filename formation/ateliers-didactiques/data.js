@@ -1,13 +1,13 @@
-/* « Ateliers didactiques » (rotation 3 × 20 min + bilan) — données communes (90 min).
+/* « Ateliers didactiques » (rotation 3 × 20 min + bilan) — données communes (105 min).
    Une seule source pour la page d'accueil, la page atelier et le bilan. */
 window.PUZZLE = {
   filRouge: 'À quel moment la difficulté aide-t-elle à apprendre, et à quel moment empêche-t-elle de penser ?',
   lunettes: [
     {id: 'dida', nom: 'Didactique', couleur: '#245d8a', pale: '#eaf3fb', titre: 'L’obstacle',
-     question: 'Où avez-vous bloqué, hésité ou dit faux ? Quelle conception, chez vous, se cachait derrière ? Sous quelle forme exacte apparaîtrait-elle chez un élève de 3e ?'},
+     question: 'Où un élève de 3e bloquerait-il, hésiterait-il ou dirait-il faux ? Quelle représentation se cacherait derrière, et sous quelle forme exacte apparaîtrait-elle ?'},
     {id: 'peda', nom: 'Pédagogique', couleur: '#c2185b', pale: '#fbe8f0', titre: 'L’aide minimale',
      question: 'Écrivez mot pour mot la relance que vous diriez à un élève bloqué au même endroit, sans donner la réponse. Puis l’aide de second niveau si la première échoue.'},
-    {id: 'cogn', nom: 'Cognitive', couleur: '#9a6900', pale: '#fff5d9', titre: 'La trace',
+    {id: 'cogn', nom: 'Cognitive', couleur: '#9a6900', pale: '#fff5d9', titre: 'La question différée',
      question: 'Écrivez la question que vous poseriez quinze jours plus tard, sur une situation nouvelle, pour distinguer « il a compris » de « il a réussi ». Quelle réponse le prouverait ?'}
   ],
   parcours: [
@@ -51,17 +51,17 @@ window.PUZZLE = {
       ],
       revelation: 'Sur les 10 000 situations, 9 900 sont « pas d’incendie » et 100 sont « incendie ».<br><strong>A</strong> répond <strong>toujours</strong> « pas d’incendie ».<br><strong>B</strong> détecte 90 des 100 incendies, et donne 495 fausses alertes sur les 9 900 situations sans incendie.',
       aides: [
-        'Relance : « 374 : la carte mesure-t-elle une température, une tension ou autre chose ? »',
-        'Indice : « Combien de volts vaut un pas du convertisseur ? Et combien de degrés ? »',
-        'Relance : « Que se passe-t-il à chaque nouvelle mesure quand la valeur oscille autour de 28 °C ? »',
+        'Relance : « 99 % de réussite… 99 % de quoi, exactement ? »',
+        'Indice : « Sur les 10 000 situations, combien contiennent vraiment un incendie ? »',
+        'Relance : « Un détecteur qui ne sonnerait jamais : quel score de réussite obtiendrait-il ? »',
         'Indice : « Sur les 100 incendies, combien le système en a-t-il détectés ? »'
       ],
       attendu: 'A : 9 900 / 10 000 = 99 % de réussite, 0 incendie détecté sur 100. B : 90 + 9 405 = 9 495 bonnes réponses, soit environ 95 % ; 90 % des incendies détectés ; 90 alertes vraies sur 585, soit environ 15 % : environ 85 % des alertes sont fausses. Une fausse alerte coûte une évacuation, une alerte manquée peut coûter des vies : le critère dépend du coût de chaque erreur, et ce choix est humain (collège, fabricant), pas « décidé » par le programme. Relever le seuil réduit les fausses alertes mais fait manquer des incendies.',
       eclairage: {titre: 'Intuition trompeuse et difficulté productive',
         texte: 'Un chiffre convaincant déclenche une réponse rapide et intuitive. Le piège n’est formateur que si l’élève peut en sortir : le but est clair, les prérequis sont réactivés, une aide minimale est disponible, et une mise en commun suit. Sinon, la difficulté fait seulement échouer.',
         retenir: 'Une difficulté fait apprendre si l’élève peut la surmonter avec une aide ajustée (difficultés désirables, Bjork ; échec productif, Kapur).'},
-      pourEleves: 'Passer de la grandeur à la donnée ; seuil et instabilité d’une commande ; un score ne suffit pas sans ses conditions ; c’est un humain qui fixe les critères de décision.',
-      pourVous: 'Quantification, hystérésis et filtrage comparés, matrice de confusion, séparation entraînement / test : culture de l’enseignant, à doser pour la classe.'
+      pourEleves: 'Un score global ne suffit pas : il faut savoir quelle erreur est commise ; une fausse alerte et une alerte manquée n’ont pas le même coût ; c’est un humain qui fixe les critères de décision.',
+      pourVous: 'Matrice de confusion, taux de détection (sensibilité), part des alertes justes (valeur prédictive), seuil de décision et coût des erreurs : culture de l’enseignant, à doser pour la classe.'
     },
     {
       id: 'visseuse-sysml', lettre: 'S', nom: 'Analyse fonctionnelle & SysML', couleur: '#9a6900',
