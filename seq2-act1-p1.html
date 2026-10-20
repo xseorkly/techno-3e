@@ -175,6 +175,33 @@ textarea::placeholder{color:#9FB0B3}
 .cadre16{position:relative;padding-top:56.25%;border-radius:8px;overflow:hidden;background:#000}
 .cadre16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
+/* Entraînement NOLEJ : niveaux cliquables */
+.niveaux{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:12px;margin:18px 0 0}
+.niveau{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;cursor:pointer;font:inherit;
+  color:var(--encre);background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:14px 15px;
+  transition:border-color .15s,box-shadow .15s,transform .15s}
+.niveau:hover{border-color:var(--teal);box-shadow:0 2px 12px rgba(14,110,107,.13);transform:translateY(-1px)}
+.niveau:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.niveau .num{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--teal-pale);color:var(--teal);
+  font-family:"Archivo",sans-serif;font-weight:700;font-size:15px;display:grid;place-items:center}
+.niveau .nt{display:block;font-family:"Archivo",sans-serif;font-weight:600;font-size:15.5px;margin:2px 0 3px}
+.niveau .ns{display:block;color:var(--doux);font-size:14px;line-height:1.4}
+.niveau.fait .num{background:var(--teal);color:#fff}
+.niveau[aria-expanded="true"]{border-color:var(--teal);background:var(--teal-pale)}
+.scene{margin-top:18px}
+.scene .entete{position:static;background:none;border:0;padding:0;display:flex;gap:12px;align-items:baseline;
+  justify-content:space-between;flex-wrap:wrap;margin:0 0 10px}
+.scene .entete p{margin:0;font-family:"Archivo",sans-serif;font-weight:600;font-size:16px;color:var(--teal)}
+.scene .fermer{font-family:"Archivo",sans-serif;font-size:14.5px;background:none;border:0;padding:0;cursor:pointer;
+  color:var(--doux);text-decoration:underline}
+.scene .fermer:hover{color:var(--magenta)}
+.scene .aide{color:var(--doux);font-size:14px;margin:10px 0 0}
+.cadrenolej{border:1px solid var(--trait);border-radius:10px;overflow:hidden;background:var(--carte);
+  height:min(78vh,760px);min-height:460px}
+.cadrenolej iframe{display:block;width:100%;height:100%;border:0}
+@media(max-width:640px){.cadrenolej{height:min(82vh,620px);min-height:420px}}
+@media print{#entrainement .niveaux,#entrainement .scene{display:none}}
+
 /* Outils intégrés */
 .outil{background:var(--carte);border:1px solid var(--teal);border-radius:var(--r);
   padding:16px 18px;margin:14px 0}
@@ -524,6 +551,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
       <a href="#construire"><b>12′</b>Construire</a>
       <a href="#approfondir"><b>10′</b>Approfondir</a>
       <a href="#transition"><b>6′</b>Transition</a>
+      <a href="#entrainement"><b>bonus</b>Entraînement</a>
     </nav>
   </header>
 
@@ -759,6 +787,42 @@ document.getElementById("navfiches").addEventListener("change", function(){
     </div>
   </article>
 
+  <article class="bloc" id="entrainement">
+    <div class="marge"><span class="duree">bonus</span></div>
+    <div class="corps">
+      <h2>6. Entraînement</h2>
+      <p>Cinq petites activités pour vérifier que le rôle de chaque matériel est bien retenu. <strong>Clique sur un niveau : il s’ouvre directement juste en dessous.</strong> Tu peux les refaire autant de fois que tu veux, rien n’est noté et rien n’est envoyé au professeur.</p>
+      <div class="niveaux" id="niveaux">
+        <button class="niveau" type="button" aria-expanded="false" data-nolej="OTg5Mzc0MTctMGU5Yy00MjFjLWFlNzItMjVjOGNkZTYzYjAzOjg4NDlmOTQ2LTU5MDMtNDczMy1hYzM2LWQ3ZmNmY2RkZWE2MTowN2MyMjA5ZC1iNzRiLTQ0ZGMtYTdhMi0wNGI0NGM5MGE0YjM=" data-titre="Vidéo interactive">
+          <span class="num">1</span>
+          <span><span class="nt">Vidéo interactive</span><span class="ns">Je regarde la vidéo : des questions apparaissent au fil des images, j’y réponds directement.</span></span>
+        </button>
+        <button class="niveau" type="button" aria-expanded="false" data-nolej="ZDc2OWI4ZGItMzYwOC00NmYzLThjMDktODNkOTU0NTQzNWUxOjE0N2VlOGYzLWIxNGMtNDA2OS04MTcwLTBmYWM5MzkzZjQ4MjowN2MyMjA5ZC1iNzRiLTQ0ZGMtYTdhMi0wNGI0NGM5MGE0YjM=" data-titre="Flashcards">
+          <span class="num">2</span>
+          <span><span class="nt">Flashcards</span><span class="ns">Le nom d’un côté, le rôle de l’autre : je retourne la carte pour vérifier si j’avais juste.</span></span>
+        </button>
+        <button class="niveau" type="button" aria-expanded="false" data-nolej="NzdjNzBmZTMtZjhiMy00N2IwLWIzNWItZmExNTdiYmIxZmY0OmEwZmQ4YjZjLTBiOTQtNDU5Ni05MGVmLWRhYTk1OTdhMGMwNzowN2MyMjA5ZC1iNzRiLTQ0ZGMtYTdhMi0wNGI0NGM5MGE0YjM=" data-titre="Glisser-déposer">
+          <span class="num">3</span>
+          <span><span class="nt">Glisser-déposer</span><span class="ns">Je place chaque mot au bon endroit : hub, switch, routeur, point d’accès, carte réseau…</span></span>
+        </button>
+        <button class="niveau" type="button" aria-expanded="false" data-nolej="ZGRhZTJmYzEtMmY5Ny00YjAwLWI5ZTktMjRlZmZhNGMxMDkxOmEwOWQzOTJiLWM5NTktNDNlMy1hYzgxLTAzMGRiNmMzZWM2ZTowN2MyMjA5ZC1iNzRiLTQ0ZGMtYTdhMi0wNGI0NGM5MGE0YjM=" data-titre="Trouver la définition">
+          <span class="num">4</span>
+          <span><span class="nt">Trouver la définition</span><span class="ns">Un mot du vocabulaire réseau, plusieurs définitions : je choisis la bonne.</span></span>
+        </button>
+        <button class="niveau" type="button" aria-expanded="false" data-nolej="NDllOTBiMDktODAyZi00NDZhLTlhNGMtMzc1MDRkMjA4OGM1OmY0MDRiM2Q3LWRhMWItNGU0My1hNTVjLWI1MWIzMDNiNjFkNjowN2MyMjA5ZC1iNzRiLTQ0ZGMtYTdhMi0wNGI0NGM5MGE0YjM=" data-titre="Quiz d’entraînement">
+          <span class="num">5</span>
+          <span><span class="nt">Quiz d’entraînement</span><span class="ns">Le bilan : quelques questions sur toute l’activité, avec la réponse juste à la fin.</span></span>
+        </button>
+      </div>
+      <div class="scene" id="scene-nolej" hidden>
+        <div class="entete"><p id="scene-titre"></p><button class="fermer" type="button" id="scene-fermer">Fermer l’activité</button></div>
+        <div class="cadrenolej" id="scene-cadre"></div>
+        <p class="aide">Activités créées avec NOLEJ. Si l’activité ne s’affiche pas, <a id="scene-lien" href="https://api.fr.nolej.education/" target="_blank" rel="noopener">ouvre-la dans un nouvel onglet</a>.</p>
+      </div>
+      <input type="hidden" id="nolej-vus">
+    </div>
+  </article>
+
   <section class="corrbloc" id="correction">
     <h2>Correction expliquée et bilan de l’activité</h2>
     <p class="intro">Entre le mot de passe donné par le professeur pour afficher les réponses, les explications supplémentaires, les schémas à retenir et le bilan de l’activité.</p>
@@ -788,7 +852,7 @@ function controles(){return tous("input[id],textarea[id],select[id]")}
 function sauver(){var d={};controles().forEach(function(c){if(c.type==="checkbox"||c.type==="radio")d[c.id]=!!c.checked;else d[c.id]=c.value});try{localStorage.setItem(CLE,JSON.stringify(d))}catch(e){}}
 function restaurer(){try{var d=JSON.parse(localStorage.getItem(CLE)||"{}");controles().forEach(function(c){if(!(c.id in d))return;if(c.type==="checkbox"||c.type==="radio")c.checked=!!d[c.id];else c.value=d[c.id]});if(Object.keys(d).length)etat.textContent="Réponses retrouvées sur cet appareil."}catch(e){}}
 function grandir(z){if(z&&z.tagName==="TEXTAREA"){z.style.height="auto";z.style.height=(z.scrollHeight+4)+"px"}}
-function majProgression(){var ids=["situation","observer","comprendre","construire","approfondir","transition"],liens=tous("#chrono a");ids.forEach(function(id,i){var b=el(id);if(!b||!liens[i])return;var rempli=(id==="situation")||tous("#"+id+" textarea,#"+id+" input:not([type=radio]):not([type=checkbox]),#"+id+" select").some(function(c){return String(c.value||"").trim()})||tous("#"+id+" input:checked").length>0;b.classList.toggle("fait",rempli);liens[i].classList.toggle("fait",rempli)})}
+function majProgression(){var ids=["situation","observer","comprendre","construire","approfondir","transition","entrainement"],liens=tous("#chrono a");ids.forEach(function(id,i){var b=el(id);if(!b||!liens[i])return;var rempli=(id==="situation")||tous("#"+id+" textarea,#"+id+" input:not([type=radio]):not([type=checkbox]),#"+id+" select").some(function(c){return String(c.value||"").trim()})||tous("#"+id+" input:checked").length>0;b.classList.toggle("fait",rempli);liens[i].classList.toggle("fait",rempli)})}
 document.addEventListener("input",function(e){if(e.target.matches("textarea"))grandir(e.target);if(e.target.matches("input,textarea,select")){e.target.classList.remove("manque");sauver();majProgression();etat.textContent="Réponses enregistrées sur cet appareil."}});
 document.addEventListener("change",function(e){if(e.target.matches("input,select")){sauver();majProgression()}});
 el("effacer").addEventListener("click",function(){if(!confirm("Effacer toutes tes réponses sur cette fiche ?"))return;controles().forEach(function(c){if(champsId.indexOf(c.id)>=0)return;if(c.type==="checkbox"||c.type==="radio")c.checked=false;else c.value=""});try{localStorage.removeItem(CLE)}catch(e){}tous("textarea").forEach(grandir);majProgression();etat.textContent="Réponses effacées."});
@@ -798,6 +862,36 @@ restaurer();tous("textarea").forEach(grandir);majProgression();
 /* Vidéos */
 function brancherVideos(zone){(zone||document).querySelectorAll(".video").forEach(function(v){var b=v.querySelector(".vlire");if(!b||b.dataset.ready)return;b.dataset.ready="1";b.addEventListener("click",function(){var c=document.createElement("div");c.className="cadre16";var f=document.createElement("iframe");f.src=v.dataset.src;f.allowFullscreen=true;f.title=v.querySelector(".vt").textContent;c.appendChild(f);v.querySelector(".actions").replaceWith(c)})})}
 brancherVideos(document);
+
+/* Entraînement NOLEJ : un niveau cliqué s'ouvre tout de suite sous la grille */
+(function(){
+  var grille=el("niveaux"), scene=el("scene-nolej"), cadre=el("scene-cadre"),
+      stitre=el("scene-titre"), slien=el("scene-lien"), memo=el("nolej-vus");
+  if(!grille||!scene||!cadre||!memo)return;
+  var BASE="https://api.fr.nolej.education/shared/activities/";
+  var niveaux=tous("#niveaux .niveau");
+  function vus(){return String(memo.value||"").split(",").filter(Boolean)}
+  function marquer(i){var v=vus();if(v.indexOf(String(i))<0){v.push(String(i));memo.value=v.join(",");sauver();majProgression()}}
+  function peindre(){var v=vus();niveaux.forEach(function(b,i){b.classList.toggle("fait",v.indexOf(String(i))>=0)})}
+  function fermer(){cadre.innerHTML="";scene.hidden=true;niveaux.forEach(function(b){b.setAttribute("aria-expanded","false")})}
+  function ouvrir(b,i){
+    var u=BASE+b.dataset.nolej;
+    niveaux.forEach(function(x){x.setAttribute("aria-expanded",x===b?"true":"false")});
+    stitre.textContent="Niveau "+(i+1)+" · "+b.dataset.titre;
+    if(slien)slien.href=u;
+    cadre.innerHTML="";
+    var f=document.createElement("iframe");
+    f.src=u;f.title=b.dataset.titre;f.loading="lazy";
+    f.setAttribute("allow","autoplay; camera *; microphone *; clipboard-write *; fullscreen *");
+    f.setAttribute("allowfullscreen","");
+    cadre.appendChild(f);
+    scene.hidden=false;marquer(i);peindre();
+    scene.scrollIntoView({behavior:"smooth",block:"start"});
+  }
+  niveaux.forEach(function(b,i){b.addEventListener("click",function(){ouvrir(b,i)})});
+  el("scene-fermer").addEventListener("click",function(){fermer();grille.scrollIntoView({behavior:"smooth",block:"center"})});
+  peindre();
+})();
 
 function val(id){var c=el(id);return c?String(c.value||"").trim():""}
 function qcm(name){var c=document.querySelector('input[name="'+name+'"]:checked');if(!c)return "";var lab=c.closest("label");return lab?lab.textContent.trim():c.value}
