@@ -43,6 +43,7 @@
 .evalbloc h2{font-family:"Archivo",system-ui,sans-serif;font-weight:600;font-size:19px;margin:0 0 6px}
 .evalbloc p.intro{color:var(--doux,#5A6C71);font-size:15px;margin:0 0 14px}
 .evalbloc .saisie{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.evalbloc .saisie[hidden]{display:none}
 .evalbloc input[type=password]{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--trait,#D2DEDE);border-radius:8px;background:#fff;min-width:190px}
 .evalbloc button{font-family:"Archivo",system-ui,sans-serif;font-weight:600;font-size:15px;background:#6B4FA8;color:#fff;border:0;border-radius:8px;padding:11px 20px;cursor:pointer}
 .evalbloc button.secondaire{background:transparent;color:#6B4FA8;border:1px solid #6B4FA8}
