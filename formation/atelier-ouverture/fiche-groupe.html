@@ -9,7 +9,13 @@
 .cadre{border:1.5px solid #9fb3b3;border-radius:12px;padding:12px 14px;break-inside:avoid;display:flex;flex-direction:column}
 .cadre h3{margin:0 0 2px;font-size:17px}.cadre h3 span{color:var(--teal)}
 .cadre .hint{font-size:13.5px;color:var(--muted);margin:0 0 8px}
-.lines{flex:1;min-height:150px;background:repeating-linear-gradient(#fff 0 27px,#e3eaea 27px 28px)}
+.lines{display:block;width:100%;box-sizing:border-box;flex:1;min-height:150px;border:0;resize:vertical;padding:0 4px;margin:0;font:15px/28px "Source Sans 3",Arial,sans-serif;color:#17302f;background:repeating-linear-gradient(transparent 0 27px,#e3eaea 27px 28px);background-attachment:local;overflow:hidden}
+.lines:focus,.fin:focus{outline:2px solid #0f6b66;outline-offset:2px;border-radius:4px}
+.fin{border:0;border-bottom:1.5px solid #9fb3b3;background:transparent;font:15px "Source Sans 3",Arial,sans-serif;color:#17302f;padding:2px 4px;min-width:0}
+.field{display:flex;gap:6px;align-items:baseline}.field .fin{flex:1;border:0}
+.tri>div{display:flex;flex-direction:column}.tri .lines{min-height:120px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 14px}.saved{font-size:13px;color:var(--muted)}
+.btn.ghost{background:#fff;color:#b3261e;border:1px solid #e1b7b3}
 .lab{font:700 12px Archivo,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--teal2);margin:6px 0 2px}
 .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;flex:1}
 .tri>div{border:1px dashed #b8c8c8;border-radius:8px;padding:6px 8px;min-height:150px;font-size:13px}
@@ -17,39 +23,56 @@
 .wide{grid-column:1/-1}
 .phr p{margin:6px 0 0;font-size:14.5px}.phr .lines{min-height:56px}
 @media(max-width:800px){.cadres,.head{grid-template-columns:1fr}.tri{grid-template-columns:1fr}}
-@media print{@page{size:A3 landscape;margin:10mm}.sheet{border:0;padding:0}.cadres{grid-template-columns:1fr 1fr 1fr}.wide{grid-column:auto}.lines{min-height:120px}}
+@media print{.tools{display:none!important}.lines{resize:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}@page{size:A3 landscape;margin:10mm}.sheet{border:0;padding:0}.cadres{grid-template-columns:1fr 1fr 1fr}.wide{grid-column:auto}.lines{min-height:120px}}
 </style></head><body>
 <nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a><a href="index.html">↑ Retour à l'atelier</a></nav>
 <main class="page">
-<header class="hero noprint"><span class="kicker">Ressource · à imprimer</span><h1>Fiche groupe</h1><p class="lead">Une fiche par groupe, idéalement en A3 paysage. Chaque cadre correspond à une étape de l'atelier. Conservez-la : elle sera reprise en fin de formation.</p></header>
-<nav class="nav noprint"><a class="btn alt" href="index.html">← Atelier</a><button class="btn" onclick="window.print()">Imprimer la fiche</button></nav>
+<header class="hero noprint"><span class="kicker">Ressource · à imprimer</span><h1>Fiche groupe</h1><p class="lead">Une fiche par groupe, idéalement en A3 paysage. Chaque cadre correspond à une étape de l'atelier. Vous pouvez la remplir directement ici : la saisie est gardée dans ce navigateur. Enregistrez-la en JSON pour la reprendre plus tard, ou imprimez-la en PDF. Elle sera reprise en fin de formation.</p></header>
+<nav class="nav noprint"><a class="btn alt" href="index.html">← Atelier</a></nav>
+<div class="tools noprint"><button class="btn" type="button" onclick="window.print()">Imprimer / PDF</button><button class="btn alt" type="button" id="exportJson">Enregistrer (JSON)</button><button class="btn alt" type="button" id="importBtn">Ouvrir un JSON</button><input type="file" id="importFile" accept=".json,application/json" hidden><button class="btn ghost" type="button" id="reset">Effacer la fiche</button><span class="saved" id="saved" aria-live="polite"></span></div>
 
 <div class="sheet">
-<div class="head"><div class="field">Objet technique du groupe :</div><div class="field">Groupe :</div><div class="field">Date :</div></div>
+<div class="head"><label class="field">Objet technique du groupe :<input class="fin" data-f="objet" type="text"></label><label class="field">Groupe :<input class="fin" data-f="groupe" type="text"></label><label class="field">Date :<input class="fin" data-f="date" type="text"></label></div>
 <div class="cadres">
 
 <div class="cadre"><h3><span>1 ·</span> Notre séquence de départ</h3><p class="hint">Sans le programme. Une problématique, 3 ou 4 séances en titres.</p>
-<div class="lab">Problématique</div><div class="lines" style="min-height:56px"></div>
-<div class="lab">Séances</div><div class="lines"></div></div>
+<div class="lab">Problématique</div><textarea class="lines" data-f="problematique" style="min-height:56px"></textarea>
+<div class="lab">Séances</div><textarea class="lines" data-f="seances"></textarea></div>
 
 <div class="cadre"><h3><span>2 ·</span> Notre séquence sur les repères</h3><p class="hint">Codes des repères réellement visés, par thème.</p>
-<div class="tri"><div><b>OST</b></div><div><b>SFC</b></div><div><b>CCRI</b></div></div>
-<div class="lab">Nombre de thèmes associés : ……&nbsp;&nbsp;·&nbsp;&nbsp;3 cartes vides qui nous interrogent (et que l'objet permettrait de travailler ?) :</div><div class="lines" style="min-height:56px"></div>
-<div class="lab">Post-it mis de côté et pourquoi</div><div class="lines" style="min-height:84px"></div></div>
+<div class="tri"><div><b>OST</b><textarea class="lines" data-f="ost" aria-label="Repères OST"></textarea></div><div><b>SFC</b><textarea class="lines" data-f="sfc" aria-label="Repères SFC"></textarea></div><div><b>CCRI</b><textarea class="lines" data-f="ccri" aria-label="Repères CCRI"></textarea></div></div>
+<div class="lab">Nombre de thèmes associés : <input class="fin" data-f="nbThemes" type="text" style="width:4em;font-weight:400">&nbsp;&nbsp;·&nbsp;&nbsp;3 cartes vides qui nous interrogent (et que l'objet permettrait de travailler ?) :</div><textarea class="lines" data-f="cartesVides" style="min-height:56px"></textarea>
+<div class="lab">Post-it mis de côté et pourquoi</div><textarea class="lines" data-f="postit" style="min-height:84px"></textarea></div>
 
-<div class="cadre wide"><h3><span>3 ·</span> Une même tâche en 5e, 4e et 3e</h3><p class="hint">Repère de 3e choisi : ……………… Pour chaque niveau : ce qui est fourni, ce que l'élève produit, le critère de réussite.</p>
-<div class="tri"><div><b>5e</b></div><div><b>4e</b></div><div><b>3e</b></div></div>
-<div class="lab">Axes de progressivité utilisés</div><div class="lines" style="min-height:56px"></div></div>
+<div class="cadre wide"><h3><span>3 ·</span> Une même tâche en 5e, 4e et 3e</h3><p class="hint">Repère de 3e choisi : <input class="fin" data-f="repere" type="text" style="width:12em"> Pour chaque niveau : ce qui est fourni, ce que l'élève produit, le critère de réussite.</p>
+<div class="tri"><div><b>5e</b><textarea class="lines" data-f="n5" aria-label="Tâche en 5e"></textarea></div><div><b>4e</b><textarea class="lines" data-f="n4" aria-label="Tâche en 4e"></textarea></div><div><b>3e</b><textarea class="lines" data-f="n3" aria-label="Tâche en 3e"></textarea></div></div>
+<div class="lab">Axes de progressivité utilisés</div><textarea class="lines" data-f="axes" style="min-height:56px"></textarea></div>
 
 <div class="cadre wide"><h3><span>4 ·</span> Notre séquence version 3e</h3><p class="hint">Problématique ancrée dans un enjeu · au moins 2 thèmes · démarche · temps de structuration · trace évaluable (repère + critère observable).</p>
-<div class="lines" style="min-height:210px"></div></div>
+<textarea class="lines" data-f="sequence" style="min-height:210px"></textarea></div>
 
 <div class="cadre phr wide"><h3><span>5 ·</span> Besoins et bilan</h3><p class="hint">Besoins du groupe (2 ou 3), puis trois phrases individuelles.</p>
-<div class="lab">Nos besoins de formation</div><div class="lines" style="min-height:84px"></div>
-<p><strong>Ce qui m'a surpris dans le programme de 3e…</strong></p><div class="lines"></div>
-<p><strong>Un contenu que je maîtrise peu aujourd'hui…</strong></p><div class="lines"></div>
-<p><strong>Une pratique que je vais faire évoluer…</strong></p><div class="lines"></div></div>
+<div class="lab">Nos besoins de formation</div><textarea class="lines" data-f="besoins" style="min-height:84px"></textarea>
+<p><strong>Ce qui m'a surpris dans le programme de 3e…</strong></p><textarea class="lines" data-f="surpris"></textarea>
+<p><strong>Un contenu que je maîtrise peu aujourd'hui…</strong></p><textarea class="lines" data-f="maitrise"></textarea>
+<p><strong>Une pratique que je vais faire évoluer…</strong></p><textarea class="lines" data-f="pratique"></textarea></div>
 
 </div></div>
 <div class="footer noprint">Atelier d'ouverture · fiche groupe.</div>
-</main></body></html>
+</main>
+<script>
+(()=>{const K='fiche_groupe_ouverture_v1',$=id=>document.getElementById(id),F=[...document.querySelectorAll('[data-f]')];
+let st={};try{st=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
+const grow=t=>{if(t.tagName!=='TEXTAREA')return;t.style.height='auto';t.style.height=t.scrollHeight+'px'};
+const fill=()=>F.forEach(el=>{el.value=st[el.dataset.f]||'';grow(el)});
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(st));$('saved').textContent='Enregistré dans ce navigateur à '+new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}catch(e){$('saved').textContent='Sauvegarde automatique impossible : pensez à enregistrer en JSON'}};
+F.forEach(el=>el.addEventListener('input',()=>{st[el.dataset.f]=el.value;grow(el);save()}));
+fill();addEventListener('resize',()=>F.forEach(grow));addEventListener('beforeprint',()=>F.forEach(grow));
+const slug=v=>(v||'').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'').toLowerCase();
+$('exportJson').onclick=()=>{const data={atelier:"Atelier d'ouverture — fiche groupe",version:1,exporte:new Date().toISOString(),champs:st};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download='fiche-groupe'+(st.groupe?'-'+slug(st.groupe):'')+(st.objet?'-'+slug(st.objet):'')+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+$('importBtn').onclick=()=>$('importFile').click();
+$('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);const c=d&&typeof d.champs==='object'?d.champs:d;if(!c||typeof c!=='object')throw 0;if(Object.values(st).some(v=>v)&&!confirm('Remplacer le contenu actuel de la fiche par celui du fichier ?'))return;st={};F.forEach(el=>{const v=c[el.dataset.f];if(typeof v==='string')st[el.dataset.f]=v});fill();save()}catch(err){alert("Ce fichier n'est pas une fiche groupe valide.")}e.target.value=''};r.readAsText(f)};
+$('reset').onclick=()=>{if(!confirm('Effacer tout le contenu de la fiche ?'))return;st={};try{localStorage.removeItem(K)}catch(e){}fill();$('saved').textContent='Fiche effacée'};
+})();
+</script>
+</body></html>
