@@ -175,6 +175,35 @@ textarea::placeholder{color:#9FB0B3}
 .cadre16{position:relative;padding-top:56.25%;border-radius:8px;overflow:hidden;background:#000}
 .cadre16 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
+/* Entraînement : livre interactif, niveaux cliquables */
+.niveaux{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:12px;margin:18px 0 0}
+.niveau{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;cursor:pointer;font:inherit;
+  color:var(--encre);background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:14px 15px;
+  transition:border-color .15s,box-shadow .15s,transform .15s}
+.niveau:hover{border-color:var(--teal);box-shadow:0 2px 12px rgba(14,110,107,.13);transform:translateY(-1px)}
+.niveau:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.niveau .num{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--teal-pale);color:var(--teal);
+  font-family:"Archivo",sans-serif;font-weight:700;font-size:15px;display:grid;place-items:center}
+.niveau .nt{display:block;font-family:"Archivo",sans-serif;font-weight:600;font-size:15.5px;margin:2px 0 3px}
+.niveau .ns{display:block;color:var(--doux);font-size:14px;line-height:1.4}
+.niveau.fait .num{background:var(--teal);color:#fff}
+.niveau[aria-expanded="true"]{border-color:var(--teal);background:var(--teal-pale)}
+.scene{margin-top:18px}
+.scene .entete{display:flex;gap:12px;align-items:baseline;justify-content:space-between;flex-wrap:wrap;margin:0 0 10px}
+.scene .entete p{margin:0;font-family:"Archivo",sans-serif;font-weight:600;font-size:16px;color:var(--teal)}
+.scene .fermer{font-family:"Archivo",sans-serif;font-size:14.5px;background:none;border:0;padding:0;cursor:pointer;
+  color:var(--doux);text-decoration:underline}
+.scene .fermer:hover{color:var(--magenta)}
+.scene .aide{color:var(--doux);font-size:14px;margin:10px 0 0}
+.cadrelivre{position:relative;border:1px solid var(--trait);border-radius:10px;overflow:hidden;
+  background:var(--carte);height:min(78vh,760px);min-height:460px}
+.cadrelivre iframe{display:block;width:100%;height:100%;border:0}
+.cadrelivre .attente{position:absolute;inset:0;display:grid;place-items:center;background:var(--carte);
+  color:var(--doux);font-size:15px;text-align:center;padding:20px}
+.cadrelivre .attente[hidden]{display:none}
+@media(max-width:640px){.cadrelivre{height:min(82vh,620px);min-height:420px}}
+@media print{#entrainement .niveaux,#entrainement .scene{display:none}}
+
 /* Outils intégrés */
 .outil{background:var(--carte);border:1px solid var(--teal);border-radius:var(--r);
   padding:16px 18px;margin:14px 0}
@@ -412,7 +441,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <h1 class="titre">Les chemins de l'information — partie 2 : le réseau postal de la classe</h1>
     <p class="sous">Adresse IP · table de routage · débit · activité sans ordinateur · 55 min</p>
     <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
-      <a href="#mission"><b>5′</b>Mission</a><a href="#ip"><b>12′</b>Adresse IP</a><a href="#routage"><b>15′</b>Routage</a><a href="#debit"><b>10′</b>Débit</a><a href="#defi"><b>8′</b>Défi</a><a href="#bilan"><b>5′</b>Bilan</a>
+      <a href="#mission"><b>5′</b>Mission</a><a href="#ip"><b>12′</b>Adresse IP</a><a href="#routage"><b>15′</b>Routage</a><a href="#debit"><b>10′</b>Débit</a><a href="#defi"><b>8′</b>Défi</a><a href="#bilan"><b>5′</b>Bilan</a><a href="#entrainement"><b>bonus</b>Entraînement</a>
     </nav>
   </header>
 
@@ -527,6 +556,35 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="qcm" data-qcm="auto" data-titre="Auto-évaluation"><label><input type="radio" name="auto" id="auto1" value="1"><span class="lt">1</span><span>J’ai encore besoin d’aide pour distinguer les trois notions.</span></label><label><input type="radio" name="auto" id="auto2" value="2"><span class="lt">2</span><span>Je reconnais les notions mais j’hésite pour les expliquer.</span></label><label><input type="radio" name="auto" id="auto3" value="3"><span class="lt">3</span><span>Je sais expliquer les trois notions avec les analogies.</span></label><label><input type="radio" name="auto" id="auto4" value="4"><span class="lt">4</span><span>Je sais expliquer le voyage d’un paquet et repérer un goulot d’étranglement.</span></label></div>
   </div></article>
 
+  <article class="bloc" id="entrainement"><div class="marge"><span class="duree">bonus</span></div><div class="corps">
+    <h2>6 — Entraînement</h2>
+    <p>Quatre exercices pour réviser l’adresse IP, la table de routage et le débit. <strong>Clique sur un niveau : il s’ouvre directement juste en dessous.</strong> Tu peux les refaire autant de fois que tu veux, rien n’est noté et rien n’est envoyé au professeur.</p>
+    <div class="niveaux" id="niveaux">
+        <button class="niveau" type="button" aria-expanded="false" data-chapitre="Vidéo interactive" data-titre="Vidéo interactive">
+          <span class="num">1</span>
+          <span><span class="nt">Vidéo interactive</span><span class="ns">Je regarde et je réponds aux questions qui s’affichent pendant la vidéo.</span></span>
+        </button>
+        <button class="niveau" type="button" aria-expanded="false" data-chapitre="Flashcards" data-titre="Flashcards">
+          <span class="num">2</span>
+          <span><span class="nt">Flashcards</span><span class="ns">Le mot d’un côté, l’explication de l’autre : je retourne la carte pour vérifier.</span></span>
+        </button>
+        <button class="niveau" type="button" aria-expanded="false" data-chapitre="Glisser - déposer" data-titre="Glisser-déposer">
+          <span class="num">3</span>
+          <span><span class="nt">Glisser-déposer</span><span class="ns">Je place chaque mot au bon endroit : réseau, passerelle, routage, interface…</span></span>
+        </button>
+        <button class="niveau" type="button" aria-expanded="false" data-chapitre="Quiz d'entraînement" data-titre="Quiz d’entraînement">
+          <span class="num">4</span>
+          <span><span class="nt">Quiz d’entraînement</span><span class="ns">Quelques questions sur l’adresse IP, la table de routage et le débit.</span></span>
+        </button>
+    </div>
+    <div class="scene" id="scene-livre" hidden>
+      <div class="entete"><p id="scene-titre"></p><button class="fermer" type="button" id="scene-fermer">Fermer l’entraînement</button></div>
+      <div class="cadrelivre" id="scene-cadre"><p class="attente" id="scene-attente">Chargement de l’entraînement…</p></div>
+      <p class="aide">Livre interactif créé avec NOLEJ. Tu peux aussi changer d’exercice avec le sommaire à gauche du livre, ou <a href="outils/livre-routage-ip.html" target="_blank" rel="noopener">l’ouvrir en plein écran dans un nouvel onglet</a>.</p>
+    </div>
+    <input type="hidden" id="livre-vus">
+  </div></article>
+
   <section class="corrbloc" id="correction"><h2>Correction expliquée et bilan de l’activité</h2><p class="intro">Entre le mot de passe donné par le professeur pour afficher les réponses, les explications et ce qu’il faut retenir.</p><div class="saisie"><input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction" autocomplete="off" spellcheck="false"><button type="button" id="corr-btn">Afficher</button></div><p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p><div class="corr" id="corr-contenu" hidden></div></section>
 <div id="alerte" class="alerte" hidden></div>
 </main>
@@ -544,7 +602,7 @@ function controles(){return tous("input[id],textarea[id],select[id]")}
 function sauver(){var d={};controles().forEach(function(c){if(c.type==="checkbox"||c.type==="radio"){if(c.checked)d[c.id]=true}else d[c.id]=c.value});try{localStorage.setItem(CLE,JSON.stringify(d))}catch(e){}}
 function restaurer(){try{var b=localStorage.getItem(CLE);if(!b)return;var d=JSON.parse(b);controles().forEach(function(c){if(!(c.id in d))return;if(c.type==="checkbox"||c.type==="radio")c.checked=true;else c.value=d[c.id]});etat.textContent="Réponses retrouvées sur cet appareil."}catch(e){}}
 function grandir(z){z.style.height="auto";z.style.height=(z.scrollHeight+4)+"px"}
-function maj(){var ids=["mission","ip","routage","debit","defi","bilan"],ln=tous("#chrono a");ids.forEach(function(id,i){var b=el(id);if(!b||!ln[i])return;var ok=id==="mission"||tous("#"+id+" textarea,#"+id+" input:not([type=radio]),#"+id+" select").some(function(c){return String(c.value||"").trim()})||tous("#"+id+" input:checked").length>0;b.classList.toggle("fait",ok);ln[i].classList.toggle("fait",ok)})}
+function maj(){var ids=["mission","ip","routage","debit","defi","bilan","entrainement"],ln=tous("#chrono a");ids.forEach(function(id,i){var b=el(id);if(!b||!ln[i])return;var ok=id==="mission"||tous("#"+id+" textarea,#"+id+" input:not([type=radio]),#"+id+" select").some(function(c){return String(c.value||"").trim()})||tous("#"+id+" input:checked").length>0;b.classList.toggle("fait",ok);ln[i].classList.toggle("fait",ok)})}
 document.addEventListener("input",function(e){if(e.target.matches("textarea"))grandir(e.target);if(e.target.matches("input,textarea,select")){sauver();maj();etat.textContent="Réponses enregistrées sur cet appareil."}});document.addEventListener("change",function(e){if(e.target.matches("input,select")){sauver();maj()}});
 el("effacer").addEventListener("click",function(){if(!confirm("Effacer toutes tes réponses sur cette fiche ?"))return;controles().forEach(function(c){if(["nom","prenom","classe","groupe","role","date"].indexOf(c.id)>=0)return;if(c.type==="radio"||c.type==="checkbox")c.checked=false;else c.value=""});try{localStorage.removeItem(CLE)}catch(e){};tous("textarea").forEach(grandir);maj();etat.textContent="Réponses effacées."});
 (function(){var d=new Date(),p=function(n){return String(n).padStart(2,"0")};if(!el("date").value)el("date").value=d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())})();restaurer();tous("textarea").forEach(grandir);maj();
@@ -552,6 +610,72 @@ function lire(){var d={id:{},rep:{}};["nom","prenom","classe","groupe","role","d
 function propre(t){return String(t||"").replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/→/g,"->").replace(/ /g," ")}
 function construirePDF(d){if(!window.jspdf||!window.jspdf.jsPDF){window.print();return null}var doc=new window.jspdf.jsPDF({unit:"mm",format:"a4"}),M=14,y=18,B=278,page=1;function chk(h){if(y+h>B){doc.addPage();page++;y=18}}function title(t){chk(14);doc.setFont("helvetica","bold");doc.setFontSize(13);doc.setTextColor(14,110,107);doc.text(propre(t),M,y);y+=7;doc.setDrawColor(210,222,222);doc.line(M,y,196,y);y+=5}function line(k,v){v=propre(v||"(non répondu)");var txt=doc.splitTextToSize(k+" : "+v,178);chk(txt.length*5+3);doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(20,38,43);doc.text(txt,M,y);y+=txt.length*5+2}doc.setFont("helvetica","bold");doc.setFontSize(16);doc.setTextColor(20,38,43);doc.text("Technologie 3e - Séquence 2 - Activité 1 - Partie 2",M,y);y+=8;doc.setFontSize(11);doc.setTextColor(90,108,113);doc.text("Le réseau postal de la classe : adresse IP, routage et débit",M,y);y+=10;line("Élève",(d.id.nom+" "+d.id.prenom).trim());line("Classe",d.id.classe);line("Groupe / rôle",(d.id.groupe||"")+" "+(d.id.role||""));title("1. Adresse IP");line("Destinataire de 192.168.2.7",d.rep["ip-dest"]);line("Même réseau ?",d.rep["ip-meme"]);line("Deux IP identiques ?",d.rep["ip-double"]);line("Mon explication",d.rep["ip-role"]);title("2. Table de routage");line("R1 ->",d.rep["route-r1"]);line("R2 ->",d.rep["route-r2"]);line("R1 connaît tout le trajet ?",d.rep["route-tout"]);line("Mon explication",d.rep["route-role"]);title("3. Débit");line("Route A en 10 s",d.rep["debit-a"]);line("Route B en 10 s",d.rep["debit-b"]);line("Plus grand débit",d.rep["debit-fort"]);line("Mon explication",d.rep["debit-role"]);title("4. Défi final");line("Identifier la destination",d.rep["defi-ip"]);line("Choisir la prochaine étape",d.rep["defi-route"]);line("Goulot d'étranglement",d.rep["defi-bouchon"]);line("Explication",d.rep["defi-exp"]);title("5. Bilan");line("Adresse IP",d.rep["bilan-ip"]);line("Table de routage",d.rep["bilan-route"]);line("Débit",d.rep["bilan-debit"]);line("Auto-évaluation",d.rep["auto"]);return doc}
 el("pdf").addEventListener("click",function(){var d=lire(),m=[];[["nom","ton nom"],["prenom","ton prénom"],["classe","ta classe"]].forEach(function(x){if(!d.id[x[0]])m.push(x[1])});if(m.length){alerte.hidden=false;alerte.textContent="Complète "+m.join(", ")+" avant de générer le PDF.";return}alerte.hidden=true;var b=this;b.disabled=true;b.textContent="Création du PDF…";try{var doc=construirePDF(d);if(doc){var nom=(d.id.nom+"-"+d.id.prenom+"-seq2-act1-p2.pdf").replace(/\s+/g,"-");doc.save(nom);etat.textContent="PDF téléchargé."}}catch(e){console.error(e);alerte.hidden=false;alerte.textContent="Le PDF n’a pas pu être créé. Utilise Imprimer / PDF navigateur."}b.disabled=false;b.textContent="Générer le PDF"});
+
+/* Entraînement : le livre interactif s'ouvre directement sur le chapitre cliqué */
+(function(){
+  var grille=el("niveaux"), scene=el("scene-livre"), cadre=el("scene-cadre"),
+      stitre=el("scene-titre"), memo=el("livre-vus");
+  if(!grille||!scene||!cadre||!memo)return;
+  var LIVRE="outils/livre-routage-ip.html";
+  var niveaux=tous("#niveaux .niveau"), cadreIframe=null, essai=null;
+  function vus(){return String(memo.value||"").split(",").filter(Boolean)}
+  function marquer(i){var v=vus();if(v.indexOf(String(i))<0){v.push(String(i));memo.value=v.join(",");sauver();maj()}}
+  function peindre(){var v=vus();niveaux.forEach(function(b,i){b.classList.toggle("fait",v.indexOf(String(i))>=0)})}
+  function attente(txt){var p=el("scene-attente");if(p)p.textContent=txt;if(p)p.hidden=!txt}
+  /* cherche le bouton du chapitre, y compris dans les shadow DOM du livre */
+  function chercher(doc,libelle){
+    var trouve=null;
+    function parcourir(racine){
+      if(trouve)return;
+      var n=racine.querySelectorAll("button,[role=button],li,a");
+      for(var i=0;i<n.length;i++){
+        if(String(n[i].textContent||"").trim()===libelle){trouve=n[i];return}
+      }
+      racine.querySelectorAll("*").forEach(function(e){if(!trouve&&e.shadowRoot)parcourir(e.shadowRoot)});
+    }
+    try{parcourir(doc)}catch(e){}
+    return trouve;
+  }
+  function viser(libelle,restant){
+    if(essai){clearTimeout(essai);essai=null}
+    var doc=null;
+    try{doc=cadreIframe&&cadreIframe.contentDocument}catch(e){doc=null}
+    var cible=doc?chercher(doc,libelle):null;
+    if(cible){try{cible.click()}catch(e){}attente("");return}
+    if(restant>0){essai=setTimeout(function(){viser(libelle,restant-1)},300);return}
+    attente("");
+  }
+  function ouvrir(b,i){
+    var libelle=b.dataset.chapitre;
+    niveaux.forEach(function(x){x.setAttribute("aria-expanded",x===b?"true":"false")});
+    stitre.textContent="Niveau "+(i+1)+" · "+b.dataset.titre;
+    scene.hidden=false;
+    if(!cadreIframe){
+      attente("Chargement de l’entraînement… (le livre est volumineux, patiente quelques secondes)");
+      cadreIframe=document.createElement("iframe");
+      cadreIframe.title="Entraînement — table de routage et adresse IP";
+      cadreIframe.setAttribute("allow","autoplay; fullscreen *; clipboard-write *");
+      cadreIframe.setAttribute("allowfullscreen","");
+      cadreIframe.addEventListener("load",function(){viser(libelle,40)});
+      cadreIframe.src=LIVRE;
+      cadre.appendChild(cadreIframe);
+    } else {
+      viser(libelle,20);
+    }
+    marquer(i);peindre();
+    scene.scrollIntoView({behavior:"smooth",block:"start"});
+  }
+  niveaux.forEach(function(b,i){b.addEventListener("click",function(){ouvrir(b,i)})});
+  el("scene-fermer").addEventListener("click",function(){
+    if(essai){clearTimeout(essai);essai=null}
+    if(cadreIframe){cadreIframe.remove();cadreIframe=null}
+    attente("Chargement de l’entraînement…");
+    scene.hidden=true;
+    niveaux.forEach(function(x){x.setAttribute("aria-expanded","false")});
+    grille.scrollIntoView({behavior:"smooth",block:"center"});
+  });
+  peindre();
+})();
 
 /* Correction protégée */
 var COFFRE="W1siMS4gTOKAmWFkcmVzc2UgSVAgOiBs4oCZYWRyZXNzZSBkdSBkZXN0aW5hdGFpcmUiLCBbIjxwPjxzdHJvbmc+RGFucyBjZXR0ZSBhY3Rpdml0w6ksIHVuZSBhZHJlc3NlIElQIGpvdWUgbGUgcsO0bGUgZOKAmXVuZSBhZHJlc3NlIHBvc3RhbGUuPC9zdHJvbmc+IEVsbGUgcGVybWV0IGRlIHNhdm9pciDDoCBxdWVsIGFwcGFyZWlsIHVuIHBhcXVldCBlc3QgZGVzdGluw6kuPC9wPiIsICI8cD5EYW5zIG5vdHJlIG1vZMOobGUsIG5vdXMgdXRpbGlzb25zIGRlcyByw6lzZWF1eCBlbiA8Y29kZT4vMjQ8L2NvZGU+IDogbGVzIHRyb2lzIHByZW1pZXJzIG5vbWJyZXMgcmVwcsOpc2VudGVudCBsZSByw6lzZWF1IGV0IGxlIGRlcm5pZXIgZGlmZsOpcmVuY2llIGxlcyBhcHBhcmVpbHMuIEV4ZW1wbGUgOiA8Y29kZT4xOTIuMTY4LjIuNzwvY29kZT4gYXBwYXJ0aWVudCBhdSByw6lzZWF1IDxjb2RlPjE5Mi4xNjguMi4wLzI0PC9jb2RlPi48L3A+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+UsOpcG9uc2VzPC9iPkxlIHBhcXVldCBkZXN0aW7DqSDDoCA8Y29kZT4xOTIuMTY4LjIuNzwvY29kZT4gdmEgw6AgWW91c3NlZi4gTMOpYSA8Y29kZT4xOTIuMTY4LjEuNDwvY29kZT4gZXQgWW91c3NlZiBuZSBzb250IHBhcyBkYW5zIGxlIG3Dqm1lIHLDqXNlYXUuIERldXggYXBwYXJlaWxzIG5lIGRvaXZlbnQgcGFzIGF2b2lyIGxhIG3Dqm1lIGFkcmVzc2UgSVAgZGFucyBsZSBtw6ptZSByw6lzZWF1IGF1IG3Dqm1lIG1vbWVudC48L2Rpdj4iLCAiPHA+PHN0cm9uZz7DgCByZXRlbmlyIDo8L3N0cm9uZz4gbOKAmWFkcmVzc2UgSVAgc2VydCDDoCBpZGVudGlmaWVyIGxvZ2lxdWVtZW50IGxhIHNvdXJjZSBldCBsYSBkZXN0aW5hdGlvbiBk4oCZdW5lIGNvbW11bmljYXRpb24gZGFucyB1biByw6lzZWF1IElQLjwvcD4iXV0sIFsiMi4gTGEgdGFibGUgZGUgcm91dGFnZSA6IGxlIHBhbm5lYXUgZHUgY2VudHJlIGRlIHRyaSIsIFsiPHA+TGUgcm91dGV1ciByZXNzZW1ibGUgw6AgdW4gPHN0cm9uZz5jZW50cmUgZGUgdHJpPC9zdHJvbmc+LiBJbCBsaXQgbOKAmWFkcmVzc2UgZGUgZGVzdGluYXRpb24sIGNvbnN1bHRlIHNhIDxzdHJvbmc+dGFibGUgZGUgcm91dGFnZTwvc3Ryb25nPiBldCBkw6ljaWRlIHZlcnMgcXVlbGxlIDxzdHJvbmc+cHJvY2hhaW5lIMOpdGFwZTwvc3Ryb25nPiBlbnZveWVyIGxlIHBhcXVldC48L3A+IiwgIjxwPlBvdXIgZW52b3llciB1biBwYXF1ZXQgZHUgcsOpc2VhdSAxIGF1IHLDqXNlYXUgMyBkYW5zIG5vdHJlIHNjaMOpbWEgOiA8c3Ryb25nPlIxIGVudm9pZSB2ZXJzIFIyPC9zdHJvbmc+LCBwdWlzIDxzdHJvbmc+UjIgZW52b2llIHZlcnMgUjM8L3N0cm9uZz4uIFIxIG7igJlhIHBhcyBiZXNvaW4gZGUgbcOpbW9yaXNlciBjaGFxdWUgbW91dmVtZW50IGZ1dHVyIDogaWwgY2hvaXNpdCBsZSBwcm9jaGFpbiBzYXV0IMOgIHBhcnRpciBkZSBzYSB0YWJsZS48L3A+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+RXJyZXVyIGZyw6lxdWVudGU8L2I+VW5lIHRhYmxlIGRlIHJvdXRhZ2UgbuKAmWVzdCBwYXMgdW5lIGNhcnRlIHF1aSBjb250aWVudCBvYmxpZ2F0b2lyZW1lbnQgdG91dCBsZSB0cmFqZXQuIEVsbGUgY29udGllbnQgZGVzIHJvdXRlcyBwZXJtZXR0YW50IGRlIGTDqXRlcm1pbmVyIG/DuSB0cmFuc21ldHRyZSBsZSBwYXF1ZXQgZW5zdWl0ZS48L2Rpdj4iXV0sIFsiMy4gTGUgZMOpYml0IDogY29tYmllbiBkZSBkb25uw6llcyBwYXNzZW50IHBlbmRhbnQgdW4gdGVtcHMgZG9ubsOpID8iLCBbIjxwPkxhIHBldGl0ZSByb3V0ZSBhdXRvcmlzZSA8c3Ryb25nPjEgcGFxdWV0IHRvdXRlcyBsZXMgMiBzZWNvbmRlczwvc3Ryb25nPi4gRW4gMTAgc2Vjb25kZXMsIGVsbGUgcGV1dCBkb25jIGZhaXJlIHBhc3NlciA8c3Ryb25nPjUgcGFxdWV0czwvc3Ryb25nPi4gTGEgZ3JhbmRlIHJvdXRlIGF1dG9yaXNlIDxzdHJvbmc+MyBwYXF1ZXRzIHRvdXRlcyBsZXMgMiBzZWNvbmRlczwvc3Ryb25nPiwgc29pdCA8c3Ryb25nPjE1IHBhcXVldHMgZW4gMTAgc2Vjb25kZXM8L3N0cm9uZz4uPC9wPiIsICI8cD48c3Ryb25nPkxlIGTDqWJpdCBtZXN1cmUgdW5lIHF1YW50aXTDqSBkZSBkb25uw6llcyBwYXIgdW5pdMOpIGRlIHRlbXBzLjwvc3Ryb25nPiBTdXIgdW4gcsOpc2VhdSByw6llbCwgb24gbOKAmWV4cHJpbWUgc291dmVudCBlbiBiaXQvcywga2JpdC9zLCBNYml0L3Mgb3UgR2JpdC9zLjwvcD4iLCAiPGRpdiBjbGFzcz1cInJldGVuaXJcIj48Yj7DgCBuZSBwYXMgY29uZm9uZHJlPC9iPlVuIGTDqWJpdCDDqWxldsOpIG5lIHNpZ25pZmllIHBhcyBxdeKAmXVuIHBhcXVldCBpbmRpdmlkdWVsIMKrIHJvdWxlIHBsdXMgdml0ZSDCuy4gQ2VsYSBzaWduaWZpZSBzdXJ0b3V0IHF1ZSBkYXZhbnRhZ2UgZGUgZG9ubsOpZXMgcGV1dmVudCDDqnRyZSB0cmFuc21pc2VzIHBlbmRhbnQgbGEgbcOqbWUgZHVyw6llLjwvZGl2PiJdXSwgWyI0LiBEw6lmaSBmaW5hbCA6IHLDqXVuaXIgbGVzIHRyb2lzIG5vdGlvbnMiLCBbIjxwPlBvdXIgZW52b3llciAxMCBwYXF1ZXRzIGRlIDxjb2RlPjE5Mi4xNjguMS4zPC9jb2RlPiB2ZXJzIDxjb2RlPjE5Mi4xNjguMy44PC9jb2RlPiA6IGzigJk8c3Ryb25nPmFkcmVzc2UgSVA8L3N0cm9uZz4gaW5kaXF1ZSBsYSBkZXN0aW5hdGlvbiwgY2hhcXVlIDxzdHJvbmc+cm91dGV1cjwvc3Ryb25nPiB1dGlsaXNlIHNhIDxzdHJvbmc+dGFibGUgZGUgcm91dGFnZTwvc3Ryb25nPiBwb3VyIGNob2lzaXIgbGUgcHJvY2hhaW4gc2F1dCwgZXQgbGUgPHN0cm9uZz5kw6liaXQ8L3N0cm9uZz4gZGUgY2hhcXVlIGxpYWlzb24gbGltaXRlIGxhIHF1YW50aXTDqSBkZSBkb25uw6llcyBxdWkgcGV1dCBsYSB0cmF2ZXJzZXIuPC9wPiIsICI8cD5BdmVjIGRlcyBsaWFpc29ucyBkZSAxMCwgMiBldCA4IHBhcXVldHMvcyBzdXIgbGUgbcOqbWUgdHJhamV0LCBsYSBsaWFpc29uIMOgIDxzdHJvbmc+MiBwYXF1ZXRzL3M8L3N0cm9uZz4gZXN0IGxlIDxzdHJvbmc+Z291bG90IGTigJnDqXRyYW5nbGVtZW50PC9zdHJvbmc+IDogZWxsZSBsaW1pdGUgbGUgdHJhbnNmZXJ0IGdsb2JhbC48L3A+Il1dLCBbIjUuIEJpbGFuIGRlIGzigJlhY3Rpdml0w6kg4oCUIGNlIHF1ZSB0dSBkb2lzIHNhdm9pciBleHBsaXF1ZXIiLCBbIjx1bD48bGk+PHN0cm9uZz5BZHJlc3NlIElQPC9zdHJvbmc+IOKGkiBwZXJtZXQgZOKAmWlkZW50aWZpZXIgbG9naXF1ZW1lbnQgbGUgZGVzdGluYXRhaXJlIGTigJl1bmUgY29tbXVuaWNhdGlvbi48L2xpPjxsaT48c3Ryb25nPlRhYmxlIGRlIHJvdXRhZ2U8L3N0cm9uZz4g4oaSIGluZGlxdWUgYXUgcm91dGV1ciB2ZXJzIHF1ZWxsZSBwcm9jaGFpbmUgw6l0YXBlIHRyYW5zbWV0dHJlIGxlIHBhcXVldC48L2xpPjxsaT48c3Ryb25nPkTDqWJpdDwvc3Ryb25nPiDihpIgcXVhbnRpdMOpIGRlIGRvbm7DqWVzIHRyYW5zbWlzZSBwZW5kYW50IHVuZSBkdXLDqWUgZG9ubsOpZS48L2xpPjwvdWw+IiwgIjxwPjxzdHJvbmc+TGEgcGhyYXNlIMOgIHNhdm9pciBkaXJlIDo8L3N0cm9uZz4gwqsgTGUgcGFxdWV0IHBvcnRlIHVuZSBhZHJlc3NlIElQIGRlIGRlc3RpbmF0aW9uLiBMZXMgcm91dGV1cnMgY29uc3VsdGVudCBsZXVycyB0YWJsZXMgZGUgcm91dGFnZSBwb3VyIGzigJlhY2hlbWluZXIgZGUgcsOpc2VhdSBlbiByw6lzZWF1LiBMZSBkw6liaXQgZGVzIGxpYWlzb25zIGTDqXRlcm1pbmUgbGEgcXVhbnRpdMOpIGRlIGRvbm7DqWVzIHF1aSBwZXV0IMOqdHJlIHRyYW5zbWlzZSBwZW5kYW50IHVuIHRlbXBzIGRvbm7DqS4gwrs8L3A+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+UHJvY2hhaW5lIMOpdGFwZTwvYj5EYW5zIGxhIHBhcnRpZSAzLCB0dSB2YXMgcmV0cm91dmVyIGNlcyB0cm9pcyBpZMOpZXMgZGFucyBGaWxpdXMgOiB0dSBjb25maWd1cmVyYXMgbGVzIGFkcmVzc2VzLCBsZXMgcGFzc2VyZWxsZXMgZXQgdHUgdGVzdGVyYXMgbGVzIGNvbW11bmljYXRpb25zLjwvZGl2PiJdXV0=",EMPREINTE=4054366658;function empreinte(t){var h=5381;for(var i=0;i<t.length;i++)h=((h*33)^t.charCodeAt(i))>>>0;return h}function rendre(l){var h="",buf=[];function vide(){if(buf.length){h+="<ul>"+buf.map(function(x){return "<li>"+x+"</li>"}).join("")+"</ul>";buf=[]}}l.forEach(function(x){if(/^\s*<(ul|ol|div|svg|p|a|table|figure|img|h[1-6]|blockquote)\b/i.test(x)){vide();h+=x}else buf.push(x)});vide();return h}var cb=el("corr-btn"),ci=el("corr-mdp"),cr=el("corr-refus"),cc=el("corr-contenu");function ouvrir(){if(empreinte(ci.value.trim())!==EMPREINTE){cr.hidden=false;ci.value="";ci.focus();return}cr.hidden=true;var sec=JSON.parse(decodeURIComponent(escape(atob(COFFRE))));cc.innerHTML=sec.map(function(x){return "<h3>"+x[0]+"</h3>"+rendre(x[1])}).join("");cc.hidden=false;ci.closest(".saisie").hidden=true;cc.scrollIntoView({behavior:"smooth",block:"nearest"})}cb.addEventListener("click",ouvrir);ci.addEventListener("keydown",function(e){if(e.key==="Enter")ouvrir()});
