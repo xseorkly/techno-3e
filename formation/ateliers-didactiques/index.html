@@ -1,4 +1,4 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ateliers didactiques — 105 min</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css"><link rel="stylesheet" href="puzzle.css?v=20261020a">
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ateliers didactiques — 105 min</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../expertise-sequence/formation.css"><link rel="stylesheet" href="puzzle.css?v=20261020b">
 <style>
 .ateliers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .at{background:#fff;border:1px solid var(--line);border-top:8px solid var(--c);border-radius:16px;padding:18px;display:flex;flex-direction:column}
@@ -70,6 +70,12 @@
 .bnav .reset{background:#fff;color:#b3261e;border:1px solid #e1b7b3;font-size:14px}
 .bs:has(>.lq) h2{font-size:clamp(26px,3vw,40px);margin:8px 0 12px}.bs:has(>.lq) .bg2{gap:12px}.bs:has(>.lq) .bg2>div{padding:12px 16px}.bs:has(>.lq) h3{font-size:19px;margin-bottom:4px}.bs:has(>.lq) .bg2 p{font-size:clamp(15px,1.3vw,18px);line-height:1.4;margin:0}.bs:has(>.lq) .ladder{margin-bottom:12px}.bs:has(>.lq) .ladder span{padding:8px;font-size:16px}.bs:has(>.lq) .todo{margin-top:12px;padding:8px 16px}.bs:has(>.lq) .lead2{margin:-4px 0 8px}
 .bt td{font-size:clamp(15px,1.35vw,19px)!important;line-height:1.35!important}
+.bs-rep{border-left:10px solid #f2b705;padding-left:2vw}.bs-rep>.bk{color:#8a6a00}.bs-rep h2{font-size:clamp(25px,2.9vw,38px);margin:8px 0 14px}
+.bs-rep .bg2,.bs-rep .bg3{gap:12px}.bs-rep .bg2>div,.bs-rep .bg3>div{padding:12px 16px}.bs-rep h3{font-size:19px;margin-bottom:4px}.bs-rep p,.bs-rep li{font-size:clamp(14px,1.25vw,17.5px)!important;line-height:1.38!important;margin:0 0 6px}
+.bs-rep .tight{padding-left:18px;margin:0}.bs-rep .tight li{margin:0 0 6px}.bs-rep .todo{margin-top:12px;padding:8px 16px}.bs-rep .bnote{margin-top:12px;padding:10px 16px}
+.chips2{list-style:none;display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0}.chips2 li{background:#fff8e1;border:1px solid #f2d27a;border-radius:999px;padding:6px 14px;margin:0!important}
+.bt.rept td,.bt.rept th{font-size:clamp(13.5px,1.2vw,16.5px)!important;line-height:1.32!important;padding:7px 10px!important}.bt.rept{border-spacing:6px}
+.ok,.ko{font-weight:700;border-radius:6px;padding:1px 7px;color:#fff}.ok{background:#2e7d4f}.ko{background:#b3261e}
 .pv{display:none}
 @media print{body.bprint>*:not(.bshow){display:none!important}body.bprint .bshow{display:block!important;position:static}body.bprint .bnav{display:none}body.bprint .bstage{padding:0;overflow:visible}body.bprint .bs{display:block!important;break-after:page;margin:0 0 10mm}body.bprint .bs-title{-webkit-print-color-adjust:exact;print-color-adjust:exact}body.bprint .exnote{display:none}body.bprint .pv{display:block;white-space:pre-wrap;border:1px solid #cfdcdc;border-radius:10px;padding:8px 12px;min-height:30mm;font-size:13pt}body.bprint .pv.sm{min-height:12mm}@page{size:A4 landscape;margin:12mm}}
 @media(max-width:860px){.bg2,.bg3{grid-template-columns:1fr}.bt,.bt tbody,.bt tr,.bt td,.bt th{display:block}.bt thead{display:none}}
@@ -128,7 +134,7 @@
 <section class="section" id="bilan-formateur"><div class="card science">
   <span class="kicker">Fin de séance</span>
   <h2>Bilan du formateur</h2>
-  <p>Environ 25 minutes, après les présentations des tables : 9 diapositives de contenu et 7 diapositives « Échange », chacune avec une question à la salle et une zone où vous notez les réponses en direct. Les réponses restent enregistrées dans ce navigateur ; celles de l’échange B réapparaissent à l’échange G. Le bouton « Imprimer / PDF » sort tout le bilan, réponses comprises.</p>
+  <p>Environ 25 minutes, après les présentations des tables : 9 diapositives de contenu et 7 diapositives « Échange », chacune avec une question à la salle et une zone où vous notez les réponses en direct, puis une diapositive « Éléments de réponse » à projeter après les réponses orales. Les réponses restent enregistrées dans ce navigateur ; celles de l’échange B réapparaissent à l’échange G. Le bouton « Imprimer / PDF » sort tout le bilan, réponses comprises.</p>
   <div class="actions"><button class="btn primary" type="button" id="bfShow">▶ Projeter le bilan du formateur</button><span style="color:var(--muted)">Flèches ← → pour avancer, Échap pour fermer.</span></div>
 </div></section>
 
@@ -137,7 +143,7 @@
 </main>
 <div class="bshow" id="bshow" role="dialog" aria-modal="true" aria-label="Bilan du formateur"><div class="bstage" id="bstage"></div><div class="bnav"><button type="button" id="bPrev" aria-label="Précédent">←</button><span id="bCount"></span><button type="button" id="bNext" aria-label="Suivant">→</button><button type="button" id="bPrint">Imprimer / PDF</button><button type="button" class="reset" id="bReset">Effacer les réponses</button><button type="button" id="bClose">✕ Fermer</button></div></div>
 <div class="full" id="proj" role="dialog" aria-modal="true" aria-label="Rotation"><button class="btn secondary fs-close" type="button">✕ Fermer</button><div class="fs"></div></div>
-<script src="data.js?v=20261020a"></script><script src="puzzle.js?v=20261020a"></script><script src="rotation.js?v=20261020a"></script><script src="bilan-formateur.js?v=20261020a"></script>
+<script src="data.js?v=20261020b"></script><script src="puzzle.js?v=20261020b"></script><script src="rotation.js?v=20261020b"></script><script src="bilan-formateur.js?v=20261020b"></script>
 <script>
 (()=>{const P=window.PUZZLE,A=P.parcours,esc=PZ.esc;
 document.getElementById('fil').textContent=P.filRouge;

@@ -1,5 +1,5 @@
 /* Bilan du formateur (40 min), en accès libre.
-   16 diapositives : contenu + 7 échanges avec la salle (zones de prise de notes en direct).
+   23 diapositives : contenu, 7 échanges avec la salle (prise de notes en direct), chacun suivi de ses éléments de réponse.
    Pastilles : R = Réseaux, D = Données & décision, S = SysML. */
 window.BILAN_HTML=`
 <section class="bs bs-title"><div class="bk">Ateliers didactiques · Bilan du formateur</div>
@@ -15,6 +15,16 @@ window.BILAN_HTML=`
 <textarea class="exnote" data-ex="A" aria-label="Notes de l’échange A" placeholder="Ce que dit la salle…"></textarea>
 </section>
 
+<section class="bs bs-rep"><div class="bk">Éléments de réponse · Échange A</div>
+<h2>« Ça dépend » est la bonne réponse : tout dépend de ce sur quoi porte l’effort</h2><div class="bg3">
+<div><h3>Elle peut aider</h3><p>Un effort qui oblige à chercher, à retrouver, à comparer ou à expliquer rend l’apprentissage plus durable, même s’il ralentit la réussite immédiate : ce sont les « difficultés désirables » (Bjork, 1994).</p></div>
+<div><h3>À une condition</h3><p>Chercher avant d’avoir le cours aide, si une mise en commun et une structuration suivent : c’est « l’échec productif » (Kapur, 2008). Sans ce temps, l’élève reste sur son erreur.</p></div>
+<div><h3>Elle peut empêcher</h3><p>La mémoire de travail est limitée : si l’effort part dans une consigne obscure ou un outil nouveau, il n’en reste plus pour l’idée à apprendre. C’est la charge cognitive « extrinsèque » (Sweller, 1988).</p></div>
+</div>
+<p class="lead2" style="margin:14px 0 6px">« Ça dépend de quoi ? » Les réponses que l’on entend souvent, et qui sont justes :</p>
+<ul class="chips2"><li>du but : l’élève sait-il ce qu’il cherche ?</li><li>des prérequis : a-t-il de quoi démarrer ?</li><li>de l’aide disponible si ça bloque</li><li>de ce qui suit : quelqu’un fait-il le point ?</li><li>du nombre de nouveautés en même temps</li></ul>
+<p class="bnote">Gardez votre réponse en tête : la suite du bilan la précise, atelier par atelier.</p></section>
+
 <section class="bs" style="--c:#0e6e6b"><div class="bk">1 · Ce que nous avons vécu</div>
 <h2>Pendant une heure, vous avez joué la situation de vos élèves</h2><div class="bg3">
 <div><b>Tour 1 · Le défi</b><p>Vous avez traité un défi exigeant, sans cours préalable.</p><p class="so">C’est dans ce type de situation que les représentations des élèves deviennent visibles : là où vous avez dû ralentir, eux buteront.</p></div>
@@ -27,6 +37,14 @@ window.BILAN_HTML=`
 <p class="consigne">Une réponse par table, une ligne par réponse. On la garde pour la fin.</p>
 <textarea class="exnote" data-ex="B" aria-label="Notes de l’échange B" placeholder="Table 1 : …&#10;Table 2 : …"></textarea>
 </section>
+
+<section class="bs bs-rep"><div class="bk">Éléments de réponse · Échange B</div>
+<h2>Là où un élève de 3e risque de lâcher, atelier par atelier</h2><div class="bg3 ateliers3">
+<div style="--c:#0e6e6b"><span class="pill r">R</span><h3>Réseaux</h3><ul class="tight"><li>Dès les relevés : « 192.168.10.21 /24 » ne lui dit rien, il ne sait pas quoi comparer.</li><li>Quand il faut réfuter le collègue sans rien manipuler : pas de bouton à cliquer, pas de procédure.</li><li>Quand « pas de site » et « pas de réseau » se confondent pour lui en « pas d’Internet ».</li></ul></div>
+<div style="--c:#245d8a"><span class="pill d">D</span><h3>Données</h3><ul class="tight"><li>Avant la révélation, il ne lâche pas : il choisit A sans hésiter. Le blocage vient après, quand son choix s’effondre.</li><li>Au calcul : trois pourcentages sur 10 000 situations, c’est beaucoup d’arithmétique pour une seule idée.</li><li>Sur le mot « réussite » : réussir à quoi ?</li></ul></div>
+<div style="--c:#9a6900"><span class="pill s">S</span><h3>SysML</h3><ul class="tight"><li>Devant le vocabulaire : cas d’utilisation, BDD, IBD, exigence, avant même d’avoir compris l’objet.</li><li>Sur « fonction » : pour lui, la visseuse sert à « visser avec un moteur ».</li><li>Sur la chaîne de traçabilité : sept maillons à tenir en tête en même temps.</li></ul></div>
+</div>
+<p class="todo"><b>Une grille utile pour lire ces blocages</b>Quatre profils d’élèves, tirés du parcours Réseaux : A clique partout ; B attend la procédure ; C comprend le problème mais pas l’outil ; D réussit mais ne sait pas expliquer. Chacun appelle une aide différente.</p></section>
 
 <section class="bs" style="--c:#0e6e6b"><div class="bk">1 · Ce que nous avons vécu · Les trois ateliers</div>
 <h2>Trois situations, un même piège pour l’élève : croire qu’il sait déjà</h2><div class="bg3 ateliers3">
@@ -53,6 +71,14 @@ window.BILAN_HTML=`
 <tr><th>La question différée</th><td><textarea class="exnote sm" data-ex="C_qd_R" aria-label="Réseaux, question différée"></textarea></td><td><textarea class="exnote sm" data-ex="C_qd_D" aria-label="Données, question différée"></textarea></td><td><textarea class="exnote sm" data-ex="C_qd_S" aria-label="SysML, question différée"></textarea></td></tr>
 </tbody></table></section>
 
+<section class="bs bs-rep"><div class="bk">Éléments de réponse · Échange C</div>
+<h2>Ce qui se recoupe le plus souvent, et ce qui diffère avec profit</h2><div class="bg3 ateliers3">
+<div style="--c:#0e6e6b"><span class="pill r">R</span><h3>Réseaux</h3><p><strong>Se recoupe.</strong> L’obstacle est la confusion entre trouver une adresse (DNS) et faire voyager les paquets (routeur, passerelle).</p><p><strong>Diffère souvent.</strong> Des tables repèrent une autre représentation, tout aussi réelle : « le Wi-Fi, c’est Internet ». C’est la même famille : réseau local, Internet et Web fondus en une seule « connexion ».</p></div>
+<div style="--c:#245d8a"><span class="pill d">D</span><h3>Données</h3><p><strong>Se recoupe.</strong> Le score global trompe, parce que les cas sont déséquilibrés : 9 900 sans incendie, 100 avec.</p><p><strong>Diffère souvent.</strong> Un second obstacle : « 85 % de fausses alertes, donc B est mauvais ». Il faut alors comparer le coût des erreurs : une évacuation inutile contre un incendie manqué.</p></div>
+<div style="--c:#9a6900"><span class="pill s">S</span><h3>SysML</h3><p><strong>Se recoupe.</strong> L’élève cite les composants avant le service rendu, et confond fonction et solution.</p><p><strong>Diffère souvent.</strong> Des tables placent l’obstacle sur la cohérence entre diagrammes : l’exigence « dévisser » existe, mais aucun signal de sens ni aucun état « rotation à gauche » ne la porte.</p></div>
+</div>
+<div class="bg2" style="margin-top:12px"><div style="--c:#c2185b"><h3>Deux vérifications sur les relances</h3><p>Contient-elle la réponse (« c’est le DNS, non ? ») ? Alors c’est une explication. Se répond-elle par oui ou non ? Alors elle ne fait pas raisonner.</p></div><div style="--c:#9a6900"><h3>Deux vérifications sur les questions différées</h3><p>Reprend-elle la même situation avec d’autres nombres ? Alors elle teste la mémoire de la procédure. Demande-t-elle une définition ? Alors elle teste la récitation.</p></div></div></section>
+
 <section class="bs" style="--c:#245d8a"><div class="bk">2 · Lunette 1 · Didactique · L’obstacle</div>
 <p class="lq"><small>La question posée aux tables</small>Où un élève de 3e bloquerait-il ? Quelle représentation se cache derrière ?</p>
 <h2>Une erreur d’élève est souvent un modèle cohérent, pas un trou</h2><div class="bg2">
@@ -67,6 +93,17 @@ window.BILAN_HTML=`
 <p class="consigne">En binôme, 1 minute, puis deux ou trois exemples partagés.</p>
 <textarea class="exnote" data-ex="D" aria-label="Notes de l’échange D" placeholder="Représentation → situation qui la met en défaut"></textarea>
 </section>
+
+<section class="bs bs-rep" style="--c:#245d8a"><div class="bk">Éléments de réponse · Échange D</div>
+<h2>Des représentations fréquentes en technologie, et une situation qui les met en défaut</h2>
+<table class="bt rept"><thead><tr><th style="background:#245d8a">Ce que croit l’élève</th><th style="background:#245d8a">Une situation où cela ne marche pas</th><th style="background:#245d8a">Ce qui le remplace</th></tr></thead><tbody>
+<tr><td>« Le Wi-Fi, c’est Internet. »</td><td>On débranche la box de sa prise vers l’extérieur : le Wi-Fi est toujours là, l’imprimante de la salle répond, mais aucun site ne s’ouvre.</td><td>Le réseau local et l’accès à Internet sont deux choses distinctes.</td></tr>
+<tr><td>« Le capteur mesure la température. »</td><td>La carte affiche 374 pour une salle à environ 35 °C.</td><td>Le capteur produit une tension, que la carte convertit en un nombre : il faut un calcul pour revenir à la grandeur.</td></tr>
+<tr><td>« Si ça marche mal, le programme est faux. »</td><td>Un ventilateur à un seul seuil, 28 °C, s’allume et s’éteint sans arrêt : le programme fait exactement ce qui est écrit.</td><td>Le comportement dépend aussi de la mesure ; deux seuils (hystérésis) stabilisent la commande.</td></tr>
+<tr><td>« La fonction, c’est la pièce principale. »</td><td>Une lampe torche à piles, une à dynamo, une solaire : la pièce change, le service rendu reste « éclairer ».</td><td>La fonction est le service rendu ; la pièce est une solution parmi d’autres.</td></tr>
+<tr><td>« 99 %, c’est fiable. »</td><td>Un détecteur qui ne sonne jamais obtient 99 % quand l’incendie est rare.</td><td>Un score global ne dit pas quelle erreur est commise.</td></tr>
+</tbody></table>
+<p class="todo"><b>Ce qui rend la situation efficace</b>L’élève prédit d’abord, puis observe un résultat qui contredit sa prédiction. Le nouveau modèle doit ensuite être compréhensible et expliquer mieux que l’ancien : sinon, l’élève revient à sa première idée (Posner et al., 1982).</p></section>
 
 <section class="bs" style="--c:#c2185b"><div class="bk">2 · Lunette 2 · Pédagogie · L’aide minimale</div>
 <p class="lq"><small>La question posée aux tables</small>Quelle relance diriez-vous, mot pour mot, sans donner la réponse ?</p>
@@ -87,6 +124,16 @@ window.BILAN_HTML=`
 <textarea class="exnote" data-ex="E" aria-label="Notes de l’échange E" placeholder="« … » → niveau ?"></textarea>
 </section>
 
+<section class="bs bs-rep" style="--c:#c2185b"><div class="bk">Éléments de réponse · Échange E</div>
+<h2>Des relances prêtes à l’emploi, classées sur l’échelle</h2>
+<table class="bt rept"><thead><tr><th style="background:#c2185b">Niveau</th><th style="background:#0e6e6b">R · Réseaux</th><th style="background:#245d8a">D · Données</th><th style="background:#9a6900">S · SysML</th></tr></thead><tbody>
+<tr><th>1 · Reformuler</th><td>« Redis-moi : qui n’arrive pas à joindre qui ? »</td><td>« Qu’est-ce qu’on attend d’abord d’un détecteur d’incendie ? »</td><td>« Cette phrase dit-elle pourquoi l’objet existe, ce qu’il doit faire, ou comment il le fait ? »</td></tr>
+<tr><th>2 · Prérequis</th><td>« Dans une adresse IP, une partie désigne le réseau. Laquelle, ici ? »</td><td>« 99 % de réussite… 99 % de quoi, exactement ? »</td><td>« Qu’est-ce qu’un service rendu, pour un objet ? »</td></tr>
+<tr><th>3 · Indice</th><td>« Compare le troisième nombre de l’adresse de PC1 et de PC3. »</td><td>« Sur les 100 incendies, combien ont été détectés ? »</td><td>« Si l’on remplaçait le moteur, la phrase resterait-elle vraie ? »</td></tr>
+<tr><th>4 · Exemple partiel</th><td>« Deux maisons rue des Lilas, une rue des Roses : qui faut-il pour passer d’une rue à l’autre ? »</td><td>« Un détecteur qui ne sonnerait jamais : quel score obtiendrait-il ? »</td><td>« Une lampe : “éclairer” ou “une LED” ? Laquelle est la fonction ? »</td></tr>
+</tbody></table>
+<div class="bg2" style="margin-top:12px"><div><h3>Ce qui fait une bonne relance</h3><p>Elle maintient l’élève sur le but, réduit le nombre de choses à considérer et signale l’élément qui compte, sans faire à sa place : ce sont trois des fonctions de l’étayage (Wood, Bruner et Ross, 1976).</p></div><div><h3>Les pièges à éviter</h3><p>La relance qui contient la réponse ; la question fermée par oui ou non ; trois relances d’affilée sans laisser le temps de chercher ; sauter directement au niveau 5.</p></div></div></section>
+
 <section class="bs" style="--c:#9a6900"><div class="bk">2 · Lunette 3 · Sciences cognitives · La question différée</div>
 <p class="lq"><small>La question posée aux tables</small>Quelle question, quinze jours plus tard, permettrait de distinguer « il a compris » de « il a réussi » ?</p>
 <h2>Réussir aujourd’hui ne prouve pas qu’on a compris</h2><div class="bg2">
@@ -101,6 +148,14 @@ window.BILAN_HTML=`
 <p class="consigne">Une proposition par table. On teste : la situation est-elle vraiment nouvelle ?</p>
 <textarea class="exnote" data-ex="F" aria-label="Notes de l’échange F" placeholder="Table 1 : …"></textarea>
 </section>
+
+<section class="bs bs-rep" style="--c:#9a6900"><div class="bk">Éléments de réponse · Échange F</div>
+<h2>Une bonne question différée change de situation, pas d’idée</h2><div class="bg3 ateliers3">
+<div style="--c:#0e6e6b"><span class="pill r">R</span><h3>Réseaux</h3><p class="acc">« Chez toi, le téléphone capte bien le Wi-Fi de la box, mais aucun site ne s’ouvre. Le Wi-Fi est-il en panne ? Comment le vérifier ? »</p><p><strong>Preuve de compréhension.</strong> L’élève distingue le réseau local, qui fonctionne, de l’accès à Internet ; il propose de tester une autre machine de la maison.</p></div>
+<div style="--c:#245d8a"><span class="pill d">D</span><h3>Données</h3><p class="acc">« Un test de dépistage annonce 98 % de réussite pour une maladie qui touche une personne sur 100. Que faut-il savoir avant de lui faire confiance ? »</p><p><strong>Preuve de compréhension.</strong> Il demande combien de malades sont détectés ; il remarque qu’un test qui répond toujours « pas malade » obtiendrait 99 %.</p></div>
+<div style="--c:#9a6900"><span class="pill s">S</span><h3>SysML</h3><p class="acc">« Sèche-cheveux : classe “sécher les cheveux rapidement”, “produire un flux d’air chaud”, “une résistance et un ventilateur”. »</p><p><strong>Preuve de compréhension.</strong> Besoin, fonction, solution, dans cet ordre, et il justifie avec le test du remplacement.</p></div>
+</div>
+<div class="bg2" style="margin-top:12px"><div><h3>Quatre critères pour l’écrire</h3><p>Une situation nouvelle ; une réponse qu’on ne peut pas réciter ; un verbe qui fait penser (expliquer, choisir, justifier) ; une correction rapide, en cinq minutes.</p></div><div><h3>Pourquoi l’espacer</h3><p>Retrouver une idée après un délai la consolide : la question différée mesure la compréhension et, en même temps, la renforce (effet test, Roediger et Karpicke, 2006 ; espacement, Cepeda et al., 2006).</p></div></div></section>
 
 <section class="bs bs-title"><div class="bk">3 · Notre réponse au fil rouge</div>
 <h2 style="color:#fff">Difficulté utile, difficulté parasite</h2>
@@ -117,6 +172,18 @@ window.BILAN_HTML=`
 <div class="recall" data-recall="B"></div>
 <textarea class="exnote" data-ex="G" aria-label="Notes de l’échange G" placeholder="Utile / parasite, et pourquoi…"></textarea>
 </section>
+
+<section class="bs bs-rep"><div class="bk">Éléments de réponse · Échange G</div>
+<h2>Les blocages repérés : on garde ce qui fait apprendre, on allège le reste</h2>
+<table class="bt rept"><thead><tr><th style="background:#0e6e6b">Le blocage</th><th style="background:#0e6e6b">Utile ou parasite ?</th><th style="background:#0e6e6b">Ce qu’on en fait</th></tr></thead><tbody>
+<tr><td>Choisir A à 99 % <span class="pill d">D</span></td><td><span class="ok">Utile</span> : c’est l’obstacle visé.</td><td>On le garde, puis on révèle la répartition et on structure.</td></tr>
+<tr><td>Réfuter le collègue sans manipuler <span class="pill r">R</span></td><td><span class="ok">Utile</span> : cela oblige à construire un modèle avant d’agir.</td><td>On le garde, avec une relance prête.</td></tr>
+<tr><td>Séparer fonction et solution <span class="pill s">S</span></td><td><span class="ok">Utile</span> : c’est l’idée à apprendre.</td><td>On le garde, avec le test du remplacement.</td></tr>
+<tr><td>Calculer trois pourcentages sur 10 000 <span class="pill d">D</span></td><td><span class="ko">Parasite</span> si l’objectif est le jugement sur un score.</td><td>On donne les effectifs, ou on raisonne sur 100 incendies.</td></tr>
+<tr><td>Décoder « /24 » <span class="pill r">R</span></td><td><span class="ko">Parasite</span> en 3e : le masque n’est pas l’objectif.</td><td>On indique quelle partie de l’adresse désigne le réseau.</td></tr>
+<tr><td>Apprendre BDD, IBD et cas d’utilisation d’un coup <span class="pill s">S</span></td><td><span class="ko">Parasite</span> : la syntaxe prend la place de l’idée.</td><td>Un diagramme, une question ; on nomme l’outil après l’avoir utilisé.</td></tr>
+</tbody></table>
+<p class="todo"><b>À retenir</b>Une même difficulté peut changer de camp : utile si les prérequis sont là, parasite s’ils manquent. Pour alléger sans supprimer l’effort : fournir l’outil, découper la tâche, montrer un exemple résolu, ne garder qu’une nouveauté à la fois.</p></section>
 
 <section class="bs" style="--c:#c2185b"><div class="bk">3 · À emporter</div>
 <h2>Trois questions avant chaque séquence</h2><ol class="bl">
