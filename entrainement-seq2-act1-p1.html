@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Je m'entraîne — Séquence 2 · Activité 1 partie 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{
+  --papier:#F4F7F7; --carte:#FFFFFF; --encre:#14262B; --doux:#5A6C71;
+  --teal:#0E6E6B; --teal-pale:#E2EFEE; --magenta:#C2185B; --trait:#D2DEDE;
+  --ok:#2E7D5B; --ok-pale:#E8F3EC; --ko:#B3261E; --ko-pale:#FBECEB; --r:10px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--papier);color:var(--encre);
+  font-family:"Source Sans 3",system-ui,sans-serif;font-size:17px;line-height:1.55}
+.page{max-width:820px;margin:0 auto;padding:0 20px 120px}
+h2,h3{font-family:"Archivo",sans-serif}
+
+/* ---------- Barre de navigation ---------- */
+.navsite{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--trait);padding:9px 20px}
+.navsite .dedans{max-width:820px;margin:0 auto;width:100%;display:flex;align-items:center;gap:16px}
+.navsite .accueil{display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  font-family:"Archivo",sans-serif;font-weight:600;font-size:14.5px;color:var(--teal);
+  border:1px solid var(--trait);border-radius:8px;padding:7px 14px;background:#fff}
+.navsite .accueil:hover{border-color:var(--teal);background:var(--teal-pale)}
+.navsite .saut{margin-left:auto;display:flex;align-items:center;gap:9px}
+.navsite .saut span{font-size:13.5px;color:var(--doux)}
+.navsite select{font:inherit;font-size:14.5px;color:var(--encre);background:#fff;
+  border:1px solid var(--trait);border-radius:8px;padding:7px 10px;max-width:min(52vw,330px)}
+@media(max-width:640px){.navsite{padding:8px 14px;gap:10px}.navsite .saut span{display:none}.navsite select{max-width:none;flex:1}}
+
+/* ---------- En-tête ---------- */
+.entete{position:relative;background:var(--carte);border:1px solid var(--trait);
+  border-top:4px solid var(--magenta);border-radius:var(--r);margin-top:26px;padding:26px 26px 22px}
+.marque{display:flex;align-items:center;gap:13px;margin:0 0 14px}
+.marque img{height:44px;width:auto;display:block}
+.fil{font-family:"Archivo",sans-serif;font-weight:600;font-size:13px;color:var(--magenta);margin:0;padding-left:13px;border-left:1px solid var(--trait)}
+.titre{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(25px,4.2vw,34px);line-height:1.14;margin:0 0 10px}
+.sous{color:var(--doux);margin:0;font-size:16px}
+.mode{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+.mode span{font-size:13.5px;background:var(--teal-pale);color:var(--teal);border-radius:20px;padding:4px 11px;font-weight:600}
+
+/* ---------- Mémo ---------- */
+.memo{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);margin-top:18px}
+.memo summary{cursor:pointer;list-style:none;padding:16px 22px;font-family:"Archivo",sans-serif;font-weight:600;font-size:17px;display:flex;align-items:center;gap:10px}
+.memo summary::-webkit-details-marker{display:none}
+.memo summary::before{content:"+";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--teal);color:#fff;font-size:16px;flex:0 0 auto}
+.memo[open] summary::before{content:"–"}
+.memo .dedans{padding:0 22px 20px}
+.cartes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.cm{border:1px solid var(--trait);border-radius:8px;padding:10px 12px;background:#FBFDFD}
+.cm b{display:block;font-family:"Archivo",sans-serif;color:var(--teal);font-size:15px}
+.cm span{font-size:15px;color:var(--encre)}
+.cle{margin:14px 0 0;background:var(--teal-pale);border-radius:8px;padding:12px 15px}
+.cle p{margin:0 0 6px}.cle p:last-child{margin:0}
+.attention{margin:10px 0 0;border-left:3px solid var(--magenta);background:#FDF3F7;border-radius:0 8px 8px 0;padding:10px 14px;font-size:15.5px}
+
+/* ---------- Exercices ---------- */
+.ex{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);margin-top:18px;padding:20px 22px}
+.ex h2{font-size:19px;margin:0 0 4px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.ex h2 .n{font-size:13px;color:var(--doux);font-weight:600}
+.consigne{margin:0 0 12px;color:var(--encre)}
+.nb{color:var(--doux);font-size:15px;font-style:italic}
+.ligne{display:flex;align-items:center;gap:12px;padding:9px 12px;border:1px solid var(--trait);border-radius:8px;margin:0 0 8px;background:#FBFDFD;flex-wrap:wrap}
+.ligne .q{flex:1 1 260px}
+.ligne select{font:inherit;font-size:16px;padding:7px 9px;border:1px solid var(--trait);border-radius:7px;background:#fff;min-width:210px;flex:0 1 auto}
+.ligne.juste{border-color:var(--ok);background:var(--ok-pale)}
+.ligne.faux{border-color:var(--ko);background:var(--ko-pale)}
+.ligne .expl{flex-basis:100%;font-size:15px;color:var(--doux);margin:2px 0 0;display:none}
+.ligne.juste .expl,.ligne.faux .expl{display:block}
+.ligne.faux .expl b{color:var(--ko)}
+.vf{display:flex;gap:6px}
+.vf label{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--trait);border-radius:7px;padding:6px 12px;background:#fff;cursor:pointer;font-weight:600}
+.vf label:has(input:checked){border-color:var(--teal);background:var(--teal-pale);color:var(--teal)}
+.vf input{accent-color:var(--teal)}
+.choix label{display:flex;align-items:flex-start;gap:9px;padding:8px 12px;border:1px solid var(--trait);border-radius:8px;margin:0 0 7px;background:#fff;cursor:pointer}
+.choix label:has(input:checked){border-color:var(--teal);background:var(--teal-pale)}
+.choix input{margin-top:5px;accent-color:var(--teal)}
+.qcm{margin:0 0 14px}
+.qcm .enonce{font-weight:600;margin:0 0 8px}
+.qcm.juste .choix label:has(input:checked){border-color:var(--ok);background:var(--ok-pale)}
+.qcm.faux .choix label:has(input:checked){border-color:var(--ko);background:var(--ko-pale)}
+.qcm.juste .vf label:has(input:checked){border-color:var(--ok);background:var(--ok-pale);color:var(--ok)}
+.qcm.faux .vf label:has(input:checked){border-color:var(--ko);background:var(--ko-pale);color:var(--ko)}
+.qcm .expl{display:none;font-size:15px;color:var(--doux);margin:2px 0 0}
+.qcm.juste .expl,.qcm.faux .expl{display:block}
+.phrase{line-height:2.4}
+.phrase select{font:inherit;font-size:16px;padding:4px 7px;border:1px solid var(--trait);border-radius:6px;background:#fff;margin:0 3px}
+.phrase select.juste{border-color:var(--ok);background:var(--ok-pale)}
+.phrase select.faux{border-color:var(--ko);background:var(--ko-pale)}
+textarea{width:100%;min-height:120px;font:inherit;font-size:16px;line-height:1.5;padding:11px 13px;border:1px solid var(--trait);border-radius:8px;background:#fff;resize:vertical}
+textarea:focus,select:focus{outline:0;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-pale)}
+.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.btn{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;background:var(--teal);color:#fff;border:0;border-radius:8px;padding:10px 18px;cursor:pointer}
+.btn:hover{background:#0b5a58}
+.btn.second{background:#fff;color:var(--teal);border:1px solid var(--teal)}
+.resultat{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px}
+.resultat.bien{color:var(--ok)}.resultat.moyen{color:#9A6A00}.resultat.revoir{color:var(--ko)}
+.attendu{display:none;margin-top:12px;border-left:3px solid var(--ok);background:var(--ok-pale);border-radius:0 8px 8px 0;padding:12px 15px}
+.attendu.ouvert{display:block}
+.attendu p{margin:0 0 8px}
+.critere{display:flex;gap:9px;align-items:flex-start;margin:0 0 6px;cursor:pointer}
+.critere input{margin-top:5px;accent-color:var(--ok)}
+.bonus{border-color:var(--magenta);border-style:dashed}
+.bonus h2{color:var(--magenta)}
+.ctx{background:#FDF3F7;border-radius:8px;padding:12px 15px;margin:0 0 12px}
+svg{display:block;width:100%;height:auto;margin:6px 0 12px}
+
+/* ---------- Bilan ---------- */
+.bilan{background:var(--carte);border:1px solid var(--trait);border-top:4px solid var(--teal);border-radius:var(--r);margin-top:22px;padding:22px}
+.bilan h2{font-size:20px;margin:0 0 6px}
+.jauge{height:12px;background:var(--teal-pale);border-radius:8px;overflow:hidden;margin:10px 0}
+.jauge i{display:block;height:100%;width:0;background:var(--teal);transition:width .4s}
+.areviser{margin:12px 0 0;padding:0;list-style:none}
+.areviser li{border:1px solid var(--trait);border-radius:8px;padding:9px 12px;margin:0 0 7px;background:#FBFDFD}
+.areviser a{color:var(--teal);font-weight:600}
+.pret{background:var(--ok-pale);border-radius:8px;padding:12px 15px;margin:12px 0 0;color:var(--ok);font-weight:600}
+.retour{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.retour a{text-decoration:none}
+@media(max-width:640px){.ex,.bilan{padding:18px 16px}.ligne select{min-width:0;width:100%}}
+@media print{.navsite,.actions,.retour{display:none}}
+</style>
+</head>
+<body>
+
+<nav class="navsite" aria-label="Navigation du site">
+  <div class="dedans">
+    <a class="accueil" href="index.html">&#8592;&nbsp;Accueil</a>
+    <label class="saut">
+      <span>Aller à</span>
+      <select id="navfiches" aria-label="Aller à une autre activité">
+        <option value="" selected disabled>Entraînement — Séq. 2 · Act. 1 partie 1</option>
+        <optgroup label="Séquence 1">
+          <option value="seq1-act1.html">Activité 1 — Le smartphone : lancement de séquence</option>
+          <option value="seq1-act2-p1.html">Activité 2 · partie 1 — Comprendre l'évolution</option>
+          <option value="seq1-act2-p2.html">Activité 2 · partie 2 — Préparer l'exposition</option>
+          <option value="seq1-act3.html">Activité 3 — L'IA dans notre poche</option>
+        </optgroup>
+        <optgroup label="Séquence 2">
+          <option value="seq2-act1-p1.html">Activité 1 · partie 1 — Matériels & réseau</option>
+          <option value="seq2-act1-p2.html">Activité 1 · partie 2 — Adresse IP, routage & débit</option>
+          <option value="seq2-act1-p3.html">Activité 1 · partie 3 — Filius</option>
+          <option value="seq2-act1-p4.html">Activité 1 · partie 4 — Analyser le routage</option>
+        </optgroup>
+        <optgroup label="Séquence 3">
+          <option value="seq3-act1-p1.html">Activité 1 · partie 1 — Découvrir la micro:bit</option>
+          <option value="seq3-act1-p2.html">Activité 1 · partie 2 — Deux cartes qui jouent</option>
+          <option value="seq3-act2-p1.html">Activité 2 · partie 1 — Trois caméras qui décident</option>
+          <option value="seq3-act2-p2.html">Activité 2 · partie 2 — J'entraîne ma propre IA</option>
+          <option value="seq3-act2-p3.html">Activité 2 · partie 3 — Où mon IA se trompe-t-elle ?</option>
+          <option value="seq3-act3-p1.html">Activité 3 · partie 1 — Je conçois le système</option>
+          <option value="seq3-act3-p2.html">Activité 3 · partie 2 — Je réalise et je teste</option>
+        </optgroup>
+        <optgroup label="Séquence 4">
+          <option value="seq4-act1.html">Séance 1 — De la plante aux données</option>
+          <option value="seq4-act2.html">Séance 2 — Calibrer le capteur</option>
+          <option value="seq4-act3.html">Séance 3 — Je conçois le programme</option>
+          <option value="seq4-act4.html">Séance 4 — Les opérateurs logiques</option>
+          <option value="seq4-act5.html">Séance 5 — Enregistrer les données</option>
+          <option value="seq4-act6.html">Séance 6 — Diagnostiquer et alerter</option>
+        </optgroup>
+        <optgroup label="Séquence 5 · OSI — Porte-courrier augmenté"><option value="seq5-act1.html">Séance 1 — Un objet encore utile ?</option><option value="seq5-act2.html">Séance 2 — Avec quoi interagit-il ?</option><option value="seq5-act3.html">Séance 3 — Pourquoi l’existant pose-t-il problème ?</option><option value="seq5-act4.html">Séance 4 — Construire le cahier des charges</option><option value="seq5-act5.html">Séance 5 — Imaginer et choisir une solution</option><option value="seq5-act6.html">Séance 6 — Du croquis au modèle 3D</option><option value="seq5-act7.html">Séance 7 — Tester, améliorer et convaincre</option></optgroup>
+        <optgroup label="Séquence 6 · OSI — J’invente, j’innove"><option value="seq6-act1.html">Séance 1 — Créer notre startup et observer la ville</option><option value="seq6-act2.html">Séance 2 — Comprendre l’utilisateur : persona et 5 Pourquoi</option><option value="seq6-act3.html">Séance 3 — Transformer un besoin en défi d’innovation</option><option value="seq6-act4.html">Séance 4 — Innovation ou déjà-vu ?</option><option value="seq6-act5.html">Séance 5 — Organiser le projet</option><option value="seq6-act6.html">Séance 6 — Décrire les usages avec SysML</option><option value="seq6-act7.html">Séance 7 — Construire le cahier des charges</option><option value="seq6-act8.html">Séance 8 — Prévoir le fonctionnement : l’algorigramme</option><option value="seq6-act9.html">Séance 9 — Choisir les solutions techniques</option><option value="seq6-act10.html">Séance 10 — Construire l’architecture du système</option><option value="seq6-act11.html">Séance 11 — Programmer, tester, corriger</option><option value="seq6-act12.html">Séance 12 — Du concept au croquis coté</option><option value="seq6-act13.html">Séance 13 — Modéliser la solution en 3D</option><option value="seq6-act14.html">Séance 14 — Valider et convaincre</option></optgroup><optgroup label="Outils">
+          <option value="outils/aide-reseau.html">Fiche d'aide réseau</option>
+          <option value="outils/reseau-simple.html">Réseau virtuel — trajet et tables</option>
+          <option value="outils/reseau-complet.html">Réseau virtuel — trajet, débit, trafic</option>
+        </optgroup>
+      </select>
+    </label>
+  </div>
+</nav>
+<script>
+document.getElementById("navfiches").addEventListener("change", function(){
+  if(this.value) location.href = this.value;
+});
+</script>
+
+<main class="page">
+
+  <header class="entete">
+    <div class="marque">
+      <img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()">
+      <p class="fil">Technologie · Séquence 2 · Activité 1 — partie 1</p>
+    </div>
+    <h1 class="titre">Je m'entraîne avant l'évaluation</h1>
+    <p class="sous">Identifier les éléments d'un réseau informatique : terminal, carte réseau, liaisons, hub, commutateur, routeur, serveur.</p>
+    <div class="mode"><span>Pas noté</span><span>Correction immédiate</span><span>À refaire autant que tu veux</span><span>≈ 20 min</span></div>
+  </header>
+
+  <details class="memo" open>
+    <summary>L'essentiel à savoir avant l'évaluation</summary>
+    <div class="dedans">
+      <div class="cartes">
+        <div class="cm"><b>Terminal</b><span>L'appareil qu'on utilise : ordinateur, tablette, smartphone, imprimante.</span></div>
+        <div class="cm"><b>Carte réseau</b><span>À l'intérieur du terminal : elle lui permet de communiquer avec le réseau.</span></div>
+        <div class="cm"><b>Liaison filaire</b><span>Par câble, par exemple un câble Ethernet RJ45.</span></div>
+        <div class="cm"><b>Liaison sans fil</b><span>Sans câble, par exemple le Wi-Fi.</span></div>
+        <div class="cm"><b>Point d'accès Wi-Fi</b><span>Permet aux appareils sans fil de rejoindre le réseau local.</span></div>
+        <div class="cm"><b>Serveur</b><span>Une machine qui fournit un service : fichiers, impression, site web…</span></div>
+      </div>
+      <div class="cle">
+        <p><b>Hub</b> → recopie ce qu'il reçoit vers <b>tous</b> ses ports, sans savoir qui est le destinataire.</p>
+        <p><b>Commutateur (switch)</b> → relie les appareils d'un <b>même réseau local</b> et envoie les données vers le <b>bon destinataire</b>.</p>
+        <p><b>Routeur</b> → relie des <b>réseaux différents</b>, par exemple le collège et Internet.</p>
+        <p><b>Box</b> → un seul boîtier qui fait souvent modem, routeur, commutateur et point d'accès Wi-Fi.</p>
+      </div>
+      <p class="attention"><b>Les deux pièges de l'évaluation</b> : confondre le hub et le commutateur, et croire que le Wi-Fi, c'est Internet. Le Wi-Fi n'est qu'un moyen de se brancher <em>sans câble</em> au réseau local.</p>
+    </div>
+  </details>
+
+  <!-- ====================== 1 ====================== -->
+  <section class="ex" id="e1" data-notion="roles">
+    <h2>1. Qui suis-je ? <span class="n">6 questions</span></h2>
+    <p class="consigne">Chaque matériel se présente. Retrouve son nom.</p>
+    <div class="ligne"><span class="q">Je relie le réseau du collège à Internet, qui est un autre réseau.</span><select id="e1-1" data-bon="Le routeur" aria-label="Réponse"><option value="">Choisir…</option><option value="Le hub">Le hub</option><option value="Le commutateur (switch)">Le commutateur (switch)</option><option value="Le routeur">Le routeur</option><option value="La carte réseau">La carte réseau</option><option value="Le serveur">Le serveur</option><option value="Le point d&#x27;accès Wi-Fi">Le point d&#x27;accès Wi-Fi</option><option value="Le câble Ethernet">Le câble Ethernet</option></select><p class="expl"><b>Réponse : Le routeur.</b> Relier deux réseaux différents, c&#x27;est le rôle du routeur.</p></div>
+<div class="ligne"><span class="q">Quand je reçois un message, je le renvoie à tous les appareils branchés sur moi.</span><select id="e1-2" data-bon="Le hub" aria-label="Réponse"><option value="">Choisir…</option><option value="Le hub">Le hub</option><option value="Le commutateur (switch)">Le commutateur (switch)</option><option value="Le routeur">Le routeur</option><option value="La carte réseau">La carte réseau</option><option value="Le serveur">Le serveur</option><option value="Le point d&#x27;accès Wi-Fi">Le point d&#x27;accès Wi-Fi</option><option value="Le câble Ethernet">Le câble Ethernet</option></select><p class="expl"><b>Réponse : Le hub.</b> Le hub diffuse à tout le monde, sans savoir qui est le destinataire.</p></div>
+<div class="ligne"><span class="q">Grâce à moi, une tablette rejoint le réseau local sans aucun câble.</span><select id="e1-3" data-bon="Le point d&#x27;accès Wi-Fi" aria-label="Réponse"><option value="">Choisir…</option><option value="Le hub">Le hub</option><option value="Le commutateur (switch)">Le commutateur (switch)</option><option value="Le routeur">Le routeur</option><option value="La carte réseau">La carte réseau</option><option value="Le serveur">Le serveur</option><option value="Le point d&#x27;accès Wi-Fi">Le point d&#x27;accès Wi-Fi</option><option value="Le câble Ethernet">Le câble Ethernet</option></select><p class="expl"><b>Réponse : Le point d&#x27;accès Wi-Fi.</b> Le point d&#x27;accès permet aux appareils sans fil de rejoindre le réseau local.</p></div>
+<div class="ligne"><span class="q">J&#x27;envoie chaque message uniquement à l&#x27;appareil qui doit le recevoir, à l&#x27;intérieur du réseau local.</span><select id="e1-4" data-bon="Le commutateur (switch)" aria-label="Réponse"><option value="">Choisir…</option><option value="Le hub">Le hub</option><option value="Le commutateur (switch)">Le commutateur (switch)</option><option value="Le routeur">Le routeur</option><option value="La carte réseau">La carte réseau</option><option value="Le serveur">Le serveur</option><option value="Le point d&#x27;accès Wi-Fi">Le point d&#x27;accès Wi-Fi</option><option value="Le câble Ethernet">Le câble Ethernet</option></select><p class="expl"><b>Réponse : Le commutateur (switch).</b> Le commutateur dirige les données vers le bon destinataire : c&#x27;est ce qui le distingue du hub.</p></div>
+<div class="ligne"><span class="q">Je suis à l&#x27;intérieur de l&#x27;ordinateur : sans moi, il ne pourrait pas communiquer avec le réseau.</span><select id="e1-5" data-bon="La carte réseau" aria-label="Réponse"><option value="">Choisir…</option><option value="Le hub">Le hub</option><option value="Le commutateur (switch)">Le commutateur (switch)</option><option value="Le routeur">Le routeur</option><option value="La carte réseau">La carte réseau</option><option value="Le serveur">Le serveur</option><option value="Le point d&#x27;accès Wi-Fi">Le point d&#x27;accès Wi-Fi</option><option value="Le câble Ethernet">Le câble Ethernet</option></select><p class="expl"><b>Réponse : La carte réseau.</b> La carte réseau est l&#x27;interface entre le terminal et le réseau.</p></div>
+<div class="ligne"><span class="q">Je garde les fichiers de la classe et je les donne à ceux qui me les demandent.</span><select id="e1-6" data-bon="Le serveur" aria-label="Réponse"><option value="">Choisir…</option><option value="Le hub">Le hub</option><option value="Le commutateur (switch)">Le commutateur (switch)</option><option value="Le routeur">Le routeur</option><option value="La carte réseau">La carte réseau</option><option value="Le serveur">Le serveur</option><option value="Le point d&#x27;accès Wi-Fi">Le point d&#x27;accès Wi-Fi</option><option value="Le câble Ethernet">Le câble Ethernet</option></select><p class="expl"><b>Réponse : Le serveur.</b> Un serveur fournit un service aux autres machines : ici, des fichiers.</p></div>
+
+    <div class="actions"><button class="btn" type="button" data-verifier="e1">Vérifier</button><span class="resultat" id="r-e1"></span></div>
+  </section>
+
+  <!-- ====================== 2 ====================== -->
+  <section class="ex" id="e2" data-notion="schema">
+    <h2>2. Le réseau de la médiathèque <span class="n">8 questions</span></h2>
+    <p class="consigne">Voici le réseau de la médiathèque de la ville. Nomme chaque matériel repéré de 1 à 6, puis indique le type des liaisons <b>x</b> et <b>y</b>.</p>
+    <svg viewBox="0 0 760 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma du réseau de la médiathèque" font-family="Source Sans 3, Arial, sans-serif">
+      <defs><style>
+        .bx{fill:#F2F7F7;stroke:#0E6E6B;stroke-width:1.5}
+        .nu{fill:#0E6E6B;font-size:19px;font-weight:700;font-family:Archivo,Arial,sans-serif}
+        .lb{fill:#5A6C71;font-size:13px}
+        .li{stroke:#14262B;stroke-width:1.8;fill:none}
+        .wi{stroke:#14262B;stroke-width:1.8;fill:none;stroke-dasharray:7 5}
+        .lt{fill:#C2185B;font-size:16px;font-weight:700;font-style:italic}
+      </style></defs>
+      <ellipse cx="52" cy="48" rx="46" ry="26" fill="#fff" stroke="#5A6C71" stroke-width="1.4"/>
+      <text x="52" y="53" class="lb" text-anchor="middle" font-size="14">Internet</text>
+      <path class="li" d="M98 48 H136"/>
+      <rect class="bx" x="136" y="24" width="112" height="48" rx="6"/><text x="192" y="55" class="nu" text-anchor="middle">1</text>
+      <path class="li" d="M192 72 V116"/>
+      <rect class="bx" x="136" y="116" width="112" height="48" rx="6"/><text x="192" y="147" class="nu" text-anchor="middle">2</text>
+      <path class="li" d="M248 140 H664"/>
+      <path class="li" d="M352 140 V84"/>
+      <text x="360" y="114" class="lt">x</text>
+      <rect class="bx" x="296" y="36" width="112" height="48" rx="6"/><text x="352" y="67" class="nu" text-anchor="middle">3</text>
+      <path class="li" d="M498 140 V176"/>
+      <rect class="bx" x="442" y="176" width="112" height="44" rx="6"/><text x="498" y="205" class="nu" text-anchor="middle">4</text>
+      <path class="li" d="M664 140 V84"/>
+      <rect class="bx" x="608" y="36" width="112" height="48" rx="6"/><text x="664" y="67" class="nu" text-anchor="middle">5</text>
+      <path class="wi" d="M554 198 H608"/>
+      <text x="572" y="190" class="lt">y</text>
+      <rect class="bx" x="608" y="176" width="112" height="44" rx="6"/><text x="664" y="205" class="nu" text-anchor="middle">6</text>
+      <text x="300" y="20" class="lb">garde le catalogue</text>
+      <text x="612" y="20" class="lb">comptoir de prêt</text>
+      <text x="446" y="228" class="lb">fixé au plafond</text>
+      <text x="612" y="228" class="lb">poche d'un visiteur</text>
+      <path class="li" d="M24 190 H58"/><text x="66" y="194" class="lb">trait plein : câble</text>
+      <path class="wi" d="M24 214 H58"/><text x="66" y="218" class="lb">pointillés : sans fil</text>
+    </svg>
+    <div class="ligne"><span class="q">Repère 1</span><select id="e2-1" data-bon="Box / routeur" aria-label="Réponse"><option value="">Choisir…</option><option value="Box / routeur">Box / routeur</option><option value="Commutateur (switch)">Commutateur (switch)</option><option value="Hub">Hub</option><option value="Serveur">Serveur</option><option value="Point d&#x27;accès Wi-Fi">Point d&#x27;accès Wi-Fi</option><option value="Ordinateur (terminal)">Ordinateur (terminal)</option><option value="Smartphone (terminal)">Smartphone (terminal)</option></select><p class="expl"><b>Réponse : Box / routeur.</b> C&#x27;est le seul matériel relié à Internet : il fait sortir les données du réseau local.</p></div>
+<div class="ligne"><span class="q">Repère 2</span><select id="e2-2" data-bon="Commutateur (switch)" aria-label="Réponse"><option value="">Choisir…</option><option value="Box / routeur">Box / routeur</option><option value="Commutateur (switch)">Commutateur (switch)</option><option value="Hub">Hub</option><option value="Serveur">Serveur</option><option value="Point d&#x27;accès Wi-Fi">Point d&#x27;accès Wi-Fi</option><option value="Ordinateur (terminal)">Ordinateur (terminal)</option><option value="Smartphone (terminal)">Smartphone (terminal)</option></select><p class="expl"><b>Réponse : Commutateur (switch).</b> Il relie tous les appareils de la médiathèque entre eux.</p></div>
+<div class="ligne"><span class="q">Repère 3 — il garde le catalogue des livres</span><select id="e2-3" data-bon="Serveur" aria-label="Réponse"><option value="">Choisir…</option><option value="Box / routeur">Box / routeur</option><option value="Commutateur (switch)">Commutateur (switch)</option><option value="Hub">Hub</option><option value="Serveur">Serveur</option><option value="Point d&#x27;accès Wi-Fi">Point d&#x27;accès Wi-Fi</option><option value="Ordinateur (terminal)">Ordinateur (terminal)</option><option value="Smartphone (terminal)">Smartphone (terminal)</option></select><p class="expl"><b>Réponse : Serveur.</b> Il fournit un service aux autres machines : la consultation du catalogue.</p></div>
+<div class="ligne"><span class="q">Repère 4 — le boîtier fixé au plafond</span><select id="e2-4" data-bon="Point d&#x27;accès Wi-Fi" aria-label="Réponse"><option value="">Choisir…</option><option value="Box / routeur">Box / routeur</option><option value="Commutateur (switch)">Commutateur (switch)</option><option value="Hub">Hub</option><option value="Serveur">Serveur</option><option value="Point d&#x27;accès Wi-Fi">Point d&#x27;accès Wi-Fi</option><option value="Ordinateur (terminal)">Ordinateur (terminal)</option><option value="Smartphone (terminal)">Smartphone (terminal)</option></select><p class="expl"><b>Réponse : Point d&#x27;accès Wi-Fi.</b> Le smartphone s&#x27;y relie sans câble : c&#x27;est donc un point d&#x27;accès Wi-Fi.</p></div>
+<div class="ligne"><span class="q">Repère 5 — au comptoir de prêt</span><select id="e2-5" data-bon="Ordinateur (terminal)" aria-label="Réponse"><option value="">Choisir…</option><option value="Box / routeur">Box / routeur</option><option value="Commutateur (switch)">Commutateur (switch)</option><option value="Hub">Hub</option><option value="Serveur">Serveur</option><option value="Point d&#x27;accès Wi-Fi">Point d&#x27;accès Wi-Fi</option><option value="Ordinateur (terminal)">Ordinateur (terminal)</option><option value="Smartphone (terminal)">Smartphone (terminal)</option></select><p class="expl"><b>Réponse : Ordinateur (terminal).</b> C&#x27;est l&#x27;appareil qu&#x27;utilise le bibliothécaire : un terminal.</p></div>
+<div class="ligne"><span class="q">Repère 6 — dans la poche d&#x27;un visiteur</span><select id="e2-6" data-bon="Smartphone (terminal)" aria-label="Réponse"><option value="">Choisir…</option><option value="Box / routeur">Box / routeur</option><option value="Commutateur (switch)">Commutateur (switch)</option><option value="Hub">Hub</option><option value="Serveur">Serveur</option><option value="Point d&#x27;accès Wi-Fi">Point d&#x27;accès Wi-Fi</option><option value="Ordinateur (terminal)">Ordinateur (terminal)</option><option value="Smartphone (terminal)">Smartphone (terminal)</option></select><p class="expl"><b>Réponse : Smartphone (terminal).</b> Un smartphone est aussi un terminal, relié ici sans fil.</p></div>
+<div class="ligne"><span class="q">Liaison x — entre le commutateur et le repère 3</span><select id="e2-7" data-bon="Filaire (câble Ethernet)" aria-label="Réponse"><option value="">Choisir…</option><option value="Filaire (câble Ethernet)">Filaire (câble Ethernet)</option><option value="Sans fil (Wi-Fi)">Sans fil (Wi-Fi)</option></select><p class="expl"><b>Réponse : Filaire (câble Ethernet).</b> Trait plein sur le schéma : liaison par câble.</p></div>
+<div class="ligne"><span class="q">Liaison y — entre les repères 4 et 6</span><select id="e2-8" data-bon="Sans fil (Wi-Fi)" aria-label="Réponse"><option value="">Choisir…</option><option value="Filaire (câble Ethernet)">Filaire (câble Ethernet)</option><option value="Sans fil (Wi-Fi)">Sans fil (Wi-Fi)</option></select><p class="expl"><b>Réponse : Sans fil (Wi-Fi).</b> Pointillés sur le schéma : liaison sans fil.</p></div>
+
+    <div class="actions"><button class="btn" type="button" data-verifier="e2">Vérifier</button><span class="resultat" id="r-e2"></span></div>
+  </section>
+
+  <!-- ====================== 3 ====================== -->
+  <section class="ex" id="e3" data-notion="vf">
+    <h2>3. Vrai ou faux ? <span class="n">4 questions</span></h2>
+    <p class="consigne">Choisis, puis vérifie : l'explication s'affiche pour chaque affirmation.</p>
+    <div class="qcm" data-groupe="v1" data-bon="faux"><p class="enonce">a) Sans routeur, deux ordinateurs branchés sur le même commutateur ne peuvent pas s&#x27;échanger un fichier.</p><div class="vf"><label><input type="radio" name="v1" id="v1-v" value="vrai">Vrai</label><label><input type="radio" name="v1" id="v1-f" value="faux">Faux</label></div><p class="expl"><b>Faux.</b> Le commutateur suffit à l&#x27;intérieur du réseau local. Le routeur n&#x27;est nécessaire que pour aller vers un autre réseau.</p></div>
+<div class="qcm" data-groupe="v2" data-bon="vrai"><p class="enonce">b) Une tablette connectée en Wi-Fi fait partie du réseau local, au même titre qu&#x27;un ordinateur branché par câble.</p><div class="vf"><label><input type="radio" name="v2" id="v2-v" value="vrai">Vrai</label><label><input type="radio" name="v2" id="v2-f" value="faux">Faux</label></div><p class="expl"><b>Vrai.</b> Le Wi-Fi est seulement une autre façon de se raccorder au même réseau local.</p></div>
+<div class="qcm" data-groupe="v3" data-bon="faux"><p class="enonce">c) Un serveur, c&#x27;est forcément un énorme ordinateur rangé dans une salle spéciale.</p><div class="vf"><label><input type="radio" name="v3" id="v3-v" value="vrai">Vrai</label><label><input type="radio" name="v3" id="v3-f" value="faux">Faux</label></div><p class="expl"><b>Faux.</b> Être serveur, c&#x27;est un rôle : toute machine qui fournit un service aux autres — fichiers, impression, site web — est un serveur.</p></div>
+<div class="qcm" data-groupe="v4" data-bon="vrai"><p class="enonce">d) Si on remplace le hub d&#x27;une salle par un commutateur, les données ne sont plus envoyées à tous les appareils.</p><div class="vf"><label><input type="radio" name="v4" id="v4-v" value="vrai">Vrai</label><label><input type="radio" name="v4" id="v4-f" value="faux">Faux</label></div><p class="expl"><b>Vrai.</b> Le commutateur envoie les données seulement vers le port du destinataire, contrairement au hub.</p></div>
+
+    <div class="actions"><button class="btn" type="button" data-verifier="e3">Vérifier</button><span class="resultat" id="r-e3"></span></div>
+  </section>
+
+  <!-- ====================== 4 ====================== -->
+  <section class="ex" id="e4" data-notion="qcm">
+    <h2>4. Questions rapides <span class="n">3 questions</span></h2>
+    <div class="qcm" data-groupe="q1" data-bon="a"><p class="enonce">1. Un ordinateur, une tablette, une imprimante réseau : dans un réseau, ce sont tous des…</p><div class="choix"><label><input type="radio" name="q1" id="q1-a" value="a"><span>des terminaux</span></label><label><input type="radio" name="q1" id="q1-b" value="b"><span>des routeurs</span></label><label><input type="radio" name="q1" id="q1-c" value="c"><span>des commutateurs</span></label></div><p class="expl"><b>Réponse : des terminaux.</b> Un terminal est l&#x27;appareil au bout du réseau, celui qu&#x27;on utilise.</p></div>
+<div class="qcm" data-groupe="q2" data-bon="a"><p class="enonce">2. Le Wi-Fi, c&#x27;est…</p><div class="choix"><label><input type="radio" name="q2" id="q2-a" value="a"><span>une façon de se raccorder au réseau sans câble</span></label><label><input type="radio" name="q2" id="q2-b" value="b"><span>un autre nom pour Internet</span></label><label><input type="radio" name="q2" id="q2-c" value="c"><span>un modèle de routeur</span></label></div><p class="expl"><b>Réponse : une façon de se raccorder au réseau sans câble.</b> Le Wi-Fi est un type de liaison sans fil. On peut très bien avoir du Wi-Fi sans accès à Internet.</p></div>
+<div class="qcm" data-groupe="q3" data-bon="a"><p class="enonce">3. Dans la plupart des maisons, la box joue le rôle de…</p><div class="choix"><label><input type="radio" name="q3" id="q3-a" value="a"><span>routeur, commutateur et point d&#x27;accès Wi-Fi à la fois</span></label><label><input type="radio" name="q3" id="q3-b" value="b"><span>serveur, uniquement</span></label><label><input type="radio" name="q3" id="q3-c" value="c"><span>carte réseau de l&#x27;ordinateur</span></label></div><p class="expl"><b>Réponse : routeur, commutateur et point d&#x27;accès Wi-Fi à la fois.</b> C&#x27;est pour cela qu&#x27;à la maison on a l&#x27;impression qu&#x27;un seul boîtier fait tout.</p></div>
+
+    <div class="actions"><button class="btn" type="button" data-verifier="e4">Vérifier</button><span class="resultat" id="r-e4"></span></div>
+  </section>
+
+  <!-- ====================== 5 ====================== -->
+  <section class="ex" id="e5" data-notion="phrases">
+    <h2>5. Le bon mot au bon endroit <span class="n">4 questions</span></h2>
+    <p class="consigne">Choisis le mot qui convient dans chaque liste.</p>
+    <p class="phrase">Pour relier les ordinateurs d'une même salle en envoyant chaque donnée au bon destinataire, on utilise un <select id="e5-1" data-bon="commutateur" aria-label="Réponse"><option value="">Choisir…</option><option value="hub">hub</option><option value="commutateur">commutateur</option><option value="routeur">routeur</option><option value="point d&#x27;accès Wi-Fi">point d&#x27;accès Wi-Fi</option><option value="carte réseau">carte réseau</option><option value="serveur">serveur</option></select>. Pour que la salle puisse aller sur Internet, il faut aussi un <select id="e5-2" data-bon="routeur" aria-label="Réponse"><option value="">Choisir…</option><option value="hub">hub</option><option value="commutateur">commutateur</option><option value="routeur">routeur</option><option value="point d&#x27;accès Wi-Fi">point d&#x27;accès Wi-Fi</option><option value="carte réseau">carte réseau</option><option value="serveur">serveur</option></select>. Les tablettes se connectent sans câble grâce au <select id="e5-3" data-bon="point d&#x27;accès Wi-Fi" aria-label="Réponse"><option value="">Choisir…</option><option value="hub">hub</option><option value="commutateur">commutateur</option><option value="routeur">routeur</option><option value="point d&#x27;accès Wi-Fi">point d&#x27;accès Wi-Fi</option><option value="carte réseau">carte réseau</option><option value="serveur">serveur</option></select>. Et chaque ordinateur peut communiquer grâce à sa <select id="e5-4" data-bon="carte réseau" aria-label="Réponse"><option value="">Choisir…</option><option value="hub">hub</option><option value="commutateur">commutateur</option><option value="routeur">routeur</option><option value="point d&#x27;accès Wi-Fi">point d&#x27;accès Wi-Fi</option><option value="carte réseau">carte réseau</option><option value="serveur">serveur</option></select>.</p>
+<p class="nb" data-apres="e5" hidden><b>La phrase correcte :</b> … on utilise un <b>commutateur</b>. … il faut aussi un <b>routeur</b>. … grâce au <b>point d'accès Wi-Fi</b>. … grâce à sa <b>carte réseau</b>. Le piège était le premier mot : un hub relie aussi les ordinateurs, mais il envoie tout à tout le monde.</p>
+
+    <div class="actions"><button class="btn" type="button" data-verifier="e5">Vérifier</button><span class="resultat" id="r-e5"></span></div>
+  </section>
+
+  <!-- ====================== 6 ====================== -->
+  <section class="ex" id="e6">
+    <h2>6. J'explique avec mes mots <span class="n">auto-évaluation</span></h2>
+    <p class="consigne">La salle de technologie possède un <b>commutateur</b>, mais <b>pas de routeur</b>. Qu'est-ce qui fonctionne encore ? Qu'est-ce qui ne fonctionne plus ? Explique pourquoi.</p>
+    <p class="nb">C'est le même type de question que l'exercice rédigé de l'évaluation : entraîne-toi à écrire une vraie réponse avant de regarder la correction.</p>
+    <textarea id="e6-rep" data-save placeholder="Avec seulement un commutateur, …"></textarea>
+    <div class="actions"><button class="btn second" type="button" data-attendu="e6">Voir la réponse attendue</button></div>
+    <div class="attendu" id="att-e6">
+      <p><b>Ce qui fonctionne</b> : les ordinateurs de la salle peuvent toujours échanger entre eux — partager un fichier, imprimer sur l'imprimante de la salle — car le commutateur relie les appareils du même réseau local.</p>
+      <p><b>Ce qui ne fonctionne plus</b> : plus rien ne peut sortir de la salle, ni vers Internet ni vers Pronote. Pour aller vers un <b>autre réseau</b>, il faut un <b>routeur</b>.</p>
+      <p><b>Coche ce que ta réponse contient :</b></p>
+      <label class="critere"><input type="checkbox" id="e6-c1" data-save>J'ai dit que les appareils de la salle peuvent encore communiquer entre eux.</label>
+      <label class="critere"><input type="checkbox" id="e6-c2" data-save>J'ai dit qu'on ne peut plus aller sur Internet (ou vers un autre réseau).</label>
+      <label class="critere"><input type="checkbox" id="e6-c3" data-save>J'ai expliqué que c'est le routeur qui relie des réseaux différents.</label>
+      <p class="nb" style="margin:8px 0 0">Trois cases cochées : tu es prêt pour l'exercice rédigé. Sinon, relis le rôle du commutateur et du routeur dans le mémo en haut de la page.</p>
+    </div>
+  </section>
+
+  <!-- ====================== Bonus ====================== -->
+  <section class="ex bonus" id="bonus">
+    <h2>Bonus — L'imprimante d'Inès <span class="n">situation-problème</span></h2>
+    <div class="ctx"><b>Depuis que la famille d'Inès a changé de box, l'imprimante Wi-Fi n'imprime plus.</b> Pourtant, l'ordinateur d'Inès va très bien sur Internet, et l'imprimante est allumée, sans message d'erreur.</div>
+    <p class="consigne">Propose une explication, puis une solution.</p>
+    <textarea id="bonus-rep" data-save placeholder="Je pense que l'imprimante…"></textarea>
+    <div class="actions"><button class="btn second" type="button" data-attendu="bonus">Voir une réponse possible</button></div>
+    <div class="attendu" id="att-bonus">
+      <p><b>Explication</b> : l'imprimante était connectée au Wi-Fi de l'<b>ancienne</b> box. En changeant de box, on a changé de point d'accès Wi-Fi : l'imprimante n'est plus dans le <b>réseau local</b> de la maison, donc l'ordinateur ne la trouve plus — même s'il accède bien à Internet.</p>
+      <p><b>Solution</b> : reconnecter l'imprimante au Wi-Fi de la nouvelle box, ou la brancher à la box avec un câble Ethernet.</p>
+      <p class="nb" style="margin:0">Ce qu'il faut retenir : avoir Internet ne veut pas dire que tous les appareils sont dans le même réseau local. Le Wi-Fi n'est qu'un moyen de s'y raccorder.</p>
+    </div>
+  </section>
+
+  <!-- ====================== Bilan ====================== -->
+  <section class="bilan" id="bilan" aria-live="polite">
+    <h2>Mon bilan avant l'évaluation</h2>
+    <p class="nb" id="bilan-texte">Vérifie les exercices 1 à 5 : ton score et ce qu'il faut revoir apparaîtront ici.</p>
+    <div class="jauge"><i id="jauge"></i></div>
+    <p class="resultat" id="score"></p>
+    <ul class="areviser" id="areviser"></ul>
+    <div class="retour">
+      <button class="btn" type="button" id="pdf-correction">Je télécharge la correction (PDF)</button>
+      <a class="btn second" href="seq2-act1-p1.html">Revoir l'activité</a>
+      <button class="btn second" type="button" id="recommencer">Tout recommencer</button>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+"use strict";
+var DONNEES = {"reviser": {"e1": "<b>Le rôle de chaque matériel</b> — relis le mémo en haut de la page, puis la partie <a href=\"seq2-act1-p1.html#comprendre\">« Je comprends : hub, switch ou routeur ? »</a> de l'activité.", "e2": "<b>Lire un schéma de réseau</b> — refais l'exercice <a href=\"seq2-act1-p1.html#construire\">« Je complète le réseau »</a> de l'activité : c'est le même raisonnement que dans l'évaluation.", "e3": "<b>Les idées reçues</b> — le Wi-Fi n'est pas Internet, un serveur est un rôle : relis <a href=\"seq2-act1-p1.html#approfondir\">« Deux éléments à connaître aussi »</a>.", "e4": "<b>Le vocabulaire</b> — terminal, Wi-Fi, box : relis les cartes du mémo en haut de cette page.", "e5": "<b>Commutateur ou routeur ?</b> — relis la partie <a href=\"seq2-act1-p1.html#transition\">« Et maintenant : comment trouver le bon destinataire ? »</a> de l'activité."}, "correction": [{"t": "h1", "s": "Correction — Je m'entraîne avant l'évaluation"}, {"t": "p", "s": "Séquence 2 · Activité 1 partie 1 — Identifier les éléments d'un réseau informatique"}, {"t": "p", "s": "Technologie 3e · Lycée français de Vienne"}, {"t": "hr"}, {"t": "h2", "s": "L'essentiel à savoir"}, {"t": "li", "s": "**Terminal** : l'appareil qu'on utilise — ordinateur, tablette, smartphone, imprimante."}, {"t": "li", "s": "**Carte réseau** : à l'intérieur du terminal, elle lui permet de communiquer avec le réseau."}, {"t": "li", "s": "**Liaison filaire** : par câble, par exemple un câble Ethernet RJ45. **Liaison sans fil** : par exemple le Wi-Fi."}, {"t": "li", "s": "**Point d'accès Wi-Fi** : permet aux appareils sans fil de rejoindre le réseau local."}, {"t": "li", "s": "**Serveur** : une machine qui fournit un service — fichiers, impression, site web."}, {"t": "li", "s": "**Hub** : recopie ce qu'il reçoit vers tous ses ports, sans savoir qui est le destinataire."}, {"t": "li", "s": "**Commutateur (switch)** : relie les appareils d'un même réseau local et envoie les données vers le bon destinataire."}, {"t": "li", "s": "**Routeur** : relie des réseaux différents, par exemple le collège et Internet."}, {"t": "li", "s": "**Box** : un seul boîtier qui fait souvent modem, routeur, commutateur et point d'accès Wi-Fi."}, {"t": "p", "s": "**Les deux pièges de l'évaluation** : confondre le hub et le commutateur, et croire que le Wi-Fi, c'est Internet."}, {"t": "h2", "s": "1. Qui suis-je ?"}, {"t": "li", "s": "Je relie le réseau du collège à Internet, qui est un autre réseau. → **Le routeur**. Relier deux réseaux différents, c'est le rôle du routeur."}, {"t": "li", "s": "Quand je reçois un message, je le renvoie à tous les appareils branchés sur moi. → **Le hub**. Le hub diffuse à tout le monde, sans savoir qui est le destinataire."}, {"t": "li", "s": "Grâce à moi, une tablette rejoint le réseau local sans aucun câble. → **Le point d'accès Wi-Fi**. Le point d'accès permet aux appareils sans fil de rejoindre le réseau local."}, {"t": "li", "s": "J'envoie chaque message uniquement à l'appareil qui doit le recevoir, à l'intérieur du réseau local. → **Le commutateur (switch)**. Le commutateur dirige les données vers le bon destinataire : c'est ce qui le distingue du hub."}, {"t": "li", "s": "Je suis à l'intérieur de l'ordinateur : sans moi, il ne pourrait pas communiquer avec le réseau. → **La carte réseau**. La carte réseau est l'interface entre le terminal et le réseau."}, {"t": "li", "s": "Je garde les fichiers de la classe et je les donne à ceux qui me les demandent. → **Le serveur**. Un serveur fournit un service aux autres machines : ici, des fichiers."}, {"t": "h2", "s": "2. Le réseau de la médiathèque"}, {"t": "li", "s": "Repère 1 → **Box / routeur**. C'est le seul matériel relié à Internet : il fait sortir les données du réseau local."}, {"t": "li", "s": "Repère 2 → **Commutateur (switch)**. Il relie tous les appareils de la médiathèque entre eux."}, {"t": "li", "s": "Repère 3 — il garde le catalogue des livres → **Serveur**. Il fournit un service aux autres machines : la consultation du catalogue."}, {"t": "li", "s": "Repère 4 — le boîtier fixé au plafond → **Point d'accès Wi-Fi**. Le smartphone s'y relie sans câble : c'est donc un point d'accès Wi-Fi."}, {"t": "li", "s": "Repère 5 — au comptoir de prêt → **Ordinateur (terminal)**. C'est l'appareil qu'utilise le bibliothécaire : un terminal."}, {"t": "li", "s": "Repère 6 — dans la poche d'un visiteur → **Smartphone (terminal)**. Un smartphone est aussi un terminal, relié ici sans fil."}, {"t": "li", "s": "Liaison x — entre le commutateur et le repère 3 → **Filaire (câble Ethernet)**. Trait plein sur le schéma : liaison par câble."}, {"t": "li", "s": "Liaison y — entre les repères 4 et 6 → **Sans fil (Wi-Fi)**. Pointillés sur le schéma : liaison sans fil."}, {"t": "h2", "s": "3. Vrai ou faux ?"}, {"t": "li", "s": "a) Sans routeur, deux ordinateurs branchés sur le même commutateur ne peuvent pas s'échanger un fichier. → **Faux**. Le commutateur suffit à l'intérieur du réseau local. Le routeur n'est nécessaire que pour aller vers un autre réseau."}, {"t": "li", "s": "b) Une tablette connectée en Wi-Fi fait partie du réseau local, au même titre qu'un ordinateur branché par câble. → **Vrai**. Le Wi-Fi est seulement une autre façon de se raccorder au même réseau local."}, {"t": "li", "s": "c) Un serveur, c'est forcément un énorme ordinateur rangé dans une salle spéciale. → **Faux**. Être serveur, c'est un rôle : toute machine qui fournit un service aux autres — fichiers, impression, site web — est un serveur."}, {"t": "li", "s": "d) Si on remplace le hub d'une salle par un commutateur, les données ne sont plus envoyées à tous les appareils. → **Vrai**. Le commutateur envoie les données seulement vers le port du destinataire, contrairement au hub."}, {"t": "h2", "s": "4. Questions rapides"}, {"t": "li", "s": "Un ordinateur, une tablette, une imprimante réseau : dans un réseau, ce sont tous des… → **des terminaux**. Un terminal est l'appareil au bout du réseau, celui qu'on utilise."}, {"t": "li", "s": "Le Wi-Fi, c'est… → **une façon de se raccorder au réseau sans câble**. Le Wi-Fi est un type de liaison sans fil. On peut très bien avoir du Wi-Fi sans accès à Internet."}, {"t": "li", "s": "Dans la plupart des maisons, la box joue le rôle de… → **routeur, commutateur et point d'accès Wi-Fi à la fois**. C'est pour cela qu'à la maison on a l'impression qu'un seul boîtier fait tout."}, {"t": "h2", "s": "5. Le bon mot au bon endroit"}, {"t": "p", "s": "Pour relier les ordinateurs d'une même salle en envoyant chaque donnée au bon destinataire, on utilise un **commutateur**. Pour que la salle puisse aller sur Internet, il faut aussi un **routeur**. Les tablettes se connectent sans câble grâce au **point d'accès Wi-Fi**. Et chaque ordinateur peut communiquer grâce à sa **carte réseau**."}, {"t": "p", "s": "Le piège était le premier mot : un hub relie aussi les ordinateurs, mais il envoie tout à tout le monde."}, {"t": "h2", "s": "6. J'explique avec mes mots"}, {"t": "p", "s": "**Ce qui fonctionne** : les ordinateurs de la salle peuvent toujours échanger entre eux — partager un fichier, imprimer sur l'imprimante de la salle — car le commutateur relie les appareils du même réseau local."}, {"t": "p", "s": "**Ce qui ne fonctionne plus** : plus rien ne peut sortir de la salle, ni vers Internet ni vers Pronote. Pour aller vers un autre réseau, il faut un routeur."}, {"t": "p", "s": "Une bonne réponse contient ces trois idées :"}, {"t": "li", "s": "les appareils de la salle peuvent encore communiquer entre eux ;"}, {"t": "li", "s": "on ne peut plus aller sur Internet, ou vers un autre réseau ;"}, {"t": "li", "s": "c'est le routeur qui relie des réseaux différents."}, {"t": "h2", "s": "Bonus — L'imprimante d'Inès"}, {"t": "p", "s": "**Explication** : l'imprimante était connectée au Wi-Fi de l'ancienne box. En changeant de box, on a changé de point d'accès Wi-Fi : l'imprimante n'est plus dans le réseau local de la maison, donc l'ordinateur ne la trouve plus — même s'il accède bien à Internet."}, {"t": "p", "s": "**Solution** : reconnecter l'imprimante au Wi-Fi de la nouvelle box, ou la brancher à la box avec un câble Ethernet."}, {"t": "p", "s": "**À retenir** : avoir Internet ne veut pas dire que tous les appareils sont dans le même réseau local. Le Wi-Fi n'est qu'un moyen de s'y raccorder."}, {"t": "hr"}, {"t": "h2", "s": "Si tu t'es trompé, que revoir ?"}, {"t": "li", "s": "**Exercice 1 ou 4** : le rôle de chaque matériel — partie « Je comprends : hub, switch ou routeur ? » de l'activité."}, {"t": "li", "s": "**Exercice 2** : lire un schéma — exercice « Je complète le réseau » de l'activité."}, {"t": "li", "s": "**Exercice 3** : les idées reçues — partie « Deux éléments à connaître aussi »."}, {"t": "li", "s": "**Exercice 5 ou 6** : commutateur ou routeur — partie « Et maintenant : comment trouver le bon destinataire ? »."}]};
+var CLE = "fiche-techno:entrainement-seq2-act1-p1";
+function el(id){return document.getElementById(id)}
+function tous(s,z){return Array.prototype.slice.call((z||document).querySelectorAll(s))}
+
+/* ---------- Sauvegarde locale (facultative) ---------- */
+function champs(){return tous("select[id],input[id],textarea[id]").filter(function(c){return c.id!=="navfiches"})}
+function sauver(){var d={};champs().forEach(function(c){d[c.id]=(c.type==="radio"||c.type==="checkbox")?c.checked:c.value});try{localStorage.setItem(CLE,JSON.stringify(d))}catch(e){}}
+function restaurer(){try{var d=JSON.parse(localStorage.getItem(CLE)||"{}");champs().forEach(function(c){if(!(c.id in d))return;if(c.type==="radio"||c.type==="checkbox")c.checked=!!d[c.id];else c.value=d[c.id]})}catch(e){}}
+document.addEventListener("change",function(e){if(e.target.id!=="navfiches")sauver()});
+document.addEventListener("input",function(e){if(e.target.tagName==="TEXTAREA")sauver()});
+
+/* ---------- Correction ---------- */
+var scores={};
+function noter(id,juste,total){
+  scores[id]={juste:juste,total:total};
+  tous('[data-apres="'+id+'"]').forEach(function(x){x.hidden=false});
+  var r=el("r-"+id), t=juste+" / "+total;
+  r.textContent = juste===total ? "Tout est juste ! "+t : (juste>=total/2 ? "Presque : "+t+" — lis les explications" : "À revoir : "+t+" — lis les explications");
+  r.className="resultat "+(juste===total?"bien":(juste>=total/2?"moyen":"revoir"));
+  bilan();
+}
+function verifierLignes(id){
+  var j=0,t=0;
+  tous("#"+id+" [data-bon]").forEach(function(s){
+    t++; var ligne=s.closest(".ligne"), ok=s.value===s.dataset.bon;
+    if(ok)j++;
+    if(ligne){ligne.classList.toggle("juste",ok);ligne.classList.toggle("faux",!ok)}
+    else{s.classList.toggle("juste",ok);s.classList.toggle("faux",!ok)}
+  });
+  noter(id,j,t);
+}
+function verifierRadios(id){
+  var j=0,t=0;
+  tous("#"+id+" [data-groupe]").forEach(function(b){
+    t++; var g=b.dataset.groupe, c=b.querySelector('input[name="'+g+'"]:checked'), ok=!!c&&c.value===b.dataset.bon;
+    if(ok)j++;
+    b.classList.toggle("juste",ok); b.classList.toggle("faux",!ok);
+  });
+  noter(id,j,t);
+}
+tous("[data-verifier]").forEach(function(b){
+  b.addEventListener("click",function(){
+    var id=b.dataset.verifier;
+    if(id==="e3"||id==="e4") verifierRadios(id); else verifierLignes(id);
+  });
+});
+tous("[data-attendu]").forEach(function(b){
+  b.addEventListener("click",function(){var a=el("att-"+b.dataset.attendu);a.classList.toggle("ouvert");b.textContent=a.classList.contains("ouvert")?"Masquer":(b.dataset.attendu==="bonus"?"Voir une réponse possible":"Voir la réponse attendue")});
+});
+
+/* ---------- Bilan ---------- */
+var REVISER = DONNEES.reviser;
+function bilan(){
+  var ids=["e1","e2","e3","e4","e5"], j=0,t=0,faits=0, liste=el("areviser");
+  liste.innerHTML="";
+  ids.forEach(function(id){
+    if(!scores[id])return; faits++; j+=scores[id].juste; t+=scores[id].total;
+    if(scores[id].juste<scores[id].total){
+      var li=document.createElement("li"); li.innerHTML=REVISER[id]; liste.appendChild(li);
+    }
+  });
+  if(!faits)return;
+  var pct=Math.round(100*j/t);
+  el("jauge").style.width=pct+"%";
+  el("score").textContent="Score : "+j+" / "+t+" ("+faits+" exercice"+(faits>1?"s":"")+" sur 5 vérifié"+(faits>1?"s":"")+")";
+  el("score").className="resultat "+(pct>=80?"bien":(pct>=50?"moyen":"revoir"));
+  var txt=el("bilan-texte");
+  if(faits<5) txt.textContent="Continue : vérifie les autres exercices pour avoir ton bilan complet.";
+  else if(pct===100) txt.textContent="";
+  else txt.textContent="Voici ce qu'il te reste à revoir avant l'évaluation :";
+  var pret=el("pret"); if(pret)pret.remove();
+  if(faits===5&&pct===100){var p=document.createElement("p");p.id="pret";p.className="pret";p.textContent="Tout est juste : tu es prêt pour l'évaluation. Termine par les exercices 6 et bonus pour t'entraîner à rédiger.";liste.after(p)}
+}
+
+el("recommencer").addEventListener("click",function(){
+  if(!confirm("Effacer toutes tes réponses de l'entraînement ?"))return;
+  champs().forEach(function(c){if(c.type==="radio"||c.type==="checkbox")c.checked=false;else if(c.tagName==="SELECT")c.selectedIndex=0;else c.value=""});
+  tous(".juste,.faux").forEach(function(x){x.classList.remove("juste","faux")});
+  tous(".resultat").forEach(function(x){x.textContent="";x.className="resultat"});
+  tous(".attendu").forEach(function(x){x.classList.remove("ouvert")});
+  scores={}; el("areviser").innerHTML=""; el("jauge").style.width="0"; el("score").textContent="";
+  el("bilan-texte").textContent="Vérifie les exercices 1 à 5 : ton score et ce qu'il faut revoir apparaîtront ici.";
+  var pret=el("pret"); if(pret)pret.remove();
+  try{localStorage.removeItem(CLE)}catch(e){}
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+/* ---------- Correction en PDF : noir seul, mise en page sobre façon Markdown ---------- */
+function propre(t){
+  return String(t||"").replace(/[‘’]/g,"'").replace(/[“”]/g,'"')
+    .replace(/[–—]/g,"-").replace(/…/g,"...").replace(/→/g,"->")
+    .replace(/ /g," ").replace(/ /g," ");
+}
+function correctionPDF(){
+  if(!(window.jspdf&&window.jspdf.jsPDF)){
+    alert("Le PDF n'a pas pu être créé : vérifie ta connexion Internet, puis réessaie.");
+    return;
+  }
+  var doc=new window.jspdf.jsPDF({unit:"mm",format:"a4"});
+  var G=20, L=170, HAUT=22, BAS=277, y=HAUT, page=1, TAILLE=10.5, LH=5.1;
+  doc.setTextColor(0,0,0); doc.setDrawColor(0,0,0);
+
+  function pied(){
+    doc.setFont("helvetica","normal"); doc.setFontSize(8.5); doc.setTextColor(0,0,0);
+    doc.text(propre("Correction — Entraînement · Séquence 2 · Activité 1 partie 1"), G, 289);
+    doc.text(String(page), G+L, 289, {align:"right"});
+  }
+  function saut(h){ if(y+h>BAS){ pied(); doc.addPage(); page++; y=HAUT; } }
+
+  /* écrit un texte contenant des **gras**, mot par mot, avec retour à la ligne */
+  function ecrire(texte, x, largeur, taille){
+    var morceaux=propre(texte).split("**"), mots=[];
+    morceaux.forEach(function(m,i){
+      m.split(/(\s+)/).forEach(function(w){ if(w!=="") mots.push({w:w, gras:i%2===1}); });
+    });
+    doc.setFontSize(taille);
+    var lignes=[[]], larg=0;
+    mots.forEach(function(m){
+      doc.setFont("helvetica", m.gras?"bold":"normal");
+      var lw=doc.getTextWidth(m.w);
+      if(/^\s+$/.test(m.w)){ if(lignes[lignes.length-1].length){ lignes[lignes.length-1].push({w:" ",gras:m.gras,lw:lw}); larg+=lw; } return; }
+      if(larg+lw>largeur && lignes[lignes.length-1].length){
+        var der=lignes[lignes.length-1]; while(der.length&&der[der.length-1].w===" ") der.pop();
+        lignes.push([]); larg=0;
+      }
+      lignes[lignes.length-1].push({w:m.w,gras:m.gras,lw:lw}); larg+=lw;
+    });
+    lignes.forEach(function(l){
+      saut(LH);
+      doc.setFontSize(taille); doc.setTextColor(0,0,0);   /* le pied de page a pu changer la taille */
+      var cx=x;
+      l.forEach(function(m){ doc.setFont("helvetica", m.gras?"bold":"normal"); doc.text(m.w, cx, y); cx+=m.lw; });
+      y+=LH*taille/TAILLE;
+    });
+  }
+
+  DONNEES.correction.forEach(function(b){
+    if(b.t==="h1"){
+      saut(16); doc.setFont("helvetica","bold"); doc.setFontSize(17);
+      var l=doc.splitTextToSize(propre(b.s), L); doc.text(l, G, y); y+=l.length*7.2;
+      doc.setLineWidth(0.4); doc.line(G, y-3.2, G+L, y-3.2); y+=4;
+    }else if(b.t==="h2"){
+      y+=3; saut(14); doc.setFont("helvetica","bold"); doc.setFontSize(13);
+      doc.text(propre(b.s), G, y); y+=2.2;
+      doc.setLineWidth(0.15); doc.line(G, y, G+L, y); y+=5.4;
+    }else if(b.t==="p"){
+      ecrire(b.s, G, L, TAILLE); y+=2.2;
+    }else if(b.t==="li"){
+      saut(LH); doc.setFont("helvetica","normal"); doc.setFontSize(TAILLE);
+      doc.text("-", G+1.5, y);
+      ecrire(b.s, G+6, L-6, TAILLE); y+=1.2;
+    }else if(b.t==="hr"){
+      y+=1.5; saut(6); doc.setLineWidth(0.25); doc.line(G, y, G+L, y); y+=6;
+    }
+  });
+  pied();
+  doc.save("Correction-Entrainement-Seq2-Act1-P1.pdf");
+}
+el("pdf-correction").addEventListener("click", correctionPDF);
+
+restaurer();
+})();
+</script>
+</body>
+</html>
