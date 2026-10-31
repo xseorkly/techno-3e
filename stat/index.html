@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Statistiques des sites</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--papier:#F4F7F7;--carte:#fff;--encre:#14262B;--doux:#5A6C71;--teal:#0E6E6B;--teal-pale:#E2EFEE;--magenta:#C2185B;--trait:#D2DEDE;--r:10px}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--papier);color:var(--encre);font:17px/1.55 "Source Sans 3",system-ui,sans-serif}
+.page{max-width:1240px;margin:0 auto;padding:0 20px 60px}
+h1,h2{font-family:"Archivo",sans-serif}
+header{padding:34px 0 18px}
+.fil{font:600 13px "Archivo",sans-serif;color:var(--magenta);margin:0 0 6px;letter-spacing:.02em}
+h1{font-size:clamp(26px,4vw,34px);line-height:1.15;margin:0 0 6px}
+header p{color:var(--doux);margin:0}
+
+/* verrou */
+.verrou{max-width:430px;margin:40px auto 0;background:var(--carte);border:1px solid var(--trait);border-top:4px solid var(--teal);border-radius:var(--r);padding:26px 24px}
+.verrou h2{font-size:19px;margin:0 0 6px}
+.verrou p{color:var(--doux);font-size:15.5px;margin:0 0 16px}
+.verrou form{display:flex;gap:10px;flex-wrap:wrap}
+.verrou input{flex:1 1 200px;font:inherit;font-size:17px;padding:11px 13px;border:1px solid var(--trait);border-radius:8px;background:#fff}
+.verrou input:focus{outline:0;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-pale)}
+.btn{font:600 15px "Archivo",sans-serif;background:var(--teal);color:#fff;border:0;border-radius:8px;padding:11px 18px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{background:#0b5a58}
+.btn.second{background:#fff;color:var(--teal);border:1px solid var(--teal)}
+.btn.second:hover{background:var(--teal-pale)}
+.btn[disabled]{opacity:.6;cursor:wait}
+.refus{color:var(--magenta);font-size:15px;margin:12px 0 0}
+
+/* tableau de bord */
+.barre{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:12px 14px;margin-top:6px}
+.barre .titre{font:600 16px "Archivo",sans-serif;margin-right:auto}
+.cadre{margin-top:12px;background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);overflow:hidden;height:min(86vh,1400px);min-height:560px}
+.cadre iframe{display:block;width:100%;height:100%;border:0}
+.aide{color:var(--doux);font-size:14.5px;margin:10px 2px 0}
+
+details.bloc{margin-top:16px;background:var(--carte);border:1px solid var(--trait);border-radius:var(--r)}
+details.bloc summary{cursor:pointer;padding:14px 18px;font:600 16px "Archivo",sans-serif}
+details.bloc .dedans{padding:0 18px 16px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{border-bottom:1px solid var(--trait);padding:7px 6px;text-align:left;vertical-align:top}
+th{font:600 13px "Archivo",sans-serif;color:var(--doux)}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:var(--teal)}
+.sites{columns:3 220px;column-gap:18px;margin:0;padding:0;list-style:none;font-size:15px}
+.sites li{margin:0 0 5px;break-inside:avoid}
+.sites a{color:var(--teal);text-decoration:none}
+.sites a:hover{text-decoration:underline}
+footer{margin-top:24px;color:var(--doux);font-size:13.5px}
+@media(max-width:640px){.cadre{height:80vh;min-height:480px}.barre .titre{flex-basis:100%}}
+</style>
+</head>
+<body>
+<main class="page">
+  <header>
+    <p class="fil">Page privée · non reliée au site</p>
+    <h1>Statistiques de mes sites</h1>
+    <p>Fréquentation anonyme de tous les sites xseorkly.github.io, mesurée par Umami.</p>
+  </header>
+
+  <section class="verrou" id="verrou">
+    <h2>Accès protégé</h2>
+    <p>Saisis le mot de passe pour afficher le tableau de bord.</p>
+    <form id="form" autocomplete="off">
+      <input type="password" id="mdp" placeholder="Mot de passe" aria-label="Mot de passe" autocomplete="current-password" required autofocus>
+      <button class="btn" type="submit" id="ouvrir">Afficher</button>
+    </form>
+    <p class="refus" id="refus" hidden>Mot de passe incorrect.</p>
+  </section>
+
+  <section id="tableau" hidden>
+    <div class="barre">
+      <span class="titre">Tableau de bord Umami</span>
+      <a class="btn" id="pleinecran" href="#" target="_blank" rel="noopener noreferrer">Ouvrir en plein écran ↗</a>
+      <button class="btn second" type="button" id="verrouiller">Verrouiller</button>
+    </div>
+    <div class="cadre" id="cadre"></div>
+    <p class="aide">Si le tableau ne s'affiche pas ci-dessus, ouvre-le en plein écran : certains navigateurs bloquent l'affichage d'un site dans un autre. Dans Umami, change la période en haut à droite, et utilise le panneau <b>Pages</b> pour voir quel site est consulté : le début de l'adresse indique le site (<code>/techno-3e/…</code>, <code>/osi/…</code>, <code>/Cpe/…</code>).</p>
+
+    <details class="bloc">
+      <summary>Lexique des événements (fiches techno-3e)</summary>
+      <div class="dedans">
+        <table>
+          <tr><th>Événement</th><th>Ce qu'il compte</th></tr>
+          <tr><td><code>pdf-fiche</code></td><td>Clic sur « Générer le PDF » d'une fiche</td></tr>
+          <tr><td><code>correction-ouverte</code></td><td>Correction réellement ouverte, avec le bon mot de passe</td></tr>
+          <tr><td><code>evaluation-ouverte</code> · <code>evaluation-pdf</code></td><td>Évaluation en ligne ouverte · son PDF généré</td></tr>
+          <tr><td><code>video-lancee</code></td><td>Vidéo lancée (avec son titre)</td></tr>
+          <tr><td><code>nolej-activite</code></td><td>Niveau NOLEJ ouvert dans « Entraînement » (avec son nom)</td></tr>
+          <tr><td><code>livre-chapitre</code></td><td>Chapitre du livre interactif ouvert (Séq. 2, partie 2)</td></tr>
+          <tr><td><code>prepa-ouverte</code> · <code>prepa-verifier</code> · <code>prepa-pdf-correction</code></td><td>Entraînement à l'évaluation : volet ouvert · exercice vérifié (avec son numéro) · correction téléchargée</td></tr>
+          <tr><td><code>aller-a</code></td><td>Changement de fiche par le menu « Aller à » (avec la page choisie)</td></tr>
+          <tr><td><code>effacer-reponses</code></td><td>Clic sur « Effacer mes réponses »</td></tr>
+          <tr><td><code>depot-envoi</code></td><td>Travail envoyé depuis la page de dépôt</td></tr>
+        </table>
+      </div>
+    </details>
+
+    <details class="bloc">
+      <summary>Les sites mesurés</summary>
+      <div class="dedans"><ul class="sites" id="sites"></ul></div>
+    </details>
+  </section>
+
+  <footer>Page privée — ne pas diffuser l'adresse. Le lien du tableau de bord est chiffré dans cette page et ne se déchiffre qu'avec le mot de passe.</footer>
+</main>
+
+<script>
+(function(){
+"use strict";
+var COFFRE = {"v":1,"iter":310000,"sel":"OBWJnIZ9eVNkOF/UB0HB0Q==","iv":"jDdXPGfPNvds5/IN","ct":"8eiYGs/Rk93Boi5rrsn3rw/87+jJKc2txycilqgFCDne3E5oGIN//CVvy1GjwAbQKK40TLkCBUxo+MjzeQ=="};
+var SITES = ["act-logiciel", "activites-macros", "badge-etablissement", "badge-etablissement2", "badge-etablissement3", "badge-etablissement4", "bf", "cerveau-adolescent", "climat-scolaire", "Cpe", "fablab", "fablab-en-classe", "fk", "formationiaperdir", "gnerateur-de-documents", "guide-macros", "guide-macros-word", "ia-administratif", "intercvl", "jeu-scratch1", "navette-lycee", "osi", "philosophie-ia", "photoeleve", "planning20262027", "programme", "programme2", "questdebformation", "regroupement_COSI_ZESE2026", "signaler-des-problemes-dans-mon-lycee", "sql1", "techno-3e", "techno-sciences-cognitives", "tour-entree-metier", "TourDeSalle", "videos-intercvl", "visite-conseil", "ysra-revision"];
+var MEMO = "stats-xseorkly";
+function el(id){return document.getElementById(id)}
+function octets(b64){var s=atob(b64),u=new Uint8Array(s.length);for(var i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u}
+
+async function dechiffrer(mdp){
+  var enc=new TextEncoder();
+  var base=await crypto.subtle.importKey("raw",enc.encode(mdp),"PBKDF2",false,["deriveKey"]);
+  var cle=await crypto.subtle.deriveKey({name:"PBKDF2",salt:octets(COFFRE.sel),iterations:COFFRE.iter,hash:"SHA-256"},
+                                       base,{name:"AES-GCM",length:256},false,["decrypt"]);
+  var clair=await crypto.subtle.decrypt({name:"AES-GCM",iv:octets(COFFRE.iv)},cle,octets(COFFRE.ct));
+  return new TextDecoder().decode(clair);
+}
+function afficher(lien){
+  el("verrou").hidden=true; el("tableau").hidden=false;
+  el("pleinecran").href=lien;
+  var f=document.createElement("iframe");
+  f.src=lien; f.title="Tableau de bord Umami"; f.referrerPolicy="no-referrer";
+  el("cadre").innerHTML=""; el("cadre").appendChild(f);
+  var ul=el("sites"); ul.innerHTML="";
+  SITES.forEach(function(s){var li=document.createElement("li"),a=document.createElement("a");
+    a.href="https://xseorkly.github.io/"+s+"/";a.target="_blank";a.rel="noopener";a.textContent="/"+s+"/";li.appendChild(a);ul.appendChild(li)});
+}
+el("form").addEventListener("submit",async function(e){
+  e.preventDefault();
+  var b=el("ouvrir"), mdp=el("mdp").value;
+  if(!window.crypto||!crypto.subtle){el("refus").textContent="Ce navigateur ne permet pas d'ouvrir la page (connexion non sécurisée ?).";el("refus").hidden=false;return}
+  b.disabled=true; b.textContent="Vérification…"; el("refus").hidden=true;
+  try{
+    var lien=await dechiffrer(mdp);
+    try{sessionStorage.setItem(MEMO,lien)}catch(_){}
+    afficher(lien);
+  }catch(err){
+    el("refus").textContent="Mot de passe incorrect."; el("refus").hidden=false;
+    el("mdp").value=""; el("mdp").focus();
+  }
+  b.disabled=false; b.textContent="Afficher";
+});
+el("verrouiller").addEventListener("click",function(){
+  try{sessionStorage.removeItem(MEMO)}catch(_){}
+  el("cadre").innerHTML=""; el("pleinecran").href="#";
+  el("tableau").hidden=true; el("verrou").hidden=false; el("mdp").value=""; el("mdp").focus();
+});
+/* déjà déverrouillé dans cet onglet : on rouvre directement */
+try{var deja=sessionStorage.getItem(MEMO); if(deja && /^https:\/\/[a-z0-9.-]*umami\.is\//.test(deja)) afficher(deja)}catch(_){}
+})();
+</script>
+</body>
+</html>
