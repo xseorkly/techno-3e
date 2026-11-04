@@ -717,13 +717,13 @@ pour chaque mesure m faire
     <p>Une coureuse prépare un ultra-trail de 20 heures avec une montre qui mesure sa fréquence cardiaque, enregistre son parcours et l'alerte par vibration. Les données sont envoyées au téléphone, puis aux serveurs du fabricant. Données techniques fictives et simplifiées.</p>
     <div class="grid2">
       <div class="docbox"><b>Ce que le sujet travaille</b><br>Données personnelles, cycle de vie, capteurs complémentaires, chaînes, échantillonnage et cas le plus défavorable, autonomie, mémoire d'un état.</div>
-      <div class="docbox"><b>Les questions qui départagent</b><br>Q7 et Q10 (garantir un délai, prouver qu'un réglage convient), Q17 (dernière suite), Q18 (boucles imbriquées et optimisation).</div>
+      <div class="docbox"><b>Les questions qui départagent</b><br>Q7 et Q11 (garantir un délai, prouver qu'un réglage convient), Q9 (programme par blocs : ordre des tests), Q18 (dernière suite), Q19 (boucles imbriquées et optimisation).</div>
     </div>
   </div>
 
   <div class="pdfs">
   <details class="pdfview">
-    <summary><span class="pdfic" aria-hidden="true">PDF</span><span><b>Énoncé illustré</b><br><span class="small">Sujet à distribuer aux élèves, au format du sujet zéro · 13 pages</span></span></summary>
+    <summary><span class="pdfic" aria-hidden="true">PDF</span><span><b>Énoncé illustré</b><br><span class="small">Sujet à distribuer aux élèves, au format du sujet zéro · 14 pages</span></span></summary>
     <div class="pdfbar">
       <a class="btn primary" href="pdf/CGC_ITN_montre_enonce.pdf" download>Télécharger le PDF</a>
       <a class="btn outline" href="pdf/CGC_ITN_montre_enonce.pdf" target="_blank" rel="noopener">Ouvrir dans un nouvel onglet</a>
@@ -734,7 +734,7 @@ pour chaque mesure m faire
     <p class="small pdfnote">Si le PDF ne s'affiche pas (certains téléphones), utilisez « Ouvrir dans un nouvel onglet » ou « Télécharger le PDF ».</p>
   </details>
   <details class="pdfview only-prof">
-    <summary><span class="pdfic" aria-hidden="true">PDF</span><span><b>Corrigé et barème</b><br><span class="small">Corrections illustrées, logigrammes, barème sur 80 points · 9 pages</span></span></summary>
+    <summary><span class="pdfic" aria-hidden="true">PDF</span><span><b>Corrigé et barème</b><br><span class="small">Corrections illustrées, logigrammes, barème sur 80 points · 10 pages</span></span></summary>
     <div class="pdfbar">
       <a class="btn primary" href="pdf/CGC_ITN_montre_corrige.pdf" download>Télécharger le PDF</a>
       <a class="btn outline" href="pdf/CGC_ITN_montre_corrige.pdf" target="_blank" rel="noopener">Ouvrir dans un nouvel onglet</a>
@@ -828,7 +828,20 @@ fonction meilleur_reglage(duree, capacite)
     </div></details>
   </article>
 
-  <div class="docbox"><b>Document 7 · Programme d'alerte</b> (au démarrage, alerte_active ← FAUX) et essai avec T = 10 s, seuil 150 bpm : mesures 145, 152, 148, 153, 155, 151, 147.
+  <div class="docbox"><b>Document 7 · Affichage de la zone cardiaque.</b> Rouge si la fréquence cardiaque atteint le seuil (avec vibration), orange si elle est à moins de 10 bpm du seuil, verte sinon. Programme MakeCode exécuté en boucle.
+    <p style="text-align:center;margin:10px 0 0"><img src="img/blocs_montre_enonce.png" alt="Programme par blocs à compléter : zone cardiaque" style="max-width:100%;width:560px;height:auto"></p></div>
+
+  <article class="q"><div class="qh"><span class="qn">Q9</span><h4>Programme par blocs : la zone cardiaque</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-rai">Raisonnement</span><span class="lvl">★★☆</span></div>
+    <p class="enonce">Compléter le programme avec les propositions : Commander la vibration, T, Afficher « ZONE VERTE », seuil − 10, Fréquence mesurée par le capteur optique, Afficher « ZONE ROUGE », seuil. Expliquer pourquoi « FC ≥ seuil » doit être testé avant « FC ≥ seuil − 10 », puis ce que fait le programme pendant un long dépassement.</p>
+    <p class="savoir"><b>Ce qu'il faut savoir.</b> Lire un programme par blocs comme au sujet zéro ; dans une suite de « si … sinon si », tester d'abord la condition la plus restrictive.</p>
+    <p class="exig"><b>Exigence.</b> Au-delà du remplissage, comprendre pourquoi l'ordre des tests change le résultat et repérer le défaut qui justifie le programme suivant.</p>
+    <details class="corr"><summary>Voir la correction</summary><div>
+      <p style="text-align:center"><img src="img/blocs_montre_corrige.png" alt="Programme par blocs complété" style="max-width:100%;width:600px;height:auto"></p>
+      <p>Si l'on teste d'abord « FC ≥ seuil − 10 », toute fréquence qui atteint le seuil passe ce test : la zone rouge et la vibration ne sont jamais atteintes. Pendant un long dépassement, la montre vibre à chaque mesure, toutes les T secondes : c'est ce que corrige le programme du document 8, qui mémorise qu'une alerte a déjà été donnée.</p>
+    </div></details>
+  </article>
+
+  <div class="docbox"><b>Document 8 · Programme d'alerte</b> (au démarrage, alerte_active ← FAUX) et essai avec T = 10 s, seuil 150 bpm : mesures 145, 152, 148, 153, 155, 151, 147.
 <pre class="code">si mesure ≥ seuil alors
     si alerte_active = FAUX alors
         commander la vibration
@@ -836,7 +849,7 @@ fonction meilleur_reglage(duree, capacite)
 sinon
     alerte_active ← FAUX</pre></div>
 
-  <article class="q"><div class="qh"><span class="qn">Q9</span><h4>Exécuter un programme à mémoire</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-test">Tests</span><span class="lvl">★★☆</span></div>
+  <article class="q"><div class="qh"><span class="qn">Q10</span><h4>Exécuter un programme à mémoire</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-test">Tests</span><span class="lvl">★★☆</span></div>
     <p class="enonce">Exécuter le programme sur l'essai, expliquer le rôle de alerte_active et la faiblesse face à une mesure fausse isolée.</p>
     <details class="corr"><summary>Voir la correction</summary><div>
       <div class="tw"><table><tr><th>Instant (s)</th><td>0</td><td>10</td><td>20</td><td>30</td><td>40</td><td>50</td><td>60</td></tr><tr><th>alerte_active</th><td>FAUX</td><td>VRAI</td><td>FAUX</td><td>VRAI</td><td>VRAI</td><td>VRAI</td><td>FAUX</td></tr><tr><th>Vibration</th><td>non</td><td>oui</td><td>non</td><td>oui</td><td>non</td><td>non</td><td>non</td></tr></table></div>
@@ -844,7 +857,7 @@ sinon
     </div></details>
   </article>
 
-  <article class="q"><div class="qh"><span class="qn">Q10</span><h4>Confirmer par deux mesures : conséquences en chaîne</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-rai">Raisonnement</span><span class="tag t-mod">Modélisation</span><span class="lvl">★★★</span></div>
+  <article class="q"><div class="qh"><span class="qn">Q11</span><h4>Confirmer par deux mesures : conséquences en chaîne</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-rai">Raisonnement</span><span class="tag t-mod">Modélisation</span><span class="lvl">★★★</span></div>
     <p class="enonce">Ne vibrer qu'après deux mesures consécutives ≥ seuil. Modifier le programme et le tester ; trouver les réglages qui respectent encore E1 et E2 ; en déduire si la batterie de 400 mA·h suffit, sinon la capacité minimale.</p>
     <p class="exig"><b>Exigence.</b> Une amélioration logicielle a des conséquences sur le réglage, puis sur le matériel : il faut suivre toute la chaîne de conséquences.</p>
     <details class="corr"><summary>Voir la correction</summary><div>
@@ -865,12 +878,12 @@ sinon
   <div class="part"><h3>Partie B · Algorithmique : analyser un parcours</h3>
   <div class="docbox"><b>Modèle.</b> Une position est relevée toutes les 10 s. Un parcours est une liste P de couples (x, y) en mètres ; <code>(x, y) ← P[i]</code>. On dispose de <code>racine(a)</code>. Jeu d'essai : P = [(0, 0), (30, 40), (30, 100), (90, 100), (90, 100), (90, 180), (30, 100), (0, 60)]. Le parc est le rectangle (0, 50, 100, 150), bords inclus.</div>
 
-  <article class="q"><div class="qh"><span class="qn">Q11</span><h4>Distances à la main</h4><span class="tag t-mod">Modélisation</span><span class="lvl">★☆☆</span></div>
+  <article class="q"><div class="qh"><span class="qn">Q12</span><h4>Distances à la main</h4><span class="tag t-mod">Modélisation</span><span class="lvl">★☆☆</span></div>
     <p class="enonce">Montrer que la distance entre P[1] et P[2] vaut 50 m ; calculer la longueur totale.</p>
     <details class="corr"><summary>Voir la correction</summary><div><p>racine(30² + 40²) = racine(2 500) = 50. Intervalles : 50, 60, 60, 0, 80, 100, 50. Total : 400 m.</p></div></details>
   </article>
 
-  <article class="q"><div class="qh"><span class="qn">Q12 · Q13</span><h4>distance et distance_totale</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-test">Cas limites</span><span class="lvl">★☆☆</span></div>
+  <article class="q"><div class="qh"><span class="qn">Q13 · Q14</span><h4>distance et distance_totale</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-test">Cas limites</span><span class="lvl">★☆☆</span></div>
     <details class="corr"><summary>Voir la correction</summary><div>
 <pre class="code">fonction distance(x1, y1, x2, y2)
     renvoyer racine((x2 − x1) × (x2 − x1) + (y2 − y1) × (y2 − y1))
@@ -885,7 +898,7 @@ fonction distance_totale(P)
       <p class="small">Avec 0 ou 1 relevé, la boucle ne s'exécute pas : le résultat est 0.</p></div></details>
   </article>
 
-  <article class="q"><div class="qh"><span class="qn">Q14</span><h4>Durée d'arrêt</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-ana">Analyse</span><span class="lvl">★★☆</span></div>
+  <article class="q"><div class="qh"><span class="qn">Q15</span><h4>Durée d'arrêt</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-ana">Analyse</span><span class="lvl">★★☆</span></div>
     <p class="enonce">Écrire <code>duree_arret(P, dmin)</code> : durée totale des intervalles où la coureuse a parcouru strictement moins de dmin. Pourquoi dmin = 5 et non 0 ?</p>
     <details class="corr"><summary>Voir la correction</summary><div>
 <pre class="code">fonction duree_arret(P, dmin)
@@ -899,7 +912,7 @@ fonction distance_totale(P)
       <p>Résultat : 10 s. Le GNSS a une précision d'environ 5 m : à l'arrêt, la position mesurée bouge. Avec dmin = 0, aucun arrêt ne serait détecté.</p></div></details>
   </article>
 
-  <article class="q"><div class="qh"><span class="qn">Q15 · Q16</span><h4>Dans le parc, entrées dans le parc</h4><span class="tag t-algo">Algorithmique</span><span class="lvl">★★☆</span></div>
+  <article class="q"><div class="qh"><span class="qn">Q16 · Q17</span><h4>Dans le parc, entrées dans le parc</h4><span class="tag t-algo">Algorithmique</span><span class="lvl">★★☆</span></div>
     <p class="enonce">Écrire <code>dans_parc(x, y, xg, yb, xd, yh)</code>, puis <code>nombre_entrees(P, …)</code> : relevés dans le parc dont le précédent est dehors.</p>
     <details class="corr"><summary>Voir la correction</summary><div>
 <pre class="code">fonction dans_parc(x, y, xg, yb, xd, yh)
@@ -916,7 +929,7 @@ fonction nombre_entrees(P, xg, yb, xd, yh)
       <p>Relevés dans le parc : 3, 4, 5, 7, 8 (le 8 est sur le bord). Entrées : 2.</p></div></details>
   </article>
 
-  <article class="q"><div class="qh"><span class="qn">Q17</span><h4>Plus longue présence dans le parc</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-test">Cas limites</span><span class="lvl">★★★</span></div>
+  <article class="q"><div class="qh"><span class="qn">Q18</span><h4>Plus longue présence dans le parc</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-test">Cas limites</span><span class="lvl">★★★</span></div>
     <details class="corr"><summary>Voir la correction</summary><div>
 <pre class="code">fonction plus_longue_presence(P, xg, yb, xd, yh)
     courant ← 0
@@ -933,7 +946,7 @@ fonction nombre_entrees(P, xg, yb, xd, yh)
       <p>Résultat : 3. Mettre à jour le maximum à chaque relevé dans le parc traite la suite qui finit au dernier relevé.</p></div></details>
   </article>
 
-  <article class="q"><div class="qh"><span class="qn">Q18</span><h4>Meilleur temps sur une distance</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-rai">Raisonnement</span><span class="lvl">★★★</span></div>
+  <article class="q"><div class="qh"><span class="qn">Q19</span><h4>Meilleur temps sur une distance</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-rai">Raisonnement</span><span class="lvl">★★★</span></div>
     <p class="enonce">Trouver la plus courte durée entre deux relevés P[i] et P[j] (i &lt; j) telle que la distance parcourue entre eux atteigne D. Calcul à la main pour D = 150 m, fonction <code>meilleur_temps(P, D)</code> (−1 si impossible), puis amélioration pour 7 201 relevés.</p>
     <details class="corr"><summary>Voir la correction</summary><div>
       <p>Cumuls : 0, 50, 110, 170, 170, 250, 350, 400. Aucun intervalle seul n'atteint 150 m ; de P[5] à P[7] : 180 m en 20 s. Résultat : 20 s.</p>
@@ -965,13 +978,13 @@ fonction nombre_entrees(P, xg, yb, xd, yh)
     <p>Construit à partir de la partie technologie du DNB 2025 (robot Oz, qui désherbe sans produit chimique). Le DNB posait six questions de lecture de documents ; ce sujet en fait une épreuve de concours. Données ajoutées fictives et simplifiées, mais cohérentes entre elles : 12 m/min, 500 W, 20 h par hectare.</p>
     <div class="grid2">
       <div class="docbox"><b>Ce que le sujet travaille</b><br>Besoin et sécurité, bilan économique et carbone, réducteur, capteurs de localisation, batterie avec réserve, trajectoire en aller-retour, priorité des règles, distance d'arrêt.</div>
-      <div class="docbox"><b>Les pièges qui départagent</b><br>La réserve de 20 % qui exclut la batterie D (Q6), le sens alterné des demi-tours (Q7), l'ordre des tests (Q8), le pire cas à deux vitesses (Q9), les bords du rang (Q12), le passage final (Q15).</div>
+      <div class="docbox"><b>Les pièges qui départagent</b><br>La réserve de 20 % qui exclut la batterie D (Q6 et Q7), le sens alterné des demi-tours (Q8), l'ordre des tests (Q9), le pire cas à deux vitesses (Q10), les bords du rang (Q13), le passage final (Q16).</div>
     </div>
   </div>
 
   <div class="pdfs">
   <details class="pdfview">
-    <summary><span class="pdfic" aria-hidden="true">PDF</span><span><b>Énoncé illustré</b><br><span class="small">Sujet à distribuer aux élèves, au format du sujet zéro · 12 pages</span></span></summary>
+    <summary><span class="pdfic" aria-hidden="true">PDF</span><span><b>Énoncé illustré</b><br><span class="small">Sujet à distribuer aux élèves, au format du sujet zéro · 13 pages</span></span></summary>
     <div class="pdfbar">
       <a class="btn primary" href="pdf/CGC_ITN_robot_enonce.pdf" download>Télécharger le PDF</a>
       <a class="btn outline" href="pdf/CGC_ITN_robot_enonce.pdf" target="_blank" rel="noopener">Ouvrir dans un nouvel onglet</a>
@@ -982,7 +995,7 @@ fonction nombre_entrees(P, xg, yb, xd, yh)
     <p class="small pdfnote">Si le PDF ne s'affiche pas (certains téléphones), utilisez « Ouvrir dans un nouvel onglet » ou « Télécharger le PDF ».</p>
   </details>
   <details class="pdfview only-prof">
-    <summary><span class="pdfic" aria-hidden="true">PDF</span><span><b>Corrigé et barème</b><br><span class="small">Corrections illustrées, logigrammes, barème sur 80 points · 11 pages</span></span></summary>
+    <summary><span class="pdfic" aria-hidden="true">PDF</span><span><b>Corrigé et barème</b><br><span class="small">Corrections illustrées, logigrammes, barème sur 80 points · 12 pages</span></span></summary>
     <div class="pdfbar">
       <a class="btn primary" href="pdf/CGC_ITN_robot_corrige.pdf" download>Télécharger le PDF</a>
       <a class="btn outline" href="pdf/CGC_ITN_robot_corrige.pdf" target="_blank" rel="noopener">Ouvrir dans un nouvel onglet</a>
@@ -1055,8 +1068,21 @@ fonction nombre_entrees(P, xg, yb, xd, yh)
       <p>Résultat : 0. Il faut 0,8 × E ≥ 4 000, soit E ≥ 5 000 W·h. A + C = 4 800 ne suffit pas ; A + D ou B + C (6 000 W·h, 9,6 h) conviennent.</p></div></details>
   </article>
 
-  <article class="q"><div class="qh"><span class="qn">Q7</span><h4>Parcourir la parcelle en aller-retour</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-rai">Raisonnement</span><span class="lvl">★★★</span></div>
-    <div class="docbox"><b>Document 6.</b> 11 rangs de 48 m espacés de 1 m. Demi-tour : tourner de 90°, avancer de 1 m, tourner de 90° dans le même sens (30 s). Vitesse 12 m/min. Instructions : <code>avancer(d)</code>, <code>tourner_gauche()</code>, <code>tourner_droite()</code>.</div>
+  <div class="docbox"><b>Document 6 · Retour automatique à la base.</b> Quand la batterie est faible, le robot arrête de biner, prévient le maraîcher et rejoint seul sa base en traversant la parcelle. Programme MakeCode exécuté en boucle.
+    <p style="text-align:center;margin:10px 0 0"><img src="img/blocs_robot_enonce.png" alt="Programme par blocs à compléter : retour à la base" style="max-width:100%;width:560px;height:auto"></p></div>
+
+  <article class="q"><div class="qh"><span class="qn">Q7</span><h4>Programme par blocs : retour à la base</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-rai">Raisonnement</span><span class="tag t-mod">Modélisation</span><span class="lvl">★★☆</span></div>
+    <p class="enonce">Compléter le programme avec les propositions : Retourner à la base de recharge, 20, Biner le rang en cours, Relever la lame, Niveau de charge de la batterie (%), Envoyer un message au maraîcher. Justifier l'ordre des actions. Avec 6 000 W·h, 500 W et 15 minutes de retour, montrer qu'un retour déclenché à 20 % ne respecte pas la réserve de 20 %, et proposer un seuil.</p>
+    <p class="savoir"><b>Ce qu'il faut savoir.</b> Lire un programme par blocs ; E = P × t ; convertir 15 min en 0,25 h ; raisonner en pourcentage de la batterie.</p>
+    <p class="exig"><b>Exigence.</b> Penser aux conséquences physiques de l'ordre des actions (la lame baissée détruit les plants) et vérifier qu'un seuil est cohérent avec une autre contrainte du sujet.</p>
+    <details class="corr"><summary>Voir la correction</summary><div>
+      <p style="text-align:center"><img src="img/blocs_robot_corrige.png" alt="Programme par blocs complété" style="max-width:100%;width:600px;height:auto"></p>
+      <p>La lame est relevée en premier, sinon le robot détruit les plants en traversant la parcelle ; le message part avant le retour pour prévenir tout de suite. Le retour consomme 500 × 0,25 = 125 W·h, soit environ 2,1 % de 6 000 W·h : déclenché à 20 %, il fait descendre la charge à 17,9 %. Il faut un seuil d'au moins 23 % ; 25 % garde une marge.</p>
+    </div></details>
+  </article>
+
+  <article class="q"><div class="qh"><span class="qn">Q8</span><h4>Parcourir la parcelle en aller-retour</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-rai">Raisonnement</span><span class="lvl">★★★</span></div>
+    <div class="docbox"><b>Document 7.</b> 11 rangs de 48 m espacés de 1 m. Demi-tour : tourner de 90°, avancer de 1 m, tourner de 90° dans le même sens (30 s). Vitesse 12 m/min. Instructions : <code>avancer(d)</code>, <code>tourner_gauche()</code>, <code>tourner_droite()</code>.</div>
     <p class="enonce">Un élève répète 11 fois : avancer(48), tourner_gauche(), avancer(1), tourner_gauche(). Expliquer l'erreur. Écrire <code>parcourir(n, L)</code>. Calculer la distance et la durée.</p>
     <details class="corr"><summary>Voir la correction</summary><div>
       <p>Toujours à gauche, le robot revient au rang 1 après le deuxième demi-tour : il fait des allers-retours entre les rangs 1 et 2, et il fait un demi-tour inutile après le dernier rang.</p>
@@ -1075,8 +1101,8 @@ fonction nombre_entrees(P, xg, yb, xd, yh)
       <p>Distance : 11 × 48 + 10 = 538 m. Durée : 528 / 12 = 44 min, plus 10 × 30 s = 5 min, soit 49 min.</p></div></details>
   </article>
 
-  <article class="q"><div class="qh"><span class="qn">Q8</span><h4>L'ordre des règles</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-test">Cas limites</span><span class="lvl">★★☆</span></div>
-    <div class="docbox"><b>Document 7.</b> Obstacle à moins de 0,3 m : arrêt. Entre 0,3 et 1 m : ralentir. Hors de la parcelle : arrêt. Précision GNSS supérieure à 0,05 m : arrêt. Sinon : avancer.</div>
+  <article class="q"><div class="qh"><span class="qn">Q9</span><h4>L'ordre des règles</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-test">Cas limites</span><span class="lvl">★★☆</span></div>
+    <div class="docbox"><b>Document 8.</b> Obstacle à moins de 0,3 m : arrêt. Entre 0,3 et 1 m : ralentir. Hors de la parcelle : arrêt. Précision GNSS supérieure à 0,05 m : arrêt. Sinon : avancer.</div>
     <p class="enonce">Écrire <code>decision(d, precision, dans_parcelle)</code>. Expliquer pourquoi l'ordre des tests compte (cas d = 0,8 hors de la parcelle). Résultat pour d = 0,3 m.</p>
     <details class="corr"><summary>Voir la correction</summary><div>
 <pre class="code">fonction decision(d, precision, dans_parcelle)
@@ -1088,8 +1114,8 @@ fonction nombre_entrees(P, xg, yb, xd, yh)
       <p>Si l'on teste d'abord « entre 0,3 et 1 m », le robot hors de la parcelle ralentit au lieu de s'arrêter : les règles d'arrêt passent en premier. Pour d = 0,3 m : « RALENTIR ».</p></div></details>
   </article>
 
-  <article class="q"><div class="qh"><span class="qn">Q9</span><h4>Distance d'arrêt et fréquence de mesure</h4><span class="tag t-rai">Raisonnement</span><span class="tag t-mod">Modélisation</span><span class="lvl">★★★</span></div>
-    <div class="docbox"><b>Document 8.</b> Mesure toutes les T secondes (0,1 ; 0,5 ou 1 s), traitement 0,1 s, freinage 0,05 m à 0,2 m/s ou 0,10 m à 0,5 m/s. Une personne qui apparaît à 0,3 m ne doit pas être touchée : arrêt à au moins 0,1 m d'elle.</div>
+  <article class="q"><div class="qh"><span class="qn">Q10</span><h4>Distance d'arrêt et fréquence de mesure</h4><span class="tag t-rai">Raisonnement</span><span class="tag t-mod">Modélisation</span><span class="lvl">★★★</span></div>
+    <div class="docbox"><b>Document 9.</b> Mesure toutes les T secondes (0,1 ; 0,5 ou 1 s), traitement 0,1 s, freinage 0,05 m à 0,2 m/s ou 0,10 m à 0,5 m/s. Une personne qui apparaît à 0,3 m ne doit pas être touchée : arrêt à au moins 0,1 m d'elle.</div>
     <p class="enonce">Exprimer la distance parcourue dans le cas le plus défavorable, trouver les réglages valables aux deux vitesses, recommander, et justifier le pare-chocs.</p>
     <details class="corr"><summary>Voir la correction</summary><div>
       <p>Au pire, la personne apparaît juste après une mesure : distance = v × T + v × 0,1 + freinage, à garder sous 0,2 m.</p>
@@ -1101,12 +1127,12 @@ fonction nombre_entrees(P, xg, yb, xd, yh)
   <div class="part"><h3>Partie B · Algorithmique : désherber un rang</h3>
   <div class="docbox"><b>Modèle.</b> Un rang est découpé en cases de 10 cm. La liste R vaut 0 (sol nu), 1 (plant) ou 2 (adventice). La lame ne doit jamais passer sur un plant ni sur une case voisine d'un plant ; les autres cases sont <b>sûres</b>. Jeu d'essai : R = [2, 0, 1, 0, 2, 2, 0, 2, 0, 1, 2, 0, 0, 2, 0, 0, 2, 2, 0, 1].</div>
 
-  <article class="q"><div class="qh"><span class="qn">Q10</span><h4>Analyse à la main</h4><span class="tag t-test">Tests</span><span class="lvl">★☆☆</span></div>
+  <article class="q"><div class="qh"><span class="qn">Q11</span><h4>Analyse à la main</h4><span class="tag t-test">Tests</span><span class="lvl">★☆☆</span></div>
     <p class="enonce">Compter plants et adventices, lister les cases sûres, compter les adventices à retirer à la main, et le nombre de baisses de lame si on la baisse sur chaque suite d'adventices sûres.</p>
     <details class="corr"><summary>Voir la correction</summary><div><p>3 plants, 8 adventices. Cases sûres : 1, 5 à 8, 12 à 18. Une adventice à la main (case 11). Suites : {1}, {5, 6}, {8}, {14}, {17, 18} : 5 baisses.</p></div></details>
   </article>
 
-  <article class="q"><div class="qh"><span class="qn">Q11 · Q12 · Q13</span><h4>compter, case_sure, adventices_a_la_main</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-test">Cas limites</span><span class="lvl">★★☆</span></div>
+  <article class="q"><div class="qh"><span class="qn">Q12 · Q13 · Q14</span><h4>compter, case_sure, adventices_a_la_main</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-test">Cas limites</span><span class="lvl">★★☆</span></div>
     <p class="exig"><b>Exigence.</b> case_sure doit fonctionner sur la première et la dernière case sans lire R[0] ni R[n + 1].</p>
     <details class="corr"><summary>Voir la correction</summary><div>
 <pre class="code">fonction case_sure(R, i)
@@ -1129,7 +1155,7 @@ fonction adventices_a_la_main(R)
       <p class="small">compter(R, v) suit le patron « Compter » de la page Ce qu'il faut savoir. Résultat de adventices_a_la_main : 1.</p></div></details>
   </article>
 
-  <article class="q"><div class="qh"><span class="qn">Q14</span><h4>Garder la lame baissée</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-rai">Raisonnement</span><span class="lvl">★★★</span></div>
+  <article class="q"><div class="qh"><span class="qn">Q15</span><h4>Garder la lame baissée</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-rai">Raisonnement</span><span class="lvl">★★★</span></div>
     <p class="enonce">La lame peut rester baissée au-dessus du sol nu tant que les cases sont sûres. Compter les baisses à la main, puis écrire <code>nombre_baisses(R)</code>.</p>
     <details class="corr"><summary>Voir la correction</summary><div>
 <pre class="code">fonction nombre_baisses(R)
@@ -1146,7 +1172,7 @@ fonction adventices_a_la_main(R)
       <p>Suites sûres {1}, {5 à 8}, {12 à 18}, chacune avec une adventice : 3 baisses au lieu de 5.</p></div></details>
   </article>
 
-  <article class="q"><div class="qh"><span class="qn">Q15</span><h4>Les passages de la lame</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-test">Cas limites</span><span class="lvl">★★★</span></div>
+  <article class="q"><div class="qh"><span class="qn">Q16</span><h4>Les passages de la lame</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-test">Cas limites</span><span class="lvl">★★★</span></div>
     <p class="enonce">Chaque passage est un couple (début, fin) : de la première à la dernière adventice sûre d'une suite de cases sûres. Écrire <code>passages(R)</code>.</p>
     <details class="corr"><summary>Voir la correction</summary><div>
 <pre class="code">fonction passages(R)
@@ -1169,7 +1195,7 @@ fonction adventices_a_la_main(R)
       <p>Résultat : [(1, 1), (5, 8), (14, 18)]. L'ajout après la boucle traite un passage qui finit à la dernière case : [0, 2, 2] donne [(2, 3)].</p></div></details>
   </article>
 
-  <article class="q"><div class="qh"><span class="qn">Q16</span><h4>Toute une parcelle, en aller-retour</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-arg">Argumentation</span><span class="lvl">★★★</span></div>
+  <article class="q"><div class="qh"><span class="qn">Q17</span><h4>Toute une parcelle, en aller-retour</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-arg">Argumentation</span><span class="lvl">★★★</span></div>
     <p class="enonce">P est une liste de rangs ; le rang 1 se parcourt dans le sens des cases, le rang 2 à l'envers, etc. Avec P = [[2, 0, 1, 0, 0, 2], [0, 2, 2, 0, 1, 0], [2, 0, 0, 0, 0, 2]] : lister dans l'ordre les adventices sûres (rang, case), écrire <code>ordre_adventices(P)</code>, puis discuter une erreur de la caméra qui prend un plant pour une adventice.</p>
     <details class="corr"><summary>Voir la correction</summary><div>
       <p>[(1, 1), (1, 6), (2, 3), (2, 2), (3, 1), (3, 6)].</p>
