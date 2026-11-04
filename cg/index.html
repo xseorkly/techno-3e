@@ -327,7 +327,7 @@ body.eleve details.pdfview.only-prof{display:none}
     <span class="kicker">1 · Analyser un objet technique</span>
     <div class="tw"><table>
       <tr><th>Notion</th><th>Ce qu'il faut savoir faire</th><th>Exemple</th></tr>
-      <tr><td>Besoin</td><td>Dire à qui l'objet rend service, sur quoi il agit, dans quel but.</td><td>Le robot rend service au maraîcher, agit sur les adventices, pour désherber sans chimie.</td></tr>
+      <tr><td>Besoin</td><td>Dire à qui l'objet rend service, sur quoi il agit, dans quel but.</td><td>Le robot rend service au maraîcher, agit sur les mauvaises herbes, pour désherber sans chimie.</td></tr>
       <tr><td>Interacteurs</td><td>Lister ce avec quoi l'objet échange : usagers, objets, données, environnement ; préciser l'échange.</td><td>Satellites GNSS : signaux de position. Pluie : contrainte d'étanchéité.</td></tr>
       <tr><td>Chaîne d'information</td><td>Acquérir (capteurs), traiter (microcontrôleur, calculateur), stocker (mémoire), communiquer (écran, voyant, module sans fil, ordre).</td><td>Télémètre → calculateur → gyrophare et ordre à la carte de puissance.</td></tr>
       <tr><td>Chaîne d'énergie</td><td>Alimenter (batterie), distribuer (transistor, carte de puissance), convertir (moteur), transmettre (réducteur, roue, masse excentrée).</td><td>Le moteur convertit l'énergie électrique en énergie mécanique.</td></tr>
@@ -1018,7 +1018,7 @@ fonction nombre_entrees(P, xg, yb, xd, yh)
 
   <article class="q"><div class="qh"><span class="qn">Q1</span><h4>Besoin, évolutions, conséquences</h4><span class="tag t-ana">Analyse de système</span><span class="tag t-arg">Argumentation</span><span class="lvl">★☆☆</span></div>
     <p class="enonce">Formuler le besoin (à qui, sur quoi, dans quel but). Citer deux évolutions technologiques par rapport au tracteur avec herbicide. Donner une conséquence positive et une négative sur le travail des maraîchers.</p>
-    <details class="corr"><summary>Voir la correction</summary><div><p>Le robot rend service au maraîcher, agit sur les adventices, pour désherber sans chimie et avec moins de pénibilité. Évolutions : GNSS centimétrique, batteries lithium-ion, moteurs et électronique de puissance compacts, calculateurs embarqués, capteurs laser. Positif : moins de désherbage manuel courbé, moins de produits chimiques. Négatif : coût, dépendance à la maintenance, moins d'emplois saisonniers.</p></div></details>
+    <details class="corr"><summary>Voir la correction</summary><div><p>Le robot rend service au maraîcher, agit sur les mauvaises herbes, pour désherber sans chimie et avec moins de pénibilité. Évolutions : GNSS centimétrique, batteries lithium-ion, moteurs et électronique de puissance compacts, calculateurs embarqués, capteurs laser. Positif : moins de désherbage manuel courbé, moins de produits chimiques. Négatif : coût, dépendance à la maintenance, moins d'emplois saisonniers.</p></div></details>
   </article>
 
   <article class="q"><div class="qh"><span class="qn">Q2</span><h4>Quatre situations de sécurité</h4><span class="tag t-ana">Analyse de système</span><span class="tag t-rai">Raisonnement</span><span class="lvl">★★☆</span></div>
@@ -1125,14 +1125,14 @@ fonction nombre_entrees(P, xg, yb, xd, yh)
   </div>
 
   <div class="part"><h3>Partie B · Algorithmique : désherber un rang</h3>
-  <div class="docbox"><b>Modèle.</b> Un rang est découpé en cases de 10 cm. La liste R vaut 0 (sol nu), 1 (plant) ou 2 (adventice). La lame ne doit jamais passer sur un plant ni sur une case voisine d'un plant ; les autres cases sont <b>sûres</b>. Jeu d'essai : R = [2, 0, 1, 0, 2, 2, 0, 2, 0, 1, 2, 0, 0, 2, 0, 0, 2, 2, 0, 1].</div>
+  <div class="docbox"><b>Modèle.</b> Un rang est découpé en cases de 10 cm. La liste R vaut 0 (sol nu), 1 (plant) ou 2 (mauvaise herbe, appelée aussi « adventice » en agronomie). La lame ne doit jamais passer sur un plant ni sur une case voisine d'un plant ; les autres cases sont <b>sûres</b>. Jeu d'essai : R = [2, 0, 1, 0, 2, 2, 0, 2, 0, 1, 2, 0, 0, 2, 0, 0, 2, 2, 0, 1].</div>
 
   <article class="q"><div class="qh"><span class="qn">Q11</span><h4>Analyse à la main</h4><span class="tag t-test">Tests</span><span class="lvl">★☆☆</span></div>
-    <p class="enonce">Compter plants et adventices, lister les cases sûres, compter les adventices à retirer à la main, et le nombre de baisses de lame si on la baisse sur chaque suite d'adventices sûres.</p>
-    <details class="corr"><summary>Voir la correction</summary><div><p>3 plants, 8 adventices. Cases sûres : 1, 5 à 8, 12 à 18. Une adventice à la main (case 11). Suites : {1}, {5, 6}, {8}, {14}, {17, 18} : 5 baisses.</p></div></details>
+    <p class="enonce">Compter plants et mauvaises herbes, lister les cases sûres, compter les mauvaises herbes à retirer à la main, et le nombre de baisses de lame si on la baisse sur chaque suite de mauvaises herbes sur des cases sûres.</p>
+    <details class="corr"><summary>Voir la correction</summary><div><p>3 plants, 8 mauvaises herbes. Cases sûres : 1, 5 à 8, 12 à 18. Une mauvaise herbe à la main (case 11). Suites : {1}, {5, 6}, {8}, {14}, {17, 18} : 5 baisses.</p></div></details>
   </article>
 
-  <article class="q"><div class="qh"><span class="qn">Q12 · Q13 · Q14</span><h4>compter, case_sure, adventices_a_la_main</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-test">Cas limites</span><span class="lvl">★★☆</span></div>
+  <article class="q"><div class="qh"><span class="qn">Q12 · Q13 · Q14</span><h4>compter, case_sure, mauvaises_herbes_a_la_main</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-test">Cas limites</span><span class="lvl">★★☆</span></div>
     <p class="exig"><b>Exigence.</b> case_sure doit fonctionner sur la première et la dernière case sans lire R[0] ni R[n + 1].</p>
     <details class="corr"><summary>Voir la correction</summary><div>
 <pre class="code">fonction case_sure(R, i)
@@ -1146,13 +1146,13 @@ fonction nombre_entrees(P, xg, yb, xd, yh)
             renvoyer FAUX
     renvoyer VRAI
 
-fonction adventices_a_la_main(R)
+fonction mauvaises_herbes_a_la_main(R)
     n ← 0
     pour i allant de 1 à longueur(R) faire
         si R[i] = 2 et case_sure(R, i) = FAUX alors
             n ← n + 1
     renvoyer n</pre>
-      <p class="small">compter(R, v) suit le patron « Compter » de la page Ce qu'il faut savoir. Résultat de adventices_a_la_main : 1.</p></div></details>
+      <p class="small">compter(R, v) suit le patron « Compter » de la page Ce qu'il faut savoir. Résultat de mauvaises_herbes_a_la_main : 1.</p></div></details>
   </article>
 
   <article class="q"><div class="qh"><span class="qn">Q15</span><h4>Garder la lame baissée</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-rai">Raisonnement</span><span class="lvl">★★★</span></div>
@@ -1169,11 +1169,11 @@ fonction adventices_a_la_main(R)
         sinon
             baissee ← FAUX
     renvoyer n</pre>
-      <p>Suites sûres {1}, {5 à 8}, {12 à 18}, chacune avec une adventice : 3 baisses au lieu de 5.</p></div></details>
+      <p>Suites sûres {1}, {5 à 8}, {12 à 18}, chacune avec une mauvaise herbe : 3 baisses au lieu de 5.</p></div></details>
   </article>
 
   <article class="q"><div class="qh"><span class="qn">Q16</span><h4>Les passages de la lame</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-test">Cas limites</span><span class="lvl">★★★</span></div>
-    <p class="enonce">Chaque passage est un couple (début, fin) : de la première à la dernière adventice sûre d'une suite de cases sûres. Écrire <code>passages(R)</code>.</p>
+    <p class="enonce">Pour ne pas user la lame inutilement, on la baisse à la première mauvaise herbe d'une zone de cases sûres consécutives et on la relève juste après la dernière mauvaise herbe de cette zone. Chaque passage est noté (début, fin). Exemple : si les cases 12 à 18 sont sûres et que les mauvaises herbes y sont en 14, 17 et 18, le passage est (14, 18). Écrire <code>passages(R)</code>.</p>
     <details class="corr"><summary>Voir la correction</summary><div>
 <pre class="code">fonction passages(R)
     resultat ← []
@@ -1196,10 +1196,10 @@ fonction adventices_a_la_main(R)
   </article>
 
   <article class="q"><div class="qh"><span class="qn">Q17</span><h4>Toute une parcelle, en aller-retour</h4><span class="tag t-algo">Algorithmique</span><span class="tag t-arg">Argumentation</span><span class="lvl">★★★</span></div>
-    <p class="enonce">P est une liste de rangs ; le rang 1 se parcourt dans le sens des cases, le rang 2 à l'envers, etc. Avec P = [[2, 0, 1, 0, 0, 2], [0, 2, 2, 0, 1, 0], [2, 0, 0, 0, 0, 2]] : lister dans l'ordre les adventices sûres (rang, case), écrire <code>ordre_adventices(P)</code>, puis discuter une erreur de la caméra qui prend un plant pour une adventice.</p>
+    <p class="enonce">P est une liste de rangs ; le rang 1 se parcourt dans le sens des cases, le rang 2 à l'envers, etc. Avec P = [[2, 0, 1, 0, 0, 2], [0, 2, 2, 0, 1, 0], [2, 0, 0, 0, 0, 2]] : lister dans l'ordre les mauvaises herbes sûres (rang, case), écrire <code>ordre_mauvaises_herbes(P)</code>, puis discuter une erreur de la caméra qui prend un plant pour une mauvaise herbe.</p>
     <details class="corr"><summary>Voir la correction</summary><div>
       <p>[(1, 1), (1, 6), (2, 3), (2, 2), (3, 1), (3, 6)].</p>
-<pre class="code">fonction ordre_adventices(P)
+<pre class="code">fonction ordre_mauvaises_herbes(P)
     resultat ← []
     pour k allant de 1 à longueur(P) faire
         R ← P[k]
@@ -1212,7 +1212,7 @@ fonction adventices_a_la_main(R)
                 si R[i] = 2 et case_sure(R, i) alors
                     ajouter(resultat, (k, i))
     renvoyer resultat</pre>
-      <p>Un plant pris pour une adventice n'est plus protégé : la lame le détruit, ce qui est plus grave que d'oublier une adventice. En cas de doute, traiter la case comme un plant, utiliser l'espacement régulier des semis, ou demander une confirmation sur deux images.</p></div></details>
+      <p>Un plant pris pour une mauvaise herbe n'est plus protégé : la lame le détruit, ce qui est plus grave que d'oublier une mauvaise herbe. En cas de doute, traiter la case comme un plant, utiliser l'espacement régulier des semis, ou demander une confirmation sur deux images.</p></div></details>
   </article>
   </div>
 </section>
