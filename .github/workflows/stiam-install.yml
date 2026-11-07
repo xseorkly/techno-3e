@@ -1,0 +1,66 @@
+name: Installer ASTROTECH sous stiam
+
+on:
+  push:
+    paths:
+      - 'stiam/_import/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  install-and-deploy:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+
+      - name: Vérifier et installer ASTROTECH
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find stiam/_import -maxdepth 1 -type f -name 'part*' | wc -l)" -eq 64
+          cat stiam/_import/part??? | base64 -d > /tmp/astrotech-site.zip
+          echo '3643d2413a2ee4e08485eec616b7524e28191ef556c3bd5862a3f99f971b367f  /tmp/astrotech-site.zip' | sha256sum -c -
+          unzip -tq /tmp/astrotech-site.zip
+          unzip -oq /tmp/astrotech-site.zip -d stiam
+          rm -rf stiam/_import
+          test -s stiam/index.html
+          test -s stiam/assets/style.css
+          test -s stiam/ressources.html
+          echo "Pages HTML : $(find stiam -name '*.html' | wc -l)"
+          echo "Dossiers enseignants : $(find stiam/telechargements/enseignants -type f | wc -l)"
+
+      - name: Enregistrer les fichiers du site sur main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A stiam
+          git diff --cached --quiet || git commit -m 'Installer ASTROTECH dans stiam (site complet)'
+          git push origin HEAD:main
+
+      - name: Configurer GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Préparer l'artefact Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Publier sur GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
