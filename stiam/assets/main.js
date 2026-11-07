@@ -3,6 +3,15 @@ const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>Array.from(r.query
 const ns='astro-v1:'+location.pathname;
 const get=k=>{try{return localStorage.getItem(k)}catch{return null}},set=(k,v)=>{try{localStorage.setItem(k,v)}catch{}};
 function start(){
+ // Ajouter la bibliographie au menu de toutes les pages, y compris les activités.
+ const nav=document.querySelector('.navlinks');
+ if(nav&&!nav.querySelector('a[href$="sources.html"]')){
+  const sub=/\/(?:activites|niveau|outils)\//.test(location.pathname);
+  const link=document.createElement('a');
+  link.href=(sub?'../':'')+'sources.html';
+  link.textContent='Sources';
+  nav.append(link);
+ }
  const menu=$('.menu-toggle'),links=$('.navlinks');if(menu&&links)menu.addEventListener('click',()=>{let o=links.classList.toggle('open');menu.setAttribute('aria-expanded',o+'')});
  if(get('astro-contrast')==='1')document.body.classList.add('high-contrast');$('.contrast-toggle')?.addEventListener('click',()=>{document.body.classList.toggle('high-contrast');set('astro-contrast',document.body.classList.contains('high-contrast')?'1':'0')});
  let filter=$('[data-filter-target]');if(filter)filter.addEventListener('input',()=>{let q=filter.value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();$$(filter.dataset.filterTarget).forEach(el=>{el.hidden=q&&!el.textContent.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().includes(q);if(q&&!el.hidden&&el.matches('details'))el.open=true;})});
