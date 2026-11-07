@@ -1,0 +1,1 @@
+Reprise de l'installation ASTROTECH : assembler les blocs binaires et vérifier l'empreinte SHA-256.

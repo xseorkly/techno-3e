@@ -32,7 +32,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(find stiam/_import -maxdepth 1 -type f -name 'part*' | wc -l)" -eq 64
-          cat stiam/_import/part??? | base64 -d > /tmp/astrotech-site.zip
+          cat stiam/_import/part??? > /tmp/astrotech-site.zip
           echo '3643d2413a2ee4e08485eec616b7524e28191ef556c3bd5862a3f99f971b367f  /tmp/astrotech-site.zip' | sha256sum -c -
           unzip -tq /tmp/astrotech-site.zip
           unzip -oq /tmp/astrotech-site.zip -d stiam
