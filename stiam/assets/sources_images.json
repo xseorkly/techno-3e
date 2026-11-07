@@ -1,0 +1,122 @@
+[
+  {
+    "niveau": "CM1",
+    "document": 1,
+    "titre": "Les phases de la Lune, vues depuis la Terre",
+    "institution": "NASA Science",
+    "url": "https://science.nasa.gov/moon/moon-phases/",
+    "accessibilite": "lien externe et QR code; photo non incorporée",
+    "question": "Comparer des formes éclairées, identifier les phases et les distinguer des éclipses.",
+    "corrige": "La partie éclairée correspond à la portion de l’hémisphère lunaire ensoleillé visible depuis la Terre. Les phases ne sont pas l’ombre de la Terre."
+  },
+  {
+    "niveau": "CM1",
+    "document": 2,
+    "titre": "Observer la Lune sur une lunaison",
+    "institution": "NASA Science / Scientific Visualization Studio",
+    "url": "https://science.nasa.gov/moon/observe-the-moon-night/rain-or-shine-moon-resources/",
+    "accessibilite": "lien externe et QR code; photo non incorporée",
+    "question": "Repérer la répétition des formes et construire un carnet daté sur deux cycles.",
+    "corrige": "On retrouve un cycle d’environ 29,5 jours. Les observations doivent être datées et décrites depuis un lieu donné."
+  },
+  {
+    "niveau": "CM2",
+    "document": 1,
+    "titre": "Portrait composite des planètes",
+    "institution": "NASA Scientific Visualization Studio",
+    "url": "https://svs.gsfc.nasa.gov/30710",
+    "accessibilite": "lien externe et QR code; photo non incorporée",
+    "question": "Repérer l’ordre des planètes et vérifier ce que le montage ne montre pas à l’échelle.",
+    "corrige": "Le montage présente 8 planètes et Pluton, planète naine. Diamètres et distances ne sont pas représentés sur une échelle commune ; les images proviennent d’instruments et dates différents."
+  },
+  {
+    "niveau": "CM2",
+    "document": 2,
+    "titre": "Un point bleu pâle : la Terre photographiée de loin",
+    "institution": "NASA, Voyager 1",
+    "url": "https://science.nasa.gov/resource/solar-system-portrait/",
+    "accessibilite": "lien externe et QR code; photo non incorporée",
+    "question": "Décrire une Terre presque invisible et comparer perception visuelle et distances.",
+    "corrige": "Cette image montre la Terre comme une fraction de pixel ; elle ne permet ni de mesurer son diamètre ni de visualiser la distance Soleil-Terre à l’échelle."
+  },
+  {
+    "niveau": "6e",
+    "document": 1,
+    "titre": "La limite entre le jour et la nuit",
+    "institution": "NASA, photographie Artemis II du 2 avril 2026",
+    "url": "https://www.nasa.gov/image-article/night-and-earth-day/",
+    "accessibilite": "lien externe et QR code; photo non incorporée",
+    "question": "Localiser la zone éclairée, formuler une hypothèse et expliquer par un globe éclairé.",
+    "corrige": "La limite jour/nuit sépare les régions exposées et non exposées à la lumière solaire. La rotation terrestre explique l’alternance locale."
+  },
+  {
+    "niveau": "6e",
+    "document": 2,
+    "titre": "Lumières nocturnes observées depuis l’espace",
+    "institution": "NASA Earth Observatory, Suomi NPP/VIIRS",
+    "url": "https://science.nasa.gov/earth/earth-observatory/night-lights-2012-the-black-marble-79803/",
+    "accessibilite": "lien externe et QR code; photo non incorporée",
+    "question": "Distinguer la lumière du Soleil des lumières d’origine humaine et identifier un composite.",
+    "corrige": "L’image rassemble plusieurs acquisitions et visualise les émissions lumineuses nocturnes ; ce n’est pas une photo instantanée de la Terre entière."
+  },
+  {
+    "niveau": "5e",
+    "document": 1,
+    "titre": "Champ extrêmement profond de Hubble",
+    "institution": "NASA/ESA, XDF, 2012",
+    "url": "https://science.nasa.gov/asset/hubble/hubble-extreme-deep-field-xdf/",
+    "accessibilite": "lien externe et QR code; photo non incorporée",
+    "question": "Distinguer étoiles et galaxies et comprendre pourquoi une longue collecte de lumière est utile.",
+    "corrige": "Le XDF est un assemblage d’observations à plusieurs filtres. Il représente environ 5 500 galaxies, pas 5 500 étoiles ; les couleurs résultent du traitement scientifique."
+  },
+  {
+    "niveau": "5e",
+    "document": 2,
+    "titre": "Les lumières des villes la nuit",
+    "institution": "NASA Earth Observatory, VIIRS",
+    "url": "https://science.nasa.gov/earth/earth-observatory/night-lights-2012-the-black-marble-79803/",
+    "accessibilite": "lien externe et QR code; photo non incorporée",
+    "question": "Repérer les zones fortement éclairées, discuter les limites d’une image satellite pour mesurer la pollution lumineuse au sol.",
+    "corrige": "Les points lumineux signalent des émissions vers l’espace, sans mesurer directement le nombre d’étoiles visibles ou l’éblouissement d’un observateur."
+  },
+  {
+    "niveau": "4e",
+    "document": 1,
+    "titre": "Images satellites en fausses couleurs",
+    "institution": "NASA Earth Observatory",
+    "url": "https://science.nasa.gov/earth/earth-observatory/how-to-interpret-a-false-color-satellite-image/",
+    "accessibilite": "lien externe et QR code; photo non incorporée",
+    "question": "Lire une légende spectrale et expliquer pourquoi un couvert végétal peut être affiché en rouge.",
+    "corrige": "Un capteur peut mesurer l’infrarouge proche ; l’affectation de cette bande au canal rouge produit une représentation en fausses couleurs sans que les forêts deviennent réellement rouges."
+  },
+  {
+    "niveau": "4e",
+    "document": 2,
+    "titre": "Villes éclairées vues par un capteur en orbite",
+    "institution": "NASA, VIIRS/Suomi NPP",
+    "url": "https://science.nasa.gov/earth/earth-observatory/night-lights-2012-the-black-marble-79803/",
+    "accessibilite": "lien externe et QR code; photo non incorporée",
+    "question": "Identifier l’instrument, les données, le traitement et la différence entre acquisition et visualisation.",
+    "corrige": "La carte est construite à partir de mesures et de traitements de plusieurs passages orbitaux ; ce n’est pas une transmission photographique unique et instantanée."
+  },
+  {
+    "niveau": "3e",
+    "document": 1,
+    "titre": "Autoportrait réel du rover Perseverance",
+    "institution": "NASA/JPL-Caltech/MSSS, 23 juillet 2024",
+    "url": "https://science.nasa.gov/photojournal/perseverances-selfie-with-cheyava-falls/",
+    "accessibilite": "lien externe et QR code; photo non incorporée",
+    "question": "Décrire les instruments et les contraintes ; critiquer la notion de « selfie ».",
+    "corrige": "Ce selfie est une mosaïque assemblée à partir de 62 images ; il permet d’identifier le rover, le sol, une zone d’étude et les instruments, pas de prouver la présence de vie."
+  },
+  {
+    "niveau": "3e",
+    "document": 2,
+    "titre": "Localisation autonome du rover sur Mars",
+    "institution": "NASA/JPL-Caltech, 2 février 2026",
+    "url": "https://science.nasa.gov/photojournal/mars-global-localization-pinpoints-perseverances-location/",
+    "accessibilite": "lien externe et QR code; photo non incorporée",
+    "question": "Comparer une vue issue des caméras du rover et la carte orbitale ; retrouver la fonction de localisation automatique.",
+    "corrige": "Le système reconnaît des caractéristiques du terrain dans les images embarquées et les rapproche d’une carte prise depuis l’orbite ; la décision ne dépend pas d’une commande terrestre instantanée."
+  }
+]

@@ -1,0 +1,11 @@
+paquet;recu;donnees;origine
+1;oui;00;simulation
+2;oui;01;simulation
+3;non;;simulation
+4;oui;10;simulation
+5;oui;01;simulation
+6;oui;00;simulation
+7;non;;simulation
+8;oui;10;simulation
+9;oui;01;simulation
+10;oui;11;simulation
