@@ -81,7 +81,7 @@ def head(titre, prof, description="Astronomie et technologies spatiales — parc
 
 def nav(prof, actif=""):
     p = "../" * prof
-    liens = [("index.html", "Accueil"), ("connaissances.html", "Connaissances"), ("activites.html", "Activités"),
+    liens = [("index.html", "Accueil"), ("stiam.html", "Les STIAM"), ("connaissances.html", "Connaissances"), ("activites.html", "Activités"),
              ("outils.html", "Simulations"), ("ressources.html", "Téléchargements"), ("enseignants.html", "Enseignants"),
              ("sources.html", "Sources")]
     items = "".join('<a href="%s%s" class="%s">%s</a>' % (p, h, "active" if h == actif else "", t(l)) for h, l in liens)
@@ -500,6 +500,16 @@ def page_accueil():
     s = re.sub(r'<link rel="stylesheet" href="https://fonts.googleapis.com/[^"]*">', '<link rel="stylesheet" href="assets/fonts.css">', s)
     s = re.sub(r'<footer>.*</html>', footer(0), s, flags=re.S)
     s = re.sub(r'<nav id="primary-nav" class="navlinks"[^>]*>.*?</nav>', re.search(r'<nav id="primary-nav".*?</nav>', nav(0, "index.html")).group(0), s, flags=re.S)
+    s = re.sub(r'<div class="hero-actions">.*?</div>', '<div class="hero-actions"><a href="stiam.html" class="btn btn-primary">Commencer : comprendre les STIAM →</a>'
+               '<a href="#niveaux" class="btn btn-secondary">Découvrir les séquences ↓</a><a href="ressources.html" class="btn btn-outline">Télécharger les ressources</a></div>', s, count=1, flags=re.S)
+    intro = ('<section class="stiam-intro" id="introduction"><div><p class="kicker">INTRODUCTION</p><h2>Avant de commencer : les STIAM</h2>'
+             '<p>Sciences, technologie, ingénierie, arts et mathématiques au service d’une même question. Une présentation et un diaporama de 12 diapositives '
+             'expliquent la démarche suivie dans tout le parcours, du CM1 à la 3e.</p></div><a class="btn btn-primary" href="stiam.html#diaporama">Voir le diaporama →</a></section>')
+    s = re.sub(r'<section class="stiam-intro".*?</section>', '', s, flags=re.S)
+    s = s.replace('</div></div>\n<section', '</div></div>\n<section', 1)
+    m = re.search(r'<section class="[^"]*process', s) or re.search(r'<section', s[s.index('hero-actions'):])
+    k = m.start() if m.re.pattern.startswith('<section class') else s.index('hero-actions') + m.start()
+    s = s[:k] + intro + s[k:]
     open(chemin, "w", encoding="utf-8").write(s)
 
 

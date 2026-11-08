@@ -1,5 +1,5 @@
-const CACHE='astrotech-v3';
-const CORE=['./','./index.html','./assets/style.css','./assets/fonts.css','./assets/main.js','./assets/config.js','./assets/simulations.js','./activites.html','./connaissances.html','./ressources.html','./outils.html','./sources.html'];
+const CACHE='astrotech-v4';
+const CORE=['./','./index.html','./stiam.html','./assets/style.css','./assets/fonts.css','./assets/main.js','./assets/config.js','./assets/simulations.js','./activites.html','./connaissances.html','./ressources.html','./outils.html','./sources.html'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)))});
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{

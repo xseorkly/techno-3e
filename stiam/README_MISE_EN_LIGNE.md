@@ -5,6 +5,7 @@ Site pédagogique statique (HTML, CSS, JavaScript), publié avec GitHub Pages. A
 ## Contenu
 
 - `index.html` : accueil et accès aux six niveaux.
+- `stiam.html` : introduction au parcours — les STIAM (définition, cycles 3 et 4, démarche, six missions, évaluation) et diaporama de 12 diapositives. Page autonome, modifiable directement.
 - `niveau/` : une page par niveau (CM1, CM2, 6e, 5e, 4e, 3e) : mission, séances, fiches de connaissances.
 - `activites/` : 51 séances élèves. Chacune suit les mêmes étapes : je m'interroge → j'enquête → je retiens → j'agis → je fais le bilan, puis la correction, repliée en bas de page.
 - `connaissances.html` : 19 fiches de connaissances (explication, expérience, idée fausse fréquente, trace écrite, preuve, questions de vérification).
