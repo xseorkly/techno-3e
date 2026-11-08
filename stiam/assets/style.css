@@ -34,3 +34,6 @@ ol.steps{margin:10px 0 14px;padding-left:0;list-style:none;counter-reset:etape}o
 
 .correction-area>summary{cursor:pointer;font:700 17px Archivo;color:var(--teal-2)}.correction-body{margin-top:12px;border-top:1px solid var(--trait);padding-top:10px}.correction-body p,.correction-body li{font-size:14px}
 .stiam-intro{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;background:#fff;border:1px solid var(--trait);border-left:5px solid var(--magenta);border-radius:14px;padding:20px 24px;margin:22px 0}.stiam-intro h2{margin:2px 0 6px;font-family:Archivo,sans-serif}.stiam-intro p{margin:0;max-width:70ch;color:var(--doux)}
+.demarche-badge{display:inline-block;margin:12px 0 0;padding:4px 11px;border-radius:999px;font:700 12.5px Archivo,sans-serif;letter-spacing:.03em}
+.demarche-sciences{background:#e3f1ef;color:#0a5552}.demarche-synthese{background:#fff3d6;color:#7a5200}.demarche-techno{background:#fbe7e1;color:#9b3d22}
+p.part-title{grid-column:1/-1;margin:14px 0 2px;padding:7px 12px;border-radius:9px;font:700 14px Archivo,sans-serif}

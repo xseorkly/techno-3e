@@ -59,8 +59,39 @@ def seance_id(niv, n):
     return "%s-s%02d" % (niv["id"], n)
 
 
+DEMARCHES = {
+    "sciences": ("Démarche scientifique", "demarche-sciences"),
+    "synthese": ("Synthèse des connaissances", "demarche-synthese"),
+    "techno": ("Démarche technologique", "demarche-techno"),
+}
+
+
 def phase_labels(s):
-    return ["S'interroger", s["enquete"].get("court", "Enquêter"), "Retenir", "Agir", "Bilan"]
+    d, court = s.get("demarche"), s["enquete"].get("court", "Enquêter")
+    if d == "sciences":
+        return ["S'interroger", court, "Conclure", "Mission", "Bilan"]
+    if d == "synthese":
+        return ["Se rappeler", "Construire", "Retenir", "Mission", "Bilan"]
+    if d == "techno":
+        return ["Problème", court, "Retenir", "Réaliser", "Bilan"]
+    return ["S'interroger", court, "Retenir", "Agir", "Bilan"]
+
+
+def titres_blocs(s):
+    """Titres des cinq blocs d'une séance et intitulé du champ de départ, selon la démarche."""
+    d, e, g = s.get("demarche"), s["enquete"], s["agir"]
+    court = e.get("court", "Enquêter")
+    if d == "sciences":
+        return (["1. Je m'interroge", "2. %s : %s" % (court, e["titre"]), "3. Je conclus et je retiens",
+                 "4. Pour notre mission : %s" % g["titre"], "5. Je fais le bilan"], "Mon hypothèse (je pense que… parce que…) :")
+    if d == "synthese":
+        return (["1. Je me rappelle", "2. Je construis la synthèse : %s" % e["titre"], "3. La synthèse à retenir",
+                 "4. Je prépare la mission : %s" % g["titre"], "5. Je vérifie mes connaissances"], "Mes réponses au défi :")
+    if d == "techno":
+        return (["1. Le problème à résoudre", "2. %s : %s" % (court, e["titre"]), "3. Je retiens",
+                 "4. Je réalise : %s" % g["titre"], "5. Je fais le bilan"], "Ma première idée de solution :")
+    return (["1. Je m'interroge", "2. %s : %s" % (court, e["titre"]), "3. Je retiens",
+             "4. J'agis : %s" % g["titre"], "5. Je fais le bilan"], "Ce que je pense, avant de chercher (mon hypothèse) :")
 
 
 def deroule(s):
@@ -199,9 +230,12 @@ def page_activite(niv, s):
              '<a href="../niveau/%s.html">%s</a> <span>›</span> <span aria-current="page">Séance %d</span></nav>' % (niv["id"], t(niv["label"]), s["n"]))
     h.append('<div class="lesson-switch"><a href="../niveau/%s.html" class="btn btn-outline">← Parcours %s</a>'
              '<label for="navfiches">Aller à une autre séance %s</label></div>' % (niv["id"], t(niv["label"]), select_activites(sid)))
+    TB, lab_hyp = titres_blocs(s)
+    dm = DEMARCHES.get(s.get("demarche"))
+    badge = '<p class="demarche-badge %s">%s</p>' % (dm[1], dm[0]) if dm else ""
     h.append('<header class="lesson-hero"><div class="brandline"><span class="brand-seal small">✦</span><span>%s · Séance %d sur %d · %d min</span>'
-             '<span class="grade-pill">%s</span></div><h1>%s</h1><p>%s</p><nav class="chrono" aria-label="Étapes de la séance">%s</nav></header>'
-             % (t(niv["discipline"]), s["n"], total, duree, t(niv["label"]), t(s["titre"]), t(s["but"]), chrono))
+             '<span class="grade-pill">%s</span></div>%s<h1>%s</h1><p>%s</p><nav class="chrono" aria-label="Étapes de la séance">%s</nav></header>'
+             % (t(niv["discipline"]), s["n"], total, duree, t(niv["label"]), badge, t(s["titre"]), t(s["but"]), chrono))
     h.append('<section class="identity" aria-label="Identité de l’élève">'
              '<div><label for="nom">Nom</label><input id="nom" data-save autocomplete="family-name"></div>'
              '<div><label for="prenom">Prénom</label><input id="prenom" data-save autocomplete="given-name"></div>'
@@ -216,15 +250,16 @@ def page_activite(niv, s):
     # 1. Situation
     si = s["situation"]
     h.append('<article class="bloc" id="situation"><div class="marge"><span class="duree">%d′</span></div><div class="corps">'
-             '<h2>1. Je m’interroge</h2><div class="situation"><p>%s</p><p class="question-cle"><strong>%s</strong></p>%s</div>'
-             '<div class="response-field"><label for="hypothese">Ce que je pense, avant de chercher (mon hypothèse) :</label>'
-             '<textarea id="hypothese" data-save placeholder="Je pense que… parce que…"></textarea></div></div></article>'
-             % (s["phases"][0], t(si["texte"]), t(si["question"]), visuel_html(si.get("visuel"), 1, deja)))
+             '<h2>%s</h2><div class="situation"><p>%s</p>%s<p class="question-cle"><strong>%s</strong></p>%s</div>'
+             '<div class="response-field"><label for="hypothese">%s</label>'
+             '<textarea id="hypothese" data-save placeholder="%s"></textarea></div></div></article>'
+             % (s["phases"][0], t(TB[0]), t(si["texte"]), ol(si.get("liste")) if si.get("liste") else "", t(si["question"]),
+                visuel_html(si.get("visuel"), 1, deja), t(lab_hyp), a(si.get("placeholder", "Je pense que… parce que…"))))
 
     # 2. Enquête
     e = s["enquete"]
     parts = ['<article class="bloc" id="enquete"><div class="marge"><span class="duree">%d′</span></div><div class="corps">' % s["phases"][1],
-             '<h2>2. %s : %s</h2>' % (t(e.get("court", "Enquêter")), t(e["titre"])),
+             '<h2>%s</h2>' % t(TB[1]),
              '<p class="consigne">%s</p>' % t(e["consigne"])]
     if e.get("etapes"):
         parts.append(ol(e["etapes"]))
@@ -244,7 +279,10 @@ def page_activite(niv, s):
 
     # 3. Retenir
     r = s["retenir"]
-    rp = ['<article class="bloc" id="retenir"><div class="marge"><span class="duree">%d′</span></div><div class="corps"><h2>3. Je retiens</h2>' % s["phases"][2]]
+    rp = ['<article class="bloc" id="retenir"><div class="marge"><span class="duree">%d′</span></div><div class="corps"><h2>%s</h2>' % (s["phases"][2], t(TB[2]))]
+    if s.get("demarche") == "sciences":
+        rp.append('<div class="response-field"><label for="conclusion">Je conclus : mon hypothèse était-elle juste ? Qu’est-ce que l’expérience ou l’observation a montré ?</label>'
+                  '<textarea id="conclusion" data-save rows="3" placeholder="Mon hypothèse était… car l’expérience a montré que…"></textarea></div>')
     if r.get("carte"):
         c = carte(niv, r["carte"])
         rp.append('<div class="knowledge-trace trace-box"><b>Trace écrite</b><p>%s</p></div>' % t(c["trace"]))
@@ -264,7 +302,7 @@ def page_activite(niv, s):
     # 4. Agir
     g = s["agir"]
     gp = ['<article class="bloc" id="agir"><div class="marge"><span class="duree">%d′</span></div><div class="corps">' % s["phases"][3],
-          '<h2>4. J’agis : %s</h2>' % t(g["titre"]),
+          '<h2>%s</h2>' % t(TB[3]),
           '<div class="tech-challenge"><p class="consigne">%s</p>%s' % (t(g["consigne"]), ol(g.get("etapes"))),
           '<p><b>Ce que je dois produire :</b> %s</p>' % t(g["production"]),
           '<p><b>Matériel :</b> %s</p>' % t(g["materiel"])]
@@ -288,7 +326,7 @@ def page_activite(niv, s):
     h.append("".join(gp))
 
     # 5. Bilan
-    bp = ['<article class="bloc" id="bilan"><div class="marge"><span class="duree">%d′</span></div><div class="corps"><h2>5. Je fais le bilan</h2><div class="quiz-area">' % s["phases"][4]]
+    bp = ['<article class="bloc" id="bilan"><div class="marge"><span class="duree">%d′</span></div><div class="corps"><h2>%s</h2><div class="quiz-area">' % (s["phases"][4], t(TB[4]))]
     for j, (q, opts, rep, fb) in enumerate(s["qcm"]):
         choix = "".join('<label class="choice"><input data-save type="radio" name="quiz_%d" value="%d"><span>%s · %s</span></label>'
                         % (j, k, lettre(k), t(o)) for k, o in enumerate(opts))
@@ -296,8 +334,9 @@ def page_activite(niv, s):
                   '<div class="choices">%s</div><div class="quiz-feedback" role="status" aria-live="polite"></div></fieldset>'
                   % (j, rep, a(fb), j + 1, t(q), choix))
     bp.append('<button type="button" class="btn btn-primary" data-check-quiz>Vérifier mes réponses</button></div>')
-    bp.append('<div class="response-field"><label for="synthese">Ma synthèse : ce que j’ai appris et ce qui le prouve</label>'
-              '<textarea id="synthese" data-save rows="4" placeholder="J’ai appris que… ; la preuve est… ; une limite est…"></textarea></div>')
+    bp.append('<div class="response-field"><label for="synthese">%s</label>'
+              '<textarea id="synthese" data-save rows="4" placeholder="%s"></textarea></div>'
+              % (t(s.get("bilan", "Ma synthèse : ce que j’ai appris et ce qui le prouve")), a(s.get("bilan_aide", "J’ai appris que… ; la preuve est… ; une limite est…"))))
     bp.append('<fieldset class="self-assessment"><legend>Mon niveau de maîtrise</legend>'
               '<label><input type="radio" name="maitrise" value="N1" data-save><b>N1</b><span>Je découvre les notions.</span></label>'
               '<label><input type="radio" name="maitrise" value="N2" data-save><b>N2</b><span>Je sais les expliquer avec une aide.</span></label>'
@@ -316,6 +355,8 @@ def page_activite(niv, s):
     if s.get("programme"):
         cr.append('<p><b>Programme :</b> %s</p>' % t(s["programme"]))
     cr.append('<p><b>Déroulé :</b> %s.</p>' % t(deroule(s)))
+    if si.get("corrige"):
+        cr.append('<h3>Réponses attendues (étape 1)</h3><p>%s</p>' % t(si["corrige"]))
     cr.append('<h3>Réponses de l’enquête</h3><ol>%s</ol>' % "".join('<li><b>%s</b> %s</li>' % (t(q), t(rr)) for q, rr in e["questions"]))
     cr.append('<h3>Production attendue</h3><p>%s</p>' % t(g["attendu"]))
     if g.get("code_attendu"):
@@ -372,9 +413,15 @@ def page_niveau(niv):
     h.append('<section><div class="section-head"><div><p class="kicker">LES CONNAISSANCES</p><h2>%d questions scientifiques</h2></div>'
              '<p>Chaque question s’appuie sur une observation, une expérience ou des données, puis sur un modèle dont on dit les limites.</p></div>'
              '<div class="science-list">%s</div></section>' % (len(niv["cartes"]), "".join(cards)))
-    sess = "".join('<a class="session larger" href="../activites/%s.html"><span class="session-num">%02d</span><span><strong>%s</strong>'
-                   '<small>%s</small></span><span class="session-go">→</span></a>' % (seance_id(niv, s["n"]), s["n"], t(s["titre"]), t(s["but"]))
-                   for s in niv["seances"])
+    sess, prec = "", None
+    for s in niv["seances"]:
+        dm = DEMARCHES.get(s.get("demarche"))
+        if dm and s.get("demarche") != prec:
+            sess += '<p class="part-title %s">%s</p>' % (dm[1], {"sciences": "Partie 1 · Comprendre : la démarche scientifique", "synthese": "Faire le point : la synthèse des connaissances",
+                                                                 "techno": "Partie 2 · Concevoir : la démarche technologique"}[s["demarche"]])
+        prec = s.get("demarche")
+        sess += ('<a class="session larger" href="../activites/%s.html"><span class="session-num">%02d</span><span><strong>%s</strong>'
+                 '<small>%s</small></span><span class="session-go">→</span></a>' % (seance_id(niv, s["n"]), s["n"], t(s["titre"]), t(s["but"])))
     h.append('<section><div class="section-head"><div><p class="kicker">MA SÉQUENCE</p><h2>Les séances, dans l’ordre</h2></div>'
              '<p>%s</p></div><div class="lesson-index">%s</div></section>' % (t(niv["calendrier"]), sess))
     m = niv["mission"]

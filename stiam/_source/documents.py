@@ -17,7 +17,7 @@ SITE = os.path.dirname(ICI)
 sys.path.insert(0, ICI)
 
 import build  # noqa: E402
-from build import NIVEAUX, typo, carte, deroule, phase_labels, docs_de_seance, avec_essais, lettre, SOURCES, VERSION_DOCS  # noqa: E402
+from build import NIVEAUX, titres_blocs, DEMARCHES, typo, carte, deroule, phase_labels, docs_de_seance, avec_essais, lettre, SOURCES, VERSION_DOCS  # noqa: E402
 from figures_registre import FIGURES, PHOTOS  # noqa: E402
 
 SORTIE = os.path.join(ICI, "_docs")
@@ -126,14 +126,17 @@ def livret(niv):
           saut()]
     for s in niv["seances"]:
         labels = phase_labels(s)
+        TB, lab_hyp = titres_blocs(s)
+        dm = DEMARCHES.get(s.get("demarche"))
         b += [h(1, "Séance %d · %s" % (s["n"], s["titre"])),
+              p(dm[0], style="discret") if dm else None,
               p(s["but"], gras="Objectif : "), p(s["reussite"], gras="Je réussis si : "),
               p(" · ".join("%s %d min" % (lab, d) for lab, d in zip(labels, s["phases"])), style="discret")]
         si = s["situation"]
-        b += [h(2, "1. Je m'interroge"), p(si["texte"]), encadre("Question", [si["question"]]), visuel(si.get("visuel")),
-              p("Mon hypothèse (je pense que… parce que…) :", style="gras"), lignes(3)]
+        b += [h(2, TB[0]), p(si["texte"]), numeros(si["liste"]) if si.get("liste") else None, encadre("Question", [si["question"]]), visuel(si.get("visuel")),
+              p(lab_hyp, style="gras"), lignes(3)]
         e = s["enquete"]
-        b += [h(2, "2. %s : %s" % (e.get("court", "Enquêter"), e["titre"])), p(e["consigne"])]
+        b += [h(2, TB[1]), p(e["consigne"])]
         if e.get("etapes"):
             b.append(numeros(e["etapes"]))
         b.append(figure(e.get("figure")))
@@ -150,7 +153,9 @@ def livret(niv):
         for i, (q, _r) in enumerate(e["questions"], 1):
             b += [p("%d. %s" % (i, q)), lignes(2)]
         r = s["retenir"]
-        b.append(h(2, "3. Je retiens"))
+        b.append(h(2, TB[2]))
+        if s.get("demarche") == "sciences":
+            b += [p("Je conclus : mon hypothèse était-elle juste ? Qu'est-ce que l'expérience ou l'observation a montré ?", style="gras"), lignes(2)]
         if r.get("carte"):
             c = carte(niv, r["carte"])
             b += [encadre("Trace écrite", [c["trace"]], "E3F1EF"), p(c["vocabulaire"], gras="Mots-clés : "), figure(c["figure"], max_h=300)]
@@ -158,7 +163,7 @@ def livret(niv):
             b += [encadre("Trace écrite", [r["texte"]], "E3F1EF"), figure(r.get("figure"), max_h=300)]
         b.append(figure(r.get("figure2"), max_h=300))
         g = s["agir"]
-        b += [h(2, "4. J'agis : %s" % g["titre"]), p(g["consigne"])]
+        b += [h(2, TB[3]), p(g["consigne"])]
         if g.get("etapes"):
             b.append(numeros(g["etapes"]))
         b += [p(g["production"], gras="Ce que je dois produire : "), p(g["materiel"], gras="Matériel : ")]
@@ -172,11 +177,11 @@ def livret(niv):
         if g.get("outil"):
             b.append(p("Simulateur en ligne : %s (page « Simulations » du site)." % g["outil"][1], style="discret"))
         b += [p("Ma production :", style="gras"), lignes(4)]
-        b.append(h(2, "5. Je fais le bilan"))
+        b.append(h(2, TB[4]))
         for j, (q, opts, _rep, _fb) in enumerate(s["qcm"], 1):
             b.append(p("Q%d. %s" % (j, q), style="gras"))
             b.append({"t": "choix", "items": [T("%s · %s" % (lettre(k), o)) for k, o in enumerate(opts)]})
-        b += [p("Ma synthèse : ce que j'ai appris et ce qui le prouve", style="gras"), lignes(3),
+        b += [p(s.get("bilan", "Ma synthèse : ce que j'ai appris et ce qui le prouve"), style="gras"), lignes(3),
               p("Mon niveau de maîtrise :", style="gras"),
               {"t": "choix", "items": ["N1 · Je découvre les notions.", "N2 · Je sais les expliquer avec une aide.",
                                        "N3 · Je les utilise seul.", "N4 · Je les justifie et je repère les limites."]},
@@ -225,6 +230,10 @@ def dossier(niv):
                   e["consigne"], "Trace écrite (voir ci-dessous).", "%s : %s" % (g["titre"], g["consigne"]), "QCM, synthèse et auto-évaluation N1 à N4."]
         b.append(tableau(["Phase", "Durée", "Ce que font les élèves"], [[lab, "%d min" % d, x] for lab, d, x in zip(labels, s["phases"], resume)], [3, 2, 12]))
         b.append(p(s["reussite"], gras="Critère de réussite : "))
+        if s.get("demarche"):
+            b.append(p(DEMARCHES[s["demarche"]][0], gras="Démarche : "))
+        if s["situation"].get("corrige"):
+            b.append(p(s["situation"]["corrige"], gras="Réponses attendues (étape 1) : "))
         b.append(h(2, "Réponses attendues de l'enquête"))
         b.append(tableau(["Question", "Réponse attendue"], e["questions"], [1, 1]))
         if e.get("code"):
