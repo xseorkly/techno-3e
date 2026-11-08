@@ -62,3 +62,9 @@ Chaque séance se termine par sa correction, repliée (« Correction (pour l'ens
 ## Crédits
 
 Schémas et simulateurs créés pour ASTROTECH. Photographies créditées dans l'atlas. Positions du Soleil calculées pour Vienne avec l'algorithme de la NOAA ; données climatiques de GeoSphere Austria. Les données d'exemple sont signalées comme telles dans les séances.
+
+## Dossiers enseignants des séquences (mot de passe)
+
+En haut de chaque page de niveau, un dossier enseignant dépliable explique comment aborder la séquence (lancement, conduite, organisation, matériel, difficultés, différenciation, évaluation, connaissances et compétences du programme). Son contenu est rédigé dans `_source/guides.py` et **chiffré** à la génération (AES-GCM, clé dérivée du mot de passe) : il n'apparaît pas en clair dans les pages publiées et ne s'ouvre qu'avec le mot de passe.
+
+Le mot de passe n'est pas versionné : avant `python3 _source/build.py`, créer le fichier `_source/.mot_de_passe` contenant le mot de passe (ou définir la variable `ASTRO_GUIDE_MDP`). Sans lui, la génération s'arrête. Le déchiffrement demande un site en https (GitHub Pages convient).

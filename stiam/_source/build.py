@@ -16,6 +16,57 @@ sys.path.insert(0, ICI)
 
 import contenu_cm1, contenu_cm2, contenu_6e, contenu_5e, contenu_4e, contenu_3e  # noqa: E402
 from figures_registre import FIGURES, PHOTOS  # noqa: E402
+from guides import GUIDES  # noqa: E402
+import base64, hashlib  # noqa: E402,E401
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM  # noqa: E402
+
+
+def mot_de_passe_guide():
+    """Mot de passe des dossiers enseignants : variable ASTRO_GUIDE_MDP ou fichier _source/.mot_de_passe (non versionné)."""
+    mdp = os.environ.get("ASTRO_GUIDE_MDP")
+    f = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".mot_de_passe")
+    if not mdp and os.path.exists(f):
+        mdp = open(f, encoding="utf-8").read().strip()
+    if not mdp:
+        sys.exit("Mot de passe des dossiers enseignants absent : créer _source/.mot_de_passe ou définir ASTRO_GUIDE_MDP.")
+    return mdp
+
+
+ITERATIONS = 200000
+
+
+def chiffrer(texte, cle_niveau):
+    """AES-GCM avec une clé dérivée du mot de passe (PBKDF2-SHA256). Déchiffré dans le navigateur par main.js."""
+    sel = hashlib.sha256(("astrotech-guide-" + cle_niveau).encode()).digest()[:16]
+    donnees = texte.encode("utf-8")
+    iv = hashlib.sha256(sel + donnees).digest()[:12]
+    cle = hashlib.pbkdf2_hmac("sha256", mot_de_passe_guide().encode(), sel, ITERATIONS, 32)
+    ct = AESGCM(cle).encrypt(iv, donnees, None)
+    b = lambda x: base64.b64encode(x).decode()
+    return b(sel), b(iv), b(ct)
+
+
+def guide_html(niv):
+    g = GUIDES[niv["id"]]
+    p = niv["programme"]
+    h = ['<h3>L’intention de la séquence</h3><p>%s</p>' % t(g["intention"]),
+         '<h3>Lancer la séquence avec les élèves</h3>%s' % ul(g["lancement"]),
+         '<h3>Conduire la séquence</h3>%s' % "".join('<p><b>%s.</b> %s</p>' % (t(a1), t(a2)) for a1, a2 in g["conduite"]),
+         '<h3>Organisation de la classe</h3>%s' % ul(g["organisation"]),
+         '<h3>Matériel à préparer</h3>%s' % ul(g["materiel"]),
+         '<h3>Difficultés et idées fausses à anticiper</h3>%s' % ul(g["difficultes"]),
+         '<h3>Différencier</h3>%s' % ul(g["differenciation"]),
+         '<h3>Évaluer</h3><p>%s</p>' % t(g["evaluation"]),
+         '<h3>Programme : connaissances visées</h3><p><b>%s.</b> %s</p>%s' % (t(p["texte"]), t(p["statut"]), ul(g["connaissances"])),
+         '<h3>%s</h3>%s' % (t(g["competences_titre"]), ul(g["competences"] or niv["competences"]))]
+    if g["competences"]:
+        h.append('<p><b>Compétences de la séquence :</b></p>%s' % ul(niv["competences"]))
+    h.append('<p class="guide-links"><a href="../enseignants.html#%s">Déroulé détaillé, grille d’évaluation et documents dans l’espace Enseignants →</a></p>' % niv["id"])
+    sel, iv, ct = chiffrer("".join(h), niv["id"])
+    return ('<details class="teacher-guide"><summary>🔒 Dossier enseignant : comment aborder cette séquence</summary><div class="guide-body">'
+            '<form class="guide-lock" data-guide data-salt="%s" data-iv="%s" data-ct="%s" data-iter="%d"><label for="guide-mdp">Mot de passe enseignant</label>'
+            '<input id="guide-mdp" type="password" autocomplete="current-password"><button class="btn btn-primary" type="submit">Ouvrir</button>'
+            '<small class="guide-msg" role="status" aria-live="polite"></small></form><div class="guide-content" hidden></div></div></details>' % (sel, iv, ct, ITERATIONS))
 
 NIVEAUX = [m.NIVEAU for m in (contenu_cm1, contenu_cm2, contenu_6e, contenu_5e, contenu_4e, contenu_3e)]
 NB_SEANCES = sum(len(n["seances"]) for n in NIVEAUX)
@@ -402,6 +453,7 @@ def page_niveau(niv):
              '<span>◷ %d min par séance</span><span>◉ %s</span></div></div><img src="../assets/figures/%s" alt="%s"></div>'
              % (t(niv["discipline"]), t(niv["titre"]), t(niv["sous_titre"]), total, niv["duree"], t(niv["programme"]["statut"].split(".")[0]), niv["image"], a(img["alt"])))
     deja.add(niv["image"])
+    h.append(guide_html(niv))
     h.append('<section class="goal-card"><h2>Ce que je vais apprendre</h2><p><b>Question de départ :</b> %s</p>%s</section>'
              % (t(niv["question"]), ul(niv["competences"])))
     cards = []

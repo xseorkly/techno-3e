@@ -37,3 +37,13 @@ function start(){
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
+
+/* Dossier enseignant chiffré (pages de niveau) */
+(()=>{const f=document.querySelector('[data-guide]');if(!f)return;const msg=f.querySelector('.guide-msg'),box=f.parentElement.querySelector('.guide-content');
+const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function ouvrir(mdp,silencieux){try{if(!crypto.subtle)throw new Error('crypto');const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(mdp),'PBKDF2',false,['deriveKey']);
+const cle=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64(f.dataset.salt),iterations:+f.dataset.iter,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
+const clair=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(f.dataset.iv)},cle,b64(f.dataset.ct));box.innerHTML=new TextDecoder().decode(clair);box.hidden=false;f.hidden=true;try{sessionStorage.setItem('astro-guide',mdp)}catch{}}
+catch(e){if(!silencieux)msg.textContent=(e.message==='crypto')?'Ouvre le site en https pour utiliser le dossier enseignant.':'Mot de passe incorrect.'}}
+f.addEventListener('submit',e=>{e.preventDefault();msg.textContent='Ouverture…';ouvrir(f.querySelector('input').value,false)});
+try{const m=sessionStorage.getItem('astro-guide');if(m)ouvrir(m,true)}catch{}})();
