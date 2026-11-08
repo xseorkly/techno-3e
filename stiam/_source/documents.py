@@ -194,6 +194,10 @@ def dossier(niv):
     b += [h(1, "Programme"), p(pr["statut"], gras=pr["texte"] + ". "), p("Intitulés visés :", style="gras"), puces(pr["attendus"])]
     if pr.get("hors"):
         b += [p("Périmètre et anticipation :", style="gras"), puces(pr["hors"])]
+    if pr.get("nouveau"):
+        nv = pr["nouveau"]
+        b += [h(2, "Nouveau programme (rentrée 2027)"), p(nv["statut"], gras=nv["texte"] + ". "),
+              tableau(["Domaine et sous-thème", "Objectif (texte officiel)", "Dans le parcours"], nv["attendus"], [5, 7, 4])]
     b += [h(1, "Compétences travaillées"), puces(niv["competences"]),
           h(1, "Interdisciplinarité"), tableau(["Discipline", "Lien", "Séances"], niv["interdisciplinarite"], [3, 8, 2]),
           h(1, "Mission"), p(m["situation"]), p(m["mission"], gras="Mission : "), p("Contraintes :", style="gras"), puces(m["contraintes"]),

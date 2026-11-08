@@ -452,6 +452,10 @@ def page_enseignants():
         h.append('<h3>Programme</h3><p><b>%s.</b> %s</p><p><b>Intitulés visés :</b></p>%s' % (t(p["texte"]), t(p["statut"]), ul(p["attendus"])))
         if p.get("hors"):
             h.append('<p><b>Périmètre et anticipation :</b></p>%s' % ul(p["hors"]))
+        if p.get("nouveau"):
+            nv = p["nouveau"]
+            h.append('<h3>Nouveau programme (rentrée 2027)</h3><p><b>%s.</b> %s</p><div class="scroll-table"><table class="teacher-table"><thead><tr><th>Domaine et sous-thème</th><th>Objectif (texte officiel)</th><th>Dans le parcours</th></tr></thead><tbody>%s</tbody></table></div>'
+                     % (t(nv["texte"]), t(nv["statut"]), "".join("<tr><td>%s</td><td>%s</td><td>%s</td></tr>" % (t(a1), t(a2), t(a3)) for a1, a2, a3 in nv["attendus"])))
         h.append('<h3>Compétences travaillées</h3>%s' % ul(niv["competences"]))
         h.append('<h3>Interdisciplinarité</h3><div class="scroll-table"><table class="teacher-table"><thead><tr><th>Discipline</th><th>Lien</th><th>Séances</th></tr></thead><tbody>%s</tbody></table></div>' % rows_i)
         h.append('<h3>Mission</h3><p>%s</p><p><b>Mission :</b> %s</p>%s<p><b>Production :</b> %s</p><p><b>Critères de validation :</b></p>%s<p><b>Calendrier :</b> %s</p>'
