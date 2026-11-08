@@ -310,26 +310,6 @@ def page_activite(niv, s):
     bp.append('</div></article>')
     h.append("".join(bp))
 
-    # Correction
-    cr = ['<section class="correction-area"><h2>Correction (enseignant)</h2>'
-          '<p>Le professeur affiche la correction avec son code. Sur un site statique, ce code masque la correction mais ne la protège pas.</p>'
-          '<div class="teacher-unlock"><input type="password" placeholder="Code enseignant" aria-label="Code enseignant">'
-          '<button class="btn btn-secondary" type="button" data-teacher-unlock>Afficher</button><small class="teacher-message" aria-live="polite"></small></div>'
-          '<div class="teacher-only" hidden>']
-    cr.append('<p><b>Objectif :</b> %s</p>' % t(s["objectif"]))
-    if s.get("programme"):
-        cr.append('<p><b>Programme :</b> %s</p>' % t(s["programme"]))
-    cr.append('<p><b>Déroulé :</b> %s.</p>' % t(deroule(s)))
-    cr.append('<h3>Réponses de l’enquête</h3><ol>%s</ol>' % "".join('<li><b>%s</b> %s</li>' % (t(q), t(rr)) for q, rr in e["questions"]))
-    cr.append('<h3>Production attendue</h3><p>%s</p>' % t(g["attendu"]))
-    if g.get("code_attendu"):
-        cr.append(code_html(g["code_attendu"], "Programme attendu"))
-    cr.append('<h3>QCM</h3><ol>%s</ol>' % "".join('<li><b>%s</b> Réponse %s : %s. %s</li>' % (t(q), lettre(rep), t(opts[rep]), t(fb)) for q, opts, rep, fb in s["qcm"]))
-    for d in docs_de_seance(niv, s["n"]):
-        cr.append('<p><b>Document « %s » :</b> %s</p>' % (t(d["titre"]), t(d["corrige"])))
-    cr.append('<p><b>Point de vigilance :</b> %s</p>' % t(s["vigilance"]))
-    cr.append('</div></section>')
-    h.append("".join(cr))
     h.append('</div>')
 
     # Pager
@@ -439,9 +419,7 @@ def page_enseignants():
     h.append('<main class="page page-sub"><nav class="breadcrumbs" aria-label="Fil d’Ariane"><a href="index.html">Accueil</a> <span>›</span> '
              '<span aria-current="page">Enseignants</span></nav><div class="page-heading"><p class="kicker">RESSOURCES ENSEIGNANTS</p>'
              '<h1>Programmes, progression, évaluation</h1><p>Pour chaque niveau : le texte officiel applicable en 2026-2027 et les intitulés exacts visés, '
-             'l’interdisciplinarité, la mission, le déroulé minuté, la grille d’évaluation et les points de vigilance. Les corrigés détaillés se trouvent dans chaque séance.</p></div>'
-             '<div class="warning-note"><b>Important :</b> cette page est publique, comme tout site GitHub Pages. Le code enseignant des séances masque les corrigés '
-             'mais ne les protège pas. Pour des corrigés confidentiels, les déposer dans un espace authentifié (ENT, Moodle).</div>')
+             'l’interdisciplinarité, la mission, le déroulé minuté, la grille d’évaluation et les points de vigilance.</p></div>')
     h.append('<div class="chipnav">%s</div><div class="teacher-list">' % "".join('<a href="#%s">%s</a>' % (n["id"], t(n["label"])) for n in NIVEAUX))
     for niv in NIVEAUX:
         p = niv["programme"]
@@ -452,7 +430,7 @@ def page_enseignants():
         ev = niv["evaluation"]
         rows_e = "".join("<tr><td><b>%s</b></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % tuple(t(x) for x in c) for c in ev["criteres"])
         m = niv["mission"]
-        docs = "".join('<li><a href="%s" target="_blank" rel="noopener">%s ↗</a> (séance %d) — %s</li>' % (a(d["url"]), t(d["titre"]), d["seance"], t(d["corrige"])) for d in niv["documents"])
+        docs = "".join('<li><a href="%s" target="_blank" rel="noopener">%s ↗</a> (séance %d) — %s</li>' % (a(d["url"]), t(d["titre"]), d["seance"], t(d["question"])) for d in niv["documents"])
         h.append('<details class="teacher-level" id="%s"><summary><span class="level-mini">%s</span><span>%s</span><span class="chev">⌄</span></summary><div class="teacher-detail">'
                  % (niv["id"], t(niv["label"]), t(niv["titre"])))
         h.append('<h3>Programme</h3><p><b>%s.</b> %s</p><p><b>Intitulés visés :</b></p>%s' % (t(p["texte"]), t(p["statut"]), ul(p["attendus"])))
@@ -466,7 +444,7 @@ def page_enseignants():
                  '<th>Phases et durées</th><th>Production</th><th>Critère de réussite</th></tr></thead><tbody>%s</tbody></table></div>' % (niv["duree"], rows_d))
         h.append('<h3>Évaluation</h3><p>%s</p><div class="scroll-table"><table class="teacher-table"><thead><tr><th>Critère</th><th>Maîtrise insuffisante</th>'
                  '<th>Maîtrise fragile</th><th>Maîtrise satisfaisante</th><th>Très bonne maîtrise</th></tr></thead><tbody>%s</tbody></table></div>' % (t(ev["tache"]), rows_e))
-        h.append('<h3>Vigilance scientifique et pédagogique</h3>%s<h3>Documents authentiques et corrigés</h3><ul>%s</ul>' % (ul(niv["vigilance"]), docs))
+        h.append('<h3>Vigilance scientifique et pédagogique</h3>%s<h3>Documents authentiques</h3><ul>%s</ul>' % (ul(niv["vigilance"]), docs))
         h.append('<a class="btn btn-secondary" href="ressources.html#%s">Télécharger le dossier et le livret →</a></div></details>' % niv["id"])
     h.append('</div><section class="project-box"><h2>Principes communs à tous les niveaux</h2>'
              '<p><b>Structure de chaque séance :</b> je m’interroge (hypothèse) → j’enquête (expérience, mesures, documents) → je retiens (trace écrite) → j’agis (projet) → je fais le bilan.</p>'

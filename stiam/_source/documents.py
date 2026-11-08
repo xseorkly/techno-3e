@@ -272,8 +272,9 @@ def cadrage():
                    "Je retiens : une trace écrite courte, les mots-clés et un schéma.",
                    "J'agis : une étape du projet (fabrication, programmation, essai, communication) avec une production précise.",
                    "Je fais le bilan : deux QCM avec explication, une synthèse et une auto-évaluation sur quatre niveaux (N1 à N4)."]),
-          p("Chaque séance indique son objectif et son critère de réussite. La correction (réponses, production attendue, programme attendu, "
-            "réponses des QCM, corrigé des documents) est construite à partir des mêmes données que la séance : elle ne peut pas la contredire."),
+          p("Chaque séance indique son objectif et son critère de réussite. Les pages élèves ne contiennent pas de corrigé. Le dossier enseignant de chaque niveau "
+            "donne les réponses attendues, la production attendue, le programme attendu, les réponses des QCM et le corrigé des documents ; "
+            "il est construit à partir des mêmes données que les séances : il ne peut pas les contredire."),
           h(1, "Évaluation"),
           p("Chaque niveau dispose d'une tâche finale et d'une grille à quatre niveaux de maîtrise : insuffisante, fragile, satisfaisante, très bonne. "
             "On évalue séparément les connaissances, le raisonnement, la réalisation technique et la qualité de la preuve."),
@@ -288,7 +289,7 @@ def cadrage():
           h(1, "Utiliser le site"),
           puces(["Aucun compte : les réponses sont enregistrées dans le navigateur de l'appareil utilisé ; elles peuvent être exportées ou imprimées en PDF.",
                  "Sur un poste partagé, l'élève efface ses réponses et son nom à la fin de la séance (boutons en bas de page).",
-                 "Le code enseignant masque les corrections mais ne les protège pas : le site est public. Les corrigés confidentiels se déposent dans un espace authentifié (ENT, Moodle)."]),
+                 "Aucun corrigé n'est publié dans les pages élèves ; les réponses attendues figurent dans les dossiers enseignants."]),
           h(1, "Sources")]
     for titre, items in SOURCES:
         b += [h(2, titre), puces(["%s — %s — %s" % (n, d, u) for n, d, u in items])]

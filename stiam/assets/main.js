@@ -26,7 +26,6 @@ function start(){
  });
  const lesson=$('.lesson-page');if(lesson){const id=lesson.dataset.page;set('astro-visited:'+id,'1');
   $('[data-check-quiz]')?.addEventListener('click',e=>{let correct=0,total=0;$$('.qcm[data-quiz]').forEach(block=>{total++;let selected=$('input:checked',block),result=$('.quiz-feedback',block);$$('.choice',block).forEach(c=>c.classList.remove('correct','incorrect'));if(!selected){result.textContent='Choisis une réponse.';return}let good=Number(selected.value)===Number(block.dataset.answer);selected.closest('.choice').classList.add(good?'correct':'incorrect');result.textContent=(good?'✓ Bonne réponse. ':'↻ À revoir. ')+block.dataset.feedback;if(good)correct++});if(correct===total&&total){set('astro-done:'+id,'1');e.currentTarget.textContent='✓ QCM réussis !'}});
-  $('[data-teacher-unlock]')?.addEventListener('click',()=>{let input=$('.teacher-unlock input'),result=$('.teacher-message');if(input.value===(window.ASTRO_CONFIG?.teacherCode||'')&&input.value){$$('.teacher-only').forEach(x=>x.hidden=false);result.textContent='Correction affichée.';input.value=''}else result.textContent='Code incorrect.'});
  }
  $$('.session').forEach(a=>{let m=a.getAttribute('href').match(/([a-z0-9]+-s\d+)\.html/);if(m&&get('astro-visited:'+m[1])==='1')a.classList.add('visited')});
  $$('[data-print]').forEach(btn=>btn.addEventListener('click',()=>{$$('textarea').forEach(el=>el.style.height=Math.max(el.scrollHeight,82)+'px');window.print()}));
