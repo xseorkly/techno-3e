@@ -354,8 +354,8 @@ basic.forever(function () {
     }
     basic.pause(1000)
 })""",
-                          questions=[("Que se passe-t-il si on appuie sur A en plein jour (luminosité 150) ?", "Rien : 150 n'est pas inférieur à 40, la variable reste ne change pas et la LED reste éteinte."),
-                                     ("Combien de temps la LED reste-t-elle allumée après un appui, la nuit ?", "20 secondes : reste vaut 20 et diminue de 1 chaque seconde."),
+                          questions=[("Que se passe-t-il si on appuie sur A en plein jour (luminosité 150) ?", "Rien : 150 n'est pas inférieur à 40, la variable « reste » ne change pas et la LED reste éteinte."),
+                                     ("Combien de temps la LED reste-t-elle allumée après un appui, la nuit ?", "20 secondes : la variable « reste » vaut 20 et diminue de 1 chaque seconde."),
                                      ("Quelle ligne faut-il modifier pour allumer 30 secondes ?", "let DUREE_ALLUMAGE = 30.")]),
              retenir=dict(texte="Un programme associe des entrées (luminosité, appui sur un bouton) à des sorties (LED allumée ou éteinte) grâce à des conditions et à des variables. Modifier un paramètre, comme un seuil ou une durée, change le comportement de l'objet sans réécrire tout le programme."),
              agir=dict(titre="Tester et régler le programme",
@@ -370,8 +370,8 @@ basic.forever(function () {
                        attendu="Test 1 : LED éteinte. Test 2 : LED allumée 20 s puis éteinte. Seuil choisi entre la valeur mesurée « nuit » et la valeur « jour », justifié par les mesures."),
              qcm=[("Dans ce programme, le bouton A représente…", ["la lampe", "le détecteur de présence", "le capteur de lumière", "l'interrupteur général"], 1,
                    "Il simule le passage d'un visiteur."),
-                  ("La variable reste vaut 5. Que se passe-t-il ?", ["la LED s'éteint immédiatement", "la LED reste allumée encore environ 5 secondes", "le programme s'arrête", "la LED clignote"], 1,
-                   "reste diminue de 1 chaque seconde jusqu'à 0.")],
+                  ("La variable « reste » vaut 5. Que se passe-t-il ?", ["la LED s'éteint immédiatement", "la LED reste allumée encore environ 5 secondes", "le programme s'arrête", "la LED clignote"], 1,
+                   "La variable « reste » diminue de 1 chaque seconde jusqu'à 0.")],
              vigilance="Prévoir une résistance de protection en série avec la LED (par exemple 100 Ω sous 3 V)."),
         dict(n=8, titre="Notre éclairage est-il meilleur ?",
              but="Je vais valider le lampadaire amélioré par des mesures et comparer les deux lampadaires selon plusieurs critères.",

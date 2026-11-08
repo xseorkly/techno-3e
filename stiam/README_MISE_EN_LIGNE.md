@@ -6,9 +6,9 @@ Site pédagogique statique (HTML, CSS, JavaScript), publié avec GitHub Pages. A
 
 - `index.html` : accueil et accès aux six niveaux.
 - `niveau/` : une page par niveau (CM1, CM2, 6e, 5e, 4e, 3e) : mission, séances, fiches de connaissances.
-- `activites/` : 51 séances élèves. Chacune suit les mêmes étapes : je m'interroge → j'enquête → je retiens → j'agis → je fais le bilan. Aucun corrigé n'apparaît dans les pages élèves.
+- `activites/` : 51 séances élèves. Chacune suit les mêmes étapes : je m'interroge → j'enquête → je retiens → j'agis → je fais le bilan, puis la correction, repliée en bas de page.
 - `connaissances.html` : 19 fiches de connaissances (explication, expérience, idée fausse fréquente, trace écrite, preuve, questions de vérification).
-- `enseignants.html` : pour chaque niveau, programme et intitulés exacts visés, interdisciplinarité, mission, déroulé minuté, grille d'évaluation, vigilance, documents authentiques.
+- `enseignants.html` : pour chaque niveau, programme et intitulés exacts visés, interdisciplinarité, mission, déroulé minuté, grille d'évaluation, vigilance, documents authentiques et corrigés.
 - `outils.html` et `outils/` : six simulateurs (ombres à Vienne, phases de la Lune, distances, pollution lumineuse, paquets d'image, campagne d'essais du rover).
 - `atlas.html` : 25 schémas, 3 photographies créditées, 12 documents de missions.
 - `ressources.html` et `telechargements/` : dossiers enseignants et livrets élèves (PDF et Word), cadrage général, atlas, parcours intégral, données et programmes d'exemple.
@@ -56,7 +56,7 @@ Tant que `depositUrl` est vide, rien n'est envoyé.
 
 ## Corrections
 
-Les pages du site ne contiennent aucun corrigé et aucun code enseignant. Les réponses attendues (enquêtes, productions, programmes, QCM, documents) figurent dans les dossiers enseignants de `telechargements/enseignants/`, produits par `sh _source/documents.sh`.
+Chaque séance se termine par sa correction, repliée (« Correction (pour l'enseignant) »), sans mot de passe : le site étant public, elle est accessible à tous. Elle n'apparaît pas à l'impression. Les mêmes corrections figurent dans les dossiers enseignants de `telechargements/enseignants/`. Pour des corrigés confidentiels, les retirer du site (bloc « Correction » de `_source/build.py`) et les déposer dans un espace authentifié (ENT, Moodle).
 
 ## Crédits
 
