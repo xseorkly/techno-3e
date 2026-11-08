@@ -31,6 +31,7 @@ function soleil(doy,heureLegale){
 }
 const DIRS=['nord','nord-est','est','sud-est','sud','sud-ouest','ouest','nord-ouest'];
 const dirNom=(az)=>DIRS[Math.round(((az%360)+360)%360/45)%8];
+const versDir=(az)=>{const d=dirNom(az);return (d==='est'||d==='ouest')?'vers l’'+d:'vers le '+d;};
 const MOIS=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
 function dateNom(doy){const d=new Date(Date.UTC(2026,0,1)+(doy-1)*864e5);return d.getUTCDate()+(d.getUTCDate()===1?'er':'')+' '+MOIS[d.getUTCMonth()];}
 function heureNom(h){const m=Math.round((h%1)*60);return Math.floor(h)+' h '+String(m).padStart(2,'0');}
@@ -80,7 +81,7 @@ function draw(){
     body+=`<line x1="${px+lp}" y1="${g}" x2="${ssx}" y2="${ssy}" stroke="#e8a235" stroke-width="2.5" stroke-dasharray="7 6"/><circle cx="${ssx}" cy="${ssy}" r="16" fill="#ffd36f" stroke="#e7a637" stroke-width="2"/>`;
     body+=txt(px+lp/2,g+28,'ombre',15,'#c2185b','middle')+txt(560,380,'Soleil non à l’échelle',13,'#5a6c71','middle');
     view.innerHTML=svg(760,390,body);
-    out.innerHTML=`<b>Ombre : environ ${Math.round(L)} cm, vers le ${dirNom(s.az+180)}</b><p>${dateNom(doy)}, ${heureNom(h)} (${s.ete?'heure d’été':'heure d’hiver'}) : le Soleil est vers le ${dirNom(s.az)}, à ${Math.round(s.elev)}° au-dessus de l’horizon. L’ombre est toujours du côté opposé au Soleil ; elle raccourcit quand le Soleil monte.</p>`;
+    out.innerHTML=`<b>Ombre : environ ${Math.round(L)} cm, ${versDir(s.az+180)}</b><p>${dateNom(doy)}, ${heureNom(h)} (${s.ete?'heure d’été':'heure d’hiver'}) : le Soleil est ${versDir(s.az)}, à ${Math.round(s.elev)}° au-dessus de l’horizon. L’ombre est toujours du côté opposé au Soleil ; elle raccourcit quand le Soleil monte.</p>`;
   }
   if(type==='lune'){
     const f=val('jour')/29.5;
@@ -120,7 +121,7 @@ function draw(){
     const c=canvas.getContext('2d'),bg=Math.floor(3+p*1.25);c.fillStyle=`rgb(${bg},${bg+Math.floor(p*.12)},${bg+Math.floor(p*.22)+11})`;c.fillRect(0,0,650,390);
     let visible=0;
     for(let i=0;i<270;i++){const x=((i*179+41)%640)+5,y=((i*127+29)%380)+5,m=((i*71)%100)/100,b=1-p/100-m*.85;if(b>0.12){visible++;c.fillStyle=`rgba(245,247,255,${Math.min(.95,b+.15)})`;c.beginPath();c.arc(x,y,0.8+m*1.4,0,Math.PI*2);c.fill()}}
-    out.innerHTML=`<b>${visible} étoiles repérables sur 270 (modèle)</b><p>Le fond éclairci masque d’abord les étoiles les plus faibles. Elles brillent toujours : c’est le contraste qui diminue.</p>`;
+    out.innerHTML=`<b>${visible===0?'Aucune étoile repérable':visible+(visible>1?' étoiles repérables':' étoile repérable')} sur 270 (modèle)</b><p>Le fond éclairci masque d’abord les étoiles les plus faibles. Elles brillent toujours : c’est le contraste qui diminue.</p>`;
   }
   if(type==='pixels'){
     const lost=val('pertes'),ordre=[2,6,1,4,7],missing=ordre.slice(0,lost);
@@ -131,7 +132,7 @@ function draw(){
     for(let r=0;r<8;r++){body+=txt(18,79+r*33,r,12,'#5a6c71','end')+txt(388,79+r*33,r,12,'#5a6c71','end');for(let k=0;k<8;k++){body+=pix(28+k*33,57+r*33,col[IMG[r][k]])+pix(398+k*33,57+r*33,missing.includes(r)?'#ccd5d6':col[IMG[r][k]])}}
     view.innerHTML=svg(760,370,body+txt(30,350,'Bleu : eau (00) · vert : végétation (01) · orange : ville (10). Chaque ligne est un paquet numéroté.',13,'#5a6c71'));
     const recus=8-lost;
-    out.innerHTML=`<b>${recus}/8 paquets reçus · ${fr(recus/8*100,1).replace(',0','')} %</b><p>${lost?'Lignes manquantes : '+missing.slice().sort((a,b)=>a-b).join(', ')+'. ':''}Grâce aux numéros, la station sait quelles lignes redemander. Une ligne manquante représente 16 bits.</p>`;
+    out.innerHTML=`<b>${recus}/8 paquets reçus · ${fr(recus/8*100,1).replace(',0','')} %</b><p>${lost?(lost>1?'Lignes manquantes : ':'Ligne manquante : ')+missing.slice().sort((a,b)=>a-b).join(', ')+'. Grâce aux numéros, la station sait quelles lignes redemander. Une ligne manquante représente 16 bits.':'Image complète : les 8 lignes (128 bits) sont arrivées.'}</p>`;
   }
   if(type==='rover'){
     const seuil=val('seuil'),v=val('vitesse'),bas=document.getElementById('bas').checked;
@@ -156,7 +157,7 @@ function draw(){
     }
     const taux=ok/20*100,valide=taux>=80&&dmin>=10;
     view.innerHTML=`<div><div class="scroll-table"><table class="sim-table"><thead><tr><th>Parcours</th><th>Essai 1</th><th>Essai 2</th><th>Essai 3</th><th>Essai 4</th><th>Essai 5</th></tr></thead><tbody>${rows}</tbody></table></div><p class="sim-caption">✓ : réussite, avec la distance minimale à l’obstacle. Contact : collision. Blocage : le rover refuse un passage plus étroit que son seuil.</p></div>`;
-    out.innerHTML=`<b>${ok}/20 réussites · ${fr(taux,0)} % · distance minimale relevée : ${fr(isFinite(dmin)?dmin:0,0)} cm${coll?' (contact)':''}</b><p>${coll} contact(s), ${bloc} blocage(s). Exigences : au moins 80 % de réussite et distance minimale d’au moins 10 cm → ${valide?'<b>rover validé</b>.':'<b>rover non validé</b>.'} Un seuil trop petit fait s’arrêter le rover trop près ; un seuil trop grand le bloque dans les passages étroits ; une vitesse élevée allonge l’arrêt.</p>`;
+    out.innerHTML=`<b>${ok}/20 réussites · ${fr(taux,0)} % · distance minimale relevée : ${fr(isFinite(dmin)?dmin:0,0)} cm${coll?' (contact)':''}</b><p>${coll} contact${coll>1?'s':''}, ${bloc} blocage${bloc>1?'s':''}. Exigences : au moins 80 % de réussite et distance minimale d’au moins 10 cm → ${valide?'<b>rover validé</b>.':'<b>rover non validé</b>.'} Un seuil trop petit fait s’arrêter le rover trop près ; un seuil trop grand le bloque dans les passages étroits ; une vitesse élevée allonge l’arrêt.</p>`;
   }
 }
 setup();
