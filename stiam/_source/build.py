@@ -232,7 +232,7 @@ def page_activite(niv, s):
              '<label for="navfiches">Aller à une autre séance %s</label></div>' % (niv["id"], t(niv["label"]), select_activites(sid)))
     TB, lab_hyp = titres_blocs(s)
     dm = DEMARCHES.get(s.get("demarche"))
-    badge = '<p class="demarche-badge %s">%s</p>' % (dm[1], dm[0]) if dm else ""
+    badge = ('<p class="demarche-badge %s">%s<small>%s</small></p>' % (dm[1], t(niv.get("parties", {}).get(s["demarche"], (dm[0],))[0]), t(dm[0]))) if dm else ""
     h.append('<header class="lesson-hero"><div class="brandline"><span class="brand-seal small">✦</span><span>%s · Séance %d sur %d · %d min</span>'
              '<span class="grade-pill">%s</span></div>%s<h1>%s</h1><p>%s</p><nav class="chrono" aria-label="Étapes de la séance">%s</nav></header>'
              % (t(niv["discipline"]), s["n"], total, duree, t(niv["label"]), badge, t(s["titre"]), t(s["but"]), chrono))
@@ -417,8 +417,8 @@ def page_niveau(niv):
     for s in niv["seances"]:
         dm = DEMARCHES.get(s.get("demarche"))
         if dm and s.get("demarche") != prec:
-            sess += '<p class="part-title %s">%s</p>' % (dm[1], {"sciences": "Partie 1 · Comprendre : la démarche scientifique", "synthese": "Faire le point : la synthèse des connaissances",
-                                                                 "techno": "Partie 2 · Concevoir : la démarche technologique"}[s["demarche"]])
+            pt, sous = niv.get("parties", {}).get(s["demarche"], (dm[0], ""))
+            sess += '<div class="part-title %s"><strong>%s</strong>%s<small>%s</small></div>' % (dm[1], t(pt), ('<span>%s</span>' % t(sous)) if sous else "", t(dm[0]))
         prec = s.get("demarche")
         sess += ('<a class="session larger" href="../activites/%s.html"><span class="session-num">%02d</span><span><strong>%s</strong>'
                  '<small>%s</small></span><span class="session-go">→</span></a>' % (seance_id(niv, s["n"]), s["n"], t(s["titre"]), t(s["but"])))

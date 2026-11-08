@@ -129,7 +129,7 @@ def livret(niv):
         TB, lab_hyp = titres_blocs(s)
         dm = DEMARCHES.get(s.get("demarche"))
         b += [h(1, "Séance %d · %s" % (s["n"], s["titre"])),
-              p(dm[0], style="discret") if dm else None,
+              p("%s · %s" % (niv.get("parties", {}).get(s["demarche"], (dm[0],))[0], dm[0]), style="discret") if dm else None,
               p(s["but"], gras="Objectif : "), p(s["reussite"], gras="Je réussis si : "),
               p(" · ".join("%s %d min" % (lab, d) for lab, d in zip(labels, s["phases"])), style="discret")]
         si = s["situation"]

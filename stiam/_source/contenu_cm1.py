@@ -54,7 +54,12 @@ NIVEAU = dict(
             "L'affiche contient une conclusion appuyée sur des relevés, une limite et une amélioration.",
         ],
     ),
-    calendrier="Partie 1 « Comprendre » (démarche scientifique) : séances 1 à 5. Séance 6 : synthèse des connaissances. Partie 2 « Concevoir » (démarche technologique) : séances 7 à 10. Le carnet de la Lune commence en séance 5 et dure deux lunaisons ; la séance 10 a lieu à la fin des deux lunaisons.",
+    parties=dict(
+        sciences=("Les mystères du ciel", "Pourquoi l'ombre tourne-t-elle et pourquoi la Lune change-t-elle de forme ? Enquêtes, expériences et défis."),
+        synthese=("Escale : ce que nous avons découvert", "On rassemble nos découvertes avant de passer à la fabrication."),
+        techno=("Mission gnomon", "Concevoir, fabriquer et tester l'instrument de notre coin observatoire."),
+    ),
+    calendrier="« Les mystères du ciel » : séances 1 à 5. Escale : séance 6. « Mission gnomon » : séances 7 à 10. Le carnet de la Lune commence en séance 5 et dure deux lunaisons ; la séance 10 a lieu à la fin des deux lunaisons.",
     cartes=[
         dict(id="cm1-1", seance=1,
              question="Le Soleil et la Lune brillent-ils de la même façon ?",
@@ -366,7 +371,7 @@ NIVEAU = dict(
                   ("L'ombre d'un objet est toujours…",
                    ["du côté de la source", "du côté opposé à la source", "vers le sud", "devant l'objet"], 1,
                    "L'objet arrête la lumière : la zone sombre est derrière lui.")],
-             bilan="Défi : sans regarder ta carte, écris les trois idées les plus importantes de la partie « comprendre ».",
+             bilan="Défi : sans regarder ta carte, écris les trois idées les plus importantes des « Mystères du ciel ».",
              bilan_aide="1. La Lune… ; 2. L'ombre… ; 3. Les phases…",
              vigilance="Laisser les élèves construire la synthèse ; le texte de la trace écrite sert de vérification finale, pas de dictée de départ. Le tableau des exigences fait le pont avec la partie technologique."),
         # ------------------------------------------------------------ PARTIE 2 : DÉMARCHE TECHNOLOGIQUE
