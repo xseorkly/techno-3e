@@ -68,5 +68,6 @@
 <script>
 const prefix='osi_sante_';document.querySelectorAll('[data-save]').forEach((el,i)=>{const k=prefix+(el.dataset.save||i);const v=localStorage.getItem(k);if(v!==null)el.value=v;el.addEventListener('input',()=>localStorage.setItem(k,el.value))});document.getElementById('clear').addEventListener('click',()=>{if(!confirm('Effacer toutes les notes enregistrées pour cet atelier ?'))return;Object.keys(localStorage).filter(k=>k.startsWith(prefix)).forEach(k=>localStorage.removeItem(k));location.reload()});
 </script>
+<script defer src="../envoi-formateur.js" data-activite="FORMATION — OSI · Thématique Santé"></script>
 </body>
 </html>
