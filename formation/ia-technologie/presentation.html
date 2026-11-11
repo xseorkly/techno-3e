@@ -6,7 +6,7 @@
 <script>if(sessionStorage.getItem('formation_teachers_unlocked_v1')!=='1')location.replace('../index.html');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<title>L’IA et le professeur de technologie · présentation 40 min</title>
+<title>L’IA et le professeur de technologie · présentation 45 min</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -75,6 +75,18 @@ ol.seven li{counter-increment:s;background:#fff;border:1px solid var(--line);bor
 ol.seven li::before{content:counter(s);position:absolute;left:.8rem;top:.55rem;width:1.6rem;height:1.6rem;border-radius:50%;
   background:var(--rose);color:#fff;font:800 .85rem/1.6rem Archivo,sans-serif;text-align:center}
 
+
+/* parties */
+.slide.divider .inner{text-align:left}
+.slide.divider.a{background:linear-gradient(135deg,var(--teal-l),var(--bg) 60%)}
+.slide.divider.b{background:linear-gradient(135deg,var(--rose-l),var(--bg) 60%)}
+.slide.divider.a h1{color:var(--teal);font-size:clamp(2.6rem,6vw,4.6rem)}
+.slide.divider.b h1{color:var(--rose);font-size:clamp(2.6rem,6vw,4.6rem)}
+.slide[data-part="B"] .kick{color:var(--rose)}
+.partbadge{font:700 .72rem Archivo,sans-serif;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:.25rem .6rem;white-space:nowrap}
+.partbadge.A{background:var(--teal-l);color:var(--teal)} .partbadge.B{background:var(--rose-l);color:var(--rose)}
+#plan .sec{font:700 .75rem Archivo,sans-serif;text-transform:uppercase;letter-spacing:.06em;margin:.7rem .6rem .2rem}
+
 /* pied */
 .foot{position:fixed;inset:auto 0 0 0;height:58px;display:flex;justify-content:center;align-items:center;gap:1rem;
   background:#fff;border-top:1px solid var(--line);z-index:10}
@@ -113,7 +125,8 @@ ol.seven li::before{content:counter(s);position:absolute;left:.8rem;top:.55rem;w
 <body>
 
 <div class="bar">
-  <div class="t">L’IA et le professeur de technologie · 40 min</div>
+  <div class="t">L’IA et le professeur de technologie · 45 min</div>
+  <span class="partbadge" id="pb" hidden></span>
   <button id="bPlan" aria-label="Plan">☰ Plan</button>
   <button id="bNotes" aria-label="Notes orateur">✎ Notes</button>
   <button id="bFull" aria-label="Plein écran">⛶ Projeter</button>
@@ -124,293 +137,392 @@ ol.seven li::before{content:counter(s);position:absolute;left:.8rem;top:.55rem;w
 
 <main id="deck">
 
-<!-- 1 -->
+<!-- Titre -->
 <section class="slide" data-title="L’IA et le professeur de technologie" data-min="1"
-  data-notes="Accueil. Annoncer le format : une présentation de 40 minutes, sans atelier. Le fil rouge : le professeur face à l’IA dans toutes ses situations professionnelles — devant ses élèves, devant sa préparation, devant ses copies. Les questions sont bienvenues à la fin de chaque partie.">
+  data-notes="Accueil. Une présentation de 45 minutes, sans atelier, en deux parties : d’abord le professeur et son travail (préparer, différencier, créer des outils, évaluer), puis les élèves (quand ils peuvent utiliser l’IA, comment les former, comment éviter la dépendance, comment repenser le travail en classe et à la maison). Les questions sont bienvenues à la fin de chaque partie.">
  <div class="inner cover">
-  <div class="kick">Présentation · 40 min · professeurs de technologie</div>
+  <div class="kick">Présentation · 45 min · professeurs de technologie</div>
   <h1>L’IA et le professeur de technologie</h1>
-  <p class="lead">Préparer, enseigner, accompagner, évaluer : ce que l’IA change pour vous et pour vos élèves, et le cadre qui s’applique.</p>
+  <p class="lead">Ce que l’IA change pour votre travail de professeur, ce qu’elle change pour vos élèves, et le cadre qui s’applique.</p>
   <div class="grid">
-   <div class="card g"><span class="ico">🧭</span><h3>Une présentation, pas un atelier</h3><p>Des repères à emporter, des exemples de technologie, le cadre en vigueur.</p></div>
+   <div class="card t"><span class="ico">👩‍🏫</span><h3>Partie A · Le professeur</h3><p>Progressions, préparation, différenciation, outils, évaluation, correction.</p></div>
+   <div class="card r"><span class="ico">🧑‍🎓</span><h3>Partie B · Les élèves</h3><p>Quand utiliser l’IA, se former, éviter la dépendance, repenser la classe et la maison.</p></div>
   </div>
  </div>
 </section>
 
-<!-- 2 -->
+<!-- Déroulé -->
 <section class="slide" data-title="Le déroulé" data-min="1"
-  data-notes="Présenter les sept temps. Insister : on part de ce qu’est l’IA (2 min), puis on regarde le professeur dans ses quatre situations, et on finit par le cadre, qui conditionne tout le reste.">
+  data-notes="Présenter les deux parties. Insister : la partie A regarde l’IA comme outil de travail du professeur ; la partie B regarde ce que l’IA change pour l’élève et ce que le professeur doit organiser pour lui. Le cadre d’usage est rappelé dans chacune des deux parties, pour le professeur puis pour l’élève.">
  <div class="inner">
-  <div class="kick">Déroulé <span class="dur">· 40 min</span></div>
-  <h2>Sept temps, 40 minutes</h2>
+  <div class="kick">Déroulé <span class="dur">· 45 min</span></div>
+  <h2>Deux parties, 45 minutes</h2>
   <table>
-   <tr><th>#</th><th>Temps</th><th>Durée</th></tr>
-   <tr><td>1</td><td>Ce qu’est (et n’est pas) une IA générative</td><td>3 min</td></tr>
-   <tr><td>2</td><td>Le professeur face à ses élèves</td><td>3 min</td></tr>
-   <tr><td>3</td><td>Le professeur qui prépare avec l’IA</td><td>6 min</td></tr>
-   <tr><td>4</td><td>Les dangers pour les élèves</td><td>8 min</td></tr>
-   <tr><td>5</td><td>Faire construire les apprentissages, accompagner</td><td>7 min</td></tr>
-   <tr><td>6</td><td>Évaluer à l’heure de l’IA</td><td>4 min</td></tr>
-   <tr><td>7</td><td>Rappel du cadre d’usage</td><td>4 min</td></tr>
-   <tr><td>·</td><td>Synthèse, ressources, questions</td><td>3 min</td></tr>
+   <tr><th>Temps</th><th>Contenu</th><th>Durée</th></tr>
+   <tr><td><strong>Introduction</strong></td><td>Ouverture et ce qu’est une IA générative</td><td>4 min</td></tr>
+   <tr><td><span class="pill">A · Professeur</span></td><td>Progressions · préparer · différencier · du papier à la plateforme · outils pour les élèves · évaluer · correction automatisée · cadre</td><td>19 min</td></tr>
+   <tr><td><span class="pill r">B · Élèves</span></td><td>Face aux élèves · quand utiliser l’IA · les former · risques · dépendance · construire les apprentissages · classe et maison · évaluer</td><td>19 min</td></tr>
+   <tr><td><strong>Synthèse</strong></td><td>Sept questions, ressources, échanges</td><td>3 min</td></tr>
   </table>
  </div>
 </section>
 
-<!-- 3 -->
-<section class="slide" data-title="Ce qu’est une IA générative" data-min="3"
-  data-notes="Trois idées suffisent. 1) Un modèle de langage prédit la suite la plus probable d’un texte : il ne consulte pas une base de vérités. 2) Il a été entraîné sur d’énormes volumes de données, avec leurs biais. 3) Il produit du plausible, pas du vrai : d’où les « hallucinations », formulées avec la même assurance qu’une réponse juste. En technologie, c’est aussi un objet technique : des données d’entrée, un traitement, une sortie, une consommation d’énergie. Cette double nature (outil ET objet d’étude) est notre fil rouge.">
+<!-- IA générative -->
+<section class="slide" data-title="Ce qu’est une IA générative" data-min="2"
+  data-notes="Trois idées suffisent. 1) Un modèle de langage prédit la suite la plus probable d’un texte : il ne consulte pas une base de vérités. 2) Il a appris sur d’énormes volumes de données, avec leurs biais. 3) Il produit du plausible, pas du vrai : l’erreur a la même assurance que la réponse juste. En technologie, l’IA est aussi un objet technique à étudier : données d’entrée, traitement, sortie, consommation d’énergie.">
  <div class="inner">
-  <div class="kick">1 · Comprendre <span class="dur">· 3 min</span></div>
+  <div class="kick">Introduction <span class="dur">· 2 min</span></div>
   <h2>Ce qu’est une IA générative, en trois idées</h2>
   <div class="grid">
-   <div class="card"><span class="ico">🎲</span><h3>Elle prédit</h3><p>Elle calcule la suite la plus <strong>probable</strong> d’un texte. Elle ne consulte pas une base de vérités.</p></div>
-   <div class="card"><span class="ico">🗂️</span><h3>Elle a appris</h3><p>Sur d’immenses volumes de données, avec leurs <strong>biais</strong> et leurs angles morts.</p></div>
-   <div class="card r"><span class="ico">⚠️</span><h3>Elle produit du plausible</h3><p>Pas forcément du vrai. L’erreur est formulée avec la <strong>même assurance</strong> que la réponse juste.</p></div>
+   <div class="card"><span class="ico">🎲</span><h3>Elle prédit</h3><p>La suite la plus <strong>probable</strong> d’un texte. Elle ne consulte pas une base de vérités.</p></div>
+   <div class="card"><span class="ico">🗂️</span><h3>Elle a appris</h3><p>Sur d’immenses volumes de données, avec leurs <strong>biais</strong>.</p></div>
+   <div class="card r"><span class="ico">⚠️</span><h3>Elle produit du plausible</h3><p>Pas forcément du vrai, avec la <strong>même assurance</strong>.</p></div>
   </div>
   <p class="quote">En technologie, l’IA est à la fois un outil que l’on utilise et un objet technique que l’on étudie.</p>
  </div>
 </section>
 
-<!-- 4 -->
-<section class="slide" data-title="Le professeur face à ses élèves" data-min="3"
-  data-notes="Partir du réel : vos élèves utilisent déjà l’IA, surtout hors de la classe, pour les devoirs. L’enjeu n’est pas d’interdire en bloc ni de laisser faire, mais d’expliciter. Deux postures à éviter : l’interdiction totale (invérifiable, et qui laisse l’élève seul face à l’outil) et le laisser-faire (qui laisse l’outil faire le travail). La posture attendue : le professeur dit clairement, tâche par tâche, ce qui est permis, et il montre lui-même un usage critique. Le professeur reste celui qui conçoit la tâche, contrôle ce que produit la machine et montre l’exemple.">
+<!-- ===================== PARTIE A ===================== -->
+<section class="slide divider a" data-title="Partie A · Le professeur" data-min="0" data-part="A"
+  data-notes="Transition. Partie A : l’IA comme outil de travail du professeur. On suit le fil de son métier : programmer l’année, préparer, différencier, fabriquer des supports et des outils, évaluer, corriger. Et à chaque étape, la même règle : l’IA propose, le professeur décide et vérifie.">
+ <div class="inner cover">
+  <div class="kick">Partie A · 19 min</div>
+  <h1>Le professeur</h1>
+  <p class="lead">L’IA comme outil de travail : programmer, préparer, différencier, outiller, évaluer.</p>
+  <p class="quote">L’IA propose. Le professeur décide et vérifie.</p>
+ </div>
+</section>
+
+<section class="slide" data-part="A" data-title="Trois rôles du professeur" data-min="1"
+  data-notes="Trois rôles qui structurent toute la partie A. Concepteur : il conçoit des séances où l’IA sert l’apprentissage. Auditeur : il vérifie tout ce que produit la machine, comme le travail d’un collègue débutant. Modèle : il montre devant la classe un usage critique, transparent et raisonné.">
  <div class="inner">
-  <div class="kick">2 · Face aux élèves <span class="dur">· 3 min</span></div>
-  <h2>Vos élèves utilisent déjà l’IA. La question est : avec quelles règles ?</h2>
+  <div class="kick">A · Professeur <span class="dur">· 1 min</span></div>
+  <h2>Trois rôles du professeur face à l’IA</h2>
+  <div class="grid">
+   <div class="card t"><span class="ico">📐</span><h3>Concepteur</h3><p>Il conçoit des tâches où l’IA sert l’apprentissage, et non l’inverse.</p></div>
+   <div class="card t"><span class="ico">🔍</span><h3>Auditeur</h3><p>Il vérifie tout ce que produit la machine : exactitude, sécurité, programme.</p></div>
+   <div class="card t"><span class="ico">🪞</span><h3>Modèle</h3><p>Il montre devant la classe un usage critique et transparent.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" data-part="A" data-title="Construire ses progressions" data-min="2"
+  data-notes="L’IA peut aider à passer du programme à une progression : proposer un découpage en séquences, repérer les notions qui reviennent d’un niveau à l’autre, équilibrer les thèmes, imaginer des situations déclenchantes. Mais elle invente souvent des attendus ou mélange des programmes anciens et nouveaux. La source de vérité reste le programme officiel et les repères annuels : on les fournit à l’IA (copier le texte du programme dans la requête) plutôt que de lui demander de s’en souvenir. La cohérence de cycle (5e, 4e, 3e) et la concertation avec les collègues restent humaines.">
+ <div class="inner">
+  <div class="kick">A · Progressions <span class="dur">· 2 min</span></div>
+  <h2>Du programme à la progression</h2>
+  <div class="grid g2">
+   <div class="card g"><h3>L’IA peut vous aider à…</h3>
+    <ul><li>Proposer un découpage en séquences et en séances</li>
+     <li>Repérer les notions qui reviennent de la 5e à la 3e</li>
+     <li>Imaginer des situations déclenchantes et des projets</li>
+     <li>Vérifier l’équilibre entre les thèmes du programme</li></ul></div>
+   <div class="card r"><h3>Restez maître de…</h3>
+    <ul><li>La <strong>source</strong> : fournissez le texte du programme, ne comptez pas sur sa mémoire</li>
+     <li>Les <strong>attendus</strong> : l’IA en invente ou mélange anciens et nouveaux programmes</li>
+     <li>La <strong>cohérence de cycle</strong> et la concertation en équipe</li></ul></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" data-part="A" data-title="Préparer ses séances" data-min="3"
+  data-notes="Le cadre autorise l’IA pour préparer. Gain réel : varier les énoncés, imaginer un contexte, anticiper les erreurs d’élèves. Montrer le modèle de requête : rôle, contexte (niveau, durée, programme), tâche, contraintes (l’élève doit raisonner lui-même), format. Trois vérifications propres à la technologie : exactitude technique (unités, schémas, code), sécurité au labo (consignes absentes ou fausses), conformité au programme. Règle absolue : aucune donnée personnelle d’élève dans un outil non validé.">
+ <div class="inner">
+  <div class="kick">A · Préparer <span class="dur">· 3 min</span></div>
+  <h2>Préparer ses séances : une requête qui embarque votre métier</h2>
+  <div class="card" style="font-family:ui-monospace,Consolas,monospace;font-size:.82em;line-height:1.6">
+   <span class="pill">Rôle</span> Tu es professeur de technologie en collège.<br>
+   <span class="pill">Contexte</span> 4e, séance de 55 min, extrait du programme : [coller le texte]. Thème : chaîne d’information d’un objet automatisé.<br>
+   <span class="pill">Tâche</span> Propose une activité où les élèves identifient capteurs, traitement et actionneurs.<br>
+   <span class="pill">Contraintes</span> L’élève raisonne lui-même ; ne donne pas la réponse. Signale ce que je dois vérifier.<br>
+   <span class="pill">Format</span> Consigne élève + attendus + erreurs fréquentes à anticiper.
+  </div>
+  <div class="grid">
+   <div class="card r"><h3>🔍 Vérifier</h3><p>Exactitude technique · sécurité au labo · conformité au programme.</p></div>
+   <div class="card r"><h3>🔒 Protéger</h3><p>Aucune donnée d’élève (nom, note, photo, situation) dans un outil non validé.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" data-part="A" data-title="Différencier" data-min="2"
+  data-notes="La différenciation est l’un des gains les plus nets. À partir d’une même fiche, l’IA produit en quelques secondes une version guidée et une version ouverte, des coups de pouce gradués à distribuer à la demande, une consigne en français simplifié pour les élèves allophones (fréquents dans le réseau AEFE), un texte adapté pour un élève dys (phrases courtes, mise en page aérée). Ce qui ne change pas : l’objectif d’apprentissage est le même pour tous. On différencie le chemin, pas la cible. Et le professeur choisit qui reçoit quoi, à partir de ce qu’il observe.">
+ <div class="inner">
+  <div class="kick">A · Différencier <span class="dur">· 2 min</span></div>
+  <h2>Différencier : un même objectif, plusieurs chemins</h2>
+  <div class="grid">
+   <div class="card"><h3>🪜 Deux versions</h3><p>Une fiche guidée et une fiche ouverte, à partir du même support.</p></div>
+   <div class="card"><h3>💡 Coups de pouce gradués</h3><p>Trois indices de plus en plus précis, distribués à la demande.</p></div>
+   <div class="card"><h3>🌍 Élèves allophones</h3><p>Consigne en français simplifié, lexique technique illustré.</p></div>
+   <div class="card"><h3>📖 Adaptations</h3><p>Phrases courtes, mise en page aérée, consignes découpées.</p></div>
+  </div>
+  <p class="quote">On différencie le chemin, pas la cible. Le professeur choisit qui reçoit quoi.</p>
+ </div>
+</section>
+
+<section class="slide" data-part="A" data-title="Du papier à la plateforme" data-min="3"
+  data-notes="L’IA abaisse fortement le coût de fabrication des supports numériques. On peut monter par paliers : une fiche papier mieux construite ; un document numérique interactif ; un QCM auto-corrigé avec des retours expliqués ; une page web ou une petite application HTML (simulateur, quiz, fiche à compléter) que l’IA écrit et que vous publiez ; enfin un parcours complet sur une plateforme. Le professeur n’a pas besoin d’être développeur, mais il reste responsable : où sont hébergées les données, est-ce accessible à tous, est-ce que ça marche sur le matériel des élèves, est-ce conforme au RGPD. Priorité aux plateformes de l’établissement et institutionnelles.">
+ <div class="inner">
+  <div class="kick">A · Supports <span class="dur">· 3 min</span></div>
+  <h2>Du document papier à la plateforme</h2>
+  <div class="flow">
+   <div class="card"><h3>📄 1. Papier</h3><p>Une fiche mieux construite, plus claire, différenciée.</p></div>
+   <div class="arrow">→</div>
+   <div class="card"><h3>🖥️ 2. Interactif</h3><p>QCM auto-corrigé avec des retours expliqués.</p></div>
+   <div class="arrow">→</div>
+   <div class="card"><h3>🌐 3. Page web</h3><p>Simulateur, quiz, fiche à compléter : l’IA écrit le code, vous publiez.</p></div>
+   <div class="arrow">→</div>
+   <div class="card t"><h3>🏗️ 4. Plateforme</h3><p>Un parcours complet sur l’ENT ou la plateforme de l’établissement.</p></div>
+  </div>
+  <div class="card r" style="margin-top:1rem"><h3>Vous restez responsable</h3><p>Hébergement et données (RGPD) · accessibilité · fonctionnement sur le matériel des élèves · priorité aux outils de l’établissement.</p></div>
+ </div>
+</section>
+
+<section class="slide" data-part="A" data-title="Préparer des outils pour les élèves" data-min="2"
+  data-notes="Au-delà des documents, le professeur peut préparer de vrais outils d’apprentissage : un quiz de récupération en mémoire avec retour immédiat, un simulateur (par exemple d’une chaîne d’énergie), un générateur d’exercices de programmation, une fiche méthode interactive, ou un assistant configuré pour guider sans donner la réponse. Pour ce dernier, rappel du cadre : uniquement à partir de la 4e, en classe, avec un outil validé. Un outil bien conçu garde l’effort de l’élève : il donne des indices, il ne fait pas à sa place.">
+ <div class="inner">
+  <div class="kick">A · Outils <span class="dur">· 2 min</span></div>
+  <h2>Préparer des outils pour les élèves</h2>
+  <div class="grid">
+   <div class="card"><h3>🧠 Quiz de mémorisation</h3><p>Questions courtes, retour immédiat, à refaire à la maison.</p></div>
+   <div class="card"><h3>⚙️ Simulateur</h3><p>Faire varier un paramètre d’une chaîne d’énergie et observer.</p></div>
+   <div class="card"><h3>💻 Exercices de code</h3><p>Programmes à prédire, tester et corriger, avec des variantes.</p></div>
+   <div class="card t"><h3>🤖 Assistant-tuteur</h3><p>Configuré pour guider par questions, jamais donner la réponse. À partir de la 4e, outil validé.</p></div>
+  </div>
+  <p class="quote">Un bon outil donne des indices. Il ne fait pas à la place de l’élève.</p>
+ </div>
+</section>
+
+<section class="slide" data-part="A" data-title="Concevoir ses évaluations" data-min="2"
+  data-notes="L’IA aide à concevoir l’évaluation : rédiger une grille critériée à partir des compétences visées, varier les items (QCM, questions ouvertes, schémas à compléter), constituer une banque de questions pour l’évaluation diagnostique ou formative, proposer des sujets équivalents pour plusieurs groupes. À vérifier : l’alignement entre ce qui est évalué et ce qui a été enseigné, la justesse des réponses attendues, et le niveau de difficulté réel.">
+ <div class="inner">
+  <div class="kick">A · Évaluer <span class="dur">· 2 min</span></div>
+  <h2>Concevoir ses évaluations avec l’IA</h2>
+  <div class="grid g2">
+   <div class="card g"><h3>L’IA peut produire…</h3>
+    <ul><li>Une <strong>grille critériée</strong> à partir des compétences visées</li>
+     <li>Des items variés : QCM, questions ouvertes, schémas à compléter</li>
+     <li>Une <strong>banque de questions</strong> diagnostiques et formatives</li>
+     <li>Des <strong>sujets équivalents</strong> pour plusieurs groupes</li></ul></div>
+   <div class="card r"><h3>Vous vérifiez…</h3>
+    <ul><li>L’<strong>alignement</strong> avec ce qui a été enseigné</li>
+     <li>La justesse des réponses attendues</li>
+     <li>Le niveau de difficulté réel pour vos élèves</li></ul></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" data-part="A" data-title="La correction automatisée" data-min="2"
+  data-notes="Distinguer trois cas. Ce qui se corrige automatiquement depuis longtemps sans problème : QCM, réponses numériques, programmes testés par des jeux d’essai. Ce que l’IA générative peut assister : repérer les erreurs fréquentes, proposer des commentaires à partir d’une grille, sur des copies anonymisées. Ce qui est exclu : une note décidée par la machine. Le règlement européen sur l’IA classe les systèmes qui évaluent les acquis parmi les usages à haut risque, et le cadre ministériel impose la supervision humaine et la transparence. L’IA peut aussi être biaisée : elle note mieux un texte bien rédigé qu’un raisonnement juste mal formulé.">
+ <div class="inner">
+  <div class="kick">A · Corriger <span class="dur">· 2 min</span></div>
+  <h2>La correction automatisée : jusqu’où ?</h2>
+  <div class="grid">
+   <div class="card g"><h3>✅ Automatisable</h3><p>QCM, réponses numériques, programmes testés par des jeux d’essai.</p></div>
+   <div class="card t"><h3>🤝 Assisté par l’IA</h3><p>Repérer les erreurs fréquentes, proposer des commentaires à partir de votre grille, sur copies <strong>anonymisées</strong>.</p></div>
+   <div class="card r"><h3>❌ Exclu</h3><p>Une note décidée par la machine. Des copies nominatives dans un outil non validé.</p></div>
+  </div>
+  <p style="margin-top:1rem"><strong>Attention aux biais :</strong> l’IA favorise un texte bien rédigé face à un raisonnement juste mal formulé. La décision reste <strong>humaine</strong> et <strong>expliquée</strong> à l’élève.</p>
+ </div>
+</section>
+
+<section class="slide" data-part="A" data-title="Le cadre : pour le professeur" data-min="2"
+  data-notes="Cadre d’usage de l’IA en éducation, publié par le ministère le 14 juin 2025. Pour les personnels, l’usage est autorisé dès lors qu’il respecte le cadre : plus-value pédagogique (sinon on s’abstient : usage raisonné et frugal), transparence, supervision humaine de toute décision, protection des données avec des outils validés (en cas de doute, le DPO de l’établissement), pas de détecteurs d’IA. Règlement européen sur l’IA : reconnaissance des émotions interdite dans les établissements d’enseignement, évaluation des acquis et surveillance d’examens classées à haut risque, obligation de maîtrise de l’IA. Dans le réseau AEFE : cadre ministériel, RGPD, droit du pays d’accueil et consignes de l’établissement.">
+ <div class="inner">
+  <div class="kick">A · Cadre <span class="dur">· 2 min</span></div>
+  <h2>Le cadre d’usage (juin 2025) : pour vous</h2>
+  <div class="grid">
+   <div class="card"><h3>🎯 Plus-value</h3><p>Usage <strong>raisonné et frugal</strong> : seulement si l’IA apporte une vraie valeur.</p></div>
+   <div class="card"><h3>👁️ Transparence</h3><p>Signaler l’usage ; <strong>supervision humaine</strong> de toute décision.</p></div>
+   <div class="card r"><h3>🔒 Données</h3><p>RGPD, outils validés. En cas de doute : le <strong>DPO</strong>.</p></div>
+   <div class="card"><h3>🚫 Pas de détecteur</h3><p>Fiabilité contestée, risque d’injustice.</p></div>
+  </div>
+  <div class="card g" style="margin-top:1rem">
+   <h3>🇪🇺 Règlement européen sur l’IA</h3>
+   <p>Reconnaissance des émotions <strong>interdite</strong> à l’école · évaluation des acquis et surveillance d’examens <strong>à haut risque</strong> · obligation de <strong>maîtrise de l’IA</strong>.</p>
+  </div>
+  <p class="src">Réseau AEFE : cadre ministériel + RGPD + droit du pays d’accueil + consignes de l’établissement.</p>
+ </div>
+</section>
+
+<!-- ===================== PARTIE B ===================== -->
+<section class="slide divider b" data-title="Partie B · Les élèves" data-min="0" data-part="B"
+  data-notes="Transition. Partie B : ce que l’IA change pour l’élève, et ce que le professeur doit organiser pour lui. Quand peut-il l’utiliser, comment le former, quels risques, comment éviter la dépendance, et comment repenser le travail en classe et à la maison.">
+ <div class="inner cover">
+  <div class="kick">Partie B · 19 min</div>
+  <h1>Les élèves</h1>
+  <p class="lead">Quand utiliser l’IA, comment se former, quels risques, comment repenser la classe et la maison.</p>
+  <p class="quote">L’enjeu n’est pas l’outil : c’est ce que l’élève apprend vraiment.</p>
+ </div>
+</section>
+
+<section class="slide" data-part="B" data-title="Vos élèves utilisent déjà l’IA" data-min="2"
+  data-notes="Partir du réel : vos élèves utilisent déjà l’IA, surtout hors de la classe. Deux postures à éviter : tout interdire (impossible à vérifier, et l’élève reste seul face à l’outil) et laisser faire (l’outil fait le travail). La posture attendue : expliciter, pour chaque tâche, ce qui est permis, pour quoi faire, et quelle trace l’élève doit garder.">
+ <div class="inner">
+  <div class="kick">B · Élèves <span class="dur">· 2 min</span></div>
+  <h2>Vos élèves utilisent déjà l’IA. Avec quelles règles ?</h2>
   <div class="flow">
    <div class="card"><h3>❌ Tout interdire</h3><p>Impossible à vérifier hors de la classe. L’élève reste seul face à l’outil.</p></div>
    <div class="card t"><h3>✅ Expliciter</h3><p>Pour <strong>chaque tâche</strong> : avec ou sans IA, pour quoi faire, avec quelle trace.</p></div>
    <div class="card"><h3>❌ Laisser faire</h3><p>L’outil fait le travail. L’élève rend un produit sans avoir appris.</p></div>
   </div>
-  <h3 style="margin-top:1.2rem">Trois rôles du professeur</h3>
-  <p><span class="pill">Concepteur</span> il conçoit des tâches où l’IA sert l’apprentissage &nbsp;
-     <span class="pill">Auditeur</span> il vérifie ce que la machine produit &nbsp;
-     <span class="pill r">Modèle</span> il montre un usage critique, devant la classe</p>
  </div>
 </section>
 
-<!-- 5 -->
-<section class="slide" data-title="Préparer ses cours avec l’IA" data-min="3"
-  data-notes="Le cadre autorise l’IA pour la préparation : c’est un gain de temps réel. Exemples en technologie : varier des énoncés d’exercices, proposer des versions différenciées d’une fiche, imaginer un contexte de projet, générer un QCM de départ, reformuler une consigne plus simplement. Mais la responsabilité reste la vôtre : c’est vous qui signez le document. Les trois pièges propres à notre discipline : erreurs techniques (unités, schémas, valeurs), consignes de sécurité absentes ou fausses au labo, et décalage avec le programme (l’IA invente souvent des attendus).">
+<section class="slide" data-part="B" data-title="Quand l’élève peut-il utiliser l’IA ?" data-min="2"
+  data-notes="Deux niveaux de réponse. 1) Le cadre fixe l’âge : au premier degré, sensibilisation sans manipulation ; en 6e et 5e, pas d’usage d’IA générative par les élèves, mais l’IA peut être étudiée (entraîner un modèle de classification simple n’est pas un usage d’IA générative) ; à partir de la 4e, usage en classe, limité, encadré et accompagné ; au lycée, usage autonome possible dans un cadre défini par l’enseignant. 2) Le professeur fixe la règle de chaque tâche, avec trois niveaux : sans IA, IA de soutien avec trace, IA objet de travail. Hors de la classe, en 4e et 3e, l’usage autonome n’est pas prévu par le cadre : les devoirs doivent en tenir compte.">
  <div class="inner">
-  <div class="kick">3 · Préparer <span class="dur">· 3 min</span></div>
-  <h2>Préparer avec l’IA : un vrai gain, une responsabilité qui reste la vôtre</h2>
-  <div class="grid g2">
-   <div class="card g"><h3>Ce que l’IA fait bien</h3>
-    <ul><li>Varier des énoncés et des contextes de projet</li>
-     <li>Différencier une fiche (version guidée / version ouverte)</li>
-     <li>Reformuler une consigne plus simplement</li>
-     <li>Proposer une première version de QCM</li>
-     <li>Imaginer des erreurs d’élèves à anticiper</li></ul></div>
-   <div class="card r"><h3>Ce que vous devez vérifier</h3>
-    <ul><li><strong>Exactitude technique</strong> : unités, valeurs, schémas, code</li>
-     <li><strong>Sécurité au labo</strong> : consignes absentes ou fausses</li>
-     <li><strong>Conformité au programme</strong> : attendus souvent inventés</li>
-     <li><strong>Intention didactique</strong> : la fiche fait-elle réfléchir l’élève ?</li></ul></div>
+  <div class="kick">B · Quand ? <span class="dur">· 2 min</span></div>
+  <h2>Quand l’élève peut-il utiliser l’IA ?</h2>
+  <table>
+   <tr><th>Niveau</th><th>Ce que prévoit le cadre d’usage</th></tr>
+   <tr><td><strong>1er degré</strong></td><td>Sensibilisation, <strong>sans manipulation directe</strong></td></tr>
+   <tr><td><strong>6e – 5e</strong></td><td>Pas d’IA générative pour les élèves ; l’IA peut être <strong>étudiée</strong></td></tr>
+   <tr><td><strong>4e – 3e</strong></td><td>Usage <strong>en classe</strong>, limité, encadré et accompagné</td></tr>
+   <tr><td><strong>Lycée</strong></td><td>Usage autonome possible, <strong>dans un cadre défini</strong> par l’enseignant</td></tr>
+  </table>
+  <div class="grid" style="margin-top:.8rem">
+   <div class="card"><span class="pill">Niveau 0</span><h3>Sans IA</h3><p>Ce que l’élève doit construire seul.</p></div>
+   <div class="card t"><span class="pill">Niveau 1</span><h3>IA de soutien</h3><p>Pour une étape précise, avec <strong>trace</strong>.</p></div>
+   <div class="card g"><span class="pill">Niveau 2</span><h3>IA objet de travail</h3><p>On l’analyse, on la critique, on la teste.</p></div>
   </div>
  </div>
 </section>
 
-<!-- 6 -->
-<section class="slide" data-title="Une bonne requête pour préparer" data-min="3"
-  data-notes="Une requête efficace embarque le contexte : niveau, programme, durée, matériel, ce que l’élève doit faire lui-même. Montrer le modèle. Deux règles absolues : aucune donnée personnelle d’élève (nom, note, situation, photo) dans un outil non validé par l’établissement ; et toujours relire comme si un collègue débutant avait écrit le document. Le gain de temps vient de la première version, pas de l’absence de relecture.">
+<section class="slide" data-part="B" data-title="Former les élèves à l’IA" data-min="2"
+  data-notes="Former, c’est d’abord faire comprendre : en technologie, l’IA est un contenu du programme. Progression possible : en 5e, repérer l’IA dans les objets du quotidien ; en 4e, entraîner et tester un modèle simple, comprendre le rôle des données ; en 3e, évaluer une IA comme un objet technique (performances, biais, consommation). Ensuite les gestes d’usage, enseignés explicitement : formuler une demande, vérifier par une autre source, citer l’usage, conserver ses requêtes, savoir dire je ne sais pas. Le parcours Pix IA, prévu en 4e et en 2de, est un point d’appui commun ; il ne vaut pas autorisation d’usage.">
  <div class="inner">
-  <div class="kick">3 · Préparer <span class="dur">· 3 min</span></div>
-  <h2>Une requête qui embarque votre métier</h2>
-  <div class="card" style="font-family:ui-monospace,Consolas,monospace;font-size:.85em;line-height:1.6">
-   <span class="pill">Rôle</span> Tu es professeur de technologie en collège.<br>
-   <span class="pill">Contexte</span> Classe de 4e, séance de 55 min, programme de technologie en vigueur, thème : chaîne d’information d’un objet automatisé.<br>
-   <span class="pill">Tâche</span> Propose une activité où les élèves identifient capteurs, traitement et actionneurs.<br>
-   <span class="pill">Contraintes</span> Matériel disponible : … L’élève doit raisonner lui-même ; ne donne pas la réponse dans la fiche. Signale ce que je dois vérifier.<br>
-   <span class="pill">Format</span> Consigne élève + attendus + erreurs fréquentes à anticiper.
+  <div class="kick">B · Former <span class="dur">· 2 min</span></div>
+  <h2>Former les élèves : comprendre, puis bien utiliser</h2>
+  <div class="flow">
+   <div class="card"><h3>5e · Repérer</h3><p>L’IA dans les objets du quotidien.</p></div>
+   <div class="arrow">→</div>
+   <div class="card"><h3>4e · Entraîner, tester</h3><p>Un modèle simple : le rôle des données.</p></div>
+   <div class="arrow">→</div>
+   <div class="card"><h3>3e · Évaluer</h3><p>Performances, biais, consommation.</p></div>
   </div>
-  <div class="grid">
-   <div class="card r"><span class="ico">🔒</span><h3>Jamais de données d’élèves</h3><p>Ni nom, ni note, ni photo, ni situation particulière dans un outil non validé.</p></div>
-   <div class="card g"><span class="ico">🔍</span><h3>Toujours relire</h3><p>Comme le travail d’un collègue débutant : plausible, à vérifier ligne à ligne.</p></div>
-  </div>
+  <p style="margin-top:1rem"><strong>Gestes à enseigner :</strong> formuler une demande · vérifier par une seconde source · citer l’usage · conserver ses requêtes · savoir dire « je ne sais pas ».</p>
+  <p><span class="pill">Pix IA</span> 4e et 2de : un point d’appui commun, qui ne remplace pas votre règle.</p>
  </div>
 </section>
 
-<!-- 7 -->
-<section class="slide" data-title="Performance ≠ apprentissage" data-min="3"
-  data-notes="L’étude de Bastani et al. (lycée, Turquie, publiée dans PNAS en 2025) : les élèves ayant accès à un assistant donnant les réponses réussissent beaucoup mieux les exercices d’entraînement, mais moins bien l’examen final sans IA que les élèves sans accès. La version « tuteur », qui guide sans donner la réponse, supprime cet effet négatif. Message : ce qui compte, ce n’est pas l’outil, c’est la manière dont la tâche est conçue. C’est exactement là que se situe le métier du professeur.">
+<section class="slide" data-part="B" data-title="Réussir n’est pas apprendre" data-min="2"
+  data-notes="Étude de Bastani et al. (lycée, Turquie, PNAS 2025) : avec un assistant qui donne les réponses, les élèves réussissent beaucoup mieux l’entraînement, mais moins bien l’examen final sans IA que ceux qui n’y ont pas eu accès. Avec un assistant tuteur qui guide sans donner la réponse, l’effet négatif disparaît. Ce n’est pas l’outil qui décide, c’est la conception de la tâche.">
  <div class="inner">
-  <div class="kick">4 · Dangers <span class="dur">· 3 min</span></div>
+  <div class="kick">B · Risques <span class="dur">· 2 min</span></div>
   <h2>Réussir la tâche n’est pas apprendre</h2>
   <div class="grid">
    <div class="card"><div class="big">+48 %</div><p>de réussite à l’entraînement avec un assistant qui <strong>donne les réponses</strong>…</p></div>
-   <div class="card r"><div class="big">−17 %</div><p>… mais des résultats <strong>plus faibles</strong> à l’examen final sans IA que les élèves qui n’y ont pas eu accès.</p></div>
-   <div class="card g"><div class="big" style="color:var(--teal)">≈ 0</div><p>Avec un assistant <strong>tuteur</strong> qui guide sans donner la réponse : l’effet négatif disparaît.</p></div>
+   <div class="card r"><div class="big">−17 %</div><p>… mais des résultats <strong>plus faibles</strong> à l’examen sans IA.</p></div>
+   <div class="card g"><div class="big" style="color:var(--teal)">≈ 0</div><p>Avec un assistant <strong>tuteur</strong> : l’effet négatif disparaît.</p></div>
   </div>
-  <p class="quote">Ce n’est pas l’outil qui décide de l’apprentissage, c’est la conception de la tâche.</p>
   <p class="src">Bastani et al., « Generative AI without guardrails can harm learning », PNAS, 2025 (lycée, mathématiques).</p>
  </div>
 </section>
 
-<!-- 8 -->
-<section class="slide" data-title="Six dangers pour les élèves" data-min="3"
-  data-notes="Parcourir rapidement les six effets. Le plus important en technologie : le délestage cognitif. Quand l’IA écrit le programme, rédige le cahier des charges ou explique la chaîne d’énergie, l’élève rend un produit correct sans avoir construit la notion. Rappeler aussi l’équité : les élèves les plus à l’aise savent vérifier l’IA, les plus fragiles la croient. Enfin la protection des données, et le coût environnemental, qui est un contenu de notre programme.">
+<section class="slide" data-part="B" data-title="Six risques pour les élèves" data-min="2"
+  data-notes="Le plus important en technologie : le délestage cognitif. Quand l’IA écrit le programme ou explique la chaîne d’énergie, l’élève rend un produit correct sans avoir construit la notion. Les autres : confiance excessive, dépendance, inégalités (les élèves à l’aise savent vérifier, les plus fragiles croient), données personnelles, et disparition de l’erreur, pourtant moteur de la démarche de projet.">
  <div class="inner">
-  <div class="kick">4 · Dangers <span class="dur">· 3 min</span></div>
-  <h2>Six risques à surveiller chez vos élèves</h2>
+  <div class="kick">B · Risques <span class="dur">· 2 min</span></div>
+  <h2>Six risques à surveiller</h2>
   <div class="grid">
-   <div class="card r"><h3>🧠 Délestage cognitif</h3><p>L’IA fait le raisonnement à la place de l’élève : programme, schéma, justification.</p></div>
-   <div class="card"><h3>🎯 Confiance excessive</h3><p>Une réponse fluide paraît juste. Les erreurs ne sont pas repérées.</p></div>
-   <div class="card"><h3>🔁 Dépendance</h3><p>L’élève ne commence plus sans l’outil, ne supporte plus la page blanche.</p></div>
-   <div class="card"><h3>⚖️ Inégalités</h3><p>Les élèves à l’aise savent vérifier l’IA ; les plus fragiles la croient.</p></div>
-   <div class="card"><h3>🔒 Données personnelles</h3><p>Photos, voix, informations personnelles confiées à des services commerciaux.</p></div>
-   <div class="card"><h3>❓ Rapport à l’erreur</h3><p>L’erreur, moteur de la démarche de projet, disparaît derrière une réponse lisse.</p></div>
+   <div class="card r"><h3>🧠 Délestage cognitif</h3><p>L’IA raisonne à la place de l’élève.</p></div>
+   <div class="card"><h3>🎯 Confiance excessive</h3><p>Une réponse fluide paraît juste.</p></div>
+   <div class="card r"><h3>🔁 Dépendance</h3><p>Plus rien ne commence sans l’outil.</p></div>
+   <div class="card"><h3>⚖️ Inégalités</h3><p>Les plus fragiles croient l’IA sans la vérifier.</p></div>
+   <div class="card"><h3>🔒 Données</h3><p>Photos, voix, informations confiées à des services commerciaux.</p></div>
+   <div class="card"><h3>❓ Rapport à l’erreur</h3><p>L’erreur, moteur du projet, disparaît.</p></div>
   </div>
  </div>
 </section>
 
-<!-- 9 -->
-<section class="slide" data-title="Délester sans priver" data-min="2"
-  data-notes="La question clé pour chaque tâche : qu’est-ce que l’élève doit garder à sa charge, parce que c’est précisément ce qu’il doit apprendre ? On peut déléguer à l’IA ce qui n’est pas l’objectif de la séance (mise en forme, reformulation d’un texte support, recherche d’un exemple), jamais ce qui l’est (le raisonnement technique, le choix de solution, l’écriture de l’algorithme).">
+<section class="slide" data-part="B" data-title="Éviter la dépendance" data-min="2"
+  data-notes="Cinq leviers concrets. 1) Toujours un temps d’effort seul avant toute aide : l’élève produit sa première réponse. 2) L’IA comme tuteur qui pose des questions, pas comme oracle qui répond. 3) Retrait progressif : l’aide est forte au début de l’année, puis diminue, et l’élève doit finir par réussir seul. 4) Des temps réguliers sans aucun outil, notamment pour vérifier les acquis. 5) La métacognition : l’élève dit ce que l’IA lui a apporté et ce qu’il sait faire seul. Et une question simple à poser aux élèves : saurais-tu le refaire sans l’IA ?">
  <div class="inner">
-  <div class="kick">4 · Dangers <span class="dur">· 2 min</span></div>
-  <h2>Délester sans priver</h2>
-  <p class="lead">Pour chaque tâche : qu’est-ce que l’élève doit garder à sa charge, parce que c’est exactement ce qu’il doit apprendre ?</p>
+  <div class="kick">B · Dépendance <span class="dur">· 2 min</span></div>
+  <h2>Éviter la dépendance : cinq leviers</h2>
+  <div class="grid">
+   <div class="card"><h3>1 · Effort d’abord</h3><p>Une première réponse <strong>seul</strong> avant toute aide.</p></div>
+   <div class="card"><h3>2 · Tuteur, pas oracle</h3><p>L’IA pose des questions, elle ne répond pas à la place.</p></div>
+   <div class="card"><h3>3 · Retrait progressif</h3><p>Une aide forte au début, qui diminue au fil de l’année.</p></div>
+   <div class="card"><h3>4 · Temps sans outil</h3><p>Des moments réguliers pour vérifier les acquis.</p></div>
+   <div class="card"><h3>5 · Prise de recul</h3><p>Qu’est-ce que l’IA m’a apporté ? Que sais-je faire seul ?</p></div>
+  </div>
+  <p class="quote">« Saurais-tu le refaire sans l’IA ? »</p>
+ </div>
+</section>
+
+<section class="slide" data-part="B" data-title="Construire les apprentissages" data-min="2"
+  data-notes="Le schéma Avant / Pendant / Après : sans IA pour se confronter au problème, IA sous contrôle comme tuteur, contradicteur ou source à critiquer, puis retour sans IA pour vérifier ce qui est appris. Et la règle du délestage : on peut confier à l’IA ce qui n’est pas l’objectif de la séance (mise en forme, exemple à analyser), jamais ce qui l’est (raisonnement technique, conception, algorithme).">
+ <div class="inner">
+  <div class="kick">B · Apprendre <span class="dur">· 2 min</span></div>
+  <h2>Avant · Pendant · Après</h2>
+  <div class="flow">
+   <div class="card g"><h3>1. Avant · sans IA</h3><p>L’élève produit <strong>sa</strong> réponse : croquis, hypothèse, algorithme.</p></div>
+   <div class="arrow">→</div>
+   <div class="card t"><h3>2. Pendant · IA encadrée</h3><p><strong>Tuteur</strong>, <strong>contradicteur</strong> ou <strong>source à critiquer</strong>.</p></div>
+   <div class="arrow">→</div>
+   <div class="card g"><h3>3. Après · sans IA</h3><p>Il vérifie, justifie, refait seul.</p></div>
+  </div>
   <table>
    <tr><th>On peut confier à l’IA…</th><th>L’élève garde à sa charge…</th></tr>
    <tr><td>La mise en forme d’un compte rendu</td><td>La démarche, les mesures, la conclusion</td></tr>
-   <tr><td>Un exemple d’objet à analyser</td><td>L’identification des fonctions et des flux</td></tr>
    <tr><td>Une critique de sa solution, après coup</td><td>La conception de la solution</td></tr>
-   <tr><td>L’explication d’un message d’erreur</td><td>L’écriture et la correction de l’algorithme</td></tr>
+   <tr><td>L’explication d’un message d’erreur</td><td>L’écriture de l’algorithme</td></tr>
   </table>
  </div>
 </section>
 
-<!-- 10 -->
-<section class="slide" data-title="Faciliter la construction des apprentissages" data-min="3"
-  data-notes="Le schéma Avant / Pendant / Après. Avant : l’élève travaille seul, sans IA, il se confronte au problème, il produit une première réponse. Pendant : l’IA intervient sous contrôle, comme tuteur, contradicteur ou source à critiquer. Après : retour sans IA pour vérifier ce qui a été réellement appris. C’est la séquence qui protège l’apprentissage tout en profitant de l’outil.">
+<section class="slide" data-part="B" data-title="Repenser la classe et la maison" data-min="3"
+  data-notes="L’IA oblige à redistribuer le travail. La classe devient le lieu de ce qui doit être construit sous le regard du professeur : raisonner, concevoir, manipuler, programmer, expliquer à l’oral. La maison devient le lieu de ce qui gagne à être fait seul et que l’IA ne peut pas faire à la place de l’élève : mémoriser (se tester, refaire un quiz), préparer (lire, observer un objet chez soi), s’entraîner sur des exercices courts dont on corrige en classe. Ce qu’on évite : noter un devoir maison rédigé comme s’il prouvait les acquis. En 4e et 3e, le cadre ne prévoit pas d’usage autonome hors de la classe : un devoir qui suppose l’IA à la maison n’est donc pas adapté au collège. Et un devoir maison se prolonge toujours en classe : présenter, défendre, refaire une partie.">
  <div class="inner">
-  <div class="kick">5 · Faire apprendre <span class="dur">· 3 min</span></div>
-  <h2>Avant · Pendant · Après</h2>
-  <div class="flow">
-   <div class="card g"><h3>1. Avant · sans IA</h3><p>L’élève se confronte au problème et produit <strong>sa</strong> première réponse : croquis, hypothèse, algorithme.</p></div>
-   <div class="arrow">→</div>
-   <div class="card t"><h3>2. Pendant · IA sous contrôle</h3><p>L’IA intervient comme <strong>tuteur</strong>, <strong>contradicteur</strong> ou <strong>source à critiquer</strong>.</p></div>
-   <div class="arrow">→</div>
-   <div class="card g"><h3>3. Après · sans IA</h3><p>L’élève vérifie, justifie, refait seul. On mesure ce qui a <strong>vraiment</strong> été appris.</p></div>
+  <div class="kick">B · Classe et maison <span class="dur">· 3 min</span></div>
+  <h2>Repenser le travail en classe et à la maison</h2>
+  <div class="grid g2">
+   <div class="card t"><h3>🏫 En classe : construire</h3>
+    <ul><li>Raisonner, concevoir, manipuler, programmer</li>
+     <li>Expliquer à l’oral, défendre un choix</li>
+     <li>Utiliser l’IA <strong>encadrée</strong>, avec trace (4e et plus)</li>
+     <li>Produire les traces qui seront évaluées</li></ul></div>
+   <div class="card g"><h3>🏠 À la maison : consolider</h3>
+    <ul><li><strong>Mémoriser</strong> en se testant : quiz, cartes, refaire un exercice</li>
+     <li><strong>Préparer</strong> : lire, observer un objet chez soi</li>
+     <li>S’entraîner sur des exercices courts, corrigés en classe</li>
+     <li>Pas d’usage autonome de l’IA prévu au collège</li></ul></div>
   </div>
+  <div class="card r" style="margin-top:1rem"><h3>À éviter</h3><p>Noter un devoir rédigé à la maison comme preuve des acquis. Un travail maison se <strong>prolonge en classe</strong> : présenter, défendre, refaire une partie.</p></div>
  </div>
 </section>
 
-<!-- 11 -->
-<section class="slide" data-title="Quatre usages qui font apprendre" data-min="2"
-  data-notes="Quatre usages concrets en technologie, que vous pouvez reprendre directement. Programmation : l’IA propose un programme volontairement à analyser ; l’élève prédit, teste, corrige. Projet : l’élève conçoit d’abord, puis confronte sa solution à l’IA, qui joue le rôle de contradicteur du cahier des charges. Analyse d’objet : l’explication fournie par l’IA est un document à critiquer, pas une réponse. Objet d’étude : on étudie l’IA elle-même, ses données, ses biais, sa consommation.">
+<section class="slide" data-part="B" data-title="Évaluer les élèves" data-min="2"
+  data-notes="Le produit final seul ne prouve plus l’apprentissage. On évalue la démarche avec des preuves croisées : traces produites en classe, journal de conception daté, oral court où l’élève explique un choix, modification en direct d’un programme. Pas de détecteurs d’IA. Et la règle doit être annoncée avant la tâche : ce qui n’a pas été explicité ne peut pas être reproché clairement.">
  <div class="inner">
-  <div class="kick">5 · Faire apprendre <span class="dur">· 2 min</span></div>
-  <h2>Quatre usages qui font apprendre en technologie</h2>
-  <div class="grid">
-   <div class="card"><h3>💻 Lire avant d’écrire</h3><p>Un programme fourni par l’IA : l’élève <strong>prédit, teste, corrige</strong>.</p></div>
-   <div class="card"><h3>📐 Contradicteur</h3><p>L’élève conçoit d’abord, puis confronte sa solution au cahier des charges avec l’IA.</p></div>
-   <div class="card"><h3>🔎 Document à critiquer</h3><p>L’explication de l’IA sur une chaîne d’énergie devient un support d’analyse.</p></div>
-   <div class="card g"><h3>🤖 Objet d’étude</h3><p>Données, entraînement, biais, consommation : l’IA comme objet technique.</p></div>
-  </div>
- </div>
-</section>
-
-<!-- 12 -->
-<section class="slide" data-title="Accompagner les élèves" data-min="2"
-  data-notes="Accompagner, c’est rendre la règle visible. Trois niveaux de contrat, affichés pour chaque tâche : sans IA, IA de soutien (avec trace : requête et réponse conservées), IA objet de travail. Enseigner explicitement les gestes : vérifier par une autre source, citer l’usage, garder ses requêtes. Le parcours Pix IA suivi par les élèves de 4e et de 2de est un point d’appui commun, mais il ne vaut pas autorisation : c’est vous qui fixez la règle de la tâche.">
- <div class="inner">
-  <div class="kick">5 · Accompagner <span class="dur">· 2 min</span></div>
-  <h2>Accompagner : une règle visible pour chaque tâche</h2>
-  <div class="grid">
-   <div class="card"><span class="pill">Niveau 0</span><h3>Sans IA</h3><p>La tâche porte sur ce que l’élève doit construire seul.</p></div>
-   <div class="card t"><span class="pill">Niveau 1</span><h3>IA de soutien</h3><p>Autorisée pour une étape précise, avec <strong>trace</strong> : requête et réponse conservées.</p></div>
-   <div class="card g"><span class="pill">Niveau 2</span><h3>IA objet de travail</h3><p>On analyse, on critique, on teste ce que produit l’IA.</p></div>
-  </div>
-  <p style="margin-top:1rem"><strong>Gestes à enseigner :</strong> vérifier par une seconde source · citer l’usage de l’IA · conserver ses requêtes · savoir dire « je ne sais pas ».</p>
-  <p><strong>Pix IA</strong> (4e et 2de) : un point d’appui commun, qui ne remplace pas votre règle.</p>
- </div>
-</section>
-
-<!-- 13 -->
-<section class="slide" data-title="Évaluer à l’heure de l’IA" data-min="2"
-  data-notes="Le produit final seul ne prouve plus l’apprentissage. Il faut évaluer la démarche : traces produites en classe, journal de bord daté, oral court où l’élève explique un choix, modification en direct d’un programme. Le cadre déconseille les détecteurs d’IA, peu fiables et sources d’injustice. Fraude : elle se définit par rapport à la règle que vous avez fixée ; d’où l’importance de l’expliciter avant la tâche.">
- <div class="inner">
-  <div class="kick">6 · Évaluer <span class="dur">· 2 min</span></div>
+  <div class="kick">B · Évaluer <span class="dur">· 2 min</span></div>
   <h2>Évaluer la démarche, pas seulement le produit</h2>
   <div class="grid g2">
    <div class="card g"><h3>Des preuves croisées</h3>
     <ul><li>Traces produites <strong>en classe</strong></li>
      <li>Journal de conception <strong>daté</strong></li>
      <li>Oral court : « explique ce choix »</li>
-     <li>Modification en direct d’un programme ou d’un schéma</li></ul></div>
+     <li>Modification en direct d’un programme</li></ul></div>
    <div class="card r"><h3>À éviter</h3>
-    <ul><li>Les <strong>détecteurs d’IA</strong> : peu fiables, déconseillés par le cadre</li>
-     <li>Une note sur le seul produit rendu à la maison</li>
+    <ul><li>Les <strong>détecteurs d’IA</strong></li>
+     <li>Une note sur le seul produit rendu</li>
      <li>Une règle annoncée <strong>après</strong> la tâche</li></ul></div>
   </div>
-  <p class="quote">Ce qui n’a pas été autorisé explicitement ne peut pas être reproché clairement.</p>
+  <p class="quote">Ce qui n’a pas été explicité ne peut pas être reproché clairement.</p>
  </div>
 </section>
 
-<!-- 14 -->
-<section class="slide" data-title="Et l’IA pour corriger ?" data-min="2"
-  data-notes="Le professeur peut utiliser l’IA pour l’aider à évaluer : rédiger une grille critériée, proposer des commentaires types, repérer des erreurs fréquentes dans des productions anonymisées. Mais la décision reste humaine : aucune note attribuée automatiquement. Le règlement européen sur l’IA classe d’ailleurs l’évaluation des acquis parmi les usages à haut risque. Et toujours sans données nominatives dans un outil non validé.">
- <div class="inner">
-  <div class="kick">6 · Évaluer <span class="dur">· 2 min</span></div>
-  <h2>Et l’IA pour vous aider à évaluer ?</h2>
-  <div class="grid">
-   <div class="card g"><h3>✅ Possible</h3><p>Construire une grille critériée, proposer des commentaires types, repérer des erreurs fréquentes sur des copies <strong>anonymisées</strong>.</p></div>
-   <div class="card r"><h3>❌ Exclu</h3><p>Une note attribuée par la machine. Des copies nominatives dans un outil non validé.</p></div>
-   <div class="card t"><h3>⚖️ Principe</h3><p>La décision d’évaluation reste <strong>humaine</strong> et <strong>transparente</strong> pour l’élève.</p></div>
-  </div>
- </div>
-</section>
-
-<!-- 15 -->
-<section class="slide" data-title="Le cadre d’usage : les élèves" data-min="2"
-  data-notes="Le cadre d’usage de l’IA en éducation, publié par le ministère le 14 juin 2025 après une consultation de janvier à mai 2025. Pour les élèves : au premier degré, sensibilisation sans manipulation directe ; au collège, usage des IA génératives à partir de la 4e, en classe, de manière limitée, encadrée et accompagnée ; au lycée, usage autonome possible dans un cadre défini par l’enseignant. En 5e et en dessous, donc, pas de manipulation d’IA générative par les élèves : en technologie, on peut en revanche étudier l’IA comme objet (entraîner un modèle de classification simple n’est pas un usage d’IA générative). Le parcours Pix IA est prévu pour tous les élèves de 4e et de 2de.">
- <div class="inner">
-  <div class="kick">7 · Cadre <span class="dur">· 2 min</span></div>
-  <h2>Le cadre d’usage de l’IA en éducation (juin 2025) : les élèves</h2>
-  <table>
-   <tr><th>Niveau</th><th>Ce que prévoit le cadre</th></tr>
-   <tr><td><strong>1er degré</strong></td><td>Sensibilisation aux notions de base, <strong>sans manipulation directe</strong> des outils</td></tr>
-   <tr><td><strong>6e – 5e</strong></td><td>Pas d’usage d’IA générative par les élèves ; l’IA peut être <strong>étudiée</strong></td></tr>
-   <tr><td><strong>À partir de la 4e</strong></td><td>Usage <strong>en classe</strong>, limité, encadré et accompagné par l’enseignant</td></tr>
-   <tr><td><strong>Lycée</strong></td><td>Usage autonome possible, <strong>dans un cadre défini</strong> par l’enseignant</td></tr>
-  </table>
-  <p style="margin-top:.8rem"><span class="pill">Pix IA</span> parcours prévu pour tous les élèves de 4e et de 2de.</p>
- </div>
-</section>
-
-<!-- 16 -->
-<section class="slide" data-title="Le cadre d’usage : le professeur" data-min="2"
-  data-notes="Pour les personnels : l’usage est autorisé dès lors qu’il respecte le cadre. Principes : plus-value pédagogique démontrée, sinon on s’abstient (usage raisonné et frugal) ; transparence quand l’IA intervient dans une décision ; supervision humaine ; protection des données (RGPD), avec des outils validés par l’institution ou l’établissement — en cas de doute, le DPO / référent RGPD. Pas de détecteurs d’IA. Côté européen : le règlement sur l’IA (AI Act) interdit la reconnaissance des émotions dans les établissements d’enseignement et classe à haut risque les systèmes qui évaluent les acquis ou surveillent les examens ; il impose aussi une obligation de maîtrise de l’IA. Dans le réseau AEFE : on applique le cadre ministériel, le RGPD, le droit du pays d’accueil et les consignes de l’établissement.">
- <div class="inner">
-  <div class="kick">7 · Cadre <span class="dur">· 2 min</span></div>
-  <h2>Le cadre d’usage : vous, professeur</h2>
-  <div class="grid">
-   <div class="card"><h3>🎯 Plus-value</h3><p>Usage <strong>raisonné et frugal</strong> : seulement si l’IA apporte une vraie valeur pédagogique.</p></div>
-   <div class="card"><h3>👁️ Transparence</h3><p>Signaler l’usage de l’IA ; <strong>supervision humaine</strong> de toute décision.</p></div>
-   <div class="card r"><h3>🔒 Données</h3><p>RGPD : outils validés, aucune donnée d’élève ailleurs. En cas de doute : le <strong>DPO</strong>.</p></div>
-   <div class="card"><h3>🚫 Pas de détecteur</h3><p>Fiabilité contestée, risque d’injustice envers les élèves.</p></div>
-  </div>
-  <div class="card g" style="margin-top:1rem">
-   <h3>🇪🇺 Règlement européen sur l’IA</h3>
-   <p>Reconnaissance des émotions <strong>interdite</strong> dans les établissements d’enseignement · évaluation des acquis et surveillance d’examens classées <strong>à haut risque</strong> · obligation de <strong>maîtrise de l’IA</strong> pour ceux qui l’utilisent.</p>
-  </div>
-  <p class="src">Réseau AEFE : cadre ministériel + RGPD + droit du pays d’accueil + consignes de l’établissement.</p>
- </div>
-</section>
-
-<!-- 17 -->
+<!-- ===================== SYNTHÈSE ===================== -->
 <section class="slide" data-title="Sept questions avant d’utiliser l’IA" data-min="2"
-  data-notes="La grille à emporter. Sept questions à se poser avant toute séance qui implique l’IA, que ce soit pour préparer, faire travailler ou évaluer. Si une réponse est non ou je ne sais pas, on ajuste la tâche ou on s’abstient.">
+  data-notes="La grille à emporter, valable pour le professeur comme pour la tâche donnée à l’élève. Si une réponse est non ou je ne sais pas, on ajuste ou on s’abstient.">
  <div class="inner">
   <div class="kick">Synthèse <span class="dur">· 2 min</span></div>
   <h2>Sept questions avant d’utiliser l’IA</h2>
   <ol class="seven">
-   <li>Qu’est-ce que l’élève doit <strong>apprendre</strong> dans cette tâche ?</li>
+   <li>Qu’est-ce que l’élève doit <strong>apprendre</strong> ici ?</li>
    <li>L’IA <strong>fait-elle</strong> ce travail à sa place ?</li>
-   <li>Le niveau de la classe <strong>permet-il</strong> cet usage (4e et plus) ?</li>
+   <li>Le niveau de la classe <strong>permet-il</strong> cet usage ?</li>
    <li>La règle (sans IA / soutien / objet) est-elle <strong>annoncée</strong> ?</li>
    <li>Quelle <strong>trace</strong> garderai-je de la démarche ?</li>
    <li>Des <strong>données personnelles</strong> sont-elles en jeu ?</li>
@@ -419,15 +531,14 @@ ol.seven li::before{content:counter(s);position:absolute;left:.8rem;top:.55rem;w
  </div>
 </section>
 
-<!-- 18 -->
 <section class="slide" data-title="Pour aller plus loin" data-min="1"
-  data-notes="Ressources. Annoncer le lien vers la formation complète de 3 h, avec les ateliers, pour ceux qui veulent approfondir. Ouvrir aux questions.">
+  data-notes="Ressources, et lien vers la formation complète de 3 h avec ses ateliers. Ouvrir aux questions.">
  <div class="inner">
   <div class="kick">Ressources</div>
   <h2>Pour aller plus loin</h2>
   <div class="grid g2">
    <div class="card"><h3>📜 Cadre</h3>
-    <ul><li><a href="https://www.education.gouv.fr/cadre-d-usage-de-l-ia-en-education-450647" target="_blank" rel="noopener">Cadre d’usage de l’IA en éducation (MENESR, juin 2025)</a></li>
+    <ul><li><a href="https://www.education.gouv.fr/cadre-d-usage-de-l-ia-en-education-450647" target="_blank" rel="noopener">Cadre d’usage de l’IA en éducation (juin 2025)</a></li>
      <li><a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj" target="_blank" rel="noopener">Règlement européen sur l’IA (UE) 2024/1689</a></li></ul></div>
    <div class="card"><h3>🔬 Recherche et élèves</h3>
     <ul><li><a href="https://doi.org/10.1073/pnas.2422633122" target="_blank" rel="noopener">Bastani et al., PNAS 2025</a></li>
@@ -462,16 +573,22 @@ ol.seven li::before{content:counter(s);position:absolute;left:.8rem;top:.55rem;w
     $('count').textContent=(i+1)+' / '+N;
     $('prog').style.width=((i+1)/N*100)+'%';
     $('prev').disabled=i===0; $('next').disabled=i===N-1;
-    $('nTitle').textContent=S[i].dataset.title+' · '+S[i].dataset.min+' min';
+    $('nTitle').textContent=S[i].dataset.title+(+S[i].dataset.min?' · '+S[i].dataset.min+' min':'');
+    const pt=S[i].dataset.part,pb=$('pb');pb.hidden=!pt;if(pt){pb.className='partbadge '+pt;pb.textContent=pt==='A'?'A · Professeur':'B · Élèves'}
     $('nBody').textContent=S[i].dataset.notes||'';
     [...$('plan').querySelectorAll('button')].forEach((b,k)=>b.classList.toggle('cur',k===i));
     try{history.replaceState(null,'','#'+(i+1))}catch(e){}
   }
   // plan
   let tot=0;
+  let last=null;
   S.forEach((s,k)=>{tot+=+s.dataset.min;
+    const part=s.dataset.part||'';
+    if(part!==last){const t=document.createElement('div');t.className='sec';
+      t.textContent=part==='A'?'Partie A · Le professeur':part==='B'?'Partie B · Les élèves':(k===0?'Introduction':'Synthèse');
+      t.style.color=part==='B'?'var(--rose)':'var(--teal)';$('plan').appendChild(t);last=part;}
     const b=document.createElement('button');
-    b.innerHTML='<span class="n">'+(k+1)+'</span><span>'+s.dataset.title+'</span><span class="d">'+s.dataset.min+' min</span>';
+    b.innerHTML='<span class="n">'+(k+1)+'</span><span>'+s.dataset.title+'</span><span class="d">'+(+s.dataset.min?s.dataset.min+' min':'')+'</span>';
     b.onclick=()=>{go(k);$('plan').classList.remove('on')};
     $('plan').appendChild(b);});
   const h=document.createElement('p');h.style.cssText='margin:.6rem .6rem 0;color:var(--mute);font-size:.85rem';
