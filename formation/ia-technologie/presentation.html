@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="09bb50e4-e5cd-47d4-b231-1551e99b2df5" data-domains="xseorkly.github.io"></script>
+<script>if(sessionStorage.getItem('formation_teachers_unlocked_v1')!=='1')location.replace('../index.html');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>L’IA et le professeur de technologie · présentation 40 min</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#156b68; --teal-l:#e3f0ef; --rose:#b3135a; --rose-l:#fbe8f0;
+  --ink:#14232b; --mute:#55656c; --bg:#f2f5f5; --card:#fff; --line:#cfdcdb;
+  --ok:#2e7d4f; --warn:#b26a00;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
+  font:400 clamp(16px,1.25vw + .55rem,22px)/1.5 "Source Sans 3",system-ui,sans-serif}
+h1,h2,h3{font-family:Archivo,system-ui,sans-serif;line-height:1.15;margin:.2em 0 .5em}
+h1{font-weight:800;font-size:clamp(1.9rem,3.6vw,3.2rem)}
+h2{font-weight:800;font-size:clamp(1.45rem,2.6vw,2.3rem)}
+h3{font-weight:600;font-size:1.05em;margin:0 0 .3em}
+p{margin:.35em 0}
+ul{margin:.3em 0;padding-left:1.15em} li{margin:.25em 0}
+strong{color:var(--ink)}
+a{color:var(--rose)}
+
+/* barre */
+.bar{position:fixed;inset:0 0 auto 0;height:52px;display:flex;align-items:center;gap:.4rem;
+  padding:0 .8rem;background:#fff;border-bottom:1px solid var(--line);z-index:10}
+.bar .t{font:600 .8rem Archivo,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.bar button{font:600 .8rem Archivo,sans-serif;border:1px solid var(--line);background:#fff;color:var(--ink);
+  border-radius:999px;padding:.35rem .75rem;cursor:pointer}
+.bar button:hover{border-color:var(--teal);color:var(--teal)}
+.bar .count{font:600 .8rem Archivo,sans-serif;color:var(--mute);min-width:3.5em;text-align:right}
+.progress{position:fixed;top:52px;left:0;height:3px;background:var(--rose);transition:width .25s;z-index:10}
+
+/* diapos */
+main{position:fixed;inset:55px 0 58px 0;overflow:hidden}
+.slide{position:absolute;inset:0;overflow-y:auto;padding:clamp(1rem,3vw,2.5rem) clamp(1rem,5vw,4.5rem);
+  display:none}
+.slide.on{display:block;animation:in .3s ease}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.inner{max-width:1150px;margin:0 auto}
+.kick{font:600 .78rem Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.kick .dur{color:var(--mute)}
+.lead{font-size:1.12em;color:var(--mute);max-width:60ch}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:1rem}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1rem 1.2rem}
+.card.t{border-color:var(--teal);border-width:2px}
+.card.r{background:var(--rose-l);border-color:#efc3d6}
+.card.g{background:var(--teal-l);border-color:#b9d8d5}
+.ico{font-size:1.5em;line-height:1}
+.big{font:800 clamp(2rem,5vw,3.6rem) Archivo,sans-serif;color:var(--rose);line-height:1}
+.pill{display:inline-block;font:600 .72rem Archivo,sans-serif;letter-spacing:.05em;text-transform:uppercase;
+  padding:.2rem .6rem;border-radius:999px;background:var(--teal-l);color:var(--teal);margin:0 .3rem .3rem 0}
+.pill.r{background:var(--rose-l);color:var(--rose)}
+.quote{border-left:5px solid var(--rose);padding:.4rem 0 .4rem 1rem;margin:1rem 0;font-size:1.15em;font-weight:600}
+table{width:100%;border-collapse:collapse;margin-top:.8rem;background:#fff;border-radius:14px;overflow:hidden}
+th,td{text-align:left;padding:.55rem .75rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 .8rem Archivo,sans-serif;text-transform:uppercase;letter-spacing:.05em;color:var(--teal);background:var(--teal-l)}
+.flow{display:flex;flex-wrap:wrap;gap:.6rem;align-items:stretch;margin-top:1rem}
+.flow .card{flex:1 1 200px}
+.arrow{align-self:center;font-size:1.6em;color:var(--teal)}
+.cover{display:flex;flex-direction:column;justify-content:center;min-height:100%}
+.cover .card{max-width:780px}
+.src{font-size:.75em;color:var(--mute);margin-top:1rem}
+ol.seven{counter-reset:s;list-style:none;padding:0;display:grid;gap:.55rem;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+ol.seven li{counter-increment:s;background:#fff;border:1px solid var(--line);border-radius:14px;padding:.6rem .9rem .6rem 3rem;position:relative;margin:0}
+ol.seven li::before{content:counter(s);position:absolute;left:.8rem;top:.55rem;width:1.6rem;height:1.6rem;border-radius:50%;
+  background:var(--rose);color:#fff;font:800 .85rem/1.6rem Archivo,sans-serif;text-align:center}
+
+/* pied */
+.foot{position:fixed;inset:auto 0 0 0;height:58px;display:flex;justify-content:center;align-items:center;gap:1rem;
+  background:#fff;border-top:1px solid var(--line);z-index:10}
+.foot button{font:600 1rem Archivo,sans-serif;border:0;background:var(--teal);color:#fff;border-radius:999px;
+  padding:.5rem 1.3rem;cursor:pointer}
+.foot button:disabled{opacity:.35;cursor:default}
+
+/* panneaux */
+.panel{position:fixed;z-index:20;background:#fff;border:1px solid var(--line);box-shadow:0 10px 40px rgba(0,0,0,.15);
+  display:none;overflow:auto}
+.panel.on{display:block}
+#plan{top:60px;left:50%;transform:translateX(-50%);width:min(560px,94vw);max-height:75vh;border-radius:18px;padding:1rem}
+#plan button{display:flex;gap:.6rem;width:100%;text-align:left;border:0;background:none;padding:.45rem .6rem;border-radius:10px;
+  font:400 .95rem "Source Sans 3",sans-serif;cursor:pointer;color:var(--ink)}
+#plan button:hover,#plan button.cur{background:var(--teal-l)}
+#plan .n{font:600 .8rem Archivo,sans-serif;color:var(--teal);min-width:2em}
+#plan .d{margin-left:auto;color:var(--mute);font-size:.85em}
+#notes{right:0;bottom:58px;width:min(460px,100vw);max-height:45vh;border-radius:18px 0 0 0;padding:1rem 1.2rem;font-size:.92rem}
+#notes .h{display:flex;justify-content:space-between;align-items:center;font:600 .8rem Archivo,sans-serif;color:var(--teal);text-transform:uppercase;letter-spacing:.05em}
+#chrono{font:800 1.1rem Archivo,sans-serif;color:var(--rose);cursor:pointer}
+#notes .body{margin-top:.5rem;color:var(--ink)}
+
+@media (max-width:640px){
+  .bar .t{display:none}
+  .bar button{padding:.3rem .55rem}
+  .arrow{transform:rotate(90deg);width:100%;text-align:center}
+}
+@media print{
+  .bar,.foot,.progress,.panel{display:none!important}
+  main{position:static}
+  .slide{display:block!important;position:static;page-break-after:always;overflow:visible;animation:none}
+  html,body{background:#fff}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="t">L’IA et le professeur de technologie · 40 min</div>
+  <button id="bPlan" aria-label="Plan">☰ Plan</button>
+  <button id="bNotes" aria-label="Notes orateur">✎ Notes</button>
+  <button id="bFull" aria-label="Plein écran">⛶ Projeter</button>
+  <button onclick="window.print()" aria-label="Imprimer">⎙</button>
+  <span class="count" id="count"></span>
+</div>
+<div class="progress" id="prog"></div>
+
+<main id="deck">
+
+<!-- 1 -->
+<section class="slide" data-title="L’IA et le professeur de technologie" data-min="1"
+  data-notes="Accueil. Annoncer le format : une présentation de 40 minutes, sans atelier. Le fil rouge : le professeur face à l’IA dans toutes ses situations professionnelles — devant ses élèves, devant sa préparation, devant ses copies. Les questions sont bienvenues à la fin de chaque partie.">
+ <div class="inner cover">
+  <div class="kick">Présentation · 40 min · professeurs de technologie</div>
+  <h1>L’IA et le professeur de technologie</h1>
+  <p class="lead">Préparer, enseigner, accompagner, évaluer : ce que l’IA change pour vous et pour vos élèves, et le cadre qui s’applique.</p>
+  <div class="grid">
+   <div class="card g"><span class="ico">🧭</span><h3>Une présentation, pas un atelier</h3><p>Des repères à emporter, des exemples de technologie, le cadre en vigueur.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- 2 -->
+<section class="slide" data-title="Le déroulé" data-min="1"
+  data-notes="Présenter les sept temps. Insister : on part de ce qu’est l’IA (2 min), puis on regarde le professeur dans ses quatre situations, et on finit par le cadre, qui conditionne tout le reste.">
+ <div class="inner">
+  <div class="kick">Déroulé <span class="dur">· 40 min</span></div>
+  <h2>Sept temps, 40 minutes</h2>
+  <table>
+   <tr><th>#</th><th>Temps</th><th>Durée</th></tr>
+   <tr><td>1</td><td>Ce qu’est (et n’est pas) une IA générative</td><td>3 min</td></tr>
+   <tr><td>2</td><td>Le professeur face à ses élèves</td><td>3 min</td></tr>
+   <tr><td>3</td><td>Le professeur qui prépare avec l’IA</td><td>6 min</td></tr>
+   <tr><td>4</td><td>Les dangers pour les élèves</td><td>8 min</td></tr>
+   <tr><td>5</td><td>Faire construire les apprentissages, accompagner</td><td>7 min</td></tr>
+   <tr><td>6</td><td>Évaluer à l’heure de l’IA</td><td>4 min</td></tr>
+   <tr><td>7</td><td>Rappel du cadre d’usage</td><td>4 min</td></tr>
+   <tr><td>·</td><td>Synthèse, ressources, questions</td><td>3 min</td></tr>
+  </table>
+ </div>
+</section>
+
+<!-- 3 -->
+<section class="slide" data-title="Ce qu’est une IA générative" data-min="3"
+  data-notes="Trois idées suffisent. 1) Un modèle de langage prédit la suite la plus probable d’un texte : il ne consulte pas une base de vérités. 2) Il a été entraîné sur d’énormes volumes de données, avec leurs biais. 3) Il produit du plausible, pas du vrai : d’où les « hallucinations », formulées avec la même assurance qu’une réponse juste. En technologie, c’est aussi un objet technique : des données d’entrée, un traitement, une sortie, une consommation d’énergie. Cette double nature (outil ET objet d’étude) est notre fil rouge.">
+ <div class="inner">
+  <div class="kick">1 · Comprendre <span class="dur">· 3 min</span></div>
+  <h2>Ce qu’est une IA générative, en trois idées</h2>
+  <div class="grid">
+   <div class="card"><span class="ico">🎲</span><h3>Elle prédit</h3><p>Elle calcule la suite la plus <strong>probable</strong> d’un texte. Elle ne consulte pas une base de vérités.</p></div>
+   <div class="card"><span class="ico">🗂️</span><h3>Elle a appris</h3><p>Sur d’immenses volumes de données, avec leurs <strong>biais</strong> et leurs angles morts.</p></div>
+   <div class="card r"><span class="ico">⚠️</span><h3>Elle produit du plausible</h3><p>Pas forcément du vrai. L’erreur est formulée avec la <strong>même assurance</strong> que la réponse juste.</p></div>
+  </div>
+  <p class="quote">En technologie, l’IA est à la fois un outil que l’on utilise et un objet technique que l’on étudie.</p>
+ </div>
+</section>
+
+<!-- 4 -->
+<section class="slide" data-title="Le professeur face à ses élèves" data-min="3"
+  data-notes="Partir du réel : vos élèves utilisent déjà l’IA, surtout hors de la classe, pour les devoirs. L’enjeu n’est pas d’interdire en bloc ni de laisser faire, mais d’expliciter. Deux postures à éviter : l’interdiction totale (invérifiable, et qui laisse l’élève seul face à l’outil) et le laisser-faire (qui laisse l’outil faire le travail). La posture attendue : le professeur dit clairement, tâche par tâche, ce qui est permis, et il montre lui-même un usage critique. Le professeur reste celui qui conçoit la tâche, contrôle ce que produit la machine et montre l’exemple.">
+ <div class="inner">
+  <div class="kick">2 · Face aux élèves <span class="dur">· 3 min</span></div>
+  <h2>Vos élèves utilisent déjà l’IA. La question est : avec quelles règles ?</h2>
+  <div class="flow">
+   <div class="card"><h3>❌ Tout interdire</h3><p>Impossible à vérifier hors de la classe. L’élève reste seul face à l’outil.</p></div>
+   <div class="card t"><h3>✅ Expliciter</h3><p>Pour <strong>chaque tâche</strong> : avec ou sans IA, pour quoi faire, avec quelle trace.</p></div>
+   <div class="card"><h3>❌ Laisser faire</h3><p>L’outil fait le travail. L’élève rend un produit sans avoir appris.</p></div>
+  </div>
+  <h3 style="margin-top:1.2rem">Trois rôles du professeur</h3>
+  <p><span class="pill">Concepteur</span> il conçoit des tâches où l’IA sert l’apprentissage &nbsp;
+     <span class="pill">Auditeur</span> il vérifie ce que la machine produit &nbsp;
+     <span class="pill r">Modèle</span> il montre un usage critique, devant la classe</p>
+ </div>
+</section>
+
+<!-- 5 -->
+<section class="slide" data-title="Préparer ses cours avec l’IA" data-min="3"
+  data-notes="Le cadre autorise l’IA pour la préparation : c’est un gain de temps réel. Exemples en technologie : varier des énoncés d’exercices, proposer des versions différenciées d’une fiche, imaginer un contexte de projet, générer un QCM de départ, reformuler une consigne plus simplement. Mais la responsabilité reste la vôtre : c’est vous qui signez le document. Les trois pièges propres à notre discipline : erreurs techniques (unités, schémas, valeurs), consignes de sécurité absentes ou fausses au labo, et décalage avec le programme (l’IA invente souvent des attendus).">
+ <div class="inner">
+  <div class="kick">3 · Préparer <span class="dur">· 3 min</span></div>
+  <h2>Préparer avec l’IA : un vrai gain, une responsabilité qui reste la vôtre</h2>
+  <div class="grid g2">
+   <div class="card g"><h3>Ce que l’IA fait bien</h3>
+    <ul><li>Varier des énoncés et des contextes de projet</li>
+     <li>Différencier une fiche (version guidée / version ouverte)</li>
+     <li>Reformuler une consigne plus simplement</li>
+     <li>Proposer une première version de QCM</li>
+     <li>Imaginer des erreurs d’élèves à anticiper</li></ul></div>
+   <div class="card r"><h3>Ce que vous devez vérifier</h3>
+    <ul><li><strong>Exactitude technique</strong> : unités, valeurs, schémas, code</li>
+     <li><strong>Sécurité au labo</strong> : consignes absentes ou fausses</li>
+     <li><strong>Conformité au programme</strong> : attendus souvent inventés</li>
+     <li><strong>Intention didactique</strong> : la fiche fait-elle réfléchir l’élève ?</li></ul></div>
+  </div>
+ </div>
+</section>
+
+<!-- 6 -->
+<section class="slide" data-title="Une bonne requête pour préparer" data-min="3"
+  data-notes="Une requête efficace embarque le contexte : niveau, programme, durée, matériel, ce que l’élève doit faire lui-même. Montrer le modèle. Deux règles absolues : aucune donnée personnelle d’élève (nom, note, situation, photo) dans un outil non validé par l’établissement ; et toujours relire comme si un collègue débutant avait écrit le document. Le gain de temps vient de la première version, pas de l’absence de relecture.">
+ <div class="inner">
+  <div class="kick">3 · Préparer <span class="dur">· 3 min</span></div>
+  <h2>Une requête qui embarque votre métier</h2>
+  <div class="card" style="font-family:ui-monospace,Consolas,monospace;font-size:.85em;line-height:1.6">
+   <span class="pill">Rôle</span> Tu es professeur de technologie en collège.<br>
+   <span class="pill">Contexte</span> Classe de 4e, séance de 55 min, programme de technologie en vigueur, thème : chaîne d’information d’un objet automatisé.<br>
+   <span class="pill">Tâche</span> Propose une activité où les élèves identifient capteurs, traitement et actionneurs.<br>
+   <span class="pill">Contraintes</span> Matériel disponible : … L’élève doit raisonner lui-même ; ne donne pas la réponse dans la fiche. Signale ce que je dois vérifier.<br>
+   <span class="pill">Format</span> Consigne élève + attendus + erreurs fréquentes à anticiper.
+  </div>
+  <div class="grid">
+   <div class="card r"><span class="ico">🔒</span><h3>Jamais de données d’élèves</h3><p>Ni nom, ni note, ni photo, ni situation particulière dans un outil non validé.</p></div>
+   <div class="card g"><span class="ico">🔍</span><h3>Toujours relire</h3><p>Comme le travail d’un collègue débutant : plausible, à vérifier ligne à ligne.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- 7 -->
+<section class="slide" data-title="Performance ≠ apprentissage" data-min="3"
+  data-notes="L’étude de Bastani et al. (lycée, Turquie, publiée dans PNAS en 2025) : les élèves ayant accès à un assistant donnant les réponses réussissent beaucoup mieux les exercices d’entraînement, mais moins bien l’examen final sans IA que les élèves sans accès. La version « tuteur », qui guide sans donner la réponse, supprime cet effet négatif. Message : ce qui compte, ce n’est pas l’outil, c’est la manière dont la tâche est conçue. C’est exactement là que se situe le métier du professeur.">
+ <div class="inner">
+  <div class="kick">4 · Dangers <span class="dur">· 3 min</span></div>
+  <h2>Réussir la tâche n’est pas apprendre</h2>
+  <div class="grid">
+   <div class="card"><div class="big">+48 %</div><p>de réussite à l’entraînement avec un assistant qui <strong>donne les réponses</strong>…</p></div>
+   <div class="card r"><div class="big">−17 %</div><p>… mais des résultats <strong>plus faibles</strong> à l’examen final sans IA que les élèves qui n’y ont pas eu accès.</p></div>
+   <div class="card g"><div class="big" style="color:var(--teal)">≈ 0</div><p>Avec un assistant <strong>tuteur</strong> qui guide sans donner la réponse : l’effet négatif disparaît.</p></div>
+  </div>
+  <p class="quote">Ce n’est pas l’outil qui décide de l’apprentissage, c’est la conception de la tâche.</p>
+  <p class="src">Bastani et al., « Generative AI without guardrails can harm learning », PNAS, 2025 (lycée, mathématiques).</p>
+ </div>
+</section>
+
+<!-- 8 -->
+<section class="slide" data-title="Six dangers pour les élèves" data-min="3"
+  data-notes="Parcourir rapidement les six effets. Le plus important en technologie : le délestage cognitif. Quand l’IA écrit le programme, rédige le cahier des charges ou explique la chaîne d’énergie, l’élève rend un produit correct sans avoir construit la notion. Rappeler aussi l’équité : les élèves les plus à l’aise savent vérifier l’IA, les plus fragiles la croient. Enfin la protection des données, et le coût environnemental, qui est un contenu de notre programme.">
+ <div class="inner">
+  <div class="kick">4 · Dangers <span class="dur">· 3 min</span></div>
+  <h2>Six risques à surveiller chez vos élèves</h2>
+  <div class="grid">
+   <div class="card r"><h3>🧠 Délestage cognitif</h3><p>L’IA fait le raisonnement à la place de l’élève : programme, schéma, justification.</p></div>
+   <div class="card"><h3>🎯 Confiance excessive</h3><p>Une réponse fluide paraît juste. Les erreurs ne sont pas repérées.</p></div>
+   <div class="card"><h3>🔁 Dépendance</h3><p>L’élève ne commence plus sans l’outil, ne supporte plus la page blanche.</p></div>
+   <div class="card"><h3>⚖️ Inégalités</h3><p>Les élèves à l’aise savent vérifier l’IA ; les plus fragiles la croient.</p></div>
+   <div class="card"><h3>🔒 Données personnelles</h3><p>Photos, voix, informations personnelles confiées à des services commerciaux.</p></div>
+   <div class="card"><h3>❓ Rapport à l’erreur</h3><p>L’erreur, moteur de la démarche de projet, disparaît derrière une réponse lisse.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- 9 -->
+<section class="slide" data-title="Délester sans priver" data-min="2"
+  data-notes="La question clé pour chaque tâche : qu’est-ce que l’élève doit garder à sa charge, parce que c’est précisément ce qu’il doit apprendre ? On peut déléguer à l’IA ce qui n’est pas l’objectif de la séance (mise en forme, reformulation d’un texte support, recherche d’un exemple), jamais ce qui l’est (le raisonnement technique, le choix de solution, l’écriture de l’algorithme).">
+ <div class="inner">
+  <div class="kick">4 · Dangers <span class="dur">· 2 min</span></div>
+  <h2>Délester sans priver</h2>
+  <p class="lead">Pour chaque tâche : qu’est-ce que l’élève doit garder à sa charge, parce que c’est exactement ce qu’il doit apprendre ?</p>
+  <table>
+   <tr><th>On peut confier à l’IA…</th><th>L’élève garde à sa charge…</th></tr>
+   <tr><td>La mise en forme d’un compte rendu</td><td>La démarche, les mesures, la conclusion</td></tr>
+   <tr><td>Un exemple d’objet à analyser</td><td>L’identification des fonctions et des flux</td></tr>
+   <tr><td>Une critique de sa solution, après coup</td><td>La conception de la solution</td></tr>
+   <tr><td>L’explication d’un message d’erreur</td><td>L’écriture et la correction de l’algorithme</td></tr>
+  </table>
+ </div>
+</section>
+
+<!-- 10 -->
+<section class="slide" data-title="Faciliter la construction des apprentissages" data-min="3"
+  data-notes="Le schéma Avant / Pendant / Après. Avant : l’élève travaille seul, sans IA, il se confronte au problème, il produit une première réponse. Pendant : l’IA intervient sous contrôle, comme tuteur, contradicteur ou source à critiquer. Après : retour sans IA pour vérifier ce qui a été réellement appris. C’est la séquence qui protège l’apprentissage tout en profitant de l’outil.">
+ <div class="inner">
+  <div class="kick">5 · Faire apprendre <span class="dur">· 3 min</span></div>
+  <h2>Avant · Pendant · Après</h2>
+  <div class="flow">
+   <div class="card g"><h3>1. Avant · sans IA</h3><p>L’élève se confronte au problème et produit <strong>sa</strong> première réponse : croquis, hypothèse, algorithme.</p></div>
+   <div class="arrow">→</div>
+   <div class="card t"><h3>2. Pendant · IA sous contrôle</h3><p>L’IA intervient comme <strong>tuteur</strong>, <strong>contradicteur</strong> ou <strong>source à critiquer</strong>.</p></div>
+   <div class="arrow">→</div>
+   <div class="card g"><h3>3. Après · sans IA</h3><p>L’élève vérifie, justifie, refait seul. On mesure ce qui a <strong>vraiment</strong> été appris.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- 11 -->
+<section class="slide" data-title="Quatre usages qui font apprendre" data-min="2"
+  data-notes="Quatre usages concrets en technologie, que vous pouvez reprendre directement. Programmation : l’IA propose un programme volontairement à analyser ; l’élève prédit, teste, corrige. Projet : l’élève conçoit d’abord, puis confronte sa solution à l’IA, qui joue le rôle de contradicteur du cahier des charges. Analyse d’objet : l’explication fournie par l’IA est un document à critiquer, pas une réponse. Objet d’étude : on étudie l’IA elle-même, ses données, ses biais, sa consommation.">
+ <div class="inner">
+  <div class="kick">5 · Faire apprendre <span class="dur">· 2 min</span></div>
+  <h2>Quatre usages qui font apprendre en technologie</h2>
+  <div class="grid">
+   <div class="card"><h3>💻 Lire avant d’écrire</h3><p>Un programme fourni par l’IA : l’élève <strong>prédit, teste, corrige</strong>.</p></div>
+   <div class="card"><h3>📐 Contradicteur</h3><p>L’élève conçoit d’abord, puis confronte sa solution au cahier des charges avec l’IA.</p></div>
+   <div class="card"><h3>🔎 Document à critiquer</h3><p>L’explication de l’IA sur une chaîne d’énergie devient un support d’analyse.</p></div>
+   <div class="card g"><h3>🤖 Objet d’étude</h3><p>Données, entraînement, biais, consommation : l’IA comme objet technique.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- 12 -->
+<section class="slide" data-title="Accompagner les élèves" data-min="2"
+  data-notes="Accompagner, c’est rendre la règle visible. Trois niveaux de contrat, affichés pour chaque tâche : sans IA, IA de soutien (avec trace : requête et réponse conservées), IA objet de travail. Enseigner explicitement les gestes : vérifier par une autre source, citer l’usage, garder ses requêtes. Le parcours Pix IA suivi par les élèves de 4e et de 2de est un point d’appui commun, mais il ne vaut pas autorisation : c’est vous qui fixez la règle de la tâche.">
+ <div class="inner">
+  <div class="kick">5 · Accompagner <span class="dur">· 2 min</span></div>
+  <h2>Accompagner : une règle visible pour chaque tâche</h2>
+  <div class="grid">
+   <div class="card"><span class="pill">Niveau 0</span><h3>Sans IA</h3><p>La tâche porte sur ce que l’élève doit construire seul.</p></div>
+   <div class="card t"><span class="pill">Niveau 1</span><h3>IA de soutien</h3><p>Autorisée pour une étape précise, avec <strong>trace</strong> : requête et réponse conservées.</p></div>
+   <div class="card g"><span class="pill">Niveau 2</span><h3>IA objet de travail</h3><p>On analyse, on critique, on teste ce que produit l’IA.</p></div>
+  </div>
+  <p style="margin-top:1rem"><strong>Gestes à enseigner :</strong> vérifier par une seconde source · citer l’usage de l’IA · conserver ses requêtes · savoir dire « je ne sais pas ».</p>
+  <p><strong>Pix IA</strong> (4e et 2de) : un point d’appui commun, qui ne remplace pas votre règle.</p>
+ </div>
+</section>
+
+<!-- 13 -->
+<section class="slide" data-title="Évaluer à l’heure de l’IA" data-min="2"
+  data-notes="Le produit final seul ne prouve plus l’apprentissage. Il faut évaluer la démarche : traces produites en classe, journal de bord daté, oral court où l’élève explique un choix, modification en direct d’un programme. Le cadre déconseille les détecteurs d’IA, peu fiables et sources d’injustice. Fraude : elle se définit par rapport à la règle que vous avez fixée ; d’où l’importance de l’expliciter avant la tâche.">
+ <div class="inner">
+  <div class="kick">6 · Évaluer <span class="dur">· 2 min</span></div>
+  <h2>Évaluer la démarche, pas seulement le produit</h2>
+  <div class="grid g2">
+   <div class="card g"><h3>Des preuves croisées</h3>
+    <ul><li>Traces produites <strong>en classe</strong></li>
+     <li>Journal de conception <strong>daté</strong></li>
+     <li>Oral court : « explique ce choix »</li>
+     <li>Modification en direct d’un programme ou d’un schéma</li></ul></div>
+   <div class="card r"><h3>À éviter</h3>
+    <ul><li>Les <strong>détecteurs d’IA</strong> : peu fiables, déconseillés par le cadre</li>
+     <li>Une note sur le seul produit rendu à la maison</li>
+     <li>Une règle annoncée <strong>après</strong> la tâche</li></ul></div>
+  </div>
+  <p class="quote">Ce qui n’a pas été autorisé explicitement ne peut pas être reproché clairement.</p>
+ </div>
+</section>
+
+<!-- 14 -->
+<section class="slide" data-title="Et l’IA pour corriger ?" data-min="2"
+  data-notes="Le professeur peut utiliser l’IA pour l’aider à évaluer : rédiger une grille critériée, proposer des commentaires types, repérer des erreurs fréquentes dans des productions anonymisées. Mais la décision reste humaine : aucune note attribuée automatiquement. Le règlement européen sur l’IA classe d’ailleurs l’évaluation des acquis parmi les usages à haut risque. Et toujours sans données nominatives dans un outil non validé.">
+ <div class="inner">
+  <div class="kick">6 · Évaluer <span class="dur">· 2 min</span></div>
+  <h2>Et l’IA pour vous aider à évaluer ?</h2>
+  <div class="grid">
+   <div class="card g"><h3>✅ Possible</h3><p>Construire une grille critériée, proposer des commentaires types, repérer des erreurs fréquentes sur des copies <strong>anonymisées</strong>.</p></div>
+   <div class="card r"><h3>❌ Exclu</h3><p>Une note attribuée par la machine. Des copies nominatives dans un outil non validé.</p></div>
+   <div class="card t"><h3>⚖️ Principe</h3><p>La décision d’évaluation reste <strong>humaine</strong> et <strong>transparente</strong> pour l’élève.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- 15 -->
+<section class="slide" data-title="Le cadre d’usage : les élèves" data-min="2"
+  data-notes="Le cadre d’usage de l’IA en éducation, publié par le ministère le 14 juin 2025 après une consultation de janvier à mai 2025. Pour les élèves : au premier degré, sensibilisation sans manipulation directe ; au collège, usage des IA génératives à partir de la 4e, en classe, de manière limitée, encadrée et accompagnée ; au lycée, usage autonome possible dans un cadre défini par l’enseignant. En 5e et en dessous, donc, pas de manipulation d’IA générative par les élèves : en technologie, on peut en revanche étudier l’IA comme objet (entraîner un modèle de classification simple n’est pas un usage d’IA générative). Le parcours Pix IA est prévu pour tous les élèves de 4e et de 2de.">
+ <div class="inner">
+  <div class="kick">7 · Cadre <span class="dur">· 2 min</span></div>
+  <h2>Le cadre d’usage de l’IA en éducation (juin 2025) : les élèves</h2>
+  <table>
+   <tr><th>Niveau</th><th>Ce que prévoit le cadre</th></tr>
+   <tr><td><strong>1er degré</strong></td><td>Sensibilisation aux notions de base, <strong>sans manipulation directe</strong> des outils</td></tr>
+   <tr><td><strong>6e – 5e</strong></td><td>Pas d’usage d’IA générative par les élèves ; l’IA peut être <strong>étudiée</strong></td></tr>
+   <tr><td><strong>À partir de la 4e</strong></td><td>Usage <strong>en classe</strong>, limité, encadré et accompagné par l’enseignant</td></tr>
+   <tr><td><strong>Lycée</strong></td><td>Usage autonome possible, <strong>dans un cadre défini</strong> par l’enseignant</td></tr>
+  </table>
+  <p style="margin-top:.8rem"><span class="pill">Pix IA</span> parcours prévu pour tous les élèves de 4e et de 2de.</p>
+ </div>
+</section>
+
+<!-- 16 -->
+<section class="slide" data-title="Le cadre d’usage : le professeur" data-min="2"
+  data-notes="Pour les personnels : l’usage est autorisé dès lors qu’il respecte le cadre. Principes : plus-value pédagogique démontrée, sinon on s’abstient (usage raisonné et frugal) ; transparence quand l’IA intervient dans une décision ; supervision humaine ; protection des données (RGPD), avec des outils validés par l’institution ou l’établissement — en cas de doute, le DPO / référent RGPD. Pas de détecteurs d’IA. Côté européen : le règlement sur l’IA (AI Act) interdit la reconnaissance des émotions dans les établissements d’enseignement et classe à haut risque les systèmes qui évaluent les acquis ou surveillent les examens ; il impose aussi une obligation de maîtrise de l’IA. Dans le réseau AEFE : on applique le cadre ministériel, le RGPD, le droit du pays d’accueil et les consignes de l’établissement.">
+ <div class="inner">
+  <div class="kick">7 · Cadre <span class="dur">· 2 min</span></div>
+  <h2>Le cadre d’usage : vous, professeur</h2>
+  <div class="grid">
+   <div class="card"><h3>🎯 Plus-value</h3><p>Usage <strong>raisonné et frugal</strong> : seulement si l’IA apporte une vraie valeur pédagogique.</p></div>
+   <div class="card"><h3>👁️ Transparence</h3><p>Signaler l’usage de l’IA ; <strong>supervision humaine</strong> de toute décision.</p></div>
+   <div class="card r"><h3>🔒 Données</h3><p>RGPD : outils validés, aucune donnée d’élève ailleurs. En cas de doute : le <strong>DPO</strong>.</p></div>
+   <div class="card"><h3>🚫 Pas de détecteur</h3><p>Fiabilité contestée, risque d’injustice envers les élèves.</p></div>
+  </div>
+  <div class="card g" style="margin-top:1rem">
+   <h3>🇪🇺 Règlement européen sur l’IA</h3>
+   <p>Reconnaissance des émotions <strong>interdite</strong> dans les établissements d’enseignement · évaluation des acquis et surveillance d’examens classées <strong>à haut risque</strong> · obligation de <strong>maîtrise de l’IA</strong> pour ceux qui l’utilisent.</p>
+  </div>
+  <p class="src">Réseau AEFE : cadre ministériel + RGPD + droit du pays d’accueil + consignes de l’établissement.</p>
+ </div>
+</section>
+
+<!-- 17 -->
+<section class="slide" data-title="Sept questions avant d’utiliser l’IA" data-min="2"
+  data-notes="La grille à emporter. Sept questions à se poser avant toute séance qui implique l’IA, que ce soit pour préparer, faire travailler ou évaluer. Si une réponse est non ou je ne sais pas, on ajuste la tâche ou on s’abstient.">
+ <div class="inner">
+  <div class="kick">Synthèse <span class="dur">· 2 min</span></div>
+  <h2>Sept questions avant d’utiliser l’IA</h2>
+  <ol class="seven">
+   <li>Qu’est-ce que l’élève doit <strong>apprendre</strong> dans cette tâche ?</li>
+   <li>L’IA <strong>fait-elle</strong> ce travail à sa place ?</li>
+   <li>Le niveau de la classe <strong>permet-il</strong> cet usage (4e et plus) ?</li>
+   <li>La règle (sans IA / soutien / objet) est-elle <strong>annoncée</strong> ?</li>
+   <li>Quelle <strong>trace</strong> garderai-je de la démarche ?</li>
+   <li>Des <strong>données personnelles</strong> sont-elles en jeu ?</li>
+   <li>Le gain justifie-t-il le <strong>coût</strong>, y compris environnemental ?</li>
+  </ol>
+ </div>
+</section>
+
+<!-- 18 -->
+<section class="slide" data-title="Pour aller plus loin" data-min="1"
+  data-notes="Ressources. Annoncer le lien vers la formation complète de 3 h, avec les ateliers, pour ceux qui veulent approfondir. Ouvrir aux questions.">
+ <div class="inner">
+  <div class="kick">Ressources</div>
+  <h2>Pour aller plus loin</h2>
+  <div class="grid g2">
+   <div class="card"><h3>📜 Cadre</h3>
+    <ul><li><a href="https://www.education.gouv.fr/cadre-d-usage-de-l-ia-en-education-450647" target="_blank" rel="noopener">Cadre d’usage de l’IA en éducation (MENESR, juin 2025)</a></li>
+     <li><a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj" target="_blank" rel="noopener">Règlement européen sur l’IA (UE) 2024/1689</a></li></ul></div>
+   <div class="card"><h3>🔬 Recherche et élèves</h3>
+    <ul><li><a href="https://doi.org/10.1073/pnas.2422633122" target="_blank" rel="noopener">Bastani et al., PNAS 2025</a></li>
+     <li><a href="https://pix.fr" target="_blank" rel="noopener">Pix</a></li></ul></div>
+   <div class="card t"><h3>🛠️ Formation complète</h3><p><a href="index.html">L’IA en technologie : formation de 3 h avec ateliers</a></p></div>
+  </div>
+  <p class="quote" style="margin-top:1.5rem">Merci. Place aux questions.</p>
+ </div>
+</section>
+
+</main>
+
+<div class="foot">
+  <button id="prev" aria-label="Précédente">←</button>
+  <button id="next" aria-label="Suivante">→</button>
+</div>
+
+<nav class="panel" id="plan" aria-label="Plan"></nav>
+<aside class="panel" id="notes" aria-label="Notes orateur">
+  <div class="h"><span id="nTitle">Notes</span><span id="chrono" title="Cliquer pour démarrer / arrêter">00:00</span></div>
+  <div class="body" id="nBody"></div>
+</aside>
+
+<script>
+(function(){
+  const S=[...document.querySelectorAll('.slide')], N=S.length;
+  const $=id=>document.getElementById(id);
+  let i=0;
+  function go(n){
+    i=Math.max(0,Math.min(N-1,n));
+    S.forEach((s,k)=>s.classList.toggle('on',k===i));
+    $('count').textContent=(i+1)+' / '+N;
+    $('prog').style.width=((i+1)/N*100)+'%';
+    $('prev').disabled=i===0; $('next').disabled=i===N-1;
+    $('nTitle').textContent=S[i].dataset.title+' · '+S[i].dataset.min+' min';
+    $('nBody').textContent=S[i].dataset.notes||'';
+    [...$('plan').querySelectorAll('button')].forEach((b,k)=>b.classList.toggle('cur',k===i));
+    try{history.replaceState(null,'','#'+(i+1))}catch(e){}
+  }
+  // plan
+  let tot=0;
+  S.forEach((s,k)=>{tot+=+s.dataset.min;
+    const b=document.createElement('button');
+    b.innerHTML='<span class="n">'+(k+1)+'</span><span>'+s.dataset.title+'</span><span class="d">'+s.dataset.min+' min</span>';
+    b.onclick=()=>{go(k);$('plan').classList.remove('on')};
+    $('plan').appendChild(b);});
+  const h=document.createElement('p');h.style.cssText='margin:.6rem .6rem 0;color:var(--mute);font-size:.85rem';
+  h.textContent='Durée totale : '+tot+' min · ←/→ pour naviguer · N : notes · P : plan';
+  $('plan').appendChild(h);
+  $('bPlan').onclick=()=>$('plan').classList.toggle('on');
+  $('bNotes').onclick=()=>$('notes').classList.toggle('on');
+  $('bFull').onclick=()=>{try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(e){}};
+  $('prev').onclick=()=>go(i-1); $('next').onclick=()=>go(i+1);
+  document.addEventListener('keydown',e=>{
+    if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1)}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1)}
+    else if(e.key==='Home')go(0); else if(e.key==='End')go(N-1);
+    else if(e.key==='n'||e.key==='N')$('notes').classList.toggle('on');
+    else if(e.key==='p'||e.key==='P')$('plan').classList.toggle('on');
+    else if(e.key==='Escape'){$('plan').classList.remove('on');$('notes').classList.remove('on')}
+  });
+  // swipe
+  let x0=null;
+  $('deck').addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
+  $('deck').addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;
+    if(Math.abs(dx)>60)go(i+(dx<0?1:-1));x0=null});
+  // chrono
+  let t=0,run=null;
+  $('chrono').onclick=()=>{if(run){clearInterval(run);run=null}else run=setInterval(()=>{t++;
+    $('chrono').textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')},1000)};
+  const h0=parseInt(location.hash.slice(1));go(isNaN(h0)?0:h0-1);
+})();
+</script>
+</body>
+</html>
