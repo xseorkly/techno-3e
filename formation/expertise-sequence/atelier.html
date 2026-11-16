@@ -54,7 +54,6 @@
 .seg button[aria-pressed=true][data-v=oui]{background:#2e7d4f;color:#fff}
 .seg button[aria-pressed=true][data-v=partie]{background:#d98b00;color:#fff}
 .seg button[aria-pressed=true][data-v=non]{background:#b3261e;color:#fff}
-.pistes{background:#fff8ec;border-left:4px solid #d98b00;border-radius:8px;padding:9px 12px;margin:10px 0;font-size:15px}
 .rs-verd{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px}
 .rs-verd>div{display:flex;gap:9px;align-items:flex-start;font-size:16px;line-height:1.35}
 .rs-verd i{flex:0 0 16px;height:16px;border-radius:50%;background:#ccc;margin-top:3px}
@@ -97,10 +96,9 @@
 <section class="section"><div class="card manche">
   <div class="mhead"><div><span class="kicker">Manche 3 · 20 min</span><h2>Décidez</h2></div><button class="timer" type="button" data-min="20">▶ 20:00</button></div>
   <p>Partez de vos verdicts « à renforcer » ou « absent ». Choisissez ce qui aura le plus d’effet sur l’apprentissage.</p>
-  <div class="pistes" id="pistes"></div>
   <div class="f"><strong>On garde…</strong><small>Ce qui fait réellement apprendre, et que vous ne toucheriez pas.</small><textarea data-f="garde"></textarea></div>
-  <div class="modif" id="m1"><div class="f"><strong>On modifie… (modification 1)</strong><small>Précisément : quelle consigne, quel moment, quel document change ?</small><textarea data-f="m1"></textarea></div><div class="f"><strong>Question qui la justifie</strong><small>La question de la manche 2 dont le verdict appelle cette modification.</small><div class="chips" data-qchip="m1q"></div><textarea data-f="m1p" aria-label="Modification 1 — parce que" placeholder="Parce que… (l’obstacle ou la difficulté traités, et l’indice qui le montre)"></textarea></div></div>
-  <div class="modif" id="m2"><div class="f"><strong>Modification 2 (facultative)</strong><textarea data-f="m2"></textarea></div><div class="f"><strong>Question qui la justifie</strong><div class="chips" data-qchip="m2q"></div><textarea data-f="m2p" aria-label="Modification 2 — parce que" placeholder="Parce que…"></textarea></div></div>
+  <div class="modif" id="m1"><div class="f"><strong>On modifie… (modification 1)</strong><small>Précisément : quelle consigne, quel moment, quel document change ?</small><textarea data-f="m1"></textarea></div><div class="f"><strong>Elle répond à quel point faible ?</strong><small>Touchez une ou plusieurs questions. Seules vos questions jugées « à renforcer » ou « absent » en manche 2 apparaissent.</small><div class="chips" data-qchip="m1q"></div><textarea data-f="m1p" aria-label="Modification 1 — parce que" placeholder="Parce que… (l’obstacle ou la difficulté traités, et l’indice qui le montre)"></textarea></div></div>
+  <div class="modif" id="m2"><div class="f"><strong>Modification 2 (facultative)</strong><textarea data-f="m2"></textarea></div><div class="f"><strong>Elle répond à quel point faible ?</strong><div class="chips" data-qchip="m2q"></div><textarea data-f="m2p" aria-label="Modification 2 — parce que" placeholder="Parce que…"></textarea></div></div>
   <div class="f"><strong>On saura que ça marche si…</strong><small>La preuve que vous chercherez chez <em>chaque</em> élève, pas seulement chez le groupe.</small><textarea data-f="preuve"></textarea></div>
   <div class="f"><strong>Ce qui nous divise encore (facultatif)</strong><small>Un désaccord dans le groupe, une question restée ouverte, une information qui vous manque dans la séquence.</small><textarea data-f="debat"></textarea></div>
   <div class="f" style="background:#fdf6f9;border-radius:12px;padding:12px 14px"><strong>Notre question primordiale</strong><small>« Quand on récupère une activité qu’on n’a pas conçue, il faut d’abord se demander : … » Elle rejoindra l’aide-mémoire collectif.</small><input type="text" data-f="primordiale" placeholder="Il faut d’abord se demander…"><div class="chips" data-chip="primL" style="margin-top:8px"></div></div>
@@ -140,14 +138,16 @@ pick.querySelectorAll('input').forEach(r=>{r.checked=String(st.seq)===r.value;r.
 /* lunettes */
 document.getElementById('lensWork').innerHTML=E.lunettes.map(l=>`<div class="lensblock" style="--c:${l.couleur}"><h3>Lunette ${esc(l.nom.toLowerCase())}</h3><p class="sous">${esc(l.sous)}</p>${l.questions.map(q=>`<div class="qrow"><div class="qt">${q.id} · ${esc(q.titre)}</div><div class="qa">${esc(q.aide)}</div><div class="seg" role="group" aria-label="Verdict ${q.id}" data-seg="${q.id}">${Object.entries(VERD).map(([v,[t]])=>`<button type="button" data-v="${v}" aria-pressed="false">${t}</button>`).join('')}</div><div class="f" style="margin:0 0 6px"><textarea data-f="${q.id}_o" aria-label="${q.id} · ${esc(q.titre)} — ce qu’on observe" placeholder="Ce qu’on observe et notre raisonnement…"></textarea></div><div class="f" style="margin:0"><input type="text" data-f="${q.id}_i" aria-label="${q.id} · ${esc(q.titre)} — indice" placeholder="Indice : document + passage (ex. « fiche 2, consigne 3 »)"></div></div>`).join('')}</div>`).join('');
 document.querySelectorAll('[data-set=rep]').forEach(g=>g.innerHTML=Object.entries(REP).map(([v,[t]])=>`<button type="button" data-v="${v}" aria-pressed="false">${t}</button>`).join(''));
-const pistes=()=>{const p=document.getElementById('pistes');const l=Object.keys(Q).filter(id=>st[id+'_v']==='renforcer'||st[id+'_v']==='absent');p.innerHTML=l.length?'<strong>Vos pistes :</strong> '+l.map(id=>`${id} ${esc(Q[id].titre)} (${VERD[st[id+'_v']][0].toLowerCase()})`).join(' · '):'<strong>Vos pistes :</strong> <span class="empty">aucun verdict « à renforcer » ou « absent » pour l’instant (manche 2).</span>'};
-document.querySelectorAll('[data-seg]').forEach(g=>{const k=g.dataset.seg+'_v';const paint=()=>g.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',st[k]===b.dataset.v));paint();g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[k]=st[k]===b.dataset.v?'':b.dataset.v;paint();save();pistes()})});pistes();
+document.querySelectorAll('[data-seg]').forEach(g=>{const k=g.dataset.seg+'_v';const paint=()=>g.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',st[k]===b.dataset.v));paint();g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[k]=st[k]===b.dataset.v?'':b.dataset.v;paint();save();qchips()})});
 
 /* puces de lunette */
 document.querySelectorAll('[data-chip]').forEach(c=>{const k=c.dataset.chip;c.innerHTML=E.lunettes.map(l=>`<button type="button" style="--c:${l.couleur}" data-v="${l.id}" aria-pressed="false">${esc(l.nom)}</button>`).join('');const paint=()=>c.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',st[k]===b.dataset.v));paint();c.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[k]=st[k]===b.dataset.v?'':b.dataset.v;paint();save()})});
 
 /* puces de question (manche 3) */
-document.querySelectorAll('[data-qchip]').forEach(c=>{const k=c.dataset.qchip;c.innerHTML=Object.values(Q).map(q=>`<button type="button" style="--c:${q.lun.couleur}" data-v="${q.id}" aria-pressed="false" title="${esc(q.titre)}">${q.id} · ${esc(q.titre)}</button>`).join('');const paint=()=>c.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',st[k]===b.dataset.v));paint();c.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[k]=st[k]===b.dataset.v?'':b.dataset.v;paint();save()})});
+/* sélection multiple : st.m1q / st.m2q = tableau d’identifiants (une ancienne valeur texte est convertie) */
+const qsel=k=>Array.isArray(st[k])?st[k]:(st[k]?[st[k]]:[]);
+function qchips(){document.querySelectorAll('[data-qchip]').forEach(c=>{const k=c.dataset.qchip,sel=qsel(k);const l=Object.values(Q).filter(q=>['renforcer','absent'].includes(st[q.id+'_v'])||sel.includes(q.id));c.innerHTML=l.length?l.map(q=>`<button type="button" style="--c:${q.lun.couleur}" data-v="${q.id}" aria-pressed="${sel.includes(q.id)}">${q.id} · ${esc(q.titre)}</button>`).join(''):'<span class="empty">Aucun verdict « à renforcer » ou « absent » pour l’instant : complétez d’abord la manche 2.</span>'})}
+document.querySelectorAll('[data-qchip]').forEach(c=>c.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const k=c.dataset.qchip,v=b.dataset.v,sel=qsel(k);st[k]=sel.includes(v)?sel.filter(x=>x!==v):Object.keys(Q).filter(id=>id===v||sel.includes(id));save();qchips()}));qchips();
 
 /* champs texte */
 document.querySelectorAll('[data-f]').forEach(el=>{el.value=st[el.dataset.f]||'';el.addEventListener('input',()=>{st[el.dataset.f]=el.value;save()})});
@@ -162,7 +162,7 @@ b.classList.add('run');b.textContent='❚❚ '+fmt();id=setInterval(()=>{left--;
 const val=(k)=>st[k]&&String(st[k]).trim()?esc(st[k]):'<span class="empty">à compléter</span>';
 const lab=(k)=>st[k]&&L[st[k]]?`<span class="lab" style="background:${L[st[k]].couleur}">${esc(L[st[k]].nom)}</span>`:'';
 /* étiquette de la question justifiant une modification (repli sur l’ancienne étiquette de lunette) */
-const qlab=(m)=>{const q=Q[st[m+'q']];return q?`<span class="lab" style="background:${q.lun.couleur}">${q.id} · ${esc(q.titre)}</span>`:lab(m+'l')};
+const qlab=(m)=>{const l=qsel(m+'q').map(id=>Q[id]).filter(Boolean);return l.length?l.map(q=>`<span class="lab" style="background:${q.lun.couleur}">${q.id} · ${esc(q.titre)}</span>`).join(''):lab(m+'l')};
 const cut=(t,n)=>{t=String(t||'').trim();return t.length>n?t.slice(0,n).replace(/\s+\S*$/,'')+'…':t};
 function render(){const s=E.sequences.find(x=>String(x.id)===String(st.seq));
 const verd=Object.values(Q).map(q=>{const v=st[q.id+'_v'];const ind=(st[q.id+'_i']||'').trim(),obs=cut(st[q.id+'_o'],140);const det=ind?'Indice : '+esc(ind):(obs?esc(obs):'<span class="empty">indice à compléter</span>');return `<div><i style="background:${v?VERD[v][1]:'#ccc'}"></i><span><strong>${q.id} ${esc(q.titre)}</strong>${v?' — '+VERD[v][0].toLowerCase():''}<small>${det}</small></span></div>`}).join('');
