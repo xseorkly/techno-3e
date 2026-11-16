@@ -48,8 +48,19 @@
 .rs-dot{display:flex;align-items:center;gap:7px;font-size:16px}.rs-dot i{width:16px;height:16px;border-radius:50%;background:#ccc;display:inline-block}
 .rs-close{position:fixed;top:14px;right:18px}
 .empty{color:#9aa9ad;font-style:italic}
-@media(max-width:860px){.pick{grid-template-columns:1fr 1fr}.rs-grid{grid-template-columns:1fr}}
-@media print{.fnav,.nav,.timer,.actions,#correction-root,.formation-print-tools{display:none!important}.card,.hero{box-shadow:none}.f textarea{min-height:0;border:0;padding:0}body{font-size:13px}.page{padding:0}.lensblock,.modif{break-inside:avoid}}
+.qrow textarea{min-height:58px}
+.gqbox{border:1px solid var(--line);border-top:6px solid var(--teal);border-radius:14px;padding:6px 16px 12px;margin:18px 0 6px;background:#f7fbfb}
+.gqbox h3{margin:10px 0 2px;color:var(--teal2)}.gqbox .gqtext{margin:4px 0 10px;font-style:italic}
+.seg button[aria-pressed=true][data-v=oui]{background:#2e7d4f;color:#fff}
+.seg button[aria-pressed=true][data-v=partie]{background:#d98b00;color:#fff}
+.seg button[aria-pressed=true][data-v=non]{background:#b3261e;color:#fff}
+.pistes{background:#fff8ec;border-left:4px solid #d98b00;border-radius:8px;padding:9px 12px;margin:10px 0;font-size:15px}
+.rs-verd{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px}
+.rs-verd>div{display:flex;gap:9px;align-items:flex-start;font-size:16px;line-height:1.35}
+.rs-verd i{flex:0 0 16px;height:16px;border-radius:50%;background:#ccc;margin-top:3px}
+.rs-verd small{display:block;color:var(--muted);font-size:15px}
+@media(max-width:860px){.pick{grid-template-columns:1fr 1fr}.rs-grid,.rs-verd{grid-template-columns:1fr}}
+@media print{.fnav,.nav,.timer,.actions,#correction-root,.formation-print-tools{display:none!important}.card,.hero{box-shadow:none}.f textarea{min-height:0;border:0;padding:0}body{font-size:13px}.page{padding:0}.lensblock,.modif,.gqbox{break-inside:avoid}}
 </style>
 <style id="navbar-css">.fnav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:4px 14px;background:transparent;font:500 13px/1.3 "Source Sans 3",Arial,sans-serif}.fnav a{color:#5b6b6a!important;text-decoration:none!important;padding:2px 0;background:none;border-radius:0}.fnav a:hover,.fnav a:focus-visible{color:#0f6b66!important;text-decoration:underline!important}@media print{.fnav{display:none}}</style></head>
 <body><nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a><a href="index.html">↑ Présentation de l’atelier</a></nav>
@@ -76,24 +87,29 @@
 
 <section class="section"><div class="card manche">
   <div class="mhead"><div><span class="kicker">Manche 2 · 30 min</span><h2>Trois lunettes, six questions</h2></div><button class="timer" type="button" data-min="30">▶ 30:00</button></div>
-  <p>Pour chaque question : un verdict, puis <strong>l’indice</strong> qui le justifie (une consigne, un document, une production). Une ligne suffit. Environ 5 minutes par question.</p>
+  <p>Pour chaque question : un verdict, quelques lignes sur <strong>ce que vous observez</strong> (répondez aux sous-questions de l’aide), puis <strong>l’indice</strong> qui le prouve (une consigne, un document, une production). Environ 4 minutes par question, puis 5 minutes pour répondre à la question de votre groupe.</p>
   <div id="lensWork"></div>
+  <div class="gqbox"><h3>Notre réponse à la question du groupe</h3><p class="gqtext" id="gqText">Choisissez d’abord votre séquence en haut de la fiche.</p>
+    <div class="seg" role="group" aria-label="Réponse à la question du groupe" data-seg="gq" data-set="rep"></div>
+    <div class="f" style="margin:4px 0 0"><textarea data-f="gq_r" aria-label="Notre réponse à la question du groupe — parce que" placeholder="Parce que… (appuyez-vous sur vos verdicts et vos indices : P1, D1…)"></textarea></div></div>
 </div></section>
 
 <section class="section"><div class="card manche">
   <div class="mhead"><div><span class="kicker">Manche 3 · 20 min</span><h2>Décidez</h2></div><button class="timer" type="button" data-min="20">▶ 20:00</button></div>
   <p>Partez de vos verdicts « à renforcer » ou « absent ». Choisissez ce qui aura le plus d’effet sur l’apprentissage.</p>
+  <div class="pistes" id="pistes"></div>
   <div class="f"><strong>On garde…</strong><small>Ce qui fait réellement apprendre, et que vous ne toucheriez pas.</small><textarea data-f="garde"></textarea></div>
-  <div class="modif" id="m1"><div class="f"><strong>On modifie… (modification 1)</strong><small>Précisément : quelle consigne, quel moment, quel document change ?</small><textarea data-f="m1"></textarea></div><div class="f"><strong>Lunette qui la justifie</strong><div class="chips" data-chip="m1l"></div><input type="text" data-f="m1p" placeholder="Parce que… (l’obstacle ou la difficulté traités)"></div></div>
-  <div class="modif" id="m2"><div class="f"><strong>Modification 2 (facultative)</strong><textarea data-f="m2"></textarea></div><div class="f"><strong>Lunette qui la justifie</strong><div class="chips" data-chip="m2l"></div><input type="text" data-f="m2p" placeholder="Parce que…"></div></div>
+  <div class="modif" id="m1"><div class="f"><strong>On modifie… (modification 1)</strong><small>Précisément : quelle consigne, quel moment, quel document change ?</small><textarea data-f="m1"></textarea></div><div class="f"><strong>Question qui la justifie</strong><small>La question de la manche 2 dont le verdict appelle cette modification.</small><div class="chips" data-qchip="m1q"></div><textarea data-f="m1p" aria-label="Modification 1 — parce que" placeholder="Parce que… (l’obstacle ou la difficulté traités, et l’indice qui le montre)"></textarea></div></div>
+  <div class="modif" id="m2"><div class="f"><strong>Modification 2 (facultative)</strong><textarea data-f="m2"></textarea></div><div class="f"><strong>Question qui la justifie</strong><div class="chips" data-qchip="m2q"></div><textarea data-f="m2p" aria-label="Modification 2 — parce que" placeholder="Parce que…"></textarea></div></div>
   <div class="f"><strong>On saura que ça marche si…</strong><small>La preuve que vous chercherez chez <em>chaque</em> élève, pas seulement chez le groupe.</small><textarea data-f="preuve"></textarea></div>
+  <div class="f"><strong>Ce qui nous divise encore (facultatif)</strong><small>Un désaccord dans le groupe, une question restée ouverte, une information qui vous manque dans la séquence.</small><textarea data-f="debat"></textarea></div>
   <div class="f" style="background:#fdf6f9;border-radius:12px;padding:12px 14px"><strong>Notre question primordiale</strong><small>« Quand on récupère une activité qu’on n’a pas conçue, il faut d’abord se demander : … » Elle rejoindra l’aide-mémoire collectif.</small><input type="text" data-f="primordiale" placeholder="Il faut d’abord se demander…"><div class="chips" data-chip="primL" style="margin-top:8px"></div></div>
 </div></section>
 
 <section class="section"><div class="card mirror">
   <span class="kicker">Restitution · 4 min</span>
   <h2>Votre écran est prêt</h2>
-  <p>Il reprend automatiquement vos réponses : la séquence, ce que vous gardez, vos modifications et votre question primordiale.</p>
+  <p>Il reprend automatiquement vos réponses : la séquence et votre réponse à la question du groupe, ce que vous gardez, vos modifications, votre question primordiale, ainsi que vos verdicts avec leurs indices.</p>
   <div class="actions"><button class="btn primary" type="button" id="openResti">Afficher notre restitution en plein écran</button><button class="btn secondary" type="button" onclick="print()">Imprimer la fiche</button><button class="btn secondary" type="button" id="exportJson">Télécharger (JSON)</button><button class="btn danger" type="button" id="reset">Effacer la fiche</button><span class="saved" id="saved"></span></div>
 </div></section>
 
@@ -112,19 +128,26 @@ let st={};try{st=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
 const save=()=>{try{localStorage.setItem(K,JSON.stringify(st));document.getElementById('saved').textContent='Enregistré à '+new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}catch(e){document.getElementById('saved').textContent='Enregistrement impossible dans ce navigateur'}};
 const L=Object.fromEntries(E.lunettes.map(l=>[l.id,l]));
 const VERD={solide:['Solide','#2e7d4f'],renforcer:['À renforcer','#d98b00'],absent:['Absent','#b3261e']};
+const REP={oui:['Oui','#2e7d4f'],partie:['En partie','#d98b00'],non:['Non','#b3261e']};
+const Q=Object.fromEntries(E.lunettes.flatMap(l=>l.questions.map(q=>[q.id,{...q,lun:l}])));
 
 /* choix de la séquence */
 const pick=document.getElementById('pick');
 pick.innerHTML=E.sequences.map(s=>`<label><input type="radio" name="seq" value="${s.id}"><b>${s.id}</b>${esc(s.titre)}</label>`).join('');
-const showGq=()=>{const s=E.sequences.find(x=>String(x.id)===String(st.seq));const g=document.getElementById('gq');if(!s){g.style.display='none';return}g.style.display='block';g.innerHTML=`<strong>Question de votre groupe :</strong> ${esc(s.question)} <a href="${E.source}" target="_blank" rel="noopener">Ouvrir la séquence ↗</a>`};
+const showGq=()=>{const s=E.sequences.find(x=>String(x.id)===String(st.seq));const g=document.getElementById('gq');if(!s){g.style.display='none';return}g.style.display='block';g.innerHTML=`<strong>Question de votre groupe :</strong> ${esc(s.question)} <a href="${E.source}" target="_blank" rel="noopener">Ouvrir la séquence ↗</a>`;document.getElementById('gqText').textContent=s.question};
 pick.querySelectorAll('input').forEach(r=>{r.checked=String(st.seq)===r.value;r.addEventListener('change',()=>{st.seq=r.value;save();showGq()})});showGq();
 
 /* lunettes */
-document.getElementById('lensWork').innerHTML=E.lunettes.map(l=>`<div class="lensblock" style="--c:${l.couleur}"><h3>Lunette ${esc(l.nom.toLowerCase())}</h3><p class="sous">${esc(l.sous)}</p>${l.questions.map(q=>`<div class="qrow"><div class="qt">${q.id} · ${esc(q.titre)}</div><div class="qa">${esc(q.aide)}</div><div class="seg" role="group" aria-label="Verdict ${q.id}" data-seg="${q.id}">${Object.entries(VERD).map(([v,[t]])=>`<button type="button" data-v="${v}" aria-pressed="false">${t}</button>`).join('')}</div><div class="f" style="margin:0"><input type="text" data-f="${q.id}_i" placeholder="Notre indice dans la séquence…"></div></div>`).join('')}</div>`).join('');
-document.querySelectorAll('[data-seg]').forEach(g=>{const k=g.dataset.seg+'_v';const paint=()=>g.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',st[k]===b.dataset.v));paint();g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[k]=st[k]===b.dataset.v?'':b.dataset.v;paint();save()})});
+document.getElementById('lensWork').innerHTML=E.lunettes.map(l=>`<div class="lensblock" style="--c:${l.couleur}"><h3>Lunette ${esc(l.nom.toLowerCase())}</h3><p class="sous">${esc(l.sous)}</p>${l.questions.map(q=>`<div class="qrow"><div class="qt">${q.id} · ${esc(q.titre)}</div><div class="qa">${esc(q.aide)}</div><div class="seg" role="group" aria-label="Verdict ${q.id}" data-seg="${q.id}">${Object.entries(VERD).map(([v,[t]])=>`<button type="button" data-v="${v}" aria-pressed="false">${t}</button>`).join('')}</div><div class="f" style="margin:0 0 6px"><textarea data-f="${q.id}_o" aria-label="${q.id} · ${esc(q.titre)} — ce qu’on observe" placeholder="Ce qu’on observe et notre raisonnement…"></textarea></div><div class="f" style="margin:0"><input type="text" data-f="${q.id}_i" aria-label="${q.id} · ${esc(q.titre)} — indice" placeholder="Indice : document + passage (ex. « fiche 2, consigne 3 »)"></div></div>`).join('')}</div>`).join('');
+document.querySelectorAll('[data-set=rep]').forEach(g=>g.innerHTML=Object.entries(REP).map(([v,[t]])=>`<button type="button" data-v="${v}" aria-pressed="false">${t}</button>`).join(''));
+const pistes=()=>{const p=document.getElementById('pistes');const l=Object.keys(Q).filter(id=>st[id+'_v']==='renforcer'||st[id+'_v']==='absent');p.innerHTML=l.length?'<strong>Vos pistes :</strong> '+l.map(id=>`${id} ${esc(Q[id].titre)} (${VERD[st[id+'_v']][0].toLowerCase()})`).join(' · '):'<strong>Vos pistes :</strong> <span class="empty">aucun verdict « à renforcer » ou « absent » pour l’instant (manche 2).</span>'};
+document.querySelectorAll('[data-seg]').forEach(g=>{const k=g.dataset.seg+'_v';const paint=()=>g.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',st[k]===b.dataset.v));paint();g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[k]=st[k]===b.dataset.v?'':b.dataset.v;paint();save();pistes()})});pistes();
 
 /* puces de lunette */
 document.querySelectorAll('[data-chip]').forEach(c=>{const k=c.dataset.chip;c.innerHTML=E.lunettes.map(l=>`<button type="button" style="--c:${l.couleur}" data-v="${l.id}" aria-pressed="false">${esc(l.nom)}</button>`).join('');const paint=()=>c.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',st[k]===b.dataset.v));paint();c.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[k]=st[k]===b.dataset.v?'':b.dataset.v;paint();save()})});
+
+/* puces de question (manche 3) */
+document.querySelectorAll('[data-qchip]').forEach(c=>{const k=c.dataset.qchip;c.innerHTML=Object.values(Q).map(q=>`<button type="button" style="--c:${q.lun.couleur}" data-v="${q.id}" aria-pressed="false" title="${esc(q.titre)}">${q.id} · ${esc(q.titre)}</button>`).join('');const paint=()=>c.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',st[k]===b.dataset.v));paint();c.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[k]=st[k]===b.dataset.v?'':b.dataset.v;paint();save()})});
 
 /* champs texte */
 document.querySelectorAll('[data-f]').forEach(el=>{el.value=st[el.dataset.f]||'';el.addEventListener('input',()=>{st[el.dataset.f]=el.value;save()})});
@@ -138,16 +161,22 @@ b.classList.add('run');b.textContent='❚❚ '+fmt();id=setInterval(()=>{left--;
 /* restitution */
 const val=(k)=>st[k]&&String(st[k]).trim()?esc(st[k]):'<span class="empty">à compléter</span>';
 const lab=(k)=>st[k]&&L[st[k]]?`<span class="lab" style="background:${L[st[k]].couleur}">${esc(L[st[k]].nom)}</span>`:'';
+/* étiquette de la question justifiant une modification (repli sur l’ancienne étiquette de lunette) */
+const qlab=(m)=>{const q=Q[st[m+'q']];return q?`<span class="lab" style="background:${q.lun.couleur}">${q.id} · ${esc(q.titre)}</span>`:lab(m+'l')};
+const cut=(t,n)=>{t=String(t||'').trim();return t.length>n?t.slice(0,n).replace(/\s+\S*$/,'')+'…':t};
 function render(){const s=E.sequences.find(x=>String(x.id)===String(st.seq));
-const dots=E.lunettes.map(l=>l.questions.map(q=>{const v=st[q.id+'_v'];return `<span class="rs-dot"><i style="background:${v?VERD[v][1]:'#ccc'}"></i>${q.id} ${esc(q.titre)}</span>`}).join('')).join('');
-const m2=st.m2&&st.m2.trim()?`<p style="margin:12px 0 0">${lab('m2l')}${esc(st.m2)}${st.m2p?` <em>— parce que ${esc(st.m2p)}</em>`:''}</p>`:'';
+const verd=Object.values(Q).map(q=>{const v=st[q.id+'_v'];const ind=(st[q.id+'_i']||'').trim(),obs=cut(st[q.id+'_o'],140);const det=ind?'Indice : '+esc(ind):(obs?esc(obs):'<span class="empty">indice à compléter</span>');return `<div><i style="background:${v?VERD[v][1]:'#ccc'}"></i><span><strong>${q.id} ${esc(q.titre)}</strong>${v?' — '+VERD[v][0].toLowerCase():''}<small>${det}</small></span></div>`}).join('');
+const rep=REP[st.gq_v];
+const gqHtml=`<p style="margin:12px 0 0"><strong>Notre question :</strong> ${s?esc(s.question):'<span class="empty">séquence non choisie</span>'}</p><p style="margin:6px 0 0">${rep?`<span class="lab" style="background:${rep[1]}">${rep[0]}</span>`:''}${val('gq_r')}</p>`;
+const m2=st.m2&&st.m2.trim()?`<p style="margin:12px 0 0">${qlab('m2')}${esc(st.m2)}${st.m2p?` <em>— parce que ${esc(st.m2p)}</em>`:''}</p>`:'';
+const debat=st.debat&&st.debat.trim()?`<div class="rs-box wide"><h2>Ce qui nous divise encore</h2>${esc(st.debat)}</div>`:'';
 document.getElementById('rsBody').innerHTML=`<div class="kicker">Groupe ${s?s.id:'?'} · Restitution · 4 min</div><h1>${s?esc(s.titre):'Séquence non choisie'}</h1><div class="meta">${s?esc(s.code)+' · ':''}${esc(st.membres||'')}</div>
 <div class="rs-grid">
-<div class="rs-box"><h2>1 · Notre séquence</h2><p style="margin:0"><strong>L’élève fait :</strong> ${val('fait')}</p><p style="margin:10px 0 0"><strong>Il doit apprendre :</strong> ${val('apprendre')}</p></div>
+<div class="rs-box"><h2>1 · Notre séquence</h2><p style="margin:0"><strong>L’élève fait :</strong> ${val('fait')}</p><p style="margin:10px 0 0"><strong>Il doit apprendre :</strong> ${val('apprendre')}</p>${gqHtml}</div>
 <div class="rs-box"><h2>2 · Ce qu’on garde</h2>${val('garde')}</div>
-<div class="rs-box wide"><h2>3 · Ce qu’on modifie</h2><p style="margin:0">${lab('m1l')}${val('m1')}${st.m1p?` <em>— parce que ${esc(st.m1p)}</em>`:''}</p>${m2}<p style="margin:12px 0 0"><strong>On saura que ça marche si…</strong> ${val('preuve')}</p></div>
+<div class="rs-box wide"><h2>3 · Ce qu’on modifie</h2><p style="margin:0">${qlab('m1')}${val('m1')}${st.m1p?` <em>— parce que ${esc(st.m1p)}</em>`:''}</p>${m2}<p style="margin:12px 0 0"><strong>On saura que ça marche si…</strong> ${val('preuve')}</p></div>
 <div class="rs-box wide" style="background:#fdf6f9"><h2>4 · Notre question primordiale</h2><p style="margin:0;font-size:24px;font-weight:600">${lab('primL')}${val('primordiale')}</p></div>
-<div class="rs-box wide"><h2>Nos verdicts</h2><div class="rs-dots">${dots}</div></div></div>`}
+<div class="rs-box wide"><h2>Nos verdicts et nos indices</h2><div class="rs-verd">${verd}</div></div>${debat}</div>`}
 const R=document.getElementById('resti');
 document.getElementById('openResti').onclick=()=>{render();R.classList.add('open');document.getElementById('closeResti').focus()};
 document.getElementById('closeResti').onclick=()=>R.classList.remove('open');
