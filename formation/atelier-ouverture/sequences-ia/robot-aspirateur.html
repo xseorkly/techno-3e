@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<script src="../../garde.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Robot aspirateur — Séquence de technologie 3e · Cycle 4</title>
+<meta name="description" content="Séquence de technologie 3e : comment être sûr que le robot aspirateur n'attrape ni votre téléphone ni la queue du chat ? Interacteurs, chaîne d'information, capteur à ultrasons, Python sur micro:bit, indice de réparabilité.">
+<!-- Polices facultatives (Internet) : sans connexion, le navigateur utilise les polices système. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   1. VARIABLES — palette reprise du site techno-3e
+   ========================================================= */
+:root{
+  --papier:#F4F7F7; --carte:#FFFFFF; --encre:#14262B; --doux:#5A6C71;
+  --teal:#0E6E6B; --teal2:#0A5A58; --teal-pale:#E2EFEE; --magenta:#C2185B;
+  --trait:#D2DEDE; --ok:#2E7D5B; --ok-pale:#E3F2EA; --ko:#B3261E; --ko-pale:#FBE9E7;
+  --ambre:#9A6900; --ambre-pale:#FFF5D9; --ost:#12395F; --sfc:#0E6E6B; --ccri:#9A6900;
+  --r:10px; --ombre:0 12px 35px rgba(20,38,43,.08);
+  --titre:"Archivo",system-ui,sans-serif; --texte:"Source Sans 3",system-ui,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono","Consolas","Menlo",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--papier);color:var(--encre);font-family:var(--texte);font-size:17px;line-height:1.55}
+a{color:var(--teal)}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+h1,h2,h3,h4{font-family:var(--titre);line-height:1.2;color:var(--encre)}
+h1{font-size:clamp(26px,4vw,36px);margin:.2em 0 .3em}
+h2{font-size:23px;margin:0 0 .5em}
+h3{font-size:19px;margin:1.1em 0 .4em}
+h4{font-size:16px;margin:.8em 0 .3em}
+code,pre{font-family:var(--mono)}
+.skip{position:absolute;left:-999px;top:0;background:#fff;padding:8px 12px;z-index:99}
+.skip:focus{left:8px}
+main:focus{outline:none}
+
+/* =========================================================
+   2. BARRE DE NAVIGATION
+   ========================================================= */
+.navsite{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--trait)}
+.navsite .dedans{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 18px;flex-wrap:wrap}
+.btn,.navsite a.nav{display:inline-flex;align-items:center;gap:6px;font-family:var(--titre);font-weight:600;font-size:14.5px;color:var(--teal);
+  border:1px solid var(--trait);border-radius:8px;padding:7px 13px;background:#fff;text-decoration:none;cursor:pointer;line-height:1.2}
+.btn:hover,.navsite a.nav:hover{border-color:var(--teal);background:var(--teal-pale)}
+.btn.plein{background:var(--teal);color:#fff;border-color:var(--teal)}
+.btn.plein:hover{background:var(--teal2)}
+.btn.petit{font-size:13.5px;padding:5px 10px}
+.btn[aria-pressed="true"]{background:var(--ambre);border-color:var(--ambre);color:#fff}
+.navsite form{margin-left:auto;display:flex;gap:6px}
+.navsite input[type=search]{font:inherit;font-size:15px;border:1px solid var(--trait);border-radius:8px;padding:6px 10px;width:min(40vw,220px)}
+@media(max-width:700px){.navsite form{margin-left:0;width:100%}.navsite input[type=search]{flex:1;width:auto}}
+.bandeau-prof{background:var(--ambre-pale);border-bottom:2px solid var(--ambre);color:#4d3600;font-size:14.5px}
+.bandeau-prof div{max-width:1040px;margin:0 auto;padding:7px 18px}
+
+/* =========================================================
+   3. MISE EN PAGE
+   ========================================================= */
+.page{max-width:1040px;margin:0 auto;padding:0 18px 120px}
+.fil{font-family:var(--titre);font-size:13.5px;color:var(--doux);margin:18px 0 0}
+.fil a{color:var(--teal);text-decoration:none}.fil a:hover{text-decoration:underline}
+.fil span[aria-hidden]{margin:0 6px}
+.entete{background:var(--carte);border:1px solid var(--trait);border-top:4px solid var(--teal);border-radius:var(--r);margin-top:14px;padding:22px 24px;box-shadow:var(--ombre)}
+.kicker{font-family:var(--titre);font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--teal)}
+.lead{font-size:18.5px;color:var(--doux);margin:.2em 0 .6em}
+.bloc{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:20px 24px;margin-top:18px}
+.bloc>h2:first-child{margin-top:0}
+.bloc h2 .num{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;font-size:15px;margin-right:8px;vertical-align:2px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:13.5px;font-weight:600;border-radius:999px;padding:3px 10px;background:var(--teal-pale);color:var(--teal2);border:1px solid transparent}
+.tag.ost{background:#e3eaf3;color:var(--ost)}.tag.sfc{background:var(--teal-pale);color:var(--sfc)}.tag.ccri{background:#f6ecd5;color:#6d4b00}
+.tag.gris{background:#eef2f2;color:var(--doux)}
+.probleme{border-left:5px solid var(--magenta);background:#fdf1f5;padding:14px 18px;border-radius:0 var(--r) var(--r) 0;font-size:18px;font-weight:600;font-family:var(--titre)}
+.situation{background:var(--teal-pale);border-radius:var(--r);padding:14px 18px}
+blockquote{margin:10px 0;padding:10px 16px;border-left:4px solid var(--trait);background:#fff;font-style:italic}
+.grille2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.muted{color:var(--doux)}
+.petit{font-size:14.5px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{border:1px solid var(--trait);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--teal-pale);font-family:var(--titre);font-size:14px}
+.tablewrap{overflow-x:auto;margin:10px 0}
+.production{display:block;margin-top:12px;font-size:14.5px;background:#f4f8f8;border:1px dashed var(--teal);border-radius:8px;padding:7px 12px}
+.production::before{content:"Production attendue · ";font-weight:700;color:var(--teal)}
+.activite-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.activite-h h2{margin:0}
+.duree{font-size:14px;color:var(--doux);font-weight:600}
+
+/* Accueil */
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:center}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+.cartes{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;margin-top:14px}
+.carte{background:#fff;border:1px solid var(--trait);border-radius:var(--r);padding:16px 18px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:6px;transition:border-color .15s,box-shadow .15s}
+.carte:hover{border-color:var(--teal);box-shadow:var(--ombre)}
+.carte .n{font-family:var(--titre);font-weight:700;color:var(--teal);font-size:14px}
+.carte h3{margin:0;font-size:18px}
+.carte .fleche{margin-top:auto;font-weight:700;color:var(--teal)}
+.barre{height:8px;background:#e6eded;border-radius:99px;overflow:hidden}
+.barre>span{display:block;height:100%;background:var(--teal)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:600 14px var(--titre);border:1px solid var(--trait);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;color:var(--encre)}
+.chip[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.fait{color:var(--ok);font-weight:700}
+
+/* Synthèse */
+.synthese{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.synthese section{border:1px solid var(--trait);border-radius:var(--r);padding:12px 14px;background:#fbfdfd}
+.synthese h3{margin:0 0 6px;font-size:16px;color:var(--teal2)}
+.synthese ul{margin:0;padding-left:18px}
+dl.vocab{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;margin:0}
+dl.vocab dt{font-weight:700}dl.vocab dd{margin:0}
+@media(max-width:560px){dl.vocab{grid-template-columns:1fr}dl.vocab dd{margin-bottom:6px}}
+details.depli>summary{cursor:pointer;font-family:var(--titre);font-weight:600;color:var(--teal);padding:6px 0}
+
+/* Enseignant */
+body:not(.prof) .prof-only{display:none!important}
+.boite-prof{border:2px solid var(--ambre);background:var(--ambre-pale);border-radius:var(--r);padding:14px 18px;margin-top:14px}
+.boite-prof>h2,.boite-prof>h3,.boite-prof>h4{color:#6d4b00;margin-top:0}
+.boite-prof::before{content:"Espace enseignant";display:inline-block;font:700 12px var(--titre);text-transform:uppercase;letter-spacing:.05em;background:var(--ambre);color:#fff;border-radius:4px;padding:2px 8px;margin-bottom:8px}
+.boite-prof table th{background:#f6e7bf}
+
+/* =========================================================
+   4. ACTIVITÉS INTERACTIVES
+   ========================================================= */
+.widget{border:1px solid var(--trait);border-radius:var(--r);padding:14px 16px;margin:14px 0;background:#fcfefe}
+.widget .consigne{font-weight:600;margin:0 0 10px}
+.widget .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.score{font-family:var(--titre);font-weight:700;font-size:15px}
+.score.bon{color:var(--ok)}.score.moyen{color:var(--ambre)}.score.faible{color:var(--ko)}
+textarea,select,input[type=text],input[type=number]{font:inherit;font-size:16px;border:1px solid #b9cccc;border-radius:7px;padding:7px 9px;background:#fff;color:var(--encre);max-width:100%}
+textarea{width:100%;resize:vertical}
+label.lbl{display:block;font-weight:600;margin:8px 0 4px}
+.sauve{font-size:12.5px;color:var(--doux)}
+.ligne-tri{display:grid;grid-template-columns:1fr minmax(180px,auto);gap:8px 12px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--trait)}
+.ligne-tri:last-of-type{border-bottom:0}
+@media(max-width:560px){.ligne-tri{grid-template-columns:1fr}}
+.ok-bg{background:var(--ok-pale)!important;border-color:var(--ok)!important}
+.ko-bg{background:var(--ko-pale)!important;border-color:var(--ko)!important}
+.fb{font-size:14.5px;margin-top:4px;padding:6px 10px;border-radius:6px}
+.fb.ok{background:var(--ok-pale);color:#1d5a3f}.fb.ko{background:var(--ko-pale);color:#7c1d16}
+.fb:empty{display:none}
+fieldset{border:1px solid var(--trait);border-radius:8px;margin:0 0 12px;padding:10px 14px}
+legend{font-weight:600;padding:0 6px}
+.opt{display:flex;gap:8px;align-items:flex-start;padding:4px 6px;border-radius:6px;cursor:pointer}
+.opt:hover{background:var(--teal-pale)}
+.opt input{margin-top:5px;flex:none}
+.ordre-liste{list-style:none;margin:0;padding:0}
+.ordre-liste li{display:flex;align-items:center;gap:8px;border:1px solid var(--trait);border-radius:7px;background:#fff;margin:5px 0;padding:5px 8px}
+.ordre-liste li code{white-space:pre;flex:1;font-size:15px;overflow-x:auto}
+.ordre-liste li span.txt{flex:1}
+.ordre-liste button{font:700 15px var(--titre);border:1px solid var(--trait);background:#fff;border-radius:6px;width:34px;height:32px;cursor:pointer;color:var(--teal)}
+.ordre-liste button:hover{background:var(--teal-pale)}
+pre.code{background:#0f2327;color:#e6f2f1;border-radius:9px;padding:14px 16px;overflow-x:auto;font-size:14.5px;line-height:1.5;margin:10px 0}
+pre.code .com{color:#8fb9b5}
+pre.code input,pre.code select{font:inherit;font-size:14px;padding:1px 5px;border-radius:4px;border:1px solid #6fa8a4;background:#fffbe6;color:#14262B}
+code.in{background:#e8efef;border-radius:4px;padding:1px 5px;font-size:.92em}
+.blk{display:inline-block;font:600 14px var(--texte);color:#fff;border-radius:6px;padding:3px 10px;margin:1px 0}
+.blk.var{background:#d6336c}.blk.ctl{background:#1e7b45}.blk.cnd{background:#2b6cb0}.blk.aff{background:#4c51bf}.blk.bas{background:#7a4dbf}
+.schema-chaine{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px}
+.schema-chaine .bx{flex:1 1 170px;border:2px solid var(--teal);border-radius:9px;background:#fff;padding:8px 10px;display:flex;flex-direction:column;gap:6px}
+.schema-chaine .bx b{font-family:var(--titre);font-size:13.5px;color:var(--teal2);letter-spacing:.03em}
+.schema-chaine .fl{align-self:center;font-size:22px;color:var(--teal);font-weight:700}
+.schema-chaine select{width:100%;font-size:14.5px}
+.arbre .racine{border:2px solid var(--ost);border-radius:9px;padding:8px 12px;background:#eef3f9;font-weight:600;max-width:520px;margin:0 auto 10px;text-align:center}
+.arbre .enfants{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;border-top:2px solid var(--ost);padding-top:12px}
+.arbre .bx{border:1px solid var(--ost);border-radius:9px;background:#fff;padding:8px 10px;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.arbre .bx b{font-family:var(--titre);color:var(--ost);font-size:13.5px}
+.arbre select{width:100%;font-size:14px}
+.aides{margin-top:10px}
+.aides .aide{background:#fffaf0;border-left:4px solid var(--ambre);padding:7px 12px;border-radius:0 6px 6px 0;margin:6px 0;font-size:15.5px}
+.lien-ext{display:flex;gap:12px;align-items:center;border:1px solid var(--trait);border-radius:var(--r);background:#fff;padding:12px 14px;margin:10px 0}
+.lien-ext .badge{font-size:12.5px;font-weight:700;background:#e3eaf3;color:var(--ost);border-radius:999px;padding:2px 8px;white-space:nowrap}
+.tab-saisie input{width:100%;min-width:70px;font-size:15px;padding:4px 6px}
+.tab-saisie td{padding:4px}
+.num-q{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--trait)}
+.num-q:last-of-type{border-bottom:0}
+.num-q .champ{display:flex;align-items:center;gap:6px}
+.num-q input{width:110px}
+@media(max-width:560px){.num-q{grid-template-columns:1fr}}
+
+/* Simulateurs */
+.sim{border:1px solid var(--trait);border-radius:var(--r);background:#fff;padding:12px}
+.sim canvas{width:100%;height:auto;display:block;border-radius:8px;background:#f7fbfb;border:1px solid var(--trait)}
+.sim .ctrl{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:10px 0}
+.sim .ctrl label{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px}
+.sim .ctrl input[type=range]{width:170px;accent-color:var(--teal)}
+.afficheur{font-family:var(--mono);background:#0f2327;color:#7ef0c8;border-radius:8px;padding:10px 14px;font-size:17px;min-height:46px}
+.journal{font-family:var(--mono);font-size:13.5px;background:#f4f8f8;border:1px solid var(--trait);border-radius:8px;padding:8px 10px;max-height:170px;overflow:auto;white-space:pre}
+.resultat{font-weight:700;padding:8px 12px;border-radius:8px;margin-top:8px}
+.resultat:empty{display:none}
+.decision td.num,.decision th.num{text-align:center}
+.decision tr.exclu td{color:#9aa;text-decoration:line-through}
+.rang{font-family:var(--titre);font-weight:700}
+
+/* Pied de page / impression */
+footer{border-top:1px solid var(--trait);background:#fff;color:var(--doux);font-size:14px}
+footer div{max-width:1040px;margin:0 auto;padding:16px 18px}
+.navseance{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:22px}
+mark{background:#fff0a8;padding:0 2px}
+@media print{.navsite,.bandeau-prof,.navseance,.actions,footer,.noprint{display:none!important}body{background:#fff;font-size:12pt}.bloc,.entete,.widget{break-inside:avoid;box-shadow:none}details{display:block}details>*{display:block}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<nav class="fnav-ia" aria-label="Navigation Formation" style="display:flex;gap:14px;flex-wrap:wrap;padding:6px 18px;font:500 13px/1.3 'Source Sans 3',Arial,sans-serif;background:#fff;border-bottom:1px solid #d2dede"><a href="../index.html" style="color:#5b6b6a;text-decoration:none">← Atelier d’ouverture</a><a href="index.html" style="color:#5b6b6a;text-decoration:none">↑ Séances générées par l’IA</a></nav>
+<header class="navsite">
+  <div class="dedans">
+    <a class="nav" href="#accueil" title="Retour à l'accueil">⌂ Accueil</a>
+    <a class="nav" href="#sequence">La séquence</a>
+    <a class="nav" href="#reperes">Les 38 repères</a>
+    <a class="nav prof-only" href="#enseignant">Espace enseignant</a>
+    <form id="formRecherche" role="search" aria-label="Rechercher dans la séquence">
+      <input type="search" id="q" placeholder="Rechercher un mot…" aria-label="Mot-clé">
+      <button class="btn" type="submit">Rechercher</button>
+    </form>
+    <button class="btn" id="btnProf" type="button" aria-pressed="false">Mode enseignant</button>
+  </div>
+</header>
+<div class="bandeau-prof prof-only" role="note"><div><strong>Mode enseignant activé.</strong> Les encadrés jaunes (préparation, réponses attendues, corrigés, grilles) sont visibles. Ce mode n'est qu'un affichage JavaScript : <strong>ce n'est pas une protection sécurisée des corrigés</strong> (ils sont présents dans le fichier).</div></div>
+<main id="main" class="page" tabindex="-1"></main>
+<footer><div>Technologie 3e · Cycle 4 — Programme de technologie, BO n° 9 du 29 février 2024 · Séquence issue de la fiche groupe « triange rectangle BSL » (atelier d'ouverture, 16/11) · Extension du site <a href="https://xseorkly.github.io/techno-3e/" target="_blank" rel="noopener">techno-3e</a> (lien Internet). Les données saisies restent dans ce navigateur.</div></footer>
+
+<script>
+'use strict';
+/* =====================================================================
+   SÉQUENCE « ROBOT ASPIRATEUR » — Technologie 3e
+   Organisation : Référentiel → Séquence → Séances → Activités (widgets)
+   Pour ajouter une séquence : ajouter un objet dans SEQUENCES (même structure).
+   ===================================================================== */
+
+/* ---------- 1. RÉFÉRENTIEL OFFICIEL (cartes 3e, BO n° 9 du 29/02/2024) ---------- */
+const COMPETENCES = {
+  C1:`Décrire les liens entre usages et évolutions technologiques des objets et des systèmes techniques`,
+  C2:`Décrire les interactions entre un objet ou un système technique, son environnement et les utilisateurs`,
+  C3:`Caractériser et choisir un objet ou un système technique selon différents critères`,
+  C4:`Décrire et caractériser l’organisation interne d’un objet ou d’un système technique et ses échanges avec son environnement (énergies, données)`,
+  C5:`Identifier un dysfonctionnement d’un objet technique et y remédier`,
+  C6:`Comprendre et modifier un programme associé à une fonctionnalité d’un objet ou d’un système technique`,
+  C7:`Imaginer, concevoir et réaliser une ou des solutions en réponse à un besoin, à des exigences (de développement durable, par exemple) ou à la nécessité d’améliorations dans une démarche de créativité`,
+  C8:`Valider les solutions techniques par des simulations ou par des protocoles de tests`,
+  C9:`Concevoir, écrire, tester et mettre au point un programme`
+};
+/* [code, compétence, intitulé exact de la colonne 3e] */
+const REPERES = [
+  ['OST11','C1',`Identifier les innovations de rupture qui sont attachées à l’évolution d’un OST`],
+  ['OST12','C1',`Mettre en relation une découverte scientifique avec ses développements technologiques et leurs effets sur la société`],
+  ['OST13','C1',`Exprimer dans un argumentaire court l’incidence d’un OST sur la société`],
+  ['OST14','C1',`Exprimer dans un argumentaire court l’incidence des contraintes sociétales sur les OST`],
+  ['OST15','C1',`Exprimer dans un argumentaire court le rôle du développement stratégique du numérique au sein de la société et des environnements professionnels (ou des métiers)`],
+  ['OST21','C2',`Décrire l’expérience de l’utilisateur d’un OST à l’aide de modes de représentation choisis`],
+  ['OST31','C3',`Établir une liste d’OST possibles en vue de répondre à un besoin`],
+  ['OST32','C3',`Choisir un OST et argumenter ce choix en prenant en compte son cycle de vie et les trois piliers du développement durable`],
+  ['OST33','C3',`Évaluer les OST selon des exigences ou des critères identifiés (caractéristiques, performances, coût, indice de réparabilité)`],
+  ['OST34','C3',`Définir et mettre en œuvre un protocole pour mesurer une caractéristique, une performance d’un OST`],
+  ['SFC11','C4',`Élaborer, à l’aide d’un schéma bloc, la chaîne d’énergie d’un OST`],
+  ['SFC12','C4',`Justifier le choix d’un matériau et de son procédé de mise en forme au regard des contraintes techniques et environnementales`],
+  ['SFC13','C4',`Décrire un OST en caractérisant sa chaîne d’information`],
+  ['SFC14','C4',`Associer des grandeurs analogiques issues d’un OST à des données exploitables`],
+  ['SFC15','C4',`Représenter sous forme de données les informations de diverses natures utilisées par un OST`],
+  ['SFC16','C4',`Identifier, selon les cas, leur mise en forme, leur transmission ou leur stockage dans des fichiers (texte, image, nombre) afin de comprendre le fonctionnement de l’OST`],
+  ['SFC17','C4',`Identifier et représenter la circulation d’une information dans le réseau Internet`],
+  ['SFC18','C4',`Justifier la nécessité d’un protocole de routage pour faire communiquer plusieurs réseaux (activité débranchée, table de routage donnée)`],
+  ['SFC21','C5',`Formuler des hypothèses expliquant le dysfonctionnement d’un objet technique`],
+  ['SFC22','C5',`Proposer un protocole de dépannage puis de réparation`],
+  ['SFC23','C5',`Réaliser le dépannage ou la réparation d’un système défectueux`],
+  ['SFC24','C5',`Réaliser une pièce sur mesure pour réparer un objet technique`],
+  ['SFC31','C6',`Déterminer les données utilisées et produites par un programme associé à une fonctionnalité en vue de le modifier`],
+  ['SFC32','C6',`Programmer un algorithme lié à une nouvelle fonctionnalité`],
+  ['SFC33','C6',`Modifier et tester le programme associé à une nouvelle fonctionnalité d’un OST`],
+  ['CCRI11','C7',`Élaborer un processus de conception et de réalisation dans une durée, avec des tâches identifiées`],
+  ['CCRI12','C7',`Proposer et fabriquer un ensemble de solutions pour produire un nouvel OST (croquis, schéma, graphique, algorithme, modélisation)`],
+  ['CCRI13','C7',`Choisir un matériau constitutif d’un objet et/ou système technique`],
+  ['CCRI14','C7',`Choisir une source d’énergie pour un OST`],
+  ['CCRI15','C7',`Choisir les constituants et assembler un prototype`],
+  ['CCRI16','C7',`Modéliser une forme voulue`],
+  ['CCRI17','C7',`Choisir les moyens et produire la forme voulue`],
+  ['CCRI18','C7',`Interfacer deux objets techniques communicants`],
+  ['CCRI21','C8',`Mettre en œuvre une simulation pour valider la tenue mécanique d’un matériau`],
+  ['CCRI22','C8',`Proposer un protocole de test pour valider la tenue mécanique d’un matériau`],
+  ['CCRI23','C8',`Proposer un protocole de test pour valider le comportement et les performances d’un objet technique`],
+  ['CCRI31','C9',`Élaborer ou concevoir un algorithme permettant de répondre au besoin visé, puis le traduire en un programme structuré, le tester et le mettre au point`],
+  ['CCRI32','C9',`Réaliser et mettre au point un programme commandant un système réel incluant une interaction entre un humain et une machine`]
+];
+/* Connaissances associées (cartes 3e) — uniquement pour les repères travaillés */
+const CONNAISSANCES = {
+  OST21:[`Interacteurs extérieurs : usagers, données, autres objets et environnement`,`Modes de représentation : croquis, schéma, graphique, algorithme et modélisation`,`Contraintes et exigences ; ergonomie liée à l’usage`],
+  OST33:[`Critères de choix : qualité, durabilité, efficacité énergétique et recyclabilité`,`Indice énergétique et indice de réparabilité`,`Notice et documentation technique ; exigences et critères de comparaison`],
+  SFC13:[`Fonctions des capteurs (température, présence, distance…)`,`Rôle d’un microcontrôleur`,`Interface humain-machine (IHM) : boutons, afficheurs et autres composants`],
+  SFC14:[`Grandeurs acquises par les capteurs`,`Fonctions des capteurs, du microcontrôleur et de l’IHM`,`Données exploitables issues de la chaîne d’information`],
+  CCRI31:[`Connaissances du thème SFC sur l’algorithmique : variables, opérateurs, conditions, boucles, listes, événements, entrées et sorties`,`Modularité : sous-programme et fonction`,`Structuration d’un programme : organisation, modularité et commentaires`]
+};
+const theme = code => code.startsWith('OST') ? 'ost' : code.startsWith('SFC') ? 'sfc' : 'ccri';
+const repere = code => REPERES.find(r => r[0] === code);
+
+/* ---------- 2. CODE PYTHON DE RÉFÉRENCE (affiché dans plusieurs séances) ---------- */
+const CODE_MESURE = `<span class="com"># Programme fourni par l'enseignant (séance 3) : afficher la distance mesurée</span>
+from microbit import *
+from machine import time_pulse_us
+
+TRIG = pin1                      <span class="com"># broche qui déclenche la salve d'ultrasons</span>
+ECHO = pin2                      <span class="com"># broche qui reçoit l'écho</span>
+ECHO.read_digital()              <span class="com"># prépare la broche ECHO en entrée</span>
+
+while True:
+    TRIG.write_digital(1)        <span class="com"># impulsion de déclenchement</span>
+    TRIG.write_digital(0)
+    duree = time_pulse_us(ECHO, 1)   <span class="com"># durée de l'écho en microsecondes</span>
+    if duree &lt; 0:                <span class="com"># aucun écho reçu</span>
+        display.show("-")
+    else:
+        distance = round(duree * 0.034 / 2)
+        display.scroll(distance)
+    sleep(300)`;
+
+const CODE_CORRIGE_S5 = `from microbit import *
+from machine import time_pulse_us
+
+TRIG = pin1          <span class="com"># broche qui déclenche la mesure</span>
+ECHO = pin2          <span class="com"># broche qui reçoit l'écho</span>
+SEUIL = 15           <span class="com"># distance d'arrêt en cm (cahier des charges : 5 à 20 cm)</span>
+
+def lire_distance():
+    <span class="com"># Sous-programme : renvoie la distance en cm</span>
+    TRIG.write_digital(1)
+    TRIG.write_digital(0)
+    duree = time_pulse_us(ECHO, 1)   <span class="com"># durée de l'écho en µs</span>
+    if duree &lt; 0:                    <span class="com"># pas d'écho reçu</span>
+        return 999
+    return round(duree * 0.034 / 2)
+
+ECHO.read_digital()     <span class="com"># prépare la broche ECHO en entrée</span>
+while True:
+    distance = lire_distance()
+    if distance &lt; SEUIL:
+        pin0.write_digital(0)        <span class="com"># LED « moteurs » éteinte : arrêt</span>
+        display.show(Image.NO)
+    else:
+        pin0.write_digital(1)        <span class="com"># LED « moteurs » allumée : avance</span>
+        display.show(Image.ARROW_N)
+    sleep(100)`;
+
+/* ---------- 3. LA SÉQUENCE ---------- */
+const SEQUENCE = {
+  id:'robot',
+  titre:`Robot aspirateur : ni téléphone, ni queue de chat !`,
+  objet:`Robot aspirateur domestique (prototype pédagogique : carte micro:bit + capteur à ultrasons)`,
+  problematique:`Comment être sûr que le robot aspirateur n’attrape ni votre téléphone ni la queue du chat ?`,
+  situation:`<p>La famille Martin a acheté un robot aspirateur. En une semaine, il a avalé le câble du chargeur, poussé un téléphone tombé du canapé sous un meuble et roulé sur la queue de Moka, le chat de la maison. Le fabricant prépare un nouveau modèle et confie à votre classe une mission : <strong>comprendre comment le robot perçoit son environnement, programmer sa détection d’obstacles, puis conseiller la famille sur le choix d’un robot plus sûr et plus durable.</strong></p>`,
+  objectifs:[
+    `Identifier les interacteurs extérieurs du robot et traduire le besoin en exigences mesurables (diagramme des exigences).`,
+    `Décrire la chaîne d’information du robot : capteurs, microcontrôleur, IHM.`,
+    `Expliquer comment un capteur à ultrasons transforme la durée d’un écho en une distance exploitable, et en connaître les limites.`,
+    `Passer de la programmation par blocs à Python : variables, affectation, conditions, boucles, sous-programme.`,
+    `Concevoir, programmer en Python, tester et mettre au point l’arrêt du robot devant un obstacle.`,
+    `Choisir un robot selon des exigences et des critères, dont l’indice de réparabilité.`
+  ],
+  competences:['C2','C3','C4','C9'],
+  reperes:['OST21','SFC13','SFC14','CCRI31','OST33'],
+  reperePrincipal:'SFC14',
+  prerequis:[
+    `Programmation par blocs (MakeCode, Scratch) : variable, boucle « répéter », condition « si… alors… sinon » (cycle 4, 5e-4e).`,
+    `Notion de chaîne d’information abordée en 5e-4e (acquérir, traiter, communiquer) — rappelée en séance 2.`,
+    `Proportionnalité et conversion d’unités (mathématiques).`
+  ],
+  duree:`7 séances de 55 min (≈ 6 h 30), dont 1 séance d’évaluation`,
+  productions:[
+    `Classement des interacteurs et diagramme des exigences (séance 1).`,
+    `Schéma de la chaîne d’information du robot (séance 2).`,
+    `Tableau de mesures et calcul de distances à partir de la durée de l’écho (séance 3).`,
+    `Exercices de traduction blocs → Python et trace d’exécution (séance 4).`,
+    `Programme Python commenté, testé sur micro:bit, et tableau d’essais (séance 5).`,
+    `Tableau de décision et argumentaire de choix d’un robot (séance 6).`,
+    `Évaluation de transfert : le robot tondeuse et le hérisson (séance 7).`
+  ],
+  seances:[] /* rempli ci-dessous */
+};
+
+/* ===================== SÉANCE 1 ===================== */
+SEQUENCE.seances.push({
+  id:'s1', num:1, titre:`Qui le robot rencontre-t-il ?`, sous:`Interacteurs extérieurs et diagramme des exigences`,
+  duree:'55 min', etape:`Découvrir et comprendre le problème`, reperes:['OST21'], comp:['C2'],
+  situation:`<p>Voici l’avis publié par la famille Martin sur le site du vendeur (avis fictif, créé pour la séquence) :</p>
+  <blockquote>« Il nettoie bien… mais lundi il a avalé le câble du chargeur, mercredi il a poussé mon téléphone tombé du canapé jusque sous le meuble, et jeudi Moka, notre chat, s’est enfui en miaulant : le robot lui a roulé sur la queue ! Deux étoiles. »</blockquote>
+  <p>Le fabricant veut améliorer son prochain modèle. Avant de choisir des capteurs ou d’écrire un programme, l’équipe de conception doit décrire précisément <strong>tout ce que le robot rencontre dans une maison</strong> et <strong>ce qu’il doit garantir</strong>.</p>`,
+  problematique:`Avec quels éléments de son environnement le robot aspirateur interagit-il, et quelles exigences doit-il respecter pour ne rien abîmer ni blesser ?`,
+  hypothese:{id:'s1-hyp', label:`Mes hypothèses : selon toi, pourquoi le robot n’a-t-il « vu » ni le téléphone ni la queue du chat ? Propose au moins deux explications.`},
+  activites:[
+    {titre:`J’identifie les interacteurs extérieurs`, duree:'12 min', modalite:'en binôme',
+     intro:`<p>Un <strong>interacteur extérieur</strong> est un élément extérieur au robot qui agit sur lui ou subit son action pendant l’utilisation. On les range en quatre familles : les <strong>usagers</strong>, l’<strong>environnement</strong> (le milieu, les êtres vivants qui s’y trouvent), les <strong>autres objets</strong> et les <strong>données</strong> échangées.</p>`,
+     contenu:[
+      {t:'tri', id:'s1-tri', consigne:`Classe chaque élément dans la bonne famille d’interacteurs.`,
+       cats:['Usager','Environnement','Autre objet','Donnée'],
+       items:[
+        {l:`L’utilisateur qui lance le nettoyage`, a:0, fb:`C’est lui qui utilise le robot et lui donne des ordres.`},
+        {l:`Moka, le chat de la maison`, a:1, fb:`Le chat n’utilise pas le robot : c’est un être vivant présent dans le milieu où le robot se déplace.`},
+        {l:`Le sol (parquet, tapis, carrelage)`, a:1, fb:`Le sol fait partie du milieu dans lequel le robot évolue.`},
+        {l:`La marche de l’escalier`, a:1, fb:`C’est une caractéristique du lieu (le milieu), pas un objet que l’on déplace.`},
+        {l:`La poussière et les miettes`, a:1, fb:`Elles font partie du milieu à nettoyer.`},
+        {l:`Le téléphone tombé au sol`, a:2, fb:`C’est un objet qui se trouve sur le trajet du robot.`},
+        {l:`Le câble du chargeur`, a:2, fb:`C’est un objet posé au sol.`},
+        {l:`La base de recharge`, a:2, fb:`C’est un autre objet technique avec lequel le robot interagit.`},
+        {l:`Le plan du logement mémorisé par le robot`, a:3, fb:`C’est une information enregistrée et utilisée par le robot : une donnée.`},
+        {l:`L’ordre « Nettoyer le salon à 10 h » envoyé par l’application`, a:3, fb:`Le robot reçoit une information : c’est une donnée.`}
+       ]},
+      {t:'aides', items:[`Pose-toi la question : « Est-ce quelqu’un qui commande le robot ? » → usager.`,`« Est-ce une information (un ordre, un plan, un horaire) ? » → donnée.`,`« Est-ce une chose que l’on peut ramasser ou déplacer ? » → autre objet. Sinon, c’est le milieu : environnement.`]}
+     ],
+     production:`Le classement complété des dix interacteurs.`},
+    {titre:`Je décris l’expérience de l’utilisateur`, duree:'13 min', modalite:'en binôme',
+     intro:`<p>Pour chaque interacteur, décris ce qui s’est passé chez les Martin, puis ce que le robot <strong>devrait</strong> faire. Ensuite, sur ta feuille, dessine un <strong>croquis</strong> : le robot au centre, les interacteurs autour, et une flèche légendée pour chaque interaction.</p>`,
+     contenu:[
+      {t:'tableau', id:'s1-ux', cols:['Interacteur','Ce qui s’est passé','Ce que le robot devrait faire'],
+       rows:[['Moka (le chat)',null,null],['Téléphone au sol',null,null],['Câble du chargeur',null,null],['Marche de l’escalier',null,null],['Utilisateur',null,null]]},
+      {t:'aides', items:[`Commence tes phrases par « Le robot doit… » : par exemple « Le robot doit s’arrêter avant de toucher… ».`,`Pour l’utilisateur, pense à ce qu’il attend : être prévenu, retrouver son sol propre, ne pas avoir à surveiller le robot.`]},
+      {t:'prof', html:`<h4>Réponses attendues</h4><ul><li>Chat : roulé sur la queue → le robot doit détecter un animal, même bas, et s’arrêter ou le contourner sans contact.</li><li>Téléphone : poussé sous le meuble → détecter un objet bas posé au sol et l’éviter.</li><li>Câble : avalé par la brosse → détecter les objets fins au sol et ne pas les aspirer.</li><li>Escalier : (pas d’incident, mais risque) → détecter le vide et ne pas tomber.</li><li>Utilisateur : il a dû surveiller → être averti (application, son) en cas de blocage.</li></ul><p>Croquis attendu : diagramme de contexte (robot au centre, flèches légendées). Accepter toute représentation lisible : c’est le « mode de représentation choisi » du repère OST21.</p>`}
+     ],
+     production:`Le tableau complété et un croquis légendé des interactions (sur feuille).`},
+    {titre:`Je construis le diagramme des exigences`, duree:'12 min', modalite:'en binôme',
+     intro:`<p>Une <strong>exigence</strong> dit ce que le robot doit garantir. Pour pouvoir la vérifier par un test, on lui associe un <strong>critère mesurable</strong> (une valeur, une limite). Associe à chaque exigence le critère qui permet de la vérifier.</p>`,
+     contenu:[
+      {t:'schema', id:'s1-exig', layout:'arbre', racine:`Exigence 1 — Le robot nettoie le sol de façon autonome sans rien abîmer ni blesser`,
+       options:[`S’arrêter ou tourner à une distance comprise entre 5 cm et 20 cm de l’obstacle`,`Détecter un vide sous l’avant du robot avant d’y engager une roue`,`Détecter un objet de plus de 1 cm de hauteur posé au sol devant le robot`,`Rejoindre la base quand la batterie descend sous 15 %`,`Recevoir un ordre de nettoyage depuis l’application`],
+       slots:[
+        {titre:'Exigence 1.1', texte:`Éviter les obstacles hauts (murs, meubles, chat assis)`, a:0},
+        {titre:'Exigence 1.2', texte:`Ne pas tomber dans l’escalier`, a:1},
+        {titre:'Exigence 1.3', texte:`Protéger les objets bas et les animaux (téléphone, câble, queue du chat)`, a:2},
+        {titre:'Exigence 1.4', texte:`Retourner se recharger seul`, a:3},
+        {titre:'Exigence 1.5', texte:`Être commandé à distance par l’utilisateur`, a:4}
+       ]},
+      {t:'reponse', id:'s1-exig-justif', label:`Quelles exigences le robot des Martin n’a-t-il pas respectées ? Justifie avec un fait de l’avis client.`, rows:3},
+      {t:'prof', html:`<p>Réponse attendue : l’exigence 1.3 n’est pas respectée (câble avalé, téléphone poussé, queue écrasée). L’exigence 1.1 semble respectée pour les obstacles hauts. Point de vigilance : faire distinguer exigence (« ce qu’il doit faire ») et critère (« comment on le vérifie »). Le critère 1.1 (5 à 20 cm) devient le <strong>cahier des charges de la séance 5</strong>.</p>`}
+     ],
+     production:`Le diagramme des exigences complété et la justification.`}
+  ],
+  miseEnCommun:`<p>Chaque binôme présente un interacteur et l’exigence associée. La classe valide le diagramme des exigences commun et retient le critère de l’exigence 1.1 (<strong>arrêt entre 5 et 20 cm</strong>), qui servira à tester le programme en séance 5. On note au tableau la question qui reste ouverte : <em>quels constituants permettent au robot de percevoir ces interacteurs ?</em></p>`,
+  synthese:{
+    comprendre:[`Un objet technique ne fonctionne jamais seul : il agit sur son environnement et subit son action.`,`Les exigences traduisent le besoin de l’utilisateur en résultats que l’objet doit garantir.`],
+    savoir:[`Les interacteurs extérieurs se rangent en quatre familles : usagers, environnement, autres objets, données.`,`Un diagramme des exigences part d’une exigence principale, la décompose en exigences plus précises et associe à chacune un critère mesurable.`],
+    savoirFaire:[`Lister les interacteurs d’un objet dans une situation d’usage.`,`Représenter l’expérience de l’utilisateur par un tableau ou un croquis légendé.`,`Formuler une exigence avec un critère vérifiable par un test.`],
+    vocab:[['Interacteur extérieur','Élément extérieur à l’objet qui agit sur lui ou subit son action.'],['Exigence','Ce que l’objet doit obligatoirement garantir.'],['Critère (niveau)','Valeur ou limite qui permet de vérifier une exigence.'],['Ergonomie','Adaptation de l’objet à son utilisateur et à son usage.']]
+  },
+  verif:[
+    {t:'qcm', id:'s1-qcm', qs:[
+      {q:`Laquelle de ces exigences peut être vérifiée par un test ?`, o:[`Le robot doit être intelligent.`,`Le robot doit s’arrêter à au moins 5 cm d’un mur.`,`Le robot doit faire attention au chat.`,`Le robot doit bien nettoyer.`], a:1, ex:`Seule cette exigence comporte un critère mesurable (5 cm) : on peut la tester avec une règle.`},
+      {q:`Le robot aspire une chaussette oubliée. Pour le robot, la chaussette est :`, o:[`un usager`,`un autre objet (interacteur)`,`une donnée`,`une exigence`], a:1, ex:`La chaussette est un objet posé sur le trajet du robot : un interacteur de la famille « autres objets ».`},
+      {q:`L’heure de nettoyage programmée dans l’application est un interacteur de type :`, o:[`usager`,`environnement`,`donnée`,`autre objet`], a:2, ex:`Un horaire est une information transmise au robot : c’est une donnée.`}
+    ]}
+  ],
+  defi:`Ajoute à ton diagramme une exigence liée au <strong>bruit</strong> (le chat a peur du robot !) et propose un critère mesurable.`,
+  prof:{
+    objectifs:[`Identifier et classer les interacteurs extérieurs (OST21).`,`Représenter l’expérience utilisateur (tableau, croquis).`,`Construire un diagramme des exigences avec des critères mesurables.`],
+    deroulement:[['0-5','Situation','Lecture de l’avis client, questionnement oral.'],['5-10','Hypothèses','Écriture individuelle, 2 ou 3 lectures à voix haute.'],['10-22','Activité 1','Classement des interacteurs, vérification et correction.'],['22-35','Activité 2','Tableau d’expérience utilisateur + croquis.'],['35-47','Activité 3','Diagramme des exigences.'],['47-55','Mise en commun et synthèse','Validation du diagramme commun, critère 5-20 cm retenu.']],
+    materiel:[`Postes ou tablettes (fichier HTML).`,`Facultatif : un robot aspirateur réel ou une courte vidéo de démonstration.`,`Feuille A4 pour le croquis.`],
+    differenciation:{aide:[`Aides progressives activables dans l’activité 1.`,`Tableau de l’activité 2 pré-rempli pour la 1re ligne (à dicter si besoin).`],defi:[`Exigence « bruit » avec critère en décibels.`,`Ajouter un interacteur « enfant qui joue » et discuter de sa famille (usager ou environnement selon la situation).`]}
+  }
+});
+
+/* ===================== SÉANCE 2 ===================== */
+SEQUENCE.seances.push({
+  id:'s2', num:2, titre:`Comment le robot perçoit-il son environnement ?`, sous:`Les capteurs et la chaîne d’information`,
+  duree:'55 min', etape:`Observer, analyser et formuler des hypothèses`, reperes:['SFC13'], comp:['C4'],
+  situation:`<p>Le service après-vente a démonté un robot de la gamme. Voici son dossier technique simplifié.</p>
+  <div class="tablewrap"><table><thead><tr><th>N°</th><th>Constituant</th><th>Ce que l’on observe</th></tr></thead><tbody>
+  <tr><td>1</td><td>Capteurs à ultrasons (×2, à l’avant, à 6 cm du sol)</td><td>Ils émettent un son inaudible et écoutent son écho.</td></tr>
+  <tr><td>2</td><td>Capteurs de vide infrarouges (×4, sous le robot)</td><td>Ils envoient une lumière infrarouge vers le sol et mesurent ce qui revient.</td></tr>
+  <tr><td>3</td><td>Pare-chocs avec micro-interrupteurs</td><td>Le contact se ferme quand le pare-chocs est enfoncé.</td></tr>
+  <tr><td>4</td><td>Codeurs sur les roues</td><td>Ils comptent les tours de chaque roue.</td></tr>
+  <tr><td>5</td><td>Gyroscope</td><td>Il mesure la rotation du robot sur lui-même.</td></tr>
+  <tr><td>6</td><td>Circuit de mesure de la batterie</td><td>Il mesure la tension de la batterie.</td></tr>
+  <tr><td>7</td><td>Carte électronique avec microcontrôleur</td><td>Elle exécute le programme du robot.</td></tr>
+  <tr><td>8</td><td>Boutons « Marche » et « Retour base »</td><td>L’utilisateur appuie dessus.</td></tr>
+  <tr><td>9</td><td>Voyants lumineux et haut-parleur</td><td>Ils s’allument ou émettent un message.</td></tr>
+  <tr><td>10</td><td>Module Wi-Fi</td><td>Il échange des informations avec l’application.</td></tr>
+  <tr><td>11</td><td>Moteurs des roues et de la turbine</td><td>Ils font avancer le robot et aspirent.</td></tr>
+  <tr><td>12</td><td>Batterie lithium-ion</td><td>Elle stocke l’énergie électrique.</td></tr>
+  </tbody></table></div>`,
+  problematique:`Quelles informations le robot doit-il acquérir et traiter pour éviter le chat et le téléphone, et quels constituants s’en chargent ?`,
+  hypothese:{id:'s2-hyp', label:`Mes hypothèses : parmi les constituants du tableau, lesquels permettent au robot de « savoir » qu’un obstacle est devant lui ?`},
+  activites:[
+    {titre:`Je range les constituants dans la chaîne d’information`, duree:'12 min', modalite:'en binôme',
+     intro:`<p>La <strong>chaîne d’information</strong> regroupe les constituants qui <strong>acquièrent</strong> des informations, les <strong>traitent</strong> et les <strong>communiquent</strong>. Les constituants qui stockent l’énergie ou produisent un mouvement appartiennent à la <strong>chaîne d’énergie</strong>.</p>`,
+     contenu:[
+      {t:'tri', id:'s2-tri', consigne:`Indique le rôle de chaque constituant.`,
+       cats:['Acquérir','Traiter','Communiquer','Chaîne d’énergie'],
+       items:[
+        {l:`Capteurs à ultrasons`, a:0, fb:`Un capteur prélève une information sur l’environnement : il acquiert.`},
+        {l:`Capteurs de vide infrarouges`, a:0, fb:`Ils prélèvent une information sur la présence du sol.`},
+        {l:`Micro-interrupteurs du pare-chocs`, a:0, fb:`Ils détectent un contact : c’est une acquisition.`},
+        {l:`Codeurs des roues`, a:0, fb:`Ils mesurent les tours de roue : acquisition.`},
+        {l:`Boutons « Marche » et « Retour base »`, a:0, fb:`Les boutons font partie de l’IHM : ils acquièrent l’ordre de l’utilisateur.`},
+        {l:`Microcontrôleur`, a:1, fb:`Il exécute le programme : il compare, calcule et décide.`},
+        {l:`Voyants et haut-parleur`, a:2, fb:`Ils transmettent une information à l’utilisateur (IHM de sortie).`},
+        {l:`Module Wi-Fi`, a:2, fb:`Il transmet des informations vers l’application.`},
+        {l:`Moteurs des roues et de la turbine`, a:3, fb:`Un moteur convertit l’énergie électrique en mouvement : chaîne d’énergie.`},
+        {l:`Batterie lithium-ion`, a:3, fb:`La batterie stocke et fournit l’énergie : chaîne d’énergie.`}
+       ]},
+      {t:'aides', items:[`Un bouton et un capteur ont le même rôle : faire entrer une information dans le robot.`,`Une information qui sort du robot (lumière d’un voyant, son, message Wi-Fi) correspond à « communiquer ».`]}
+     ],
+     production:`Le classement des constituants.`},
+    {titre:`J’associe chaque capteur à l’information qu’il acquiert`, duree:'12 min', modalite:'en binôme',
+     contenu:[
+      {t:'tri', id:'s2-assoc', consigne:`Pour chaque capteur, choisis l’information qu’il fournit au microcontrôleur.`,
+       cats:[`Distance d’un obstacle devant le robot`,`Présence ou absence du sol sous le robot`,`Contact avec un obstacle (oui / non)`,`Distance parcourue par chaque roue`,`Angle de rotation du robot`,`Niveau de charge de la batterie`],
+       items:[
+        {l:`Capteur à ultrasons`, a:0, fb:`Il mesure le temps de retour d’un écho, qui dépend de la distance.`},
+        {l:`Capteur de vide infrarouge`, a:1, fb:`Au-dessus d’une marche, la lumière ne revient presque plus : le sol a « disparu ».`},
+        {l:`Micro-interrupteur du pare-chocs`, a:2, fb:`Un interrupteur n’a que deux états : enfoncé ou non.`},
+        {l:`Codeur de roue`, a:3, fb:`Nombre de tours × périmètre de la roue = distance parcourue.`},
+        {l:`Gyroscope`, a:4, fb:`Il mesure la rotation du robot.`},
+        {l:`Circuit de mesure de la batterie`, a:5, fb:`La tension de la batterie indique son niveau de charge.`}
+       ]},
+      {t:'qcm', id:'s2-bool', qs:[
+        {q:`Parmi ces informations, lesquelles ne peuvent prendre que deux valeurs (vrai / faux) ? Plusieurs réponses possibles.`, o:[`Contact avec un obstacle`,`Présence ou absence du sol`,`Distance d’un obstacle`,`Angle de rotation`], a:[0,1], ex:`Le contact et la présence du sol sont des informations « tout ou rien » (booléennes). La distance et l’angle peuvent prendre de très nombreuses valeurs : on les étudiera en séance 3.`}
+      ]}
+     ],
+     production:`Les associations capteur → information et le repérage des informations booléennes.`},
+    {titre:`Je complète le schéma de la chaîne d’information`, duree:'15 min', modalite:'individuel puis binôme',
+     intro:`<p>On étudie la fonction : <strong>« éviter un obstacle sans le toucher »</strong>. Complète le schéma de la chaîne d’information correspondante.</p>`,
+     contenu:[
+      {t:'schema', id:'s2-chaine', layout:'chaine',
+       options:[`Obstacle (mur, chat) devant le robot`,`Capteur à ultrasons`,`Microcontrôleur : compare la distance au seuil`,`Ordre d’arrêt aux moteurs + voyant`,`Batterie`,`Module Wi-Fi`,`Turbine d’aspiration`],
+       slots:[
+        {titre:'Information d’entrée', a:0},
+        {titre:'ACQUÉRIR', a:1},
+        {titre:'TRAITER', a:2},
+        {titre:'COMMUNIQUER', a:3}
+       ]},
+      {t:'aides', items:[`Le schéma se lit de gauche à droite : d’où vient l’information, qui la capte, qui décide, à qui la décision est transmise ?`,`La batterie et la turbine appartiennent à la chaîne d’énergie : elles n’ont pas leur place ici.`]}
+     ],
+     production:`Le schéma de la chaîne d’information complété (à recopier sur la fiche).`},
+    {titre:`J’enquête : quel capteur aurait pu sauver Moka ?`, duree:'8 min', modalite:'en binôme',
+     intro:`<p>Le téléphone est posé à plat (épaisseur : 8 mm). La queue du chat dépasse à peine du sol. Les capteurs à ultrasons sont placés à <strong>6 cm du sol</strong>.</p>`,
+     contenu:[
+      {t:'reponse', id:'s2-enquete', label:`Quel constituant du robot aurait pu détecter le téléphone ou la queue ? Lequel ne pouvait pas ? Pourquoi ? (hypothèse à vérifier en séance 3)`, rows:4},
+      {t:'aides', items:[`Regarde la hauteur des capteurs à ultrasons et la hauteur du téléphone.`,`Le pare-chocs ne détecte qu’au moment du contact : est-ce suffisant pour un chat ?`]},
+      {t:'prof', html:`<p>Réponse attendue : les ultrasons, placés à 6 cm, « visent » au-dessus d’un objet de 8 mm : ils risquent de ne pas le détecter. Le pare-chocs ne réagit qu’après le contact (trop tard pour la queue). Aucun capteur du dossier n’est conçu pour les objets très bas : il faudrait un capteur supplémentaire (caméra, capteur de lumière structurée, capteur bas). Accepter toute hypothèse argumentée : elle sera testée en séance 3.</p>`}
+     ],
+     production:`Une hypothèse argumentée.`}
+  ],
+  miseEnCommun:`<p>Projection du schéma de la chaîne d’information ; un élève justifie chaque bloc. On confronte les hypothèses de l’enquête et on garde deux questions pour la séance suivante : <em>comment un capteur à ultrasons mesure-t-il une distance ? Peut-il voir un objet bas ?</em></p>`,
+  synthese:{
+    comprendre:[`Pour réagir à son environnement, le robot doit d’abord acquérir des informations, puis les traiter avec un programme, enfin communiquer une décision (aux moteurs, à l’utilisateur).`,`Chaque capteur ne perçoit qu’une seule sorte d’information : il faut plusieurs capteurs complémentaires.`],
+    savoir:[`Acquérir : capteurs et boutons de l’IHM. Traiter : microcontrôleur (il exécute le programme). Communiquer : voyants, haut-parleur, écran, Wi-Fi, ordres envoyés aux actionneurs.`,`Une IHM (interface humain-machine) permet à l’utilisateur de dialoguer avec l’objet : boutons (entrée), afficheurs et voyants (sortie).`,`Certaines informations sont booléennes (deux états), d’autres varient (distance, angle).`],
+    savoirFaire:[`Identifier le rôle d’un constituant dans la chaîne d’information à partir d’un dossier technique.`,`Associer un capteur à l’information qu’il acquiert.`,`Compléter le schéma de la chaîne d’information d’une fonction.`],
+    vocab:[['Capteur','Constituant qui prélève une information sur l’environnement.'],['Microcontrôleur','Circuit qui exécute le programme et prend les décisions.'],['IHM','Interface humain-machine : boutons, voyants, écran…'],['Chaîne d’information','Acquérir → traiter → communiquer.']]
+  },
+  verif:[
+    {t:'qcm', id:'s2-qcm', qs:[
+      {q:`Dans un robot aspirateur, le microcontrôleur sert à :`, o:[`fournir l’énergie aux moteurs`,`exécuter le programme et décider`,`mesurer la distance des obstacles`,`aspirer la poussière`], a:1, ex:`Le microcontrôleur traite les informations : il exécute le programme.`},
+      {q:`Le bouton « Retour base » fait partie de la fonction :`, o:[`Acquérir`,`Traiter`,`Communiquer`,`Chaîne d’énergie`], a:0, ex:`Un bouton fait entrer l’ordre de l’utilisateur dans le robot : c’est une acquisition (IHM d’entrée).`},
+      {q:`Quel capteur évite au robot de tomber dans l’escalier ?`, o:[`Le gyroscope`,`Le codeur de roue`,`Le capteur de vide infrarouge`,`Le module Wi-Fi`], a:2, ex:`Le capteur de vide, placé sous le robot, détecte l’absence de sol.`}
+    ]}
+  ],
+  defi:`Complète la chaîne d’information de la fonction « ne pas tomber dans l’escalier » (information d’entrée, acquérir, traiter, communiquer).`,
+  prof:{
+    objectifs:[`Décrire la chaîne d’information du robot (SFC13).`,`Identifier fonctions des capteurs, rôle du microcontrôleur et de l’IHM.`],
+    deroulement:[['0-6','Situation et hypothèses','Lecture du dossier technique, hypothèses rapides.'],['6-18','Activité 1','Classement dans la chaîne d’information.'],['18-30','Activité 2','Capteur → information, notion de booléen.'],['30-45','Activité 3','Schéma de la chaîne d’information.'],['45-50','Activité 4','Enquête (hypothèse).'],['50-55','Mise en commun et synthèse','Correction du schéma, questions pour la séance 3.']],
+    materiel:[`Dossier technique (intégré).`,`Facultatif : un robot démonté ou des photos d’un robot ouvert, un capteur à ultrasons et un micro-interrupteur à manipuler.`],
+    differenciation:{aide:[`Aides activables, schéma avec moins d’options pour les élèves en difficulté (faire éliminer d’abord les éléments de la chaîne d’énergie).`],defi:[`Chaîne d’information de la fonction « ne pas tomber ».`]}
+  }
+});
+
+/* ===================== SÉANCE 3 ===================== */
+SEQUENCE.seances.push({
+  id:'s3', num:3, titre:`Comment un son peut-il mesurer une distance ?`, sous:`Du capteur à ultrasons à une donnée exploitable`,
+  duree:'55 min', etape:`Rechercher, expérimenter, simuler`, reperes:['SFC14'], comp:['C4'],
+  situation:`<p>La chauve-souris se dirige dans le noir en écoutant l’écho de ses cris. Le capteur à ultrasons du robot fait la même chose : son émetteur envoie une courte salve de son à <strong>40 000 Hz</strong> (inaudible pour nous), son récepteur attend l’écho renvoyé par l’obstacle. Le capteur ne donne <strong>pas</strong> directement une distance : il fournit une <strong>durée</strong>.</p>`,
+  problematique:`Comment la durée d’un écho est-elle transformée en une distance que le programme peut utiliser, et le capteur peut-il détecter la queue du chat ou le téléphone ?`,
+  hypothese:{id:'s3-hyp', label:`Mes hypothèses : si l’obstacle est deux fois plus loin, que devient selon toi la durée de l’écho ? Pourquoi ?`},
+  activites:[
+    {titre:`Je mesure la durée de l’écho (simulation)`, duree:'12 min', modalite:'en binôme',
+     intro:`<p>Règle la distance du <strong>mur</strong>, clique sur « Émettre une salve » et relève la durée de l’écho dans le tableau. Calcule ensuite le rapport durée ÷ distance (arrondi à l’unité).</p>`,
+     contenu:[
+      {t:'simUltrason', id:'s3-sim'},
+      {t:'tableau', id:'s3-mesures', cols:['Distance du mur (cm)','Durée de l’écho (µs)','Durée ÷ distance'], rows:[['10',null,null],['20',null,null],['40',null,null],['80',null,null],['160',null,null]]},
+      {t:'reponse', id:'s3-constat', label:`Que remarques-tu ? Quel lien y a-t-il entre la distance et la durée de l’écho ?`, rows:3},
+      {t:'prof', html:`<p>Valeurs du simulateur : 10 cm → 588 µs ; 20 → 1176 ; 40 → 2353 ; 80 → 4706 ; 160 → 9412. Rapport constant ≈ 59 µs/cm : la durée est proportionnelle à la distance (le son fait un aller-retour à 340 m/s).</p>`}
+     ],
+     production:`Le tableau de mesures et le constat de proportionnalité.`},
+    {titre:`Je transforme une durée en distance`, duree:'8 min', modalite:'individuel',
+     intro:`<p>Dans l’air, le son se déplace à environ <strong>340 m/s</strong>, soit <strong>0,034 cm par microseconde</strong>. Pendant la durée de l’écho, le son fait l’<strong>aller</strong> jusqu’à l’obstacle <strong>et le retour</strong>.</p>`,
+     contenu:[
+      {t:'qcm', id:'s3-formule', qs:[
+        {q:`Quelle formule donne la distance d (en cm) à partir de la durée t de l’écho (en µs) ?`, o:[`d = 0,034 × t`,`d = 0,034 × t ÷ 2`,`d = t ÷ 0,034`,`d = 2 × 0,034 × t`], a:1, ex:`0,034 × t est la distance totale parcourue par le son (aller + retour). L’obstacle est à la moitié : on divise par 2.`, fb:[`Ce calcul donne la distance aller ET retour : c’est deux fois trop.`,null,`On multiplie une vitesse par une durée pour obtenir une distance, on ne divise pas.`,`On a multiplié par 2 au lieu de diviser : le son fait l’aller-retour.`]}
+      ]},
+      {t:'numerique', id:'s3-calc', qs:[
+        {q:`La durée de l’écho est 1 176 µs. À quelle distance est l’obstacle ?`, a:20, tol:0.5, u:'cm', ex:`1 176 × 0,034 ÷ 2 ≈ 20 cm.`},
+        {q:`La durée de l’écho est 588 µs. À quelle distance est l’obstacle ?`, a:10, tol:0.5, u:'cm', ex:`588 × 0,034 ÷ 2 ≈ 10 cm.`},
+        {q:`Le robot doit s’arrêter à 15 cm. Quelle durée d’écho correspond à 15 cm ? (arrondis à l’unité)`, a:882, tol:6, u:'µs', ex:`t = 2 × d ÷ 0,034 = 2 × 15 ÷ 0,034 ≈ 882 µs.`}
+      ]},
+      {t:'aides', items:[`Commence par calculer la distance aller + retour : 0,034 × durée.`,`Divise ensuite par 2 pour obtenir la distance de l’obstacle.`,`Pour la dernière question, fais le calcul « à l’envers » : durée = 2 × distance ÷ 0,034.`]}
+     ],
+     production:`Les calculs de distance justifiés.`},
+    {titre:`J’explore les limites du capteur`, duree:'12 min', modalite:'en binôme',
+     intro:`<p>Dans le simulateur, choisis successivement chaque type d’obstacle et fais plusieurs essais à différentes distances. Le simulateur utilise un <strong>modèle simplifié</strong> du comportement réel.</p>`,
+     contenu:[
+      {t:'tableau', id:'s3-limites', cols:['Obstacle','Écho reçu ? (toujours / parfois / jamais)','Mon explication'], rows:[['Mur',null,null],['Chat assis (fourrure)',null,null],['Queue du chat posée au sol',null,null],['Téléphone posé à plat',null,null],['Boîte posée en biais',null,null]]},
+      {t:'qcm', id:'s3-limites-qcm', qs:[
+        {q:`Pourquoi le téléphone posé à plat n’est-il pas détecté ?`, o:[`Il est trop lourd.`,`Il est plus bas que le faisceau du capteur, qui passe au-dessus.`,`Il absorbe toute la lumière.`,`Le capteur ne détecte que les êtres vivants.`], a:1, ex:`Le capteur est à 6 cm du sol : un objet de 8 mm se trouve sous son faisceau, l’onde ne le rencontre pas.`},
+        {q:`Pourquoi le chat assis n’est-il détecté que de près ?`, o:[`Sa fourrure absorbe une partie des ultrasons : l’écho devient trop faible quand il est loin.`,`Le chat bouge trop vite.`,`Le chat émet lui-même des ultrasons.`,`Les ultrasons ne traversent pas l’air.`], a:0, ex:`Les matières molles et douces (fourrure, coussin) renvoient mal l’onde : l’écho s’affaiblit avec la distance.`},
+        {q:`La boîte posée en biais n’est pas détectée car :`, o:[`l’onde est renvoyée dans une autre direction et ne revient pas vers le récepteur`,`elle est transparente`,`elle est trop proche`,`le capteur est éteint`], a:0, ex:`Comme une balle sur un mur incliné, l’onde rebondit ailleurs.`}
+      ]},
+      {t:'reponse', id:'s3-conclusion', label:`Conclusion : notre hypothèse de la séance 2 est-elle confirmée ? Un capteur à ultrasons suffit-il pour protéger le téléphone et la queue du chat ?`, rows:3}
+     ],
+     production:`Le tableau des limites et une conclusion argumentée.`},
+    {titre:`Je vérifie avec le vrai capteur`, duree:'10 min', modalite:'en groupe de 3-4',
+     intro:`<p>L’enseignant a chargé dans la carte micro:bit un programme qui affiche la distance mesurée (voir ci-dessous, tu le comprendras en séance 5). Place une boîte à différentes distances, mesure la distance réelle à la règle et compare.</p>`,
+     contenu:[
+      {t:'code', titre:`Programme fourni (lecture seule)`, html:CODE_MESURE},
+      {t:'tableau', id:'s3-reel', cols:['Distance à la règle (cm)','Distance affichée par la carte (cm)','Écart (cm)'], rows:[[null,null,null],[null,null,null],[null,null,null],[null,null,null]]},
+      {t:'qcm', id:'s3-donnee', qs:[
+        {q:`La durée de l’écho peut prendre une infinité de valeurs (1 176,3 µs, 1 176,31 µs…). C’est :`, o:[`une grandeur analogique`,`une donnée booléenne`,`un programme`,`une exigence`], a:0, ex:`Une grandeur analogique varie de façon continue.`},
+        {q:`Le nombre entier 23 affiché par la carte est :`, o:[`une grandeur analogique`,`une donnée numérique exploitable par le programme`,`une onde sonore`,`un interacteur`], a:1, ex:`Le programme a converti la durée en un nombre entier de centimètres : il peut le comparer à un seuil.`}
+      ]},
+      {t:'prof', html:`<p>Matériel : micro:bit V2, capteur à ultrasons compatible 3,3 V (HC-SR04P, RCWL-1601 ou modèle du kit de la classe ; le HC-SR04 classique est prévu pour 5 V), TRIG sur P1, ECHO sur P2, GND commun. Écarts attendus : ±1 à 2 cm (arrondi, position du capteur, angle). Si le capteur du kit utilise une seule broche (type Grove), adapter le programme selon la documentation du fabricant.</p>`}
+     ],
+     production:`Le tableau de comparaison mesure réelle / donnée affichée.`}
+  ],
+  miseEnCommun:`<p>Mise en commun des rapports durée ÷ distance (≈ 59 µs/cm), validation de la formule <strong>d = 0,034 × t ÷ 2</strong>. Discussion des limites : le capteur ne « voit » que ce qui renvoie l’onde vers lui. Conclusion collective : pour protéger le téléphone et la queue, il faut un capteur complémentaire placé plus bas, mais l’arrêt devant les obstacles hauts sera programmé dès la prochaine séance.</p>`,
+  synthese:{
+    comprendre:[`Le capteur ne « voit » pas : il mesure la durée de l’aller-retour du son. C’est le programme qui transforme cette durée en distance.`,`Un capteur a des limites : il ne détecte que les obstacles qui renvoient l’onde vers lui (hauteur, matière, inclinaison).`],
+    savoir:[`Une grandeur analogique peut prendre une infinité de valeurs (la durée de l’écho, la distance réelle).`,`Une donnée numérique est un nombre utilisable par le programme (la distance arrondie en cm).`,`Distance = vitesse du son × durée ÷ 2, avec une vitesse d’environ 0,034 cm/µs dans l’air.`],
+    savoirFaire:[`Relever des mesures dans un tableau et repérer une proportionnalité.`,`Calculer une distance à partir de la durée d’un écho (et inversement).`,`Identifier les situations où un capteur ne détecte pas un obstacle.`],
+    vocab:[['Ultrason','Son trop aigu pour être entendu par l’oreille humaine (plus de 20 000 Hz).'],['Écho','Onde renvoyée par un obstacle.'],['Grandeur analogique','Grandeur physique qui varie de façon continue.'],['Donnée numérique','Nombre exploitable par un programme.']]
+  },
+  verif:[
+    {t:'numerique', id:'s3-verif-num', qs:[
+      {q:`Écho de 2 940 µs : distance de l’obstacle ?`, a:50, tol:0.5, u:'cm', ex:`2 940 × 0,034 ÷ 2 ≈ 50 cm.`}
+    ]},
+    {t:'qcm', id:'s3-verif', qs:[
+      {q:`Si la distance de l’obstacle double, la durée de l’écho :`, o:[`reste la même`,`double`,`est divisée par deux`,`est multipliée par quatre`], a:1, ex:`La durée est proportionnelle à la distance.`},
+      {q:`Quel obstacle un capteur à ultrasons placé à 6 cm du sol risque-t-il de ne pas détecter ?`, o:[`un mur`,`un pied de table épais`,`une chaussette posée au sol`,`une porte fermée`], a:2, ex:`La chaussette est sous le faisceau du capteur.`}
+    ]}
+  ],
+  defi:`La vitesse du son dépend de la température (≈ 331 m/s à 0 °C, ≈ 343 m/s à 20 °C). Calcule l’erreur commise sur une distance de 100 cm si on utilise 340 m/s alors qu’il fait 0 °C.`,
+  prof:{
+    objectifs:[`Associer la durée de l’écho (grandeur analogique) à une distance (donnée exploitable) — SFC14.`,`Identifier les limites d’un capteur.`],
+    deroulement:[['0-5','Situation et hypothèses','La chauve-souris, le capteur ; hypothèse sur la durée.'],['5-17','Activité 1','Simulation et tableau de mesures.'],['17-25','Activité 2','Formule et calculs.'],['25-37','Activité 3','Limites du capteur (simulation).'],['37-47','Activité 4','Mesures réelles avec le capteur.'],['47-55','Mise en commun et synthèse','Formule, limites, conclusion sur l’hypothèse.']],
+    materiel:[`Par groupe : micro:bit V2 + câble USB, capteur à ultrasons compatible 3,3 V, fils, règle ou mètre, boîte en carton, coussin.`,`Programme de mesure préchargé (code ci-dessus).`],
+    differenciation:{aide:[`Aides progressives sur les calculs ; tableau de l’activité 1 avec une ligne exemple faite au tableau.`],defi:[`Influence de la température sur la vitesse du son.`]}
+  }
+});
+
+/* ===================== SÉANCE 4 ===================== */
+SEQUENCE.seances.push({
+  id:'s4', num:4, titre:`Des blocs à Python : nommer et faire évoluer une donnée`, sous:`Variables, affectation, conditions et boucles`,
+  duree:'55 min', etape:`Structurer des connaissances (outils de programmation)`, reperes:['CCRI31'], comp:['C9'],
+  situation:`<p>Vous savez programmer avec des blocs (MakeCode, Scratch). Les ingénieurs qui programment les robots écrivent du <strong>texte</strong>, par exemple en <strong>Python</strong>. Bonne nouvelle : les idées sont les mêmes. Il faut apprendre une nouvelle façon de les écrire, avant de programmer notre robot en séance 5.</p>`,
+  problematique:`Comment traduire en Python un programme par blocs, et comment une variable permet-elle au robot de mémoriser et de faire évoluer une mesure ?`,
+  hypothese:{id:'s4-hyp', label:`Mes hypothèses : d’après toi, que faut-il écrire en Python pour remplacer le bloc « répéter indéfiniment » ?`},
+  activites:[
+    {titre:`Je joue avec Pyrates`, duree:'15 min', modalite:'individuel',
+     intro:`<p>Pyrates est un jeu en ligne conçu pour passer des blocs à Python : on programme un pirate en Python, et un mémo compare chaque instruction aux blocs connus.</p>`,
+     contenu:[
+      {t:'lien', url:'https://py-rates.fr/', titre:`Pyrates — jouer en ligne`, texte:`Joue les premiers niveaux. Note ton identifiant de partie pour reprendre plus tard. Pour chaque niveau réussi, recopie sur ta fiche une instruction Python nouvelle et le bloc qui lui correspond.`},
+      {t:'reponse', id:'s4-pyrates', label:`Les instructions Python que j’ai découvertes et leur équivalent en blocs :`, rows:4},
+      {t:'prof', html:`<p>Pyrates nécessite Internet ; guide pédagogique : <a href="https://py-rates.fr/guide/FR/index.html" target="_blank" rel="noopener">py-rates.fr/guide/FR</a> (lien Internet). Sans connexion, passer directement à l’activité 2, qui couvre les mêmes notions. Pyrates n’aborde pas la définition de fonctions : elle est introduite en séance 5.</p>`}
+     ],
+     production:`La liste des instructions découvertes.`},
+    {titre:`J’associe les blocs et les lignes Python`, duree:'10 min', modalite:'en binôme',
+     contenu:[
+      {t:'tri', id:'s4-blocs', consigne:`Associe chaque bloc à sa traduction en Python.`,
+       cats:['distance = 0','while True:','if distance < 15:','else:','compteur = compteur + 1','display.scroll(distance)','sleep(100)'],
+       mono:true,
+       items:[
+        {l:`<span class="blk var">définir distance à 0</span>`, a:0, fb:`Donner une valeur à une variable s’écrit avec le signe = (affectation).`},
+        {l:`<span class="blk ctl">répéter indéfiniment</span>`, a:1, fb:`« Tant que vrai » : la boucle ne s’arrête jamais.`},
+        {l:`<span class="blk cnd">si distance &lt; 15 alors</span>`, a:2, fb:`La condition s’écrit après if et se termine par deux-points.`},
+        {l:`<span class="blk cnd">sinon</span>`, a:3, fb:`else: introduit ce qui se passe quand la condition est fausse.`},
+        {l:`<span class="blk var">modifier compteur de 1</span>`, a:4, fb:`On calcule compteur + 1, puis on range le résultat dans compteur.`},
+        {l:`<span class="blk bas">montrer nombre distance</span>`, a:5, fb:`display.scroll fait défiler la valeur sur l’écran de LED.`},
+        {l:`<span class="blk ctl">pause (ms) 100</span>`, a:6, fb:`sleep attend un nombre de millisecondes.`}
+       ]},
+      {t:'aides', items:[`En Python, les lignes qui ouvrent un bloc (boucle, condition) se terminent par deux-points « : ».`,`« modifier de 1 » signifie « ajouter 1 à la valeur actuelle ».`]}
+     ],
+     production:`Le tableau de correspondance blocs ↔ Python.`},
+    {titre:`Je suis l’évolution des variables (trace d’exécution)`, duree:'12 min', modalite:'individuel',
+     intro:`<p>Le robot approche d’un mur. On simule les mesures : à chaque tour de boucle, il se rapproche de 10 cm. Exécute le programme « à la main » en remplissant le tableau.</p>`,
+     contenu:[
+      {t:'code', titre:`Programme à exécuter à la main`, html:`compteur = 0
+distance = 50
+while distance &gt; 20:
+    distance = distance - 10
+    compteur = compteur + 1
+display.scroll(compteur)`},
+      {t:'tableau', id:'s4-trace', cols:['Tour de boucle','distance > 20 ? (vrai/faux)','distance (après le tour)','compteur (après le tour)'], rows:[['Avant la boucle','—','50','0'],['1',null,null,null],['2',null,null,null],['3',null,null,null],['4',null,'—','—']]},
+      {t:'numerique', id:'s4-trace-num', qs:[
+        {q:`Combien de fois la boucle est-elle exécutée ?`, a:3, tol:0, u:'fois', ex:`50 → 40 → 30 → 20 : au 4e test, 20 > 20 est faux, la boucle s’arrête.`},
+        {q:`Quelle valeur la carte affiche-t-elle à la fin ?`, a:3, tol:0, u:'', ex:`compteur vaut 3.`},
+        {q:`Quelle est la valeur finale de distance ?`, a:20, tol:0, u:'cm', ex:`La boucle s’arrête quand distance vaut 20.`}
+      ]},
+      {t:'aides', items:[`Au début de chaque tour, on teste la condition avec la valeur actuelle de distance.`,`Attention : 20 > 20 est FAUX (20 n’est pas strictement plus grand que 20).`]}
+     ],
+     production:`Le tableau de trace d’exécution complété.`},
+    {titre:`Je remets un programme en ordre`, duree:'10 min', modalite:'en binôme',
+     intro:`<p>Programme : <strong>le robot compte les chocs</strong>. Le bouton A de la carte joue le rôle du micro-interrupteur du pare-chocs. Remets les lignes dans l’ordre (l’indentation est déjà correcte).</p>`,
+     contenu:[
+      {t:'ordre', id:'s4-ordre', code:true,
+       lignes:[`from microbit import *`,`chocs = 0`,`while True:`,`    if button_a.was_pressed():`,`        chocs = chocs + 1`,`    display.show(chocs)`],
+       alt:[[0,1,2,5,3,4]]},
+      {t:'aides', items:[`On importe toujours la bibliothèque en premier.`,`La variable doit exister avant d’être utilisée dans la boucle.`,`Une ligne décalée de 8 espaces est à l’intérieur du « if » ; décalée de 4, elle est dans la boucle.`]},
+      {t:'reponse', id:'s4-ordre-justif', label:`Pourquoi la ligne « chocs = 0 » ne doit-elle pas être placée dans la boucle ?`, rows:2},
+      {t:'prof', html:`<p>Réponse attendue : dans la boucle, la variable serait remise à 0 à chaque tour : le compteur n’augmenterait jamais au-delà de 1. Faire tester sur la carte si possible (python.microbit.org).</p>`}
+     ],
+     production:`Le programme remis en ordre et la justification.`}
+  ],
+  miseEnCommun:`<p>Correction collective de la trace d’exécution au tableau. On construit ensemble un mémo « blocs ↔ Python » et on insiste sur deux pièges : <strong>= range une valeur</strong> alors que <strong>== compare</strong>, et l’<strong>indentation</strong> remplace l’emboîtement des blocs.</p>`,
+  synthese:{
+    comprendre:[`Une variable est une « boîte » nommée qui mémorise une donnée (par exemple une distance mesurée). Sa valeur peut changer pendant l’exécution.`,`Python et les blocs expriment les mêmes idées : seule l’écriture change.`],
+    savoir:[`Affectation : distance = 50 range 50 dans la variable distance.`,`Comparaison : &lt;, &gt;, &lt;=, &gt;=, == (égal), != (différent) donnent vrai ou faux.`,`while True: répète indéfiniment ; if … : / else : choisit selon une condition.`,`L’indentation (décalage de 4 espaces) indique les instructions qui sont dans une boucle ou une condition.`],
+    savoirFaire:[`Traduire un programme par blocs en Python.`,`Suivre l’évolution d’une variable dans un tableau de trace.`,`Remettre en ordre les lignes d’un programme.`],
+    vocab:[['Variable','Nom associé à une valeur mémorisée.'],['Affectation','Instruction qui donne une valeur à une variable (=).'],['Boucle','Instructions répétées (while).'],['Condition','Test qui donne vrai ou faux (if).'],['Indentation','Décalage des lignes qui montre leur emboîtement.']]
+  },
+  verif:[
+    {t:'qcm', id:'s4-qcm', qs:[
+      {q:`Que fait l’instruction distance = distance - 10 ?`, o:[`Elle compare distance et distance - 10.`,`Elle enlève 10 à la valeur de distance et range le résultat dans distance.`,`Elle provoque une erreur.`,`Elle affiche -10.`], a:1, ex:`On calcule d’abord à droite du =, puis on range le résultat dans la variable de gauche.`},
+      {q:`Laquelle de ces lignes est une comparaison ?`, o:[`distance = 10`,`distance == 10`,`distance = distance + 10`,`sleep(10)`], a:1, ex:`== teste l’égalité et donne vrai ou faux.`},
+      {q:`Python affiche une erreur sur la ligne « if distance < 15 ». Que manque-t-il ?`, o:[`les deux-points à la fin`,`un point-virgule`,`des guillemets`,`le mot « alors »`], a:0, ex:`Une ligne qui ouvre une condition se termine par deux-points : if distance < 15:`}
+    ]}
+  ],
+  defi:`Modifie le programme des chocs pour que la carte affiche une tête triste (Image.SAD) à partir de 5 chocs.`,
+  prof:{
+    objectifs:[`Mobiliser variables, affectation, opérateurs, conditions et boucles en Python (connaissances de CCRI31).`,`Préparer la séance 5 (programme structuré).`],
+    deroulement:[['0-5','Situation et hypothèses','Rappel des blocs connus.'],['5-20','Activité 1','Pyrates (ou activité 2 directement sans Internet).'],['20-30','Activité 2','Correspondance blocs ↔ Python.'],['30-42','Activité 3','Trace d’exécution.'],['42-50','Activité 4','Programme à remettre en ordre.'],['50-55','Mise en commun et synthèse','Mémo blocs ↔ Python, pièges = / ==.']],
+    materiel:[`Postes avec Internet (Pyrates) ; à défaut, uniquement le fichier HTML.`,`Facultatif : micro:bit pour tester le programme des chocs.`],
+    differenciation:{aide:[`Mémo blocs ↔ Python distribué ; aides progressives pour la trace.`],defi:[`Seuil de 5 chocs avec affichage d’une image.`]}
+  }
+});
+
+/* ===================== SÉANCE 5 ===================== */
+SEQUENCE.seances.push({
+  id:'s5', num:5, titre:`Programmer le robot pour qu’il s’arrête à temps`, sous:`Algorithme, programme Python, tests et mise au point`,
+  duree:'55 min', etape:`Concevoir, tester et améliorer une solution`, reperes:['CCRI31','SFC14'], comp:['C9','C4'],
+  situation:`<p>L’équipe dispose d’un prototype : une carte micro:bit, un capteur à ultrasons et une LED (sur la broche P0) qui représente les moteurs (LED allumée = le robot avance, LED éteinte = arrêt). Le cahier des charges de la séance 1 impose : <strong>le robot doit s’arrêter à une distance comprise entre 5 cm et 20 cm d’un obstacle</strong>.</p>`,
+  problematique:`Quel programme permet au robot de s’arrêter à temps devant un obstacle, et comment vérifier qu’il respecte le cahier des charges ?`,
+  hypothese:{id:'s5-hyp', label:`Mes hypothèses : quelles étapes le programme doit-il répéter en permanence ?`},
+  activites:[
+    {titre:`J’écris l’algorithme`, duree:'10 min', modalite:'en binôme',
+     contenu:[
+      {t:'ordre', id:'s5-algo', code:false,
+       lignes:[`SEUIL ← 15 (distance d’arrêt en cm)`,`Répéter indéfiniment :`,`    Mesurer la durée de l’écho`,`    Calculer distance ← durée × 0,034 ÷ 2`,`    Si distance < SEUIL alors :`,`        Arrêter les moteurs et afficher ✖`,`    Sinon :`,`        Faire avancer le robot et afficher ↑`]},
+      {t:'aides', items:[`On fixe le seuil une seule fois, avant la boucle.`,`On ne peut pas calculer la distance avant d’avoir mesuré la durée.`]}
+     ],
+     production:`L’algorithme remis en ordre.`},
+    {titre:`Je traduis l’algorithme en Python`, duree:'13 min', modalite:'en binôme',
+     intro:`<p>Le programme est organisé avec un <strong>sous-programme</strong> (une fonction) <code class="in">lire_distance()</code> : il regroupe les instructions de mesure et <strong>renvoie</strong> la distance. Le programme principal l’appelle à chaque tour de boucle. Les lignes qui commencent par <code class="in">#</code> sont des <strong>commentaires</strong> : Python les ignore, ils servent à expliquer le programme. Complète les cases.</p>`,
+     contenu:[
+      {t:'trous', id:'s5-trous', code:[
+`from microbit import *`,
+`from machine import time_pulse_us`,
+``,
+`TRIG = pin1          # broche qui déclenche la mesure`,
+`ECHO = pin2          # broche qui reçoit l'écho`,
+`SEUIL = [[0]]        # distance d'arrêt en cm (cahier des charges : 5 à 20 cm)`,
+``,
+`def lire_distance():`,
+`    # Sous-programme : renvoie la distance en cm`,
+`    TRIG.write_digital(1)`,
+`    TRIG.write_digital(0)`,
+`    duree = time_pulse_us(ECHO, 1)   # durée de l'écho en µs`,
+`    if duree < 0:                    # pas d'écho reçu`,
+`        return 999`,
+`    return round(duree * [[1]] / 2)`,
+``,
+`ECHO.read_digital()     # prépare la broche ECHO en entrée`,
+`while True:`,
+`    distance = [[2]]`,
+`    if distance [[3]] SEUIL:`,
+`        pin0.write_digital(0)        # LED « moteurs » éteinte : arrêt`,
+`        display.show(Image.NO)`,
+`    else:`,
+`        pin0.write_digital(1)        # LED « moteurs » allumée : avance`,
+`        display.show(Image.ARROW_N)`,
+`    sleep(100)`],
+       blancs:[
+        {type:'input', w:5, range:[5,20], fb:`Choisis une valeur entière entre 5 et 20 : c’est le critère du cahier des charges.`},
+        {type:'input', w:7, ok:['0.034'], fb:`C’est la vitesse du son en cm/µs. Attention : en Python, la virgule décimale s’écrit avec un point.`},
+        {type:'input', w:16, ok:['lire_distance()'], fb:`Il faut appeler le sous-programme qui mesure, sans oublier les parenthèses.`},
+        {type:'select', opts:['<','>','==','<='], ok:['<','<='], fb:`Le robot doit s’arrêter quand l’obstacle est PLUS PROCHE que le seuil.`}
+       ]},
+      {t:'aides', items:[`Relis l’algorithme : chaque ligne correspond à une ou plusieurs lignes Python.`,`Le sous-programme s’appelle comme une instruction : son nom suivi de parenthèses.`,`En Python : 0.034 et non 0,034.`]},
+      {t:'lien', url:'https://python.microbit.org/', titre:`Éditeur Python micro:bit (officiel)`, texte:`Recopie le programme complété dans l’éditeur, puis transfère-le dans la carte (câble USB).`},
+      {t:'prof', html:`<h4>Programme corrigé</h4><pre class="code">${CODE_CORRIGE_S5}</pre><p>Câblage : TRIG → P1, ECHO → P2, LED + résistance (220 Ω) → P0, GND commun ; capteur compatible 3,3 V. <code class="in">time_pulse_us</code> renvoie une valeur négative s’il n’y a pas d’écho : le programme renvoie alors 999 (« aucun obstacle »).</p>`}
+     ],
+     production:`Le programme Python complété et commenté.`},
+    {titre:`Je teste et je mets au point (simulation)`, duree:'12 min', modalite:'en binôme',
+     intro:`<p>Le programme mesure la distance à chaque tour de boucle, puis attend (<code class="in">sleep</code>). Pendant ce temps, le robot continue d’avancer ! Dans le simulateur, cherche des réglages qui respectent le cahier des charges (arrêt entre 5 et 20 cm), puis essaie un robot plus rapide.</p>`,
+     contenu:[
+      {t:'simRobot', id:'s5-sim'},
+      {t:'tableau', id:'s5-essais', cols:['Essai','SEUIL (cm)','Vitesse (cm/s)','Pause (ms)','Obstacle','Distance d’arrêt (cm)','Conforme ?'], rows:[['1',null,null,null,null,null,null],['2',null,null,null,null,null,null],['3',null,null,null,null,null,null],['4',null,null,null,null,null,null]]},
+      {t:'reponse', id:'s5-explication', label:`Explique pourquoi un robot rapide doit avoir un seuil plus grand ou une pause plus courte. Utilise un calcul (distance parcourue pendant une pause = vitesse × durée).`, rows:3},
+      {t:'prof', html:`<p>Exemple : à 40 cm/s avec une pause de 500 ms, le robot avance de 20 cm entre deux mesures : avec SEUIL = 15, il peut s’arrêter trop près ou percuter. Solutions : réduire la pause (100 ms → 4 cm), augmenter le seuil, réduire la vitesse. Avec le téléphone, le simulateur montre une collision quel que soit le réglage : l’exigence 1.3 ne peut pas être satisfaite par ce seul capteur.</p>`}
+     ],
+     production:`Le tableau d’essais et l’explication chiffrée.`},
+    {titre:`Je teste le prototype réel`, duree:'12 min', modalite:'en groupe de 3-4',
+     contenu:[
+      {t:'tableau', id:'s5-protocole', cols:['Test','Comportement attendu','Comportement observé','Conforme ?'], rows:[['Main approchée lentement de 50 cm à 5 cm','Arrêt (✖) quand la main est sous le seuil',null,null],['Boîte en carton à 10 cm','Arrêt (✖)',null,null],['Boîte en carton à 40 cm','Avance (↑)',null,null],['Coussin à 15 cm','Arrêt (✖)',null,null],['Téléphone posé à plat à 10 cm','Arrêt attendu par la famille…',null,null]]},
+      {t:'reponse', id:'s5-bilan', label:`Bilan : notre programme respecte-t-il l’exigence 1.1 ? Protège-t-il le téléphone et la queue du chat (exigence 1.3) ? Que faudrait-il ajouter au robot ?`, rows:4}
+     ],
+     production:`Le protocole de test rempli et le bilan.`}
+  ],
+  miseEnCommun:`<p>Chaque groupe présente un réglage conforme et un réglage non conforme, avec le calcul de la distance parcourue pendant une pause. Conclusion : le programme respecte l’exigence 1.1 (obstacles hauts) ; l’exigence 1.3 (objets bas) demande <strong>un autre capteur</strong> : c’est un critère à vérifier lors de l’achat d’un robot (séance 6).</p>`,
+  synthese:{
+    comprendre:[`Programmer, c’est d’abord écrire un algorithme, puis le traduire dans un langage, le tester et le corriger (mise au point).`,`Le test se fait toujours par rapport au cahier des charges : un programme « qui marche » doit respecter les critères.`],
+    savoir:[`Un sous-programme (fonction, définie avec def) regroupe des instructions et peut renvoyer une valeur (return).`,`Une constante comme SEUIL, définie en haut du programme, se modifie facilement.`,`Les commentaires (#) expliquent le programme sans être exécutés.`,`Entre deux mesures, le robot continue d’avancer : vitesse × pause = distance parcourue.`],
+    savoirFaire:[`Écrire un algorithme puis le traduire en Python.`,`Appeler un sous-programme et utiliser la valeur qu’il renvoie.`,`Tester un programme avec un protocole et corriger un réglage.`],
+    vocab:[['Algorithme','Suite ordonnée d’actions qui résout un problème.'],['Sous-programme (fonction)','Bloc d’instructions nommé, que l’on peut appeler.'],['Commentaire','Texte explicatif ignoré par Python (#).'],['Mise au point','Tests et corrections jusqu’à respecter le cahier des charges.']]
+  },
+  verif:[
+    {t:'qcm', id:'s5-qcm', qs:[
+      {q:`Dans le programme, à quoi sert l’instruction return ?`, o:[`À arrêter la carte`,`À renvoyer la distance mesurée au programme principal`,`À recommencer la boucle`,`À afficher la distance`], a:1, ex:`return renvoie la valeur calculée : distance = lire_distance() la récupère.`},
+      {q:`Le robot percute le mur alors que SEUIL = 15. Quelle modification est la plus pertinente ?`, o:[`Supprimer la boucle`,`Réduire la pause (sleep) ou augmenter le seuil`,`Remplacer < par >`,`Supprimer les commentaires`], a:1, ex:`Le robot avance trop entre deux mesures : on mesure plus souvent ou on s’arrête plus tôt.`},
+      {q:`Pourquoi définir SEUIL en haut du programme ?`, o:[`C’est obligatoire en Python`,`Pour pouvoir le régler facilement à un seul endroit`,`Pour que le programme aille plus vite`,`Pour économiser la batterie`], a:1, ex:`Une constante nommée rend le programme lisible et facile à régler.`}
+    ]}
+  ],
+  defi:`Ajoute une zone de ralentissement : si la distance est inférieure à 40 cm (mais supérieure au seuil), affiche une flèche vers le bas (Image.ARROW_S) pour indiquer que le robot ralentit. Utilise if / elif / else.`,
+  prof:{
+    objectifs:[`Concevoir un algorithme, le traduire en programme structuré (sous-programme, commentaires), le tester et le mettre au point (CCRI31).`,`Réinvestir la conversion durée → distance (SFC14).`],
+    deroulement:[['0-5','Situation et hypothèses','Rappel du critère 5-20 cm.'],['5-15','Activité 1','Algorithme à remettre en ordre.'],['15-28','Activité 2','Programme à compléter, transfert sur la carte.'],['28-40','Activité 3','Simulation : réglages, vitesse, pause.'],['40-52','Activité 4','Protocole de test sur prototype.'],['52-55','Mise en commun et synthèse','Exigence 1.1 validée, 1.3 non satisfaite → séance 6.']],
+    materiel:[`Par groupe : micro:bit V2 + câble USB, capteur à ultrasons 3,3 V, LED + résistance 220 Ω, fils, plaque d’essai, boîte, coussin.`,`Ordinateurs avec Internet pour python.microbit.org (ou l’éditeur Mu installé, hors ligne).`],
+    differenciation:{aide:[`Aides activables ; programme à trous ; pour les plus en difficulté, fournir le programme corrigé et faire uniquement varier SEUIL et sleep.`],defi:[`Zone de ralentissement avec elif ; compteur d’obstacles (réinvestissement de la séance 4).`]}
+  }
+});
+
+/* ===================== SÉANCE 6 ===================== */
+SEQUENCE.seances.push({
+  id:'s6', num:6, titre:`Quel robot choisir pour une maison avec un chat ?`, sous:`Exigences, critères de choix et indice de réparabilité`,
+  duree:'55 min', etape:`Exploiter les résultats pour choisir et argumenter`, reperes:['OST33'], comp:['C3'],
+  situation:`<p>Dix-huit mois plus tard, la brosse principale du robot des Martin casse. Le fabricant ne vend plus la pièce : le robot finit à la déchetterie. Pour le remplacer, la famille fixe ses conditions : <strong>budget maximal de 350 €</strong>, un robot qui <strong>protège Moka et les objets au sol</strong> (exigence 1.3) et qui <strong>dure</strong>.</p>
+  <p>En France, les aspirateurs (y compris les robots) doivent afficher un <strong>indice de réparabilité</strong> : une note sur 10 calculée à partir de 5 critères (documentation, facilité de démontage, disponibilité des pièces détachées, prix des pièces, et un critère propre à la catégorie de produit).</p>
+  <div class="tablewrap"><table><thead><tr><th>Caractéristique</th><th>Robot A « Nettoya S1 »</th><th>Robot B « Brossix Vision »</th><th>Robot C « Clean’Eco 3 »</th></tr></thead><tbody>
+  <tr><td>Prix</td><td>199 €</td><td>449 €</td><td>329 €</td></tr>
+  <tr><td>Autonomie</td><td>90 min</td><td>180 min</td><td>120 min</td></tr>
+  <tr><td>Capteurs d’obstacles</td><td>Pare-chocs + infrarouge avant</td><td>Télémètre laser + caméra + ultrasons</td><td>Ultrasons + capteur 3D bas (lumière structurée)</td></tr>
+  <tr><td>Détection des objets bas au sol</td><td>Non</td><td>Oui (dès 0,5 cm)</td><td>Oui (dès 1 cm)</td></tr>
+  <tr><td>Indice de réparabilité</td><td>4,6 / 10</td><td>6,3 / 10</td><td>8,4 / 10</td></tr>
+  <tr><td>Pièces détachées disponibles</td><td>2 ans</td><td>5 ans</td><td>7 ans</td></tr>
+  <tr><td>Batterie remplaçable par l’utilisateur</td><td>Non</td><td>Oui (vis)</td><td>Oui (sans outil)</td></tr>
+  </tbody></table></div>
+  <p class="petit muted">Modèles et valeurs fictifs, créés pour la séquence.</p>`,
+  problematique:`Comment choisir un robot aspirateur qui réponde aux exigences de la famille tout en étant durable et réparable ?`,
+  hypothese:{id:'s6-hyp', label:`Mes hypothèses : sans calcul, quel robot conseillerais-tu à la famille ? Pourquoi ?`},
+  activites:[
+    {titre:`Je comprends l’indice de réparabilité`, duree:'10 min', modalite:'en binôme',
+     contenu:[
+      {t:'tri', id:'s6-criteres', consigne:`Associe chaque question de consommateur au critère de l’indice qui y répond.`,
+       cats:['Documentation','Facilité de démontage','Disponibilité des pièces détachées','Prix des pièces détachées','Critère spécifique (aspirateurs robots)'],
+       items:[
+        {l:`Le fabricant fournit-il les notices d’entretien et de réparation, et pendant combien d’années ?`, a:0, fb:`Il s’agit des documents disponibles : documentation.`},
+        {l:`Combien d’étapes et quels outils faut-il pour atteindre la batterie ou le moteur ?`, a:1, fb:`On évalue la difficulté pour ouvrir l’appareil : démontage.`},
+        {l:`Pendant combien d’années pourra-t-on acheter une brosse ou une batterie de rechange ?`, a:2, fb:`C’est la durée pendant laquelle les pièces existent : disponibilité.`},
+        {l:`Une batterie de rechange coûte-t-elle cher par rapport au prix du robot neuf ?`, a:3, fb:`On compare le prix de la pièce à celui de l’appareil : prix des pièces.`},
+        {l:`Le robot propose-t-il un compteur d’usage, une assistance à distance gratuite et une réinitialisation du logiciel ?`, a:4, fb:`Ce sont les sous-critères propres aux aspirateurs robots.`}
+       ]}
+     ],
+     production:`Les associations question → critère.`},
+    {titre:`Je calcule un indice de réparabilité`, duree:'10 min', modalite:'individuel',
+     intro:`<p>Dans cette activité, on utilise un calcul simplifié : l’indice est la <strong>moyenne des notes sur 10</strong> des cinq critères (ils ont ici le même poids).</p>
+     <div class="tablewrap"><table><thead><tr><th>Critère (note /10)</th><th>Robot A</th><th>Robot C</th></tr></thead><tbody>
+     <tr><td>Documentation</td><td>3</td><td>9</td></tr><tr><td>Facilité de démontage</td><td>5</td><td>8</td></tr><tr><td>Disponibilité des pièces</td><td>4</td><td>9</td></tr><tr><td>Prix des pièces</td><td>6</td><td>7</td></tr><tr><td>Critère spécifique</td><td>5</td><td>9</td></tr></tbody></table></div>`,
+     contenu:[
+      {t:'numerique', id:'s6-indice', qs:[
+        {q:`Indice de réparabilité du robot A (sur 10, à 0,1 près) :`, a:4.6, tol:0.05, u:'/10', ex:`(3 + 5 + 4 + 6 + 5) ÷ 5 = 23 ÷ 5 = 4,6.`},
+        {q:`Indice de réparabilité du robot C (sur 10, à 0,1 près) :`, a:8.4, tol:0.05, u:'/10', ex:`(9 + 8 + 9 + 7 + 9) ÷ 5 = 42 ÷ 5 = 8,4.`}
+      ]},
+      {t:'qcm', id:'s6-indice-qcm', qs:[
+        {q:`Un indice de réparabilité élevé signifie que :`, o:[`le robot ne tombera jamais en panne`,`le robot sera plus facile et moins coûteux à réparer en cas de panne`,`le robot consomme peu d’électricité`,`le robot nettoie mieux`], a:1, ex:`L’indice renseigne sur la réparabilité, pas sur la fiabilité, la consommation ou l’efficacité de nettoyage.`}
+      ]}
+     ],
+     production:`Le calcul des indices.`},
+    {titre:`Je construis un tableau de décision`, duree:'20 min', modalite:'en binôme',
+     intro:`<p>Une <strong>exigence éliminatoire</strong> (le budget) écarte un produit, quelle que soit sa note. Les autres <strong>critères</strong> sont pondérés : donne à chacun un poids de 0 (sans importance) à 3 (très important) selon les besoins de la famille. L’outil calcule le score : poids × note (notes sur 5).</p>`,
+     contenu:[
+      {t:'decision', id:'s6-decision'},
+      {t:'aides', items:[`Relis l’exigence 1.3 de la séance 1 : quel critère la représente ici ?`,`La famille veut un robot « qui dure » : quels critères y correspondent ?`]}
+     ],
+     production:`Le tableau de décision pondéré.`},
+    {titre:`J’argumente mon choix`, duree:'10 min', modalite:'individuel',
+     contenu:[
+      {t:'reponse', id:'s6-argumentaire', label:`Rédige un argumentaire de 5 lignes pour la famille Martin. Cite au moins trois critères, dont l’indice de réparabilité, et explique pourquoi les autres robots sont écartés.`, rows:6},
+      {t:'prof', html:`<p>Réponse attendue (robot C) : B est éliminé par le budget (449 € > 350 €). Entre A et C, C détecte les objets bas (protection de Moka et du téléphone, exigence 1.3), a un indice de réparabilité de 8,4/10 contre 4,6/10, des pièces disponibles 7 ans et une batterie remplaçable sans outil : il durera plus longtemps. A est moins cher mais ne protège pas les objets bas et sera difficile à réparer. Valoriser les élèves qui distinguent exigence éliminatoire et critère pondéré.</p>`}
+     ],
+     production:`L’argumentaire rédigé.`}
+  ],
+  miseEnCommun:`<p>Comparaison des pondérations des binômes : les choix diffèrent-ils ? Pourquoi ? On montre qu’un choix se justifie par les exigences et les critères retenus, et que le budget est une exigence éliminatoire. Lecture de deux argumentaires.</p>`,
+  synthese:{
+    comprendre:[`Choisir un objet technique, c’est le comparer à d’autres selon des exigences (à respecter obligatoirement) et des critères (plus ou moins importants).`,`Un objet réparable dure plus longtemps : on réduit les déchets et les dépenses.`],
+    savoir:[`L’indice de réparabilité est une note sur 10 affichée sur les aspirateurs (dont les robots) vendus en France.`,`Il est calculé à partir de 5 critères : documentation, facilité de démontage, disponibilité des pièces détachées, prix des pièces, critère spécifique à la catégorie.`,`Un tableau de décision pondéré permet de comparer objectivement plusieurs produits.`],
+    savoirFaire:[`Lire une fiche technique et en extraire des caractéristiques.`,`Calculer une moyenne de notes et interpréter un indice.`,`Construire un tableau de décision et argumenter un choix.`],
+    vocab:[['Exigence éliminatoire','Condition qui écarte un produit si elle n’est pas respectée.'],['Critère pondéré','Critère affecté d’un poids selon son importance.'],['Indice de réparabilité','Note sur 10 indiquant la facilité à réparer un produit.'],['Pièce détachée','Pièce vendue séparément pour réparer un appareil.']]
+  },
+  verif:[
+    {t:'qcm', id:'s6-qcm', qs:[
+      {q:`Le robot B obtient le meilleur score pondéré mais coûte 449 €. Pour la famille Martin :`, o:[`on le choisit quand même`,`il est écarté : le budget est une exigence éliminatoire`,`on baisse le poids du prix`,`on change le budget`], a:1, ex:`Une exigence non respectée écarte le produit, quel que soit son score.`},
+      {q:`Lequel n’est PAS un critère de l’indice de réparabilité ?`, o:[`Disponibilité des pièces détachées`,`Facilité de démontage`,`Puissance d’aspiration`,`Documentation`], a:2, ex:`La puissance d’aspiration est une performance, pas un critère de réparabilité.`}
+    ]}
+  ],
+  defi:`Recherche l’indice de réparabilité d’un vrai robot aspirateur sur un site de vente en France (Internet) et compare-le aux robots de la séance.`,
+  prof:{
+    objectifs:[`Évaluer des OST selon des exigences et des critères, dont l’indice de réparabilité (OST33).`],
+    deroulement:[['0-5','Situation et hypothèses','Panne non réparable, conditions de la famille.'],['5-15','Activité 1','Critères de l’indice.'],['15-25','Activité 2','Calcul simplifié de l’indice.'],['25-45','Activité 3','Tableau de décision pondéré.'],['45-52','Activité 4','Argumentaire.'],['52-55','Mise en commun et synthèse','Exigence éliminatoire / critères.']],
+    materiel:[`Fichier HTML ; facultatif : étiquettes d’indice de réparabilité réelles (photos) ou fiches produits imprimées.`],
+    differenciation:{aide:[`Phrases d’amorce pour l’argumentaire : « Je conseille le robot … car … De plus … En revanche, le robot … est écarté car … ».`],defi:[`Recherche d’un indice réel ; discussion sur l’évolution vers un indice de durabilité pour d’autres familles de produits.`]},
+    note:`L’indice de réparabilité des aspirateurs (filaires, sans fil, robots) est fixé par l’arrêté du 22 avril 2022 (application fin 2022). Pour d’autres familles de produits (téléviseurs, lave-linge), il a été remplacé par un indice de durabilité depuis 2025 : vérifier la réglementation en vigueur avant la séance. Le calcul officiel pondère les critères et comporte des sous-critères ; la moyenne simple utilisée ici est une simplification pédagogique. La connaissance « indice énergétique » de la carte OST33 n’est pas mobilisée (pas d’étiquette énergie pour les robots aspirateurs).`
+  }
+});
+
+/* ===================== SÉANCE 7 — ÉVALUATION ===================== */
+SEQUENCE.seances.push({
+  id:'s7', num:7, titre:`Évaluation : le robot tondeuse et le hérisson`, sous:`Situation nouvelle de transfert — évaluation par compétences`,
+  duree:'55 min', etape:`Évaluer les acquis`, reperes:['OST21','SFC13','SFC14','CCRI31','OST33'], comp:['C2','C4','C9','C3'], evaluation:true,
+  situation:`<p>Une commune propose aux habitants d’acheter un robot tondeuse. Des associations de protection de la nature alertent : la nuit, des robots tondeuses blessent des hérissons qui, face à un danger, se mettent en boule au lieu de fuir. La commune vous demande d’étudier le problème.</p><p><strong>Travail individuel.</strong> Les parties A à E sont indépendantes. Les réponses à choix sont corrigées automatiquement ; les réponses rédigées seront évaluées par l’enseignant avec la grille.</p>`,
+  problematique:`Un robot tondeuse peut-il protéger les hérissons, et lequel conseiller à la commune ?`,
+  hypothese:null,
+  activites:[
+    {titre:`Partie A — Les interacteurs du robot tondeuse (C2 · OST21)`, duree:'10 min', modalite:'individuel',
+     contenu:[
+      {t:'tri', id:'s7-A', consigne:`Classe chaque élément dans la bonne famille d’interacteurs.`, cats:['Usager','Environnement','Autre objet','Donnée'],
+       items:[
+        {l:`Le jardinier qui programme la tonte`, a:0},{l:`Le hérisson`, a:1},{l:`La pluie`, a:1},{l:`L’herbe`, a:1},
+        {l:`Le câble périphérique qui délimite la pelouse`, a:2},{l:`La station de charge`, a:2},{l:`Les horaires de tonte enregistrés`, a:3}
+       ]},
+      {t:'reponse', id:'s7-A-exig', label:`Écris une exigence, avec un critère mesurable, qui protège le hérisson.`, rows:2}
+     ]},
+    {titre:`Partie B — La chaîne d’information (C4 · SFC13)`, duree:'8 min', modalite:'individuel',
+     contenu:[
+      {t:'schema', id:'s7-B', layout:'chaine',
+       options:[`Hérisson devant le robot`,`Capteur à ultrasons`,`Microcontrôleur : compare la distance au seuil`,`Ordre d’arrêt des lames et des roues`,`Batterie`,`Lames de coupe`],
+       slots:[{titre:'Information d’entrée', a:0},{titre:'ACQUÉRIR', a:1},{titre:'TRAITER', a:2},{titre:'COMMUNIQUER', a:3}]}
+     ]},
+    {titre:`Partie C — Du capteur à la donnée (C4 · SFC14)`, duree:'12 min', modalite:'individuel',
+     contenu:[
+      {t:'numerique', id:'s7-C', qs:[
+        {q:`L’écho revient après 2 350 µs. À quelle distance est l’obstacle ? (v = 0,034 cm/µs)`, a:40, tol:1, u:'cm', ex:`2 350 × 0,034 ÷ 2 ≈ 40 cm.`},
+        {q:`La tondeuse doit s’arrêter à 30 cm. Quelle durée d’écho correspond à 30 cm ?`, a:1765, tol:15, u:'µs', ex:`2 × 30 ÷ 0,034 ≈ 1 765 µs.`}
+      ]},
+      {t:'reponse', id:'s7-C-limite', label:`Un hérisson en boule mesure environ 10 cm de haut ; ses piquants renvoient mal les ondes. Le capteur à ultrasons de la tondeuse est placé à 15 cm du sol. Explique pourquoi la détection du hérisson n’est pas garantie.`, rows:3}
+     ]},
+    {titre:`Partie D — Le programme (C9 · CCRI31)`, duree:'13 min', modalite:'individuel',
+     intro:`<p>Un stagiaire a écrit ce programme. La tondeuse ne s’arrête jamais devant un obstacle.</p>`,
+     contenu:[
+      {t:'code', titre:`Programme du stagiaire`, html:`SEUIL = 30
+distance = lire_distance()
+while True:
+    if distance &gt; SEUIL:
+        arreter_lames()
+    else:
+        avancer()
+    sleep(100)`},
+      {t:'qcm', id:'s7-D', qs:[
+        {q:`Quelles erreurs empêchent ce programme de fonctionner correctement ? (plusieurs réponses)`, o:[`La distance n’est mesurée qu’une seule fois, avant la boucle.`,`La comparaison est inversée : il faut s’arrêter quand distance < SEUIL.`,`SEUIL devrait être écrit entre guillemets.`,`La pause sleep(100) est interdite dans une boucle.`], a:[0,1], ex:`La mesure doit être répétée dans la boucle, et l’arrêt doit se produire quand l’obstacle est plus proche que le seuil.`}
+      ]},
+      {t:'trous', id:'s7-D-trous', intro:`Complète le programme corrigé :`, code:[
+`SEUIL = 30`,`while True:`,`    distance = [[0]]`,`    if distance [[1]] SEUIL:`,`        arreter_lames()`,`    else:`,`        avancer()`,`    sleep(100)`],
+       blancs:[{type:'input', w:16, ok:['lire_distance()'], fb:`La mesure doit être refaite à chaque tour.`},{type:'select', opts:['>','<','=='], ok:['<'], fb:`On s’arrête quand l’obstacle est plus proche que le seuil.`}]},
+      {t:'reponse', id:'s7-D-algo', label:`Propose une amélioration de l’algorithme pour mieux protéger les hérissons (pas besoin d’écrire le code).`, rows:3}
+     ]},
+    {titre:`Partie E — Choisir une tondeuse (C3 · OST33)`, duree:'12 min', modalite:'individuel',
+     intro:`<div class="tablewrap"><table><thead><tr><th>Caractéristique</th><th>Tondeuse X</th><th>Tondeuse Y</th></tr></thead><tbody>
+     <tr><td>Prix</td><td>499 €</td><td>579 €</td></tr><tr><td>Indice de réparabilité</td><td>4,1 / 10</td><td>7,8 / 10</td></tr><tr><td>Pièces détachées</td><td>3 ans</td><td>8 ans</td></tr><tr><td>Tonte de nuit</td><td>Impossible à désactiver</td><td>Désactivable (programmation de jour)</td></tr><tr><td>Détection d’obstacles</td><td>Pare-chocs</td><td>Ultrasons + caméra</td></tr></tbody></table></div><p class="petit muted">Modèles fictifs. Budget de la commune : 600 € par tondeuse.</p>`,
+     contenu:[
+      {t:'qcm', id:'s7-E', qs:[
+        {q:`Les deux tondeuses respectent-elles l’exigence de budget ?`, o:[`Oui, les deux`,`Seulement X`,`Seulement Y`,`Aucune`], a:0, ex:`499 € et 579 € sont inférieurs à 600 €.`},
+        {q:`L’indice de réparabilité de Y (7,8/10) indique que :`, o:[`Y sera plus facile et moins coûteuse à réparer`,`Y ne tombera jamais en panne`,`Y tond plus vite`,`Y consomme moins d’énergie`], a:0, ex:`L’indice renseigne sur la réparabilité.`}
+      ]},
+      {t:'reponse', id:'s7-E-arg', label:`Rédige un argumentaire court (4 à 5 lignes) pour conseiller la commune. Cite au moins trois critères, dont l’indice de réparabilité et la protection des hérissons.`, rows:5}
+     ]}
+  ],
+  miseEnCommun:`<p>Correction différée : l’enseignant restitue la grille de compétences remplie à chaque élève à la séance suivante.</p>`,
+  synthese:null,
+  verif:[],
+  prof:{
+    objectifs:[`Évaluer en situation nouvelle C2 (OST21), C4 (SFC13, SFC14), C9 (CCRI31), C3 (OST33).`],
+    deroulement:[['0-3','Consignes','Lecture de la situation.'],['3-13','Partie A','Interacteurs + exigence.'],['13-21','Partie B','Chaîne d’information.'],['21-33','Partie C','Calculs + limite du capteur.'],['33-46','Partie D','Débogage du programme.'],['46-55','Partie E','Choix argumenté.']],
+    materiel:[`Fichier HTML (mode élève) ou version imprimée ; calculatrice.`],
+    differenciation:{aide:[`Tiers-temps : parties A, B, C et D obligatoires, E facultative. Lecture de l’énoncé à voix haute possible. Calculatrice autorisée.`],defi:[`Partie D : écrire le code de l’amélioration proposée.`]},
+    corrige:`<h4>Corrigé détaillé</h4>
+    <p><strong>Partie A.</strong> Usager : jardinier. Environnement : hérisson, pluie, herbe. Autres objets : câble périphérique, station de charge. Donnée : horaires de tonte. Exigence attendue (exemple) : « La tondeuse doit arrêter ses lames lorsqu’un animal de plus de 5 cm de haut se trouve à moins de 30 cm » ou « La tondeuse ne doit pas fonctionner entre 20 h et 7 h ». Exiger un critère mesurable (distance, hauteur, horaire).</p>
+    <p><strong>Partie B.</strong> Hérisson → capteur à ultrasons → microcontrôleur (compare au seuil) → ordre d’arrêt des lames et des roues. La batterie et les lames appartiennent à la chaîne d’énergie.</p>
+    <p><strong>Partie C.</strong> 2 350 × 0,034 ÷ 2 ≈ 40 cm. 2 × 30 ÷ 0,034 ≈ 1 765 µs. Limite : le capteur, à 15 cm du sol, vise au-dessus d’un hérisson de 10 cm ; de plus, les piquants renvoient mal l’onde (écho faible ou dévié) : le hérisson peut passer inaperçu.</p>
+    <p><strong>Partie D.</strong> Erreurs : mesure faite une seule fois hors de la boucle ; comparaison inversée. Corrigé : <code class="in">distance = lire_distance()</code> dans la boucle ; <code class="in">if distance &lt; SEUIL:</code>. Améliorations acceptées : ajouter un capteur plus bas ou une caméra, interdire la tonte la nuit (condition sur l’heure), réduire la vitesse, augmenter le seuil, émettre un son avant de démarrer.</p>
+    <p><strong>Partie E.</strong> Les deux respectent le budget. Y est conseillée : tonte de nuit désactivable (protège les hérissons, actifs la nuit), meilleure détection (ultrasons + caméra), indice de réparabilité 7,8/10 contre 4,1/10, pièces disponibles 8 ans. X est moins chère mais ne protège pas les hérissons et sera difficile à réparer.</p>`
+  }
+});
+
+/* ---------- 4. GRILLE D'ÉVALUATION PAR COMPÉTENCES ---------- */
+const GRILLE = [
+  {c:'C2', r:'OST21', crit:`Partie A : classement des interacteurs et exigence avec critère mesurable`,
+   n:[`Moins de 4 interacteurs bien classés ; pas d’exigence.`,`4 ou 5 interacteurs bien classés ; exigence sans critère mesurable.`,`6 interacteurs bien classés ; exigence avec un critère mesurable.`,`7 interacteurs bien classés ; exigence précise, mesurable et adaptée au hérisson.`]},
+  {c:'C4', r:'SFC13', crit:`Partie B : schéma de la chaîne d’information`,
+   n:[`Moins de 2 blocs corrects.`,`2 blocs corrects.`,`3 blocs corrects.`,`4 blocs corrects, sans constituant de la chaîne d’énergie.`]},
+  {c:'C4', r:'SFC14', crit:`Partie C : conversion durée ↔ distance et limite du capteur`,
+   n:[`Aucun calcul juste ; limite non identifiée.`,`Un calcul juste ou limite partiellement expliquée.`,`Deux calculs justes ; une limite expliquée (hauteur ou matière).`,`Deux calculs justes ; limite expliquée avec les deux causes (hauteur et piquants).`]},
+  {c:'C9', r:'CCRI31', crit:`Partie D : identification des erreurs, programme corrigé, amélioration`,
+   n:[`Aucune erreur identifiée.`,`Une erreur identifiée ou corrigée.`,`Les deux erreurs identifiées et corrigées.`,`Les deux erreurs corrigées et une amélioration pertinente de l’algorithme.`]},
+  {c:'C3', r:'OST33', crit:`Partie E : choix argumenté avec exigences et critères`,
+   n:[`Choix sans justification.`,`Choix justifié par un seul critère.`,`Choix justifié par trois critères dont l’indice de réparabilité.`,`Choix justifié par au moins trois critères, avec la protection des hérissons et la distinction exigence / critère.`]}
+];
+
+/* ---------- 5. TRAÇABILITÉ (séance → compétence → repère → connaissance → activité → production → évaluation) ---------- */
+const TRACABILITE = [
+  ['s1','C2','OST21',0,`Classer dix interacteurs du robot`,`Classement complété`,`Au moins 8 interacteurs sur 10 bien classés (vérification automatique)`],
+  ['s1','C2','OST21',1,`Décrire l’expérience de l’utilisateur (tableau + croquis légendé)`,`Tableau et croquis`,`4 interacteurs au moins avec ce qui s’est passé et ce que le robot doit faire`],
+  ['s1','C2','OST21',2,`Construire le diagramme des exigences`,`Diagramme des exigences`,`Chaque exigence associée à un critère mesurable ; exigence non respectée justifiée`],
+  ['s2','C4','SFC13',0,`Associer chaque capteur à l’information acquise`,`Associations capteur → information`,`5 associations justes sur 6 ; informations booléennes repérées`],
+  ['s2','C4','SFC13',1,`Ranger les constituants (acquérir, traiter, communiquer)`,`Classement des constituants`,`Microcontrôleur placé en « traiter » ; 8 constituants sur 10 bien placés`],
+  ['s2','C4','SFC13',2,`Compléter le schéma de la chaîne d’information`,`Schéma complété`,`Boutons en « acquérir », voyants en « communiquer » ; 4 blocs justes`],
+  ['s3','C4','SFC14',0,`Mesurer la durée de l’écho (simulation, tableau)`,`Tableau de mesures`,`Proportionnalité durée / distance identifiée`],
+  ['s3','C4','SFC14',2,`Convertir une durée en distance ; comparer mesure réelle et donnée affichée`,`Calculs et tableau de comparaison`,`Formule d = 0,034 × t ÷ 2 utilisée correctement ; écart réel commenté`],
+  ['s3','C4','SFC14',1,`Explorer les limites du capteur`,`Tableau des limites + conclusion`,`Au moins deux causes de non-détection expliquées`],
+  ['s4','C9','CCRI31',0,`Traduire blocs → Python ; trace d’exécution ; programme à remettre en ordre`,`Correspondances, trace, programme ordonné`,`Trace juste (3 tours, compteur = 3) ; ordre correct ; rôle de l’initialisation justifié`],
+  ['s5','C9','CCRI31',1,`Algorithme puis programme avec sous-programme lire_distance()`,`Programme Python complété`,`Programme complet qui fonctionne sur la carte`],
+  ['s5','C9','CCRI31',2,`Commenter, tester (simulation, prototype) et mettre au point`,`Tableau d’essais, protocole de test, bilan`,`Réglage conforme (arrêt entre 5 et 20 cm) justifié par un calcul vitesse × pause`],
+  ['s5','C4','SFC14',2,`Réinvestir la conversion durée → distance dans le programme`,`Ligne return round(duree * 0.034 / 2)`,`Facteur 0.034 et division par 2 justifiés`],
+  ['s6','C3','OST33',1,`Associer les critères de l’indice ; calculer un indice`,`Associations et calculs`,`Indices 4,6 et 8,4 retrouvés`],
+  ['s6','C3','OST33',2,`Tableau de décision pondéré et argumentaire`,`Tableau + argumentaire`,`Exigence éliminatoire appliquée ; au moins trois critères dont l’indice cités`],
+  ['s6','C3','OST33',0,`Comparer les robots selon qualité, durabilité (pièces, batterie)`,`Argumentaire`,`Durabilité argumentée (pièces, batterie remplaçable)`],
+  ['s7','C2','OST21',2,`Évaluation partie A`,`Classement + exigence`,`Grille, ligne C2`],
+  ['s7','C4','SFC13',0,`Évaluation partie B`,`Schéma`,`Grille, ligne C4 (SFC13)`],
+  ['s7','C4','SFC14',2,`Évaluation partie C`,`Calculs + explication`,`Grille, ligne C4 (SFC14)`],
+  ['s7','C9','CCRI31',0,`Évaluation partie D`,`Programme corrigé + amélioration`,`Grille, ligne C9`],
+  ['s7','C3','OST33',1,`Évaluation partie E`,`Argumentaire`,`Grille, ligne C3`]
+];
+
+/* ---------- 6. ANALYSE DE LA FICHE GROUPE (JSON source) ---------- */
+const ANALYSE_JSON = `
+<ul>
+<li><strong>Conservé :</strong> l’objet (robot aspirateur), la problématique, le repère principal SFC14, les trois thèmes (OST, SFC, CCRI), les quatre séances proposées (interacteurs et diagramme des exigences ; capteurs ; capteur à ultrasons en Python ; choix selon la réparabilité), l’usage de Pyrates et de la carte micro:bit, l’axe « construire Python sur les acquis des blocs (variable, boucle) ».</li>
+<li><strong>Corrigé :</strong> « interaction extérieurs » → <em>interacteurs extérieurs</em> (connaissance de la carte OST21, dont l’intitulé est « Décrire l’expérience de l’utilisateur d’un OST à l’aide de modes de représentation choisis ») ; « CCRI31 — variable en python » → la carte CCRI31 porte sur l’élaboration d’un algorithme traduit en programme structuré, testé et mis au point ; les variables en sont une <em>connaissance</em>. « SFC14 — capteur ultrason » : le repère exact est « Associer des grandeurs analogiques issues d’un OST à des données exploitables » ; le capteur à ultrasons en est le support.</li>
+<li><strong>Restructuré :</strong> la séance « programmer un capteur ultrason en Python » mêlait trois apprentissages. Elle est répartie en une séance de mesure et de conversion durée → distance (SFC14), une séance de passage blocs → Python (variables, conditions, boucles) et une séance de programmation, test et mise au point (CCRI31).</li>
+<li><strong>Enrichi :</strong> exploration des limites du capteur (réponse directe à la problématique : téléphone et queue du chat ne sont pas détectés par un capteur placé trop haut), simulateurs, protocole de test sur prototype, tableau de décision pondéré, évaluation de transfert (robot tondeuse), grille par compétences.</li>
+<li><strong>Nombre de compétences limité :</strong> C2, C3, C4, C9 (cinq repères). CCRI32 (interaction humain-machine sur système réel) et OST34 (protocole de mesure d’une performance) sont des prolongements possibles mais ne sont pas évalués.</li>
+</ul>`;
+
+/* =====================================================================
+   7. ÉTAT ET SAUVEGARDE LOCALE
+   ===================================================================== */
+const CLE = 'techno3e-robot-aspirateur-v1';
+let ETAT = {answers:{}, scores:{}, done:{}};
+let stockageOK = true;
+try { const s = localStorage.getItem(CLE); if (s) ETAT = Object.assign(ETAT, JSON.parse(s)); }
+catch(e){ stockageOK = false; }
+function sauver(){ try { localStorage.setItem(CLE, JSON.stringify(ETAT)); } catch(e){ stockageOK = false; } }
+let PROF = false;
+try { PROF = sessionStorage.getItem(CLE + '-prof') === '1'; } catch(e){}
+
+/* =====================================================================
+   8. OUTILS
+   ===================================================================== */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const strip = s => String(s).replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/gi,' ').replace(/\s+/g,' ').trim();
+const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+function hash(str){ let h = 2166136261; for (const ch of str){ h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
+/* Mélange déterministe (même ordre à chaque visite) */
+function melange(arr, graine){ const a = arr.slice(); let s = hash(graine); for (let i = a.length - 1; i > 0; i--){ s = (Math.imul(s, 1103515245) + 12345) >>> 0; const j = s % (i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const seance = id => SEQUENCE.seances.find(s => s.id === id);
+const tagRep = code => { const r = repere(code); return `<span class="tag ${theme(code)}" title="${esc(r ? r[2] : '')}">${code} · ${r ? r[1] : ''}</span>`; };
+function classeScore(ok, tot){ const p = tot ? ok / tot : 0; return p >= .8 ? 'bon' : p >= .5 ? 'moyen' : 'faible'; }
+
+/* Registre de tous les widgets : id → {def, seance} (utile pour l'export et les vérifications) */
+const WIDGETS = {};
+const VERIFIABLES = ['tri','qcm','ordre','trous','numerique','schema'];
+SEQUENCE.seances.forEach(s => {
+  const tout = [];
+  if (s.hypothese) tout.push(Object.assign({t:'reponse'}, s.hypothese));
+  s.activites.forEach(a => a.contenu.forEach(w => tout.push(w)));
+  (s.verif || []).forEach(w => tout.push(w));
+  tout.forEach(w => { if (w.id) WIDGETS[w.id] = {def:w, seance:s.id}; });
+  s._verifiables = tout.filter(w => VERIFIABLES.includes(w.t)).map(w => w.id);
+});
+function progression(s){ const v = s._verifiables; const faits = v.filter(id => ETAT.scores[id]).length; return {faits, total:v.length}; }
+
+/* =====================================================================
+   9. RENDU DES WIDGETS
+   ===================================================================== */
+const R = {};
+const actionsHTML = (id, extra='') => `<div class="actions"><button class="btn plein" type="button" data-act="verifier" data-id="${id}">Vérifier</button><button class="btn petit" type="button" data-act="effacer" data-id="${id}">Recommencer</button><span class="score" id="sc-${id}" aria-live="polite"></span>${extra}</div>`;
+
+R.texte = w => w.html;
+R.code = w => `<div class="widget"><p class="consigne">${w.titre || 'Programme'}</p><pre class="code">${w.html}</pre></div>`;
+R.prof = w => `<div class="boite-prof prof-only">${w.html}</div>`;
+R.lien = w => `<div class="lien-ext"><span class="badge">🌐 Internet requis</span><div><a href="${w.url}" target="_blank" rel="noopener">${w.titre} ↗</a><div class="petit">${w.texte || ''}</div></div></div>`;
+R.aides = w => `<div class="aides" data-n="0">${w.items.map((a,i)=>`<div class="aide" hidden><strong>Aide ${i+1} :</strong> ${a}</div>`).join('')}<button class="btn petit" type="button" data-act="aide">💡 Afficher l’aide 1 / ${w.items.length}</button></div>`;
+R.reponse = w => { const v = ETAT.answers[w.id] || ''; return `<div class="widget"><label class="lbl" for="r-${w.id}">${w.label}</label><textarea id="r-${w.id}" data-save="${w.id}" rows="${w.rows || 4}" placeholder="Écris ta réponse ici…">${esc(v)}</textarea><div class="sauve">Enregistré automatiquement dans ce navigateur.</div></div>`; };
+
+R.tri = w => {
+  const sv = ETAT.answers[w.id] || [];
+  const items = melange(w.items.map((it,i)=>Object.assign({i}, it)), w.id);
+  const opts = w.cats.map((c,i)=>({c,i}));
+  const optsAff = w.cats.length > 4 ? melange(opts, w.id + 'c') : opts;
+  return `<div class="widget" data-w="${w.id}">${w.consigne ? `<p class="consigne">${w.consigne}</p>` : ''}
+  ${items.map(it => `<div class="ligne-tri"><div><span id="lb-${w.id}-${it.i}">${it.l}</span><div class="fb" id="fb-${w.id}-${it.i}"></div></div>
+   <select data-champ="${w.id}" data-i="${it.i}" aria-labelledby="lb-${w.id}-${it.i}" ${w.mono ? 'style="font-family:var(--mono)"' : ''}><option value="">— choisir —</option>${optsAff.map(o=>`<option value="${o.i}" ${String(sv[it.i]) === String(o.i) ? 'selected' : ''}>${esc(o.c)}</option>`).join('')}</select></div>`).join('')}
+  ${actionsHTML(w.id)}</div>`;
+};
+
+R.qcm = w => {
+  const sv = ETAT.answers[w.id] || {};
+  return `<div class="widget" data-w="${w.id}">${w.qs.map((q,qi) => {
+    const multi = Array.isArray(q.a); const type = multi ? 'checkbox' : 'radio'; const sel = sv[qi] || [];
+    return `<fieldset><legend>${qi+1}. ${q.q}${multi ? ' <span class="muted petit">(plusieurs réponses)</span>' : ''}</legend>
+    ${q.o.map((o,oi)=>`<label class="opt"><input type="${type}" name="${w.id}-${qi}" value="${oi}" data-champ="${w.id}" data-q="${qi}" ${sel.includes(oi) ? 'checked' : ''}><span>${o}</span></label>`).join('')}
+    <div class="fb" id="fb-${w.id}-${qi}"></div></fieldset>`; }).join('')}${actionsHTML(w.id)}</div>`;
+};
+
+R.ordre = w => {
+  let ordre = ETAT.answers[w.id];
+  if (!Array.isArray(ordre) || ordre.length !== w.lignes.length){
+    const idx = w.lignes.map((_,i)=>i); let m = melange(idx, w.id); let k = 0;
+    while (m.every((v,i)=>v===i) && k < 5){ m = melange(idx, w.id + k); k++; }
+    ordre = m;
+  }
+  return `<div class="widget" data-w="${w.id}"><p class="consigne">Remets les lignes dans le bon ordre avec les flèches ↑ ↓.</p>
+  <ol class="ordre-liste" id="ol-${w.id}">${ordre.map(i => `<li data-i="${i}"><button type="button" data-act="haut" aria-label="Monter la ligne">↑</button><button type="button" data-act="bas" aria-label="Descendre la ligne">↓</button>${w.code ? `<code>${esc(w.lignes[i])}</code>` : `<span class="txt" style="white-space:pre-wrap">${esc(w.lignes[i])}</span>`}</li>`).join('')}</ol>
+  ${actionsHTML(w.id)}<div class="fb" id="fb-${w.id}"></div></div>`;
+};
+
+R.trous = w => {
+  const sv = ETAT.answers[w.id] || [];
+  const ligne = l => esc(l).replace(/\[\[(\d+)\]\]/g, (_, n) => {
+    const b = w.blancs[+n]; const v = sv[+n] || '';
+    if (b.type === 'select') return `<select data-champ="${w.id}" data-i="${n}" aria-label="Case ${+n+1}"><option value="">?</option>${b.opts.map(o=>`<option ${o===v?'selected':''}>${esc(o)}</option>`).join('')}</select>`;
+    return `<input type="text" data-champ="${w.id}" data-i="${n}" aria-label="Case ${+n+1}" size="${b.w || 8}" value="${esc(v)}" autocomplete="off" spellcheck="false">`;
+  }).replace(/(#[^\n]*)$/, '<span class="com">$1</span>');
+  return `<div class="widget" data-w="${w.id}">${w.intro ? `<p class="consigne">${w.intro}</p>` : '<p class="consigne">Complète les cases du programme.</p>'}
+  <pre class="code">${w.code.map(ligne).join('\n')}</pre>
+  <div id="fbt-${w.id}">${w.blancs.map((b,i)=>`<div class="fb" id="fb-${w.id}-${i}"></div>`).join('')}</div>${actionsHTML(w.id)}</div>`;
+};
+
+R.numerique = w => {
+  const sv = ETAT.answers[w.id] || [];
+  return `<div class="widget" data-w="${w.id}">${w.qs.map((q,i)=>`<div class="num-q"><label for="n-${w.id}-${i}">${q.q}</label><div class="champ"><input type="text" inputmode="decimal" id="n-${w.id}-${i}" data-champ="${w.id}" data-i="${i}" value="${esc(sv[i] || '')}" autocomplete="off"><span>${q.u || ''}</span></div><div class="fb" id="fb-${w.id}-${i}" style="grid-column:1/-1"></div></div>`).join('')}${actionsHTML(w.id)}</div>`;
+};
+
+R.schema = w => {
+  const sv = ETAT.answers[w.id] || [];
+  const opts = melange(w.options.map((o,i)=>({o,i})), w.id);
+  const sel = (s,i) => `<select data-champ="${w.id}" data-i="${i}" aria-label="${esc(s.titre)}"><option value="">— choisir —</option>${opts.map(o=>`<option value="${o.i}" ${String(sv[i])===String(o.i)?'selected':''}>${esc(o.o)}</option>`).join('')}</select>`;
+  if (w.layout === 'arbre'){
+    return `<div class="widget arbre" data-w="${w.id}"><div class="racine">${w.racine}</div><div class="enfants">${w.slots.map((s,i)=>`<div class="bx" id="bx-${w.id}-${i}"><b>${s.titre}</b><span>${s.texte}</span><span class="petit muted">Critère :</span>${sel(s,i)}</div>`).join('')}</div>${actionsHTML(w.id)}</div>`;
+  }
+  return `<div class="widget" data-w="${w.id}"><div class="schema-chaine">${w.slots.map((s,i)=>`${i ? '<span class="fl" aria-hidden="true">→</span>' : ''}<div class="bx" id="bx-${w.id}-${i}"><b>${s.titre}</b>${sel(s,i)}</div>`).join('')}</div>${actionsHTML(w.id)}</div>`;
+};
+
+R.tableau = w => {
+  const sv = ETAT.answers[w.id] || {};
+  return `<div class="widget"><div class="tablewrap"><table class="tab-saisie"><thead><tr>${w.cols.map(c=>`<th scope="col">${esc(c)}</th>`).join('')}</tr></thead><tbody>
+  ${w.rows.map((r,ri)=>`<tr>${r.map((c,ci)=> c === null ? `<td><input type="text" data-tab="${w.id}" data-k="${ri}-${ci}" value="${esc(sv[ri+'-'+ci] || '')}" aria-label="${esc(w.cols[ci])}, ligne ${ri+1}"></td>` : `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}
+  </tbody></table></div><div class="sauve">Tableau enregistré automatiquement dans ce navigateur.</div></div>`;
+};
+
+/* ----- Simulateur 1 : capteur à ultrasons (modèle simplifié) ----- */
+const OBSTACLES = {
+  mur:{nom:'Mur', h:40, detect:d=>d<=400, couleur:'#8a9ba0'},
+  chat:{nom:'Chat assis (fourrure)', h:25, detect:d=>d<=60, couleur:'#c98b4a'},
+  queue:{nom:'Queue du chat posée au sol', h:2, detect:()=>false, couleur:'#c98b4a'},
+  tel:{nom:'Téléphone posé à plat', h:1, detect:()=>false, couleur:'#222'},
+  biais:{nom:'Boîte posée en biais', h:12, detect:()=>false, couleur:'#b07c3c'}
+};
+R.simUltrason = w => `<div class="sim" id="sim-${w.id}">
+  <canvas width="760" height="200" aria-label="Simulation : robot, capteur à ultrasons et obstacle"></canvas>
+  <div class="ctrl">
+    <label>Distance : <input type="range" min="2" max="250" value="20" data-r="d"> <output data-o="d">20 cm</output></label>
+    <label>Obstacle : <select data-r="obs">${Object.entries(OBSTACLES).map(([k,o])=>`<option value="${k}">${o.nom}</option>`).join('')}</select></label>
+    <button class="btn plein" type="button" data-r="go">📡 Émettre une salve</button>
+  </div>
+  <div class="afficheur" aria-live="polite" data-o="aff">Durée de l’écho : —</div>
+  <p class="petit muted">Modèle simplifié : capteur à 6 cm du sol, vitesse du son 340 m/s. Les matières molles absorbent une partie de l’onde ; un objet plus bas que le faisceau ou incliné ne renvoie pas d’écho vers le récepteur.</p></div>`;
+
+function initSimUltrason(id){
+  const box = $('#sim-' + id); if (!box) return;
+  const cv = $('canvas', box), ctx = cv.getContext('2d');
+  const inD = $('[data-r=d]', box), outD = $('[data-o=d]', box), sel = $('[data-r=obs]', box), aff = $('[data-o=aff]', box);
+  const X0 = 90, ECH = 2.5, SOL = 170, HCAP = 6;
+  let anim = null;
+  function dessiner(px){
+    const d = +inD.value, o = OBSTACLES[sel.value];
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ctx.fillStyle = '#dfe9e8'; ctx.fillRect(0, SOL, cv.width, 30);
+    ctx.fillStyle = '#5a6c71'; ctx.font = '13px sans-serif'; ctx.fillText('sol', 8, SOL + 20);
+    /* robot (vue de côté) */
+    ctx.fillStyle = '#0E6E6B'; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(10, SOL-40, 80, 36, 10) : ctx.rect(10, SOL-40, 80, 36); ctx.fill();
+    ctx.fillStyle = '#222'; ctx.beginPath(); ctx.arc(30, SOL-4, 6, 0, 7); ctx.arc(70, SOL-4, 6, 0, 7); ctx.fill();
+    const yc = SOL - HCAP*4; ctx.fillStyle = '#C2185B'; ctx.fillRect(86, yc-5, 6, 10);
+    ctx.fillStyle = '#14262B'; ctx.fillText('capteur (6 cm)', 18, SOL-48);
+    /* faisceau */
+    ctx.strokeStyle = 'rgba(194,24,91,.25)'; ctx.setLineDash([4,4]); ctx.beginPath(); ctx.moveTo(92, yc); ctx.lineTo(cv.width, yc-30); ctx.moveTo(92,yc); ctx.lineTo(cv.width, yc+30 > SOL ? SOL : yc+30); ctx.stroke(); ctx.setLineDash([]);
+    /* obstacle */
+    const xo = X0 + Math.min(d, 260) * ECH; const hpx = Math.max(o.h * 4, 3);
+    ctx.fillStyle = o.couleur;
+    if (sel.value === 'biais'){ ctx.save(); ctx.translate(xo+15, SOL-hpx/2); ctx.rotate(-0.6); ctx.fillRect(-18, -hpx/2, 36, hpx); ctx.restore(); }
+    else if (sel.value === 'chat'){ ctx.beginPath(); ctx.ellipse(xo+22, SOL-hpx/2, 22, hpx/2, 0, 0, 7); ctx.fill(); ctx.beginPath(); ctx.arc(xo+12, SOL-hpx-10, 12, 0, 7); ctx.fill(); }
+    else if (sel.value === 'mur'){ ctx.fillRect(xo, SOL-160, 18, 160); }
+    else { ctx.fillRect(xo, SOL-hpx, sel.value==='queue' ? 70 : 40, hpx); }
+    ctx.fillStyle = '#14262B'; ctx.fillText(d + ' cm', X0 + Math.min(d,260)*ECH/2 - 12, SOL + 20);
+    if (px != null){ ctx.fillStyle = '#C2185B'; ctx.beginPath(); ctx.arc(px, yc, 6, 0, 7); ctx.fill(); }
+  }
+  inD.addEventListener('input', () => { outD.textContent = inD.value + ' cm'; dessiner(); });
+  sel.addEventListener('change', () => dessiner());
+  $('[data-r=go]', box).addEventListener('click', () => {
+    if (anim) cancelAnimationFrame(anim);
+    const d = +inD.value, o = OBSTACLES[sel.value];
+    const ok = d >= 2 && o.detect(d);
+    const xo = X0 + Math.min(d,260)*ECH, depart = performance.now(), T = 900;
+    aff.textContent = 'Salve émise… le récepteur attend l’écho';
+    const pas = t => {
+      const k = (t - depart) / T; let px;
+      if (ok) px = k < .5 ? 92 + (xo-92)*k*2 : xo - (xo-92)*(k-.5)*2;
+      else px = 92 + (cv.width - 92) * k;
+      if (k < 1){ dessiner(px); anim = requestAnimationFrame(pas); }
+      else { dessiner(); aff.textContent = ok ? `Durée de l’écho : ${Math.round(2*d/0.034)} µs` : 'Aucun écho reçu (la carte obtient une valeur négative : pas de mesure)'; }
+    };
+    anim = requestAnimationFrame(pas);
+  });
+  dessiner();
+}
+
+/* ----- Simulateur 2 : boucle de mesure et arrêt du robot ----- */
+const OBST2 = {mur:{nom:'Mur', detect:d=>d<=400}, chat:{nom:'Chat assis', detect:d=>d<=60}, tel:{nom:'Téléphone posé à plat', detect:()=>false}};
+R.simRobot = w => `<div class="sim" id="sim-${w.id}">
+  <canvas width="760" height="150" aria-label="Simulation : le robot avance vers un obstacle"></canvas>
+  <div class="ctrl">
+    <label>SEUIL : <input type="range" min="2" max="60" value="15" data-r="seuil"> <output data-o="seuil">15 cm</output></label>
+    <label>Vitesse : <input type="range" min="5" max="50" value="20" data-r="v"> <output data-o="v">20 cm/s</output></label>
+    <label>Pause sleep : <input type="range" min="50" max="1000" step="50" value="100" data-r="p"> <output data-o="p">100 ms</output></label>
+    <label>Obstacle : <select data-r="obs">${Object.entries(OBST2).map(([k,o])=>`<option value="${k}">${o.nom}</option>`).join('')}</select></label>
+    <button class="btn plein" type="button" data-r="go">▶ Lancer</button>
+  </div>
+  <div class="journal" data-o="log" aria-live="polite">Règle les paramètres puis lance la simulation.</div>
+  <div class="resultat" data-o="res" aria-live="polite"></div></div>`;
+
+function initSimRobot(id){
+  const box = $('#sim-' + id); if (!box) return;
+  const cv = $('canvas', box), ctx = cv.getContext('2d');
+  const g = k => $(`[data-r=${k}]`, box), o = k => $(`[data-o=${k}]`, box);
+  const OBS = 150, X0 = 20, ECH = 4.2, SOL = 120;
+  let x = 0, anim = null;
+  function dessiner(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ctx.fillStyle = '#dfe9e8'; ctx.fillRect(0, SOL, cv.width, 30);
+    const s = +g('seuil').value, xo = X0 + 40 + OBS*ECH;
+    ctx.fillStyle = 'rgba(46,125,91,.15)'; ctx.fillRect(xo - 20*ECH, 20, 15*ECH, SOL-20);
+    ctx.fillStyle = '#2E7D5B'; ctx.font = '12px sans-serif'; ctx.fillText('zone conforme 5-20 cm', xo - 20*ECH, 16);
+    ctx.strokeStyle = '#C2185B'; ctx.setLineDash([5,4]); ctx.beginPath(); ctx.moveTo(xo - s*ECH, 25); ctx.lineTo(xo - s*ECH, SOL); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#C2185B'; ctx.fillText('seuil', xo - s*ECH - 14, SOL + 24);
+    const t = g('obs').value; ctx.fillStyle = t === 'mur' ? '#8a9ba0' : t === 'chat' ? '#c98b4a' : '#222';
+    if (t === 'mur') ctx.fillRect(xo, 10, 14, SOL-10); else if (t === 'chat'){ ctx.beginPath(); ctx.ellipse(xo+20, SOL-25, 20, 25, 0, 0, 7); ctx.fill(); } else ctx.fillRect(xo, SOL-4, 36, 4);
+    const xr = X0 + x*ECH; ctx.fillStyle = '#0E6E6B'; ctx.fillRect(xr, SOL-30, 40, 26); ctx.fillStyle = '#222'; ctx.beginPath(); ctx.arc(xr+10, SOL-4, 5, 0, 7); ctx.arc(xr+30, SOL-4, 5, 0, 7); ctx.fill();
+  }
+  ['seuil','v','p'].forEach(k => g(k).addEventListener('input', () => { o(k).textContent = g(k).value + (k==='v'?' cm/s':k==='p'?' ms':' cm'); dessiner(); }));
+  g('obs').addEventListener('change', () => { x = 0; dessiner(); });
+  g('go').addEventListener('click', () => {
+    if (anim) cancelAnimationFrame(anim);
+    const S = +g('seuil').value, V = +g('v').value, P = +g('p').value, type = g('obs').value;
+    x = 0; let tSim = 0, prochaine = 0, tour = 0, fini = false; const lignes = ['tour | temps (s) | distance mesurée | décision'];
+    o('res').textContent = ''; o('res').className = 'resultat';
+    let dernier = performance.now();
+    const pas = now => {
+      const dt = Math.min((now - dernier) / 1000, 0.05) * 2; dernier = now; /* simulation accélérée ×2 */
+      let reste = dt;
+      while (reste > 0 && !fini){
+        const h = Math.min(reste, 0.005); reste -= h;
+        if (tSim >= prochaine){
+          tour++; const dReel = OBS - x; const dMes = OBST2[type].detect(dReel) ? Math.round(dReel) : 999;
+          const stop = dMes < S;
+          if (tour <= 200) lignes.push(`${String(tour).padStart(4)} | ${tSim.toFixed(2).padStart(9)} | ${String(dMes === 999 ? '999 (aucun écho)' : dMes + ' cm').padStart(16)} | ${stop ? 'ARRÊT' : 'avance'}`);
+          if (stop){ fini = true; const d = OBS - x; const conf = d >= 5 && d <= 20; o('res').textContent = `Arrêt à ${d.toFixed(1)} cm de l’obstacle — ${conf ? 'conforme au cahier des charges (5 à 20 cm) ✔' : (d < 5 ? 'trop près : non conforme ✘' : 'trop loin : non conforme (le robot ne nettoie pas près des obstacles) ✘')}`; o('res').className = 'resultat ' + (conf ? 'ok-bg' : 'ko-bg'); break; }
+          prochaine = tSim + P/1000;
+        }
+        x += V * h; tSim += h;
+        if (x >= OBS){ x = OBS; fini = true; o('res').textContent = type === 'tel' ? 'Collision : le robot a poussé le téléphone (jamais détecté par le capteur à ultrasons) ✘' : type === 'chat' ? 'Collision : le robot a touché le chat ✘' : 'Collision : le robot a percuté le mur ✘'; o('res').className = 'resultat ko-bg'; }
+      }
+      o('log').textContent = lignes.join('\n'); o('log').scrollTop = 1e6;
+      dessiner();
+      if (!fini) anim = requestAnimationFrame(pas);
+    };
+    anim = requestAnimationFrame(pas);
+  });
+  dessiner();
+}
+
+/* ----- Outil 3 : tableau de décision pondéré ----- */
+const ROBOTS = [{n:'A « Nettoya S1 »', prix:199},{n:'B « Brossix Vision »', prix:449},{n:'C « Clean’Eco 3 »', prix:329}];
+const CRITERES = [
+  {c:'Prix (moins cher = meilleure note)', notes:[5,1,3]},
+  {c:'Protection des objets bas et du chat', notes:[1,5,4]},
+  {c:'Autonomie', notes:[2,5,3]},
+  {c:'Indice de réparabilité', notes:[2,3,5]},
+  {c:'Disponibilité des pièces et batterie remplaçable', notes:[1,3,5]}
+];
+R.decision = w => {
+  const sv = ETAT.answers[w.id] || {p:[1,1,1,1,1], budget:true};
+  return `<div class="widget decision" data-w="${w.id}"><label class="opt" style="margin-bottom:8px"><input type="checkbox" data-dec="budget" ${sv.budget ? 'checked' : ''}><span>Appliquer l’exigence éliminatoire : <strong>prix ≤ 350 €</strong></span></label>
+  <div class="tablewrap"><table><thead><tr><th>Critère (note sur 5)</th><th class="num">Poids (0 à 3)</th>${ROBOTS.map(r=>`<th class="num">${r.n}</th>`).join('')}</tr></thead><tbody>
+  ${CRITERES.map((c,i)=>`<tr><td>${c.c}</td><td class="num"><select data-dec="p" data-i="${i}" aria-label="Poids : ${esc(c.c)}">${[0,1,2,3].map(v=>`<option ${sv.p[i]==v?'selected':''}>${v}</option>`).join('')}</select></td>${c.notes.map(n=>`<td class="num">${n}</td>`).join('')}</tr>`).join('')}
+  </tbody><tfoot><tr><th colspan="2">Score pondéré (Σ poids × note)</th>${ROBOTS.map((r,i)=>`<th class="num" id="tot-${w.id}-${i}"></th>`).join('')}</tr></tfoot></table></div>
+  <div class="resultat" id="res-${w.id}" aria-live="polite"></div></div>`;
+};
+function majDecision(id){
+  const box = $(`[data-w="${id}"]`); if (!box) return;
+  const p = $$('[data-dec=p]', box).map(s => +s.value); const budget = $('[data-dec=budget]', box).checked;
+  ETAT.answers[id] = {p, budget}; sauver();
+  const tot = ROBOTS.map((r,i) => CRITERES.reduce((a,c,k)=>a + p[k]*c.notes[i], 0));
+  const exclu = ROBOTS.map(r => budget && r.prix > 350);
+  ROBOTS.forEach((r,i) => { const c = $(`#tot-${id}-${i}`); c.textContent = exclu[i] ? `${tot[i]} — exclu (budget)` : tot[i]; });
+  const cands = ROBOTS.map((r,i)=>({r,i,t:tot[i]})).filter(o=>!exclu[o.i]).sort((a,b)=>b.t-a.t);
+  const res = $(`#res-${id}`); let msg = cands.length ? `Classement : ${cands.map((o,k)=>`${k+1}. ${o.r.n} (${o.t})`).join(' · ')}.` : 'Aucun robot retenu.';
+  if (p[1] === 0) msg += ' ⚠ Tu as donné un poids nul à la protection du chat et des objets bas : est-ce cohérent avec la problématique et l’exigence 1.3 ?';
+  if (p[3] === 0 && p[4] === 0) msg += ' ⚠ La famille veut un robot qui dure : aucun critère de durabilité n’est pris en compte.';
+  res.textContent = msg; res.className = 'resultat ' + (p[1] === 0 ? 'ko-bg' : 'ok-bg');
+}
+
+/* =====================================================================
+   10. VÉRIFICATIONS ET SCORES
+   ===================================================================== */
+function collecter(id){
+  const w = WIDGETS[id] && WIDGETS[id].def; if (!w) return;
+  const box = $(`[data-w="${id}"]`); if (!box) return;
+  if (w.t === 'qcm'){ const o = {}; w.qs.forEach((q,qi)=>{ o[qi] = $$(`input[data-q="${qi}"]`, box).filter(i=>i.checked).map(i=>+i.value); }); ETAT.answers[id] = o; }
+  else if (w.t === 'ordre'){ ETAT.answers[id] = $$('li', $('#ol-' + id)).map(li => +li.dataset.i); }
+  else { const a = []; $$('[data-champ]', box).forEach(el => { a[+el.dataset.i] = el.value; }); ETAT.answers[id] = a; }
+  sauver();
+}
+const VERIF = {
+  tri(w, box){ let ok = 0; w.items.forEach((it,i) => { const s = $(`select[data-i="${i}"]`, box); const bon = s.value !== '' && +s.value === it.a; ok += bon; s.classList.toggle('ok-bg', bon); s.classList.toggle('ko-bg', !bon); const f = $(`#fb-${w.id}-${i}`); f.className = 'fb ' + (bon ? '' : 'ko'); f.textContent = bon ? '' : (s.value === '' ? 'Choisis une réponse.' : (it.fb ? '↺ ' + 'Indice : ' + it.fb : 'Ce n’est pas la bonne famille.')); }); return [ok, w.items.length]; },
+  schema(w, box){ let ok = 0; w.slots.forEach((sl,i) => { const s = $(`select[data-i="${i}"]`, box); const bon = s.value !== '' && +s.value === sl.a; ok += bon; $(`#bx-${w.id}-${i}`).classList.toggle('ok-bg', bon); $(`#bx-${w.id}-${i}`).classList.toggle('ko-bg', !bon); }); return [ok, w.slots.length]; },
+  qcm(w, box){ let ok = 0; w.qs.forEach((q,qi) => { const sel = $$(`input[data-q="${qi}"]`, box).filter(i=>i.checked).map(i=>+i.value).sort(); const att = (Array.isArray(q.a) ? q.a.slice() : [q.a]).sort(); const bon = sel.length === att.length && sel.every((v,k)=>v===att[k]); ok += bon; const f = $(`#fb-${w.id}-${qi}`);
+      if (!sel.length){ f.className = 'fb ko'; f.textContent = 'Choisis une réponse.'; return; }
+      const fbOpt = !bon && q.fb && sel.length === 1 && q.fb[sel[0]] ? q.fb[sel[0]] + ' ' : '';
+      f.className = 'fb ' + (bon ? 'ok' : 'ko'); f.textContent = bon ? '✔ ' + q.ex : '✘ ' + (fbOpt || (Array.isArray(q.a) ? 'Vérifie chaque proposition : il y a ' + q.a.length + ' bonnes réponses. ' : 'Relis la question et réessaie. ')); }); return [ok, w.qs.length]; },
+  ordre(w, box){ const ord = $$('li', $('#ol-' + w.id)).map(li => +li.dataset.i); const bons = [w.lignes.map((_,i)=>i)].concat(w.alt || []);
+      const ref = bons.find(b => b.every((v,i)=>v===ord[i])) || bons[0]; let ok = 0;
+      $$('li', $('#ol-' + w.id)).forEach((li,i) => { const b = ord[i] === ref[i]; ok += b; li.classList.toggle('ok-bg', b); li.classList.toggle('ko-bg', !b); });
+      const f = $('#fb-' + w.id); f.className = 'fb ' + (ok === ord.length ? 'ok' : 'ko'); f.textContent = ok === ord.length ? '✔ Programme dans le bon ordre.' : `✘ ${ord.length - ok} ligne(s) mal placée(s) (en rouge). Utilise les aides si besoin.`; return [ok, ord.length]; },
+  trous(w, box){ let ok = 0; w.blancs.forEach((b,i) => { const el = $(`[data-champ][data-i="${i}"]`, box); const v = el.value.trim().replace(/\s+/g,''); let bon;
+      if (b.range){ const n = Number(v); bon = v !== '' && Number.isInteger(n) && n >= b.range[0] && n <= b.range[1]; }
+      else bon = b.ok.map(x=>x.replace(/\s+/g,'')).includes(v);
+      ok += bon; el.classList.toggle('ok-bg', bon); el.classList.toggle('ko-bg', !bon); const f = $(`#fb-${w.id}-${i}`); f.className = 'fb ' + (bon ? '' : 'ko'); f.textContent = bon ? '' : `Case ${i+1} : ${b.fb}`; }); return [ok, w.blancs.length]; },
+  numerique(w, box){ let ok = 0; w.qs.forEach((q,i) => { const el = $(`#n-${w.id}-${i}`); const v = parseFloat(el.value.replace(/\s/g,'').replace(',', '.')); const bon = !isNaN(v) && Math.abs(v - q.a) <= q.tol; ok += bon; el.classList.toggle('ok-bg', bon); el.classList.toggle('ko-bg', !bon); const f = $(`#fb-${w.id}-${i}`); f.className = 'fb ' + (bon ? 'ok' : 'ko'); f.textContent = bon ? '✔ ' + q.ex : (isNaN(v) ? 'Écris un nombre.' : '✘ Ce n’est pas la bonne valeur. Vérifie tes calculs (aides disponibles) et réessaie.'); }); return [ok, w.qs.length]; }
+};
+function verifier(id){
+  const w = WIDGETS[id].def, box = $(`[data-w="${id}"]`);
+  collecter(id);
+  const [ok, tot] = VERIF[w.t](w, box);
+  ETAT.scores[id] = {ok, tot, date:new Date().toISOString()}; sauver();
+  const sc = $('#sc-' + id); sc.textContent = `Score : ${ok} / ${tot}`; sc.className = 'score ' + classeScore(ok, tot);
+}
+function afficherScoresExistants(){
+  Object.keys(ETAT.scores).forEach(id => { const sc = $('#sc-' + id); if (sc){ const s = ETAT.scores[id]; sc.textContent = `Dernier score : ${s.ok} / ${s.tot}`; sc.className = 'score ' + classeScore(s.ok, s.tot); } });
+}
+
+/* =====================================================================
+   11. PAGES
+   ===================================================================== */
+const ROBOT_SVG = `<svg viewBox="0 0 300 190" role="img" aria-label="Illustration : robot aspirateur, chat et téléphone" style="width:100%;max-width:340px;display:block;margin:auto">
+<rect x="0" y="150" width="300" height="40" fill="#dfe9e8"/><ellipse cx="105" cy="148" rx="80" ry="10" fill="#c9d8d7"/>
+<rect x="30" y="100" width="150" height="46" rx="22" fill="#0E6E6B"/><rect x="45" y="92" width="120" height="16" rx="8" fill="#0A5A58"/>
+<circle cx="70" cy="146" r="8" fill="#14262B"/><circle cx="140" cy="146" r="8" fill="#14262B"/>
+<rect x="176" y="114" width="8" height="14" rx="2" fill="#C2185B"/><path d="M188 116 q12 5 0 10 M196 112 q18 9 0 18" stroke="#C2185B" stroke-width="2.5" fill="none"/>
+<circle cx="88" cy="118" r="5" fill="#7ef0c8"/>
+<rect x="208" y="145" width="44" height="5" rx="2" fill="#14262B"/><path d="M226 150 q30 -2 60 -12" stroke="#c98b4a" stroke-width="5" fill="none" stroke-linecap="round"/>
+<ellipse cx="275" cy="118" rx="18" ry="24" fill="#c98b4a"/><circle cx="270" cy="88" r="13" fill="#c98b4a"/><path d="M261 80 l3 -10 l6 8 M272 78 l6 -8 l2 10" fill="#c98b4a"/>
+<text x="198" y="172" font-size="11" fill="#5A6C71" font-family="sans-serif">téléphone ?   queue ?</text></svg>`;
+
+function filAriane(items){ return `<nav class="fil" aria-label="Fil d’Ariane">${items.map((it,i)=> it[1] ? `<a href="${it[1]}">${it[0]}</a>` : `<span aria-current="page">${it[0]}</span>`).join('<span aria-hidden="true">›</span>')}</nav>`; }
+
+function pageAccueil(){
+  const comps = SEQUENCE.competences;
+  return `${filAriane([['Accueil']])}
+  <section class="entete"><div class="hero"><div>
+    <span class="kicker">Technologie 3e · Cycle 4 · Séquence</span>
+    <h1>${SEQUENCE.titre}</h1>
+    <p class="probleme">${SEQUENCE.problematique}</p>
+    <div class="meta">${SEQUENCE.reperes.map(tagRep).join('')}<span class="tag gris">${SEQUENCE.duree}</span></div>
+    <p><a class="btn plein" href="#sequence">Découvrir la séquence →</a> <a class="btn" href="#s1">Commencer la séance 1</a></p>
+  </div><div>${ROBOT_SVG}</div></div></section>
+
+  <section class="bloc"><h2>Sommaire des séances</h2>
+    <p class="muted petit">Filtrer par compétence :</p>
+    <div class="chips" role="group" aria-label="Filtrer les séances par compétence">${comps.map(c=>`<button class="chip" type="button" data-act="filtre" data-c="${c}" aria-pressed="false" title="${esc(COMPETENCES[c])}">${c}</button>`).join('')}<button class="chip" type="button" data-act="filtre" data-c="" aria-pressed="true">Toutes</button></div>
+    <div class="cartes" id="cartesSeances">${SEQUENCE.seances.map(s => { const p = progression(s); const pc = p.total ? Math.round(100*p.faits/p.total) : 0; return `<a class="carte" href="#${s.id}" data-comp="${s.comp.join(' ')}">
+      <span class="n">Séance ${s.num} · ${s.duree}${s.evaluation ? ' · Évaluation' : ''}</span><h3>${s.titre}</h3><span class="muted petit">${s.sous}</span>
+      <span class="meta">${s.reperes.map(tagRep).join('')}</span>
+      <span class="petit">${ETAT.done[s.id] ? '<span class="fait">✔ Séance terminée</span>' : `Exercices vérifiés : ${p.faits} / ${p.total}`}</span>
+      <span class="barre" aria-hidden="true"><span style="width:${pc}%"></span></span><span class="fleche">Ouvrir →</span></a>`; }).join('')}</div>
+  </section>
+
+  <section class="bloc"><h2>Mes données</h2>
+    <p>Tes réponses, tes scores et ta progression sont enregistrés <strong>uniquement dans ce navigateur, sur cet appareil</strong>. Ils ne sont pas synchronisés entre plusieurs appareils et peuvent être effacés si l’historique du navigateur est vidé. Pense à exporter ton travail.</p>
+    ${stockageOK ? '' : '<p class="fb ko">⚠ Le stockage local est indisponible dans ce navigateur (mode privé ?) : tes réponses ne seront pas conservées après fermeture.</p>'}
+    <div class="actions"><button class="btn plein" type="button" data-act="exporter">⬇ Exporter mes réponses (.txt)</button><button class="btn" type="button" onclick="window.print()">🖨 Imprimer la page</button><button class="btn" type="button" data-act="reinit">Réinitialiser toutes mes réponses</button></div>
+  </section>
+
+  <section class="bloc prof-only boite-prof"><h2>Espace enseignant</h2><p>Fiches de préparation, analyse de la fiche groupe, traçabilité des compétences, grille d’évaluation et corrigés : <a href="#enseignant">ouvrir l’espace enseignant</a>. Dans chaque séance, les encadrés jaunes donnent le déroulement, le matériel, les réponses attendues et la différenciation.</p></section>`;
+}
+
+function pageSequence(){
+  return `${filAriane([['Accueil','#accueil'],['La séquence']])}
+  <section class="entete"><span class="kicker">Présentation générale</span><h1>${SEQUENCE.titre}</h1><p class="probleme">${SEQUENCE.problematique}</p></section>
+  <section class="bloc"><h2>Situation de départ</h2><div class="situation">${SEQUENCE.situation}</div>
+    <div class="grille2" style="margin-top:14px"><div><h3>Objet technique étudié</h3><p>${SEQUENCE.objet}</p></div><div><h3>Durée</h3><p>${SEQUENCE.duree}</p></div></div></section>
+  <section class="bloc"><h2>Objectifs d’apprentissage</h2><ul>${SEQUENCE.objectifs.map(o=>`<li>${o}</li>`).join('')}</ul></section>
+  <section class="bloc"><h2>Compétences et repères mobilisés</h2>
+    <div class="tablewrap"><table><thead><tr><th>Compétence</th><th>Repère (carte 3e)</th><th>Connaissances associées</th><th>Séances</th></tr></thead><tbody>
+    ${SEQUENCE.reperes.map(code => { const r = repere(code); const ss = SEQUENCE.seances.filter(s=>s.reperes.includes(code)).map(s=>`<a href="#${s.id}">S${s.num}</a>`).join(', '); return `<tr><td><strong>${r[1]}</strong><br><span class="petit muted">${COMPETENCES[r[1]]}</span></td><td>${tagRep(code)}${code===SEQUENCE.reperePrincipal?' <span class="tag gris">repère principal</span>':''}<br>${r[2]}</td><td><ul>${CONNAISSANCES[code].map(k=>`<li>${k}</li>`).join('')}</ul></td><td>${ss}</td></tr>`; }).join('')}
+    </tbody></table></div></section>
+  <section class="bloc"><h2>Prérequis</h2><ul>${SEQUENCE.prerequis.map(p=>`<li>${p}</li>`).join('')}</ul></section>
+  <section class="bloc"><h2>Progression et productions attendues</h2>
+    <div class="tablewrap"><table><thead><tr><th>Séance</th><th>Étape de la démarche</th><th>Problématique de la séance</th><th>Repères</th></tr></thead><tbody>
+    ${SEQUENCE.seances.map(s=>`<tr><td><a href="#${s.id}">S${s.num} — ${s.titre}</a></td><td>${s.etape}</td><td>${s.problematique}</td><td>${s.reperes.join(', ')}</td></tr>`).join('')}</tbody></table></div>
+    <h3>Productions des élèves</h3><ul>${SEQUENCE.productions.map(p=>`<li>${p}</li>`).join('')}</ul></section>`;
+}
+
+function blocWidgets(liste){ return liste.map(w => R[w.t] ? R[w.t](w) : '').join(''); }
+
+function pageSeance(s){
+  const i = SEQUENCE.seances.indexOf(s), prec = SEQUENCE.seances[i-1], suiv = SEQUENCE.seances[i+1];
+  const P = s.prof;
+  const prep = `<section class="boite-prof prof-only"><h2>Fiche de préparation — séance ${s.num}</h2>
+    <div class="grille2"><div><h4>Objectifs</h4><ul>${P.objectifs.map(o=>`<li>${o}</li>`).join('')}</ul></div>
+    <div><h4>Repères et connaissances</h4><ul>${s.reperes.map(c=>`<li><strong>${c}</strong> (${repere(c)[1]}) — ${repere(c)[2]}</li>`).join('')}</ul></div></div>
+    <h4>Déroulement (55 min)</h4><div class="tablewrap"><table><thead><tr><th>Minutes</th><th>Phase</th><th>Ce qui se passe</th></tr></thead><tbody>${P.deroulement.map(d=>`<tr><td>${d[0]}</td><td>${d[1]}</td><td>${d[2]}</td></tr>`).join('')}</tbody></table></div>
+    <h4>Matériel</h4><ul>${P.materiel.map(m=>`<li>${m}</li>`).join('')}</ul>
+    <div class="grille2"><div><h4>Différenciation — soutien</h4><ul>${P.differenciation.aide.map(m=>`<li>${m}</li>`).join('')}</ul></div><div><h4>Différenciation — approfondissement</h4><ul>${P.differenciation.defi.map(m=>`<li>${m}</li>`).join('')}</ul></div></div>
+    ${P.note ? `<h4>Point de vigilance</h4><p>${P.note}</p>` : ''}
+    ${P.corrige ? P.corrige : ''}
+    ${s.evaluation ? grilleHTML() : ''}</section>`;
+  const syn = s.synthese ? `<section class="bloc"><h2>Ma synthèse</h2><details class="depli"><summary>Afficher la synthèse (après les activités et la mise en commun)</summary>
+    <div class="synthese" style="margin-top:10px"><section><h3>Ce que je dois comprendre</h3><ul>${s.synthese.comprendre.map(x=>`<li>${x}</li>`).join('')}</ul></section>
+    <section><h3>Ce que je dois savoir</h3><ul>${s.synthese.savoir.map(x=>`<li>${x}</li>`).join('')}</ul></section>
+    <section><h3>Ce que je dois savoir faire</h3><ul>${s.synthese.savoirFaire.map(x=>`<li>${x}</li>`).join('')}</ul></section>
+    <section><h3>Vocabulaire essentiel</h3><dl class="vocab">${s.synthese.vocab.map(v=>`<dt>${v[0]}</dt><dd>${v[1]}</dd>`).join('')}</dl></section></div></details></section>` : '';
+  return `${filAriane([['Accueil','#accueil'],['Séquence Robot aspirateur','#sequence'],['Séance ' + s.num]])}
+  <section class="entete"><span class="kicker">Séance ${s.num} / ${SEQUENCE.seances.length} · ${s.duree} · ${s.etape}</span>
+    <h1>${s.titre}</h1><p class="lead">${s.sous}</p><div class="meta">${s.reperes.map(tagRep).join('')}</div></section>
+  ${prep}
+  <section class="bloc"><h2>${s.evaluation ? 'La situation' : 'Mise en situation'}</h2><div class="situation">${s.situation}</div></section>
+  <section class="bloc"><h2>${s.evaluation ? 'Le problème' : 'Mon problème à résoudre'}</h2><p class="probleme">${s.problematique}</p>${s.hypothese ? R.reponse(s.hypothese) : ''}</section>
+  ${s.activites.map((a,k)=>`<section class="bloc" id="${s.id}-a${k+1}"><div class="activite-h"><h2>${s.evaluation ? '' : `<span class="num">${k+1}</span>Activité ${k+1} — `}${a.titre}</h2><span class="duree">⏱ ${a.duree} · ${a.modalite}</span></div>${a.intro || ''}${blocWidgets(a.contenu)}${a.production ? `<span class="production">${a.production}</span>` : ''}</section>`).join('')}
+  <section class="bloc"><h2>${s.evaluation ? 'Après l’évaluation' : 'Mise en commun'}</h2>${s.miseEnCommun}</section>
+  ${syn}
+  ${s.verif && s.verif.length ? `<section class="bloc"><h2>Je vérifie mes acquis</h2>${blocWidgets(s.verif)}</section>` : ''}
+  ${s.defi ? `<section class="bloc"><h2>Pour aller plus loin — défi</h2><p>${s.defi}</p>${R.reponse({id:s.id+'-defi', label:'Ma réponse au défi :', rows:3})}</section>` : ''}
+  <div class="actions noprint" style="margin-top:16px"><button class="btn ${ETAT.done[s.id] ? '' : 'plein'}" type="button" data-act="terminer" data-s="${s.id}">${ETAT.done[s.id] ? '✔ Séance marquée comme terminée (annuler)' : 'J’ai terminé cette séance'}</button></div>
+  <nav class="navseance" aria-label="Séances précédente et suivante">${prec ? `<a class="btn" href="#${prec.id}">← Séance ${prec.num}</a>` : '<a class="btn" href="#sequence">← La séquence</a>'}<a class="btn" href="#accueil">⌂ Accueil</a>${suiv ? `<a class="btn plein" href="#${suiv.id}">Séance ${suiv.num} →</a>` : ''}</nav>`;
+}
+
+function grilleHTML(){
+  return `<h4>Grille d’évaluation par compétences</h4><div class="tablewrap"><table><thead><tr><th>Compétence · repère</th><th>Critère observable</th><th>Maîtrise insuffisante</th><th>Maîtrise fragile</th><th>Maîtrise satisfaisante</th><th>Très bonne maîtrise</th></tr></thead><tbody>
+  ${GRILLE.map(g=>`<tr><td><strong>${g.c}</strong> · ${g.r}</td><td>${g.crit}</td>${g.n.map(n=>`<td>${n}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+}
+
+function pageReperes(){
+  const usage = code => SEQUENCE.seances.filter(s=>s.reperes.includes(code));
+  return `${filAriane([['Accueil','#accueil'],['Les 38 repères de 3e']])}
+  <section class="entete"><span class="kicker">Tableau récapitulatif</span><h1>Les 38 repères de progressivité de 3e</h1><p class="lead">Intitulés des cartes 3e (BO n° 9 du 29 février 2024). Les repères non abordés dans cette séquence sont indiqués « non traité ».</p></section>
+  <section class="bloc"><div class="tablewrap"><table><thead><tr><th>Code</th><th>Compétence</th><th>Intitulé du repère</th><th>Séances de la séquence</th></tr></thead><tbody>
+  ${REPERES.map(r=>{ const u = usage(r[0]); return `<tr><td>${tagRep(r[0])}</td><td>${r[1]}</td><td>${r[2]}</td><td>${u.length ? u.map(s=>`<a href="#${s.id}">S${s.num}</a>`).join(', ') : '<span class="muted">Non traité</span>'}</td></tr>`; }).join('')}
+  </tbody></table></div>
+  <p class="petit muted">Bilan : ${SEQUENCE.reperes.length} repères traités sur 38, répartis sur ${SEQUENCE.competences.length} compétences (${SEQUENCE.competences.join(', ')}).</p></section>`;
+}
+
+function pageEnseignant(){
+  if (!PROF) return `${filAriane([['Accueil','#accueil'],['Espace enseignant']])}<section class="entete"><h1>Espace enseignant</h1><p>Active le <strong>mode enseignant</strong> (bouton en haut à droite) pour afficher cette page. Rappel : ce mode n’est qu’un affichage et ne protège pas les corrigés.</p><button class="btn plein" type="button" data-act="prof">Activer le mode enseignant</button></section>`;
+  return `${filAriane([['Accueil','#accueil'],['Espace enseignant']])}
+  <section class="entete"><span class="kicker">Espace enseignant</span><h1>Préparer et conduire la séquence</h1><p class="lead">Analyse de la fiche groupe, traçabilité des compétences, grille d’évaluation, préparation de chaque séance.</p>
+  <p class="petit">Accès rapide aux fiches de préparation : ${SEQUENCE.seances.map(s=>`<a href="#${s.id}">S${s.num}</a>`).join(' · ')}</p></section>
+  <section class="bloc boite-prof"><h2>Analyse de la fiche groupe (JSON)</h2>${ANALYSE_JSON}</section>
+  <section class="bloc boite-prof"><h2>Tableau de traçabilité des compétences</h2>
+   <p class="petit">Filtrer : <span class="chips" role="group" aria-label="Filtrer par compétence">${SEQUENCE.competences.map(c=>`<button class="chip" type="button" data-act="filtreT" data-c="${c}" aria-pressed="false">${c}</button>`).join('')}<button class="chip" type="button" data-act="filtreT" data-c="" aria-pressed="true">Toutes</button></span></p>
+   <div class="tablewrap"><table id="tabTrace"><thead><tr><th>Séance</th><th>Compétence</th><th>Repère</th><th>Connaissance (intitulé de la carte)</th><th>Activité réalisée</th><th>Production</th><th>Critère d’évaluation</th></tr></thead><tbody>
+   ${TRACABILITE.map(t=>{ const s = seance(t[0]); return `<tr data-comp="${t[1]}"><td><a href="#${s.id}">S${s.num}</a> ${s.titre}</td><td>${t[1]}</td><td>${t[2]}</td><td>${CONNAISSANCES[t[2]][t[3]]}</td><td>${t[4]}</td><td>${t[5]}</td><td>${t[6]}</td></tr>`; }).join('')}
+   </tbody></table></div></section>
+  <section class="bloc boite-prof"><h2>Évaluation sommative (séance 7)</h2>${grilleHTML()}<p><a href="#s7">Ouvrir la séance 7 et son corrigé détaillé →</a></p></section>
+  <section class="bloc boite-prof"><h2>Matériel pour la séquence</h2><ul>
+   <li>Par groupe de 3-4 : carte micro:bit V2 + câble USB, capteur à ultrasons compatible 3,3 V (HC-SR04P, RCWL-1601 ou équivalent ; le HC-SR04 standard est prévu pour 5 V), LED + résistance 220 Ω, fils et plaque d’essai, règle ou mètre, boîte en carton, coussin.</li>
+   <li>Ordinateurs : ce fichier HTML (fonctionne hors ligne) ; Internet pour Pyrates (S4) et python.microbit.org (S5), ou l’éditeur Mu installé localement.</li>
+   <li>Facultatif : un robot aspirateur réel ou des vidéos de démonstration, photos d’étiquettes d’indice de réparabilité.</li></ul></section>
+  <section class="bloc boite-prof"><h2>Données des élèves</h2><p>Les réponses sont stockées dans le navigateur de chaque poste (stockage local), sans compte ni serveur. Pour récupérer un travail : bouton « Exporter mes réponses » sur la page d’accueil (fichier texte), à déposer par exemple via le formulaire de dépôt du site techno-3e.</p></section>`;
+}
+
+function pageRecherche(q){
+  /* normalisation qui conserve la longueur (pour retrouver la position dans le texte d'origine) */
+  const nl = t => t.split('').map(c => c.normalize('NFD').charAt(0)).join('').toLowerCase();
+  const rassembler = (o, acc) => { if (typeof o === 'string') acc.push(strip(o)); else if (Array.isArray(o)) o.forEach(x => rassembler(x, acc)); else if (o && typeof o === 'object') Object.entries(o).forEach(([k,v]) => { if (['id','t','a','layout','_verifiables','comp'].includes(k)) return; if (k === 'prof' && !PROF) return; if (k === 'html' && o.t === 'prof' && !PROF) return; rassembler(v, acc); }); return acc; };
+  const nq = nl(q.trim());
+  const res = [];
+  if (nq.length >= 2){
+    SEQUENCE.seances.forEach(s => {
+      const txt = rassembler(s, []).join(' · ');
+      const n = nl(txt); const pos = n.indexOf(nq);
+      if (pos >= 0){ const deb = Math.max(0, pos - 70); const count = n.split(nq).length - 1;
+        const avant = txt.slice(deb, pos), mot = txt.slice(pos, pos + nq.length), apres = txt.slice(pos + nq.length, pos + nq.length + 110);
+        res.push({s, count, ext: (deb ? '…' : '') + esc(avant) + '<mark>' + esc(mot) + '</mark>' + esc(apres) + '…'}); }
+    });
+    res.sort((a,b)=>b.count-a.count);
+  }
+  return `${filAriane([['Accueil','#accueil'],['Recherche']])}
+  <section class="entete"><h1>Recherche : « ${esc(q)} »</h1><p class="lead">${nq.length < 2 ? 'Saisis au moins deux caractères.' : res.length ? `${res.length} séance(s) contiennent ce mot.` : 'Aucun résultat. Essaie un autre mot (par exemple : capteur, variable, réparabilité, exigence).'}</p></section>
+  ${res.map(r=>`<a class="carte bloc" href="#${r.s.id}" style="display:block"><span class="n">Séance ${r.s.num} · ${r.count} occurrence(s)</span><h3>${r.s.titre}</h3><p class="petit">${r.ext}</p></a>`).join('')}`;
+}
+
+/* =====================================================================
+   12. ROUTEUR ET ÉVÉNEMENTS
+   ===================================================================== */
+function afficher(){
+  const h = decodeURIComponent(location.hash.slice(1)) || 'accueil';
+  const main = $('#main'); let html; let titre = 'Robot aspirateur — Technologie 3e';
+  const s = seance(h);
+  if (s){ html = pageSeance(s); titre = `Séance ${s.num} — ${s.titre}`; }
+  else if (h === 'sequence'){ html = pageSequence(); titre = 'La séquence — Robot aspirateur'; }
+  else if (h === 'reperes'){ html = pageReperes(); titre = 'Les 38 repères de 3e'; }
+  else if (h === 'enseignant'){ html = pageEnseignant(); titre = 'Espace enseignant'; }
+  else if (h.startsWith('recherche/')){ const q = h.slice(10); html = pageRecherche(q); titre = 'Recherche'; $('#q').value = q; }
+  else if (/^s\d-a\d$/.test(h)){ const [sid] = h.split('-'); location.replace('#' + sid); return; }
+  else html = pageAccueil();
+  main.innerHTML = html; document.title = titre + ' · Technologie 3e';
+  if (s){ $$('.sim', main).forEach(b => { const id = b.id.slice(4); const w = WIDGETS[id] && WIDGETS[id].def; if (!w) return; if (w.t === 'simUltrason') initSimUltrason(id); if (w.t === 'simRobot') initSimRobot(id); });
+    $$('.decision', main).forEach(b => majDecision(b.dataset.w)); }
+  afficherScoresExistants();
+  window.scrollTo(0,0); main.focus({preventScroll:true});
+}
+window.addEventListener('hashchange', afficher);
+
+function appliquerProf(){ document.body.classList.toggle('prof', PROF); $('#btnProf').setAttribute('aria-pressed', String(PROF)); $('#btnProf').textContent = PROF ? 'Mode enseignant : activé' : 'Mode enseignant'; try { sessionStorage.setItem(CLE + '-prof', PROF ? '1' : '0'); } catch(e){} }
+$('#btnProf').addEventListener('click', () => { PROF = !PROF; appliquerProf(); if (/enseignant|recherche/.test(location.hash)) afficher(); });
+$('#formRecherche').addEventListener('submit', e => { e.preventDefault(); const q = $('#q').value.trim(); if (q) location.hash = 'recherche/' + encodeURIComponent(q); });
+
+/* Délégation : clics */
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  const act = b.dataset.act;
+  if (act === 'verifier') verifier(b.dataset.id);
+  else if (act === 'effacer'){ const id = b.dataset.id; delete ETAT.answers[id]; delete ETAT.scores[id]; sauver(); const box = $(`[data-w="${id}"]`); const w = WIDGETS[id].def; const tmp = document.createElement('div'); tmp.innerHTML = R[w.t](w); box.replaceWith(tmp.firstElementChild); }
+  else if (act === 'aide'){ const box = b.parentElement; const n = +box.dataset.n; const aides = $$('.aide', box); if (aides[n]) aides[n].hidden = false; box.dataset.n = n + 1; if (n + 1 >= aides.length) b.remove(); else b.textContent = `💡 Afficher l’aide ${n+2} / ${aides.length}`; }
+  else if (act === 'haut' || act === 'bas'){ const li = b.closest('li'); const ol = li.parentElement; if (act === 'haut' && li.previousElementSibling) ol.insertBefore(li, li.previousElementSibling); if (act === 'bas' && li.nextElementSibling) ol.insertBefore(li.nextElementSibling, li); $$('li', ol).forEach(x=>x.classList.remove('ok-bg','ko-bg')); collecter(ol.id.slice(3)); b.focus(); }
+  else if (act === 'terminer'){ const id = b.dataset.s; ETAT.done[id] = !ETAT.done[id]; if (!ETAT.done[id]) delete ETAT.done[id]; sauver(); b.textContent = ETAT.done[id] ? '✔ Séance marquée comme terminée (annuler)' : 'J’ai terminé cette séance'; b.classList.toggle('plein', !ETAT.done[id]); }
+  else if (act === 'filtre' || act === 'filtreT'){ const c = b.dataset.c; $$(`[data-act="${act}"]`).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    const cibles = act === 'filtre' ? $$('#cartesSeances .carte') : $$('#tabTrace tbody tr');
+    cibles.forEach(el => { el.hidden = !!c && !el.dataset.comp.split(' ').includes(c); }); }
+  else if (act === 'exporter') exporter();
+  else if (act === 'reinit'){ if (confirm('Effacer toutes tes réponses, tes scores et ta progression sur cet appareil ? Cette action est définitive.')){ ETAT = {answers:{}, scores:{}, done:{}}; sauver(); afficher(); } }
+  else if (act === 'prof'){ PROF = true; appliquerProf(); afficher(); }
+});
+/* Délégation : saisies */
+document.addEventListener('input', e => {
+  const el = e.target;
+  if (el.dataset.save){ ETAT.answers[el.dataset.save] = el.value; sauver(); }
+  else if (el.dataset.tab){ const id = el.dataset.tab; ETAT.answers[id] = ETAT.answers[id] || {}; ETAT.answers[id][el.dataset.k] = el.value; sauver(); }
+  else if (el.dataset.champ && el.type === 'text'){ el.classList.remove('ok-bg','ko-bg'); collecter(el.dataset.champ); }
+});
+document.addEventListener('change', e => {
+  const el = e.target;
+  if (el.dataset.champ){ el.classList.remove('ok-bg','ko-bg'); collecter(el.dataset.champ); }
+  else if (el.dataset.dec){ majDecision(el.closest('[data-w]').dataset.w); }
+});
+
+/* Export des réponses (fichier texte) */
+function exporter(){
+  const L = [`Technologie 3e — ${SEQUENCE.titre}`, `Export du ${new Date().toLocaleString('fr-FR')}`, `Nom et classe : ______________________`, ''];
+  SEQUENCE.seances.forEach(s => {
+    L.push('='.repeat(60), `SÉANCE ${s.num} — ${s.titre}${ETAT.done[s.id] ? ' (terminée)' : ''}`, '='.repeat(60));
+    Object.entries(WIDGETS).filter(([id,o]) => o.seance === s.id).forEach(([id,o]) => {
+      const w = o.def, a = ETAT.answers[id], sc = ETAT.scores[id];
+      if (w.t === 'reponse' && a) L.push(`• ${strip(w.label)}`, `  ${a.replace(/\n/g,'\n  ')}`, '');
+      if (w.t === 'tableau' && a && Object.values(a).some(v=>v)){ L.push(`• Tableau : ${w.cols.join(' | ')}`); w.rows.forEach((r,ri)=>L.push('  ' + r.map((c,ci)=> c === null ? (a[ri+'-'+ci] || '…') : c).join(' | '))); L.push(''); }
+      if (w.t === 'decision' && a) L.push(`• Tableau de décision — poids : ${a.p.join(', ')} ; exigence budget : ${a.budget ? 'oui' : 'non'}`, '');
+      if (sc) L.push(`• Exercice « ${id} » : score ${sc.ok} / ${sc.tot}`);
+    });
+    const d = ETAT.answers[s.id + '-defi']; if (d) L.push(`• Défi : ${d}`);
+    L.push('');
+  });
+  const blob = new Blob([L.join('\n')], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'mes-reponses-robot-aspirateur.txt'; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+
+appliquerProf();
+afficher();
+</script>
+</body>
+</html>

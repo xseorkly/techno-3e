@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<script src="../../garde.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trottinette électrique — Séquence de technologie 3e · Cycle 4</title>
+<meta name="description" content="Séquence de technologie 3e : la trottinette électrique, de la batterie à la roue. Chaîne d’énergie, autonomie, moteur, transmission, projet de modification planifié.">
+<!-- Polices facultatives (Internet) : sans connexion, le navigateur utilise les polices système. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   1. VARIABLES — palette reprise du site techno-3e
+   ========================================================= */
+:root{
+  --papier:#F4F7F7; --carte:#FFFFFF; --encre:#14262B; --doux:#5A6C71;
+  --teal:#0E6E6B; --teal2:#0A5A58; --teal-pale:#E2EFEE; --magenta:#C2185B;
+  --trait:#D2DEDE; --ok:#2E7D5B; --ok-pale:#E3F2EA; --ko:#B3261E; --ko-pale:#FBE9E7;
+  --ambre:#9A6900; --ambre-pale:#FFF5D9; --ost:#12395F; --sfc:#0E6E6B; --ccri:#9A6900;
+  --r:10px; --ombre:0 12px 35px rgba(20,38,43,.08);
+  --titre:"Archivo",system-ui,sans-serif; --texte:"Source Sans 3",system-ui,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono","Consolas","Menlo",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--papier);color:var(--encre);font-family:var(--texte);font-size:17px;line-height:1.55}
+a{color:var(--teal)}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+h1,h2,h3,h4{font-family:var(--titre);line-height:1.2;color:var(--encre)}
+h1{font-size:clamp(26px,4vw,36px);margin:.2em 0 .3em}
+h2{font-size:23px;margin:0 0 .5em}
+h3{font-size:19px;margin:1.1em 0 .4em}
+h4{font-size:16px;margin:.8em 0 .3em}
+code,pre{font-family:var(--mono)}
+.skip{position:absolute;left:-999px;top:0;background:#fff;padding:8px 12px;z-index:99}
+.skip:focus{left:8px}
+main:focus{outline:none}
+
+/* =========================================================
+   2. BARRE DE NAVIGATION
+   ========================================================= */
+.navsite{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--trait)}
+.navsite .dedans{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 18px;flex-wrap:wrap}
+.btn,.navsite a.nav{display:inline-flex;align-items:center;gap:6px;font-family:var(--titre);font-weight:600;font-size:14.5px;color:var(--teal);
+  border:1px solid var(--trait);border-radius:8px;padding:7px 13px;background:#fff;text-decoration:none;cursor:pointer;line-height:1.2}
+.btn:hover,.navsite a.nav:hover{border-color:var(--teal);background:var(--teal-pale)}
+.btn.plein{background:var(--teal);color:#fff;border-color:var(--teal)}
+.btn.plein:hover{background:var(--teal2)}
+.btn.petit{font-size:13.5px;padding:5px 10px}
+.btn[aria-pressed="true"]{background:var(--ambre);border-color:var(--ambre);color:#fff}
+.navsite form{margin-left:auto;display:flex;gap:6px}
+.navsite input[type=search]{font:inherit;font-size:15px;border:1px solid var(--trait);border-radius:8px;padding:6px 10px;width:min(40vw,220px)}
+@media(max-width:700px){.navsite form{margin-left:0;width:100%}.navsite input[type=search]{flex:1;width:auto}}
+.bandeau-prof{background:var(--ambre-pale);border-bottom:2px solid var(--ambre);color:#4d3600;font-size:14.5px}
+.bandeau-prof div{max-width:1040px;margin:0 auto;padding:7px 18px}
+
+/* =========================================================
+   3. MISE EN PAGE
+   ========================================================= */
+.page{max-width:1040px;margin:0 auto;padding:0 18px 120px}
+.fil{font-family:var(--titre);font-size:13.5px;color:var(--doux);margin:18px 0 0}
+.fil a{color:var(--teal);text-decoration:none}.fil a:hover{text-decoration:underline}
+.fil span[aria-hidden]{margin:0 6px}
+.entete{background:var(--carte);border:1px solid var(--trait);border-top:4px solid var(--teal);border-radius:var(--r);margin-top:14px;padding:22px 24px;box-shadow:var(--ombre)}
+.kicker{font-family:var(--titre);font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--teal)}
+.lead{font-size:18.5px;color:var(--doux);margin:.2em 0 .6em}
+.bloc{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:20px 24px;margin-top:18px}
+.bloc>h2:first-child{margin-top:0}
+.bloc h2 .num{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;font-size:15px;margin-right:8px;vertical-align:2px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:13.5px;font-weight:600;border-radius:999px;padding:3px 10px;background:var(--teal-pale);color:var(--teal2);border:1px solid transparent}
+.tag.ost{background:#e3eaf3;color:var(--ost)}.tag.sfc{background:var(--teal-pale);color:var(--sfc)}.tag.ccri{background:#f6ecd5;color:#6d4b00}
+.tag.gris{background:#eef2f2;color:var(--doux)}
+.probleme{border-left:5px solid var(--magenta);background:#fdf1f5;padding:14px 18px;border-radius:0 var(--r) var(--r) 0;font-size:18px;font-weight:600;font-family:var(--titre)}
+.situation{background:var(--teal-pale);border-radius:var(--r);padding:14px 18px}
+blockquote{margin:10px 0;padding:10px 16px;border-left:4px solid var(--trait);background:#fff;font-style:italic}
+.grille2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.muted{color:var(--doux)}
+.petit{font-size:14.5px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{border:1px solid var(--trait);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--teal-pale);font-family:var(--titre);font-size:14px}
+.tablewrap{overflow-x:auto;margin:10px 0}
+.production{display:block;margin-top:12px;font-size:14.5px;background:#f4f8f8;border:1px dashed var(--teal);border-radius:8px;padding:7px 12px}
+.production::before{content:"Production attendue · ";font-weight:700;color:var(--teal)}
+.activite-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.activite-h h2{margin:0}
+.duree{font-size:14px;color:var(--doux);font-weight:600}
+
+/* Accueil */
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:center}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+.cartes{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;margin-top:14px}
+.carte{background:#fff;border:1px solid var(--trait);border-radius:var(--r);padding:16px 18px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:6px;transition:border-color .15s,box-shadow .15s}
+.carte:hover{border-color:var(--teal);box-shadow:var(--ombre)}
+.carte .n{font-family:var(--titre);font-weight:700;color:var(--teal);font-size:14px}
+.carte h3{margin:0;font-size:18px}
+.carte .fleche{margin-top:auto;font-weight:700;color:var(--teal)}
+.barre{height:8px;background:#e6eded;border-radius:99px;overflow:hidden}
+.barre>span{display:block;height:100%;background:var(--teal)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:600 14px var(--titre);border:1px solid var(--trait);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;color:var(--encre)}
+.chip[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.fait{color:var(--ok);font-weight:700}
+
+/* Synthèse */
+.synthese{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.synthese section{border:1px solid var(--trait);border-radius:var(--r);padding:12px 14px;background:#fbfdfd}
+.synthese h3{margin:0 0 6px;font-size:16px;color:var(--teal2)}
+.synthese ul{margin:0;padding-left:18px}
+dl.vocab{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;margin:0}
+dl.vocab dt{font-weight:700}dl.vocab dd{margin:0}
+@media(max-width:560px){dl.vocab{grid-template-columns:1fr}dl.vocab dd{margin-bottom:6px}}
+details.depli>summary{cursor:pointer;font-family:var(--titre);font-weight:600;color:var(--teal);padding:6px 0}
+
+/* Enseignant */
+body:not(.prof) .prof-only{display:none!important}
+.boite-prof{border:2px solid var(--ambre);background:var(--ambre-pale);border-radius:var(--r);padding:14px 18px;margin-top:14px}
+.boite-prof>h2,.boite-prof>h3,.boite-prof>h4{color:#6d4b00;margin-top:0}
+.boite-prof::before{content:"Espace enseignant";display:inline-block;font:700 12px var(--titre);text-transform:uppercase;letter-spacing:.05em;background:var(--ambre);color:#fff;border-radius:4px;padding:2px 8px;margin-bottom:8px}
+.boite-prof table th{background:#f6e7bf}
+
+/* =========================================================
+   4. ACTIVITÉS INTERACTIVES
+   ========================================================= */
+.widget{border:1px solid var(--trait);border-radius:var(--r);padding:14px 16px;margin:14px 0;background:#fcfefe}
+.widget .consigne{font-weight:600;margin:0 0 10px}
+.widget .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.score{font-family:var(--titre);font-weight:700;font-size:15px}
+.score.bon{color:var(--ok)}.score.moyen{color:var(--ambre)}.score.faible{color:var(--ko)}
+textarea,select,input[type=text],input[type=number]{font:inherit;font-size:16px;border:1px solid #b9cccc;border-radius:7px;padding:7px 9px;background:#fff;color:var(--encre);max-width:100%}
+textarea{width:100%;resize:vertical}
+label.lbl{display:block;font-weight:600;margin:8px 0 4px}
+.sauve{font-size:12.5px;color:var(--doux)}
+.ligne-tri{display:grid;grid-template-columns:1fr minmax(180px,auto);gap:8px 12px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--trait)}
+.ligne-tri:last-of-type{border-bottom:0}
+@media(max-width:560px){.ligne-tri{grid-template-columns:1fr}}
+.ok-bg{background:var(--ok-pale)!important;border-color:var(--ok)!important}
+.ko-bg{background:var(--ko-pale)!important;border-color:var(--ko)!important}
+.fb{font-size:14.5px;margin-top:4px;padding:6px 10px;border-radius:6px}
+.fb.ok{background:var(--ok-pale);color:#1d5a3f}.fb.ko{background:var(--ko-pale);color:#7c1d16}
+.fb:empty{display:none}
+fieldset{border:1px solid var(--trait);border-radius:8px;margin:0 0 12px;padding:10px 14px}
+legend{font-weight:600;padding:0 6px}
+.opt{display:flex;gap:8px;align-items:flex-start;padding:4px 6px;border-radius:6px;cursor:pointer}
+.opt:hover{background:var(--teal-pale)}
+.opt input{margin-top:5px;flex:none}
+.ordre-liste{list-style:none;margin:0;padding:0}
+.ordre-liste li{display:flex;align-items:center;gap:8px;border:1px solid var(--trait);border-radius:7px;background:#fff;margin:5px 0;padding:5px 8px}
+.ordre-liste li code{white-space:pre;flex:1;font-size:15px;overflow-x:auto}
+.ordre-liste li span.txt{flex:1}
+.ordre-liste button{font:700 15px var(--titre);border:1px solid var(--trait);background:#fff;border-radius:6px;width:34px;height:32px;cursor:pointer;color:var(--teal)}
+.ordre-liste button:hover{background:var(--teal-pale)}
+pre.code{background:#0f2327;color:#e6f2f1;border-radius:9px;padding:14px 16px;overflow-x:auto;font-size:14.5px;line-height:1.5;margin:10px 0}
+pre.code .com{color:#8fb9b5}
+pre.code input,pre.code select{font:inherit;font-size:14px;padding:1px 5px;border-radius:4px;border:1px solid #6fa8a4;background:#fffbe6;color:#14262B}
+code.in{background:#e8efef;border-radius:4px;padding:1px 5px;font-size:.92em}
+.blk{display:inline-block;font:600 14px var(--texte);color:#fff;border-radius:6px;padding:3px 10px;margin:1px 0}
+.blk.var{background:#d6336c}.blk.ctl{background:#1e7b45}.blk.cnd{background:#2b6cb0}.blk.aff{background:#4c51bf}.blk.bas{background:#7a4dbf}
+.schema-chaine{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px}
+.schema-chaine .bx{flex:1 1 170px;border:2px solid var(--teal);border-radius:9px;background:#fff;padding:8px 10px;display:flex;flex-direction:column;gap:6px}
+.schema-chaine .bx b{font-family:var(--titre);font-size:13.5px;color:var(--teal2);letter-spacing:.03em}
+.schema-chaine .fl{align-self:center;font-size:22px;color:var(--teal);font-weight:700}
+.schema-chaine select{width:100%;font-size:14.5px}
+.arbre .racine{border:2px solid var(--ost);border-radius:9px;padding:8px 12px;background:#eef3f9;font-weight:600;max-width:520px;margin:0 auto 10px;text-align:center}
+.arbre .enfants{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;border-top:2px solid var(--ost);padding-top:12px}
+.arbre .bx{border:1px solid var(--ost);border-radius:9px;background:#fff;padding:8px 10px;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.arbre .bx b{font-family:var(--titre);color:var(--ost);font-size:13.5px}
+.arbre select{width:100%;font-size:14px}
+.aides{margin-top:10px}
+.aides .aide{background:#fffaf0;border-left:4px solid var(--ambre);padding:7px 12px;border-radius:0 6px 6px 0;margin:6px 0;font-size:15.5px}
+.lien-ext{display:flex;gap:12px;align-items:center;border:1px solid var(--trait);border-radius:var(--r);background:#fff;padding:12px 14px;margin:10px 0}
+.lien-ext .badge{font-size:12.5px;font-weight:700;background:#e3eaf3;color:var(--ost);border-radius:999px;padding:2px 8px;white-space:nowrap}
+.tab-saisie input{width:100%;min-width:70px;font-size:15px;padding:4px 6px}
+.tab-saisie td{padding:4px}
+.num-q{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--trait)}
+.num-q:last-of-type{border-bottom:0}
+.num-q .champ{display:flex;align-items:center;gap:6px}
+.num-q input{width:110px}
+@media(max-width:560px){.num-q{grid-template-columns:1fr}}
+
+/* Simulateurs */
+.sim{border:1px solid var(--trait);border-radius:var(--r);background:#fff;padding:12px}
+.sim canvas{width:100%;height:auto;display:block;border-radius:8px;background:#f7fbfb;border:1px solid var(--trait)}
+.sim .ctrl{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:10px 0}
+.sim .ctrl label{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px}
+.sim .ctrl input[type=range]{width:170px;accent-color:var(--teal)}
+.afficheur{font-family:var(--mono);background:#0f2327;color:#7ef0c8;border-radius:8px;padding:10px 14px;font-size:17px;min-height:46px}
+.journal{font-family:var(--mono);font-size:13.5px;background:#f4f8f8;border:1px solid var(--trait);border-radius:8px;padding:8px 10px;max-height:170px;overflow:auto;white-space:pre}
+.resultat{font-weight:700;padding:8px 12px;border-radius:8px;margin-top:8px}
+.resultat:empty{display:none}
+.decision td.num,.decision th.num{text-align:center}
+.decision tr.exclu td{color:#9aa;text-decoration:line-through}
+.rang{font-family:var(--titre);font-weight:700}
+.diag-test{margin:6px 0}.diag-test .btn{text-align:left;white-space:normal}.diag-test .btn:disabled{opacity:.75;cursor:default}
+
+/* Pied de page / impression */
+footer{border-top:1px solid var(--trait);background:#fff;color:var(--doux);font-size:14px}
+footer div{max-width:1040px;margin:0 auto;padding:16px 18px}
+.navseance{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:22px}
+mark{background:#fff0a8;padding:0 2px}
+@media print{.navsite,.bandeau-prof,.navseance,.actions,footer,.noprint{display:none!important}body{background:#fff;font-size:12pt}.bloc,.entete,.widget{break-inside:avoid;box-shadow:none}details{display:block}details>*{display:block}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<nav class="fnav-ia" aria-label="Navigation Formation" style="display:flex;gap:14px;flex-wrap:wrap;padding:6px 18px;font:500 13px/1.3 'Source Sans 3',Arial,sans-serif;background:#fff;border-bottom:1px solid #d2dede"><a href="../index.html" style="color:#5b6b6a;text-decoration:none">← Atelier d’ouverture</a><a href="index.html" style="color:#5b6b6a;text-decoration:none">↑ Séances générées par l’IA</a></nav>
+<header class="navsite">
+  <div class="dedans">
+    <a class="nav" href="#accueil" title="Retour à l'accueil">⌂ Accueil</a>
+    <a class="nav" href="#sequence">La séquence</a>
+    <a class="nav" href="#reperes">Les 38 repères</a>
+    <a class="nav prof-only" href="#enseignant">Espace enseignant</a>
+    <form id="formRecherche" role="search" aria-label="Rechercher dans la séquence">
+      <input type="search" id="q" placeholder="Rechercher un mot…" aria-label="Mot-clé">
+      <button class="btn" type="submit">Rechercher</button>
+    </form>
+    <button class="btn" id="btnProf" type="button" aria-pressed="false">Mode enseignant</button>
+  </div>
+</header>
+<div class="bandeau-prof prof-only" role="note"><div><strong>Mode enseignant activé.</strong> Les encadrés jaunes (préparation, réponses attendues, corrigés, grilles) sont visibles. Ce mode n'est qu'un affichage JavaScript : <strong>ce n'est pas une protection sécurisée des corrigés</strong> (ils sont présents dans le fichier).</div></div>
+<main id="main" class="page" tabindex="-1"></main>
+<footer><div>Technologie 3e · Cycle 4 — Programme de technologie, BO n° 9 du 29 février 2024 · Séquence issue de la fiche groupe « BRUFRAN — Trottinette électrique » (atelier d'ouverture, 16/11/2026) · Extension du site <a href="https://xseorkly.github.io/techno-3e/" target="_blank" rel="noopener">techno-3e</a> (lien Internet). Les données saisies restent dans ce navigateur.</div></footer>
+
+<script>
+'use strict';
+/* =====================================================================
+   SÉQUENCE « TROTTINETTE ÉLECTRIQUE » — Technologie 3e
+   Organisation : Référentiel → Séquence → Séances → Activités (widgets)
+   Pour ajouter une séquence : ajouter un objet dans SEQUENCES (même structure).
+   ===================================================================== */
+
+/* ---------- 1. RÉFÉRENTIEL OFFICIEL (cartes 3e, BO n° 9 du 29/02/2024) ---------- */
+const COMPETENCES = {
+  C1:`Décrire les liens entre usages et évolutions technologiques des objets et des systèmes techniques`,
+  C2:`Décrire les interactions entre un objet ou un système technique, son environnement et les utilisateurs`,
+  C3:`Caractériser et choisir un objet ou un système technique selon différents critères`,
+  C4:`Décrire et caractériser l’organisation interne d’un objet ou d’un système technique et ses échanges avec son environnement (énergies, données)`,
+  C5:`Identifier un dysfonctionnement d’un objet technique et y remédier`,
+  C6:`Comprendre et modifier un programme associé à une fonctionnalité d’un objet ou d’un système technique`,
+  C7:`Imaginer, concevoir et réaliser une ou des solutions en réponse à un besoin, à des exigences (de développement durable, par exemple) ou à la nécessité d’améliorations dans une démarche de créativité`,
+  C8:`Valider les solutions techniques par des simulations ou par des protocoles de tests`,
+  C9:`Concevoir, écrire, tester et mettre au point un programme`
+};
+/* [code, compétence, intitulé exact de la colonne 3e] */
+const REPERES = [
+  ['OST11','C1',`Identifier les innovations de rupture qui sont attachées à l’évolution d’un OST`],
+  ['OST12','C1',`Mettre en relation une découverte scientifique avec ses développements technologiques et leurs effets sur la société`],
+  ['OST13','C1',`Exprimer dans un argumentaire court l’incidence d’un OST sur la société`],
+  ['OST14','C1',`Exprimer dans un argumentaire court l’incidence des contraintes sociétales sur les OST`],
+  ['OST15','C1',`Exprimer dans un argumentaire court le rôle du développement stratégique du numérique au sein de la société et des environnements professionnels (ou des métiers)`],
+  ['OST21','C2',`Décrire l’expérience de l’utilisateur d’un OST à l’aide de modes de représentation choisis`],
+  ['OST31','C3',`Établir une liste d’OST possibles en vue de répondre à un besoin`],
+  ['OST32','C3',`Choisir un OST et argumenter ce choix en prenant en compte son cycle de vie et les trois piliers du développement durable`],
+  ['OST33','C3',`Évaluer les OST selon des exigences ou des critères identifiés (caractéristiques, performances, coût, indice de réparabilité)`],
+  ['OST34','C3',`Définir et mettre en œuvre un protocole pour mesurer une caractéristique, une performance d’un OST`],
+  ['SFC11','C4',`Élaborer, à l’aide d’un schéma bloc, la chaîne d’énergie d’un OST`],
+  ['SFC12','C4',`Justifier le choix d’un matériau et de son procédé de mise en forme au regard des contraintes techniques et environnementales`],
+  ['SFC13','C4',`Décrire un OST en caractérisant sa chaîne d’information`],
+  ['SFC14','C4',`Associer des grandeurs analogiques issues d’un OST à des données exploitables`],
+  ['SFC15','C4',`Représenter sous forme de données les informations de diverses natures utilisées par un OST`],
+  ['SFC16','C4',`Identifier, selon les cas, leur mise en forme, leur transmission ou leur stockage dans des fichiers (texte, image, nombre) afin de comprendre le fonctionnement de l’OST`],
+  ['SFC17','C4',`Identifier et représenter la circulation d’une information dans le réseau Internet`],
+  ['SFC18','C4',`Justifier la nécessité d’un protocole de routage pour faire communiquer plusieurs réseaux (activité débranchée, table de routage donnée)`],
+  ['SFC21','C5',`Formuler des hypothèses expliquant le dysfonctionnement d’un objet technique`],
+  ['SFC22','C5',`Proposer un protocole de dépannage puis de réparation`],
+  ['SFC23','C5',`Réaliser le dépannage ou la réparation d’un système défectueux`],
+  ['SFC24','C5',`Réaliser une pièce sur mesure pour réparer un objet technique`],
+  ['SFC31','C6',`Déterminer les données utilisées et produites par un programme associé à une fonctionnalité en vue de le modifier`],
+  ['SFC32','C6',`Programmer un algorithme lié à une nouvelle fonctionnalité`],
+  ['SFC33','C6',`Modifier et tester le programme associé à une nouvelle fonctionnalité d’un OST`],
+  ['CCRI11','C7',`Élaborer un processus de conception et de réalisation dans une durée, avec des tâches identifiées`],
+  ['CCRI12','C7',`Proposer et fabriquer un ensemble de solutions pour produire un nouvel OST (croquis, schéma, graphique, algorithme, modélisation)`],
+  ['CCRI13','C7',`Choisir un matériau constitutif d’un objet et/ou système technique`],
+  ['CCRI14','C7',`Choisir une source d’énergie pour un OST`],
+  ['CCRI15','C7',`Choisir les constituants et assembler un prototype`],
+  ['CCRI16','C7',`Modéliser une forme voulue`],
+  ['CCRI17','C7',`Choisir les moyens et produire la forme voulue`],
+  ['CCRI18','C7',`Interfacer deux objets techniques communicants`],
+  ['CCRI21','C8',`Mettre en œuvre une simulation pour valider la tenue mécanique d’un matériau`],
+  ['CCRI22','C8',`Proposer un protocole de test pour valider la tenue mécanique d’un matériau`],
+  ['CCRI23','C8',`Proposer un protocole de test pour valider le comportement et les performances d’un objet technique`],
+  ['CCRI31','C9',`Élaborer ou concevoir un algorithme permettant de répondre au besoin visé, puis le traduire en un programme structuré, le tester et le mettre au point`],
+  ['CCRI32','C9',`Réaliser et mettre au point un programme commandant un système réel incluant une interaction entre un humain et une machine`]
+];
+/* Connaissances associées (cartes 3e) — uniquement pour les repères travaillés */
+const CONNAISSANCES = {
+  SFC11:[`Formes d’énergie : électrique, cinétique, potentielle, thermique et lumineuse`,`Conversions d’énergie : moteur électrique, lampe, radiateur, génératrice et vérin`,`Fonctions de la batterie, du relais et de l’interrupteur`,`Transmission et transformation de mouvements : engrenages, courroies et chaînes`],
+  OST34:[`Critères de performance d’un OST`,`Grandeurs mesurables (par exemple vitesse et autonomie énergétique)`,`Mesure et comparaison à partir d’un protocole`],
+  CCRI11:[`Diagramme de planification : tâches, durée et contraintes entre tâches`,`Étapes d’un projet et rôle d’une revue de projet`,`Écoconception`,`À remobiliser : cycle de vie, contraintes sociétales et piliers du développement durable`]
+};
+const theme = code => code.startsWith('OST') ? 'ost' : code.startsWith('SFC') ? 'sfc' : 'ccri';
+const repere = code => REPERES.find(r => r[0] === code);
+
+/* ---------- 2. RESSOURCES PARTAGÉES ---------- */
+const FICHE_TROT = `<div class="tablewrap"><table><thead><tr><th colspan="2">Fiche technique — trottinette « Urban 36 » (modèle fictif, créé pour la séquence)</th></tr></thead><tbody>
+<tr><td>Batterie</td><td>Lithium-ion 36 V – 7,8 Ah (10 éléments de 3,6 V en série)</td></tr>
+<tr><td>Chargeur</td><td>Entrée 230 V alternatif ; sortie 42 V continu – 2 A</td></tr>
+<tr><td>Moteur</td><td>Moteur électrique 36 V – 350 W, fixé sous le plateau</td></tr>
+<tr><td>Transmission</td><td>Courroie crantée : poulie moteur 12 dents, poulie de roue 72 dents</td></tr>
+<tr><td>Roue arrière</td><td>Diamètre 20 cm</td></tr>
+<tr><td>Vitesse maximale par construction</td><td>Environ 19 km/h (moteur à 3 000 tr/min)</td></tr>
+<tr><td>Autonomie annoncée</td><td>« Jusqu’à 25 km » (conducteur de 75 kg, 15 km/h, terrain plat, 20 °C)</td></tr>
+<tr><td>Autres constituants</td><td>Contrôleur électronique, gâchette d’accélérateur, afficheur, interrupteur marche/arrêt, phare à LED, frein moteur à récupération d’énergie</td></tr>
+</tbody></table></div>`;
+
+/* ---------- 3. LA SÉQUENCE ---------- */
+const SEQUENCE = {
+  id:'trottinette', court:'Séquence Trottinette électrique',
+  titre:`La trottinette électrique : de la batterie à la roue`,
+  objet:`Trottinette électrique à moteur fixé sur le cadre et transmission par courroie (modèle fictif « Urban 36 ») ; maquette motorisée du laboratoire pour les essais`,
+  problematique:`Comment l’énergie de la trottinette électrique est-elle stockée, convertie et transmise jusqu’à la roue, et comment améliorer ses performances sans sortir du cadre légal ?`,
+  situation:`<p>Au collège, plusieurs élèves de 3e viennent en trottinette électrique. Ils se posent des questions : <em>« Pourquoi ma batterie ne tient-elle jamais les 25 km annoncés ? »</em>, <em>« Qu’est-ce qui fait avancer la roue ? »</em>, <em>« Peut-on la rendre plus rapide ? »</em></p>
+  <p>Votre classe enquête sur la <strong>chaîne d’énergie</strong> de la trottinette : d’où vient l’énergie, comment elle est convertie, comment elle est transmise. Vous mesurerez ses performances, puis vous mènerez un <strong>projet</strong> : modifier la transmission d’une maquette pour atteindre une vitesse cible… en respectant la réglementation, qui limite les trottinettes électriques à 25 km/h.</p>`,
+  objectifs:[
+    `Identifier comment l’énergie est stockée dans la batterie et sous quelle forme elle est restituée ; exploiter ses caractéristiques (tension, capacité, énergie).`,
+    `Calculer l’autonomie et mettre en œuvre un protocole pour mesurer une performance (vitesse, autonomie).`,
+    `Localiser le convertisseur d’énergie et exploiter ses caractéristiques (tension, courant, puissance, rendement).`,
+    `Élaborer le schéma-bloc complet de la chaîne d’énergie, de la prise de courant à la roue.`,
+    `Analyser le système de transmission et calculer l’effet d’une modification sur la vitesse.`,
+    `Planifier puis conduire un projet de modification de la transmission, avec revue de projet.`
+  ],
+  competences:['C4','C3','C7'],
+  reperes:['SFC11','OST34','CCRI11'],
+  reperePrincipal:'SFC11',
+  prerequis:[
+    `Formes d’énergie et notion de conversion (cycle 4, 5e-4e).`,
+    `Chaîne d’information (acquérir, traiter, communiquer) : rappelée en séance 3.`,
+    `Proportionnalité, périmètre d’un cercle (mathématiques) ; tension et intensité (physique-chimie).`
+  ],
+  duree:`7 séances de 55 min (≈ 6 h 30), dont 1 séance d’évaluation`,
+  materiel:[
+    `Une trottinette électrique réelle (ou photos et vidéo de son démontage) — ne jamais ouvrir la batterie.`,
+    `Maquette motorisée du laboratoire (moteur à courant continu 6 V, transmission par engrenages ou poulies et courroie interchangeables, roue) — une par groupe si possible.`,
+    `Multimètres, alimentation de laboratoire ou boîtier de piles, chronomètres, ruban adhésif de repère, mètre.`,
+    `Jeu de pignons ou de poulies de différents nombres de dents ; imprimante 3D facultative (séance 5).`,
+    `Ce fichier HTML (fonctionne hors ligne).`
+  ],
+  noteGrille:`La compétence C7 (CCRI11) est évaluée en partie D et sur la revue de projet de la séance 6.`,
+  productions:[
+    `Classement des constituants et caractéristiques de la batterie (séance 1).`,
+    `Calculs et protocole de mesure de l’autonomie (séance 2).`,
+    `Mesures de puissance, bilan énergétique du moteur et schéma-bloc complet (séance 3).`,
+    `Calculs de rapport de transmission et de vitesse, mesures sur maquette (séance 4).`,
+    `Diagramme de planification du projet (séance 5).`,
+    `Maquette modifiée, mesures de vitesse et compte rendu de revue de projet (séance 6).`,
+    `Évaluation de transfert : le vélo à assistance électrique (séance 7).`
+  ],
+  seances:[]
+};
+
+/* ===================== SÉANCE 1 ===================== */
+SEQUENCE.seances.push({
+  id:'s1', num:1, titre:`D’où provient l’énergie de la trottinette ?`, sous:`Découverte de la trottinette, stockage de l’énergie et batterie`,
+  duree:'55 min', etape:`Découvrir et comprendre le problème`, reperes:['SFC11'], comp:['C4'],
+  situation:`<p>Inès vient de recevoir une trottinette électrique « Urban 36 ». Le soir, elle la branche sur une prise ; le matin, elle parcourt 4 km pour venir au collège. Mais où l’énergie est-elle gardée pendant la nuit ? Et sous quelle forme arrive-t-elle au moteur ?</p>${FICHE_TROT}`,
+  problematique:`Comment l’énergie de la prise de courant est-elle stockée dans la trottinette, et sous quelle forme est-elle restituée ?`,
+  hypothese:{id:'s1-hyp', label:`Mes hypothèses : sous quelle forme l’énergie est-elle gardée dans la batterie ? Sous quelle forme en ressort-elle ?`},
+  activites:[
+    {titre:`Je découvre les constituants de la trottinette`, duree:'15 min', modalite:'en binôme',
+     intro:`<p>Observe la trottinette du laboratoire (ou les photos projetées) et lis la fiche technique. Chaque constituant de la <strong>chaîne d’énergie</strong> réalise une <strong>fonction</strong> : ALIMENTER, STOCKER, DISTRIBUER, CONVERTIR, TRANSMETTRE. D’autres constituants appartiennent à la <strong>chaîne d’information</strong>.</p>`,
+     contenu:[
+      {t:'tri', id:'s1-fonctions', consigne:`Indique la fonction de chaque constituant.`, cats:['ALIMENTER','STOCKER','DISTRIBUER','CONVERTIR','TRANSMETTRE','Chaîne d’information'],
+       items:[
+        {l:`Chargeur (230 V → 42 V)`, a:0, fb:`Il apporte l’énergie du réseau électrique à la trottinette.`},
+        {l:`Batterie lithium-ion`, a:1, fb:`Elle garde l’énergie entre deux charges.`},
+        {l:`Contrôleur électronique`, a:2, fb:`Il dose l’énergie envoyée au moteur selon les ordres de la gâchette.`},
+        {l:`Interrupteur marche/arrêt`, a:2, fb:`Il autorise ou coupe le passage de l’énergie électrique.`},
+        {l:`Moteur électrique`, a:3, fb:`Il change la forme de l’énergie : électrique → mécanique.`},
+        {l:`Phare à LED`, a:3, fb:`Il change la forme de l’énergie : électrique → lumineuse.`},
+        {l:`Courroie crantée et poulies`, a:4, fb:`Elles transmettent le mouvement du moteur à la roue.`},
+        {l:`Gâchette d’accélérateur`, a:5, fb:`Elle acquiert la demande du conducteur : c’est une information, pas de l’énergie.`},
+        {l:`Afficheur de vitesse`, a:5, fb:`Il communique une information au conducteur.`}
+       ]},
+      {t:'aides', items:[`Demande-toi : « Ce constituant change-t-il la forme de l’énergie ? » → CONVERTIR.`,`« Laisse-t-il passer plus ou moins d’énergie ? » → DISTRIBUER.`,`« Transporte-t-il un mouvement sans changer la forme de l’énergie ? » → TRANSMETTRE.`]}
+     ],
+     production:`Le classement des constituants par fonction.`},
+    {titre:`Je comprends comment l’énergie est stockée`, duree:'12 min', modalite:'en binôme',
+     intro:`<p>Une batterie lithium-ion est formée d’<strong>éléments</strong> (cellules). Pendant la charge, une réaction chimique réversible met en réserve l’énergie ; pendant l’utilisation, la réaction inverse libère un courant électrique.</p>`,
+     contenu:[
+      {t:'qcm', id:'s1-stockage', qs:[
+        {q:`Sous quelle forme l’énergie est-elle stockée dans la batterie ?`, o:[`Chimique`,`Cinétique`,`Lumineuse`,`Potentielle de pesanteur`], a:0, ex:`L’énergie est stockée sous forme chimique, grâce à une réaction réversible.`},
+        {q:`Sous quelle forme la batterie restitue-t-elle l’énergie ?`, o:[`Thermique`,`Électrique`,`Mécanique`,`Lumineuse`], a:1, ex:`La batterie fournit un courant électrique au contrôleur, puis au moteur.`},
+        {q:`Quel est le rôle du chargeur ?`, o:[`Stocker l’énergie`,`Transformer la tension du réseau (230 V alternatif) en tension adaptée à la batterie (42 V continu)`,`Faire tourner la roue`,`Mesurer la vitesse`], a:1, ex:`Le chargeur réalise la fonction ALIMENTER : il adapte l’énergie du réseau.`}
+      ]},
+      {t:'reponse', id:'s1-securite', label:`Pourquoi ne faut-il jamais ouvrir, percer ou laisser chauffer une batterie lithium-ion ? Pourquoi ne doit-elle pas être jetée à la poubelle ?`, rows:3},
+      {t:'prof', html:`<p>Attendu : risque d’échauffement, d’incendie, de dégagement de gaz toxiques ; recyclage obligatoire en point de collecte (métaux comme le lithium et le cobalt récupérables, pollution évitée). Ne jamais démonter la batterie en classe.</p>`}
+     ],
+     production:`Les réponses sur le stockage et la sécurité.`},
+    {titre:`J’exploite les caractéristiques de la batterie`, duree:'15 min', modalite:'individuel',
+     intro:`<p>Deux caractéristiques figurent sur la batterie : la <strong>tension</strong> U (en volts, V) et la <strong>capacité</strong> Q (en ampères-heures, Ah). L’<strong>énergie stockée</strong> vaut : E (Wh) = U (V) × Q (Ah).</p>`,
+     contenu:[
+      {t:'numerique', id:'s1-batterie', qs:[
+        {q:`Combien d’éléments de 3,6 V faut-il mettre en série pour obtenir 36 V ?`, a:10, tol:0, u:'éléments', ex:`En série, les tensions s’additionnent : 36 ÷ 3,6 = 10.`},
+        {q:`Énergie stockée dans la batterie (36 V – 7,8 Ah), en Wh ?`, a:280.8, tol:0.1, u:'Wh', ex:`36 × 7,8 = 280,8 Wh.`},
+        {q:`Le chargeur fournit 2 A. Durée de charge approximative d’une batterie vide (en heures, au dixième) ?`, a:3.9, tol:0.05, u:'h', ex:`7,8 Ah ÷ 2 A = 3,9 h (en réalité un peu plus : la fin de charge est plus lente).`}
+      ]},
+      {t:'aides', items:[`Capacité (Ah) = intensité (A) × durée (h), donc durée = capacité ÷ intensité.`]}
+     ],
+     production:`Les calculs sur la batterie.`},
+    {titre:`Je commence le schéma de la chaîne d’énergie`, duree:'8 min', modalite:'individuel',
+     contenu:[
+      {t:'schema', id:'s1-debut', layout:'chaine',
+       options:[`Réseau électrique (prise 230 V)`,`ALIMENTER : chargeur`,`STOCKER : batterie`,`TRANSMETTRE : courroie`,`CONVERTIR : phare`],
+       slots:[{titre:'Source', a:0},{titre:'Bloc 1', a:1},{titre:'Bloc 2', a:2}]},
+      {t:'reponse', id:'s1-formes', label:`Écris la forme d’énergie sur chaque flèche : entre la prise et le chargeur, entre le chargeur et la batterie, à la sortie de la batterie.`, rows:2}
+     ],
+     production:`Le début du schéma-bloc (complété en séance 3).`}
+  ],
+  miseEnCommun:`<p>Correction du classement : on distingue clairement la chaîne d’énergie (ce qui fait avancer) et la chaîne d’information (ce qui commande). On écrit au tableau : <strong>la batterie stocke l’énergie sous forme chimique et la restitue sous forme électrique</strong>. Question pour la suite : <em>280,8 Wh, combien de kilomètres ?</em></p>`,
+  synthese:{
+    comprendre:[`L’énergie vient du réseau électrique ; elle est stockée dans la batterie entre deux charges puis restituée au moteur.`,`Chaque constituant de la chaîne d’énergie réalise une fonction : alimenter, stocker, distribuer, convertir, transmettre.`],
+    savoir:[`La batterie lithium-ion stocke l’énergie sous forme chimique et la restitue sous forme électrique.`,`Caractéristiques d’une batterie : tension (V), capacité (Ah). Énergie stockée E (Wh) = U (V) × Q (Ah).`,`L’interrupteur et le contrôleur distribuent l’énergie ; le chargeur alimente.`],
+    savoirFaire:[`Associer un constituant à sa fonction dans la chaîne d’énergie.`,`Calculer l’énergie stockée dans une batterie.`,`Respecter les règles de sécurité liées aux batteries.`],
+    vocab:[['STOCKER','Garder l’énergie pour l’utiliser plus tard.'],['Tension (V)','Grandeur électrique qui caractérise la batterie.'],['Capacité (Ah)','Quantité d’électricité que la batterie peut fournir.'],['Wattheure (Wh)','Unité d’énergie : 1 Wh = 3 600 J.']]
+  },
+  verif:[
+    {t:'qcm', id:'s1-qcm', qs:[
+      {q:`Une batterie de 48 V – 10 Ah stocke :`, o:[`58 Wh`,`480 Wh`,`4,8 Wh`,`38 Wh`], a:1, ex:`48 × 10 = 480 Wh.`},
+      {q:`Le contrôleur de la trottinette réalise la fonction :`, o:[`STOCKER`,`DISTRIBUER`,`CONVERTIR`,`TRANSMETTRE`], a:1, ex:`Il dose l’énergie envoyée au moteur.`}
+    ]}
+  ],
+  defi:`Une trottinette plus puissante utilise une batterie de 48 V – 13 Ah. Combien d’éléments de 3,6 V en série ? Quelle énergie stockée ?`,
+  prof:{
+    objectifs:[`Découvrir la trottinette et identifier les fonctions de la chaîne d’énergie, dont STOCKER (SFC11).`,`Exploiter les caractéristiques de la batterie (tension, capacité, énergie).`],
+    deroulement:[['0-5','Situation et hypothèses','Inès et sa trottinette.'],['5-20','Activité 1','Constituants et fonctions.'],['20-32','Activité 2','Stockage, sécurité, recyclage.'],['32-47','Activité 3','Calculs sur la batterie.'],['47-55','Activité 4 et mise en commun','Début du schéma-bloc.']],
+    materiel:[`Trottinette réelle éteinte et débranchée (ou photos), fiche technique intégrée.`],
+    differenciation:{aide:[`Niveau « découverte » de la fiche groupe (5e) : observation de la trottinette et repérage des constituants uniquement.`],defi:[`Batterie 48 V – 13 Ah : 13,3 → 13 ou 14 éléments selon les modèles (48 V nominal ≈ 13 × 3,7 V) ; 624 Wh.`]},
+    note:`Sécurité : ne jamais ouvrir une batterie lithium-ion en classe. La forme « chimique » ne figure pas dans la liste de formes d’énergie de la carte SFC11, mais elle est indispensable pour répondre à la question de la fiche groupe « Comment est stockée l’énergie ? ».`
+  }
+});
+
+/* ===================== SÉANCE 2 ===================== */
+SEQUENCE.seances.push({
+  id:'s2', num:2, titre:`Pourquoi ma batterie ne tient-elle pas les 25 km annoncés ?`, sous:`Calcul de l’autonomie et protocole de mesure d’une performance`,
+  duree:'55 min', etape:`Rechercher, expérimenter, simuler`, reperes:['OST34','SFC11'], comp:['C3','C4'],
+  situation:`<p>Le fabricant annonce « jusqu’à 25 km ». Pourtant, en hiver, Hugo (90 kg) qui monte une côte chaque matin à fond ne fait que 14 km avant que la batterie soit vide. Le fabricant a-t-il menti ? Lisez bien la fiche technique : l’autonomie a été mesurée <strong>dans des conditions précises</strong>.</p>`,
+  problematique:`De quoi dépend l’autonomie de la trottinette, et comment la mesurer de façon fiable ?`,
+  hypothese:{id:'s2-hyp', label:`Mes hypothèses : cite trois facteurs qui, selon toi, diminuent l’autonomie de la trottinette.`},
+  activites:[
+    {titre:`Je calcule l’autonomie`, duree:'10 min', modalite:'individuel',
+     intro:`<p>La <strong>consommation</strong> d’une trottinette s’exprime en wattheures par kilomètre (Wh/km). On considère qu’on peut utiliser environ 90 % de l’énergie de la batterie (on ne la vide jamais totalement). Autonomie (km) = énergie utilisable (Wh) ÷ consommation (Wh/km).</p>`,
+     contenu:[
+      {t:'numerique', id:'s2-calc', qs:[
+        {q:`Énergie utilisable : 90 % de 280,8 Wh (au dixième) ?`, a:252.7, tol:0.1, u:'Wh', ex:`280,8 × 0,9 ≈ 252,7 Wh.`},
+        {q:`À 15 km/h, la consommation est d’environ 10 Wh/km. Autonomie (km, à l’unité) ?`, a:25, tol:0.5, u:'km', ex:`252,7 ÷ 10 ≈ 25 km : c’est la valeur annoncée.`},
+        {q:`Hugo consomme 18 Wh/km. Autonomie (km, à l’unité) ?`, a:14, tol:0.5, u:'km', ex:`252,7 ÷ 18 ≈ 14 km.`}
+      ]}
+     ],
+     production:`Les calculs d’autonomie.`},
+    {titre:`J’explore les facteurs avec le simulateur`, duree:'15 min', modalite:'en binôme',
+     intro:`<p>Le simulateur utilise un modèle physique simplifié. <strong>Fais varier un seul paramètre à la fois</strong> en laissant les autres aux valeurs de référence (15 km/h, 75 kg, plat, 20 °C) et note l’autonomie obtenue.</p>`,
+     contenu:[
+      {t:'simAutonomie', id:'s2-sim'},
+      {t:'tableau', id:'s2-facteurs', cols:['Paramètre modifié','Valeur testée','Autonomie (km)','Effet (augmente / diminue)'], rows:[['Référence','15 km/h, 75 kg, plat, 20 °C',null,'—'],['Vitesse','25 km/h',null,null],['Masse du conducteur','100 kg',null,null],['Pente','3 %',null,null],['Température','0 °C',null,null]]},
+      {t:'reponse', id:'s2-hugo', label:`Explique à Hugo pourquoi il ne fait que 14 km, en citant au moins trois facteurs.`, rows:3},
+      {t:'prof', html:`<p>Valeurs du simulateur (modèle simplifié) : référence ≈ 26 km ; 25 km/h ≈ 18 km ; 100 kg ≈ 23 km ; pente 3 % ≈ 13 km ; 0 °C ≈ 21 km. Hugo cumule masse, vitesse, pente et froid. Le fabricant n’a pas menti : il a mesuré dans des conditions favorables, ce qui montre l’importance de connaître le protocole.</p>`}
+     ],
+     production:`Le tableau des facteurs et l’explication à Hugo.`},
+    {titre:`Je rédige un protocole de mesure`, duree:'20 min', modalite:'en groupe de 3',
+     intro:`<p>Le collège veut comparer deux trottinettes. Rédigez un <strong>protocole</strong> permettant de mesurer leur autonomie réelle de façon équitable.</p>`,
+     contenu:[
+      {t:'qcm', id:'s2-protocole', qs:[
+        {q:`Que faut-il garder identique pour comparer équitablement les deux trottinettes ? (plusieurs réponses)`, o:[`Le même conducteur (ou la même masse)`,`Le même parcours et la même vitesse`,`La même température extérieure`,`La même couleur de trottinette`,`Une batterie chargée à 100 % au départ`], a:[0,1,2,4], ex:`On ne fait varier que la trottinette : tout ce qui influence la consommation doit être identique.`},
+        {q:`Comment savoir que l’essai est terminé ?`, o:[`Quand le conducteur est fatigué`,`Quand la trottinette s’arrête ou atteint une vitesse minimale fixée à l’avance`,`Après 10 minutes`,`Quand il pleut`], a:1, ex:`Le critère de fin doit être défini avant l’essai.`}
+      ]},
+      {t:'tableau', id:'s2-protocole-tab', cols:['Étape','Ce que l’on fait','Matériel','Grandeur mesurée'], rows:[['1',null,null,null],['2',null,null,null],['3',null,null,null],['4',null,null,null]]},
+      {t:'prof', html:`<p>Protocole attendu : charger les batteries à 100 % ; même conducteur (masse mesurée), même parcours plat en boucle, vitesse constante (régulateur ou 15 km/h affichés), même température ; mesurer la distance (compteur ou nombre de tours × longueur) jusqu’à l’arrêt ; répéter si possible ; comparer. Pour des raisons de sécurité et de temps, l’essai réel peut être remplacé par l’analyse des données fournies dans la vérification des acquis.</p>`}
+     ],
+     production:`Le protocole de mesure rédigé.`}
+  ],
+  miseEnCommun:`<p>Comparaison des protocoles : chaque groupe vérifie qu’un seul facteur varie. On retient qu’une performance (vitesse, autonomie) n’a de sens que si l’on connaît les <strong>conditions de mesure</strong>.</p>`,
+  synthese:{
+    comprendre:[`L’autonomie dépend de l’énergie stockée et de la consommation, qui varie avec la vitesse, la masse, la pente et la température.`,`Pour mesurer ou comparer une performance, on suit un protocole où un seul paramètre varie.`],
+    savoir:[`Autonomie (km) = énergie utilisable (Wh) ÷ consommation (Wh/km).`,`Vitesse et autonomie sont des critères de performance mesurables.`,`Un protocole précise les conditions, le matériel, les étapes, les grandeurs mesurées et le critère de fin.`],
+    savoirFaire:[`Calculer une autonomie.`,`Analyser l’influence d’un paramètre en ne faisant varier que lui.`,`Rédiger un protocole de mesure.`],
+    vocab:[['Autonomie','Distance (ou durée) possible avec une charge complète.'],['Consommation','Énergie utilisée par kilomètre (Wh/km).'],['Performance','Caractéristique mesurable de ce que l’objet sait faire.'],['Protocole','Suite d’étapes précises pour une mesure reproductible.']]
+  },
+  verif:[
+    {t:'numerique', id:'s2-verif-num', qs:[
+      {q:`Essai : la batterie (252,7 Wh utilisables) a permis de parcourir 21 km. Consommation moyenne (Wh/km, au dixième) ?`, a:12.0, tol:0.1, u:'Wh/km', ex:`252,7 ÷ 21 ≈ 12,0 Wh/km.`}
+    ]},
+    {t:'qcm', id:'s2-qcm', qs:[
+      {q:`Pour mesurer l’effet de la masse du conducteur sur l’autonomie, on doit :`, o:[`changer la masse et la vitesse en même temps`,`changer seulement la masse`,`changer de trottinette`,`rouler en montée`], a:1, ex:`Un seul paramètre varie à la fois.`}
+    ]}
+  ],
+  defi:`À l’aide du simulateur, trouve la vitesse qui permet à Hugo (90 kg, pente 3 %, 0 °C) de parcourir au moins 8 km.`,
+  prof:{
+    objectifs:[`Définir et mettre en œuvre un protocole pour mesurer une performance d’un OST (OST34) : autonomie.`,`Calcul de l’autonomie (fiche groupe, niveau 3e).`],
+    deroulement:[['0-5','Situation et hypothèses','Autonomie annoncée / réelle.'],['5-15','Activité 1','Calculs.'],['15-30','Activité 2','Simulation, un facteur à la fois.'],['30-50','Activité 3','Protocole de mesure.'],['50-55','Mise en commun et synthèse','Conditions de mesure.']],
+    materiel:[`Fichier HTML ; facultatif : données d’essais réels d’une trottinette du collège (avec autorisation et sécurité : cour fermée, casque).`],
+    differenciation:{aide:[`Protocole à trous (étapes données dans le désordre à remettre en ordre).`],defi:[`Recherche de la vitesse permettant 8 km dans les conditions d’Hugo.`]},
+    note:`Le simulateur repose sur un modèle simplifié : résistance au roulement, résistance de l’air, pente, rendement global de 70 %, 3 Wh/km pour les accessoires et accélérations, capacité réduite par le froid (90 % à 10 °C, 80 % à 0 °C). Les ordres de grandeur sont réalistes, pas les valeurs d’un modèle réel.`
+  }
+});
+
+/* ===================== SÉANCE 3 ===================== */
+SEQUENCE.seances.push({
+  id:'s3', num:3, titre:`Quel est le convertisseur d’énergie ?`, sous:`Le moteur : tension, courant, puissance, rendement`,
+  duree:'55 min', etape:`Observer, mesurer, modéliser`, reperes:['SFC11'], comp:['C4'],
+  situation:`<p>Sur la fiche technique, on lit « moteur 36 V – 350 W ». Inès se demande : <em>qu’est-ce qui se passe dans ce moteur ? Toute l’énergie qu’il reçoit fait-elle avancer la trottinette ?</em> Et pourquoi la trottinette ralentit-elle « toute seule » quand on lâche la gâchette, en rechargeant un peu la batterie ?</p>`,
+  problematique:`Où l’énergie électrique est-elle convertie en mouvement, et quelle part sert vraiment à avancer ?`,
+  hypothese:{id:'s3-hyp', label:`Mes hypothèses : où se trouve le convertisseur ? Quelle forme d’énergie reçoit-il, et laquelle produit-il ? Une partie est-elle perdue ?`},
+  activites:[
+    {titre:`Je localise le convertisseur et ce qui le commande`, duree:'10 min', modalite:'en binôme',
+     contenu:[
+      {t:'ordre', id:'s3-commande', code:false, lignes:[`Le conducteur appuie sur la gâchette d’accélérateur`,`La gâchette (capteur) envoie une information au contrôleur`,`Le microcontrôleur du contrôleur décide de la puissance à envoyer`,`Le contrôleur distribue l’énergie électrique de la batterie au moteur`,`Le moteur convertit l’énergie électrique en énergie mécanique de rotation`,`La courroie transmet la rotation à la roue arrière`]},
+      {t:'qcm', id:'s3-lien', qs:[
+        {q:`Quel constituant fait le lien entre la chaîne d’information et la chaîne d’énergie ?`, o:[`La batterie`,`Le contrôleur (fonction DISTRIBUER)`,`La courroie`,`Le phare`], a:1, ex:`Le contrôleur reçoit des ordres (information) et dose l’énergie (énergie).`}
+      ]}
+     ],
+     production:`La séquence ordonnée.`},
+    {titre:`Je mesure la puissance d’un moteur (maquette)`, duree:'15 min', modalite:'en groupe de 3',
+     intro:`<p>La puissance électrique reçue par un moteur vaut <strong>P (W) = U (V) × I (A)</strong>. On mesure la tension U avec un voltmètre (en dérivation) et l’intensité I avec un ampèremètre (en série) sur le moteur de la maquette, à vide puis en freinant légèrement l’axe avec les doigts protégés par un chiffon.</p>`,
+     contenu:[
+      {t:'tableau', id:'s3-mesures', cols:['Situation','Tension U (V)','Intensité I (A)','Puissance P = U × I (W)'], rows:[['Moteur à vide',null,null,null],['Moteur freiné légèrement',null,null,null]]},
+      {t:'numerique', id:'s3-p', qs:[
+        {q:`Moteur de la maquette : U = 6,0 V et I = 0,45 A. Puissance reçue (W, au dixième) ?`, a:2.7, tol:0.05, u:'W', ex:`6,0 × 0,45 = 2,7 W.`},
+        {q:`Moteur de la trottinette : 36 V – 350 W. Intensité du courant (A, au dixième) ?`, a:9.7, tol:0.1, u:'A', ex:`I = P ÷ U = 350 ÷ 36 ≈ 9,7 A.`}
+      ]},
+      {t:'reponse', id:'s3-constat', label:`Que devient l’intensité quand on freine le moteur ? Que peut-on en conclure sur la puissance demandée en montée ?`, rows:3},
+      {t:'prof', html:`<p>Constat attendu : l’intensité augmente quand le moteur est freiné (le moteur demande plus de puissance quand l’effort augmente) ; en montée, la consommation augmente, ce qui rejoint la séance 2. Sécurité : basse tension (6 V), freinage doux, pas de doigts nus près des engrenages.</p>`}
+     ],
+     production:`Le tableau de mesures et la conclusion.`},
+    {titre:`Toute l’énergie sert-elle à avancer ?`, duree:'12 min', modalite:'individuel',
+     intro:`<p>Le moteur reçoit 350 W électriques et fournit 280 W mécaniques à la courroie. Le <strong>rendement</strong> η = puissance utile ÷ puissance reçue.</p>`,
+     contenu:[
+      {t:'numerique', id:'s3-rend', qs:[
+        {q:`Rendement du moteur (en %) ?`, a:80, tol:0.5, u:'%', ex:`280 ÷ 350 = 0,8 = 80 %.`},
+        {q:`Puissance perdue (W) ?`, a:70, tol:0, u:'W', ex:`350 − 280 = 70 W.`}
+      ]},
+      {t:'qcm', id:'s3-pertes', qs:[
+        {q:`Sous quelle forme cette puissance est-elle principalement perdue ?`, o:[`Thermique (le moteur chauffe)`,`Lumineuse`,`Chimique`,`Elle n’existe pas`], a:0, ex:`Les pertes chauffent le moteur : c’est pourquoi il est ventilé ou refroidi par le cadre.`},
+        {q:`Quand Inès lâche la gâchette en descente, le moteur fonctionne en génératrice et recharge un peu la batterie. Il convertit alors l’énergie :`, o:[`électrique en mécanique`,`mécanique (cinétique) en électrique`,`lumineuse en électrique`,`chimique en thermique`], a:1, ex:`C’est le freinage avec récupération d’énergie : le mouvement de la trottinette produit de l’électricité.`}
+      ]}
+     ],
+     production:`Le bilan énergétique du moteur.`},
+    {titre:`Je complète la chaîne d’énergie complète`, duree:'13 min', modalite:'individuel',
+     contenu:[
+      {t:'schema', id:'s3-chaine', layout:'chaine',
+       options:[`ALIMENTER : chargeur`,`STOCKER : batterie`,`DISTRIBUER : contrôleur`,`CONVERTIR : moteur`,`TRANSMETTRE : courroie et poulies`,`ACQUÉRIR : gâchette`],
+       slots:[{titre:'Bloc 1', a:0},{titre:'Bloc 2', a:1},{titre:'Bloc 3', a:2},{titre:'Bloc 4', a:3},{titre:'Bloc 5', a:4}]},
+      {t:'schema', id:'s3-formes', layout:'chaine',
+       options:[`Énergie électrique`,`Énergie chimique`,`Énergie mécanique de rotation`,`Énergie cinétique de la trottinette`,`Énergie thermique (pertes)`],
+       slots:[{titre:'Stockée dans la batterie', a:1},{titre:'Entre contrôleur et moteur', a:0},{titre:'Entre moteur et courroie', a:2},{titre:'Trottinette en mouvement', a:3},{titre:'Perdue par le moteur', a:4}]},
+      {t:'reponse', id:'s3-texte', label:`Rédige un court texte qui décrit la chaîne d’énergie complète, de la prise de courant à la roue (fonctions, constituants, formes d’énergie).`, rows:5}
+     ],
+     production:`Le schéma-bloc complet et le texte descriptif.`}
+  ],
+  miseEnCommun:`<p>Construction collective du schéma-bloc complet au tableau, avec les formes d’énergie sur les flèches et une flèche « pertes thermiques » sous le moteur. On remarque que la fiche groupe pose une dernière question : <em>comment l’énergie mécanique est-elle transmise à la roue ?</em></p>`,
+  synthese:{
+    comprendre:[`Le moteur est le convertisseur : il reçoit de l’énergie électrique et produit de l’énergie mécanique de rotation.`,`Toute conversion s’accompagne de pertes, surtout thermiques ; le rendement mesure la part utile.`],
+    savoir:[`P (W) = U (V) × I (A).`,`Rendement η = puissance utile ÷ puissance reçue (toujours inférieur à 1, soit 100 %).`,`Chaîne d’énergie : ALIMENTER (chargeur) → STOCKER (batterie) → DISTRIBUER (contrôleur) → CONVERTIR (moteur) → TRANSMETTRE (courroie) → roue.`,`Une génératrice convertit l’énergie mécanique en énergie électrique (freinage avec récupération).`],
+    savoirFaire:[`Mesurer une tension et une intensité, calculer une puissance.`,`Calculer un rendement et des pertes.`,`Élaborer le schéma-bloc complet d’une chaîne d’énergie.`],
+    vocab:[['Convertisseur','Constituant qui change la forme de l’énergie.'],['Puissance (W)','Énergie transférée par seconde.'],['Rendement','Part de l’énergie reçue qui est utile.'],['Génératrice','Machine qui convertit un mouvement en électricité.']]
+  },
+  verif:[
+    {t:'qcm', id:'s3-qcm', qs:[
+      {q:`Un moteur reçoit 500 W et fournit 400 W. Son rendement est de :`, o:[`80 %`,`125 %`,`100 W`,`20 %`], a:0, ex:`400 ÷ 500 = 0,8.`},
+      {q:`Sous 36 V, un moteur parcouru par 5 A reçoit :`, o:[`41 W`,`7,2 W`,`180 W`,`31 W`], a:2, ex:`36 × 5 = 180 W.`}
+    ]}
+  ],
+  defi:`Beaucoup de trottinettes ont un moteur intégré dans la roue (moteur-roue). Dessine leur chaîne d’énergie : quel bloc disparaît ? Quel avantage et quel inconvénient vois-tu ?`,
+  prof:{
+    objectifs:[`Localiser le convertisseur et exploiter ses caractéristiques (tension, courant, puissance) ; élaborer la chaîne d’énergie complète (SFC11).`,`Lien avec la chaîne d’information (DISTRIBUER) — niveau 4e de la fiche groupe.`],
+    deroulement:[['0-5','Situation et hypothèses','Moteur 36 V – 350 W.'],['5-15','Activité 1','Commande du moteur.'],['15-30','Activité 2','Mesures U, I, P sur maquette.'],['30-42','Activité 3','Rendement, pertes, génératrice.'],['42-55','Activité 4 et mise en commun','Schéma-bloc complet.']],
+    materiel:[`Par groupe : maquette avec moteur 6 V, alimentation ou piles, deux multimètres, fils, chiffon.`],
+    differenciation:{aide:[`Schéma de branchement du voltmètre et de l’ampèremètre fourni ; liste des fonctions à placer.`],defi:[`Moteur-roue : le bloc TRANSMETTRE disparaît (moins de pièces, pas de courroie à changer) mais roue plus lourde et moteur plus difficile à réparer.`]}
+  }
+});
+
+/* ===================== SÉANCE 4 ===================== */
+SEQUENCE.seances.push({
+  id:'s4', num:4, titre:`Comment l’énergie mécanique est-elle transmise à la roue ?`, sous:`Le système de transmission et son effet sur la vitesse`,
+  duree:'55 min', etape:`Analyser, expérimenter, interpréter`, reperes:['SFC11','OST34'], comp:['C4','C3'],
+  situation:`<p>Le moteur de l’Urban 36 tourne à <strong>3 000 tours par minute</strong> (tr/min). Si la roue tournait aussi vite, la trottinette roulerait à plus de 110 km/h ! Entre le moteur et la roue, une <strong>courroie crantée</strong> relie une petite poulie de 12 dents (moteur) à une grande poulie de 72 dents (roue).</p>`,
+  problematique:`Comment la transmission adapte-t-elle la rotation du moteur à la roue, et comment calculer la vitesse de la trottinette ?`,
+  hypothese:{id:'s4-hyp', label:`Mes hypothèses : quand la petite poulie fait un tour, la grande poulie en fait-elle plus, moins ou autant ? Pourquoi ?`},
+  activites:[
+    {titre:`J’identifie les systèmes de transmission`, duree:'10 min', modalite:'en binôme',
+     contenu:[
+      {t:'tri', id:'s4-types', consigne:`Associe chaque objet à son système de transmission.`, cats:['Courroie crantée et poulies','Chaîne et pignons','Engrenages','Aucune transmission (moteur dans la roue)'],
+       items:[
+        {l:`Trottinette Urban 36`, a:0},{l:`Vélo classique (pédalier → roue arrière)`, a:1},{l:`Perceuse sans fil (réducteur dans le boîtier)`, a:2},{l:`Trottinette à moteur-roue`, a:3, fb:`Le moteur est intégré au moyeu de la roue : il entraîne la roue directement.`},{l:`Maquette du laboratoire avec roues dentées en contact`, a:2}
+       ]},
+      {t:'qcm', id:'s4-role', qs:[
+        {q:`La transmission de la trottinette :`, o:[`change la forme de l’énergie`,`transmet le mouvement en réduisant la vitesse de rotation`,`stocke l’énergie`,`commande le moteur`], a:1, ex:`La forme d’énergie reste mécanique : la transmission adapte la vitesse de rotation (et l’effort).`}
+      ]}
+     ],
+     production:`Le classement des transmissions.`},
+    {titre:`Je calcule la vitesse de la trottinette`, duree:'15 min', modalite:'individuel',
+     intro:`<p>Avec une courroie (ou une chaîne), les dents passent au même rythme sur les deux poulies. Donc : <strong>N roue = N moteur × (Z poulie moteur ÷ Z poulie roue)</strong>, où Z est le nombre de dents. Le rapport Z moteur ÷ Z roue s’appelle le <strong>rapport de transmission</strong>. À chaque tour, la roue avance de son périmètre : π × diamètre.</p>`,
+     contenu:[
+      {t:'numerique', id:'s4-vitesse', qs:[
+        {q:`Rapport de transmission 12 ÷ 72 (sous forme décimale, au centième) ?`, a:0.17, tol:0.005, u:'', ex:`12 ÷ 72 ≈ 0,17 (soit 1/6).`},
+        {q:`Vitesse de rotation de la roue (tr/min) ?`, a:500, tol:1, u:'tr/min', ex:`3 000 × 12 ÷ 72 = 500 tr/min.`},
+        {q:`Périmètre de la roue de 20 cm de diamètre (en m, au centième) ?`, a:0.63, tol:0.005, u:'m', ex:`π × 0,20 ≈ 0,63 m.`},
+        {q:`Vitesse de la trottinette en km/h (au dixième) ? (distance par minute × 60 ÷ 1 000)`, a:18.8, tol:0.15, u:'km/h', ex:`500 × 0,628 ≈ 314 m/min ; × 60 = 18 850 m/h ≈ 18,8 km/h.`}
+      ]},
+      {t:'aides', items:[`Commence par le nombre de tours de la roue par minute.`,`Distance parcourue en 1 min = nombre de tours × périmètre.`,`Pour passer des m/min aux km/h : × 60 puis ÷ 1 000.`]}
+     ],
+     production:`Le calcul de la vitesse.`},
+    {titre:`Je teste des modifications de la transmission`, duree:'15 min', modalite:'en binôme',
+     intro:`<p>Utilise le simulateur pour changer la poulie du moteur ou de la roue. Observe la vitesse et l’<strong>effort disponible</strong> à la roue (utile en montée), puis remplis le tableau.</p>`,
+     contenu:[
+      {t:'simTransmission', id:'s4-sim'},
+      {t:'tableau', id:'s4-essais', cols:['Poulie moteur (dents)','Poulie roue (dents)','Vitesse (km/h)','Effort en côte (comparé à l’origine)','Autorisée sur la voie publique ?'], rows:[['12','72',null,null,null],['14','72',null,null,null],['16','72',null,null,null],['12','60',null,null,null]]},
+      {t:'qcm', id:'s4-compromis', qs:[
+        {q:`On remplace la poulie moteur de 12 dents par une de 14 dents. Que se passe-t-il ?`, o:[`La trottinette va plus vite mais monte moins bien les côtes`,`Elle va moins vite et monte mieux les côtes`,`Rien ne change`,`Elle consomme moins dans tous les cas`], a:0, ex:`On gagne en vitesse, on perd en effort disponible : c’est un compromis.`},
+        {q:`Une trottinette dont la vitesse maximale par construction dépasse 25 km/h :`, o:[`peut rouler sur la voie publique si le conducteur est prudent`,`n’est pas autorisée sur la voie publique ; le débridage est interdit et sanctionné`,`est autorisée sur les trottoirs`,`est autorisée la nuit`], a:1, ex:`En France, la vitesse maximale d’une trottinette électrique est fixée à 25 km/h et le débridage est interdit.`}
+      ]},
+      {t:'prof', html:`<p>Valeurs : 12/72 → 18,8 km/h ; 14/72 → 22,0 km/h (effort ×0,86) ; 16/72 → 25,1 km/h (non autorisée) ; 12/60 → 22,6 km/h. Réglementation (France, 2026) : 25 km/h maximum par construction, débridage interdit (contravention de 5e classe, jusqu’à 1 500 €), âge minimum 14 ans. Toute modification se fait sur la maquette du laboratoire, jamais sur une trottinette personnelle.</p>`}
+     ],
+     production:`Le tableau des essais et les réponses.`},
+    {titre:`Je vérifie sur la maquette`, duree:'10 min', modalite:'en groupe de 3',
+     intro:`<p>Mets un repère adhésif sur la roue de la maquette. Compte le nombre de tours en 10 secondes, mesure le diamètre de la roue et calcule la vitesse. Compare au calcul fait à partir du rapport de transmission.</p>`,
+     contenu:[
+      {t:'tableau', id:'s4-maquette', cols:['Tours de roue en 10 s','Tours par minute','Diamètre (cm)','Vitesse mesurée (m/s)','Vitesse calculée (m/s)','Écart'], rows:[[null,null,null,null,null,null]]},
+      {t:'reponse', id:'s4-ecart', label:`D’où peut venir l’écart entre la vitesse calculée et la vitesse mesurée ?`, rows:2}
+     ],
+     production:`La mesure sur maquette et l’analyse de l’écart.`}
+  ],
+  miseEnCommun:`<p>Validation de la formule et du compromis vitesse / effort. On annonce le projet des deux séances suivantes : <strong>modifier la transmission de la maquette pour augmenter sa vitesse de 15 à 20 %</strong>, en restant, à l’échelle de la trottinette, sous 25 km/h.</p>`,
+  synthese:{
+    comprendre:[`La transmission transmet le mouvement du moteur à la roue sans changer la forme de l’énergie ; elle adapte la vitesse de rotation.`,`Augmenter la vitesse par la transmission diminue l’effort disponible : c’est un compromis.`],
+    savoir:[`Transmissions : courroie et poulies, chaîne et pignons, engrenages ; certains moteurs sont dans la roue (pas de transmission).`,`N roue = N moteur × Z moteur ÷ Z roue ; vitesse = N roue × π × diamètre.`,`En France, une trottinette électrique est limitée à 25 km/h par construction ; le débridage est interdit.`],
+    savoirFaire:[`Identifier un système de transmission.`,`Calculer une vitesse de rotation et une vitesse de déplacement.`,`Mesurer une vitesse sur une maquette et comparer au calcul.`],
+    vocab:[['Transmission','Système qui transmet un mouvement d’un arbre à un autre.'],['Rapport de transmission','Z moteur ÷ Z roue.'],['tr/min','Tours par minute : unité de vitesse de rotation.'],['Débridage','Suppression illégale de la limitation de vitesse.']]
+  },
+  verif:[
+    {t:'numerique', id:'s4-verif', qs:[
+      {q:`Moteur à 2 400 tr/min, poulie moteur 10 dents, poulie roue 60 dents : vitesse de rotation de la roue (tr/min) ?`, a:400, tol:0, u:'tr/min', ex:`2 400 × 10 ÷ 60 = 400 tr/min.`}
+    ]}
+  ],
+  defi:`Quelle poulie de roue (nombre de dents entier) faut-il avec la poulie moteur de 12 dents pour atteindre la vitesse la plus proche possible de 25 km/h sans la dépasser ?`,
+  prof:{
+    objectifs:[`Découvrir le système de transmission et calculer l’effet de sa modification sur la vitesse (SFC11 — transmission de mouvement).`,`Mesurer une vitesse sur maquette et comparer au calcul (OST34).`],
+    deroulement:[['0-5','Situation et hypothèses','3 000 tr/min au moteur.'],['5-15','Activité 1','Types de transmission.'],['15-30','Activité 2','Calcul de la vitesse.'],['30-45','Activité 3','Simulation et réglementation.'],['45-55','Activité 4 et mise en commun','Mesure sur maquette, annonce du projet.']],
+    materiel:[`Maquettes avec transmission, chronomètres, adhésif, réglet ; trottinette réelle pour observer la courroie (sans démontage).`],
+    differenciation:{aide:[`Calcul guidé étape par étape (aides activables) ; calculatrice.`],defi:[`Poulie de roue de 57 dents : 3 000 × 12 ÷ 57 ≈ 631,6 tr/min → 23,8 km/h ; 54 dents → 25,1 km/h (trop).`]},
+    note:`Sur la question éthique et légale : l’objectif du projet est d’apprendre à modifier une transmission sur une maquette, en vérifiant la conformité à une limite (25 km/h à l’échelle réelle). Rappeler explicitement que débrider une trottinette personnelle est interdit et dangereux.`
+  }
+});
+
+/* ===================== SÉANCE 5 — PLANIFIER LE PROJET ===================== */
+SEQUENCE.seances.push({
+  id:'s5', num:5, titre:`Projet : planifier la modification de la transmission`, sous:`Tâches, durées, contraintes entre tâches et diagramme de planification`,
+  duree:'55 min', etape:`Concevoir et organiser une solution`, reperes:['CCRI11'], comp:['C7'],
+  situation:`<p>Le cahier des charges du projet : <strong>augmenter la vitesse de la maquette de 15 à 20 %</strong> en modifiant uniquement la transmission, sans que la vitesse équivalente de la trottinette dépasse 25 km/h, en <strong>deux séances (110 minutes)</strong>, avec les pièces du laboratoire. Votre équipe de quatre doit d’abord organiser le travail : qui fait quoi, dans quel ordre, et combien de temps cela prendra.</p>`,
+  problematique:`Comment organiser les tâches du projet pour le terminer dans le temps imparti ?`,
+  hypothese:{id:'s5-hyp', label:`Mes hypothèses : quelles tâches faut-il réaliser ? Lesquelles peuvent être faites en même temps par des membres différents de l’équipe ?`},
+  activites:[
+    {titre:`J’identifie les étapes et la revue de projet`, duree:'10 min', modalite:'en équipe',
+     contenu:[
+      {t:'ordre', id:'s5-etapes', code:false, lignes:[`Analyser le besoin et le cahier des charges`,`Rechercher et comparer des solutions`,`Choisir une solution (revue de projet n° 1)`,`Réaliser la solution`,`Tester et mesurer les performances`,`Faire le bilan : objectifs atteints ? améliorations ? (revue de projet n° 2)`]},
+      {t:'qcm', id:'s5-revue', qs:[
+        {q:`À quoi sert une revue de projet ?`, o:[`À noter les élèves`,`À faire le point à une étape clé : vérifier l’avancement et les choix, décider de la suite`,`À ranger le matériel`,`À commencer le projet`], a:1, ex:`La revue de projet permet de valider une étape avant de continuer ou de corriger.`}
+      ]}
+     ],
+     production:`Les étapes du projet ordonnées.`},
+    {titre:`Je construis le diagramme de planification`, duree:'25 min', modalite:'en équipe',
+     intro:`<p>Voici les tâches du projet avec leur durée et les tâches qui doivent être terminées avant (contraintes). Indique pour chaque tâche la <strong>minute de début</strong>. Plusieurs tâches peuvent se dérouler en même temps (l’équipe compte quatre élèves). Le projet doit tenir en <strong>110 minutes</strong>.</p>`,
+     contenu:[
+      {t:'gantt', id:'s5-gantt', max:110,
+       taches:[
+        {n:`A — Analyser la maquette et mesurer la vitesse actuelle`, d:15, pred:[]},
+        {n:`B — Calculer le rapport de transmission nécessaire`, d:10, pred:[0]},
+        {n:`C — Choisir les poulies disponibles dans le stock`, d:10, pred:[1]},
+        {n:`D — Modéliser en 3D la poulie manquante`, d:15, pred:[1]},
+        {n:`E — Imprimer la poulie en 3D`, d:25, pred:[3]},
+        {n:`F — Préparer le protocole de mesure de la vitesse`, d:15, pred:[0]},
+        {n:`G — Monter la nouvelle transmission`, d:20, pred:[2,4]},
+        {n:`H — Mesurer la vitesse et comparer à l’objectif`, d:15, pred:[6,5]},
+        {n:`I — Revue de projet et bilan`, d:10, pred:[7]}
+       ]},
+      {t:'numerique', id:'s5-critique', qs:[
+        {q:`Durée minimale du projet (en minutes), en enchaînant les tâches qui dépendent les unes des autres ?`, a:110, tol:0, u:'min', ex:`A (15) → B (10) → D (15) → E (25) → G (20) → H (15) → I (10) = 110 min : c’est le chemin critique.`},
+        {q:`De combien de minutes la tâche F (protocole) peut-elle être retardée sans retarder le projet ? (marge)`, a:55, tol:0, u:'min', ex:`F peut commencer à 15 min. H commence au plus tôt à 85 min (fin de G) : F doit donc finir au plus tard à 85 min, soit commencer au plus tard à 70 min. Marge : 70 − 15 = 55 min.`}
+      ]},
+      {t:'aides', items:[`Une tâche ne peut commencer que lorsque toutes ses tâches précédentes sont terminées.`,`Les tâches C, D et F peuvent être faites en parallèle par des élèves différents.`,`Le chemin le plus long d’une suite de tâches dépendantes donne la durée minimale.`]},
+      {t:'prof', html:`<p>Planning optimal : A 0-15 ; B 15-25 ; C 25-35 ; D 25-40 ; E 40-65 ; F 15-30 (ou plus tard) ; G 65-85 ; H 85-100 ; I 100-110. Chemin critique : A-B-D-E-G-H-I (110 min). Écoconception : si une poulie convenable existe dans le stock, D et E deviennent inutiles (moins de plastique, moins d’énergie) et le projet raccourcit de 30 min — à faire remarquer.</p>`}
+     ],
+     production:`Le diagramme de planification validé.`},
+    {titre:`Je répartis les rôles et je pense écoconception`, duree:'15 min', modalite:'en équipe',
+     contenu:[
+      {t:'tableau', id:'s5-roles', cols:['Membre de l’équipe','Tâches','Matériel nécessaire'], rows:[[null,null,null],[null,null,null],[null,null,null],[null,null,null]]},
+      {t:'qcm', id:'s5-eco', qs:[
+        {q:`Dans une démarche d’écoconception, quelle solution privilégier pour obtenir la poulie ?`, o:[`Imprimer systématiquement une nouvelle poulie`,`Réutiliser une poulie du stock si elle convient, imprimer seulement si nécessaire`,`Acheter une trottinette neuve`,`Jeter l’ancienne poulie`], a:1, ex:`Réutiliser évite de consommer matière et énergie : c’est aussi plus rapide.`}
+      ]},
+      {t:'reponse', id:'s5-revue1', label:`Revue de projet n° 1 : quelle solution votre équipe a-t-elle retenue (poulies, rapport visé, vitesse visée) ? Pourquoi ?`, rows:3}
+     ],
+     production:`Répartition des rôles et compte rendu de la revue de projet n° 1.`}
+  ],
+  miseEnCommun:`<p>Chaque équipe présente son diagramme : les tâches en parallèle sont-elles bien réparties ? Où est le chemin critique ? On souligne qu’un retard sur une tâche critique retarde tout le projet.</p>`,
+  synthese:{
+    comprendre:[`Un projet se découpe en tâches qui ont une durée et des contraintes d’ordre.`,`Planifier permet de terminer à temps : certaines tâches peuvent être menées en parallèle, d’autres non (chemin critique).`],
+    savoir:[`Étapes d’un projet : besoin, recherche de solutions, choix, réalisation, tests, bilan ; les revues de projet valident les étapes clés.`,`Diagramme de planification : tâches, durées, contraintes entre tâches.`,`Écoconception : réduire l’impact environnemental dès la conception (réutiliser, économiser matière et énergie).`],
+    savoirFaire:[`Ordonner les tâches d’un projet et respecter leurs contraintes.`,`Construire un diagramme de planification et repérer le chemin critique.`,`Répartir les rôles dans une équipe.`],
+    vocab:[['Tâche','Action précise du projet, avec une durée.'],['Contrainte d’antériorité','Une tâche doit être finie avant qu’une autre commence.'],['Chemin critique','Suite de tâches qui détermine la durée minimale du projet.'],['Revue de projet','Bilan à une étape clé pour décider de la suite.']]
+  },
+  verif:[
+    {t:'qcm', id:'s5-qcm', qs:[
+      {q:`La tâche E (impression) prend 10 minutes de retard. Le projet :`, o:[`n’est pas retardé`,`est retardé de 10 minutes, car E est sur le chemin critique`,`est retardé de 20 minutes`,`est annulé`], a:1, ex:`Toute tâche du chemin critique retarde le projet si elle prend du retard.`}
+    ]}
+  ],
+  defi:`Si une poulie convenable est trouvée dans le stock (D et E supprimées), quelle devient la durée minimale du projet ?`,
+  prof:{
+    objectifs:[`Élaborer un processus de conception et de réalisation dans une durée, avec des tâches identifiées (CCRI11).`],
+    deroulement:[['0-5','Situation et hypothèses','Cahier des charges du projet.'],['5-15','Activité 1','Étapes et revue de projet.'],['15-40','Activité 2','Diagramme de planification.'],['40-52','Activité 3','Rôles, écoconception, revue n° 1.'],['52-55','Mise en commun','Chemin critique.']],
+    materiel:[`Fichier HTML ; stock de poulies ou pignons ; inventaire du stock affiché.`],
+    differenciation:{aide:[`Diagramme pré-rempli pour A et B ; aides activables.`],defi:[`Sans D et E : A-B-C-G-H-I = 15 + 10 + 10 + 20 + 15 + 10 = 80 min.`]}
+  }
+});
+
+/* ===================== SÉANCE 6 — RÉALISER, TESTER, REVUE ===================== */
+SEQUENCE.seances.push({
+  id:'s6', num:6, titre:`Projet : réaliser, mesurer, faire le bilan`, sous:`Modification de la maquette, mesure de la performance et revue de projet`,
+  duree:'55 min', etape:`Réaliser, tester, valider`, reperes:['CCRI11','OST34'], comp:['C7','C3'],
+  situation:`<p>Le planning est prêt, la poulie est choisie ou imprimée. Il est temps de modifier la maquette, de <strong>mesurer</strong> sa nouvelle vitesse avec le protocole préparé et de présenter le <strong>bilan</strong> lors de la revue de projet n° 2.</p>`,
+  problematique:`Notre modification atteint-elle l’objectif de vitesse fixé par le cahier des charges, tout en restant conforme ?`,
+  hypothese:{id:'s6-hyp', label:`Mes hypothèses : quelle vitesse prévoyez-vous d’après votre calcul ? Quels écarts pourraient apparaître lors de la mesure ?`},
+  activites:[
+    {titre:`Je réalise la modification`, duree:'15 min', modalite:'en équipe',
+     contenu:[
+      {t:'ordre', id:'s6-montage', code:false, lignes:[`Débrancher l’alimentation de la maquette`,`Détendre ou retirer la courroie`,`Démonter l’ancienne poulie`,`Monter la nouvelle poulie et la fixer`,`Remettre et tendre la courroie`,`Faire tourner à la main pour vérifier l’alignement`,`Rebrancher et faire un essai à basse tension`]},
+      {t:'reponse', id:'s6-suivi', label:`Suivi du planning : quelles tâches sont terminées ? Y a-t-il un retard ? Sur quelle tâche ?`, rows:2}
+     ],
+     production:`La maquette modifiée et le suivi du planning.`},
+    {titre:`Je mesure la performance`, duree:'20 min', modalite:'en équipe',
+     contenu:[
+      {t:'tableau', id:'s6-mesures', cols:['Essai','Tours de roue en 10 s','Vitesse (m/s)'], rows:[['Avant modification — essai 1',null,null],['Avant modification — essai 2',null,null],['Après modification — essai 1',null,null],['Après modification — essai 2',null,null],['Après modification — essai 3',null,null]]},
+      {t:'numerique', id:'s6-gain', qs:[
+        {q:`Exemple : vitesse moyenne avant 0,50 m/s, après 0,58 m/s. Augmentation en % ?`, a:16, tol:0.5, u:'%', ex:`(0,58 − 0,50) ÷ 0,50 = 0,16 = 16 % : l’objectif (15 à 20 %) est atteint.`},
+        {q:`À l’échelle de la trottinette (18,8 km/h au départ), quelle vitesse donnerait une augmentation de 16 % (km/h, au dixième) ?`, a:21.8, tol:0.1, u:'km/h', ex:`18,8 × 1,16 ≈ 21,8 km/h : inférieur à 25 km/h, donc conforme.`}
+      ]},
+      {t:'aides', items:[`Augmentation (%) = (valeur après − valeur avant) ÷ valeur avant × 100.`,`Fais la moyenne de plusieurs essais avant de calculer.`]}
+     ],
+     production:`Le tableau de mesures et le calcul de l’augmentation.`},
+    {titre:`Revue de projet n° 2`, duree:'15 min', modalite:'en équipe, puis présentation orale',
+     contenu:[
+      {t:'tableau', id:'s6-revue', cols:['Critère du cahier des charges','Niveau attendu','Résultat obtenu','Atteint ?'], rows:[['Augmentation de vitesse','15 à 20 %',null,null],['Vitesse équivalente de la trottinette','≤ 25 km/h',null,null],['Durée du projet','≤ 110 min',null,null],['Pièces neuves fabriquées','Le moins possible',null,null]]},
+      {t:'reponse', id:'s6-bilan', label:`Bilan de l’équipe : qu’est-ce qui a bien fonctionné ? Quelle difficulté avez-vous rencontrée ? Que changeriez-vous dans votre organisation ? Quelle conséquence la modification a-t-elle sur l’effort en côte et la consommation ?`, rows:5},
+      {t:'prof', html:`<h4>Grille d’évaluation du projet (C7 · CCRI11)</h4><div class="tablewrap"><table><thead><tr><th>Critère</th><th>Insuffisante</th><th>Fragile</th><th>Satisfaisante</th><th>Très bonne</th></tr></thead><tbody>
+      <tr><td>Planification</td><td>Pas de planning</td><td>Planning sans contraintes respectées</td><td>Planning respectant les contraintes, ≤ 110 min</td><td>Planning optimisé, chemin critique identifié, rôles répartis</td></tr>
+      <tr><td>Suivi et revue de projet</td><td>Aucun suivi</td><td>Suivi partiel</td><td>Revue complète avec critères</td><td>Revue argumentée, écarts expliqués, pistes d’amélioration</td></tr>
+      <tr><td>Écoconception</td><td>Non prise en compte</td><td>Évoquée</td><td>Réutilisation privilégiée</td><td>Choix justifiés (matière, énergie, durée)</td></tr></tbody></table></div>`}
+     ],
+     production:`Le tableau de revue de projet et le bilan.`}
+  ],
+  miseEnCommun:`<p>Présentation orale de chaque équipe (2 min). On compare les solutions (poulie du stock ou imprimée), les écarts entre calcul et mesure, et le respect du planning. On revient sur la problématique générale : la chaîne d’énergie complète, de la prise à la roue.</p>`,
+  synthese:{
+    comprendre:[`Un projet se termine par la vérification des performances par rapport au cahier des charges, puis par un bilan.`,`Une performance se mesure plusieurs fois et se compare à un objectif chiffré.`],
+    savoir:[`Revue de projet : comparer les résultats aux critères et niveaux du cahier des charges, expliquer les écarts, proposer des améliorations.`,`Pourcentage d’augmentation = (après − avant) ÷ avant × 100.`],
+    savoirFaire:[`Modifier une transmission en respectant la sécurité.`,`Mesurer une vitesse, calculer une moyenne et un pourcentage.`,`Présenter le bilan d’un projet.`],
+    vocab:[['Objectif chiffré','Valeur à atteindre, fixée par le cahier des charges.'],['Écart','Différence entre le résultat attendu et le résultat obtenu.'],['Bilan','Analyse de ce qui a été réussi et de ce qui peut être amélioré.']]
+  },
+  verif:[
+    {t:'qcm', id:'s6-qcm', qs:[
+      {q:`Pourquoi faire trois essais de mesure plutôt qu’un seul ?`, o:[`Pour fatiguer le moteur`,`Pour limiter l’influence d’une erreur et calculer une moyenne fiable`,`C’est obligatoire par la loi`,`Pour aller plus vite`], a:1, ex:`Répéter la mesure rend le résultat plus fiable.`}
+    ]}
+  ],
+  defi:`Proposez une deuxième modification qui augmenterait la vitesse sans réduire l’effort en côte. (Indice : il faudrait agir sur un autre bloc de la chaîne d’énergie.)`,
+  prof:{
+    objectifs:[`Conduire et suivre un projet, revue de projet (CCRI11).`,`Mesurer et comparer une performance à partir d’un protocole (OST34).`],
+    deroulement:[['0-5','Lancement','Rappel du planning.'],['5-20','Activité 1','Modification de la maquette.'],['20-40','Activité 2','Mesures.'],['40-55','Activité 3','Revue de projet et présentations.']],
+    materiel:[`Maquettes, poulies, petit outillage (tournevis, clés Allen), chronomètres, adhésif.`],
+    differenciation:{aide:[`Fiche de montage illustrée ; tableau de mesures pré-rempli pour le « avant ».`],defi:[`Agir sur le bloc CONVERTIR (moteur plus puissant) ou ALIMENTER/STOCKER (tension plus élevée) — et discuter de la conformité.`]},
+    note:`Si les tâches ne sont pas terminées, la mesure peut porter sur le seul calcul et le simulateur de la séance 4 ; le bilan porte alors sur l’analyse du retard (lien direct avec la planification).`
+  }
+});
+
+/* ===================== SÉANCE 7 — ÉVALUATION ===================== */
+SEQUENCE.seances.push({
+  id:'s7', num:7, titre:`Évaluation : le vélo à assistance électrique`, sous:`Situation nouvelle de transfert — évaluation par compétences`,
+  duree:'55 min', etape:`Évaluer les acquis`, reperes:['SFC11','OST34','CCRI11'], comp:['C4','C3','C7'], evaluation:true,
+  situation:`<p>Le professeur d’EPS se rend au collège en <strong>vélo à assistance électrique (VAE)</strong>. Quand il pédale, un capteur détecte le pédalage et le moteur ajoute sa force ; l’assistance s’arrête au-delà de 25 km/h. Fiche technique (modèle fictif) : batterie lithium-ion <strong>36 V – 13 Ah</strong> ; moteur 36 V – 250 W dans le pédalier ; transmission par chaîne : plateau de 40 dents, pignons arrière de 11 à 32 dents ; roue de 70 cm de diamètre.</p><p><strong>Travail individuel.</strong> Les parties sont indépendantes.</p>`,
+  problematique:`Comment fonctionne la chaîne d’énergie du VAE, quelles sont ses performances et comment organiser son entretien ?`,
+  hypothese:null,
+  activites:[
+    {titre:`Partie A — Chaîne d’énergie (C4 · SFC11)`, duree:'15 min', modalite:'individuel',
+     contenu:[
+      {t:'schema', id:'s7-A', layout:'chaine', options:[`STOCKER : batterie`,`DISTRIBUER : contrôleur`,`CONVERTIR : moteur`,`TRANSMETTRE : chaîne et pignons`,`ACQUÉRIR : capteur de pédalage`], slots:[{titre:'Bloc 1', a:0},{titre:'Bloc 2', a:1},{titre:'Bloc 3', a:2},{titre:'Bloc 4', a:3}]},
+      {t:'qcm', id:'s7-A-qcm', qs:[
+        {q:`La batterie restitue l’énergie sous forme :`, o:[`chimique`,`électrique`,`cinétique`,`thermique`], a:1, ex:`Stockée sous forme chimique, restituée sous forme électrique.`},
+        {q:`Le capteur de pédalage appartient :`, o:[`à la chaîne d’énergie`,`à la chaîne d’information`,`à la transmission`,`à la batterie`], a:1, ex:`Il acquiert une information.`}
+      ]},
+      {t:'numerique', id:'s7-A-num', qs:[
+        {q:`Énergie stockée dans la batterie (Wh) ?`, a:468, tol:0, u:'Wh', ex:`36 × 13 = 468 Wh.`},
+        {q:`Intensité dans le moteur à pleine puissance (A, au dixième) ?`, a:6.9, tol:0.1, u:'A', ex:`250 ÷ 36 ≈ 6,9 A.`}
+      ]}
+     ]},
+    {titre:`Partie B — Transmission (C4 · SFC11)`, duree:'10 min', modalite:'individuel',
+     contenu:[
+      {t:'numerique', id:'s7-B', qs:[
+        {q:`Le cycliste pédale à 60 tr/min avec le plateau de 40 dents et le pignon de 20 dents. Vitesse de rotation de la roue (tr/min) ?`, a:120, tol:0, u:'tr/min', ex:`60 × 40 ÷ 20 = 120 tr/min.`},
+        {q:`Vitesse du vélo (km/h, au dixième) ? (périmètre = π × 0,70 m)`, a:15.8, tol:0.15, u:'km/h', ex:`120 × 2,199 m ≈ 263,9 m/min × 60 ≈ 15,8 km/h.`}
+      ]},
+      {t:'reponse', id:'s7-B-rep', label:`En montée, le cycliste passe sur le pignon de 32 dents. Explique l’effet sur la vitesse et sur l’effort.`, rows:2}
+     ]},
+    {titre:`Partie C — Performance et protocole (C3 · OST34)`, duree:'15 min', modalite:'individuel',
+     contenu:[
+      {t:'numerique', id:'s7-C', qs:[{q:`Consommation 9 Wh/km, 90 % de la batterie utilisable. Autonomie (km, à l’unité) ?`, a:47, tol:0.5, u:'km', ex:`468 × 0,9 = 421,2 Wh ÷ 9 ≈ 47 km.`}]},
+      {t:'reponse', id:'s7-C-prot', label:`Rédige un protocole (4 étapes au moins) pour mesurer l’autonomie réelle du VAE en mode d’assistance « fort ». Précise ce qui doit rester identique.`, rows:5}
+     ]},
+    {titre:`Partie D — Organiser l’entretien (C7 · CCRI11)`, duree:'15 min', modalite:'individuel',
+     intro:`<p>L’atelier vélo du collège doit remplacer la chaîne et les pignons. Tâches : A — Démonter la roue arrière (10 min) ; B — Démonter l’ancienne chaîne (5 min, après A) ; C — Démonter les pignons (10 min, après A) ; D — Commander et recevoir les pièces neuves (20 min de recherche, en parallèle dès le début) ; E — Monter les pignons neufs (10 min, après C et D) ; F — Monter la chaîne neuve (10 min, après B et E) ; G — Remonter la roue et régler (15 min, après F) ; H — Essai sur route (10 min, après G).</p>`,
+     contenu:[
+      {t:'numerique', id:'s7-D', qs:[{q:`Durée minimale de l’intervention (min) ?`, a:65, tol:0, u:'min', ex:`A (10) puis C (10) se terminent à 20 min, en même temps que D (20) ; ensuite E (10), F (10), G (15), H (10) : 20 + 45 = 65 min.`}]},
+      {t:'reponse', id:'s7-D-rep', label:`Quelles tâches sont sur le chemin critique ? Proposez une idée d’écoconception pour cet entretien.`, rows:3}
+     ]}
+  ],
+  miseEnCommun:`<p>Correction différée : l’enseignant restitue la grille de compétences remplie à la séance suivante.</p>`,
+  synthese:null, verif:[],
+  prof:{
+    objectifs:[`Évaluer en situation nouvelle C4 (SFC11), C3 (OST34), C7 (CCRI11).`],
+    deroulement:[['0-3','Consignes','Lecture de la situation.'],['3-18','Partie A','Chaîne d’énergie et calculs.'],['18-28','Partie B','Transmission.'],['28-43','Partie C','Autonomie et protocole.'],['43-55','Partie D','Planification.']],
+    materiel:[`Fichier HTML (mode élève) ou version imprimée ; calculatrice.`],
+    differenciation:{aide:[`Tiers-temps : parties A, B et C obligatoires, D facultative.`],defi:[`Partie B : calculer la vitesse maximale de pédalage permise avant que l’assistance s’arrête (25 km/h).`]},
+    corrige:`<h4>Corrigé détaillé</h4>
+    <p><strong>Partie A.</strong> STOCKER (batterie) → DISTRIBUER (contrôleur) → CONVERTIR (moteur) → TRANSMETTRE (chaîne et pignons) ; énergie restituée sous forme électrique ; capteur de pédalage = chaîne d’information. 36 × 13 = 468 Wh ; 250 ÷ 36 ≈ 6,9 A.</p>
+    <p><strong>Partie B.</strong> 60 × 40 ÷ 20 = 120 tr/min ; 120 × π × 0,70 ≈ 263,9 m/min ≈ 15,8 km/h. Pignon de 32 dents : la roue tourne moins vite (60 × 40 ÷ 32 = 75 tr/min, ≈ 9,9 km/h) mais l’effort à fournir est plus faible : utile en montée.</p>
+    <p><strong>Partie C.</strong> 468 × 0,9 ÷ 9 ≈ 47 km. Protocole : batterie chargée à 100 %, même cycliste (masse notée), même parcours, même mode d’assistance, même vitesse moyenne, température notée ; rouler jusqu’à l’arrêt de l’assistance ; relever la distance ; répéter si possible.</p>
+    <p><strong>Partie D.</strong> A → C (20 min) et D (20 min) se terminent en même temps : chemin critique (A-C ou D) → E → F → G → H = 65 min ; B a de la marge. Écoconception : réutiliser les pièces encore en bon état (vérifier l’usure), recycler les pièces usées, choisir des pièces standard et durables.</p>`
+  }
+});
+
+/* ---------- 4. GRILLE D'ÉVALUATION ---------- */
+const GRILLE = [
+  {c:'C4', r:'SFC11', crit:`Parties A et B : schéma-bloc, formes d’énergie, calculs (énergie, intensité, transmission)`,
+   n:[`Schéma incomplet (moins de 2 blocs) ; aucun calcul juste.`,`2 ou 3 blocs justes ; un calcul juste.`,`Schéma juste ; trois calculs justes.`,`Schéma et formes d’énergie justes ; tous les calculs justes ; effet du pignon expliqué (vitesse et effort).`]},
+  {c:'C3', r:'OST34', crit:`Partie C : calcul d’autonomie et protocole de mesure`,
+   n:[`Pas de calcul ni de protocole.`,`Calcul juste ou protocole incomplet.`,`Calcul juste ; protocole avec conditions identiques.`,`Calcul juste ; protocole complet (conditions, matériel, critère de fin, répétition).`]},
+  {c:'C7', r:'CCRI11', crit:`Partie D : durée minimale, chemin critique, écoconception`,
+   n:[`Aucune réponse pertinente.`,`Durée fausse mais contraintes en partie comprises.`,`Durée juste ; chemin critique identifié.`,`Durée et chemin critique justes ; proposition d’écoconception pertinente.`]}
+];
+
+/* ---------- 5. TRAÇABILITÉ ---------- */
+const TRACABILITE = [
+  ['s1','C4','SFC11',2,`Classer les constituants par fonction (batterie, interrupteur, contrôleur…)`,`Classement`,`8 constituants sur 9 bien placés ; batterie = STOCKER`],
+  ['s1','C4','SFC11',0,`Forme d’énergie stockée et restituée ; calculs sur la batterie`,`Réponses et calculs`,`Énergie stockée 280,8 Wh ; restitution électrique identifiée`],
+  ['s2','C3','OST34',1,`Calculer l’autonomie ; explorer les facteurs (un seul à la fois)`,`Calculs et tableau des facteurs`,`Autonomie juste ; effet de chaque facteur identifié`],
+  ['s2','C3','OST34',2,`Rédiger un protocole de mesure de l’autonomie`,`Protocole`,`Conditions identiques, matériel, critère de fin précisés`],
+  ['s3','C4','SFC11',1,`Mesurer U et I, calculer P ; rendement ; génératrice`,`Tableau de mesures, bilan énergétique`,`P = U × I juste ; rendement 80 % ; pertes thermiques identifiées`],
+  ['s3','C4','SFC11',2,`Élaborer le schéma-bloc complet de la chaîne d’énergie`,`Schéma-bloc et texte`,`5 blocs dans l’ordre ; formes d’énergie justes`],
+  ['s4','C4','SFC11',3,`Identifier les transmissions ; calculer rapport et vitesse`,`Calculs`,`Vitesse de 18,8 km/h retrouvée ; compromis vitesse / effort expliqué`],
+  ['s4','C3','OST34',0,`Mesurer la vitesse sur maquette, comparer au calcul`,`Tableau de mesures`,`Écart calculé et expliqué`],
+  ['s5','C7','CCRI11',0,`Construire le diagramme de planification`,`Diagramme validé`,`Contraintes respectées, durée ≤ 110 min, chemin critique identifié`],
+  ['s5','C7','CCRI11',1,`Étapes du projet, revue de projet n° 1`,`Étapes ordonnées, compte rendu`,`Solution retenue justifiée`],
+  ['s5','C7','CCRI11',2,`Écoconception (réutiliser une poulie)`,`Choix justifié`,`Réutilisation privilégiée`],
+  ['s6','C7','CCRI11',1,`Réaliser, suivre le planning, revue de projet n° 2`,`Maquette modifiée, revue de projet`,`Grille projet de la séance 6`],
+  ['s6','C3','OST34',2,`Mesurer la vitesse avant/après (3 essais), calculer l’augmentation`,`Tableau et calcul`,`Augmentation calculée et comparée à l’objectif (15-20 %) et à 25 km/h`],
+  ['s7','C4','SFC11',3,`Évaluation parties A et B`,`Schéma et calculs`,`Grille, ligne C4`],
+  ['s7','C3','OST34',2,`Évaluation partie C`,`Calcul et protocole`,`Grille, ligne C3`],
+  ['s7','C7','CCRI11',0,`Évaluation partie D`,`Durée et chemin critique`,`Grille, ligne C7`]
+];
+
+/* ---------- 6. ANALYSE DE LA FICHE GROUPE ---------- */
+const ANALYSE_JSON = `
+<ul>
+<li><strong>Conservé :</strong> l’objet (trottinette électrique), le repère principal SFC11, les trois questions des séances (d’où provient l’énergie ? quel est le convertisseur ? comment est transmise l’énergie mécanique ?) et toutes les étapes du champ « séquence » : stockage, forme restituée, tension et capacité, autonomie, localisation et caractéristiques du convertisseur (tension, courant, puissance), système de transmission, modification de la transmission pour augmenter la vitesse.</li>
+<li><strong>Corrigé :</strong> la problématique « Découvrir la chaîne d’énergie » est un objectif ; elle est reformulée en question technologique. Le champ « OST » contenait « CCRI11 » (erreur de saisie) : aucun repère OST n’était donc proposé alors que la fiche annonce 3 thèmes.</li>
+<li><strong>Complété :</strong> <strong>OST34</strong> (« Définir et mettre en œuvre un protocole pour mesurer une caractéristique, une performance d’un OST ») est ajouté : ses connaissances (vitesse et autonomie énergétique, mesure à partir d’un protocole) correspondent exactement au calcul de l’autonomie et à la modification de la vitesse demandés. <strong>CCRI11</strong> (gestion de projet) était annoncé sans activité : la modification de la transmission devient un projet planifié (séances 5 et 6).</li>
+<li><strong>Différenciation reprise :</strong> niveau 5e (découverte de la trottinette) en soutien de la séance 1 ; niveau 4e (chaîne d’information) via le lien gâchette → contrôleur → moteur (séance 3) ; niveau 3e (chaîne d’énergie, autonomie, vitesse) comme fil conducteur.</li>
+<li><strong>Point de vigilance légal :</strong> modifier la vitesse d’une trottinette réelle relève du débridage, interdit. Le projet porte donc sur une maquette, avec une contrainte explicite : rester sous 25 km/h à l’échelle réelle. Beaucoup de trottinettes ont un moteur dans la roue (sans transmission) : le modèle étudié, à courroie, est fictif mais représentatif d’autres modèles ; la comparaison est proposée en défi.</li>
+</ul>`;
+
+
+/* =====================================================================
+   7. ÉTAT ET SAUVEGARDE LOCALE
+   ===================================================================== */
+const CLE = 'techno3e-trottinette-v1';
+let ETAT = {answers:{}, scores:{}, done:{}};
+let stockageOK = true;
+try { const s = localStorage.getItem(CLE); if (s) ETAT = Object.assign(ETAT, JSON.parse(s)); }
+catch(e){ stockageOK = false; }
+function sauver(){ try { localStorage.setItem(CLE, JSON.stringify(ETAT)); } catch(e){ stockageOK = false; } }
+let PROF = false;
+try { PROF = sessionStorage.getItem(CLE + '-prof') === '1'; } catch(e){}
+
+/* =====================================================================
+   8. OUTILS
+   ===================================================================== */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const strip = s => String(s).replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/gi,' ').replace(/\s+/g,' ').trim();
+const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+function hash(str){ let h = 2166136261; for (const ch of str){ h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
+/* Mélange déterministe (même ordre à chaque visite) */
+function melange(arr, graine){ const a = arr.slice(); let s = hash(graine); for (let i = a.length - 1; i > 0; i--){ s = (Math.imul(s, 1103515245) + 12345) >>> 0; const j = s % (i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const seance = id => SEQUENCE.seances.find(s => s.id === id);
+const tagRep = code => { const r = repere(code); return `<span class="tag ${theme(code)}" title="${esc(r ? r[2] : '')}">${code} · ${r ? r[1] : ''}</span>`; };
+function classeScore(ok, tot){ const p = tot ? ok / tot : 0; return p >= .8 ? 'bon' : p >= .5 ? 'moyen' : 'faible'; }
+
+/* Registre de tous les widgets : id → {def, seance} (utile pour l'export et les vérifications) */
+const WIDGETS = {};
+const VERIFIABLES = ['tri','qcm','ordre','trous','numerique','schema','diag','gantt'];
+SEQUENCE.seances.forEach(s => {
+  const tout = [];
+  if (s.hypothese) tout.push(Object.assign({t:'reponse'}, s.hypothese));
+  s.activites.forEach(a => a.contenu.forEach(w => tout.push(w)));
+  (s.verif || []).forEach(w => tout.push(w));
+  tout.forEach(w => { if (w.id) WIDGETS[w.id] = {def:w, seance:s.id}; });
+  s._verifiables = tout.filter(w => VERIFIABLES.includes(w.t)).map(w => w.id);
+});
+function progression(s){ const v = s._verifiables; const faits = v.filter(id => ETAT.scores[id]).length; return {faits, total:v.length}; }
+
+/* =====================================================================
+   9. RENDU DES WIDGETS
+   ===================================================================== */
+const R = {};
+const actionsHTML = (id, extra='') => `<div class="actions"><button class="btn plein" type="button" data-act="verifier" data-id="${id}">Vérifier</button><button class="btn petit" type="button" data-act="effacer" data-id="${id}">Recommencer</button><span class="score" id="sc-${id}" aria-live="polite"></span>${extra}</div>`;
+
+R.texte = w => w.html;
+R.code = w => `<div class="widget"><p class="consigne">${w.titre || 'Programme'}</p><pre class="code">${w.html}</pre></div>`;
+R.prof = w => `<div class="boite-prof prof-only">${w.html}</div>`;
+R.lien = w => `<div class="lien-ext"><span class="badge">🌐 Internet requis</span><div><a href="${w.url}" target="_blank" rel="noopener">${w.titre} ↗</a><div class="petit">${w.texte || ''}</div></div></div>`;
+R.aides = w => `<div class="aides" data-n="0">${w.items.map((a,i)=>`<div class="aide" hidden><strong>Aide ${i+1} :</strong> ${a}</div>`).join('')}<button class="btn petit" type="button" data-act="aide">💡 Afficher l’aide 1 / ${w.items.length}</button></div>`;
+R.reponse = w => { const v = ETAT.answers[w.id] || ''; return `<div class="widget"><label class="lbl" for="r-${w.id}">${w.label}</label><textarea id="r-${w.id}" data-save="${w.id}" rows="${w.rows || 4}" placeholder="Écris ta réponse ici…">${esc(v)}</textarea><div class="sauve">Enregistré automatiquement dans ce navigateur.</div></div>`; };
+
+R.tri = w => {
+  const sv = ETAT.answers[w.id] || [];
+  const items = melange(w.items.map((it,i)=>Object.assign({i}, it)), w.id);
+  const opts = w.cats.map((c,i)=>({c,i}));
+  const optsAff = w.cats.length > 4 ? melange(opts, w.id + 'c') : opts;
+  return `<div class="widget" data-w="${w.id}">${w.consigne ? `<p class="consigne">${w.consigne}</p>` : ''}
+  ${items.map(it => `<div class="ligne-tri"><div><span id="lb-${w.id}-${it.i}">${it.l}</span><div class="fb" id="fb-${w.id}-${it.i}"></div></div>
+   <select data-champ="${w.id}" data-i="${it.i}" aria-labelledby="lb-${w.id}-${it.i}" ${w.mono ? 'style="font-family:var(--mono)"' : ''}><option value="">— choisir —</option>${optsAff.map(o=>`<option value="${o.i}" ${String(sv[it.i]) === String(o.i) ? 'selected' : ''}>${esc(o.c)}</option>`).join('')}</select></div>`).join('')}
+  ${actionsHTML(w.id)}</div>`;
+};
+
+R.qcm = w => {
+  const sv = ETAT.answers[w.id] || {};
+  return `<div class="widget" data-w="${w.id}">${w.qs.map((q,qi) => {
+    const multi = Array.isArray(q.a); const type = multi ? 'checkbox' : 'radio'; const sel = sv[qi] || [];
+    return `<fieldset><legend>${qi+1}. ${q.q}${multi ? ' <span class="muted petit">(plusieurs réponses)</span>' : ''}</legend>
+    ${q.o.map((o,oi)=>`<label class="opt"><input type="${type}" name="${w.id}-${qi}" value="${oi}" data-champ="${w.id}" data-q="${qi}" ${sel.includes(oi) ? 'checked' : ''}><span>${o}</span></label>`).join('')}
+    <div class="fb" id="fb-${w.id}-${qi}"></div></fieldset>`; }).join('')}${actionsHTML(w.id)}</div>`;
+};
+
+R.ordre = w => {
+  let ordre = ETAT.answers[w.id];
+  if (!Array.isArray(ordre) || ordre.length !== w.lignes.length){
+    const idx = w.lignes.map((_,i)=>i); let m = melange(idx, w.id); let k = 0;
+    while (m.every((v,i)=>v===i) && k < 5){ m = melange(idx, w.id + k); k++; }
+    ordre = m;
+  }
+  return `<div class="widget" data-w="${w.id}"><p class="consigne">Remets les lignes dans le bon ordre avec les flèches ↑ ↓.</p>
+  <ol class="ordre-liste" id="ol-${w.id}">${ordre.map(i => `<li data-i="${i}"><button type="button" data-act="haut" aria-label="Monter la ligne">↑</button><button type="button" data-act="bas" aria-label="Descendre la ligne">↓</button>${w.code ? `<code>${esc(w.lignes[i])}</code>` : `<span class="txt" style="white-space:pre-wrap">${esc(w.lignes[i])}</span>`}</li>`).join('')}</ol>
+  ${actionsHTML(w.id)}<div class="fb" id="fb-${w.id}"></div></div>`;
+};
+
+R.trous = w => {
+  const sv = ETAT.answers[w.id] || [];
+  const ligne = l => esc(l).replace(/\[\[(\d+)\]\]/g, (_, n) => {
+    const b = w.blancs[+n]; const v = sv[+n] || '';
+    if (b.type === 'select') return `<select data-champ="${w.id}" data-i="${n}" aria-label="Case ${+n+1}"><option value="">?</option>${b.opts.map(o=>`<option ${o===v?'selected':''}>${esc(o)}</option>`).join('')}</select>`;
+    return `<input type="text" data-champ="${w.id}" data-i="${n}" aria-label="Case ${+n+1}" size="${b.w || 8}" value="${esc(v)}" autocomplete="off" spellcheck="false">`;
+  }).replace(/(#[^\n]*)$/, '<span class="com">$1</span>');
+  return `<div class="widget" data-w="${w.id}">${w.intro ? `<p class="consigne">${w.intro}</p>` : '<p class="consigne">Complète les cases du programme.</p>'}
+  <pre class="code">${w.code.map(ligne).join('\n')}</pre>
+  <div id="fbt-${w.id}">${w.blancs.map((b,i)=>`<div class="fb" id="fb-${w.id}-${i}"></div>`).join('')}</div>${actionsHTML(w.id)}</div>`;
+};
+
+R.numerique = w => {
+  const sv = ETAT.answers[w.id] || [];
+  return `<div class="widget" data-w="${w.id}">${w.qs.map((q,i)=>`<div class="num-q"><label for="n-${w.id}-${i}">${q.q}</label><div class="champ"><input type="text" inputmode="decimal" id="n-${w.id}-${i}" data-champ="${w.id}" data-i="${i}" value="${esc(sv[i] || '')}" autocomplete="off"><span>${q.u || ''}</span></div><div class="fb" id="fb-${w.id}-${i}" style="grid-column:1/-1"></div></div>`).join('')}${actionsHTML(w.id)}</div>`;
+};
+
+R.schema = w => {
+  const sv = ETAT.answers[w.id] || [];
+  const opts = melange(w.options.map((o,i)=>({o,i})), w.id);
+  const sel = (s,i) => `<select data-champ="${w.id}" data-i="${i}" aria-label="${esc(s.titre)}"><option value="">— choisir —</option>${opts.map(o=>`<option value="${o.i}" ${String(sv[i])===String(o.i)?'selected':''}>${esc(o.o)}</option>`).join('')}</select>`;
+  if (w.layout === 'arbre'){
+    return `<div class="widget arbre" data-w="${w.id}"><div class="racine">${w.racine}</div><div class="enfants">${w.slots.map((s,i)=>`<div class="bx" id="bx-${w.id}-${i}"><b>${s.titre}</b><span>${s.texte}</span><span class="petit muted">Critère :</span>${sel(s,i)}</div>`).join('')}</div>${actionsHTML(w.id)}</div>`;
+  }
+  return `<div class="widget" data-w="${w.id}"><div class="schema-chaine">${w.slots.map((s,i)=>`${i ? '<span class="fl" aria-hidden="true">→</span>' : ''}<div class="bx" id="bx-${w.id}-${i}"><b>${s.titre}</b>${sel(s,i)}</div>`).join('')}</div>${actionsHTML(w.id)}</div>`;
+};
+
+R.tableau = w => {
+  const sv = ETAT.answers[w.id] || {};
+  return `<div class="widget"><div class="tablewrap"><table class="tab-saisie"><thead><tr>${w.cols.map(c=>`<th scope="col">${esc(c)}</th>`).join('')}</tr></thead><tbody>
+  ${w.rows.map((r,ri)=>`<tr>${r.map((c,ci)=> c === null ? `<td><input type="text" data-tab="${w.id}" data-k="${ri}-${ci}" value="${esc(sv[ri+'-'+ci] || '')}" aria-label="${esc(w.cols[ci])}, ligne ${ri+1}"></td>` : `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}
+  </tbody></table></div><div class="sauve">Tableau enregistré automatiquement dans ce navigateur.</div></div>`;
+};
+
+/* ----- Simulateur 1 : autonomie de la trottinette (modèle physique simplifié) ----- */
+R.simAutonomie = w => `<div class="sim" id="sim-${w.id}">
+  <div class="ctrl">
+    <label>Vitesse : <input type="range" min="10" max="25" value="15" data-r="v"> <output data-o="v">15 km/h</output></label>
+    <label>Masse du conducteur : <input type="range" min="40" max="110" step="5" value="75" data-r="m"> <output data-o="m">75 kg</output></label>
+    <label>Pente moyenne : <input type="range" min="0" max="6" step="0.5" value="0" data-r="p"> <output data-o="p">0 %</output></label>
+    <label>Température : <select data-r="t"><option value="1">20 °C</option><option value="0.9">10 °C</option><option value="0.8">0 °C</option></select></label>
+  </div>
+  <div class="afficheur" aria-live="polite" data-o="aff"></div>
+  <canvas width="760" height="60" aria-label="Jauge d’autonomie"></canvas>
+  <p class="petit muted">Modèle simplifié : batterie 280,8 Wh (90 % utilisables), trottinette 14 kg, résistance au roulement, résistance de l’air, pente, rendement global 70 %, 3 Wh/km pour l’éclairage et les accélérations ; le froid réduit la capacité utilisable.</p></div>`;
+function autonomie(v, m, p, kt){
+  const M = m + 14, g = 9.81, vs = v / 3.6;
+  const F = 0.012 * M * g + 0.5 * 1.2 * 0.6 * vs * vs + M * g * p / 100;   /* N */
+  const c = F * 1000 / 3600 / 0.7 + 3;                                     /* Wh/km */
+  return {c, km: 280.8 * 0.9 * kt / c};
+}
+function initSimAutonomie(id){
+  const box = $('#sim-' + id); if (!box) return;
+  const g = k => $(`[data-r=${k}]`, box), cv = $('canvas', box), ctx = cv.getContext('2d');
+  function maj(){
+    $('[data-o=v]', box).textContent = g('v').value + ' km/h'; $('[data-o=m]', box).textContent = g('m').value + ' kg'; $('[data-o=p]', box).textContent = String(g('p').value).replace('.', ',') + ' %';
+    const r = autonomie(+g('v').value, +g('m').value, +g('p').value, +g('t').value);
+    $('[data-o=aff]', box).textContent = `Consommation ≈ ${r.c.toFixed(1).replace('.', ',')} Wh/km — Autonomie ≈ ${Math.round(r.km)} km`;
+    ctx.clearRect(0,0,cv.width,cv.height); const L = cv.width - 40, x = Math.min(r.km / 40, 1) * L;
+    ctx.fillStyle = '#e6eded'; ctx.fillRect(20, 14, L, 20); ctx.fillStyle = r.km >= 20 ? '#2E7D5B' : r.km >= 12 ? '#9A6900' : '#B3261E'; ctx.fillRect(20, 14, x, 20);
+    ctx.fillStyle = '#14262B'; ctx.font = '12px sans-serif'; [0,10,20,30,40].forEach(k => ctx.fillText(k + ' km', 20 + k/40*L - 10, 52));
+    const ann = 20 + 25/40*L; ctx.strokeStyle = '#C2185B'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(ann, 8); ctx.lineTo(ann, 40); ctx.stroke(); ctx.lineWidth = 1; ctx.fillStyle = '#C2185B'; ctx.fillText('annoncé', ann + 4, 10);
+  }
+  ['v','m','p'].forEach(k => g(k).addEventListener('input', maj)); g('t').addEventListener('change', maj); maj();
+}
+
+/* ----- Simulateur 2 : transmission par poulies et courroie ----- */
+R.simTransmission = w => `<div class="sim" id="sim-${w.id}">
+  <div class="ctrl">
+    <label>Poulie moteur : <select data-r="zm">${[10,11,12,13,14,15,16,18].map(z=>`<option ${z===12?'selected':''}>${z}</option>`).join('')}</select> dents</label>
+    <label>Poulie de roue : <select data-r="zr">${[54,57,60,64,68,72,76,80].map(z=>`<option ${z===72?'selected':''}>${z}</option>`).join('')}</select> dents</label>
+    <span class="petit">Moteur : 3 000 tr/min — roue : Ø 20 cm</span>
+  </div>
+  <canvas width="760" height="150" aria-label="Schéma de la transmission : deux poulies reliées par une courroie"></canvas>
+  <div class="afficheur" aria-live="polite" data-o="aff"></div>
+  <div class="resultat" data-o="res" aria-live="polite"></div></div>`;
+function initSimTransmission(id){
+  const box = $('#sim-' + id); if (!box) return;
+  const g = k => $(`[data-r=${k}]`, box), cv = $('canvas', box), ctx = cv.getContext('2d');
+  let angle = 0, anim = null, last = performance.now();
+  function etat(){ const zm = +g('zm').value, zr = +g('zr').value; const nr = 3000 * zm / zr; const v = nr * Math.PI * 0.20 * 60 / 1000; const effort = (12/72) / (zm/zr); return {zm, zr, nr, v, effort}; }
+  function dessiner(){
+    const e = etat(); ctx.clearRect(0,0,cv.width,cv.height);
+    const r1 = 8 + e.zm * 1.6, r2 = 8 + e.zr * 0.9, x1 = 160, x2 = 470, y = 75;
+    ctx.strokeStyle = '#14262B'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(x1, y - r1); ctx.lineTo(x2, y - r2); ctx.moveTo(x1, y + r1); ctx.lineTo(x2, y + r2); ctx.stroke(); ctx.lineWidth = 1;
+    [[x1, r1, angle, '#C2185B', 'moteur'],[x2, r2, angle * e.zm / e.zr, '#0E6E6B', 'roue']].forEach(([x, r, a, c, t]) => {
+      ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + Math.cos(a) * r, y + Math.sin(a) * r); ctx.stroke(); ctx.lineWidth = 1;
+      ctx.fillStyle = '#14262B'; ctx.font = '13px sans-serif'; ctx.fillText(t, x - 18, y + r + 18); });
+    ctx.fillText('courroie crantée', 270, 20);
+    $('[data-o=aff]', box).textContent = `Rapport ${e.zm}/${e.zr} = ${(e.zm/e.zr).toFixed(3).replace('.', ',')} — roue : ${Math.round(e.nr)} tr/min — vitesse ≈ ${e.v.toFixed(1).replace('.', ',')} km/h — effort en côte : ×${e.effort.toFixed(2).replace('.', ',')} par rapport à l’origine`;
+    const res = $('[data-o=res]', box);
+    if (e.v > 25){ res.textContent = '✘ Vitesse par construction supérieure à 25 km/h : cette trottinette ne serait pas autorisée sur la voie publique (débridage interdit).'; res.className = 'resultat ko-bg'; }
+    else { res.textContent = `✔ Vitesse inférieure ou égale à 25 km/h : conforme. ${e.effort < 1 ? 'Attention : l’effort disponible en côte diminue.' : e.effort > 1 ? 'L’effort disponible en côte augmente, la vitesse diminue.' : ''}`; res.className = 'resultat ok-bg'; }
+  }
+  const tour = now => { const dt = (now - last) / 1000; last = now; angle += dt * 6; dessiner(); if (document.body.contains(cv)) anim = requestAnimationFrame(tour); };
+  ['zm','zr'].forEach(k => g(k).addEventListener('change', dessiner)); anim = requestAnimationFrame(tour);
+}
+
+/* ----- Outil 3 : diagramme de planification (type Gantt) ----- */
+R.gantt = w => {
+  const sv = ETAT.answers[w.id] || [];
+  return `<div class="widget gantt" data-w="${w.id}"><div class="tablewrap"><table><thead><tr><th>Tâche</th><th>Durée</th><th>Après</th><th>Début (min)</th><th style="width:40%">Planning (0 à ${w.max} min)</th></tr></thead><tbody>
+  ${w.taches.map((t,i)=>`<tr id="gr-${w.id}-${i}"><td>${t.n}</td><td>${t.d} min</td><td>${t.pred.length ? t.pred.map(p=>String.fromCharCode(65+p)).join(', ') : '—'}</td>
+   <td><input type="text" inputmode="numeric" size="4" data-champ="${w.id}" data-i="${i}" value="${esc(sv[i] ?? '')}" aria-label="Minute de début de la tâche ${String.fromCharCode(65+i)}"></td>
+   <td><div style="position:relative;height:18px;background:#eef3f3;border-radius:4px"><div id="gb-${w.id}-${i}" style="position:absolute;top:0;height:18px;border-radius:4px;background:var(--teal)"></div></div></td></tr>`).join('')}
+  </tbody></table></div><p class="petit" id="gt-${w.id}"></p><div class="fb" id="fb-${w.id}-0"></div>${actionsHTML(w.id)}</div>`;
+};
+function majGantt(id){
+  const w = WIDGETS[id].def; const box = $(`[data-w="${id}"]`); if (!box) return;
+  let fin = 0;
+  w.taches.forEach((t,i) => { const v = parseInt($(`[data-champ][data-i="${i}"]`, box).value, 10); const b = $(`#gb-${id}-${i}`);
+    if (isNaN(v)){ b.style.width = '0'; return; } b.style.left = Math.min(100, v / w.max * 100) + '%'; b.style.width = Math.max(0, Math.min(100 - v / w.max * 100, t.d / w.max * 100)) + '%'; fin = Math.max(fin, v + t.d); });
+  $(`#gt-${id}`).textContent = fin ? `Fin du projet prévue à ${fin} min (maximum : ${w.max} min).` : '';
+}
+
+/* ----- Outil 3 : diagnostic de panne par tests ----- */
+R.diag = w => {
+  const faits = ETAT.answers[w.id + '-tests'] || []; const sv = ETAT.answers[w.id] || [];
+  return `<div class="widget" data-w="${w.id}"><p class="consigne">Tests disponibles (clique pour réaliser un test) :</p>
+  <div class="diag-tests">${w.tests.map((te,i)=>`<div class="diag-test"><button class="btn petit" type="button" data-act="diagtest" data-id="${w.id}" data-i="${i}" ${faits.includes(i)?'disabled':''}>${faits.includes(i)?'✔ ':''}Test ${i+1} — ${te.l}</button><div class="fb ok" id="dt-${w.id}-${i}">${faits.includes(i) ? te.r : ''}</div></div>`).join('')}</div>
+  <p class="petit"><strong>Tests réalisés : <span id="nbt-${w.id}">${faits.length}</span></strong></p>
+  <label class="lbl" for="dg-${w.id}">Mon diagnostic : la cause de la panne est…</label>
+  <select id="dg-${w.id}" data-champ="${w.id}" data-i="0"><option value="">— choisir —</option>${w.options.map((o,i)=>`<option value="${i}" ${String(sv[0])===String(i)?'selected':''}>${esc(o)}</option>`).join('')}</select>
+  <div class="fb" id="fb-${w.id}-0"></div>${actionsHTML(w.id)}</div>`;
+};
+function testDiag(id, i){
+  const w = WIDGETS[id].def; const k = id + '-tests'; const faits = ETAT.answers[k] || [];
+  if (!faits.includes(i)) faits.push(i); ETAT.answers[k] = faits; sauver();
+  const b = $(`[data-act="diagtest"][data-id="${id}"][data-i="${i}"]`); b.disabled = true; b.textContent = '✔ ' + b.textContent;
+  $(`#dt-${id}-${i}`).textContent = w.tests[i].r; $(`#nbt-${id}`).textContent = faits.length;
+}
+
+/* ----- Outil 4 : tableau de décision pondéré (générique) ----- */
+R.decision = w => {
+  const sv = ETAT.answers[w.id] || {p:w.criteres.map(()=>1), budget:true};
+  return `<div class="widget decision" data-w="${w.id}"><label class="opt" style="margin-bottom:8px"><input type="checkbox" data-dec="budget" ${sv.budget ? 'checked' : ''}><span>${w.exigence.label}</span></label>
+  <div class="tablewrap"><table><thead><tr><th>Critère (note sur 5)</th><th class="num">Poids (0 à 3)</th>${w.produits.map(r=>`<th class="num">${r.n}</th>`).join('')}</tr></thead><tbody>
+  ${w.criteres.map((c,i)=>`<tr><td>${c.c}</td><td class="num"><select data-dec="p" data-i="${i}" aria-label="Poids : ${esc(c.c)}">${[0,1,2,3].map(v=>`<option ${sv.p[i]==v?'selected':''}>${v}</option>`).join('')}</select></td>${c.notes.map(n=>`<td class="num">${n}</td>`).join('')}</tr>`).join('')}
+  </tbody><tfoot><tr><th colspan="2">Score pondéré (Σ poids × note)</th>${w.produits.map((r,i)=>`<th class="num" id="tot-${w.id}-${i}"></th>`).join('')}</tr></tfoot></table></div>
+  <div class="resultat" id="res-${w.id}" aria-live="polite"></div></div>`;
+};
+function majDecision(id){
+  const box = $(`[data-w="${id}"]`); if (!box) return; const w = WIDGETS[id].def;
+  const p = $$('[data-dec=p]', box).map(s => +s.value); const budget = $('[data-dec=budget]', box).checked;
+  ETAT.answers[id] = {p, budget}; sauver();
+  const tot = w.produits.map((r,i) => w.criteres.reduce((a,c,k)=>a + p[k]*c.notes[i], 0));
+  const exclu = w.produits.map((r,i) => budget && w.exigence.exclus.includes(i));
+  w.produits.forEach((r,i) => { $(`#tot-${id}-${i}`).textContent = exclu[i] ? `${tot[i]} — ${w.exigence.motif}` : tot[i]; });
+  const cands = w.produits.map((r,i)=>({r,i,t:tot[i]})).filter(o=>!exclu[o.i]).sort((a,b)=>b.t-a.t);
+  let msg = cands.length ? `Classement : ${cands.map((o,k)=>`${k+1}. ${o.r.n} (${o.t})`).join(' · ')}.` : 'Aucun modèle retenu.';
+  if (cands.length > 1 && cands[0].t === cands[1].t) msg += ' Égalité : il faut départager par un argument supplémentaire.';
+  let alerte = false; (w.alertes || []).forEach(a => { if (p[a.i] === 0){ msg += ' ⚠ ' + a.msg; alerte = true; } });
+  const res = $(`#res-${id}`); res.textContent = msg; res.className = 'resultat ' + (alerte ? 'ko-bg' : 'ok-bg');
+}
+
+/* =====================================================================
+   10. VÉRIFICATIONS ET SCORES
+   ===================================================================== */
+function collecter(id){
+  const w = WIDGETS[id] && WIDGETS[id].def; if (!w) return;
+  const box = $(`[data-w="${id}"]`); if (!box) return;
+  if (w.t === 'qcm'){ const o = {}; w.qs.forEach((q,qi)=>{ o[qi] = $$(`input[data-q="${qi}"]`, box).filter(i=>i.checked).map(i=>+i.value); }); ETAT.answers[id] = o; }
+  else if (w.t === 'ordre'){ ETAT.answers[id] = $$('li', $('#ol-' + id)).map(li => +li.dataset.i); }
+  else { const a = []; $$('[data-champ]', box).forEach(el => { a[+el.dataset.i] = el.value; }); ETAT.answers[id] = a; }
+  sauver();
+}
+const VERIF = {
+  gantt(w, box){ const deb = w.taches.map((t,i) => parseInt($(`[data-champ][data-i="${i}"]`, box).value, 10)); let ok = 0; const pb = [];
+    w.taches.forEach((t,i) => { const L = String.fromCharCode(65+i); let bon = !isNaN(deb[i]) && deb[i] >= 0 && deb[i] + t.d <= w.max;
+      if (isNaN(deb[i])) pb.push(`${L} : début non renseigné`); else if (deb[i] + t.d > w.max) pb.push(`${L} : se termine après ${w.max} min`);
+      t.pred.forEach(p => { if (isNaN(deb[p]) || deb[i] < deb[p] + w.taches[p].d){ bon = false; if (!isNaN(deb[i])) pb.push(`${L} commence avant la fin de ${String.fromCharCode(65+p)}`); } });
+      ok += bon; $(`#gr-${w.id}-${i}`).classList.toggle('ok-bg', bon); $(`#gr-${w.id}-${i}`).classList.toggle('ko-bg', !bon); });
+    majGantt(w.id); const f = $(`#fb-${w.id}-0`); f.className = 'fb ' + (ok === w.taches.length ? 'ok' : 'ko');
+    f.textContent = ok === w.taches.length ? '✔ Planning valide : toutes les contraintes sont respectées dans le temps imparti.' : '✘ ' + pb.slice(0, 4).join(' ; ') + (pb.length > 4 ? '…' : '.'); return [ok, w.taches.length]; },
+  diag(w, box){ const sel = $(`#dg-${w.id}`); const n = (ETAT.answers[w.id + '-tests'] || []).length; const bon = sel.value !== '' && +sel.value === w.a; sel.classList.toggle('ok-bg', bon); sel.classList.toggle('ko-bg', !bon); const f = $(`#fb-${w.id}-0`);
+    if (sel.value === ''){ f.className = 'fb ko'; f.textContent = 'Choisis un diagnostic.'; return [0,1]; }
+    if (!n){ f.className = 'fb ko'; f.textContent = 'Un diagnostic se justifie par des tests : réalise d’abord des tests.'; return [0,1]; }
+    f.className = 'fb ' + (bon ? 'ok' : 'ko'); f.textContent = bon ? `✔ Bon diagnostic, avec ${n} test(s). ${n <= 4 ? 'Démarche efficace.' : 'Tu aurais pu conclure avec moins de tests : lesquels étaient inutiles ?'}` : '✘ Ce diagnostic est contredit par au moins un de tes tests. Relis les résultats (ou réalise un autre test).'; return [bon ? 1 : 0, 1]; },
+  tri(w, box){ let ok = 0; w.items.forEach((it,i) => { const s = $(`select[data-i="${i}"]`, box); const bon = s.value !== '' && +s.value === it.a; ok += bon; s.classList.toggle('ok-bg', bon); s.classList.toggle('ko-bg', !bon); const f = $(`#fb-${w.id}-${i}`); f.className = 'fb ' + (bon ? '' : 'ko'); f.textContent = bon ? '' : (s.value === '' ? 'Choisis une réponse.' : (it.fb ? '↺ ' + 'Indice : ' + it.fb : 'Ce n’est pas la bonne famille.')); }); return [ok, w.items.length]; },
+  schema(w, box){ let ok = 0; w.slots.forEach((sl,i) => { const s = $(`select[data-i="${i}"]`, box); const bon = s.value !== '' && +s.value === sl.a; ok += bon; $(`#bx-${w.id}-${i}`).classList.toggle('ok-bg', bon); $(`#bx-${w.id}-${i}`).classList.toggle('ko-bg', !bon); }); return [ok, w.slots.length]; },
+  qcm(w, box){ let ok = 0; w.qs.forEach((q,qi) => { const sel = $$(`input[data-q="${qi}"]`, box).filter(i=>i.checked).map(i=>+i.value).sort(); const att = (Array.isArray(q.a) ? q.a.slice() : [q.a]).sort(); const bon = sel.length === att.length && sel.every((v,k)=>v===att[k]); ok += bon; const f = $(`#fb-${w.id}-${qi}`);
+      if (!sel.length){ f.className = 'fb ko'; f.textContent = 'Choisis une réponse.'; return; }
+      const fbOpt = !bon && q.fb && sel.length === 1 && q.fb[sel[0]] ? q.fb[sel[0]] + ' ' : '';
+      f.className = 'fb ' + (bon ? 'ok' : 'ko'); f.textContent = bon ? '✔ ' + q.ex : '✘ ' + (fbOpt || (Array.isArray(q.a) ? 'Vérifie chaque proposition : il y a ' + q.a.length + ' bonnes réponses. ' : 'Relis la question et réessaie. ')); }); return [ok, w.qs.length]; },
+  ordre(w, box){ const ord = $$('li', $('#ol-' + w.id)).map(li => +li.dataset.i); const bons = [w.lignes.map((_,i)=>i)].concat(w.alt || []);
+      const ref = bons.find(b => b.every((v,i)=>v===ord[i])) || bons[0]; let ok = 0;
+      $$('li', $('#ol-' + w.id)).forEach((li,i) => { const b = ord[i] === ref[i]; ok += b; li.classList.toggle('ok-bg', b); li.classList.toggle('ko-bg', !b); });
+      const f = $('#fb-' + w.id); f.className = 'fb ' + (ok === ord.length ? 'ok' : 'ko'); f.textContent = ok === ord.length ? '✔ Programme dans le bon ordre.' : `✘ ${ord.length - ok} ligne(s) mal placée(s) (en rouge). Utilise les aides si besoin.`; return [ok, ord.length]; },
+  trous(w, box){ let ok = 0; w.blancs.forEach((b,i) => { const el = $(`[data-champ][data-i="${i}"]`, box); const v = el.value.trim().replace(/\s+/g,''); let bon;
+      if (b.range){ const n = Number(v); bon = v !== '' && Number.isInteger(n) && n >= b.range[0] && n <= b.range[1]; }
+      else bon = b.ok.map(x=>x.replace(/\s+/g,'')).includes(v);
+      ok += bon; el.classList.toggle('ok-bg', bon); el.classList.toggle('ko-bg', !bon); const f = $(`#fb-${w.id}-${i}`); f.className = 'fb ' + (bon ? '' : 'ko'); f.textContent = bon ? '' : `Case ${i+1} : ${b.fb}`; }); return [ok, w.blancs.length]; },
+  numerique(w, box){ let ok = 0; w.qs.forEach((q,i) => { const el = $(`#n-${w.id}-${i}`); const v = parseFloat(el.value.replace(/\s/g,'').replace(',', '.')); const bon = !isNaN(v) && Math.abs(v - q.a) <= q.tol; ok += bon; el.classList.toggle('ok-bg', bon); el.classList.toggle('ko-bg', !bon); const f = $(`#fb-${w.id}-${i}`); f.className = 'fb ' + (bon ? 'ok' : 'ko'); f.textContent = bon ? '✔ ' + q.ex : (isNaN(v) ? 'Écris un nombre.' : '✘ Ce n’est pas la bonne valeur. Vérifie tes calculs (aides disponibles) et réessaie.'); }); return [ok, w.qs.length]; }
+};
+function verifier(id){
+  const w = WIDGETS[id].def, box = $(`[data-w="${id}"]`);
+  collecter(id);
+  const [ok, tot] = VERIF[w.t](w, box);
+  ETAT.scores[id] = {ok, tot, date:new Date().toISOString()}; sauver();
+  const sc = $('#sc-' + id); sc.textContent = `Score : ${ok} / ${tot}`; sc.className = 'score ' + classeScore(ok, tot);
+}
+function afficherScoresExistants(){
+  Object.keys(ETAT.scores).forEach(id => { const sc = $('#sc-' + id); if (sc){ const s = ETAT.scores[id]; sc.textContent = `Dernier score : ${s.ok} / ${s.tot}`; sc.className = 'score ' + classeScore(s.ok, s.tot); } });
+}
+
+/* =====================================================================
+   11. PAGES
+   ===================================================================== */
+const ROBOT_SVG = `<svg viewBox="0 0 300 200" role="img" aria-label="Illustration : trottinette électrique avec batterie, moteur et courroie" style="width:100%;max-width:340px;display:block;margin:auto">
+<rect x="0" y="182" width="300" height="18" fill="#dfe9e8"/>
+<path d="M210 30 L232 158" stroke="#14262B" stroke-width="8" stroke-linecap="round"/><path d="M188 28 h44" stroke="#14262B" stroke-width="8" stroke-linecap="round"/>
+<rect x="60" y="148" width="170" height="14" rx="5" fill="#0E6E6B"/><rect x="85" y="150" width="90" height="9" rx="2" fill="#9A6900"/><text x="94" y="158" font-size="8" fill="#fff" font-family="sans-serif">BATTERIE 36 V</text>
+<circle cx="64" cy="168" r="18" fill="#14262B"/><circle cx="64" cy="168" r="6" fill="#5A6C71"/><circle cx="232" cy="168" r="18" fill="#14262B"/><circle cx="232" cy="168" r="6" fill="#5A6C71"/>
+<circle cx="110" cy="174" r="6" fill="#C2185B"/><path d="M110 168 L64 158 M110 180 L64 178" stroke="#C2185B" stroke-width="2"/>
+<path d="M150 70 l-14 30 h14 l-8 28 l24 -38 h-14 l10 -20 z" fill="#C2185B"/>
+<text x="20" y="40" font-size="13" fill="#5A6C71" font-family="sans-serif">batterie → moteur → roue</text></svg>`;
+
+function filAriane(items){ return `<nav class="fil" aria-label="Fil d’Ariane">${items.map((it,i)=> it[1] ? `<a href="${it[1]}">${it[0]}</a>` : `<span aria-current="page">${it[0]}</span>`).join('<span aria-hidden="true">›</span>')}</nav>`; }
+
+function pageAccueil(){
+  const comps = SEQUENCE.competences;
+  return `${filAriane([['Accueil']])}
+  <section class="entete"><div class="hero"><div>
+    <span class="kicker">Technologie 3e · Cycle 4 · Séquence</span>
+    <h1>${SEQUENCE.titre}</h1>
+    <p class="probleme">${SEQUENCE.problematique}</p>
+    <div class="meta">${SEQUENCE.reperes.map(tagRep).join('')}<span class="tag gris">${SEQUENCE.duree}</span></div>
+    <p><a class="btn plein" href="#sequence">Découvrir la séquence →</a> <a class="btn" href="#s1">Commencer la séance 1</a></p>
+  </div><div>${ROBOT_SVG}</div></div></section>
+
+  <section class="bloc"><h2>Sommaire des séances</h2>
+    <p class="muted petit">Filtrer par compétence :</p>
+    <div class="chips" role="group" aria-label="Filtrer les séances par compétence">${comps.map(c=>`<button class="chip" type="button" data-act="filtre" data-c="${c}" aria-pressed="false" title="${esc(COMPETENCES[c])}">${c}</button>`).join('')}<button class="chip" type="button" data-act="filtre" data-c="" aria-pressed="true">Toutes</button></div>
+    <div class="cartes" id="cartesSeances">${SEQUENCE.seances.map(s => { const p = progression(s); const pc = p.total ? Math.round(100*p.faits/p.total) : 0; return `<a class="carte" href="#${s.id}" data-comp="${s.comp.join(' ')}">
+      <span class="n">Séance ${s.num} · ${s.duree}${s.evaluation ? ' · Évaluation' : ''}</span><h3>${s.titre}</h3><span class="muted petit">${s.sous}</span>
+      <span class="meta">${s.reperes.map(tagRep).join('')}</span>
+      <span class="petit">${ETAT.done[s.id] ? '<span class="fait">✔ Séance terminée</span>' : `Exercices vérifiés : ${p.faits} / ${p.total}`}</span>
+      <span class="barre" aria-hidden="true"><span style="width:${pc}%"></span></span><span class="fleche">Ouvrir →</span></a>`; }).join('')}</div>
+  </section>
+
+  <section class="bloc"><h2>Mes données</h2>
+    <p>Tes réponses, tes scores et ta progression sont enregistrés <strong>uniquement dans ce navigateur, sur cet appareil</strong>. Ils ne sont pas synchronisés entre plusieurs appareils et peuvent être effacés si l’historique du navigateur est vidé. Pense à exporter ton travail.</p>
+    ${stockageOK ? '' : '<p class="fb ko">⚠ Le stockage local est indisponible dans ce navigateur (mode privé ?) : tes réponses ne seront pas conservées après fermeture.</p>'}
+    <div class="actions"><button class="btn plein" type="button" data-act="exporter">⬇ Exporter mes réponses (.txt)</button><button class="btn" type="button" onclick="window.print()">🖨 Imprimer la page</button><button class="btn" type="button" data-act="reinit">Réinitialiser toutes mes réponses</button></div>
+  </section>
+
+  <section class="bloc prof-only boite-prof"><h2>Espace enseignant</h2><p>Fiches de préparation, analyse de la fiche groupe, traçabilité des compétences, grille d’évaluation et corrigés : <a href="#enseignant">ouvrir l’espace enseignant</a>. Dans chaque séance, les encadrés jaunes donnent le déroulement, le matériel, les réponses attendues et la différenciation.</p></section>`;
+}
+
+function pageSequence(){
+  return `${filAriane([['Accueil','#accueil'],['La séquence']])}
+  <section class="entete"><span class="kicker">Présentation générale</span><h1>${SEQUENCE.titre}</h1><p class="probleme">${SEQUENCE.problematique}</p></section>
+  <section class="bloc"><h2>Situation de départ</h2><div class="situation">${SEQUENCE.situation}</div>
+    <div class="grille2" style="margin-top:14px"><div><h3>Objet technique étudié</h3><p>${SEQUENCE.objet}</p></div><div><h3>Durée</h3><p>${SEQUENCE.duree}</p></div></div></section>
+  <section class="bloc"><h2>Objectifs d’apprentissage</h2><ul>${SEQUENCE.objectifs.map(o=>`<li>${o}</li>`).join('')}</ul></section>
+  <section class="bloc"><h2>Compétences et repères mobilisés</h2>
+    <div class="tablewrap"><table><thead><tr><th>Compétence</th><th>Repère (carte 3e)</th><th>Connaissances associées</th><th>Séances</th></tr></thead><tbody>
+    ${SEQUENCE.reperes.map(code => { const r = repere(code); const ss = SEQUENCE.seances.filter(s=>s.reperes.includes(code)).map(s=>`<a href="#${s.id}">S${s.num}</a>`).join(', '); return `<tr><td><strong>${r[1]}</strong><br><span class="petit muted">${COMPETENCES[r[1]]}</span></td><td>${tagRep(code)}${code===SEQUENCE.reperePrincipal?' <span class="tag gris">repère principal</span>':''}<br>${r[2]}</td><td><ul>${CONNAISSANCES[code].map(k=>`<li>${k}</li>`).join('')}</ul></td><td>${ss}</td></tr>`; }).join('')}
+    </tbody></table></div></section>
+  <section class="bloc"><h2>Prérequis</h2><ul>${SEQUENCE.prerequis.map(p=>`<li>${p}</li>`).join('')}</ul></section>
+  <section class="bloc"><h2>Progression et productions attendues</h2>
+    <div class="tablewrap"><table><thead><tr><th>Séance</th><th>Étape de la démarche</th><th>Problématique de la séance</th><th>Repères</th></tr></thead><tbody>
+    ${SEQUENCE.seances.map(s=>`<tr><td><a href="#${s.id}">S${s.num} — ${s.titre}</a></td><td>${s.etape}</td><td>${s.problematique}</td><td>${s.reperes.join(', ')}</td></tr>`).join('')}</tbody></table></div>
+    <h3>Productions des élèves</h3><ul>${SEQUENCE.productions.map(p=>`<li>${p}</li>`).join('')}</ul></section>`;
+}
+
+function blocWidgets(liste){ return liste.map(w => R[w.t] ? R[w.t](w) : '').join(''); }
+
+function pageSeance(s){
+  const i = SEQUENCE.seances.indexOf(s), prec = SEQUENCE.seances[i-1], suiv = SEQUENCE.seances[i+1];
+  const P = s.prof;
+  const prep = `<section class="boite-prof prof-only"><h2>Fiche de préparation — séance ${s.num}</h2>
+    <div class="grille2"><div><h4>Objectifs</h4><ul>${P.objectifs.map(o=>`<li>${o}</li>`).join('')}</ul></div>
+    <div><h4>Repères et connaissances</h4><ul>${s.reperes.map(c=>`<li><strong>${c}</strong> (${repere(c)[1]}) — ${repere(c)[2]}</li>`).join('')}</ul></div></div>
+    <h4>Déroulement (55 min)</h4><div class="tablewrap"><table><thead><tr><th>Minutes</th><th>Phase</th><th>Ce qui se passe</th></tr></thead><tbody>${P.deroulement.map(d=>`<tr><td>${d[0]}</td><td>${d[1]}</td><td>${d[2]}</td></tr>`).join('')}</tbody></table></div>
+    <h4>Matériel</h4><ul>${P.materiel.map(m=>`<li>${m}</li>`).join('')}</ul>
+    <div class="grille2"><div><h4>Différenciation — soutien</h4><ul>${P.differenciation.aide.map(m=>`<li>${m}</li>`).join('')}</ul></div><div><h4>Différenciation — approfondissement</h4><ul>${P.differenciation.defi.map(m=>`<li>${m}</li>`).join('')}</ul></div></div>
+    ${P.note ? `<h4>Point de vigilance</h4><p>${P.note}</p>` : ''}
+    ${P.corrige ? P.corrige : ''}
+    ${s.evaluation ? grilleHTML() : ''}</section>`;
+  const syn = s.synthese ? `<section class="bloc"><h2>Ma synthèse</h2><details class="depli"><summary>Afficher la synthèse (après les activités et la mise en commun)</summary>
+    <div class="synthese" style="margin-top:10px"><section><h3>Ce que je dois comprendre</h3><ul>${s.synthese.comprendre.map(x=>`<li>${x}</li>`).join('')}</ul></section>
+    <section><h3>Ce que je dois savoir</h3><ul>${s.synthese.savoir.map(x=>`<li>${x}</li>`).join('')}</ul></section>
+    <section><h3>Ce que je dois savoir faire</h3><ul>${s.synthese.savoirFaire.map(x=>`<li>${x}</li>`).join('')}</ul></section>
+    <section><h3>Vocabulaire essentiel</h3><dl class="vocab">${s.synthese.vocab.map(v=>`<dt>${v[0]}</dt><dd>${v[1]}</dd>`).join('')}</dl></section></div></details></section>` : '';
+  return `${filAriane([['Accueil','#accueil'],[SEQUENCE.court,'#sequence'],['Séance ' + s.num]])}
+  <section class="entete"><span class="kicker">Séance ${s.num} / ${SEQUENCE.seances.length} · ${s.duree} · ${s.etape}</span>
+    <h1>${s.titre}</h1><p class="lead">${s.sous}</p><div class="meta">${s.reperes.map(tagRep).join('')}</div></section>
+  ${prep}
+  <section class="bloc"><h2>${s.evaluation ? 'La situation' : 'Mise en situation'}</h2><div class="situation">${s.situation}</div></section>
+  <section class="bloc"><h2>${s.evaluation ? 'Le problème' : 'Mon problème à résoudre'}</h2><p class="probleme">${s.problematique}</p>${s.hypothese ? R.reponse(s.hypothese) : ''}</section>
+  ${s.activites.map((a,k)=>`<section class="bloc" id="${s.id}-a${k+1}"><div class="activite-h"><h2>${s.evaluation ? '' : `<span class="num">${k+1}</span>Activité ${k+1} — `}${a.titre}</h2><span class="duree">⏱ ${a.duree} · ${a.modalite}</span></div>${a.intro || ''}${blocWidgets(a.contenu)}${a.production ? `<span class="production">${a.production}</span>` : ''}</section>`).join('')}
+  <section class="bloc"><h2>${s.evaluation ? 'Après l’évaluation' : 'Mise en commun'}</h2>${s.miseEnCommun}</section>
+  ${syn}
+  ${s.verif && s.verif.length ? `<section class="bloc"><h2>Je vérifie mes acquis</h2>${blocWidgets(s.verif)}</section>` : ''}
+  ${s.defi ? `<section class="bloc"><h2>Pour aller plus loin — défi</h2><p>${s.defi}</p>${R.reponse({id:s.id+'-defi', label:'Ma réponse au défi :', rows:3})}</section>` : ''}
+  <div class="actions noprint" style="margin-top:16px"><button class="btn ${ETAT.done[s.id] ? '' : 'plein'}" type="button" data-act="terminer" data-s="${s.id}">${ETAT.done[s.id] ? '✔ Séance marquée comme terminée (annuler)' : 'J’ai terminé cette séance'}</button></div>
+  <nav class="navseance" aria-label="Séances précédente et suivante">${prec ? `<a class="btn" href="#${prec.id}">← Séance ${prec.num}</a>` : '<a class="btn" href="#sequence">← La séquence</a>'}<a class="btn" href="#accueil">⌂ Accueil</a>${suiv ? `<a class="btn plein" href="#${suiv.id}">Séance ${suiv.num} →</a>` : ''}</nav>`;
+}
+
+function grilleHTML(){
+  return `<h4>Grille d’évaluation par compétences</h4><div class="tablewrap"><table><thead><tr><th>Compétence · repère</th><th>Critère observable</th><th>Maîtrise insuffisante</th><th>Maîtrise fragile</th><th>Maîtrise satisfaisante</th><th>Très bonne maîtrise</th></tr></thead><tbody>
+  ${GRILLE.map(g=>`<tr><td><strong>${g.c}</strong> · ${g.r}</td><td>${g.crit}</td>${g.n.map(n=>`<td>${n}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${SEQUENCE.noteGrille ? `<p class="petit">${SEQUENCE.noteGrille}</p>` : ''}`;
+}
+
+function pageReperes(){
+  const usage = code => SEQUENCE.seances.filter(s=>s.reperes.includes(code));
+  return `${filAriane([['Accueil','#accueil'],['Les 38 repères de 3e']])}
+  <section class="entete"><span class="kicker">Tableau récapitulatif</span><h1>Les 38 repères de progressivité de 3e</h1><p class="lead">Intitulés des cartes 3e (BO n° 9 du 29 février 2024). Les repères non abordés dans cette séquence sont indiqués « non traité ».</p></section>
+  <section class="bloc"><div class="tablewrap"><table><thead><tr><th>Code</th><th>Compétence</th><th>Intitulé du repère</th><th>Séances de la séquence</th></tr></thead><tbody>
+  ${REPERES.map(r=>{ const u = usage(r[0]); return `<tr><td>${tagRep(r[0])}</td><td>${r[1]}</td><td>${r[2]}</td><td>${u.length ? u.map(s=>`<a href="#${s.id}">S${s.num}</a>`).join(', ') : '<span class="muted">Non traité</span>'}</td></tr>`; }).join('')}
+  </tbody></table></div>
+  <p class="petit muted">Bilan : ${SEQUENCE.reperes.length} repères traités sur 38, répartis sur ${SEQUENCE.competences.length} compétences (${SEQUENCE.competences.join(', ')}).</p></section>`;
+}
+
+function pageEnseignant(){
+  if (!PROF) return `${filAriane([['Accueil','#accueil'],['Espace enseignant']])}<section class="entete"><h1>Espace enseignant</h1><p>Active le <strong>mode enseignant</strong> (bouton en haut à droite) pour afficher cette page. Rappel : ce mode n’est qu’un affichage et ne protège pas les corrigés.</p><button class="btn plein" type="button" data-act="prof">Activer le mode enseignant</button></section>`;
+  return `${filAriane([['Accueil','#accueil'],['Espace enseignant']])}
+  <section class="entete"><span class="kicker">Espace enseignant</span><h1>Préparer et conduire la séquence</h1><p class="lead">Analyse de la fiche groupe, traçabilité des compétences, grille d’évaluation, préparation de chaque séance.</p>
+  <p class="petit">Accès rapide aux fiches de préparation : ${SEQUENCE.seances.map(s=>`<a href="#${s.id}">S${s.num}</a>`).join(' · ')}</p></section>
+  <section class="bloc boite-prof"><h2>Analyse de la fiche groupe (JSON)</h2>${ANALYSE_JSON}</section>
+  <section class="bloc boite-prof"><h2>Tableau de traçabilité des compétences</h2>
+   <p class="petit">Filtrer : <span class="chips" role="group" aria-label="Filtrer par compétence">${SEQUENCE.competences.map(c=>`<button class="chip" type="button" data-act="filtreT" data-c="${c}" aria-pressed="false">${c}</button>`).join('')}<button class="chip" type="button" data-act="filtreT" data-c="" aria-pressed="true">Toutes</button></span></p>
+   <div class="tablewrap"><table id="tabTrace"><thead><tr><th>Séance</th><th>Compétence</th><th>Repère</th><th>Connaissance (intitulé de la carte)</th><th>Activité réalisée</th><th>Production</th><th>Critère d’évaluation</th></tr></thead><tbody>
+   ${TRACABILITE.map(t=>{ const s = seance(t[0]); return `<tr data-comp="${t[1]}"><td><a href="#${s.id}">S${s.num}</a> ${s.titre}</td><td>${t[1]}</td><td>${t[2]}</td><td>${CONNAISSANCES[t[2]][t[3]]}</td><td>${t[4]}</td><td>${t[5]}</td><td>${t[6]}</td></tr>`; }).join('')}
+   </tbody></table></div></section>
+  <section class="bloc boite-prof"><h2>Évaluation sommative (séance 7)</h2>${grilleHTML()}<p><a href="#s7">Ouvrir la séance 7 et son corrigé détaillé →</a></p></section>
+  <section class="bloc boite-prof"><h2>Matériel pour la séquence</h2><ul>${SEQUENCE.materiel.map(m=>`<li>${m}</li>`).join('')}</ul></section>
+  <section class="bloc boite-prof"><h2>Données des élèves</h2><p>Les réponses sont stockées dans le navigateur de chaque poste (stockage local), sans compte ni serveur. Pour récupérer un travail : bouton « Exporter mes réponses » sur la page d’accueil (fichier texte), à déposer par exemple via le formulaire de dépôt du site techno-3e.</p></section>`;
+}
+
+function pageRecherche(q){
+  /* normalisation qui conserve la longueur (pour retrouver la position dans le texte d'origine) */
+  const nl = t => t.split('').map(c => c.normalize('NFD').charAt(0)).join('').toLowerCase();
+  const rassembler = (o, acc) => { if (typeof o === 'string') acc.push(strip(o)); else if (Array.isArray(o)) o.forEach(x => rassembler(x, acc)); else if (o && typeof o === 'object') Object.entries(o).forEach(([k,v]) => { if (['id','t','a','layout','_verifiables','comp'].includes(k)) return; if (k === 'prof' && !PROF) return; if (k === 'html' && o.t === 'prof' && !PROF) return; rassembler(v, acc); }); return acc; };
+  const nq = nl(q.trim());
+  const res = [];
+  if (nq.length >= 2){
+    SEQUENCE.seances.forEach(s => {
+      const txt = rassembler(s, []).join(' · ');
+      const n = nl(txt); const pos = n.indexOf(nq);
+      if (pos >= 0){ const deb = Math.max(0, pos - 70); const count = n.split(nq).length - 1;
+        const avant = txt.slice(deb, pos), mot = txt.slice(pos, pos + nq.length), apres = txt.slice(pos + nq.length, pos + nq.length + 110);
+        res.push({s, count, ext: (deb ? '…' : '') + esc(avant) + '<mark>' + esc(mot) + '</mark>' + esc(apres) + '…'}); }
+    });
+    res.sort((a,b)=>b.count-a.count);
+  }
+  return `${filAriane([['Accueil','#accueil'],['Recherche']])}
+  <section class="entete"><h1>Recherche : « ${esc(q)} »</h1><p class="lead">${nq.length < 2 ? 'Saisis au moins deux caractères.' : res.length ? `${res.length} séance(s) contiennent ce mot.` : 'Aucun résultat. Essaie un autre mot (par exemple : capteur, variable, réparabilité, exigence).'}</p></section>
+  ${res.map(r=>`<a class="carte bloc" href="#${r.s.id}" style="display:block"><span class="n">Séance ${r.s.num} · ${r.count} occurrence(s)</span><h3>${r.s.titre}</h3><p class="petit">${r.ext}</p></a>`).join('')}`;
+}
+
+/* =====================================================================
+   12. ROUTEUR ET ÉVÉNEMENTS
+   ===================================================================== */
+function afficher(){
+  const h = decodeURIComponent(location.hash.slice(1)) || 'accueil';
+  const main = $('#main'); let html; let titre = SEQUENCE.titre;
+  const s = seance(h);
+  if (s){ html = pageSeance(s); titre = `Séance ${s.num} — ${s.titre}`; }
+  else if (h === 'sequence'){ html = pageSequence(); titre = 'La séquence — ' + SEQUENCE.court; }
+  else if (h === 'reperes'){ html = pageReperes(); titre = 'Les 38 repères de 3e'; }
+  else if (h === 'enseignant'){ html = pageEnseignant(); titre = 'Espace enseignant'; }
+  else if (h.startsWith('recherche/')){ const q = h.slice(10); html = pageRecherche(q); titre = 'Recherche'; $('#q').value = q; }
+  else if (/^s\d-a\d$/.test(h)){ const [sid] = h.split('-'); location.replace('#' + sid); return; }
+  else html = pageAccueil();
+  main.innerHTML = html; document.title = titre + ' · Technologie 3e';
+  if (s){ const INITS = {simAutonomie:initSimAutonomie, simTransmission:initSimTransmission}; $$('.sim', main).forEach(b => { const id = b.id.slice(4); const w = WIDGETS[id] && WIDGETS[id].def; if (w && INITS[w.t]) INITS[w.t](id); });
+    $$('.decision', main).forEach(b => majDecision(b.dataset.w)); $$('.gantt', main).forEach(b => majGantt(b.dataset.w)); }
+  afficherScoresExistants();
+  window.scrollTo(0,0); main.focus({preventScroll:true});
+}
+window.addEventListener('hashchange', afficher);
+
+function appliquerProf(){ document.body.classList.toggle('prof', PROF); $('#btnProf').setAttribute('aria-pressed', String(PROF)); $('#btnProf').textContent = PROF ? 'Mode enseignant : activé' : 'Mode enseignant'; try { sessionStorage.setItem(CLE + '-prof', PROF ? '1' : '0'); } catch(e){} }
+$('#btnProf').addEventListener('click', () => { PROF = !PROF; appliquerProf(); if (/enseignant|recherche/.test(location.hash)) afficher(); });
+$('#formRecherche').addEventListener('submit', e => { e.preventDefault(); const q = $('#q').value.trim(); if (q) location.hash = 'recherche/' + encodeURIComponent(q); });
+
+/* Délégation : clics */
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  const act = b.dataset.act;
+  if (act === 'verifier') verifier(b.dataset.id);
+  else if (act === 'effacer'){ const id = b.dataset.id; delete ETAT.answers[id]; delete ETAT.answers[id + '-tests']; delete ETAT.scores[id]; sauver(); const box = $(`[data-w="${id}"]`); const w = WIDGETS[id].def; const tmp = document.createElement('div'); tmp.innerHTML = R[w.t](w); box.replaceWith(tmp.firstElementChild); }
+  else if (act === 'aide'){ const box = b.parentElement; const n = +box.dataset.n; const aides = $$('.aide', box); if (aides[n]) aides[n].hidden = false; box.dataset.n = n + 1; if (n + 1 >= aides.length) b.remove(); else b.textContent = `💡 Afficher l’aide ${n+2} / ${aides.length}`; }
+  else if (act === 'haut' || act === 'bas'){ const li = b.closest('li'); const ol = li.parentElement; if (act === 'haut' && li.previousElementSibling) ol.insertBefore(li, li.previousElementSibling); if (act === 'bas' && li.nextElementSibling) ol.insertBefore(li.nextElementSibling, li); $$('li', ol).forEach(x=>x.classList.remove('ok-bg','ko-bg')); collecter(ol.id.slice(3)); b.focus(); }
+  else if (act === 'diagtest') testDiag(b.dataset.id, +b.dataset.i);
+  else if (act === 'terminer'){ const id = b.dataset.s; ETAT.done[id] = !ETAT.done[id]; if (!ETAT.done[id]) delete ETAT.done[id]; sauver(); b.textContent = ETAT.done[id] ? '✔ Séance marquée comme terminée (annuler)' : 'J’ai terminé cette séance'; b.classList.toggle('plein', !ETAT.done[id]); }
+  else if (act === 'filtre' || act === 'filtreT'){ const c = b.dataset.c; $$(`[data-act="${act}"]`).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    const cibles = act === 'filtre' ? $$('#cartesSeances .carte') : $$('#tabTrace tbody tr');
+    cibles.forEach(el => { el.hidden = !!c && !el.dataset.comp.split(' ').includes(c); }); }
+  else if (act === 'exporter') exporter();
+  else if (act === 'reinit'){ if (confirm('Effacer toutes tes réponses, tes scores et ta progression sur cet appareil ? Cette action est définitive.')){ ETAT = {answers:{}, scores:{}, done:{}}; sauver(); afficher(); } }
+  else if (act === 'prof'){ PROF = true; appliquerProf(); afficher(); }
+});
+/* Délégation : saisies */
+document.addEventListener('input', e => {
+  const el = e.target;
+  if (el.dataset.save){ ETAT.answers[el.dataset.save] = el.value; sauver(); }
+  else if (el.dataset.tab){ const id = el.dataset.tab; ETAT.answers[id] = ETAT.answers[id] || {}; ETAT.answers[id][el.dataset.k] = el.value; sauver(); }
+  else if (el.dataset.champ && el.type === 'text'){ el.classList.remove('ok-bg','ko-bg'); collecter(el.dataset.champ); if (WIDGETS[el.dataset.champ] && WIDGETS[el.dataset.champ].def.t === 'gantt') majGantt(el.dataset.champ); }
+});
+document.addEventListener('change', e => {
+  const el = e.target;
+  if (el.dataset.champ){ el.classList.remove('ok-bg','ko-bg'); collecter(el.dataset.champ); }
+  else if (el.dataset.dec){ majDecision(el.closest('[data-w]').dataset.w); }
+});
+
+/* Export des réponses (fichier texte) */
+function exporter(){
+  const L = [`Technologie 3e — ${SEQUENCE.titre}`, `Export du ${new Date().toLocaleString('fr-FR')}`, `Nom et classe : ______________________`, ''];
+  SEQUENCE.seances.forEach(s => {
+    L.push('='.repeat(60), `SÉANCE ${s.num} — ${s.titre}${ETAT.done[s.id] ? ' (terminée)' : ''}`, '='.repeat(60));
+    Object.entries(WIDGETS).filter(([id,o]) => o.seance === s.id).forEach(([id,o]) => {
+      const w = o.def, a = ETAT.answers[id], sc = ETAT.scores[id];
+      if (w.t === 'reponse' && a) L.push(`• ${strip(w.label)}`, `  ${a.replace(/\n/g,'\n  ')}`, '');
+      if (w.t === 'tableau' && a && Object.values(a).some(v=>v)){ L.push(`• Tableau : ${w.cols.join(' | ')}`); w.rows.forEach((r,ri)=>L.push('  ' + r.map((c,ci)=> c === null ? (a[ri+'-'+ci] || '…') : c).join(' | '))); L.push(''); }
+      if (w.t === 'decision' && a) L.push(`• Tableau de décision — poids : ${a.p.join(', ')} ; exigence budget : ${a.budget ? 'oui' : 'non'}`, '');
+      if (sc) L.push(`• Exercice « ${id} » : score ${sc.ok} / ${sc.tot}`);
+    });
+    const d = ETAT.answers[s.id + '-defi']; if (d) L.push(`• Défi : ${d}`);
+    L.push('');
+  });
+  const blob = new Blob([L.join('\n')], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'mes-reponses-trottinette.txt'; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+
+appliquerProf();
+afficher();
+</script>
+</body>
+</html>

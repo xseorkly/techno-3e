@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<script src="../../garde.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Imprimante 3D — Séquence de technologie 3e · Cycle 4</title>
+<meta name="description" content="Séquence de technologie 3e : Imprimerie, imprimante, 3D… et après ? Innovations, fabrication additive, essais de filaments, panne et conduction thermique, choix d’une imprimante, imprimante du futur.">
+<!-- Polices facultatives (Internet) : sans connexion, le navigateur utilise les polices système. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   1. VARIABLES — palette reprise du site techno-3e
+   ========================================================= */
+:root{
+  --papier:#F4F7F7; --carte:#FFFFFF; --encre:#14262B; --doux:#5A6C71;
+  --teal:#0E6E6B; --teal2:#0A5A58; --teal-pale:#E2EFEE; --magenta:#C2185B;
+  --trait:#D2DEDE; --ok:#2E7D5B; --ok-pale:#E3F2EA; --ko:#B3261E; --ko-pale:#FBE9E7;
+  --ambre:#9A6900; --ambre-pale:#FFF5D9; --ost:#12395F; --sfc:#0E6E6B; --ccri:#9A6900;
+  --r:10px; --ombre:0 12px 35px rgba(20,38,43,.08);
+  --titre:"Archivo",system-ui,sans-serif; --texte:"Source Sans 3",system-ui,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono","Consolas","Menlo",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--papier);color:var(--encre);font-family:var(--texte);font-size:17px;line-height:1.55}
+a{color:var(--teal)}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+h1,h2,h3,h4{font-family:var(--titre);line-height:1.2;color:var(--encre)}
+h1{font-size:clamp(26px,4vw,36px);margin:.2em 0 .3em}
+h2{font-size:23px;margin:0 0 .5em}
+h3{font-size:19px;margin:1.1em 0 .4em}
+h4{font-size:16px;margin:.8em 0 .3em}
+code,pre{font-family:var(--mono)}
+.skip{position:absolute;left:-999px;top:0;background:#fff;padding:8px 12px;z-index:99}
+.skip:focus{left:8px}
+main:focus{outline:none}
+
+/* =========================================================
+   2. BARRE DE NAVIGATION
+   ========================================================= */
+.navsite{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--trait)}
+.navsite .dedans{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 18px;flex-wrap:wrap}
+.btn,.navsite a.nav{display:inline-flex;align-items:center;gap:6px;font-family:var(--titre);font-weight:600;font-size:14.5px;color:var(--teal);
+  border:1px solid var(--trait);border-radius:8px;padding:7px 13px;background:#fff;text-decoration:none;cursor:pointer;line-height:1.2}
+.btn:hover,.navsite a.nav:hover{border-color:var(--teal);background:var(--teal-pale)}
+.btn.plein{background:var(--teal);color:#fff;border-color:var(--teal)}
+.btn.plein:hover{background:var(--teal2)}
+.btn.petit{font-size:13.5px;padding:5px 10px}
+.btn[aria-pressed="true"]{background:var(--ambre);border-color:var(--ambre);color:#fff}
+.navsite form{margin-left:auto;display:flex;gap:6px}
+.navsite input[type=search]{font:inherit;font-size:15px;border:1px solid var(--trait);border-radius:8px;padding:6px 10px;width:min(40vw,220px)}
+@media(max-width:700px){.navsite form{margin-left:0;width:100%}.navsite input[type=search]{flex:1;width:auto}}
+.bandeau-prof{background:var(--ambre-pale);border-bottom:2px solid var(--ambre);color:#4d3600;font-size:14.5px}
+.bandeau-prof div{max-width:1040px;margin:0 auto;padding:7px 18px}
+
+/* =========================================================
+   3. MISE EN PAGE
+   ========================================================= */
+.page{max-width:1040px;margin:0 auto;padding:0 18px 120px}
+.fil{font-family:var(--titre);font-size:13.5px;color:var(--doux);margin:18px 0 0}
+.fil a{color:var(--teal);text-decoration:none}.fil a:hover{text-decoration:underline}
+.fil span[aria-hidden]{margin:0 6px}
+.entete{background:var(--carte);border:1px solid var(--trait);border-top:4px solid var(--teal);border-radius:var(--r);margin-top:14px;padding:22px 24px;box-shadow:var(--ombre)}
+.kicker{font-family:var(--titre);font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--teal)}
+.lead{font-size:18.5px;color:var(--doux);margin:.2em 0 .6em}
+.bloc{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:20px 24px;margin-top:18px}
+.bloc>h2:first-child{margin-top:0}
+.bloc h2 .num{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;font-size:15px;margin-right:8px;vertical-align:2px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:13.5px;font-weight:600;border-radius:999px;padding:3px 10px;background:var(--teal-pale);color:var(--teal2);border:1px solid transparent}
+.tag.ost{background:#e3eaf3;color:var(--ost)}.tag.sfc{background:var(--teal-pale);color:var(--sfc)}.tag.ccri{background:#f6ecd5;color:#6d4b00}
+.tag.gris{background:#eef2f2;color:var(--doux)}
+.probleme{border-left:5px solid var(--magenta);background:#fdf1f5;padding:14px 18px;border-radius:0 var(--r) var(--r) 0;font-size:18px;font-weight:600;font-family:var(--titre)}
+.situation{background:var(--teal-pale);border-radius:var(--r);padding:14px 18px}
+blockquote{margin:10px 0;padding:10px 16px;border-left:4px solid var(--trait);background:#fff;font-style:italic}
+.grille2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.muted{color:var(--doux)}
+.petit{font-size:14.5px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{border:1px solid var(--trait);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--teal-pale);font-family:var(--titre);font-size:14px}
+.tablewrap{overflow-x:auto;margin:10px 0}
+.production{display:block;margin-top:12px;font-size:14.5px;background:#f4f8f8;border:1px dashed var(--teal);border-radius:8px;padding:7px 12px}
+.production::before{content:"Production attendue · ";font-weight:700;color:var(--teal)}
+.activite-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.activite-h h2{margin:0}
+.duree{font-size:14px;color:var(--doux);font-weight:600}
+
+/* Accueil */
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:center}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+.cartes{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;margin-top:14px}
+.carte{background:#fff;border:1px solid var(--trait);border-radius:var(--r);padding:16px 18px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:6px;transition:border-color .15s,box-shadow .15s}
+.carte:hover{border-color:var(--teal);box-shadow:var(--ombre)}
+.carte .n{font-family:var(--titre);font-weight:700;color:var(--teal);font-size:14px}
+.carte h3{margin:0;font-size:18px}
+.carte .fleche{margin-top:auto;font-weight:700;color:var(--teal)}
+.barre{height:8px;background:#e6eded;border-radius:99px;overflow:hidden}
+.barre>span{display:block;height:100%;background:var(--teal)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:600 14px var(--titre);border:1px solid var(--trait);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;color:var(--encre)}
+.chip[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.fait{color:var(--ok);font-weight:700}
+
+/* Synthèse */
+.synthese{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.synthese section{border:1px solid var(--trait);border-radius:var(--r);padding:12px 14px;background:#fbfdfd}
+.synthese h3{margin:0 0 6px;font-size:16px;color:var(--teal2)}
+.synthese ul{margin:0;padding-left:18px}
+dl.vocab{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;margin:0}
+dl.vocab dt{font-weight:700}dl.vocab dd{margin:0}
+@media(max-width:560px){dl.vocab{grid-template-columns:1fr}dl.vocab dd{margin-bottom:6px}}
+details.depli>summary{cursor:pointer;font-family:var(--titre);font-weight:600;color:var(--teal);padding:6px 0}
+
+/* Enseignant */
+body:not(.prof) .prof-only{display:none!important}
+.boite-prof{border:2px solid var(--ambre);background:var(--ambre-pale);border-radius:var(--r);padding:14px 18px;margin-top:14px}
+.boite-prof>h2,.boite-prof>h3,.boite-prof>h4{color:#6d4b00;margin-top:0}
+.boite-prof::before{content:"Espace enseignant";display:inline-block;font:700 12px var(--titre);text-transform:uppercase;letter-spacing:.05em;background:var(--ambre);color:#fff;border-radius:4px;padding:2px 8px;margin-bottom:8px}
+.boite-prof table th{background:#f6e7bf}
+
+/* =========================================================
+   4. ACTIVITÉS INTERACTIVES
+   ========================================================= */
+.widget{border:1px solid var(--trait);border-radius:var(--r);padding:14px 16px;margin:14px 0;background:#fcfefe}
+.widget .consigne{font-weight:600;margin:0 0 10px}
+.widget .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.score{font-family:var(--titre);font-weight:700;font-size:15px}
+.score.bon{color:var(--ok)}.score.moyen{color:var(--ambre)}.score.faible{color:var(--ko)}
+textarea,select,input[type=text],input[type=number]{font:inherit;font-size:16px;border:1px solid #b9cccc;border-radius:7px;padding:7px 9px;background:#fff;color:var(--encre);max-width:100%}
+textarea{width:100%;resize:vertical}
+label.lbl{display:block;font-weight:600;margin:8px 0 4px}
+.sauve{font-size:12.5px;color:var(--doux)}
+.ligne-tri{display:grid;grid-template-columns:1fr minmax(180px,auto);gap:8px 12px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--trait)}
+.ligne-tri:last-of-type{border-bottom:0}
+@media(max-width:560px){.ligne-tri{grid-template-columns:1fr}}
+.ok-bg{background:var(--ok-pale)!important;border-color:var(--ok)!important}
+.ko-bg{background:var(--ko-pale)!important;border-color:var(--ko)!important}
+.fb{font-size:14.5px;margin-top:4px;padding:6px 10px;border-radius:6px}
+.fb.ok{background:var(--ok-pale);color:#1d5a3f}.fb.ko{background:var(--ko-pale);color:#7c1d16}
+.fb:empty{display:none}
+fieldset{border:1px solid var(--trait);border-radius:8px;margin:0 0 12px;padding:10px 14px}
+legend{font-weight:600;padding:0 6px}
+.opt{display:flex;gap:8px;align-items:flex-start;padding:4px 6px;border-radius:6px;cursor:pointer}
+.opt:hover{background:var(--teal-pale)}
+.opt input{margin-top:5px;flex:none}
+.ordre-liste{list-style:none;margin:0;padding:0}
+.ordre-liste li{display:flex;align-items:center;gap:8px;border:1px solid var(--trait);border-radius:7px;background:#fff;margin:5px 0;padding:5px 8px}
+.ordre-liste li code{white-space:pre;flex:1;font-size:15px;overflow-x:auto}
+.ordre-liste li span.txt{flex:1}
+.ordre-liste button{font:700 15px var(--titre);border:1px solid var(--trait);background:#fff;border-radius:6px;width:34px;height:32px;cursor:pointer;color:var(--teal)}
+.ordre-liste button:hover{background:var(--teal-pale)}
+pre.code{background:#0f2327;color:#e6f2f1;border-radius:9px;padding:14px 16px;overflow-x:auto;font-size:14.5px;line-height:1.5;margin:10px 0}
+pre.code .com{color:#8fb9b5}
+pre.code input,pre.code select{font:inherit;font-size:14px;padding:1px 5px;border-radius:4px;border:1px solid #6fa8a4;background:#fffbe6;color:#14262B}
+code.in{background:#e8efef;border-radius:4px;padding:1px 5px;font-size:.92em}
+.blk{display:inline-block;font:600 14px var(--texte);color:#fff;border-radius:6px;padding:3px 10px;margin:1px 0}
+.blk.var{background:#d6336c}.blk.ctl{background:#1e7b45}.blk.cnd{background:#2b6cb0}.blk.aff{background:#4c51bf}.blk.bas{background:#7a4dbf}
+.schema-chaine{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px}
+.schema-chaine .bx{flex:1 1 170px;border:2px solid var(--teal);border-radius:9px;background:#fff;padding:8px 10px;display:flex;flex-direction:column;gap:6px}
+.schema-chaine .bx b{font-family:var(--titre);font-size:13.5px;color:var(--teal2);letter-spacing:.03em}
+.schema-chaine .fl{align-self:center;font-size:22px;color:var(--teal);font-weight:700}
+.schema-chaine select{width:100%;font-size:14.5px}
+.arbre .racine{border:2px solid var(--ost);border-radius:9px;padding:8px 12px;background:#eef3f9;font-weight:600;max-width:520px;margin:0 auto 10px;text-align:center}
+.arbre .enfants{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;border-top:2px solid var(--ost);padding-top:12px}
+.arbre .bx{border:1px solid var(--ost);border-radius:9px;background:#fff;padding:8px 10px;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.arbre .bx b{font-family:var(--titre);color:var(--ost);font-size:13.5px}
+.arbre select{width:100%;font-size:14px}
+.aides{margin-top:10px}
+.aides .aide{background:#fffaf0;border-left:4px solid var(--ambre);padding:7px 12px;border-radius:0 6px 6px 0;margin:6px 0;font-size:15.5px}
+.lien-ext{display:flex;gap:12px;align-items:center;border:1px solid var(--trait);border-radius:var(--r);background:#fff;padding:12px 14px;margin:10px 0}
+.lien-ext .badge{font-size:12.5px;font-weight:700;background:#e3eaf3;color:var(--ost);border-radius:999px;padding:2px 8px;white-space:nowrap}
+.tab-saisie input{width:100%;min-width:70px;font-size:15px;padding:4px 6px}
+.tab-saisie td{padding:4px}
+.num-q{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--trait)}
+.num-q:last-of-type{border-bottom:0}
+.num-q .champ{display:flex;align-items:center;gap:6px}
+.num-q input{width:110px}
+@media(max-width:560px){.num-q{grid-template-columns:1fr}}
+
+/* Simulateurs */
+.sim{border:1px solid var(--trait);border-radius:var(--r);background:#fff;padding:12px}
+.sim canvas{width:100%;height:auto;display:block;border-radius:8px;background:#f7fbfb;border:1px solid var(--trait)}
+.sim .ctrl{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:10px 0}
+.sim .ctrl label{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px}
+.sim .ctrl input[type=range]{width:170px;accent-color:var(--teal)}
+.afficheur{font-family:var(--mono);background:#0f2327;color:#7ef0c8;border-radius:8px;padding:10px 14px;font-size:17px;min-height:46px}
+.journal{font-family:var(--mono);font-size:13.5px;background:#f4f8f8;border:1px solid var(--trait);border-radius:8px;padding:8px 10px;max-height:170px;overflow:auto;white-space:pre}
+.resultat{font-weight:700;padding:8px 12px;border-radius:8px;margin-top:8px}
+.resultat:empty{display:none}
+.decision td.num,.decision th.num{text-align:center}
+.decision tr.exclu td{color:#9aa;text-decoration:line-through}
+.rang{font-family:var(--titre);font-weight:700}
+.diag-test{margin:6px 0}.diag-test .btn{text-align:left;white-space:normal}.diag-test .btn:disabled{opacity:.75;cursor:default}
+
+/* Pied de page / impression */
+footer{border-top:1px solid var(--trait);background:#fff;color:var(--doux);font-size:14px}
+footer div{max-width:1040px;margin:0 auto;padding:16px 18px}
+.navseance{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:22px}
+mark{background:#fff0a8;padding:0 2px}
+@media print{.navsite,.bandeau-prof,.navseance,.actions,footer,.noprint{display:none!important}body{background:#fff;font-size:12pt}.bloc,.entete,.widget{break-inside:avoid;box-shadow:none}details{display:block}details>*{display:block}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<nav class="fnav-ia" aria-label="Navigation Formation" style="display:flex;gap:14px;flex-wrap:wrap;padding:6px 18px;font:500 13px/1.3 'Source Sans 3',Arial,sans-serif;background:#fff;border-bottom:1px solid #d2dede"><a href="../index.html" style="color:#5b6b6a;text-decoration:none">← Atelier d’ouverture</a><a href="index.html" style="color:#5b6b6a;text-decoration:none">↑ Séances générées par l’IA</a></nav>
+<header class="navsite">
+  <div class="dedans">
+    <a class="nav" href="#accueil" title="Retour à l'accueil">⌂ Accueil</a>
+    <a class="nav" href="#sequence">La séquence</a>
+    <a class="nav" href="#reperes">Les 38 repères</a>
+    <a class="nav prof-only" href="#enseignant">Espace enseignant</a>
+    <form id="formRecherche" role="search" aria-label="Rechercher dans la séquence">
+      <input type="search" id="q" placeholder="Rechercher un mot…" aria-label="Mot-clé">
+      <button class="btn" type="submit">Rechercher</button>
+    </form>
+    <button class="btn" id="btnProf" type="button" aria-pressed="false">Mode enseignant</button>
+  </div>
+</header>
+<div class="bandeau-prof prof-only" role="note"><div><strong>Mode enseignant activé.</strong> Les encadrés jaunes (préparation, réponses attendues, corrigés, grilles) sont visibles. Ce mode n'est qu'un affichage JavaScript : <strong>ce n'est pas une protection sécurisée des corrigés</strong> (ils sont présents dans le fichier).</div></div>
+<main id="main" class="page" tabindex="-1"></main>
+<footer><div>Technologie 3e · Cycle 4 — Programme de technologie, BO n° 9 du 29 février 2024 · Séquence issue de la fiche groupe 3 « Imprimante 3D » (atelier d'ouverture, 16/11/2026) · Extension du site <a href="https://xseorkly.github.io/techno-3e/" target="_blank" rel="noopener">techno-3e</a> (lien Internet). Les données saisies restent dans ce navigateur.</div></footer>
+
+<script>
+'use strict';
+/* =====================================================================
+   SÉQUENCE « IMPRIMANTE 3D » — Technologie 3e
+   Organisation : Référentiel → Séquence → Séances → Activités (widgets)
+   Pour ajouter une séquence : ajouter un objet dans SEQUENCES (même structure).
+   ===================================================================== */
+
+/* ---------- 1. RÉFÉRENTIEL OFFICIEL (cartes 3e, BO n° 9 du 29/02/2024) ---------- */
+const COMPETENCES = {
+  C1:`Décrire les liens entre usages et évolutions technologiques des objets et des systèmes techniques`,
+  C2:`Décrire les interactions entre un objet ou un système technique, son environnement et les utilisateurs`,
+  C3:`Caractériser et choisir un objet ou un système technique selon différents critères`,
+  C4:`Décrire et caractériser l’organisation interne d’un objet ou d’un système technique et ses échanges avec son environnement (énergies, données)`,
+  C5:`Identifier un dysfonctionnement d’un objet technique et y remédier`,
+  C6:`Comprendre et modifier un programme associé à une fonctionnalité d’un objet ou d’un système technique`,
+  C7:`Imaginer, concevoir et réaliser une ou des solutions en réponse à un besoin, à des exigences (de développement durable, par exemple) ou à la nécessité d’améliorations dans une démarche de créativité`,
+  C8:`Valider les solutions techniques par des simulations ou par des protocoles de tests`,
+  C9:`Concevoir, écrire, tester et mettre au point un programme`
+};
+/* [code, compétence, intitulé exact de la colonne 3e] */
+const REPERES = [
+  ['OST11','C1',`Identifier les innovations de rupture qui sont attachées à l’évolution d’un OST`],
+  ['OST12','C1',`Mettre en relation une découverte scientifique avec ses développements technologiques et leurs effets sur la société`],
+  ['OST13','C1',`Exprimer dans un argumentaire court l’incidence d’un OST sur la société`],
+  ['OST14','C1',`Exprimer dans un argumentaire court l’incidence des contraintes sociétales sur les OST`],
+  ['OST15','C1',`Exprimer dans un argumentaire court le rôle du développement stratégique du numérique au sein de la société et des environnements professionnels (ou des métiers)`],
+  ['OST21','C2',`Décrire l’expérience de l’utilisateur d’un OST à l’aide de modes de représentation choisis`],
+  ['OST31','C3',`Établir une liste d’OST possibles en vue de répondre à un besoin`],
+  ['OST32','C3',`Choisir un OST et argumenter ce choix en prenant en compte son cycle de vie et les trois piliers du développement durable`],
+  ['OST33','C3',`Évaluer les OST selon des exigences ou des critères identifiés (caractéristiques, performances, coût, indice de réparabilité)`],
+  ['OST34','C3',`Définir et mettre en œuvre un protocole pour mesurer une caractéristique, une performance d’un OST`],
+  ['SFC11','C4',`Élaborer, à l’aide d’un schéma bloc, la chaîne d’énergie d’un OST`],
+  ['SFC12','C4',`Justifier le choix d’un matériau et de son procédé de mise en forme au regard des contraintes techniques et environnementales`],
+  ['SFC13','C4',`Décrire un OST en caractérisant sa chaîne d’information`],
+  ['SFC14','C4',`Associer des grandeurs analogiques issues d’un OST à des données exploitables`],
+  ['SFC15','C4',`Représenter sous forme de données les informations de diverses natures utilisées par un OST`],
+  ['SFC16','C4',`Identifier, selon les cas, leur mise en forme, leur transmission ou leur stockage dans des fichiers (texte, image, nombre) afin de comprendre le fonctionnement de l’OST`],
+  ['SFC17','C4',`Identifier et représenter la circulation d’une information dans le réseau Internet`],
+  ['SFC18','C4',`Justifier la nécessité d’un protocole de routage pour faire communiquer plusieurs réseaux (activité débranchée, table de routage donnée)`],
+  ['SFC21','C5',`Formuler des hypothèses expliquant le dysfonctionnement d’un objet technique`],
+  ['SFC22','C5',`Proposer un protocole de dépannage puis de réparation`],
+  ['SFC23','C5',`Réaliser le dépannage ou la réparation d’un système défectueux`],
+  ['SFC24','C5',`Réaliser une pièce sur mesure pour réparer un objet technique`],
+  ['SFC31','C6',`Déterminer les données utilisées et produites par un programme associé à une fonctionnalité en vue de le modifier`],
+  ['SFC32','C6',`Programmer un algorithme lié à une nouvelle fonctionnalité`],
+  ['SFC33','C6',`Modifier et tester le programme associé à une nouvelle fonctionnalité d’un OST`],
+  ['CCRI11','C7',`Élaborer un processus de conception et de réalisation dans une durée, avec des tâches identifiées`],
+  ['CCRI12','C7',`Proposer et fabriquer un ensemble de solutions pour produire un nouvel OST (croquis, schéma, graphique, algorithme, modélisation)`],
+  ['CCRI13','C7',`Choisir un matériau constitutif d’un objet et/ou système technique`],
+  ['CCRI14','C7',`Choisir une source d’énergie pour un OST`],
+  ['CCRI15','C7',`Choisir les constituants et assembler un prototype`],
+  ['CCRI16','C7',`Modéliser une forme voulue`],
+  ['CCRI17','C7',`Choisir les moyens et produire la forme voulue`],
+  ['CCRI18','C7',`Interfacer deux objets techniques communicants`],
+  ['CCRI21','C8',`Mettre en œuvre une simulation pour valider la tenue mécanique d’un matériau`],
+  ['CCRI22','C8',`Proposer un protocole de test pour valider la tenue mécanique d’un matériau`],
+  ['CCRI23','C8',`Proposer un protocole de test pour valider le comportement et les performances d’un objet technique`],
+  ['CCRI31','C9',`Élaborer ou concevoir un algorithme permettant de répondre au besoin visé, puis le traduire en un programme structuré, le tester et le mettre au point`],
+  ['CCRI32','C9',`Réaliser et mettre au point un programme commandant un système réel incluant une interaction entre un humain et une machine`]
+];
+/* Connaissances associées (cartes 3e) — uniquement pour les repères travaillés */
+const CONNAISSANCES = {
+  OST11:[`Invention, innovation et évolution des besoins`,`Famille et lignée d’objets ou systèmes techniques`,`Fonction technique et principe technique`],
+  OST13:[`Contraintes sociétales et développement durable`,`Incidences sociétales des technologies`,`Biais et effets de l’usage d’une intelligence artificielle`],
+  SFC12:[`Caractéristiques et propriétés des principaux matériaux`,`Caractéristiques des procédés de mise en forme disponibles au laboratoire`,`Cycle de vie d’un OST et incidence environnementale`],
+  SFC21:[`Fiabilité, durabilité et indice de réparabilité`,`Caractéristiques des composants : capteurs, actionneurs, microcontrôleurs et générateurs`,`Modes de sollicitation des matériaux (flexion, torsion)`],
+  SFC22:[`Fiabilité, durabilité et indice de réparabilité`,`Caractéristiques des composants à remplacer`,`Règles de sécurité ; outillage et moyens de prototypage et de fabrication`],
+  OST33:[`Critères de choix : qualité, durabilité, efficacité énergétique et recyclabilité`,`Indice énergétique et indice de réparabilité`,`Notice et documentation technique ; exigences et critères de comparaison`],
+  CCRI12:[`Modes de représentation : croquis, schéma, graphique, algorithme et modélisation`,`Procédés de réalisation, de mise en forme et d’assemblage`,`Ergonomie, exigences, interacteurs et critères`,`Règles usuelles de sécurité en atelier de fabrication collaboratif`]
+};
+const theme = code => code.startsWith('OST') ? 'ost' : code.startsWith('SFC') ? 'sfc' : 'ccri';
+const repere = code => REPERES.find(r => r[0] === code);
+
+/* ---------- 2. RESSOURCES PARTAGÉES ---------- */
+const GCODE = `<span class="com">; début d'un fichier G-code produit par le trancheur</span>
+M140 S60          <span class="com">; plateau : consigne 60 °C</span>
+M104 S210         <span class="com">; buse : consigne 210 °C</span>
+G28               <span class="com">; retour à l'origine des axes X, Y, Z</span>
+M190 S60          <span class="com">; attendre que le plateau atteigne 60 °C</span>
+M109 S210         <span class="com">; attendre que la buse atteigne 210 °C</span>
+G1 Z0.2 F3000     <span class="com">; monter la buse à 0,2 mm (1re couche)</span>
+G1 X50 Y20 E2.5 F1500   <span class="com">; aller en X50 Y20 en poussant 2,5 mm de filament</span>`;
+
+/* ---------- 3. LA SÉQUENCE ---------- */
+const SEQUENCE = {
+  id:'imprimante3d', court:'Séquence Imprimante 3D',
+  titre:`Imprimerie, imprimante, 3D… et après ?`,
+  objet:`Imprimante 3D à dépôt de fil fondu (FDM) du laboratoire de technologie, comparée à la presse à imprimer et à l’imprimante de bureau`,
+  problematique:`Imprimerie, imprimante, 3D… et après ? Quelle imprimante pour répondre aux besoins de demain ?`,
+  situation:`<p>Le collège veut équiper son FabLab d’une nouvelle imprimante 3D. Mais l’ancienne machine « fait mal fondre le plastique », les élèves ne savent pas quel filament choisir, et le conseil pédagogique se demande : <strong>à quoi servira l’impression 3D demain ?</strong> Votre classe devient le bureau d’études du projet. Vous allez remonter le temps de l’imprimerie à l’imprimante 3D, comprendre et tester la machine, la réparer, choisir le bon équipement… puis imaginer l’imprimante du futur.</p>
+  <p>Le fil rouge de toute la séquence est la <strong>notion de besoin</strong> : quel besoin a fait naître chaque invention ? Quel besoin l’imprimante 3D d’aujourd’hui ne satisfait-elle pas encore ?</p>`,
+  objectifs:[
+    `Identifier les innovations de rupture de l’imprimerie à l’impression 3D et distinguer famille et lignée d’objets.`,
+    `Décrire le procédé de fabrication additive et la chaîne numérique (modèle 3D → trancheur → G-code → pièce).`,
+    `Justifier le choix d’un filament et du procédé au regard de contraintes techniques et environnementales, à partir d’essais.`,
+    `Formuler des hypothèses sur une panne et proposer un protocole de dépannage puis de réparation, en lien avec la conduction thermique (physique-chimie).`,
+    `Évaluer et choisir une imprimante selon un cahier des charges, des critères et la réparabilité.`,
+    `Proposer des solutions (croquis, schémas) pour une imprimante du futur et argumenter sur ses incidences sociétales.`
+  ],
+  competences:['C1','C3','C4','C5','C7'],
+  reperes:['OST11','OST13','SFC12','SFC21','SFC22','OST33','CCRI12'],
+  reperePrincipal:'SFC12',
+  prerequis:[
+    `Notion de besoin et de fonction d’usage (cycle 4, 5e-4e).`,
+    `Modélisation 3D simple (Tinkercad, Onshape ou équivalent) — utile mais non indispensable.`,
+    `Physique-chimie : notion de température, de transfert thermique (repris dans la séance 4 interdisciplinaire).`
+  ],
+  duree:`7 séances de 55 min (≈ 6 h 30), dont 1 séance d’évaluation`,
+  materiel:[
+    `Imprimante 3D du laboratoire (FDM) et, si possible, une tête d’impression démontée ou des photos.`,
+    `Éprouvettes imprimées 80 × 10 × 4 mm (remplissage 100 %) en PLA, PETG et TPU (ABS facultatif, sous ventilation), masses marquées, serre-joint, réglet, récipient d’eau chaude à 60 °C (sous surveillance de l’enseignant).`,
+    `Séance 4 avec la physique-chimie : tiges de même longueur et section (cuivre, aluminium, laiton, acier), cire et petites billes ou punaises, source de chaleur, chronomètre ; multimètre.`,
+    `Ce fichier HTML (fonctionne hors ligne) ; un trancheur (Cura, PrusaSlicer…) pour la séance 2 si disponible.`,
+    `Facultatif : documents ou vidéos sur l’impression 3D de maisons, médicale, spatiale ; carton, ciseaux et colle pour les maquettes de la séance 6.`
+  ],
+  noteGrille:`La compétence C7 (CCRI12) est évaluée sur la production de la séance 6 (grille dans la fiche de préparation de cette séance).`,
+  productions:[
+    `Frise et classement des innovations (atelier tournant, séance 1).`,
+    `Chaîne numérique et lecture d’un G-code (séance 2).`,
+    `Protocole et résultats d’essais de flexion et de chaleur ; choix justifié de filaments (séance 3).`,
+    `Diagnostic de panne, protocole de mesure de conduction et protocole de réparation (séance 4).`,
+    `Cahier des charges et tableau de décision pour l’imprimante du FabLab (séance 5).`,
+    `Croquis de solutions et argumentaire pour l’imprimante du futur (séance 6, classe inversée).`,
+    `Évaluation de transfert : l’imprimante 3D à béton (séance 7).`
+  ],
+  seances:[]
+};
+
+/* ===================== SÉANCE 1 — ATELIER TOURNANT ===================== */
+SEQUENCE.seances.push({
+  id:'s1', num:1, titre:`De l’imprimerie à l’imprimante 3D`, sous:`Atelier tournant : innovations, besoins, familles et lignées`,
+  duree:'55 min', etape:`Découvrir et comprendre le problème`, reperes:['OST11'], comp:['C1'],
+  situation:`<p>« Imprimer » : ce mot désigne aussi bien la presse de Gutenberg, l’imprimante du CDI que la machine du FabLab qui fabrique des pièces en plastique. Pourtant, ces machines ne font pas du tout la même chose. Par groupes, vous passez dans <strong>quatre ateliers de 10 minutes</strong> ; les activités ci-dessous correspondent à chaque atelier.</p>`,
+  problematique:`Quels besoins ont conduit de l’imprimerie à l’imprimante, puis à l’imprimante 3D, et quelles innovations ont marqué une rupture ?`,
+  hypothese:{id:'s1-hyp', label:`Mes hypothèses : à ton avis, quel point commun y a-t-il entre la presse de Gutenberg et une imprimante 3D ? Quelle grande différence ?`},
+  activites:[
+    {titre:`Atelier A — Remonter le temps`, duree:'10 min', modalite:'groupe de 4',
+     intro:`<div class="tablewrap"><table><thead><tr><th>Document</th><th>Ce qu’il faut retenir</th></tr></thead><tbody>
+     <tr><td>Presse à caractères mobiles (Gutenberg, vers 1450)</td><td>Des lettres en métal, réutilisables, sont assemblées pour composer une page ; une presse reporte l’encre sur le papier. On peut produire des centaines de copies identiques.</td></tr>
+     <tr><td>Presse rotative (XIXe siècle)</td><td>Un cylindre imprime en continu sur un rouleau de papier : les journaux sont tirés à des milliers d’exemplaires par heure.</td></tr>
+     <tr><td>Imprimante matricielle (années 1970)</td><td>Reliée à un ordinateur, elle frappe un ruban encré avec de petites aiguilles : on imprime un seul exemplaire, à la demande.</td></tr>
+     <tr><td>Premiers brevets d’impression 3D (1984)</td><td>Des inventeurs, en France et aux États-Unis, déposent des brevets pour fabriquer un objet en volume, couche par couche, en durcissant une résine.</td></tr>
+     <tr><td>Projet RepRap (2005)</td><td>Une imprimante 3D libre, dont les plans sont partagés et qui peut imprimer une partie de ses propres pièces.</td></tr>
+     <tr><td>Imprimantes 3D grand public (après 2009)</td><td>Le brevet du dépôt de fil fondu tombe dans le domaine public : les prix chutent, les imprimantes arrivent dans les collèges et les maisons.</td></tr>
+     </tbody></table></div>`,
+     contenu:[
+      {t:'ordre', id:'s1-frise', code:false, lignes:[`Presse à caractères mobiles`,`Presse rotative`,`Imprimante matricielle reliée à un ordinateur`,`Premiers brevets d’impression 3D`,`Projet RepRap (imprimante 3D libre)`,`Imprimantes 3D grand public`]},
+      {t:'tri', id:'s1-besoin', consigne:`Associe chaque invention au besoin auquel elle répond.`,
+       cats:[`Diffuser un même texte en très grand nombre, plus vite que les copistes`,`Imprimer à la demande un document créé sur ordinateur`,`Fabriquer un objet en volume sans moule, à partir d’un fichier`,`Rendre la fabrication d’objets accessible à tous, à faible coût`],
+       items:[
+        {l:`Presse à caractères mobiles`, a:0, fb:`Avant elle, les livres étaient recopiés à la main.`},
+        {l:`Imprimante matricielle`, a:1, fb:`Elle est reliée à un ordinateur et imprime un seul exemplaire.`},
+        {l:`Premiers procédés d’impression 3D`, a:2, fb:`Ils fabriquent des pièces en volume, couche par couche.`},
+        {l:`RepRap et imprimantes 3D grand public`, a:3, fb:`Plans libres et prix bas : la machine arrive chez les particuliers.`}
+       ]}
+     ],
+     production:`La frise remise en ordre et les associations invention → besoin.`},
+    {titre:`Atelier B — Rupture ou amélioration ?`, duree:'10 min', modalite:'groupe de 4',
+     intro:`<p>Une <strong>innovation de rupture</strong> apporte un <strong>nouveau principe technique</strong> qui change profondément les usages. Une <strong>innovation incrémentale</strong> (amélioration) perfectionne un objet sans changer son principe.</p>`,
+     contenu:[
+      {t:'tri', id:'s1-rupture', consigne:`Classe chaque innovation.`, cats:['Innovation de rupture','Amélioration (incrémentale)'],
+       items:[
+        {l:`Les caractères mobiles de Gutenberg`, a:0, fb:`Nouveau principe : composer une page avec des lettres réutilisables.`},
+        {l:`L’imprimante laser : l’image est dessinée par un faisceau laser puis fixée avec du toner, sans aucune frappe`, a:0, fb:`Le principe change complètement par rapport à la frappe d’un ruban.`},
+        {l:`La fabrication d’objets en volume, couche par couche, sans moule`, a:0, fb:`On ne fabrique plus en enlevant ou en moulant la matière : on l’ajoute.`},
+        {l:`Une imprimante jet d’encre qui imprime désormais en couleur`, a:1, fb:`Même principe (gouttelettes d’encre), une performance en plus.`},
+        {l:`L’ajout d’un plateau chauffant sur les imprimantes 3D`, a:1, fb:`Il améliore l’adhérence de la pièce, le principe reste le dépôt de fil fondu.`},
+        {l:`Une imprimante 3D avec deux buses pour deux couleurs`, a:1, fb:`Même principe, une possibilité en plus.`}
+       ]},
+      {t:'aides', items:[`Demande-toi : « Est-ce que la façon de faire (le principe technique) a changé, ou seulement une performance ? »`]}
+     ],
+     production:`Le classement rupture / amélioration.`},
+    {titre:`Atelier C — Familles et lignées`, duree:'10 min', modalite:'groupe de 4',
+     intro:`<p>Une <strong>famille</strong> d’objets regroupe des objets qui répondent au <strong>même besoin</strong> (même fonction d’usage), même avec des principes différents. Une <strong>lignée</strong> regroupe les objets d’une famille qui utilisent le <strong>même principe technique</strong> et qui se perfectionnent au fil du temps.</p>`,
+     contenu:[
+      {t:'qcm', id:'s1-famille', qs:[
+        {q:`L’imprimante matricielle, l’imprimante jet d’encre et l’imprimante laser impriment toutes un document sur papier, avec des principes différents. Elles appartiennent :`, o:[`à la même famille, mais à des lignées différentes`,`à la même lignée`,`à des familles différentes`,`à aucune famille`], a:0, ex:`Même besoin (imprimer un document) = même famille ; principes différents = lignées différentes.`},
+        {q:`Une RepRap de 2006 et une imprimante 3D à fil fondu de 2026 forment :`, o:[`deux familles différentes`,`une même lignée (même principe, perfectionné dans le temps)`,`une innovation de rupture`,`une même chaîne d’énergie`], a:1, ex:`Le principe (déposer un fil fondu) est le même : c’est une lignée.`},
+        {q:`L’imprimante 3D à fil fondu et l’imprimante 3D à résine fabriquent toutes deux des objets en volume. Elles sont :`, o:[`de la même lignée`,`de la même famille, de lignées différentes`,`sans rapport`,`des innovations incrémentales l’une de l’autre`], a:1, ex:`Même besoin, principes différents (fil fondu / résine durcie par la lumière).`}
+      ]}
+     ],
+     production:`Les réponses justifiées sur familles et lignées.`},
+    {titre:`Atelier D — Le besoin de demain`, duree:'10 min', modalite:'groupe de 4',
+     contenu:[
+      {t:'tableau', id:'s1-besoins', cols:['Machine','Besoin satisfait','Ce qui manquait (et a poussé à innover)'], rows:[['Presse de Gutenberg',null,null],['Imprimante de bureau',null,null],['Imprimante 3D d’aujourd’hui',null,null]]},
+      {t:'reponse', id:'s1-manque', label:`Selon ton groupe, qu’est-ce qui manque encore à l’imprimante 3D d’aujourd’hui ? (vitesse, matériaux, déchets, prix, facilité…) Cette idée sera reprise en séance 6.`, rows:3},
+      {t:'prof', html:`<p>Exemples attendus : lenteur, nombre limité de matériaux, déchets de supports et de pièces ratées, réglages difficiles, émissions de particules, pannes. Garder une trace affichée de ces besoins : elle alimente la séance 6.</p>`}
+     ],
+     production:`Le tableau des besoins et une piste pour l’avenir.`}
+  ],
+  miseEnCommun:`<p>Chaque groupe présente un atelier (5 min au total). On construit au tableau une frise commune où l’on marque en couleur les <strong>ruptures</strong>, et on affiche la liste des « besoins non satisfaits » de l’imprimante 3D actuelle, qui sert de fil rouge.</p>`,
+  synthese:{
+    comprendre:[`Une innovation naît d’un besoin nouveau ou mal satisfait.`,`Une innovation de rupture change le principe technique et transforme les usages ; une amélioration perfectionne l’objet sans changer son principe.`],
+    savoir:[`Imprimerie (vers 1450) → imprimante reliée à l’ordinateur (années 1970) → impression 3D (brevets en 1984, grand public après 2009).`,`Famille : objets qui répondent au même besoin. Lignée : objets d’une famille qui partagent le même principe technique et évoluent dans le temps.`],
+    savoirFaire:[`Placer des inventions sur une frise et les associer au besoin qui les a fait naître.`,`Distinguer innovation de rupture et amélioration.`,`Identifier la famille et la lignée d’un objet.`],
+    vocab:[['Invention','Création d’une solution technique nouvelle.'],['Innovation','Invention qui est adoptée par les utilisateurs.'],['Innovation de rupture','Innovation qui change le principe technique et les usages.'],['Famille / lignée','Même besoin / même principe technique au fil du temps.']]
+  },
+  verif:[
+    {t:'qcm', id:'s1-qcm', qs:[
+      {q:`L’imprimante 3D grand public s’est développée surtout après 2009 parce que :`, o:[`l’électricité est devenue moins chère`,`le brevet du dépôt de fil fondu est tombé dans le domaine public`,`les ordinateurs ont disparu`,`le papier est devenu rare`], a:1, ex:`Sans brevet, de nombreux fabricants ont pu produire des machines bon marché.`},
+      {q:`Passer d’une buse de 0,4 mm à une buse de 0,6 mm pour imprimer plus vite est :`, o:[`une innovation de rupture`,`une amélioration incrémentale`,`une nouvelle famille`,`une invention sans innovation`], a:1, ex:`Le principe reste le même : c’est une amélioration.`}
+    ]}
+  ],
+  defi:`Cherche un autre objet de la famille « fabriquer un objet en volume » qui n’ajoute pas de matière (indice : le tour, la fraiseuse, le moule…). À quelle lignée appartient-il ?`,
+  prof:{
+    objectifs:[`Identifier les innovations de rupture attachées à l’évolution de l’imprimante (OST11).`,`Introduire famille et lignée ; installer le fil rouge du besoin.`],
+    deroulement:[['0-5','Lancement','Hypothèses, constitution des groupes, consignes de rotation.'],['5-15','Atelier 1','Rotation 1 (chaque groupe commence par un atelier différent).'],['15-25','Atelier 2','Rotation 2.'],['25-35','Atelier 3','Rotation 3.'],['35-45','Atelier 4','Rotation 4.'],['45-55','Mise en commun et synthèse','Frise commune, besoins non satisfaits.']],
+    materiel:[`4 îlots avec une tablette ou un poste ouvert sur l’atelier correspondant ; documents imprimés ou objets réels (caractères d’imprimerie, vieille imprimante, pièces imprimées).`],
+    differenciation:{aide:[`Aides activables ; définitions de famille et lignée affichées sur chaque îlot.`],defi:[`Famille « fabriquer un objet en volume » et procédés par enlèvement de matière.`]},
+    note:`Atelier tournant : chaque groupe commence par un atelier différent (A, B, C, D) ; les activités sont indépendantes. Prévoir un signal sonore toutes les 10 minutes. La trace évaluable est le classement et le tableau des besoins.`
+  }
+});
+
+/* ===================== SÉANCE 2 ===================== */
+SEQUENCE.seances.push({
+  id:'s2', num:2, titre:`Comment naît un objet couche par couche ?`, sous:`Le procédé de fabrication additive et la chaîne numérique`,
+  duree:'55 min', etape:`Observer, analyser le fonctionnement`, reperes:['SFC12'], comp:['C4'],
+  situation:`<p>Le FabLab doit fabriquer un porte-badge de 20 mm de haut. Un élève lance l’impression… elle dure une heure ! Un autre affirme qu’on pourrait l’obtenir en découpant une plaque ou en le moulant. Avant de choisir, il faut comprendre <strong>comment travaille l’imprimante 3D</strong> et ce qui la distingue des autres procédés du laboratoire.</p>`,
+  problematique:`Comment l’imprimante 3D transforme-t-elle un fichier numérique en objet, et en quoi ce procédé diffère-t-il des autres procédés de mise en forme ?`,
+  hypothese:{id:'s2-hyp', label:`Mes hypothèses : pourquoi l’impression du porte-badge est-elle si longue ? Quels réglages pourraient la raccourcir ?`},
+  activites:[
+    {titre:`Je compare les procédés du laboratoire`, duree:'10 min', modalite:'en binôme',
+     contenu:[
+      {t:'tri', id:'s2-procedes', consigne:`Classe chaque procédé selon la façon dont il donne sa forme à la matière.`, cats:['Ajout de matière','Enlèvement de matière','Déformation / moulage'],
+       items:[
+        {l:`Imprimante 3D à fil fondu`, a:0, fb:`La pièce est construite en déposant de la matière.`},
+        {l:`Découpe laser d’une plaque`, a:1, fb:`Le laser vaporise la matière le long du contour.`},
+        {l:`Fraisage (usinage) d’un bloc`, a:1, fb:`L’outil retire des copeaux.`},
+        {l:`Thermoformage d’une feuille de plastique`, a:2, fb:`La feuille chauffée est déformée sur un moule.`},
+        {l:`Moulage par injection (industrie)`, a:2, fb:`La matière fondue prend la forme d’un moule.`},
+        {l:`Pliage d’une plaque à la plieuse`, a:2, fb:`La matière est déformée sans être enlevée.`}
+       ]},
+      {t:'qcm', id:'s2-avantages', qs:[
+        {q:`Quel est le principal avantage de la fabrication additive pour un prototype unique ?`, o:[`Elle est la plus rapide pour 10 000 pièces`,`Elle ne nécessite ni moule ni outil spécifique et permet des formes creuses complexes`,`Elle ne consomme aucune énergie`,`Elle fonctionne avec tous les matériaux`], a:1, ex:`Pas de moule à fabriquer : idéal pour une pièce unique ou complexe. Pour une grande série, le moulage est plus rapide.`}
+      ]}
+     ],
+     production:`Le classement des procédés.`},
+    {titre:`J’identifie les constituants de la tête d’impression`, duree:'12 min', modalite:'en binôme',
+     intro:`<p>Observe l’imprimante du laboratoire (ou la photo projetée par l’enseignant) et associe chaque constituant à son rôle.</p>`,
+     contenu:[
+      {t:'tri', id:'s2-constituants', consigne:`Associe chaque constituant à son rôle.`,
+       cats:[`Pousser le filament vers la zone chaude`,`Chauffer le bloc de chauffe`,`Mesurer la température du bloc de chauffe`,`Donner au plastique fondu un fil de diamètre précis`,`Garder le filament froid avant la zone chaude`,`Refroidir le plastique qui vient d’être déposé`,`Maintenir la pièce et limiter son décollement`],
+       items:[
+        {l:`Moteur d’extrusion (moteur pas à pas)`, a:0, fb:`Il entraîne une roue crantée qui pousse le filament.`},
+        {l:`Cartouche chauffante`, a:1, fb:`C’est une résistance électrique : elle convertit l’énergie électrique en chaleur.`},
+        {l:`Thermistance`, a:2, fb:`C’est un capteur : sa résistance varie avec la température.`},
+        {l:`Buse (diamètre 0,4 mm)`, a:3, fb:`Le trou de la buse fixe la largeur du fil déposé.`},
+        {l:`Radiateur et son ventilateur`, a:4, fb:`Ils évitent que le filament ne ramollisse trop tôt et ne bouche la tête.`},
+        {l:`Ventilateur de pièce`, a:5, fb:`Il fige rapidement chaque couche déposée.`},
+        {l:`Plateau chauffant`, a:6, fb:`La chaleur améliore l’adhérence de la première couche.`}
+       ]}
+     ],
+     production:`Les associations constituant → rôle.`},
+    {titre:`Je reconstitue la chaîne numérique`, duree:'10 min', modalite:'en binôme',
+     contenu:[
+      {t:'ordre', id:'s2-chaine', code:false, lignes:[`Modéliser la pièce en 3D (logiciel de CAO)`,`Exporter le modèle au format STL (surface en triangles)`,`Trancher : choisir le filament, la hauteur de couche, le remplissage, les supports`,`Le trancheur produit un fichier G-code (instructions pour la machine)`,`Lancer l’impression couche par couche`,`Retirer la pièce, enlever les supports et contrôler les dimensions`]},
+      {t:'numerique', id:'s2-couches', qs:[
+        {q:`Le porte-badge mesure 20 mm de haut. Avec une hauteur de couche de 0,2 mm, combien de couches faut-il ?`, a:100, tol:0, u:'couches', ex:`20 ÷ 0,2 = 100 couches.`},
+        {q:`Chaque couche dure en moyenne 36 s. Durée d’impression (en minutes) ?`, a:60, tol:0.5, u:'min', ex:`100 × 36 s = 3 600 s = 60 min.`},
+        {q:`On passe à des couches de 0,3 mm (même durée par couche). Nouvelle durée (en minutes, arrondie à l’unité) ?`, a:40, tol:0.6, u:'min', ex:`20 ÷ 0,3 ≈ 67 couches × 36 s ≈ 2 400 s ≈ 40 min. On gagne du temps mais la surface est moins lisse.`}
+      ]},
+      {t:'aides', items:[`Nombre de couches = hauteur de la pièce ÷ hauteur d’une couche.`,`Pense à convertir les secondes en minutes (÷ 60).`]}
+     ],
+     production:`La chaîne numérique ordonnée et les calculs de durée.`},
+    {titre:`Je lis le programme de la machine (G-code)`, duree:'13 min', modalite:'individuel',
+     intro:`<p>Le G-code est un <strong>programme</strong> : une suite d’instructions exécutées dans l’ordre par la carte électronique de l’imprimante. Chaque ligne commence par un code (G ou M) suivi de paramètres.</p>`,
+     contenu:[
+      {t:'code', titre:`Extrait de G-code`, html:GCODE},
+      {t:'qcm', id:'s2-gcode', qs:[
+        {q:`Que signifie la ligne M104 S210 ?`, o:[`Déplacer la buse de 210 mm`,`Régler la consigne de température de la buse à 210 °C`,`Imprimer 210 couches`,`Régler la vitesse à 210 mm/s`], a:1, ex:`M104 fixe la consigne de température de la buse ; S donne la valeur.`},
+        {q:`Pourquoi la ligne M109 S210 est-elle placée avant les déplacements G1 ?`, o:[`Pour attendre que la buse soit chaude avant d’extruder le plastique`,`Pour éteindre la buse`,`Pour aller plus vite`,`Elle ne sert à rien`], a:0, ex:`Si l’on pousse le filament alors que la buse est froide, il ne fond pas : risque de bouchage.`},
+        {q:`Dans G1 X50 Y20 E2.5 F1500, que représente E2.5 ?`, o:[`La température`,`La longueur de filament à pousser pendant le déplacement`,`L’épaisseur de la couche`,`Le numéro de la couche`], a:1, ex:`E commande le moteur d’extrusion.`}
+      ]},
+      {t:'reponse', id:'s2-gcode-modif', label:`Le filament choisi est du PETG (buse 240 °C, plateau 75 °C). Réécris les lignes à modifier dans l’extrait.`, rows:4},
+      {t:'prof', html:`<p>Réponse attendue : M140 S75, M104 S240, M190 S75, M109 S240. Lien avec la programmation : le G-code est une séquence d’instructions sans boucle ni condition, générée automatiquement par le trancheur (réponse au besoin « pratiquer plus la programmation » exprimé par le groupe).</p>`}
+     ],
+     production:`Les lignes de G-code corrigées pour le PETG.`}
+  ],
+  miseEnCommun:`<p>Projection du trancheur (Cura ou PrusaSlicer) : on fait varier la hauteur de couche et le remplissage et on observe la durée estimée et la masse de filament. On valide la chaîne numérique et le rôle de chaque constituant de la tête.</p>`,
+  synthese:{
+    comprendre:[`L’impression 3D est un procédé par ajout de matière : la pièce est construite couche par couche, sans moule.`,`Un fichier numérique passe par plusieurs étapes avant de devenir un objet ; le trancheur traduit la forme en instructions machine (G-code).`],
+    savoir:[`Procédés du laboratoire : ajout (impression 3D), enlèvement (découpe laser, fraisage), déformation et moulage (thermoformage, pliage).`,`Tête d’impression : moteur d’extrusion, cartouche chauffante, thermistance, buse, radiateur, ventilateur de pièce ; plateau chauffant.`,`Durée d’impression ≈ nombre de couches × durée d’une couche ; nombre de couches = hauteur ÷ hauteur de couche.`],
+    savoirFaire:[`Classer un procédé de mise en forme.`,`Ordonner les étapes de la chaîne numérique.`,`Lire et modifier quelques lignes de G-code.`],
+    vocab:[['Fabrication additive','Procédé qui construit une pièce en ajoutant de la matière couche par couche.'],['Trancheur','Logiciel qui découpe le modèle 3D en couches et produit le G-code.'],['G-code','Programme d’instructions exécuté par la machine.'],['STL','Format de fichier décrivant la surface d’un objet 3D en triangles.']]
+  },
+  verif:[
+    {t:'qcm', id:'s2-qcm', qs:[
+      {q:`Quel constituant est un capteur ?`, o:[`La cartouche chauffante`,`La thermistance`,`La buse`,`Le moteur d’extrusion`], a:1, ex:`La thermistance mesure la température ; la cartouche chauffante est un actionneur qui chauffe.`},
+      {q:`Pour fabriquer 50 000 bouchons identiques, le procédé le plus adapté est :`, o:[`l’impression 3D`,`le moulage par injection`,`la découpe laser`,`le pliage`], a:1, ex:`Une fois le moule fabriqué, l’injection produit une pièce en quelques secondes.`}
+    ]}
+  ],
+  defi:`Compare la masse de filament et la durée estimées par un trancheur pour un même cube avec un remplissage de 15 % et de 100 %. Que choisirais-tu pour un porte-badge ? Pour une pièce qui doit résister à un effort ?`,
+  prof:{
+    objectifs:[`Caractériser le procédé de fabrication additive et le comparer aux autres procédés du laboratoire (SFC12).`],
+    deroulement:[['0-5','Situation et hypothèses','Le porte-badge qui met une heure.'],['5-15','Activité 1','Procédés du laboratoire.'],['15-27','Activité 2','Constituants de la tête (observation de la machine).'],['27-37','Activité 3','Chaîne numérique et calculs de durée.'],['37-50','Activité 4','Lecture et modification du G-code.'],['50-55','Mise en commun et synthèse','Démonstration du trancheur.']],
+    materiel:[`Imprimante 3D du laboratoire (machine à l’arrêt et froide pour l’observation), tête démontée ou photos ; vidéoprojecteur et trancheur.`],
+    differenciation:{aide:[`Aides sur les calculs ; schéma légendé de la tête fourni aux élèves en difficulté.`],defi:[`Influence du remplissage sur masse et durée.`]},
+    note:`Lancer pendant cette séance l’impression des éprouvettes nécessaires à la séance 3 (PLA, PETG, TPU — 80 × 10 × 4 mm, remplissage 100 %, même orientation).`
+  }
+});
+
+/* ===================== SÉANCE 3 ===================== */
+SEQUENCE.seances.push({
+  id:'s3', num:3, titre:`Même machine, différents filaments : allons tester !`, sous:`Propriétés des matériaux et choix justifié`,
+  duree:'55 min', etape:`Expérimenter, interpréter les résultats`, reperes:['SFC12'], comp:['C4'],
+  situation:`<p>Le FabLab reçoit trois commandes : une <strong>figurine décorative</strong> pour le CDI, une <strong>coque souple</strong> qui protège un capteur des chocs, et un <strong>crochet</strong> fixé dehors, au soleil, pour suspendre des outils de jardin. L’imprimante accepte plusieurs filaments. Lequel choisir pour chaque pièce ?</p>
+  <div class="tablewrap"><table><thead><tr><th>Filament</th><th>Origine</th><th>Buse / plateau (valeurs usuelles)</th><th>Informations fournisseur</th></tr></thead><tbody>
+  <tr><td>PLA</td><td>Biosourcé (amidon de maïs, canne à sucre)</td><td>190–220 °C / 0–60 °C</td><td>Facile à imprimer, rigide ; ramollit vers 60 °C ; compostable seulement en installation industrielle.</td></tr>
+  <tr><td>PETG</td><td>Pétrole</td><td>220–250 °C / 70–80 °C</td><td>Résiste mieux aux chocs et à la chaleur que le PLA ; recyclable dans la filière PET dans certains cas.</td></tr>
+  <tr><td>ABS</td><td>Pétrole</td><td>230–260 °C / 90–110 °C</td><td>Résiste à près de 100 °C ; dégage des vapeurs à l’impression (ventilation, enceinte fermée).</td></tr>
+  <tr><td>TPU</td><td>Pétrole</td><td>210–230 °C / 0–60 °C</td><td>Souple et élastique, absorbe les chocs ; impression lente.</td></tr>
+  </tbody></table></div>`,
+  problematique:`Quel filament choisir pour chaque pièce, en tenant compte des contraintes techniques (effort, chaleur, souplesse) et de l’environnement ?`,
+  hypothese:{id:'s3-hyp', label:`Mes hypothèses : sans essai, quel filament choisirais-tu pour chacune des trois pièces ? Pourquoi ?`},
+  activites:[
+    {titre:`Je construis un protocole d’essai équitable`, duree:'8 min', modalite:'en binôme',
+     intro:`<p>Pour comparer la rigidité des filaments, on encastre une éprouvette dans un serre-joint et on suspend des masses à son extrémité (essai de <strong>flexion</strong>). On mesure la flèche (de combien l’extrémité descend).</p>`,
+     contenu:[
+      {t:'qcm', id:'s3-protocole', qs:[
+        {q:`Pour que la comparaison soit juste, que faut-il garder identique pour toutes les éprouvettes ? (plusieurs réponses)`, o:[`Les dimensions et le remplissage de l’éprouvette`,`La longueur qui dépasse du serre-joint`,`Les masses suspendues`,`Le matériau`], a:[0,1,2], ex:`On ne fait varier qu’un seul paramètre : le matériau. Tout le reste doit être identique.`},
+        {q:`Pourquoi refaire chaque essai trois fois ?`, o:[`Pour fatiguer l’éprouvette`,`Pour vérifier que le résultat est fiable et calculer une moyenne`,`Pour aller plus vite`,`Ce n’est pas utile`], a:1, ex:`Répéter permet de repérer une erreur de mesure et de calculer une moyenne.`}
+      ]}
+     ],
+     production:`Les règles du protocole.`},
+    {titre:`J’essaie en flexion (banc réel ou virtuel)`, duree:'17 min', modalite:'en groupe de 3',
+     intro:`<p>Réalise l’essai sur les éprouvettes imprimées. Si le matériel manque, utilise le banc virtuel (valeurs d’ordre de grandeur, modèle simplifié).</p>`,
+     contenu:[
+      {t:'simFlexion', id:'s3-banc'},
+      {t:'tableau', id:'s3-resultats', cols:['Filament','Flèche avec 500 g (mm)','Flèche avec 1 kg (mm)','Comportement (casse ? plie ? revient ?)'], rows:[['PLA',null,null,null],['PETG',null,null,null],['TPU',null,null,null],['ABS (facultatif)',null,null,null]]},
+      {t:'reponse', id:'s3-interpretation', label:`Classe les filaments du plus rigide au plus souple. Lequel casse sans prévenir ? Lequel revient à sa forme ?`, rows:3},
+      {t:'prof', html:`<p>Banc virtuel : flèche par kg ≈ PLA 2 mm, ABS 3,5 mm, PETG 4 mm, TPU 25 mm. Le PLA casse brusquement vers 1,6 kg (matériau fragile) ; le PETG plie davantage puis casse au-delà de 2,4 kg ; le TPU plie fortement sans casser et revient à sa forme (élastique). Sur le banc réel, accepter tout classement cohérent avec les mesures du groupe.</p>`}
+     ],
+     production:`Le tableau de résultats et l’interprétation.`},
+    {titre:`Je teste la tenue à la chaleur`, duree:'10 min', modalite:'démonstration enseignant',
+     intro:`<p>L’enseignant plonge pendant 2 minutes une éprouvette de chaque filament dans de l’eau à 60 °C, puis tente de la plier (gants). Note tes observations.</p>`,
+     contenu:[
+      {t:'tableau', id:'s3-chaleur', cols:['Filament','Après 2 min dans l’eau à 60 °C : rigide ou ramolli ?'], rows:[['PLA',null],['PETG',null],['TPU',null]]},
+      {t:'qcm', id:'s3-chaleur-qcm', qs:[
+        {q:`En été, l’intérieur d’une voiture au soleil peut dépasser 60 °C. Une pièce en PLA posée sur le tableau de bord risque de :`, o:[`fondre en liquide`,`se déformer`,`devenir plus solide`,`ne rien subir`], a:1, ex:`Le PLA ramollit vers 60 °C : la pièce se déforme sous son propre poids.`}
+      ]},
+      {t:'prof', html:`<p>Sécurité : eau à 60 °C maximum, manipulation par l’enseignant ou avec gants, pas de bouilloire en libre accès. Résultat attendu : le PLA ramollit nettement ; le PETG reste rigide ; le TPU reste souple (il l’était déjà).</p>`}
+     ],
+     production:`Les observations de l’essai de chaleur.`},
+    {titre:`Je choisis et je justifie`, duree:'12 min', modalite:'en binôme',
+     contenu:[
+      {t:'tri', id:'s3-choix', consigne:`Associe chaque pièce au filament le plus adapté.`, cats:['PLA','PETG','TPU'],
+       items:[
+        {l:`Figurine décorative pour le CDI (intérieur, aucun effort)`, a:0, fb:`Aucune contrainte particulière : le filament le plus simple à imprimer et biosourcé suffit.`},
+        {l:`Coque qui protège un capteur des chocs`, a:2, fb:`Il faut un matériau souple qui absorbe les chocs.`},
+        {l:`Crochet d’extérieur, au soleil, qui porte des outils`, a:1, fb:`Il faut résister à la chaleur et aux efforts sans casser brusquement.`}
+       ]},
+      {t:'reponse', id:'s3-justif', label:`Justifie le choix pour le crochet en citant un résultat d’essai et une contrainte environnementale (origine, fin de vie).`, rows:4},
+      {t:'prof', html:`<p>Attendu : PETG — il ne ramollit pas à 60 °C (essai de chaleur), plie avant de casser (essai de flexion) ; il est issu du pétrole mais recyclable dans certaines filières. Le PLA, biosourcé, serait préférable du point de vue de l’origine, mais il se déformerait au soleil. L’ABS conviendrait techniquement mais ses vapeurs imposent une enceinte ventilée.</p>`}
+     ],
+     production:`Le choix de filament justifié pour chaque pièce.`}
+  ],
+  miseEnCommun:`<p>Mise en commun des résultats de flexion (moyennes de la classe). On discute des écarts entre groupes (orientation d’impression, remplissage, défauts) et on valide les choix. On souligne qu’un choix de matériau est toujours un <strong>compromis</strong> entre contraintes techniques et environnementales.</p>`,
+  synthese:{
+    comprendre:[`Avec la même machine, on obtient des pièces aux propriétés très différentes selon le filament.`,`Choisir un matériau, c’est confronter des contraintes techniques (effort, chaleur, souplesse) et environnementales (origine, fin de vie) : c’est un compromis.`],
+    savoir:[`Rigidité : un matériau rigide se déforme peu ; un matériau souple (élastique) se déforme et reprend sa forme.`,`Un matériau fragile casse sans se déformer avant ; un matériau ductile se déforme avant de casser.`,`PLA : biosourcé, facile, ramollit vers 60 °C. PETG : résistant aux chocs et à la chaleur. TPU : souple. ABS : résiste à la chaleur, vapeurs à l’impression.`],
+    savoirFaire:[`Concevoir un essai équitable (un seul paramètre varie).`,`Mesurer, relever et interpréter des résultats d’essai.`,`Justifier un choix de matériau avec des résultats et des critères environnementaux.`],
+    vocab:[['Flexion','Sollicitation qui fait plier une pièce.'],['Flèche','Déplacement de l’extrémité d’une pièce qui plie.'],['Biosourcé','Fabriqué à partir de matières végétales renouvelables.'],['Protocole','Suite d’opérations précises pour réaliser un essai reproductible.']]
+  },
+  verif:[
+    {t:'qcm', id:'s3-qcm', qs:[
+      {q:`Une éprouvette en PLA casse net sous 1,6 kg sans s’être beaucoup déformée. Le PLA est :`, o:[`souple`,`fragile`,`élastique`,`ductile`], a:1, ex:`Casser sans se déformer avant = comportement fragile.`},
+      {q:`Le PLA est biosourcé. Cela signifie qu’il :`, o:[`se dégrade dans la nature en quelques jours`,`est fabriqué à partir de matières végétales`,`n’a aucun impact environnemental`,`se recycle avec le verre`], a:1, ex:`Biosourcé concerne l’origine ; sa fin de vie demande un compostage industriel.`}
+    ]}
+  ],
+  defi:`Pour aller plus loin (fiche groupe) : trois technologies répondent au même besoin « fabriquer un objet en volume » : le fil fondu (FDM), la résine durcie par la lumière (SLA) et le frittage de poudre par laser (SLS). Recherche pour chacune un avantage et un inconvénient, puis dis laquelle conviendrait à un bijoutier qui veut des détails très fins.`,
+  prof:{
+    objectifs:[`Justifier le choix d’un matériau et du procédé au regard des contraintes techniques et environnementales (SFC12).`],
+    deroulement:[['0-5','Situation et hypothèses','Trois commandes, quatre filaments.'],['5-13','Activité 1','Protocole équitable.'],['13-30','Activité 2','Essais de flexion (réels ou virtuels).'],['30-40','Activité 3','Démonstration chaleur (enseignant).'],['40-52','Activité 4','Choix justifiés.'],['52-55','Mise en commun et synthèse','Compromis technique / environnement.']],
+    materiel:[`Par groupe : éprouvettes PLA, PETG, TPU (80 × 10 × 4 mm, 100 %), serre-joint, masses de 100 g à 1 kg avec crochet, réglet ; pour la démonstration : eau à 60 °C, thermomètre, gants.`],
+    differenciation:{aide:[`Tableau de résultats pré-structuré ; banc virtuel pour les groupes en difficulté de manipulation.`],defi:[`Comparaison FDM / SLA / SLS (piste « pour aller plus loin » de la fiche groupe).`]},
+    note:`Les valeurs du banc virtuel sont des ordres de grandeur pédagogiques, non des caractéristiques normalisées : les résultats réels dépendent fortement de l’orientation d’impression et du remplissage, ce qui est un bon sujet de discussion.`
+  }
+});
+
+/* ===================== SÉANCE 4 — PANNE (PC-TECHNO) ===================== */
+SEQUENCE.seances.push({
+  id:'s4', num:4, titre:`La machine fait mal fondre le plastique : on enquête !`, sous:`Diagnostic, conduction thermique et protocole de réparation (séance PC-Techno)`,
+  duree:'55 min', etape:`Formuler des hypothèses, tester, proposer une réparation`, reperes:['SFC21','SFC22'], comp:['C5'],
+  situation:`<p>Depuis qu’un élève a changé la tête d’impression, l’imprimante du FabLab imprime mal : le fil est irrégulier, les couches se décollent, et on entend parfois le moteur d’extrusion « claquer ». La température affichée descend sous la consigne au bout de quelques couches. <strong>Le plastique ne fond pas bien.</strong> Les professeurs de technologie et de physique-chimie vous confient l’enquête.</p>`,
+  problematique:`Pourquoi le plastique fond-il mal, et comment réparer durablement la machine en choisissant les bons matériaux ?`,
+  hypothese:{id:'s4-hyp', label:`Mes hypothèses : propose au moins trois causes possibles de la panne, en t’appuyant sur les constituants de la tête vus en séance 2.`},
+  activites:[
+    {titre:`Je mène le diagnostic`, duree:'15 min', modalite:'en binôme',
+     intro:`<p>Choisis les tests à réaliser, un par un, et note ce que chacun t’apprend. Un bon diagnostic utilise <strong>peu de tests bien choisis</strong>. Quand tu es sûr de toi, choisis la cause de la panne.</p>`,
+     contenu:[
+      {t:'diag', id:'s4-diag',
+       tests:[
+        {l:`Lire la température affichée, ventilateur de pièce éteint`, r:`Consigne 210 °C : la température se stabilise à 210 °C.`},
+        {l:`Lire la température affichée, ventilateur de pièce allumé à 100 %`, r:`La température chute à 196 °C et oscille : la cartouche chauffe à fond sans parvenir à rattraper la consigne.`},
+        {l:`Mesurer la résistance de la cartouche chauffante (machine débranchée)`, r:`3,7 Ω. La notice indique 12 V – 40 W, soit environ 3,6 Ω attendus : la cartouche est en bon état.`},
+        {l:`Mesurer la résistance de la thermistance à 25 °C (machine débranchée)`, r:`99 kΩ. La notice indique 100 kΩ à 25 °C : le capteur est en bon état.`},
+        {l:`Pousser le filament à la main, buse à 210 °C, ventilateur éteint`, r:`Le plastique s’écoule régulièrement : la buse n’est pas bouchée.`},
+        {l:`Observer la tête d’impression`, r:`Le bloc de chauffe en aluminium est nu : la chaussette en silicone n’a pas été remise. Le conduit du ventilateur de pièce souffle directement sur le bloc.`},
+        {l:`Vérifier le ventilateur du radiateur`, r:`Il tourne normalement dès la mise sous tension.`}
+       ],
+       options:[`La buse est bouchée`,`La cartouche chauffante est défectueuse`,`La thermistance donne une mesure fausse`,`Le bloc de chauffe perd sa chaleur : pas d’isolation et flux d’air du ventilateur de pièce`,`Le ventilateur du radiateur est en panne`], a:3},
+      {t:'aides', items:[`Compare les deux lectures de température : qu’est-ce qui change entre elles ?`,`Si la cartouche et la thermistance sont en bon état et la buse libre, que reste-t-il ?`]}
+     ],
+     production:`La liste des tests réalisés et le diagnostic.`},
+    {titre:`Je calcule et je vérifie (lien physique-chimie)`, duree:'8 min', modalite:'individuel',
+     intro:`<p>La puissance d’une résistance alimentée sous une tension U vaut P = U² ÷ R. Donc R = U² ÷ P.</p>`,
+     contenu:[
+      {t:'numerique', id:'s4-calcul', qs:[
+        {q:`Cartouche 12 V – 40 W : quelle résistance (en Ω, au dixième) ?`, a:3.6, tol:0.05, u:'Ω', ex:`R = 12² ÷ 40 = 144 ÷ 40 = 3,6 Ω.`},
+        {q:`Une cartouche 24 V – 40 W montée par erreur sur une imprimante 12 V. Quelle puissance fournirait-elle ? (R = 14,4 Ω)`, a:10, tol:0.1, u:'W', ex:`P = 12² ÷ 14,4 = 10 W seulement : elle chaufferait beaucoup trop peu. C’est une autre cause classique de « plastique mal fondu ».`}
+      ]}
+     ],
+     production:`Les calculs de résistance et de puissance.`},
+    {titre:`Quelle est la meilleure façon de tester la conduction thermique ?`, duree:'15 min', modalite:'en binôme (PC)',
+     intro:`<p>Expérience classique : des billes sont collées à la cire tous les 2 cm le long d’une tige ; on chauffe une extrémité ; la bille tombe quand la cire fond. Plus les billes tombent vite, plus le matériau <strong>conduit</strong> la chaleur. Utilise la simulation (modèle simplifié) ou le montage réel.</p>`,
+     contenu:[
+      {t:'simConduction', id:'s4-cond'},
+      {t:'tableau', id:'s4-cond-res', cols:['Matériau','Temps de chute de la bille à 10 cm (s)','Classement (1 = meilleur conducteur)'], rows:[['Cuivre',null,null],['Aluminium',null,null],['Laiton',null,null],['Acier',null,null]]},
+      {t:'qcm', id:'s4-cond-qcm', qs:[
+        {q:`Pour que la comparaison soit valable, les tiges doivent avoir : (plusieurs réponses)`, o:[`la même longueur et la même section`,`la même source de chaleur, à la même distance`,`la même température de départ`,`la même couleur`], a:[0,1,2], ex:`Seul le matériau doit changer. La couleur n’intervient pas ici.`},
+        {q:`La buse doit transmettre la chaleur au plastique. Pourquoi est-elle souvent en laiton plutôt qu’en acier ?`, o:[`Le laiton conduit mieux la chaleur`,`Le laiton est plus léger`,`L’acier fond à 210 °C`,`Le laiton isole mieux`], a:0, ex:`Le laiton conduit bien la chaleur. L’acier trempé conduit moins bien mais résiste mieux à l’usure par des filaments abrasifs.`}
+      ]}
+     ],
+     production:`Le tableau de classement des matériaux et les règles d’un protocole valable.`},
+    {titre:`Je choisis l’isolant et je rédige le protocole de réparation`, duree:'12 min', modalite:'en binôme',
+     intro:`<div class="tablewrap"><table><thead><tr><th>Matériau</th><th>Conductivité thermique (W/m·K, ordre de grandeur)</th><th>Température maximale d’usage</th></tr></thead><tbody>
+     <tr><td>Aluminium</td><td>≈ 200</td><td>Fond vers 660 °C</td></tr><tr><td>Silicone</td><td>≈ 0,2</td><td>≈ 250 à 300 °C</td></tr><tr><td>PLA</td><td>≈ 0,13</td><td>Ramollit vers 60 °C</td></tr><tr><td>Polystyrène expansé</td><td>≈ 0,035</td><td>Se déforme vers 90 °C</td></tr></tbody></table></div>`,
+     contenu:[
+      {t:'qcm', id:'s4-isolant', qs:[
+        {q:`Quel matériau choisir pour la chaussette qui isole le bloc de chauffe (à 210–250 °C) ?`, o:[`Aluminium`,`Silicone`,`PLA`,`Polystyrène expansé`], a:1, ex:`Il faut un isolant (faible conductivité) qui supporte la température du bloc : seul le silicone répond aux deux exigences.`, fb:[`L’aluminium conduit très bien la chaleur : il ne l’isole pas.`,null,`Isolant, mais il ramollit à 60 °C : il fondrait sur le bloc.`,`Très isolant, mais il se déforme vers 90 °C.`]}
+      ]},
+      {t:'ordre', id:'s4-reparation', code:false,
+       lignes:[`Éteindre et débrancher l’imprimante`,`Laisser refroidir la tête d’impression sous 50 °C`,`Nettoyer le bloc de chauffe (brosse en laiton)`,`Installer une chaussette en silicone adaptée au modèle du bloc`,`Réorienter le conduit du ventilateur de pièce vers la pièce et non vers le bloc`,`Rebrancher et lancer un étalonnage de la régulation de température`,`Imprimer une pièce test et la comparer à la pièce de référence`],
+       alt:[[0,1,4,2,3,5,6],[0,1,2,4,3,5,6]]},
+      {t:'reponse', id:'s4-securite', label:`Cite deux règles de sécurité indispensables pendant cette réparation et explique chacune.`, rows:3},
+      {t:'prof', html:`<p>Réponses attendues : couper l’alimentation (risque électrique et démarrage intempestif du chauffage) ; attendre le refroidissement (bloc à plus de 200 °C : brûlures) ; ne pas forcer sur la thermistance et ses fils (fragiles). Sur Marlin, l’étalonnage de la régulation se lance avec la commande M303 (autotune PID). Si une imprimante en panne est disponible, la réparation réelle peut être réalisée (prolongement vers SFC23, non évalué ici).</p>`}
+     ],
+     production:`Le choix argumenté de l’isolant et le protocole de réparation ordonné.`}
+  ],
+  miseEnCommun:`<p>Confrontation des diagnostics : quels tests ont été vraiment utiles ? Le professeur de physique-chimie fait le lien entre conduction thermique, isolation et pertes par l’air (le ventilateur « emporte » la chaleur). On valide le protocole de réparation et on remarque qu’une machine <strong>démontable, documentée, avec des pièces standard</strong> se répare facilement : c’est un critère de choix pour la séance 5.</p>`,
+  synthese:{
+    comprendre:[`Dépanner, c’est formuler des hypothèses puis les tester une par une, en commençant par les plus probables et les plus simples.`,`Un même phénomène physique (la conduction thermique) explique pourquoi la buse doit conduire la chaleur et pourquoi le bloc doit être isolé.`],
+    savoir:[`Composants de la tête : cartouche chauffante (actionneur qui chauffe), thermistance (capteur de température), buse, ventilateurs.`,`Un bon conducteur thermique (cuivre, aluminium, laiton) transmet vite la chaleur ; un isolant (silicone, air, plastiques) la freine.`,`Une réparation suit un protocole : sécurité (couper, refroidir), intervention, réglage, test de validation.`],
+    savoirFaire:[`Formuler des hypothèses et choisir des tests pertinents.`,`Comparer des matériaux avec un protocole équitable.`,`Rédiger un protocole de dépannage puis de réparation en respectant la sécurité.`],
+    vocab:[['Diagnostic','Recherche de la cause d’une panne à partir de tests.'],['Conductivité thermique','Aptitude d’un matériau à transmettre la chaleur.'],['Isolant thermique','Matériau qui transmet mal la chaleur.'],['Réparabilité','Facilité avec laquelle un objet peut être réparé.']]
+  },
+  verif:[
+    {t:'qcm', id:'s4-qcm', qs:[
+      {q:`La thermistance mesure 100 kΩ à 25 °C comme l’indique la notice. On peut conclure que :`, o:[`la thermistance fonctionne probablement correctement`,`la cartouche est défectueuse`,`la buse est bouchée`,`le ventilateur est en panne`], a:0, ex:`Le test ne concerne que la thermistance : il confirme qu’elle est en bon état.`},
+      {q:`Pourquoi commencer une réparation en débranchant la machine ?`, o:[`Pour économiser l’énergie`,`Pour éviter tout risque électrique et un chauffage intempestif`,`Pour refroidir plus vite`,`Ce n’est pas nécessaire`], a:1, ex:`La sécurité vient toujours en premier.`}
+    ]}
+  ],
+  defi:`Le « heatbreak » relie le radiateur froid au bloc chaud. Il doit laisser passer le filament mais freiner la chaleur. Faut-il le fabriquer en cuivre ou en acier inoxydable ? Justifie avec la simulation.`,
+  prof:{
+    objectifs:[`Formuler des hypothèses expliquant le dysfonctionnement (SFC21).`,`Proposer un protocole de dépannage puis de réparation (SFC22).`,`Physique-chimie : conduction thermique, protocole expérimental, P = U²/R.`],
+    deroulement:[['0-5','Situation et hypothèses','Symptômes de la panne ; hypothèses individuelles.'],['5-20','Activité 1','Diagnostic guidé (tests au choix).'],['20-28','Activité 2','Calculs de résistance et de puissance.'],['28-43','Activité 3','Conduction thermique (co-animation PC).'],['43-53','Activité 4','Isolant et protocole de réparation.'],['53-55','Synthèse','Lien réparabilité → séance 5.']],
+    materiel:[`Imprimante (ou tête démontée), multimètre, chaussette silicone ; montage de conduction (tiges cuivre, aluminium, laiton, acier de même section, cire, billes, bec ou plaque chauffante, chronomètre).`],
+    differenciation:{aide:[`Aides pour le diagnostic ; liste de tests réduite (4) pour les élèves en difficulté.`],defi:[`Matériau du heatbreak (acier inoxydable : mauvais conducteur, voulu ici).`]},
+    note:`Séance co-animée avec le professeur de physique-chimie. Le montage réel de conduction nécessite une source de chaleur : respecter les consignes de sécurité du laboratoire de PC.`
+  }
+});
+
+/* ===================== SÉANCE 5 ===================== */
+SEQUENCE.seances.push({
+  id:'s5', num:5, titre:`Quelle imprimante pour le FabLab ?`, sous:`Besoin, cahier des charges, critères et réparabilité`,
+  duree:'55 min', etape:`Exploiter les résultats pour choisir et argumenter`, reperes:['OST33'], comp:['C3'],
+  situation:`<p>La réparation a fonctionné, mais la vieille machine ne suffit plus : les projets des 3es nécessitent des pièces plus grandes et plusieurs imprimantes tournent en même temps. Le collège dispose d’un budget de <strong>900 €</strong>. Trois modèles sont proposés.</p>
+  <div class="tablewrap"><table><thead><tr><th>Caractéristique</th><th>P1 « Cubix Mini »</th><th>P2 « Open Maker 220 »</th><th>P3 « ProFab Box »</th></tr></thead><tbody>
+  <tr><td>Prix</td><td>249 €</td><td>329 €</td><td>799 €</td></tr>
+  <tr><td>Volume d’impression</td><td>10 × 10 × 10 cm</td><td>22 × 22 × 25 cm</td><td>25 × 25 × 25 cm</td></tr>
+  <tr><td>Filaments</td><td>PLA en bobines de la marque uniquement</td><td>PLA, PETG, TPU (bobines standard)</td><td>PLA, PETG, TPU, ABS (bobines standard)</td></tr>
+  <tr><td>Sécurité</td><td>Cadre fermé</td><td>Cadre ouvert</td><td>Enceinte fermée avec filtre</td></tr>
+  <tr><td>Documentation</td><td>Notice d’utilisation seule</td><td>Plans libres, guides de réparation détaillés</td><td>Guide d’entretien, pas de guide de démontage</td></tr>
+  <tr><td>Pièces détachées</td><td>Non vendues</td><td>Standard, vendues partout, peu chères</td><td>Pièces de la marque, disponibles 5 ans, chères</td></tr>
+  <tr><td>Consommation moyenne en impression</td><td>60 W</td><td>110 W</td><td>180 W</td></tr>
+  </tbody></table></div><p class="petit muted">Modèles et valeurs fictifs, créés pour la séquence.</p>`,
+  problematique:`Quelle imprimante choisir pour répondre au besoin du FabLab, et comment intégrer la réparabilité dans ce choix ?`,
+  hypothese:{id:'s5-hyp', label:`Mes hypothèses : laquelle choisirais-tu à première vue ? Quel critère t’a le plus influencé ?`},
+  activites:[
+    {titre:`J’exprime le besoin et le cahier des charges`, duree:'12 min', modalite:'en binôme',
+     intro:`<p>Avant de comparer, on formule le besoin (diagramme « bête à cornes ») puis on le traduit en <strong>fonctions</strong>, <strong>critères</strong> et <strong>niveaux</strong> : c’est le cahier des charges.</p>`,
+     contenu:[
+      {t:'schema', id:'s5-besoin', layout:'chaine',
+       options:[`Aux élèves et aux professeurs du collège`,`Sur de la matière plastique (filament)`,`Fabriquer les pièces des projets de technologie`,`Sur le papier`,`Imprimer des photos`],
+       slots:[{titre:'À qui rend-il service ?', a:0},{titre:'Sur quoi agit-il ?', a:1},{titre:'Dans quel but ?', a:2}]},
+      {t:'tri', id:'s5-cdc', consigne:`Associe chaque fonction à son critère et à son niveau.`,
+       cats:[`Volume d’impression ≥ 18 × 18 × 18 cm`,`Coût d’achat ≤ 900 €`,`Pièces détachées vendues et documentation de réparation disponible`,`Au moins PLA et PETG`,`Zone chaude protégée ou enceinte`],
+       items:[
+        {l:`Fabriquer les pièces des projets de 3e`, a:0, fb:`Les pièces des projets doivent tenir dans la machine.`},
+        {l:`Respecter le budget du collège`, a:1, fb:`C’est une contrainte financière.`},
+        {l:`Pouvoir être réparée au FabLab`, a:2, fb:`C’est la leçon de la séance 4.`},
+        {l:`Imprimer des pièces adaptées à leur usage`, a:3, fb:`On a vu en séance 3 que le PLA ne suffit pas toujours.`},
+        {l:`Être utilisée sans danger par des élèves`, a:4, fb:`La buse est à plus de 200 °C.`}
+       ]}
+     ],
+     production:`La bête à cornes et le cahier des charges.`},
+    {titre:`J’évalue la réparabilité`, duree:'10 min', modalite:'individuel',
+     intro:`<p>Les imprimantes 3D ne sont pas soumises à l’indice de réparabilité officiel, mais on peut reprendre ses critères. Le FabLab a noté chaque modèle sur 10 : documentation, démontage, disponibilité des pièces, prix des pièces. Note de réparabilité = moyenne des quatre notes.</p>
+     <div class="tablewrap"><table><thead><tr><th>Critère (/10)</th><th>P1</th><th>P2</th><th>P3</th></tr></thead><tbody><tr><td>Documentation</td><td>2</td><td>9</td><td>5</td></tr><tr><td>Facilité de démontage</td><td>3</td><td>8</td><td>6</td></tr><tr><td>Disponibilité des pièces</td><td>1</td><td>9</td><td>7</td></tr><tr><td>Prix des pièces</td><td>2</td><td>9</td><td>4</td></tr></tbody></table></div>`,
+     contenu:[
+      {t:'numerique', id:'s5-repar', qs:[
+        {q:`Note de réparabilité de P1 (/10)`, a:2, tol:0.05, u:'/10', ex:`(2 + 3 + 1 + 2) ÷ 4 = 2.`},
+        {q:`Note de réparabilité de P2 (/10, au centième)`, a:8.75, tol:0.01, u:'/10', ex:`(9 + 8 + 9 + 9) ÷ 4 = 35 ÷ 4 = 8,75.`},
+        {q:`Note de réparabilité de P3 (/10, au dixième)`, a:5.5, tol:0.05, u:'/10', ex:`(5 + 6 + 7 + 4) ÷ 4 = 22 ÷ 4 = 5,5.`}
+      ]},
+      {t:'qcm', id:'s5-indice', qs:[
+        {q:`En France, l’indice de réparabilité officiel (note sur 10) est affiché par exemple sur :`, o:[`les aspirateurs et les ordinateurs portables`,`les livres`,`les vélos sans moteur`,`les vêtements`], a:0, ex:`Il concerne certains équipements électriques et électroniques ; pour d’autres familles, il a été remplacé par un indice de durabilité.`}
+      ]}
+     ],
+     production:`Les notes de réparabilité calculées.`},
+    {titre:`Je compare avec un tableau de décision`, duree:'18 min', modalite:'en binôme',
+     intro:`<p>Une <strong>exigence éliminatoire</strong> écarte un modèle ; les autres critères sont pondérés de 0 à 3 selon le besoin du FabLab. L’outil calcule le score : poids × note (notes sur 5).</p>`,
+     contenu:[
+      {t:'decision', id:'s5-decision',
+       produits:[{n:'P1 « Cubix Mini »'},{n:'P2 « Open Maker 220 »'},{n:'P3 « ProFab Box »'}],
+       exigence:{label:`Appliquer l’exigence éliminatoire : <strong>volume ≥ 18 × 18 × 18 cm</strong> et <strong>prix ≤ 900 €</strong>`, exclus:[0], motif:'exclu (volume)'},
+       criteres:[
+        {c:'Coût d’achat (moins cher = meilleure note)', notes:[5,4,2]},
+        {c:'Réparabilité (documentation, pièces)', notes:[1,5,3]},
+        {c:'Sécurité pour les élèves', notes:[4,2,5]},
+        {c:'Variété des filaments', notes:[1,4,5]},
+        {c:'Consommation d’énergie (faible = meilleure note)', notes:[5,4,2]}
+       ],
+       alertes:[{i:1, msg:'Tu as donné un poids nul à la réparabilité : pourtant la séance 4 a montré son importance.'},{i:2, msg:'La sécurité des élèves a un poids nul : est-ce acceptable dans un collège ?'}]},
+      {t:'reponse', id:'s5-argument', label:`Rédige ta recommandation au chef d’établissement (5 lignes) : modèle choisi, exigences respectées, trois critères dont la réparabilité, et un point de vigilance.`, rows:6},
+      {t:'prof', html:`<p>P1 est éliminé (volume insuffisant). Entre P2 et P3, le choix dépend des pondérations : P2 l’emporte si réparabilité et coût pèsent lourd (on peut même acheter deux P2 pour le prix d’un P3) ; P3 l’emporte si la sécurité (enceinte, filtre) et l’ABS sont prioritaires. Les deux réponses sont recevables si elles sont argumentées ; valoriser le point de vigilance (cadre ouvert de P2 → règles d’usage, capot ; pièces chères de P3).</p>`}
+     ],
+     production:`Le tableau de décision et la recommandation argumentée.`}
+  ],
+  miseEnCommun:`<p>Vote argumenté de la classe. On compare les pondérations : un choix technique dépend des priorités retenues, d’où l’importance d’un cahier des charges clair. On relie réparabilité, durée de vie et impact environnemental.</p>`,
+  synthese:{
+    comprendre:[`On choisit un objet technique en le comparant au cahier des charges : les exigences éliminent, les critères pondérés départagent.`,`La réparabilité prolonge la durée de vie d’un objet : c’est un critère économique et environnemental.`],
+    savoir:[`Bête à cornes : à qui rend-il service ? sur quoi agit-il ? dans quel but ?`,`Cahier des charges : fonction → critère → niveau.`,`Critères de réparabilité : documentation, démontage, disponibilité des pièces, prix des pièces (repris de l’indice de réparabilité officiel).`],
+    savoirFaire:[`Formuler un besoin et l’écrire en cahier des charges.`,`Calculer une note moyenne et construire un tableau de décision.`,`Argumenter un choix par écrit.`],
+    vocab:[['Cahier des charges','Document qui décrit le besoin en fonctions, critères et niveaux.'],['Critère','Ce sur quoi on juge une fonction.'],['Niveau','Valeur attendue pour un critère.'],['Exigence éliminatoire','Condition obligatoire qui écarte un produit.']]
+  },
+  verif:[
+    {t:'qcm', id:'s5-qcm', qs:[
+      {q:`Dans « Volume d’impression ≥ 18 × 18 × 18 cm », « 18 × 18 × 18 cm » est :`, o:[`une fonction`,`un critère`,`un niveau`,`un besoin`], a:2, ex:`Le critère est le volume d’impression ; le niveau est la valeur attendue.`},
+      {q:`Pourquoi des pièces standard rendent-elles une imprimante plus réparable ?`, o:[`Elles sont plus jolies`,`On les trouve facilement et à bas prix chez de nombreux vendeurs`,`Elles ne s’usent jamais`,`Elles sont obligatoires`], a:1, ex:`Disponibilité et prix des pièces sont deux critères de réparabilité.`}
+    ]}
+  ],
+  defi:`Calcule la consommation d’énergie de P2 et de P3 pour 300 heures d’impression par an (en kWh), puis le coût annuel avec un prix de 0,25 € par kWh.`,
+  prof:{
+    objectifs:[`Évaluer les OST selon des exigences ou des critères identifiés, dont la réparabilité (OST33) ; s’approprier un cahier des charges.`],
+    deroulement:[['0-5','Situation et hypothèses','Trois modèles, un budget.'],['5-17','Activité 1','Bête à cornes et cahier des charges.'],['17-27','Activité 2','Notes de réparabilité.'],['27-45','Activité 3','Tableau de décision et recommandation.'],['45-55','Mise en commun et synthèse','Vote argumenté.']],
+    materiel:[`Fichier HTML ; facultatif : fiches techniques de vraies imprimantes.`],
+    differenciation:{aide:[`Amorces de rédaction : « Je recommande … car … Il respecte … En revanche … ».`],defi:[`Coût énergétique annuel : P2 33 kWh ≈ 8,25 € ; P3 54 kWh = 13,50 €.`]},
+    note:`La fiche groupe signalait « beaucoup de diagrammes parfois inutiles » : seule la bête à cornes est conservée, parce qu’elle sert directement à écrire le cahier des charges utilisé pour choisir.`
+  }
+});
+
+/* ===================== SÉANCE 6 — CLASSE INVERSÉE ===================== */
+SEQUENCE.seances.push({
+  id:'s6', num:6, titre:`Imaginer l’imprimante 3D du futur`, sous:`Classe inversée : besoins, solutions, incidences sur la société`,
+  duree:'55 min (+ 20 min de préparation à la maison)', etape:`Concevoir, proposer une solution et argumenter`, reperes:['CCRI12','OST13'], comp:['C7','C1'],
+  situation:`<p><strong>À la maison (classe inversée)</strong>, lis les quatre fiches et réponds aux questions de l’activité 1. En classe, ton équipe imagine une imprimante du futur qui répond à un besoin encore mal satisfait (liste de la séance 1).</p>
+  <div class="grille2">
+  <div class="situation"><strong>Fiche 1 — Construire des maisons.</strong> Des imprimantes géantes déposent un mortier couche par couche pour élever des murs en quelques jours, sans coffrage. Des logements ont déjà été construits ainsi en Europe et ailleurs. Questions en débat : emplois du bâtiment, isolation, quantité de ciment (fortement émetteur de CO₂).</div>
+  <div class="situation"><strong>Fiche 2 — Soigner.</strong> Les hôpitaux impriment des modèles d’organes pour préparer les opérations, des guides chirurgicaux et des prothèses sur mesure, parfois moins chères. Des laboratoires de recherche impriment des tissus vivants : c’est la bio-impression, encore expérimentale.</div>
+  <div class="situation"><strong>Fiche 3 — Recycler.</strong> Des « recycleurs » broient des déchets plastiques (bouteilles, pièces ratées) et les transforment en nouveau filament. Les pièces ratées et les supports restent aujourd’hui une source importante de déchets dans les FabLabs.</div>
+  <div class="situation"><strong>Fiche 4 — Réparer loin de tout.</strong> En 2014, une imprimante 3D a fabriqué des pièces à bord de la Station spatiale internationale : on peut produire une pièce de rechange sur place au lieu d’attendre une livraison. Le même principe intéresse les bateaux, les zones isolées… et les particuliers qui réparent leurs objets.</div>
+  </div>`,
+  problematique:`Quelle imprimante 3D pourrait répondre à un besoin de demain, et quelles seraient ses incidences sur la société et l’environnement ?`,
+  hypothese:null,
+  activites:[
+    {titre:`À la maison : je lis et je classe les incidences`, duree:'20 min (maison) + 5 min en classe', modalite:'individuel',
+     contenu:[
+      {t:'tri', id:'s6-enjeux', consigne:`Range chaque incidence selon le pilier du développement durable qu’elle concerne surtout.`, cats:['Environnemental','Sociétal','Économique'],
+       items:[
+        {l:`Fabriquer une pièce de rechange sur place évite son transport.`, a:0, fb:`Moins de transport = moins d’émissions.`},
+        {l:`Une prothèse sur mesure améliore la vie d’un enfant qui grandit.`, a:1, fb:`Santé et qualité de vie des personnes : pilier sociétal.`},
+        {l:`Construire des logements plus vite pour les familles sans abri.`, a:1, fb:`Accès au logement : pilier sociétal.`},
+        {l:`Les magasins de pièces détachées vendent moins.`, a:2, fb:`Activité commerciale et emplois : pilier économique.`},
+        {l:`Transformer les pièces ratées en nouveau filament.`, a:0, fb:`Réduction des déchets.`},
+        {l:`Une entreprise fabrique à la demande sans stock coûteux.`, a:2, fb:`Coûts de stockage : pilier économique.`}
+       ]},
+      {t:'reponse', id:'s6-maison', label:`Quelle fiche t’a le plus intéressé ? Quel besoin nouveau fait-elle apparaître ?`, rows:3}
+     ],
+     production:`Le classement des incidences et la réponse préparée à la maison.`},
+    {titre:`Je définis le besoin de notre imprimante du futur`, duree:'10 min', modalite:'équipe de 3-4',
+     contenu:[
+      {t:'tableau', id:'s6-besoin', cols:['Question','Notre réponse'], rows:[['À qui rendra-t-elle service ?',null],['Sur quoi agira-t-elle ?',null],['Dans quel but ?',null],['Deux exigences avec un critère mesurable',null],['Interacteurs principaux (usagers, environnement…)',null]]},
+      {t:'aides', items:[`Repars de la liste des « besoins non satisfaits » affichée en séance 1.`,`Exemple d’exigence : « Recycler les pièces ratées : au moins 80 % de la masse transformée en filament ».`]}
+     ],
+     production:`La fiche besoin de l’équipe.`},
+    {titre:`Je propose plusieurs solutions et j’en choisis une`, duree:'20 min', modalite:'équipe de 3-4',
+     intro:`<p>Sur une feuille A3, chaque membre de l’équipe dessine <strong>au moins un croquis</strong> de solution (vue d’ensemble légendée). L’équipe compare les solutions aux exigences, en choisit une, puis réalise un <strong>schéma</strong> de son fonctionnement (étapes ou constituants principaux). Une maquette rapide en carton est possible.</p>`,
+     contenu:[
+      {t:'tableau', id:'s6-solutions', cols:['Solution (titre du croquis)','Exigence 1 respectée ?','Exigence 2 respectée ?','Faisabilité (facile / difficile)','Retenue ?'], rows:[[null,null,null,null,null],[null,null,null,null,null],[null,null,null,null,null]]},
+      {t:'reponse', id:'s6-description', label:`Décris la solution retenue : principe de fonctionnement, matériaux envisagés, procédés de fabrication de ses pièces, règles de sécurité d’utilisation.`, rows:5},
+      {t:'prof', html:`<h4>Grille d’évaluation de la production (C7 · CCRI12)</h4><div class="tablewrap"><table><thead><tr><th>Critère</th><th>Insuffisante</th><th>Fragile</th><th>Satisfaisante</th><th>Très bonne</th></tr></thead><tbody>
+      <tr><td>Croquis et schéma</td><td>Absents ou illisibles</td><td>Un croquis peu légendé</td><td>Plusieurs croquis légendés + schéma</td><td>Solutions variées, schéma clair, maquette</td></tr>
+      <tr><td>Lien avec le besoin et les exigences</td><td>Aucun</td><td>Besoin cité sans exigences</td><td>Solution comparée aux exigences</td><td>Choix argumenté par les exigences et la faisabilité</td></tr>
+      <tr><td>Matériaux, procédés, sécurité</td><td>Absents</td><td>Un élément cité</td><td>Matériaux et procédés cités</td><td>Matériaux, procédés et règles de sécurité justifiés</td></tr></tbody></table></div>`}
+     ],
+     production:`Croquis (A3), schéma, tableau de comparaison et description de la solution retenue.`},
+    {titre:`J’argumente sur les incidences de notre imprimante`, duree:'10 min', modalite:'individuel',
+     contenu:[
+      {t:'reponse', id:'s6-argumentaire', label:`Argumentaire court (5 lignes) : quelles incidences positives et négatives notre imprimante aurait-elle sur la société et l’environnement ? Cite au moins un effet sociétal et un effet environnemental.`, rows:6},
+      {t:'prof', html:`<p>Critères OST13 : argumentaire court et structuré ; au moins une incidence sociétale et une environnementale ; présence d’un effet positif ET d’un effet négatif ou d’une limite. Exemple de limite : consommation d’énergie, émissions de particules, emplois, objets jetables plus nombreux.</p>`}
+     ],
+     production:`L’argumentaire individuel.`}
+  ],
+  miseEnCommun:`<p>Galerie des croquis : chaque équipe présente sa solution en 1 minute ; les autres équipes posent une question sur une exigence ou une incidence. On retient que toute innovation a des effets positifs et des limites, à anticiper dès la conception.</p>`,
+  synthese:{
+    comprendre:[`Une innovation part d’un besoin ; on imagine plusieurs solutions avant d’en choisir une à l’aide des exigences.`,`Toute innovation a des incidences sur la société, l’économie et l’environnement, positives et négatives.`],
+    savoir:[`Modes de représentation d’une solution : croquis, schéma, maquette, modèle 3D.`,`Les trois piliers du développement durable : environnemental, sociétal, économique.`],
+    savoirFaire:[`Proposer plusieurs solutions par des croquis légendés.`,`Choisir une solution à l’aide d’exigences.`,`Rédiger un argumentaire court sur les incidences d’une technologie.`],
+    vocab:[['Croquis','Dessin rapide à main levée qui représente une idée.'],['Schéma','Représentation simplifiée du fonctionnement.'],['Incidence','Effet d’une technologie sur la société ou l’environnement.'],['Classe inversée','Découverte des documents à la maison, travail collectif en classe.']]
+  },
+  verif:[
+    {t:'qcm', id:'s6-qcm', qs:[
+      {q:`Pourquoi dessiner plusieurs solutions avant d’en choisir une ?`, o:[`Pour remplir la feuille`,`Pour comparer les idées aux exigences et garder la meilleure`,`C’est inutile`,`Pour avoir une note plus élevée`], a:1, ex:`Comparer plusieurs pistes évite de s’enfermer dans la première idée.`}
+    ]}
+  ],
+  defi:`Modélise en 3D (Tinkercad) une pièce de ton imprimante du futur et imprime-la au FabLab.`,
+  prof:{
+    objectifs:[`Proposer un ensemble de solutions (croquis, schéma) pour un nouvel OST (CCRI12).`,`Exprimer dans un argumentaire court l’incidence d’un OST sur la société (OST13).`],
+    deroulement:[['Maison','Classe inversée','Lecture des 4 fiches, classement des incidences (20 min).'],['0-5','Retour sur le travail maison','Correction rapide du classement.'],['5-15','Activité 2','Besoin et exigences de l’équipe.'],['15-35','Activité 3','Croquis, choix, schéma.'],['35-45','Activité 4','Argumentaire individuel.'],['45-55','Mise en commun','Galerie des croquis.']],
+    materiel:[`Feuilles A3, crayons, carton et colle (maquette facultative) ; accès au fichier HTML à la maison (ou fiches imprimées pour les élèves sans connexion).`],
+    differenciation:{aide:[`Fiches imprimées et lues en classe pour les élèves qui n’ont pas pu préparer ; banque de pistes (recycleur intégré, imprimante solaire, imprimante multi-matériaux).`],defi:[`Modélisation et impression d’une pièce.`]},
+    note:`Les fiches documentaires résument des usages connus de l’impression 3D ; elles peuvent être enrichies par des vidéos ou des articles récents (lien Internet à vérifier avant la séance).`
+  }
+});
+
+/* ===================== SÉANCE 7 — ÉVALUATION ===================== */
+SEQUENCE.seances.push({
+  id:'s7', num:7, titre:`Évaluation : l’imprimante 3D à béton`, sous:`Situation nouvelle de transfert — évaluation par compétences`,
+  duree:'55 min', etape:`Évaluer les acquis`, reperes:['OST11','OST13','SFC12','SFC21','SFC22','OST33'], comp:['C1','C4','C5','C3'], evaluation:true,
+  situation:`<p>Une communauté de communes veut construire des logements avec une <strong>imprimante 3D à béton</strong> : un bras robotisé dépose un mortier couche par couche pour élever les murs, sans coffrage. Vous êtes chargés d’étudier le projet.</p><p><strong>Travail individuel.</strong> Les parties sont indépendantes. Les réponses à choix sont corrigées automatiquement ; les réponses rédigées sont évaluées avec la grille.</p>`,
+  problematique:`L’imprimante 3D à béton est-elle une bonne solution pour construire des logements, et comment la choisir et l’entretenir ?`,
+  hypothese:null,
+  activites:[
+    {titre:`Partie A — Innovation et société (C1 · OST11, OST13)`, duree:'12 min', modalite:'individuel',
+     contenu:[
+      {t:'tri', id:'s7-A', consigne:`Rupture ou amélioration ?`, cats:['Innovation de rupture','Amélioration (incrémentale)'],
+       items:[{l:`Élever des murs en déposant le mortier couche par couche, sans coffrage`, a:0},{l:`Une bétonnière avec une cuve plus grande`, a:1},{l:`Une imprimante à béton qui imprime 20 % plus vite que le modèle précédent`, a:1},{l:`Un mortier qui durcit un peu plus vite que le précédent`, a:1}]},
+      {t:'qcm', id:'s7-A-qcm', qs:[
+        {q:`Une imprimante à béton et une grue avec coffrages servent toutes deux à construire des murs avec des principes différents. Elles sont :`, o:[`de la même lignée`,`de la même famille, de lignées différentes`,`de familles différentes`,`identiques`], a:1, ex:`Même besoin, principes différents.`}
+      ]},
+      {t:'reponse', id:'s7-A-arg', label:`Argumentaire court : donne une incidence positive et une incidence négative de cette technologie sur la société.`, rows:3}
+     ]},
+    {titre:`Partie B — Matériau et procédé (C4 · SFC12)`, duree:'10 min', modalite:'individuel',
+     intro:`<div class="tablewrap"><table><thead><tr><th>Matériau</th><th>Temps pour durcir assez pour porter la couche suivante</th><th>Émissions de CO₂ (ordre de grandeur)</th></tr></thead><tbody><tr><td>Béton classique</td><td>Plusieurs heures</td><td>Élevées</td></tr><tr><td>Mortier imprimable à prise rapide</td><td>Quelques minutes</td><td>Élevées</td></tr><tr><td>Mortier imprimable bas carbone (ciment en partie remplacé)</td><td>Quelques minutes</td><td>Réduites</td></tr></tbody></table></div><p class="petit muted">Données simplifiées pour l’évaluation.</p>`,
+     contenu:[
+      {t:'qcm', id:'s7-B', qs:[
+        {q:`Pourquoi le béton classique ne convient-il pas à l’impression ?`, o:[`Il est trop solide`,`Il durcit trop lentement : les couches inférieures s’écraseraient sous les suivantes`,`Il est trop cher`,`Il est biosourcé`], a:1, ex:`En fabrication additive, chaque couche doit porter la suivante rapidement.`},
+        {q:`L’impression à béton est un procédé :`, o:[`par enlèvement de matière`,`par ajout de matière`,`par pliage`,`par découpe`], a:1, ex:`Couche par couche : ajout de matière.`}
+      ]},
+      {t:'reponse', id:'s7-B-justif', label:`Quel matériau choisir ? Justifie avec une contrainte technique et une contrainte environnementale.`, rows:3}
+     ]},
+    {titre:`Partie C — La panne (C5 · SFC21, SFC22)`, duree:'15 min', modalite:'individuel',
+     intro:`<p>Le mortier sort par à-coups, puis plus du tout. La pompe tourne, le moteur ne fait pas de bruit anormal.</p>`,
+     contenu:[
+      {t:'qcm', id:'s7-C', qs:[
+        {q:`Quelles hypothèses sont plausibles ? (plusieurs réponses)`, o:[`La buse est partiellement bouchée par du mortier durci`,`Le mortier est trop sec (pas assez d’eau)`,`Le tuyau entre la pompe et la buse est plié`,`Le logiciel a été conçu en 2020`], a:[0,1,2], ex:`Les trois premières expliquent un écoulement irrégulier ; la date du logiciel n’est pas une cause.`}
+      ]},
+      {t:'ordre', id:'s7-C-ordre', code:false, lignes:[`Arrêter la pompe et couper l’alimentation`,`Faire chuter la pression dans le tuyau`,`Vérifier le tuyau sur toute sa longueur`,`Démonter et nettoyer la buse`,`Contrôler la consistance du mortier`,`Redémarrer et imprimer une couche test`],
+       alt:[[0,1,2,4,3,5],[0,1,3,2,4,5],[0,1,3,4,2,5],[0,1,4,2,3,5],[0,1,4,3,2,5]]},
+      {t:'reponse', id:'s7-C-secu', label:`Explique pourquoi les deux premières étapes doivent toujours être faites en premier.`, rows:2}
+     ]},
+    {titre:`Partie D — Choisir l’imprimante (C3 · OST33)`, duree:'15 min', modalite:'individuel',
+     intro:`<div class="tablewrap"><table><thead><tr><th>Caractéristique</th><th>Imprimante M</th><th>Imprimante N</th></tr></thead><tbody><tr><td>Prix</td><td>180 000 €</td><td>240 000 €</td></tr><tr><td>Hauteur de mur maximale</td><td>2,5 m</td><td>3,2 m</td></tr><tr><td>Pièces d’usure</td><td>Spécifiques, délai 3 mois</td><td>Standard, livrées en 48 h</td></tr><tr><td>Documentation de maintenance</td><td>Non fournie</td><td>Complète, formation incluse</td></tr></tbody></table></div><p class="petit muted">Modèles fictifs. Exigences : budget ≤ 250 000 € ; murs de 2,7 m de haut.</p>`,
+     contenu:[
+      {t:'qcm', id:'s7-D', qs:[
+        {q:`Quelle imprimante respecte toutes les exigences ?`, o:[`M seulement`,`N seulement`,`Les deux`,`Aucune`], a:1, ex:`M ne permet que 2,5 m de hauteur : elle est éliminée.`}
+      ]},
+      {t:'reponse', id:'s7-D-arg', label:`Rédige un argumentaire court pour la communauté de communes en citant les exigences et au moins deux critères liés à la réparabilité.`, rows:4}
+     ]}
+  ],
+  miseEnCommun:`<p>Correction différée : l’enseignant restitue la grille de compétences remplie à la séance suivante.</p>`,
+  synthese:null, verif:[],
+  prof:{
+    objectifs:[`Évaluer en situation nouvelle C1 (OST11, OST13), C4 (SFC12), C5 (SFC21, SFC22), C3 (OST33). C7 (CCRI12) est évaluée sur la production de la séance 6.`],
+    deroulement:[['0-3','Consignes','Lecture de la situation.'],['3-15','Partie A','Innovation et incidences.'],['15-25','Partie B','Matériau et procédé.'],['25-40','Partie C','Panne et protocole.'],['40-55','Partie D','Choix argumenté.']],
+    materiel:[`Fichier HTML (mode élève) ou version imprimée.`],
+    differenciation:{aide:[`Tiers-temps : parties A, B et C obligatoires, D facultative ; lecture de l’énoncé à voix haute possible.`],defi:[`Partie C : proposer une modification de la machine qui évite le bouchage (nettoyage automatique, capteur de pression).`]},
+    corrige:`<h4>Corrigé détaillé</h4>
+    <p><strong>Partie A.</strong> Rupture : murs imprimés sans coffrage (nouveau principe). Amélioration : bétonnière plus grande ; imprimante 20 % plus rapide ; mortier qui durcit un peu plus vite. Famille identique, lignées différentes. Argumentaire : positif — logements construits plus vite, formes libres, moins de déchets de coffrage ; négatif — transformation des métiers du bâtiment, ciment émetteur de CO₂, recul encore faible sur la durabilité.</p>
+    <p><strong>Partie B.</strong> Le béton classique durcit trop lentement ; procédé par ajout de matière. Choix : mortier bas carbone à prise rapide — il porte rapidement la couche suivante (contrainte technique) et réduit les émissions de CO₂ (contrainte environnementale).</p>
+    <p><strong>Partie C.</strong> Hypothèses plausibles : buse bouchée, mortier trop sec, tuyau plié. Protocole : arrêter et couper l’alimentation, décompresser, puis vérifier tuyau / buse / mortier (ordre des trois contrôles accepté s’il est cohérent), redémarrer et tester. Sécurité : un tuyau sous pression peut projeter du mortier ; une machine sous tension peut redémarrer.</p>
+    <p><strong>Partie D.</strong> N seule respecte les exigences (M : 2,5 m &lt; 2,7 m). Critères de réparabilité : pièces standard livrées en 48 h, documentation complète et formation ; N est plus chère mais l’immobilisation du chantier sera plus courte.</p>`
+  }
+});
+
+/* ---------- 4. GRILLE D'ÉVALUATION PAR COMPÉTENCES ---------- */
+const GRILLE = [
+  {c:'C1', r:'OST11 · OST13', crit:`Partie A : rupture / amélioration, famille / lignée, argumentaire sur les incidences`,
+   n:[`Moins de 2 classements justes ; pas d’argumentaire.`,`2 ou 3 classements justes ; une seule incidence citée.`,`4 classements justes et famille / lignée juste ; une incidence positive et une négative.`,`Tout est juste ; argumentaire nuancé et précis.`]},
+  {c:'C4', r:'SFC12', crit:`Partie B : procédé identifié, choix du matériau justifié`,
+   n:[`Procédé et matériau non identifiés.`,`Procédé identifié ; choix sans justification.`,`Choix justifié par une contrainte technique ou environnementale.`,`Choix justifié par une contrainte technique ET une contrainte environnementale.`]},
+  {c:'C5', r:'SFC21 · SFC22', crit:`Partie C : hypothèses plausibles, protocole ordonné et sûr`,
+   n:[`Aucune hypothèse plausible.`,`Hypothèses partielles ; protocole sans étape de sécurité en premier.`,`Hypothèses plausibles ; protocole cohérent débutant par la sécurité.`,`Hypothèses et protocole justes ; sécurité expliquée.`]},
+  {c:'C3', r:'OST33', crit:`Partie D : exigences appliquées, critères de réparabilité argumentés`,
+   n:[`Choix sans justification.`,`Choix juste mais exigences non citées.`,`Exigences appliquées et un critère de réparabilité cité.`,`Exigences appliquées, deux critères de réparabilité et un argument de coût ou de durée de vie.`]}
+];
+
+/* ---------- 5. TRAÇABILITÉ ---------- */
+const TRACABILITE = [
+  ['s1','C1','OST11',0,`Frise et associations invention → besoin (ateliers A et D)`,`Frise ordonnée, tableau des besoins`,`Frise correcte ; besoin associé à chaque invention`],
+  ['s1','C1','OST11',2,`Classer rupture / amélioration (atelier B)`,`Classement`,`5 innovations sur 6 bien classées, principe technique cité`],
+  ['s1','C1','OST11',1,`Familles et lignées (atelier C)`,`Réponses justifiées`,`Famille et lignée distinguées sur les trois exemples`],
+  ['s2','C4','SFC12',1,`Classer les procédés du laboratoire ; chaîne numérique ; G-code`,`Classement, chaîne ordonnée, lignes de G-code corrigées`,`Procédés bien classés ; calcul de durée juste ; G-code adapté au PETG`],
+  ['s3','C4','SFC12',0,`Essais de flexion et de chaleur sur trois filaments`,`Tableau de résultats et interprétation`,`Protocole équitable ; classement de rigidité cohérent avec les mesures`],
+  ['s3','C4','SFC12',2,`Choisir le filament de trois pièces`,`Choix justifié`,`Justification par un résultat d’essai et une contrainte environnementale`],
+  ['s4','C5','SFC21',1,`Diagnostic par tests sur les composants de la tête`,`Tests réalisés et diagnostic`,`Cause identifiée avec 4 tests ou moins, hypothèses écartées justifiées`],
+  ['s4','C5','SFC21',0,`Mesures de résistance, comparaison à la notice`,`Calculs R = U²/P`,`Calculs justes et conclusion sur l’état des composants`],
+  ['s4','C5','SFC22',1,`Choix de l’isolant (matériau du composant à remplacer)`,`Choix argumenté`,`Silicone choisi avec deux exigences (isolant, tenue en température)`],
+  ['s4','C5','SFC22',2,`Protocole de réparation et règles de sécurité`,`Protocole ordonné`,`Sécurité en premier ; test de validation final`],
+  ['s5','C3','OST33',2,`Bête à cornes, cahier des charges, tableau de décision`,`Cahier des charges et recommandation`,`Exigence éliminatoire appliquée ; trois critères cités`],
+  ['s5','C3','OST33',1,`Notes de réparabilité (critères de l’indice)`,`Calculs`,`Notes 2 ; 8,75 ; 5,5 retrouvées`],
+  ['s5','C3','OST33',0,`Comparer consommation, qualité, durabilité`,`Recommandation`,`Au moins un critère de durabilité ou d’efficacité énergétique argumenté`],
+  ['s6','C7','CCRI12',0,`Croquis de plusieurs solutions et schéma de la solution retenue`,`Feuille A3, schéma, maquette facultative`,`Grille de la séance 6 (croquis et schéma)`],
+  ['s6','C7','CCRI12',2,`Comparer les solutions aux exigences`,`Tableau des solutions`,`Choix argumenté par les exigences`],
+  ['s6','C1','OST13',1,`Classer les incidences ; argumentaire individuel`,`Classement et argumentaire`,`Une incidence sociétale et une environnementale, positive et négative`],
+  ['s7','C1','OST11',0,`Évaluation partie A`,`Classements`,`Grille, ligne C1`],
+  ['s7','C1','OST13',1,`Évaluation partie A`,`Argumentaire`,`Grille, ligne C1`],
+  ['s7','C4','SFC12',0,`Évaluation partie B`,`Choix justifié`,`Grille, ligne C4`],
+  ['s7','C5','SFC21',0,`Évaluation partie C`,`Hypothèses`,`Grille, ligne C5`],
+  ['s7','C5','SFC22',2,`Évaluation partie C`,`Protocole`,`Grille, ligne C5`],
+  ['s7','C3','OST33',2,`Évaluation partie D`,`Argumentaire`,`Grille, ligne C3`]
+];
+
+/* ---------- 6. ANALYSE DE LA FICHE GROUPE (JSON source) ---------- */
+const ANALYSE_JSON = `
+<ul>
+<li><strong>Conservé :</strong> l’objet (imprimante 3D), la problématique « Imprimerie, imprimante, 3D… et après ? », les quatre séances proposées (atelier tournant sur l’évolution ; filaments testés ; machine en panne en interdisciplinarité PC-Techno ; imprimante du futur), le fil rouge du besoin, les enjeux environnementaux, sociétaux et économiques, et les trois traces évaluables (atelier tournant, activité expérimentale, classe inversée).</li>
+<li><strong>Réduit :</strong> la fiche citait 16 repères (OST11 à 14, 31, 33, 34 ; SFC12, 21 à 23 ; CCRI11 à 15). Pour garder une séquence cohérente et évaluable, 7 repères sur 5 compétences sont retenus : OST11, OST13 (C1), OST33 (C3), SFC12 (C4), SFC21, SFC22 (C5), CCRI12 (C7). OST12, OST14, OST31, OST34, SFC23 et CCRI11, CCRI13, CCRI14, CCRI15 ne sont pas évalués : certains sont effleurés (SFC23 si une réparation réelle est faite, CCRI13 dans le choix d’un filament) et constituent des prolongements.</li>
+<li><strong>Restructuré :</strong> une séance sur le fonctionnement de la machine et la chaîne numérique a été ajoutée avant les essais (besoin exprimé par le groupe : « apprendre en détail comment fonctionne une imprimante 3D ») ; la piste « différents types d’imprimantes, un seul besoin » devient la séance 5 (choix de l’imprimante du FabLab), avec la réparabilité et le cahier des charges.</li>
+<li><strong>Enrichi :</strong> diagnostic de panne interactif, mesures R = U²/P, simulation de conduction thermique et règles d’un protocole équitable (réponse au besoin « meilleure façon de tester la conductivité thermique »), banc de flexion virtuel, lecture de G-code (réponse au souhait « pratiquer plus la programmation »), évaluation de transfert (imprimante à béton) et grilles par compétences.</li>
+<li><strong>Diagrammes :</strong> en réponse à la remarque « beaucoup de diagrammes parfois inutiles », un seul outil est conservé (bête à cornes), utilisé directement pour écrire le cahier des charges qui sert au choix.</li>
+</ul>`;
+
+
+/* =====================================================================
+   7. ÉTAT ET SAUVEGARDE LOCALE
+   ===================================================================== */
+const CLE = 'techno3e-imprimante-3d-v1';
+let ETAT = {answers:{}, scores:{}, done:{}};
+let stockageOK = true;
+try { const s = localStorage.getItem(CLE); if (s) ETAT = Object.assign(ETAT, JSON.parse(s)); }
+catch(e){ stockageOK = false; }
+function sauver(){ try { localStorage.setItem(CLE, JSON.stringify(ETAT)); } catch(e){ stockageOK = false; } }
+let PROF = false;
+try { PROF = sessionStorage.getItem(CLE + '-prof') === '1'; } catch(e){}
+
+/* =====================================================================
+   8. OUTILS
+   ===================================================================== */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const strip = s => String(s).replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/gi,' ').replace(/\s+/g,' ').trim();
+const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+function hash(str){ let h = 2166136261; for (const ch of str){ h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
+/* Mélange déterministe (même ordre à chaque visite) */
+function melange(arr, graine){ const a = arr.slice(); let s = hash(graine); for (let i = a.length - 1; i > 0; i--){ s = (Math.imul(s, 1103515245) + 12345) >>> 0; const j = s % (i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const seance = id => SEQUENCE.seances.find(s => s.id === id);
+const tagRep = code => { const r = repere(code); return `<span class="tag ${theme(code)}" title="${esc(r ? r[2] : '')}">${code} · ${r ? r[1] : ''}</span>`; };
+function classeScore(ok, tot){ const p = tot ? ok / tot : 0; return p >= .8 ? 'bon' : p >= .5 ? 'moyen' : 'faible'; }
+
+/* Registre de tous les widgets : id → {def, seance} (utile pour l'export et les vérifications) */
+const WIDGETS = {};
+const VERIFIABLES = ['tri','qcm','ordre','trous','numerique','schema','diag'];
+SEQUENCE.seances.forEach(s => {
+  const tout = [];
+  if (s.hypothese) tout.push(Object.assign({t:'reponse'}, s.hypothese));
+  s.activites.forEach(a => a.contenu.forEach(w => tout.push(w)));
+  (s.verif || []).forEach(w => tout.push(w));
+  tout.forEach(w => { if (w.id) WIDGETS[w.id] = {def:w, seance:s.id}; });
+  s._verifiables = tout.filter(w => VERIFIABLES.includes(w.t)).map(w => w.id);
+});
+function progression(s){ const v = s._verifiables; const faits = v.filter(id => ETAT.scores[id]).length; return {faits, total:v.length}; }
+
+/* =====================================================================
+   9. RENDU DES WIDGETS
+   ===================================================================== */
+const R = {};
+const actionsHTML = (id, extra='') => `<div class="actions"><button class="btn plein" type="button" data-act="verifier" data-id="${id}">Vérifier</button><button class="btn petit" type="button" data-act="effacer" data-id="${id}">Recommencer</button><span class="score" id="sc-${id}" aria-live="polite"></span>${extra}</div>`;
+
+R.texte = w => w.html;
+R.code = w => `<div class="widget"><p class="consigne">${w.titre || 'Programme'}</p><pre class="code">${w.html}</pre></div>`;
+R.prof = w => `<div class="boite-prof prof-only">${w.html}</div>`;
+R.lien = w => `<div class="lien-ext"><span class="badge">🌐 Internet requis</span><div><a href="${w.url}" target="_blank" rel="noopener">${w.titre} ↗</a><div class="petit">${w.texte || ''}</div></div></div>`;
+R.aides = w => `<div class="aides" data-n="0">${w.items.map((a,i)=>`<div class="aide" hidden><strong>Aide ${i+1} :</strong> ${a}</div>`).join('')}<button class="btn petit" type="button" data-act="aide">💡 Afficher l’aide 1 / ${w.items.length}</button></div>`;
+R.reponse = w => { const v = ETAT.answers[w.id] || ''; return `<div class="widget"><label class="lbl" for="r-${w.id}">${w.label}</label><textarea id="r-${w.id}" data-save="${w.id}" rows="${w.rows || 4}" placeholder="Écris ta réponse ici…">${esc(v)}</textarea><div class="sauve">Enregistré automatiquement dans ce navigateur.</div></div>`; };
+
+R.tri = w => {
+  const sv = ETAT.answers[w.id] || [];
+  const items = melange(w.items.map((it,i)=>Object.assign({i}, it)), w.id);
+  const opts = w.cats.map((c,i)=>({c,i}));
+  const optsAff = w.cats.length > 4 ? melange(opts, w.id + 'c') : opts;
+  return `<div class="widget" data-w="${w.id}">${w.consigne ? `<p class="consigne">${w.consigne}</p>` : ''}
+  ${items.map(it => `<div class="ligne-tri"><div><span id="lb-${w.id}-${it.i}">${it.l}</span><div class="fb" id="fb-${w.id}-${it.i}"></div></div>
+   <select data-champ="${w.id}" data-i="${it.i}" aria-labelledby="lb-${w.id}-${it.i}" ${w.mono ? 'style="font-family:var(--mono)"' : ''}><option value="">— choisir —</option>${optsAff.map(o=>`<option value="${o.i}" ${String(sv[it.i]) === String(o.i) ? 'selected' : ''}>${esc(o.c)}</option>`).join('')}</select></div>`).join('')}
+  ${actionsHTML(w.id)}</div>`;
+};
+
+R.qcm = w => {
+  const sv = ETAT.answers[w.id] || {};
+  return `<div class="widget" data-w="${w.id}">${w.qs.map((q,qi) => {
+    const multi = Array.isArray(q.a); const type = multi ? 'checkbox' : 'radio'; const sel = sv[qi] || [];
+    return `<fieldset><legend>${qi+1}. ${q.q}${multi ? ' <span class="muted petit">(plusieurs réponses)</span>' : ''}</legend>
+    ${q.o.map((o,oi)=>`<label class="opt"><input type="${type}" name="${w.id}-${qi}" value="${oi}" data-champ="${w.id}" data-q="${qi}" ${sel.includes(oi) ? 'checked' : ''}><span>${o}</span></label>`).join('')}
+    <div class="fb" id="fb-${w.id}-${qi}"></div></fieldset>`; }).join('')}${actionsHTML(w.id)}</div>`;
+};
+
+R.ordre = w => {
+  let ordre = ETAT.answers[w.id];
+  if (!Array.isArray(ordre) || ordre.length !== w.lignes.length){
+    const idx = w.lignes.map((_,i)=>i); let m = melange(idx, w.id); let k = 0;
+    while (m.every((v,i)=>v===i) && k < 5){ m = melange(idx, w.id + k); k++; }
+    ordre = m;
+  }
+  return `<div class="widget" data-w="${w.id}"><p class="consigne">Remets les lignes dans le bon ordre avec les flèches ↑ ↓.</p>
+  <ol class="ordre-liste" id="ol-${w.id}">${ordre.map(i => `<li data-i="${i}"><button type="button" data-act="haut" aria-label="Monter la ligne">↑</button><button type="button" data-act="bas" aria-label="Descendre la ligne">↓</button>${w.code ? `<code>${esc(w.lignes[i])}</code>` : `<span class="txt" style="white-space:pre-wrap">${esc(w.lignes[i])}</span>`}</li>`).join('')}</ol>
+  ${actionsHTML(w.id)}<div class="fb" id="fb-${w.id}"></div></div>`;
+};
+
+R.trous = w => {
+  const sv = ETAT.answers[w.id] || [];
+  const ligne = l => esc(l).replace(/\[\[(\d+)\]\]/g, (_, n) => {
+    const b = w.blancs[+n]; const v = sv[+n] || '';
+    if (b.type === 'select') return `<select data-champ="${w.id}" data-i="${n}" aria-label="Case ${+n+1}"><option value="">?</option>${b.opts.map(o=>`<option ${o===v?'selected':''}>${esc(o)}</option>`).join('')}</select>`;
+    return `<input type="text" data-champ="${w.id}" data-i="${n}" aria-label="Case ${+n+1}" size="${b.w || 8}" value="${esc(v)}" autocomplete="off" spellcheck="false">`;
+  }).replace(/(#[^\n]*)$/, '<span class="com">$1</span>');
+  return `<div class="widget" data-w="${w.id}">${w.intro ? `<p class="consigne">${w.intro}</p>` : '<p class="consigne">Complète les cases du programme.</p>'}
+  <pre class="code">${w.code.map(ligne).join('\n')}</pre>
+  <div id="fbt-${w.id}">${w.blancs.map((b,i)=>`<div class="fb" id="fb-${w.id}-${i}"></div>`).join('')}</div>${actionsHTML(w.id)}</div>`;
+};
+
+R.numerique = w => {
+  const sv = ETAT.answers[w.id] || [];
+  return `<div class="widget" data-w="${w.id}">${w.qs.map((q,i)=>`<div class="num-q"><label for="n-${w.id}-${i}">${q.q}</label><div class="champ"><input type="text" inputmode="decimal" id="n-${w.id}-${i}" data-champ="${w.id}" data-i="${i}" value="${esc(sv[i] || '')}" autocomplete="off"><span>${q.u || ''}</span></div><div class="fb" id="fb-${w.id}-${i}" style="grid-column:1/-1"></div></div>`).join('')}${actionsHTML(w.id)}</div>`;
+};
+
+R.schema = w => {
+  const sv = ETAT.answers[w.id] || [];
+  const opts = melange(w.options.map((o,i)=>({o,i})), w.id);
+  const sel = (s,i) => `<select data-champ="${w.id}" data-i="${i}" aria-label="${esc(s.titre)}"><option value="">— choisir —</option>${opts.map(o=>`<option value="${o.i}" ${String(sv[i])===String(o.i)?'selected':''}>${esc(o.o)}</option>`).join('')}</select>`;
+  if (w.layout === 'arbre'){
+    return `<div class="widget arbre" data-w="${w.id}"><div class="racine">${w.racine}</div><div class="enfants">${w.slots.map((s,i)=>`<div class="bx" id="bx-${w.id}-${i}"><b>${s.titre}</b><span>${s.texte}</span><span class="petit muted">Critère :</span>${sel(s,i)}</div>`).join('')}</div>${actionsHTML(w.id)}</div>`;
+  }
+  return `<div class="widget" data-w="${w.id}"><div class="schema-chaine">${w.slots.map((s,i)=>`${i ? '<span class="fl" aria-hidden="true">→</span>' : ''}<div class="bx" id="bx-${w.id}-${i}"><b>${s.titre}</b>${sel(s,i)}</div>`).join('')}</div>${actionsHTML(w.id)}</div>`;
+};
+
+R.tableau = w => {
+  const sv = ETAT.answers[w.id] || {};
+  return `<div class="widget"><div class="tablewrap"><table class="tab-saisie"><thead><tr>${w.cols.map(c=>`<th scope="col">${esc(c)}</th>`).join('')}</tr></thead><tbody>
+  ${w.rows.map((r,ri)=>`<tr>${r.map((c,ci)=> c === null ? `<td><input type="text" data-tab="${w.id}" data-k="${ri}-${ci}" value="${esc(sv[ri+'-'+ci] || '')}" aria-label="${esc(w.cols[ci])}, ligne ${ri+1}"></td>` : `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}
+  </tbody></table></div><div class="sauve">Tableau enregistré automatiquement dans ce navigateur.</div></div>`;
+};
+
+/* ----- Simulateur 1 : banc de flexion (modèle simplifié, ordres de grandeur) ----- */
+const FILAMENTS = {
+  PLA:{k:2, rupture:1.6, couleur:'#2b6cb0', comportement:'casse net, sans prévenir (fragile)'},
+  PETG:{k:4, rupture:2.4, couleur:'#2E7D5B', comportement:'plie nettement avant de casser'},
+  ABS:{k:3.5, rupture:2.0, couleur:'#9A6900', comportement:'plie un peu avant de casser'},
+  TPU:{k:25, rupture:Infinity, couleur:'#C2185B', comportement:'plie fortement sans casser et reprend sa forme (élastique)'}
+};
+R.simFlexion = w => `<div class="sim" id="sim-${w.id}">
+  <canvas width="760" height="220" aria-label="Banc de flexion virtuel : éprouvette encastrée et masse suspendue"></canvas>
+  <div class="ctrl">
+    <label>Filament : <select data-r="mat">${Object.keys(FILAMENTS).map(k=>`<option>${k}</option>`).join('')}</select></label>
+    <label>Masse suspendue : <input type="range" min="0" max="2500" step="100" value="0" data-r="m"> <output data-o="m">0 g</output></label>
+  </div>
+  <div class="afficheur" aria-live="polite" data-o="aff">Flèche : 0,0 mm</div>
+  <p class="petit muted">Modèle simplifié : éprouvette 80 × 10 × 4 mm, remplissage 100 %, 60 mm en porte-à-faux. Valeurs d’ordre de grandeur, à comparer avec vos essais réels.</p></div>`;
+function initSimFlexion(id){
+  const box = $('#sim-' + id); if (!box) return;
+  const cv = $('canvas', box), ctx = cv.getContext('2d');
+  const sel = $('[data-r=mat]', box), m = $('[data-r=m]', box), om = $('[data-o=m]', box), aff = $('[data-o=aff]', box);
+  function maj(){
+    const f = FILAMENTS[sel.value], kg = +m.value / 1000; om.textContent = m.value + ' g';
+    const casse = kg > f.rupture; const fl = casse ? null : f.k * kg;
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ctx.fillStyle = '#5a6c71'; ctx.fillRect(60, 40, 60, 120); ctx.fillStyle = '#14262B'; ctx.font = '13px sans-serif'; ctx.fillText('serre-joint', 58, 30);
+    const x0 = 120, y0 = 95, L = 480, ech = 3;
+    ctx.strokeStyle = f.couleur; ctx.lineWidth = 14; ctx.lineCap = 'butt'; ctx.beginPath(); ctx.moveTo(x0, y0);
+    if (casse){ ctx.lineTo(x0 + 120, y0 + 4); ctx.stroke(); ctx.beginPath(); ctx.moveTo(x0 + 140, y0 + 60); ctx.lineTo(x0 + 330, y0 + 95); ctx.stroke(); }
+    else { const d = Math.min(fl * ech, 110); ctx.quadraticCurveTo(x0 + L*0.55, y0, x0 + L, y0 + d); ctx.stroke();
+      ctx.lineWidth = 2; ctx.strokeStyle = '#14262B'; ctx.beginPath(); ctx.moveTo(x0 + L - 4, y0 + d); ctx.lineTo(x0 + L - 4, y0 + d + 30); ctx.stroke();
+      if (kg > 0){ ctx.fillStyle = '#14262B'; ctx.fillRect(x0 + L - 24, y0 + d + 30, 40, 30); ctx.fillStyle = '#fff'; ctx.fillText((+m.value) + ' g', x0 + L - 22, y0 + d + 50); }
+      ctx.setLineDash([4,4]); ctx.strokeStyle = '#999'; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0 + L + 20, y0); ctx.stroke(); ctx.setLineDash([]); }
+    ctx.lineWidth = 1;
+    aff.textContent = casse ? `Rupture ! Le ${sel.value} ${f.comportement}.` : `Flèche : ${fl.toFixed(1).replace('.', ',')} mm` + (sel.value === 'TPU' && kg > 0 ? ' — l’éprouvette reprend sa forme quand on retire la masse.' : '');
+  }
+  sel.addEventListener('change', () => { m.value = 0; maj(); }); m.addEventListener('input', maj); maj();
+}
+
+/* ----- Simulateur 2 : conduction thermique (billes collées à la cire) ----- */
+const METAUX = { Cuivre:{a:1.1e-4, c:'#b87333'}, Aluminium:{a:9.7e-5, c:'#a9b4bb'}, Laiton:{a:3.4e-5, c:'#c9a227'}, Acier:{a:1.2e-5, c:'#6b7a80'}, 'Acier inoxydable':{a:4e-6, c:'#8d9aa0'} };
+R.simConduction = w => `<div class="sim" id="sim-${w.id}">
+  <canvas width="760" height="170" aria-label="Simulation : tige chauffée à une extrémité, billes collées à la cire"></canvas>
+  <div class="ctrl">
+    <label>Matériau de la tige : <select data-r="mat">${Object.keys(METAUX).map(k=>`<option>${k}</option>`).join('')}</select></label>
+    <button class="btn plein" type="button" data-r="go">🔥 Chauffer</button>
+    <button class="btn" type="button" data-r="raz">Réinitialiser</button>
+  </div>
+  <div class="afficheur" aria-live="polite" data-o="aff">Temps : 0 s</div>
+  <div class="journal" data-o="log" aria-live="polite">Les temps de chute s’afficheront ici.</div>
+  <p class="petit muted">Modèle simplifié : tiges de même longueur et de même section, même source de chaleur, départ à 20 °C ; billes à 2, 4, 6, 8 et 10 cm. Simulation accélérée.</p></div>`;
+function initSimConduction(id){
+  const box = $('#sim-' + id); if (!box) return;
+  const cv = $('canvas', box), ctx = cv.getContext('2d');
+  const sel = $('[data-r=mat]', box), aff = $('[data-o=aff]', box), log = $('[data-o=log]', box);
+  const pos = [2,4,6,8,10]; let t = 0, anim = null;
+  const chute = x => (x/100)**2 / (2 * METAUX[sel.value].a); /* secondes, modèle simplifié */
+  function dessiner(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    const x0 = 120, ech = 55, y = 70;
+    ctx.fillStyle = '#dfe9e8'; ctx.fillRect(0, 150, cv.width, 20);
+    ctx.fillStyle = METAUX[sel.value].c; ctx.fillRect(x0, y - 7, 11*ech, 14);
+    ctx.fillStyle = t > 0 ? '#e8590c' : '#bbb'; ctx.beginPath(); ctx.moveTo(x0 - 50, 140); ctx.lineTo(x0 - 20, 80); ctx.lineTo(x0 + 10, 140); ctx.fill();
+    ctx.fillStyle = '#14262B'; ctx.font = '13px sans-serif'; ctx.fillText(t > 0 ? 'source de chaleur' : 'source éteinte', 10, 30);
+    pos.forEach(x => { const tc = chute(x); const tombe = t >= tc; const px = x0 + x*ech; let py = y + 14;
+      if (tombe) py = Math.min(140, y + 14 + (t - tc) * 120);
+      ctx.fillStyle = '#14262B'; ctx.beginPath(); ctx.arc(px, py, 7, 0, 7); ctx.fill(); ctx.fillText(x + ' cm', px - 14, y - 14); });
+  }
+  function lignes(){ return pos.map(x => { const tc = chute(x); return `bille à ${String(x).padStart(2)} cm : ${t >= tc ? 'tombée après ' + Math.round(tc) + ' s' : 'pas encore tombée'}`; }).join('\n'); }
+  $('[data-r=go]', box).addEventListener('click', () => {
+    if (anim) cancelAnimationFrame(anim); t = 0.001; let d = performance.now(); const fin = Math.max(chute(10) + 2, 5);
+    const pas = now => { const dt = (now - d) / 1000; d = now; t += dt * Math.max(10, fin / 12); /* accéléré : ≈ 12 s réelles */
+      if (t > fin) t = fin; aff.textContent = `Temps simulé : ${Math.round(t)} s`; log.textContent = lignes(); dessiner();
+      if (t < fin) anim = requestAnimationFrame(pas); };
+    anim = requestAnimationFrame(pas);
+  });
+  $('[data-r=raz]', box).addEventListener('click', () => { if (anim) cancelAnimationFrame(anim); t = 0; aff.textContent = 'Temps : 0 s'; log.textContent = 'Les temps de chute s’afficheront ici.'; dessiner(); });
+  sel.addEventListener('change', () => $('[data-r=raz]', box).click());
+  dessiner();
+}
+
+/* ----- Outil 3 : diagnostic de panne par tests ----- */
+R.diag = w => {
+  const faits = ETAT.answers[w.id + '-tests'] || []; const sv = ETAT.answers[w.id] || [];
+  return `<div class="widget" data-w="${w.id}"><p class="consigne">Tests disponibles (clique pour réaliser un test) :</p>
+  <div class="diag-tests">${w.tests.map((te,i)=>`<div class="diag-test"><button class="btn petit" type="button" data-act="diagtest" data-id="${w.id}" data-i="${i}" ${faits.includes(i)?'disabled':''}>${faits.includes(i)?'✔ ':''}Test ${i+1} — ${te.l}</button><div class="fb ok" id="dt-${w.id}-${i}">${faits.includes(i) ? te.r : ''}</div></div>`).join('')}</div>
+  <p class="petit"><strong>Tests réalisés : <span id="nbt-${w.id}">${faits.length}</span></strong></p>
+  <label class="lbl" for="dg-${w.id}">Mon diagnostic : la cause de la panne est…</label>
+  <select id="dg-${w.id}" data-champ="${w.id}" data-i="0"><option value="">— choisir —</option>${w.options.map((o,i)=>`<option value="${i}" ${String(sv[0])===String(i)?'selected':''}>${esc(o)}</option>`).join('')}</select>
+  <div class="fb" id="fb-${w.id}-0"></div>${actionsHTML(w.id)}</div>`;
+};
+function testDiag(id, i){
+  const w = WIDGETS[id].def; const k = id + '-tests'; const faits = ETAT.answers[k] || [];
+  if (!faits.includes(i)) faits.push(i); ETAT.answers[k] = faits; sauver();
+  const b = $(`[data-act="diagtest"][data-id="${id}"][data-i="${i}"]`); b.disabled = true; b.textContent = '✔ ' + b.textContent;
+  $(`#dt-${id}-${i}`).textContent = w.tests[i].r; $(`#nbt-${id}`).textContent = faits.length;
+}
+
+/* ----- Outil 4 : tableau de décision pondéré (générique) ----- */
+R.decision = w => {
+  const sv = ETAT.answers[w.id] || {p:w.criteres.map(()=>1), budget:true};
+  return `<div class="widget decision" data-w="${w.id}"><label class="opt" style="margin-bottom:8px"><input type="checkbox" data-dec="budget" ${sv.budget ? 'checked' : ''}><span>${w.exigence.label}</span></label>
+  <div class="tablewrap"><table><thead><tr><th>Critère (note sur 5)</th><th class="num">Poids (0 à 3)</th>${w.produits.map(r=>`<th class="num">${r.n}</th>`).join('')}</tr></thead><tbody>
+  ${w.criteres.map((c,i)=>`<tr><td>${c.c}</td><td class="num"><select data-dec="p" data-i="${i}" aria-label="Poids : ${esc(c.c)}">${[0,1,2,3].map(v=>`<option ${sv.p[i]==v?'selected':''}>${v}</option>`).join('')}</select></td>${c.notes.map(n=>`<td class="num">${n}</td>`).join('')}</tr>`).join('')}
+  </tbody><tfoot><tr><th colspan="2">Score pondéré (Σ poids × note)</th>${w.produits.map((r,i)=>`<th class="num" id="tot-${w.id}-${i}"></th>`).join('')}</tr></tfoot></table></div>
+  <div class="resultat" id="res-${w.id}" aria-live="polite"></div></div>`;
+};
+function majDecision(id){
+  const box = $(`[data-w="${id}"]`); if (!box) return; const w = WIDGETS[id].def;
+  const p = $$('[data-dec=p]', box).map(s => +s.value); const budget = $('[data-dec=budget]', box).checked;
+  ETAT.answers[id] = {p, budget}; sauver();
+  const tot = w.produits.map((r,i) => w.criteres.reduce((a,c,k)=>a + p[k]*c.notes[i], 0));
+  const exclu = w.produits.map((r,i) => budget && w.exigence.exclus.includes(i));
+  w.produits.forEach((r,i) => { $(`#tot-${id}-${i}`).textContent = exclu[i] ? `${tot[i]} — ${w.exigence.motif}` : tot[i]; });
+  const cands = w.produits.map((r,i)=>({r,i,t:tot[i]})).filter(o=>!exclu[o.i]).sort((a,b)=>b.t-a.t);
+  let msg = cands.length ? `Classement : ${cands.map((o,k)=>`${k+1}. ${o.r.n} (${o.t})`).join(' · ')}.` : 'Aucun modèle retenu.';
+  if (cands.length > 1 && cands[0].t === cands[1].t) msg += ' Égalité : il faut départager par un argument supplémentaire.';
+  let alerte = false; (w.alertes || []).forEach(a => { if (p[a.i] === 0){ msg += ' ⚠ ' + a.msg; alerte = true; } });
+  const res = $(`#res-${id}`); res.textContent = msg; res.className = 'resultat ' + (alerte ? 'ko-bg' : 'ok-bg');
+}
+
+/* =====================================================================
+   10. VÉRIFICATIONS ET SCORES
+   ===================================================================== */
+function collecter(id){
+  const w = WIDGETS[id] && WIDGETS[id].def; if (!w) return;
+  const box = $(`[data-w="${id}"]`); if (!box) return;
+  if (w.t === 'qcm'){ const o = {}; w.qs.forEach((q,qi)=>{ o[qi] = $$(`input[data-q="${qi}"]`, box).filter(i=>i.checked).map(i=>+i.value); }); ETAT.answers[id] = o; }
+  else if (w.t === 'ordre'){ ETAT.answers[id] = $$('li', $('#ol-' + id)).map(li => +li.dataset.i); }
+  else { const a = []; $$('[data-champ]', box).forEach(el => { a[+el.dataset.i] = el.value; }); ETAT.answers[id] = a; }
+  sauver();
+}
+const VERIF = {
+  diag(w, box){ const sel = $(`#dg-${w.id}`); const n = (ETAT.answers[w.id + '-tests'] || []).length; const bon = sel.value !== '' && +sel.value === w.a; sel.classList.toggle('ok-bg', bon); sel.classList.toggle('ko-bg', !bon); const f = $(`#fb-${w.id}-0`);
+    if (sel.value === ''){ f.className = 'fb ko'; f.textContent = 'Choisis un diagnostic.'; return [0,1]; }
+    if (!n){ f.className = 'fb ko'; f.textContent = 'Un diagnostic se justifie par des tests : réalise d’abord des tests.'; return [0,1]; }
+    f.className = 'fb ' + (bon ? 'ok' : 'ko'); f.textContent = bon ? `✔ Bon diagnostic, avec ${n} test(s). ${n <= 4 ? 'Démarche efficace.' : 'Tu aurais pu conclure avec moins de tests : lesquels étaient inutiles ?'}` : '✘ Ce diagnostic est contredit par au moins un de tes tests. Relis les résultats (ou réalise un autre test).'; return [bon ? 1 : 0, 1]; },
+  tri(w, box){ let ok = 0; w.items.forEach((it,i) => { const s = $(`select[data-i="${i}"]`, box); const bon = s.value !== '' && +s.value === it.a; ok += bon; s.classList.toggle('ok-bg', bon); s.classList.toggle('ko-bg', !bon); const f = $(`#fb-${w.id}-${i}`); f.className = 'fb ' + (bon ? '' : 'ko'); f.textContent = bon ? '' : (s.value === '' ? 'Choisis une réponse.' : (it.fb ? '↺ ' + 'Indice : ' + it.fb : 'Ce n’est pas la bonne famille.')); }); return [ok, w.items.length]; },
+  schema(w, box){ let ok = 0; w.slots.forEach((sl,i) => { const s = $(`select[data-i="${i}"]`, box); const bon = s.value !== '' && +s.value === sl.a; ok += bon; $(`#bx-${w.id}-${i}`).classList.toggle('ok-bg', bon); $(`#bx-${w.id}-${i}`).classList.toggle('ko-bg', !bon); }); return [ok, w.slots.length]; },
+  qcm(w, box){ let ok = 0; w.qs.forEach((q,qi) => { const sel = $$(`input[data-q="${qi}"]`, box).filter(i=>i.checked).map(i=>+i.value).sort(); const att = (Array.isArray(q.a) ? q.a.slice() : [q.a]).sort(); const bon = sel.length === att.length && sel.every((v,k)=>v===att[k]); ok += bon; const f = $(`#fb-${w.id}-${qi}`);
+      if (!sel.length){ f.className = 'fb ko'; f.textContent = 'Choisis une réponse.'; return; }
+      const fbOpt = !bon && q.fb && sel.length === 1 && q.fb[sel[0]] ? q.fb[sel[0]] + ' ' : '';
+      f.className = 'fb ' + (bon ? 'ok' : 'ko'); f.textContent = bon ? '✔ ' + q.ex : '✘ ' + (fbOpt || (Array.isArray(q.a) ? 'Vérifie chaque proposition : il y a ' + q.a.length + ' bonnes réponses. ' : 'Relis la question et réessaie. ')); }); return [ok, w.qs.length]; },
+  ordre(w, box){ const ord = $$('li', $('#ol-' + w.id)).map(li => +li.dataset.i); const bons = [w.lignes.map((_,i)=>i)].concat(w.alt || []);
+      const ref = bons.find(b => b.every((v,i)=>v===ord[i])) || bons[0]; let ok = 0;
+      $$('li', $('#ol-' + w.id)).forEach((li,i) => { const b = ord[i] === ref[i]; ok += b; li.classList.toggle('ok-bg', b); li.classList.toggle('ko-bg', !b); });
+      const f = $('#fb-' + w.id); f.className = 'fb ' + (ok === ord.length ? 'ok' : 'ko'); f.textContent = ok === ord.length ? '✔ Programme dans le bon ordre.' : `✘ ${ord.length - ok} ligne(s) mal placée(s) (en rouge). Utilise les aides si besoin.`; return [ok, ord.length]; },
+  trous(w, box){ let ok = 0; w.blancs.forEach((b,i) => { const el = $(`[data-champ][data-i="${i}"]`, box); const v = el.value.trim().replace(/\s+/g,''); let bon;
+      if (b.range){ const n = Number(v); bon = v !== '' && Number.isInteger(n) && n >= b.range[0] && n <= b.range[1]; }
+      else bon = b.ok.map(x=>x.replace(/\s+/g,'')).includes(v);
+      ok += bon; el.classList.toggle('ok-bg', bon); el.classList.toggle('ko-bg', !bon); const f = $(`#fb-${w.id}-${i}`); f.className = 'fb ' + (bon ? '' : 'ko'); f.textContent = bon ? '' : `Case ${i+1} : ${b.fb}`; }); return [ok, w.blancs.length]; },
+  numerique(w, box){ let ok = 0; w.qs.forEach((q,i) => { const el = $(`#n-${w.id}-${i}`); const v = parseFloat(el.value.replace(/\s/g,'').replace(',', '.')); const bon = !isNaN(v) && Math.abs(v - q.a) <= q.tol; ok += bon; el.classList.toggle('ok-bg', bon); el.classList.toggle('ko-bg', !bon); const f = $(`#fb-${w.id}-${i}`); f.className = 'fb ' + (bon ? 'ok' : 'ko'); f.textContent = bon ? '✔ ' + q.ex : (isNaN(v) ? 'Écris un nombre.' : '✘ Ce n’est pas la bonne valeur. Vérifie tes calculs (aides disponibles) et réessaie.'); }); return [ok, w.qs.length]; }
+};
+function verifier(id){
+  const w = WIDGETS[id].def, box = $(`[data-w="${id}"]`);
+  collecter(id);
+  const [ok, tot] = VERIF[w.t](w, box);
+  ETAT.scores[id] = {ok, tot, date:new Date().toISOString()}; sauver();
+  const sc = $('#sc-' + id); sc.textContent = `Score : ${ok} / ${tot}`; sc.className = 'score ' + classeScore(ok, tot);
+}
+function afficherScoresExistants(){
+  Object.keys(ETAT.scores).forEach(id => { const sc = $('#sc-' + id); if (sc){ const s = ETAT.scores[id]; sc.textContent = `Dernier score : ${s.ok} / ${s.tot}`; sc.className = 'score ' + classeScore(s.ok, s.tot); } });
+}
+
+/* =====================================================================
+   11. PAGES
+   ===================================================================== */
+const ROBOT_SVG = `<svg viewBox="0 0 300 200" role="img" aria-label="Illustration : imprimante 3D en train d'imprimer une pièce" style="width:100%;max-width:340px;display:block;margin:auto">
+<rect x="0" y="182" width="300" height="18" fill="#dfe9e8"/>
+<rect x="40" y="20" width="14" height="160" fill="#14262B"/><rect x="246" y="20" width="14" height="160" fill="#14262B"/><rect x="40" y="20" width="220" height="12" fill="#14262B"/>
+<rect x="54" y="62" width="192" height="8" fill="#5A6C71"/><rect x="128" y="48" width="44" height="40" rx="5" fill="#0E6E6B"/><rect x="140" y="88" width="20" height="10" fill="#C2185B"/><path d="M146 98 h8 l-4 8 z" fill="#c9a227"/>
+<path d="M150 20 q20 -14 40 0" stroke="#C2185B" stroke-width="3" fill="none"/>
+<rect x="70" y="160" width="160" height="10" fill="#9A6900"/><rect x="60" y="170" width="180" height="8" fill="#5A6C71"/>
+<g fill="#2b6cb0"><rect x="120" y="150" width="60" height="5"/><rect x="123" y="144" width="54" height="5"/><rect x="127" y="138" width="46" height="5"/><rect x="131" y="132" width="38" height="5"/><rect x="135" y="126" width="30" height="5"/><rect x="139" y="120" width="22" height="5"/></g>
+<text x="183" y="140" font-size="12" fill="#5A6C71" font-family="sans-serif">et après ?</text></svg>`;
+
+function filAriane(items){ return `<nav class="fil" aria-label="Fil d’Ariane">${items.map((it,i)=> it[1] ? `<a href="${it[1]}">${it[0]}</a>` : `<span aria-current="page">${it[0]}</span>`).join('<span aria-hidden="true">›</span>')}</nav>`; }
+
+function pageAccueil(){
+  const comps = SEQUENCE.competences;
+  return `${filAriane([['Accueil']])}
+  <section class="entete"><div class="hero"><div>
+    <span class="kicker">Technologie 3e · Cycle 4 · Séquence</span>
+    <h1>${SEQUENCE.titre}</h1>
+    <p class="probleme">${SEQUENCE.problematique}</p>
+    <div class="meta">${SEQUENCE.reperes.map(tagRep).join('')}<span class="tag gris">${SEQUENCE.duree}</span></div>
+    <p><a class="btn plein" href="#sequence">Découvrir la séquence →</a> <a class="btn" href="#s1">Commencer la séance 1</a></p>
+  </div><div>${ROBOT_SVG}</div></div></section>
+
+  <section class="bloc"><h2>Sommaire des séances</h2>
+    <p class="muted petit">Filtrer par compétence :</p>
+    <div class="chips" role="group" aria-label="Filtrer les séances par compétence">${comps.map(c=>`<button class="chip" type="button" data-act="filtre" data-c="${c}" aria-pressed="false" title="${esc(COMPETENCES[c])}">${c}</button>`).join('')}<button class="chip" type="button" data-act="filtre" data-c="" aria-pressed="true">Toutes</button></div>
+    <div class="cartes" id="cartesSeances">${SEQUENCE.seances.map(s => { const p = progression(s); const pc = p.total ? Math.round(100*p.faits/p.total) : 0; return `<a class="carte" href="#${s.id}" data-comp="${s.comp.join(' ')}">
+      <span class="n">Séance ${s.num} · ${s.duree}${s.evaluation ? ' · Évaluation' : ''}</span><h3>${s.titre}</h3><span class="muted petit">${s.sous}</span>
+      <span class="meta">${s.reperes.map(tagRep).join('')}</span>
+      <span class="petit">${ETAT.done[s.id] ? '<span class="fait">✔ Séance terminée</span>' : `Exercices vérifiés : ${p.faits} / ${p.total}`}</span>
+      <span class="barre" aria-hidden="true"><span style="width:${pc}%"></span></span><span class="fleche">Ouvrir →</span></a>`; }).join('')}</div>
+  </section>
+
+  <section class="bloc"><h2>Mes données</h2>
+    <p>Tes réponses, tes scores et ta progression sont enregistrés <strong>uniquement dans ce navigateur, sur cet appareil</strong>. Ils ne sont pas synchronisés entre plusieurs appareils et peuvent être effacés si l’historique du navigateur est vidé. Pense à exporter ton travail.</p>
+    ${stockageOK ? '' : '<p class="fb ko">⚠ Le stockage local est indisponible dans ce navigateur (mode privé ?) : tes réponses ne seront pas conservées après fermeture.</p>'}
+    <div class="actions"><button class="btn plein" type="button" data-act="exporter">⬇ Exporter mes réponses (.txt)</button><button class="btn" type="button" onclick="window.print()">🖨 Imprimer la page</button><button class="btn" type="button" data-act="reinit">Réinitialiser toutes mes réponses</button></div>
+  </section>
+
+  <section class="bloc prof-only boite-prof"><h2>Espace enseignant</h2><p>Fiches de préparation, analyse de la fiche groupe, traçabilité des compétences, grille d’évaluation et corrigés : <a href="#enseignant">ouvrir l’espace enseignant</a>. Dans chaque séance, les encadrés jaunes donnent le déroulement, le matériel, les réponses attendues et la différenciation.</p></section>`;
+}
+
+function pageSequence(){
+  return `${filAriane([['Accueil','#accueil'],['La séquence']])}
+  <section class="entete"><span class="kicker">Présentation générale</span><h1>${SEQUENCE.titre}</h1><p class="probleme">${SEQUENCE.problematique}</p></section>
+  <section class="bloc"><h2>Situation de départ</h2><div class="situation">${SEQUENCE.situation}</div>
+    <div class="grille2" style="margin-top:14px"><div><h3>Objet technique étudié</h3><p>${SEQUENCE.objet}</p></div><div><h3>Durée</h3><p>${SEQUENCE.duree}</p></div></div></section>
+  <section class="bloc"><h2>Objectifs d’apprentissage</h2><ul>${SEQUENCE.objectifs.map(o=>`<li>${o}</li>`).join('')}</ul></section>
+  <section class="bloc"><h2>Compétences et repères mobilisés</h2>
+    <div class="tablewrap"><table><thead><tr><th>Compétence</th><th>Repère (carte 3e)</th><th>Connaissances associées</th><th>Séances</th></tr></thead><tbody>
+    ${SEQUENCE.reperes.map(code => { const r = repere(code); const ss = SEQUENCE.seances.filter(s=>s.reperes.includes(code)).map(s=>`<a href="#${s.id}">S${s.num}</a>`).join(', '); return `<tr><td><strong>${r[1]}</strong><br><span class="petit muted">${COMPETENCES[r[1]]}</span></td><td>${tagRep(code)}${code===SEQUENCE.reperePrincipal?' <span class="tag gris">repère principal</span>':''}<br>${r[2]}</td><td><ul>${CONNAISSANCES[code].map(k=>`<li>${k}</li>`).join('')}</ul></td><td>${ss}</td></tr>`; }).join('')}
+    </tbody></table></div></section>
+  <section class="bloc"><h2>Prérequis</h2><ul>${SEQUENCE.prerequis.map(p=>`<li>${p}</li>`).join('')}</ul></section>
+  <section class="bloc"><h2>Progression et productions attendues</h2>
+    <div class="tablewrap"><table><thead><tr><th>Séance</th><th>Étape de la démarche</th><th>Problématique de la séance</th><th>Repères</th></tr></thead><tbody>
+    ${SEQUENCE.seances.map(s=>`<tr><td><a href="#${s.id}">S${s.num} — ${s.titre}</a></td><td>${s.etape}</td><td>${s.problematique}</td><td>${s.reperes.join(', ')}</td></tr>`).join('')}</tbody></table></div>
+    <h3>Productions des élèves</h3><ul>${SEQUENCE.productions.map(p=>`<li>${p}</li>`).join('')}</ul></section>`;
+}
+
+function blocWidgets(liste){ return liste.map(w => R[w.t] ? R[w.t](w) : '').join(''); }
+
+function pageSeance(s){
+  const i = SEQUENCE.seances.indexOf(s), prec = SEQUENCE.seances[i-1], suiv = SEQUENCE.seances[i+1];
+  const P = s.prof;
+  const prep = `<section class="boite-prof prof-only"><h2>Fiche de préparation — séance ${s.num}</h2>
+    <div class="grille2"><div><h4>Objectifs</h4><ul>${P.objectifs.map(o=>`<li>${o}</li>`).join('')}</ul></div>
+    <div><h4>Repères et connaissances</h4><ul>${s.reperes.map(c=>`<li><strong>${c}</strong> (${repere(c)[1]}) — ${repere(c)[2]}</li>`).join('')}</ul></div></div>
+    <h4>Déroulement (55 min)</h4><div class="tablewrap"><table><thead><tr><th>Minutes</th><th>Phase</th><th>Ce qui se passe</th></tr></thead><tbody>${P.deroulement.map(d=>`<tr><td>${d[0]}</td><td>${d[1]}</td><td>${d[2]}</td></tr>`).join('')}</tbody></table></div>
+    <h4>Matériel</h4><ul>${P.materiel.map(m=>`<li>${m}</li>`).join('')}</ul>
+    <div class="grille2"><div><h4>Différenciation — soutien</h4><ul>${P.differenciation.aide.map(m=>`<li>${m}</li>`).join('')}</ul></div><div><h4>Différenciation — approfondissement</h4><ul>${P.differenciation.defi.map(m=>`<li>${m}</li>`).join('')}</ul></div></div>
+    ${P.note ? `<h4>Point de vigilance</h4><p>${P.note}</p>` : ''}
+    ${P.corrige ? P.corrige : ''}
+    ${s.evaluation ? grilleHTML() : ''}</section>`;
+  const syn = s.synthese ? `<section class="bloc"><h2>Ma synthèse</h2><details class="depli"><summary>Afficher la synthèse (après les activités et la mise en commun)</summary>
+    <div class="synthese" style="margin-top:10px"><section><h3>Ce que je dois comprendre</h3><ul>${s.synthese.comprendre.map(x=>`<li>${x}</li>`).join('')}</ul></section>
+    <section><h3>Ce que je dois savoir</h3><ul>${s.synthese.savoir.map(x=>`<li>${x}</li>`).join('')}</ul></section>
+    <section><h3>Ce que je dois savoir faire</h3><ul>${s.synthese.savoirFaire.map(x=>`<li>${x}</li>`).join('')}</ul></section>
+    <section><h3>Vocabulaire essentiel</h3><dl class="vocab">${s.synthese.vocab.map(v=>`<dt>${v[0]}</dt><dd>${v[1]}</dd>`).join('')}</dl></section></div></details></section>` : '';
+  return `${filAriane([['Accueil','#accueil'],[SEQUENCE.court,'#sequence'],['Séance ' + s.num]])}
+  <section class="entete"><span class="kicker">Séance ${s.num} / ${SEQUENCE.seances.length} · ${s.duree} · ${s.etape}</span>
+    <h1>${s.titre}</h1><p class="lead">${s.sous}</p><div class="meta">${s.reperes.map(tagRep).join('')}</div></section>
+  ${prep}
+  <section class="bloc"><h2>${s.evaluation ? 'La situation' : 'Mise en situation'}</h2><div class="situation">${s.situation}</div></section>
+  <section class="bloc"><h2>${s.evaluation ? 'Le problème' : 'Mon problème à résoudre'}</h2><p class="probleme">${s.problematique}</p>${s.hypothese ? R.reponse(s.hypothese) : ''}</section>
+  ${s.activites.map((a,k)=>`<section class="bloc" id="${s.id}-a${k+1}"><div class="activite-h"><h2>${s.evaluation ? '' : `<span class="num">${k+1}</span>Activité ${k+1} — `}${a.titre}</h2><span class="duree">⏱ ${a.duree} · ${a.modalite}</span></div>${a.intro || ''}${blocWidgets(a.contenu)}${a.production ? `<span class="production">${a.production}</span>` : ''}</section>`).join('')}
+  <section class="bloc"><h2>${s.evaluation ? 'Après l’évaluation' : 'Mise en commun'}</h2>${s.miseEnCommun}</section>
+  ${syn}
+  ${s.verif && s.verif.length ? `<section class="bloc"><h2>Je vérifie mes acquis</h2>${blocWidgets(s.verif)}</section>` : ''}
+  ${s.defi ? `<section class="bloc"><h2>Pour aller plus loin — défi</h2><p>${s.defi}</p>${R.reponse({id:s.id+'-defi', label:'Ma réponse au défi :', rows:3})}</section>` : ''}
+  <div class="actions noprint" style="margin-top:16px"><button class="btn ${ETAT.done[s.id] ? '' : 'plein'}" type="button" data-act="terminer" data-s="${s.id}">${ETAT.done[s.id] ? '✔ Séance marquée comme terminée (annuler)' : 'J’ai terminé cette séance'}</button></div>
+  <nav class="navseance" aria-label="Séances précédente et suivante">${prec ? `<a class="btn" href="#${prec.id}">← Séance ${prec.num}</a>` : '<a class="btn" href="#sequence">← La séquence</a>'}<a class="btn" href="#accueil">⌂ Accueil</a>${suiv ? `<a class="btn plein" href="#${suiv.id}">Séance ${suiv.num} →</a>` : ''}</nav>`;
+}
+
+function grilleHTML(){
+  return `<h4>Grille d’évaluation par compétences</h4><div class="tablewrap"><table><thead><tr><th>Compétence · repère</th><th>Critère observable</th><th>Maîtrise insuffisante</th><th>Maîtrise fragile</th><th>Maîtrise satisfaisante</th><th>Très bonne maîtrise</th></tr></thead><tbody>
+  ${GRILLE.map(g=>`<tr><td><strong>${g.c}</strong> · ${g.r}</td><td>${g.crit}</td>${g.n.map(n=>`<td>${n}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${SEQUENCE.noteGrille ? `<p class="petit">${SEQUENCE.noteGrille}</p>` : ''}`;
+}
+
+function pageReperes(){
+  const usage = code => SEQUENCE.seances.filter(s=>s.reperes.includes(code));
+  return `${filAriane([['Accueil','#accueil'],['Les 38 repères de 3e']])}
+  <section class="entete"><span class="kicker">Tableau récapitulatif</span><h1>Les 38 repères de progressivité de 3e</h1><p class="lead">Intitulés des cartes 3e (BO n° 9 du 29 février 2024). Les repères non abordés dans cette séquence sont indiqués « non traité ».</p></section>
+  <section class="bloc"><div class="tablewrap"><table><thead><tr><th>Code</th><th>Compétence</th><th>Intitulé du repère</th><th>Séances de la séquence</th></tr></thead><tbody>
+  ${REPERES.map(r=>{ const u = usage(r[0]); return `<tr><td>${tagRep(r[0])}</td><td>${r[1]}</td><td>${r[2]}</td><td>${u.length ? u.map(s=>`<a href="#${s.id}">S${s.num}</a>`).join(', ') : '<span class="muted">Non traité</span>'}</td></tr>`; }).join('')}
+  </tbody></table></div>
+  <p class="petit muted">Bilan : ${SEQUENCE.reperes.length} repères traités sur 38, répartis sur ${SEQUENCE.competences.length} compétences (${SEQUENCE.competences.join(', ')}).</p></section>`;
+}
+
+function pageEnseignant(){
+  if (!PROF) return `${filAriane([['Accueil','#accueil'],['Espace enseignant']])}<section class="entete"><h1>Espace enseignant</h1><p>Active le <strong>mode enseignant</strong> (bouton en haut à droite) pour afficher cette page. Rappel : ce mode n’est qu’un affichage et ne protège pas les corrigés.</p><button class="btn plein" type="button" data-act="prof">Activer le mode enseignant</button></section>`;
+  return `${filAriane([['Accueil','#accueil'],['Espace enseignant']])}
+  <section class="entete"><span class="kicker">Espace enseignant</span><h1>Préparer et conduire la séquence</h1><p class="lead">Analyse de la fiche groupe, traçabilité des compétences, grille d’évaluation, préparation de chaque séance.</p>
+  <p class="petit">Accès rapide aux fiches de préparation : ${SEQUENCE.seances.map(s=>`<a href="#${s.id}">S${s.num}</a>`).join(' · ')}</p></section>
+  <section class="bloc boite-prof"><h2>Analyse de la fiche groupe (JSON)</h2>${ANALYSE_JSON}</section>
+  <section class="bloc boite-prof"><h2>Tableau de traçabilité des compétences</h2>
+   <p class="petit">Filtrer : <span class="chips" role="group" aria-label="Filtrer par compétence">${SEQUENCE.competences.map(c=>`<button class="chip" type="button" data-act="filtreT" data-c="${c}" aria-pressed="false">${c}</button>`).join('')}<button class="chip" type="button" data-act="filtreT" data-c="" aria-pressed="true">Toutes</button></span></p>
+   <div class="tablewrap"><table id="tabTrace"><thead><tr><th>Séance</th><th>Compétence</th><th>Repère</th><th>Connaissance (intitulé de la carte)</th><th>Activité réalisée</th><th>Production</th><th>Critère d’évaluation</th></tr></thead><tbody>
+   ${TRACABILITE.map(t=>{ const s = seance(t[0]); return `<tr data-comp="${t[1]}"><td><a href="#${s.id}">S${s.num}</a> ${s.titre}</td><td>${t[1]}</td><td>${t[2]}</td><td>${CONNAISSANCES[t[2]][t[3]]}</td><td>${t[4]}</td><td>${t[5]}</td><td>${t[6]}</td></tr>`; }).join('')}
+   </tbody></table></div></section>
+  <section class="bloc boite-prof"><h2>Évaluation sommative (séance 7)</h2>${grilleHTML()}<p><a href="#s7">Ouvrir la séance 7 et son corrigé détaillé →</a></p></section>
+  <section class="bloc boite-prof"><h2>Matériel pour la séquence</h2><ul>${SEQUENCE.materiel.map(m=>`<li>${m}</li>`).join('')}</ul></section>
+  <section class="bloc boite-prof"><h2>Données des élèves</h2><p>Les réponses sont stockées dans le navigateur de chaque poste (stockage local), sans compte ni serveur. Pour récupérer un travail : bouton « Exporter mes réponses » sur la page d’accueil (fichier texte), à déposer par exemple via le formulaire de dépôt du site techno-3e.</p></section>`;
+}
+
+function pageRecherche(q){
+  /* normalisation qui conserve la longueur (pour retrouver la position dans le texte d'origine) */
+  const nl = t => t.split('').map(c => c.normalize('NFD').charAt(0)).join('').toLowerCase();
+  const rassembler = (o, acc) => { if (typeof o === 'string') acc.push(strip(o)); else if (Array.isArray(o)) o.forEach(x => rassembler(x, acc)); else if (o && typeof o === 'object') Object.entries(o).forEach(([k,v]) => { if (['id','t','a','layout','_verifiables','comp'].includes(k)) return; if (k === 'prof' && !PROF) return; if (k === 'html' && o.t === 'prof' && !PROF) return; rassembler(v, acc); }); return acc; };
+  const nq = nl(q.trim());
+  const res = [];
+  if (nq.length >= 2){
+    SEQUENCE.seances.forEach(s => {
+      const txt = rassembler(s, []).join(' · ');
+      const n = nl(txt); const pos = n.indexOf(nq);
+      if (pos >= 0){ const deb = Math.max(0, pos - 70); const count = n.split(nq).length - 1;
+        const avant = txt.slice(deb, pos), mot = txt.slice(pos, pos + nq.length), apres = txt.slice(pos + nq.length, pos + nq.length + 110);
+        res.push({s, count, ext: (deb ? '…' : '') + esc(avant) + '<mark>' + esc(mot) + '</mark>' + esc(apres) + '…'}); }
+    });
+    res.sort((a,b)=>b.count-a.count);
+  }
+  return `${filAriane([['Accueil','#accueil'],['Recherche']])}
+  <section class="entete"><h1>Recherche : « ${esc(q)} »</h1><p class="lead">${nq.length < 2 ? 'Saisis au moins deux caractères.' : res.length ? `${res.length} séance(s) contiennent ce mot.` : 'Aucun résultat. Essaie un autre mot (par exemple : capteur, variable, réparabilité, exigence).'}</p></section>
+  ${res.map(r=>`<a class="carte bloc" href="#${r.s.id}" style="display:block"><span class="n">Séance ${r.s.num} · ${r.count} occurrence(s)</span><h3>${r.s.titre}</h3><p class="petit">${r.ext}</p></a>`).join('')}`;
+}
+
+/* =====================================================================
+   12. ROUTEUR ET ÉVÉNEMENTS
+   ===================================================================== */
+function afficher(){
+  const h = decodeURIComponent(location.hash.slice(1)) || 'accueil';
+  const main = $('#main'); let html; let titre = SEQUENCE.titre;
+  const s = seance(h);
+  if (s){ html = pageSeance(s); titre = `Séance ${s.num} — ${s.titre}`; }
+  else if (h === 'sequence'){ html = pageSequence(); titre = 'La séquence — ' + SEQUENCE.court; }
+  else if (h === 'reperes'){ html = pageReperes(); titre = 'Les 38 repères de 3e'; }
+  else if (h === 'enseignant'){ html = pageEnseignant(); titre = 'Espace enseignant'; }
+  else if (h.startsWith('recherche/')){ const q = h.slice(10); html = pageRecherche(q); titre = 'Recherche'; $('#q').value = q; }
+  else if (/^s\d-a\d$/.test(h)){ const [sid] = h.split('-'); location.replace('#' + sid); return; }
+  else html = pageAccueil();
+  main.innerHTML = html; document.title = titre + ' · Technologie 3e';
+  if (s){ const INITS = {simFlexion:initSimFlexion, simConduction:initSimConduction}; $$('.sim', main).forEach(b => { const id = b.id.slice(4); const w = WIDGETS[id] && WIDGETS[id].def; if (w && INITS[w.t]) INITS[w.t](id); });
+    $$('.decision', main).forEach(b => majDecision(b.dataset.w)); }
+  afficherScoresExistants();
+  window.scrollTo(0,0); main.focus({preventScroll:true});
+}
+window.addEventListener('hashchange', afficher);
+
+function appliquerProf(){ document.body.classList.toggle('prof', PROF); $('#btnProf').setAttribute('aria-pressed', String(PROF)); $('#btnProf').textContent = PROF ? 'Mode enseignant : activé' : 'Mode enseignant'; try { sessionStorage.setItem(CLE + '-prof', PROF ? '1' : '0'); } catch(e){} }
+$('#btnProf').addEventListener('click', () => { PROF = !PROF; appliquerProf(); if (/enseignant|recherche/.test(location.hash)) afficher(); });
+$('#formRecherche').addEventListener('submit', e => { e.preventDefault(); const q = $('#q').value.trim(); if (q) location.hash = 'recherche/' + encodeURIComponent(q); });
+
+/* Délégation : clics */
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  const act = b.dataset.act;
+  if (act === 'verifier') verifier(b.dataset.id);
+  else if (act === 'effacer'){ const id = b.dataset.id; delete ETAT.answers[id]; delete ETAT.answers[id + '-tests']; delete ETAT.scores[id]; sauver(); const box = $(`[data-w="${id}"]`); const w = WIDGETS[id].def; const tmp = document.createElement('div'); tmp.innerHTML = R[w.t](w); box.replaceWith(tmp.firstElementChild); }
+  else if (act === 'aide'){ const box = b.parentElement; const n = +box.dataset.n; const aides = $$('.aide', box); if (aides[n]) aides[n].hidden = false; box.dataset.n = n + 1; if (n + 1 >= aides.length) b.remove(); else b.textContent = `💡 Afficher l’aide ${n+2} / ${aides.length}`; }
+  else if (act === 'haut' || act === 'bas'){ const li = b.closest('li'); const ol = li.parentElement; if (act === 'haut' && li.previousElementSibling) ol.insertBefore(li, li.previousElementSibling); if (act === 'bas' && li.nextElementSibling) ol.insertBefore(li.nextElementSibling, li); $$('li', ol).forEach(x=>x.classList.remove('ok-bg','ko-bg')); collecter(ol.id.slice(3)); b.focus(); }
+  else if (act === 'diagtest') testDiag(b.dataset.id, +b.dataset.i);
+  else if (act === 'terminer'){ const id = b.dataset.s; ETAT.done[id] = !ETAT.done[id]; if (!ETAT.done[id]) delete ETAT.done[id]; sauver(); b.textContent = ETAT.done[id] ? '✔ Séance marquée comme terminée (annuler)' : 'J’ai terminé cette séance'; b.classList.toggle('plein', !ETAT.done[id]); }
+  else if (act === 'filtre' || act === 'filtreT'){ const c = b.dataset.c; $$(`[data-act="${act}"]`).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    const cibles = act === 'filtre' ? $$('#cartesSeances .carte') : $$('#tabTrace tbody tr');
+    cibles.forEach(el => { el.hidden = !!c && !el.dataset.comp.split(' ').includes(c); }); }
+  else if (act === 'exporter') exporter();
+  else if (act === 'reinit'){ if (confirm('Effacer toutes tes réponses, tes scores et ta progression sur cet appareil ? Cette action est définitive.')){ ETAT = {answers:{}, scores:{}, done:{}}; sauver(); afficher(); } }
+  else if (act === 'prof'){ PROF = true; appliquerProf(); afficher(); }
+});
+/* Délégation : saisies */
+document.addEventListener('input', e => {
+  const el = e.target;
+  if (el.dataset.save){ ETAT.answers[el.dataset.save] = el.value; sauver(); }
+  else if (el.dataset.tab){ const id = el.dataset.tab; ETAT.answers[id] = ETAT.answers[id] || {}; ETAT.answers[id][el.dataset.k] = el.value; sauver(); }
+  else if (el.dataset.champ && el.type === 'text'){ el.classList.remove('ok-bg','ko-bg'); collecter(el.dataset.champ); }
+});
+document.addEventListener('change', e => {
+  const el = e.target;
+  if (el.dataset.champ){ el.classList.remove('ok-bg','ko-bg'); collecter(el.dataset.champ); }
+  else if (el.dataset.dec){ majDecision(el.closest('[data-w]').dataset.w); }
+});
+
+/* Export des réponses (fichier texte) */
+function exporter(){
+  const L = [`Technologie 3e — ${SEQUENCE.titre}`, `Export du ${new Date().toLocaleString('fr-FR')}`, `Nom et classe : ______________________`, ''];
+  SEQUENCE.seances.forEach(s => {
+    L.push('='.repeat(60), `SÉANCE ${s.num} — ${s.titre}${ETAT.done[s.id] ? ' (terminée)' : ''}`, '='.repeat(60));
+    Object.entries(WIDGETS).filter(([id,o]) => o.seance === s.id).forEach(([id,o]) => {
+      const w = o.def, a = ETAT.answers[id], sc = ETAT.scores[id];
+      if (w.t === 'reponse' && a) L.push(`• ${strip(w.label)}`, `  ${a.replace(/\n/g,'\n  ')}`, '');
+      if (w.t === 'tableau' && a && Object.values(a).some(v=>v)){ L.push(`• Tableau : ${w.cols.join(' | ')}`); w.rows.forEach((r,ri)=>L.push('  ' + r.map((c,ci)=> c === null ? (a[ri+'-'+ci] || '…') : c).join(' | '))); L.push(''); }
+      if (w.t === 'decision' && a) L.push(`• Tableau de décision — poids : ${a.p.join(', ')} ; exigence budget : ${a.budget ? 'oui' : 'non'}`, '');
+      if (sc) L.push(`• Exercice « ${id} » : score ${sc.ok} / ${sc.tot}`);
+    });
+    const d = ETAT.answers[s.id + '-defi']; if (d) L.push(`• Défi : ${d}`);
+    L.push('');
+  });
+  const blob = new Blob([L.join('\n')], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'mes-reponses-imprimante-3d.txt'; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+
+appliquerProf();
+afficher();
+</script>
+</body>
+</html>
