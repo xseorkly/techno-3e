@@ -62,7 +62,17 @@ details.step[open]>summary{border-bottom:1px solid var(--line)}
 @media(max-width:850px){.frame,.s-body,.themes{grid-template-columns:1fr}.consigne{grid-row:auto}}
 @media(max-width:560px){.objects,.resbar{grid-template-columns:1fr}.frise,.resources{grid-template-columns:1fr 1fr}details.step>summary{grid-template-columns:auto 1fr}.s-time{grid-column:2;justify-self:start}}
 @media print{details.step{box-shadow:none;break-inside:avoid}details.step .s-body{display:grid}.toolbar{display:none}}
-</style></head><body>
+</style><style>
+.seqs-ia{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+@media(max-width:760px){.seqs-ia{grid-template-columns:1fr}}
+.seq-ia{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-top:4px solid var(--teal);border-radius:14px;padding:14px 16px;transition:border-color .15s,box-shadow .15s}
+.seq-ia:hover,.seq-ia:focus-visible{border-color:var(--teal);box-shadow:var(--shadow)}
+.seq-ia .ico{font-size:26px}.seq-ia .k{font:700 12px Archivo,sans-serif;color:var(--teal);letter-spacing:.05em;text-transform:uppercase}
+.seq-ia h3{margin:0;font-size:18px}.seq-ia p{margin:0;color:var(--muted);font-size:15px}.seq-ia p.rep{font:600 13px Archivo,sans-serif;color:var(--ink)}
+.seq-ia .grp{font-size:13px;color:var(--muted)}.seq-ia .go{margin-top:auto;font-weight:700;color:var(--teal)}
+.ia-note{border-left:4px solid #9a6900;background:#fff5d9;border-radius:0 10px 10px 0;padding:10px 14px;font-size:15px;margin-top:12px}
+</style>
+</head><body>
 <nav class="fnav" aria-label="Navigation Formation"><a href="../index.html">← Formation enseignants</a></nav>
 <main class="page">
 
@@ -223,6 +233,13 @@ details.step[open]>summary{border-bottom:1px solid var(--line)}
 </div>
 </details>
 </section>
+
+<section class="section" id="sequences-ia"><div class="panel">
+<h2>Séances générées par l’IA</h2>
+<p class="ia-note"><strong>Séquences générées par l’IA (Claude) à partir des fiches groupes de l’atelier.</strong> Chaque fichier est autonome : espace élève, mode enseignant (corrigés, grilles, traçabilité des compétences), sauvegarde locale. Ce sont des propositions de travail à relire, adapter et tester avant usage en classe : les objets, valeurs et modèles cités sont en partie fictifs et signalés comme tels.</p>
+<div class="seqs-ia"><a class="seq-ia" href="sequences-ia/robot-aspirateur.html"><span class="ico" aria-hidden="true">🤖</span><span class="k">Aspirateur robot · 7 séances</span><h3>Robot aspirateur : ni téléphone, ni queue de chat !</h3><p>Comment être sûr que le robot aspirateur n’attrape ni votre téléphone ni la queue du chat ?</p><p class="rep">OST21 · SFC13 · SFC14 · CCRI31 · OST33</p><span class="grp">Groupe « triange rectangle BSL »</span><span class="go">Ouvrir la séquence →</span></a><a class="seq-ia" href="sequences-ia/imprimante-3d.html"><span class="ico" aria-hidden="true">🖨️</span><span class="k">Imprimante 3D · 7 séances</span><h3>Imprimerie, imprimante, 3D… et après ?</h3><p>Quelle imprimante pour répondre aux besoins de demain ?</p><p class="rep">OST11 · OST13 · SFC12 · SFC21 · SFC22 · OST33 · CCRI12</p><span class="grp">Groupe 3</span><span class="go">Ouvrir la séquence →</span></a><a class="seq-ia" href="sequences-ia/camera-ip.html"><span class="ico" aria-hidden="true">📷</span><span class="k">Caméra IP · 8 séances</span><h3>Être présent chez soi tout en étant absent</h3><p>Léa veut vérifier que son chat va bien pendant son absence : comment être présent chez soi tout en étant absent ?</p><p class="rep">OST33 · SFC11 · SFC13 · SFC17 · SFC18 · CCRI18 · OST15</p><span class="grp">Groupe « Caméra IP »</span><span class="go">Ouvrir la séquence →</span></a><a class="seq-ia" href="sequences-ia/trottinette-electrique.html"><span class="ico" aria-hidden="true">🛴</span><span class="k">Trottinette électrique · 7 séances</span><h3>La trottinette électrique : de la batterie à la roue</h3><p>Comment l’énergie est-elle stockée, convertie et transmise jusqu’à la roue, et comment améliorer les performances sans sortir du cadre légal ?</p><p class="rep">SFC11 · OST34 · CCRI11</p><span class="grp">Groupe BRUFRAN</span><span class="go">Ouvrir la séquence →</span></a></div>
+<p style="margin:12px 0 0"><a class="btn alt" href="sequences-ia/index.html">Voir la rubrique complète</a></p>
+</div></section>
 
 <section class="section"><p class="muted" style="margin:0">Textes de référence, à lire après l'atelier : <a href="https://www.education.gouv.fr/bo/2024/Hebdo9/MENE2402802A" target="_blank" rel="noopener">programme de technologie du cycle 4 (BO n° 9 du 29 février 2024)</a> · <a href="https://eduscol.education.gouv.fr/sites/default/files/document/guide-daccompagnement-du-programme-de-technologie-mai-2024pdf-106860.pdf" target="_blank" rel="noopener">guide d'accompagnement (mai 2024)</a>.</p></section>
 

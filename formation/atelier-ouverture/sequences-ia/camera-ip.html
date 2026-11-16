@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<script src="../../garde.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caméra IP — Séquence de technologie 3e · Cycle 4</title>
+<meta name="description" content="Séquence de technologie 3e : être présent chez soi tout en étant absent. Caméra IP : choix, chaîne d’énergie, chaîne d’information, réseaux et adresses IP, routage, objets communicants, cybersécurité.">
+<!-- Polices facultatives (Internet) : sans connexion, le navigateur utilise les polices système. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   1. VARIABLES — palette reprise du site techno-3e
+   ========================================================= */
+:root{
+  --papier:#F4F7F7; --carte:#FFFFFF; --encre:#14262B; --doux:#5A6C71;
+  --teal:#0E6E6B; --teal2:#0A5A58; --teal-pale:#E2EFEE; --magenta:#C2185B;
+  --trait:#D2DEDE; --ok:#2E7D5B; --ok-pale:#E3F2EA; --ko:#B3261E; --ko-pale:#FBE9E7;
+  --ambre:#9A6900; --ambre-pale:#FFF5D9; --ost:#12395F; --sfc:#0E6E6B; --ccri:#9A6900;
+  --r:10px; --ombre:0 12px 35px rgba(20,38,43,.08);
+  --titre:"Archivo",system-ui,sans-serif; --texte:"Source Sans 3",system-ui,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono","Consolas","Menlo",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--papier);color:var(--encre);font-family:var(--texte);font-size:17px;line-height:1.55}
+a{color:var(--teal)}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+h1,h2,h3,h4{font-family:var(--titre);line-height:1.2;color:var(--encre)}
+h1{font-size:clamp(26px,4vw,36px);margin:.2em 0 .3em}
+h2{font-size:23px;margin:0 0 .5em}
+h3{font-size:19px;margin:1.1em 0 .4em}
+h4{font-size:16px;margin:.8em 0 .3em}
+code,pre{font-family:var(--mono)}
+.skip{position:absolute;left:-999px;top:0;background:#fff;padding:8px 12px;z-index:99}
+.skip:focus{left:8px}
+main:focus{outline:none}
+
+/* =========================================================
+   2. BARRE DE NAVIGATION
+   ========================================================= */
+.navsite{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--trait)}
+.navsite .dedans{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 18px;flex-wrap:wrap}
+.btn,.navsite a.nav{display:inline-flex;align-items:center;gap:6px;font-family:var(--titre);font-weight:600;font-size:14.5px;color:var(--teal);
+  border:1px solid var(--trait);border-radius:8px;padding:7px 13px;background:#fff;text-decoration:none;cursor:pointer;line-height:1.2}
+.btn:hover,.navsite a.nav:hover{border-color:var(--teal);background:var(--teal-pale)}
+.btn.plein{background:var(--teal);color:#fff;border-color:var(--teal)}
+.btn.plein:hover{background:var(--teal2)}
+.btn.petit{font-size:13.5px;padding:5px 10px}
+.btn[aria-pressed="true"]{background:var(--ambre);border-color:var(--ambre);color:#fff}
+.navsite form{margin-left:auto;display:flex;gap:6px}
+.navsite input[type=search]{font:inherit;font-size:15px;border:1px solid var(--trait);border-radius:8px;padding:6px 10px;width:min(40vw,220px)}
+@media(max-width:700px){.navsite form{margin-left:0;width:100%}.navsite input[type=search]{flex:1;width:auto}}
+.bandeau-prof{background:var(--ambre-pale);border-bottom:2px solid var(--ambre);color:#4d3600;font-size:14.5px}
+.bandeau-prof div{max-width:1040px;margin:0 auto;padding:7px 18px}
+
+/* =========================================================
+   3. MISE EN PAGE
+   ========================================================= */
+.page{max-width:1040px;margin:0 auto;padding:0 18px 120px}
+.fil{font-family:var(--titre);font-size:13.5px;color:var(--doux);margin:18px 0 0}
+.fil a{color:var(--teal);text-decoration:none}.fil a:hover{text-decoration:underline}
+.fil span[aria-hidden]{margin:0 6px}
+.entete{background:var(--carte);border:1px solid var(--trait);border-top:4px solid var(--teal);border-radius:var(--r);margin-top:14px;padding:22px 24px;box-shadow:var(--ombre)}
+.kicker{font-family:var(--titre);font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--teal)}
+.lead{font-size:18.5px;color:var(--doux);margin:.2em 0 .6em}
+.bloc{background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);padding:20px 24px;margin-top:18px}
+.bloc>h2:first-child{margin-top:0}
+.bloc h2 .num{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;font-size:15px;margin-right:8px;vertical-align:2px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:13.5px;font-weight:600;border-radius:999px;padding:3px 10px;background:var(--teal-pale);color:var(--teal2);border:1px solid transparent}
+.tag.ost{background:#e3eaf3;color:var(--ost)}.tag.sfc{background:var(--teal-pale);color:var(--sfc)}.tag.ccri{background:#f6ecd5;color:#6d4b00}
+.tag.gris{background:#eef2f2;color:var(--doux)}
+.probleme{border-left:5px solid var(--magenta);background:#fdf1f5;padding:14px 18px;border-radius:0 var(--r) var(--r) 0;font-size:18px;font-weight:600;font-family:var(--titre)}
+.situation{background:var(--teal-pale);border-radius:var(--r);padding:14px 18px}
+blockquote{margin:10px 0;padding:10px 16px;border-left:4px solid var(--trait);background:#fff;font-style:italic}
+.grille2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.muted{color:var(--doux)}
+.petit{font-size:14.5px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{border:1px solid var(--trait);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--teal-pale);font-family:var(--titre);font-size:14px}
+.tablewrap{overflow-x:auto;margin:10px 0}
+.production{display:block;margin-top:12px;font-size:14.5px;background:#f4f8f8;border:1px dashed var(--teal);border-radius:8px;padding:7px 12px}
+.production::before{content:"Production attendue · ";font-weight:700;color:var(--teal)}
+.activite-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.activite-h h2{margin:0}
+.duree{font-size:14px;color:var(--doux);font-weight:600}
+
+/* Accueil */
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:center}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+.cartes{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;margin-top:14px}
+.carte{background:#fff;border:1px solid var(--trait);border-radius:var(--r);padding:16px 18px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:6px;transition:border-color .15s,box-shadow .15s}
+.carte:hover{border-color:var(--teal);box-shadow:var(--ombre)}
+.carte .n{font-family:var(--titre);font-weight:700;color:var(--teal);font-size:14px}
+.carte h3{margin:0;font-size:18px}
+.carte .fleche{margin-top:auto;font-weight:700;color:var(--teal)}
+.barre{height:8px;background:#e6eded;border-radius:99px;overflow:hidden}
+.barre>span{display:block;height:100%;background:var(--teal)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:600 14px var(--titre);border:1px solid var(--trait);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;color:var(--encre)}
+.chip[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.fait{color:var(--ok);font-weight:700}
+
+/* Synthèse */
+.synthese{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.synthese section{border:1px solid var(--trait);border-radius:var(--r);padding:12px 14px;background:#fbfdfd}
+.synthese h3{margin:0 0 6px;font-size:16px;color:var(--teal2)}
+.synthese ul{margin:0;padding-left:18px}
+dl.vocab{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;margin:0}
+dl.vocab dt{font-weight:700}dl.vocab dd{margin:0}
+@media(max-width:560px){dl.vocab{grid-template-columns:1fr}dl.vocab dd{margin-bottom:6px}}
+details.depli>summary{cursor:pointer;font-family:var(--titre);font-weight:600;color:var(--teal);padding:6px 0}
+
+/* Enseignant */
+body:not(.prof) .prof-only{display:none!important}
+.boite-prof{border:2px solid var(--ambre);background:var(--ambre-pale);border-radius:var(--r);padding:14px 18px;margin-top:14px}
+.boite-prof>h2,.boite-prof>h3,.boite-prof>h4{color:#6d4b00;margin-top:0}
+.boite-prof::before{content:"Espace enseignant";display:inline-block;font:700 12px var(--titre);text-transform:uppercase;letter-spacing:.05em;background:var(--ambre);color:#fff;border-radius:4px;padding:2px 8px;margin-bottom:8px}
+.boite-prof table th{background:#f6e7bf}
+
+/* =========================================================
+   4. ACTIVITÉS INTERACTIVES
+   ========================================================= */
+.widget{border:1px solid var(--trait);border-radius:var(--r);padding:14px 16px;margin:14px 0;background:#fcfefe}
+.widget .consigne{font-weight:600;margin:0 0 10px}
+.widget .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.score{font-family:var(--titre);font-weight:700;font-size:15px}
+.score.bon{color:var(--ok)}.score.moyen{color:var(--ambre)}.score.faible{color:var(--ko)}
+textarea,select,input[type=text],input[type=number]{font:inherit;font-size:16px;border:1px solid #b9cccc;border-radius:7px;padding:7px 9px;background:#fff;color:var(--encre);max-width:100%}
+textarea{width:100%;resize:vertical}
+label.lbl{display:block;font-weight:600;margin:8px 0 4px}
+.sauve{font-size:12.5px;color:var(--doux)}
+.ligne-tri{display:grid;grid-template-columns:1fr minmax(180px,auto);gap:8px 12px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--trait)}
+.ligne-tri:last-of-type{border-bottom:0}
+@media(max-width:560px){.ligne-tri{grid-template-columns:1fr}}
+.ok-bg{background:var(--ok-pale)!important;border-color:var(--ok)!important}
+.ko-bg{background:var(--ko-pale)!important;border-color:var(--ko)!important}
+.fb{font-size:14.5px;margin-top:4px;padding:6px 10px;border-radius:6px}
+.fb.ok{background:var(--ok-pale);color:#1d5a3f}.fb.ko{background:var(--ko-pale);color:#7c1d16}
+.fb:empty{display:none}
+fieldset{border:1px solid var(--trait);border-radius:8px;margin:0 0 12px;padding:10px 14px}
+legend{font-weight:600;padding:0 6px}
+.opt{display:flex;gap:8px;align-items:flex-start;padding:4px 6px;border-radius:6px;cursor:pointer}
+.opt:hover{background:var(--teal-pale)}
+.opt input{margin-top:5px;flex:none}
+.ordre-liste{list-style:none;margin:0;padding:0}
+.ordre-liste li{display:flex;align-items:center;gap:8px;border:1px solid var(--trait);border-radius:7px;background:#fff;margin:5px 0;padding:5px 8px}
+.ordre-liste li code{white-space:pre;flex:1;font-size:15px;overflow-x:auto}
+.ordre-liste li span.txt{flex:1}
+.ordre-liste button{font:700 15px var(--titre);border:1px solid var(--trait);background:#fff;border-radius:6px;width:34px;height:32px;cursor:pointer;color:var(--teal)}
+.ordre-liste button:hover{background:var(--teal-pale)}
+pre.code{background:#0f2327;color:#e6f2f1;border-radius:9px;padding:14px 16px;overflow-x:auto;font-size:14.5px;line-height:1.5;margin:10px 0}
+pre.code .com{color:#8fb9b5}
+pre.code input,pre.code select{font:inherit;font-size:14px;padding:1px 5px;border-radius:4px;border:1px solid #6fa8a4;background:#fffbe6;color:#14262B}
+code.in{background:#e8efef;border-radius:4px;padding:1px 5px;font-size:.92em}
+.blk{display:inline-block;font:600 14px var(--texte);color:#fff;border-radius:6px;padding:3px 10px;margin:1px 0}
+.blk.var{background:#d6336c}.blk.ctl{background:#1e7b45}.blk.cnd{background:#2b6cb0}.blk.aff{background:#4c51bf}.blk.bas{background:#7a4dbf}
+.schema-chaine{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px}
+.schema-chaine .bx{flex:1 1 170px;border:2px solid var(--teal);border-radius:9px;background:#fff;padding:8px 10px;display:flex;flex-direction:column;gap:6px}
+.schema-chaine .bx b{font-family:var(--titre);font-size:13.5px;color:var(--teal2);letter-spacing:.03em}
+.schema-chaine .fl{align-self:center;font-size:22px;color:var(--teal);font-weight:700}
+.schema-chaine select{width:100%;font-size:14.5px}
+.arbre .racine{border:2px solid var(--ost);border-radius:9px;padding:8px 12px;background:#eef3f9;font-weight:600;max-width:520px;margin:0 auto 10px;text-align:center}
+.arbre .enfants{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;border-top:2px solid var(--ost);padding-top:12px}
+.arbre .bx{border:1px solid var(--ost);border-radius:9px;background:#fff;padding:8px 10px;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.arbre .bx b{font-family:var(--titre);color:var(--ost);font-size:13.5px}
+.arbre select{width:100%;font-size:14px}
+.aides{margin-top:10px}
+.aides .aide{background:#fffaf0;border-left:4px solid var(--ambre);padding:7px 12px;border-radius:0 6px 6px 0;margin:6px 0;font-size:15.5px}
+.lien-ext{display:flex;gap:12px;align-items:center;border:1px solid var(--trait);border-radius:var(--r);background:#fff;padding:12px 14px;margin:10px 0}
+.lien-ext .badge{font-size:12.5px;font-weight:700;background:#e3eaf3;color:var(--ost);border-radius:999px;padding:2px 8px;white-space:nowrap}
+.tab-saisie input{width:100%;min-width:70px;font-size:15px;padding:4px 6px}
+.tab-saisie td{padding:4px}
+.num-q{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--trait)}
+.num-q:last-of-type{border-bottom:0}
+.num-q .champ{display:flex;align-items:center;gap:6px}
+.num-q input{width:110px}
+@media(max-width:560px){.num-q{grid-template-columns:1fr}}
+
+/* Simulateurs */
+.sim{border:1px solid var(--trait);border-radius:var(--r);background:#fff;padding:12px}
+.sim canvas{width:100%;height:auto;display:block;border-radius:8px;background:#f7fbfb;border:1px solid var(--trait)}
+.sim .ctrl{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:10px 0}
+.sim .ctrl label{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px}
+.sim .ctrl input[type=range]{width:170px;accent-color:var(--teal)}
+.afficheur{font-family:var(--mono);background:#0f2327;color:#7ef0c8;border-radius:8px;padding:10px 14px;font-size:17px;min-height:46px}
+.journal{font-family:var(--mono);font-size:13.5px;background:#f4f8f8;border:1px solid var(--trait);border-radius:8px;padding:8px 10px;max-height:170px;overflow:auto;white-space:pre}
+.resultat{font-weight:700;padding:8px 12px;border-radius:8px;margin-top:8px}
+.resultat:empty{display:none}
+.decision td.num,.decision th.num{text-align:center}
+.decision tr.exclu td{color:#9aa;text-decoration:line-through}
+.rang{font-family:var(--titre);font-weight:700}
+.diag-test{margin:6px 0}.diag-test .btn{text-align:left;white-space:normal}.diag-test .btn:disabled{opacity:.75;cursor:default}
+
+/* Pied de page / impression */
+footer{border-top:1px solid var(--trait);background:#fff;color:var(--doux);font-size:14px}
+footer div{max-width:1040px;margin:0 auto;padding:16px 18px}
+.navseance{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:22px}
+mark{background:#fff0a8;padding:0 2px}
+@media print{.navsite,.bandeau-prof,.navseance,.actions,footer,.noprint{display:none!important}body{background:#fff;font-size:12pt}.bloc,.entete,.widget{break-inside:avoid;box-shadow:none}details{display:block}details>*{display:block}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<nav class="fnav-ia" aria-label="Navigation Formation" style="display:flex;gap:14px;flex-wrap:wrap;padding:6px 18px;font:500 13px/1.3 'Source Sans 3',Arial,sans-serif;background:#fff;border-bottom:1px solid #d2dede"><a href="../index.html" style="color:#5b6b6a;text-decoration:none">← Atelier d’ouverture</a><a href="index.html" style="color:#5b6b6a;text-decoration:none">↑ Séances générées par l’IA</a></nav>
+<header class="navsite">
+  <div class="dedans">
+    <a class="nav" href="#accueil" title="Retour à l'accueil">⌂ Accueil</a>
+    <a class="nav" href="#sequence">La séquence</a>
+    <a class="nav" href="#reperes">Les 38 repères</a>
+    <a class="nav prof-only" href="#enseignant">Espace enseignant</a>
+    <form id="formRecherche" role="search" aria-label="Rechercher dans la séquence">
+      <input type="search" id="q" placeholder="Rechercher un mot…" aria-label="Mot-clé">
+      <button class="btn" type="submit">Rechercher</button>
+    </form>
+    <button class="btn" id="btnProf" type="button" aria-pressed="false">Mode enseignant</button>
+  </div>
+</header>
+<div class="bandeau-prof prof-only" role="note"><div><strong>Mode enseignant activé.</strong> Les encadrés jaunes (préparation, réponses attendues, corrigés, grilles) sont visibles. Ce mode n'est qu'un affichage JavaScript : <strong>ce n'est pas une protection sécurisée des corrigés</strong> (ils sont présents dans le fichier).</div></div>
+<main id="main" class="page" tabindex="-1"></main>
+<footer><div>Technologie 3e · Cycle 4 — Programme de technologie, BO n° 9 du 29 février 2024 · Séquence issue de la fiche groupe « Caméra IP » (atelier d'ouverture, 16/11/2026) · Extension du site <a href="https://xseorkly.github.io/techno-3e/" target="_blank" rel="noopener">techno-3e</a> (lien Internet). Les données saisies restent dans ce navigateur.</div></footer>
+
+<script>
+'use strict';
+/* =====================================================================
+   SÉQUENCE « CAMÉRA IP » — Technologie 3e
+   Organisation : Référentiel → Séquence → Séances → Activités (widgets)
+   Pour ajouter une séquence : ajouter un objet dans SEQUENCES (même structure).
+   ===================================================================== */
+
+/* ---------- 1. RÉFÉRENTIEL OFFICIEL (cartes 3e, BO n° 9 du 29/02/2024) ---------- */
+const COMPETENCES = {
+  C1:`Décrire les liens entre usages et évolutions technologiques des objets et des systèmes techniques`,
+  C2:`Décrire les interactions entre un objet ou un système technique, son environnement et les utilisateurs`,
+  C3:`Caractériser et choisir un objet ou un système technique selon différents critères`,
+  C4:`Décrire et caractériser l’organisation interne d’un objet ou d’un système technique et ses échanges avec son environnement (énergies, données)`,
+  C5:`Identifier un dysfonctionnement d’un objet technique et y remédier`,
+  C6:`Comprendre et modifier un programme associé à une fonctionnalité d’un objet ou d’un système technique`,
+  C7:`Imaginer, concevoir et réaliser une ou des solutions en réponse à un besoin, à des exigences (de développement durable, par exemple) ou à la nécessité d’améliorations dans une démarche de créativité`,
+  C8:`Valider les solutions techniques par des simulations ou par des protocoles de tests`,
+  C9:`Concevoir, écrire, tester et mettre au point un programme`
+};
+/* [code, compétence, intitulé exact de la colonne 3e] */
+const REPERES = [
+  ['OST11','C1',`Identifier les innovations de rupture qui sont attachées à l’évolution d’un OST`],
+  ['OST12','C1',`Mettre en relation une découverte scientifique avec ses développements technologiques et leurs effets sur la société`],
+  ['OST13','C1',`Exprimer dans un argumentaire court l’incidence d’un OST sur la société`],
+  ['OST14','C1',`Exprimer dans un argumentaire court l’incidence des contraintes sociétales sur les OST`],
+  ['OST15','C1',`Exprimer dans un argumentaire court le rôle du développement stratégique du numérique au sein de la société et des environnements professionnels (ou des métiers)`],
+  ['OST21','C2',`Décrire l’expérience de l’utilisateur d’un OST à l’aide de modes de représentation choisis`],
+  ['OST31','C3',`Établir une liste d’OST possibles en vue de répondre à un besoin`],
+  ['OST32','C3',`Choisir un OST et argumenter ce choix en prenant en compte son cycle de vie et les trois piliers du développement durable`],
+  ['OST33','C3',`Évaluer les OST selon des exigences ou des critères identifiés (caractéristiques, performances, coût, indice de réparabilité)`],
+  ['OST34','C3',`Définir et mettre en œuvre un protocole pour mesurer une caractéristique, une performance d’un OST`],
+  ['SFC11','C4',`Élaborer, à l’aide d’un schéma bloc, la chaîne d’énergie d’un OST`],
+  ['SFC12','C4',`Justifier le choix d’un matériau et de son procédé de mise en forme au regard des contraintes techniques et environnementales`],
+  ['SFC13','C4',`Décrire un OST en caractérisant sa chaîne d’information`],
+  ['SFC14','C4',`Associer des grandeurs analogiques issues d’un OST à des données exploitables`],
+  ['SFC15','C4',`Représenter sous forme de données les informations de diverses natures utilisées par un OST`],
+  ['SFC16','C4',`Identifier, selon les cas, leur mise en forme, leur transmission ou leur stockage dans des fichiers (texte, image, nombre) afin de comprendre le fonctionnement de l’OST`],
+  ['SFC17','C4',`Identifier et représenter la circulation d’une information dans le réseau Internet`],
+  ['SFC18','C4',`Justifier la nécessité d’un protocole de routage pour faire communiquer plusieurs réseaux (activité débranchée, table de routage donnée)`],
+  ['SFC21','C5',`Formuler des hypothèses expliquant le dysfonctionnement d’un objet technique`],
+  ['SFC22','C5',`Proposer un protocole de dépannage puis de réparation`],
+  ['SFC23','C5',`Réaliser le dépannage ou la réparation d’un système défectueux`],
+  ['SFC24','C5',`Réaliser une pièce sur mesure pour réparer un objet technique`],
+  ['SFC31','C6',`Déterminer les données utilisées et produites par un programme associé à une fonctionnalité en vue de le modifier`],
+  ['SFC32','C6',`Programmer un algorithme lié à une nouvelle fonctionnalité`],
+  ['SFC33','C6',`Modifier et tester le programme associé à une nouvelle fonctionnalité d’un OST`],
+  ['CCRI11','C7',`Élaborer un processus de conception et de réalisation dans une durée, avec des tâches identifiées`],
+  ['CCRI12','C7',`Proposer et fabriquer un ensemble de solutions pour produire un nouvel OST (croquis, schéma, graphique, algorithme, modélisation)`],
+  ['CCRI13','C7',`Choisir un matériau constitutif d’un objet et/ou système technique`],
+  ['CCRI14','C7',`Choisir une source d’énergie pour un OST`],
+  ['CCRI15','C7',`Choisir les constituants et assembler un prototype`],
+  ['CCRI16','C7',`Modéliser une forme voulue`],
+  ['CCRI17','C7',`Choisir les moyens et produire la forme voulue`],
+  ['CCRI18','C7',`Interfacer deux objets techniques communicants`],
+  ['CCRI21','C8',`Mettre en œuvre une simulation pour valider la tenue mécanique d’un matériau`],
+  ['CCRI22','C8',`Proposer un protocole de test pour valider la tenue mécanique d’un matériau`],
+  ['CCRI23','C8',`Proposer un protocole de test pour valider le comportement et les performances d’un objet technique`],
+  ['CCRI31','C9',`Élaborer ou concevoir un algorithme permettant de répondre au besoin visé, puis le traduire en un programme structuré, le tester et le mettre au point`],
+  ['CCRI32','C9',`Réaliser et mettre au point un programme commandant un système réel incluant une interaction entre un humain et une machine`]
+];
+/* Connaissances associées (cartes 3e) — uniquement pour les repères travaillés */
+const CONNAISSANCES = {
+  OST33:[`Critères de choix : qualité, durabilité, efficacité énergétique et recyclabilité`,`Indice énergétique et indice de réparabilité`,`Notice et documentation technique ; exigences et critères de comparaison`],
+  SFC11:[`Formes d’énergie : électrique, cinétique, potentielle, thermique et lumineuse`,`Conversions d’énergie : moteur électrique, lampe, radiateur, génératrice et vérin`,`Fonctions de la batterie, du relais et de l’interrupteur`,`Transmission et transformation de mouvements : engrenages, courroies et chaînes`],
+  SFC13:[`Fonctions des capteurs (température, présence, distance…)`,`Rôle d’un microcontrôleur`,`Interface humain-machine (IHM) : boutons, afficheurs et autres composants`],
+  SFC17:[`Distinction entre réseau local et réseau mondial (Internet)`,`Rôle des terminaux, cartes réseau, liaisons, commutateurs, routeurs et serveurs`,`Adresse IP et tables de routage`,`Débit et ordres de grandeur associés`],
+  SFC18:[`Rôle du routeur dans la communication entre réseaux`,`Rôle et structure d’une adresse IP`,`Rôle des tables de routage`,`Réseau local et réseau mondial (Internet)`],
+  CCRI18:[`Rôles des terminaux, cartes réseau, liaisons, commutateurs, routeurs et serveurs`,`Composants d’une interface humain-machine (IHM) : boutons, afficheurs…`],
+  OST15:[`Systèmes d’information, fichiers, dossiers et arborescences`,`Flux et stockage des données : incidences`,`Cybersécurité : données personnelles, traces numériques, identification et authentification`,`Cyberviolence, propriété intellectuelle et usage détourné`]
+};
+const theme = code => code.startsWith('OST') ? 'ost' : code.startsWith('SFC') ? 'sfc' : 'ccri';
+const repere = code => REPERES.find(r => r[0] === code);
+
+/* ---------- 2. RESSOURCES PARTAGÉES ---------- */
+const RESEAU_SVG = `<svg viewBox="0 0 760 250" role="img" aria-label="Schéma du réseau : maison, routeurs R1 à R4, data center et réseau mobile" style="width:100%;max-width:760px;display:block;margin:10px auto;background:#fff;border:1px solid #d2dede;border-radius:8px">
+<g font-family="sans-serif" font-size="12" fill="#14262B">
+<rect x="10" y="30" width="160" height="110" rx="10" fill="#E2EFEE" stroke="#0E6E6B"/><text x="20" y="48" font-weight="bold">Maison de Léa</text><text x="20" y="64">192.168.1.0/24</text>
+<text x="20" y="90">Caméra 192.168.1.23</text><text x="20" y="108">Box (LAN) 192.168.1.1</text>
+<circle cx="200" cy="85" r="22" fill="#12395F"/><text x="190" y="90" fill="#fff" font-weight="bold">R1</text><text x="188" y="124">box</text>
+<circle cx="380" cy="85" r="22" fill="#12395F"/><text x="370" y="90" fill="#fff" font-weight="bold">R2</text><text x="340" y="50">routeur du fournisseur</text><text x="355" y="64">d’accès (FAI)</text>
+<circle cx="560" cy="45" r="22" fill="#12395F"/><text x="550" y="50" fill="#fff" font-weight="bold">R3</text>
+<circle cx="560" cy="185" r="22" fill="#12395F"/><text x="550" y="190" fill="#fff" font-weight="bold">R4</text>
+<rect x="600" y="10" width="150" height="70" rx="10" fill="#f6ecd5" stroke="#9A6900"/><text x="608" y="28" font-weight="bold">Data center</text><text x="608" y="44">198.51.100.0/24</text><text x="608" y="62">Serveur 198.51.100.20</text>
+<rect x="600" y="150" width="150" height="75" rx="10" fill="#fdf1f5" stroke="#C2185B"/><text x="608" y="168" font-weight="bold">Réseau mobile</text><text x="608" y="184">10.20.0.0/16</text><text x="608" y="202">Téléphone 10.20.4.8</text>
+<g stroke="#5A6C71" stroke-width="3"><line x1="170" y1="85" x2="178" y2="85"/><line x1="222" y1="85" x2="358" y2="85"/><line x1="400" y1="75" x2="540" y2="52"/><line x1="400" y1="95" x2="540" y2="178"/><line x1="582" y1="45" x2="600" y2="45"/><line x1="582" y1="185" x2="600" y2="185"/></g>
+<text x="250" y="78">fibre</text><text x="230" y="105">WAN 203.0.113.57</text>
+<line x1="380" y1="107" x2="380" y2="150" stroke="#5A6C71" stroke-width="3" stroke-dasharray="6 4"/><text x="330" y="168">vers le reste d’Internet</text>
+</g></svg>`;
+
+const CODE_EMETTEUR = `<span class="com"># Carte A — posée sur la gamelle du chat (objet « capteur »)</span>
+from microbit import *
+import radio
+
+radio.config(group=7)        <span class="com"># canal radio partagé par les deux cartes</span>
+radio.on()
+
+while True:
+    if accelerometer.was_gesture('shake'):   <span class="com"># la gamelle a bougé</span>
+        radio.send('CHAT')                   <span class="com"># envoi du message</span>
+        display.show(Image.YES)
+        sleep(500)
+        display.clear()`;
+
+const CODE_RECEPTEUR = `<span class="com"># Carte B — dans la poche de Léa (objet « récepteur »)</span>
+from microbit import *
+import radio
+
+radio.config(group=7)
+radio.on()
+alertes = 0
+
+while True:
+    message = radio.receive()
+    if message == 'CHAT':
+        alertes = alertes + 1
+        display.scroll('Chat ' + str(alertes))
+    if button_a.was_pressed():               <span class="com"># Léa remet le compteur à zéro</span>
+        alertes = 0
+        display.show(0)`;
+
+/* ---------- 3. LA SÉQUENCE ---------- */
+const SEQUENCE = {
+  id:'camera-ip', court:'Séquence Caméra IP',
+  titre:`Être présent chez soi tout en étant absent`,
+  objet:`Caméra IP motorisée d’intérieur (surveillance d’un animal), reliée par Wi-Fi à une box et à Internet ; prototype pédagogique avec deux cartes micro:bit`,
+  problematique:`Léa a un chat qui reste seul à la maison pendant qu’elle est au collège. Elle aimerait vérifier qu’il va bien pendant son absence. Comment être présent chez soi tout en étant absent ?`,
+  situation:`<p>Léa a adopté Moustache, un chat curieux qui passe ses journées seul. Elle a vu qu’une <strong>caméra IP</strong> permet de regarder chez soi depuis son téléphone, de parler à son animal, et même de recevoir une alerte quand il bouge. Mais laquelle acheter avec ses économies ? Comment l’image peut-elle traverser la ville jusqu’à son téléphone ? Et qui d’autre pourrait regarder chez elle ?</p>
+  <p>Votre classe accompagne Léa : <strong>choisir la caméra</strong>, <strong>comprendre comment elle fonctionne</strong> (énergie et information), <strong>suivre le chemin de l’image dans les réseaux</strong>, <strong>faire dialoguer deux objets</strong> et <strong>sécuriser l’installation</strong>.</p>`,
+  objectifs:[
+    `Traduire le besoin de Léa en exigences et choisir une caméra à partir de notices et de critères (dont l’efficacité énergétique).`,
+    `Élaborer la chaîne d’énergie de la caméra à l’aide d’un schéma-bloc : du texte au schéma et du schéma au texte (repère principal SFC11).`,
+    `Caractériser la chaîne d’information et la relier à la chaîne d’énergie (fonction DISTRIBUER).`,
+    `Identifier et représenter la circulation de l’image dans les réseaux : réseau local, Internet, adresses IP, débit.`,
+    `Justifier la nécessité du routage à l’aide de tables de routage (activité débranchée).`,
+    `Interfacer deux objets communicants (prototype micro:bit) et sécuriser une installation connectée.`
+  ],
+  competences:['C1','C3','C4','C7'],
+  reperes:['OST33','SFC11','SFC13','SFC17','SFC18','CCRI18','OST15'],
+  reperePrincipal:'SFC11',
+  prerequis:[
+    `Formes d’énergie et notion de chaîne d’énergie (cycle 4, 5e-4e) : fonctions alimenter, distribuer, convertir, transmettre.`,
+    `Chaîne d’information : acquérir, traiter, communiquer.`,
+    `Programmation par blocs de la carte micro:bit (variables, conditions, boucle).`
+  ],
+  duree:`8 séances de 55 min (≈ 7 h 20), dont 1 séance d’évaluation`,
+  materiel:[
+    `Une caméra IP motorisée réelle (idéalement) ou des photos de son intérieur ; notices fournies dans le fichier.`,
+    `Séance 6 : par binôme, deux cartes micro:bit V2 avec câbles USB et piles ; postes avec python.microbit.org (Internet) ou l’éditeur MakeCode.`,
+    `Séance 5 : étiquettes de routeurs, tables de routage imprimées, enveloppes « paquets » pour l’activité débranchée.`,
+    `Ce fichier HTML (fonctionne hors ligne).`
+  ],
+  noteGrille:`La compétence C7 (CCRI18) est évaluée sur la production de la séance 6 (prototype de deux cartes communicantes et protocole de test).`,
+  productions:[
+    `Fiche besoin, tableau des caractéristiques extrait des notices et tableau de décision (séance 1).`,
+    `Schéma-bloc de la chaîne d’énergie et texte explicatif (séance 2).`,
+    `Schéma de la chaîne d’information relié à la chaîne d’énergie (séance 3).`,
+    `Chemin de l’image dans les réseaux, adresses IP et calculs de débit (séance 4).`,
+    `Parcours de paquets avec tables de routage et justification d’un protocole de routage (séance 5).`,
+    `Prototype de deux cartes communicantes et protocole de test (séance 6).`,
+    `Charte de sécurité de la caméra de Léa (séance 7).`,
+    `Évaluation de transfert : la sonnette vidéo connectée (séance 8).`
+  ],
+  seances:[]
+};
+
+/* ===================== SÉANCE 1 ===================== */
+SEQUENCE.seances.push({
+  id:'s1', num:1, titre:`Quelle caméra pour surveiller Moustache ?`, sous:`Besoin, notices, critères de choix`,
+  duree:'55 min', etape:`Découvrir le problème et définir le besoin`, reperes:['OST33'], comp:['C3'],
+  situation:`<p>Léa dispose de <strong>60 €</strong>. Son salon mesure 5 m × 4 m ; la seule prise électrique libre est <strong>au milieu du grand mur</strong>. Elle rentre après la tombée de la nuit en hiver, et Moustache adore se cacher dans les coins. Voici des extraits des notices de trois modèles (modèles fictifs, créés pour la séquence).</p>
+  <div class="grille2">
+  <div class="situation"><strong>MiniCam Fix — 29 €</strong><br>Caméra fixe, angle de vue horizontal 110°. Résolution 1080p. Détection de mouvement par analyse de l’image. Vision nocturne jusqu’à 8 m. Alimentation : adaptateur secteur 5 V, puissance 2,5 W. Enregistrement sur carte microSD. Mises à jour : « selon disponibilité ».</div>
+  <div class="situation"><strong>PetView 360 — 45 €</strong><br>Caméra motorisée : rotation horizontale 355°, verticale 90°, suivi automatique du mouvement. Résolution 2K. Vision nocturne 10 m. Micro et haut-parleur (parler à l’animal). Alimentation secteur 5 V, puissance 3,5 W. Carte microSD ou cloud (3 €/mois, facultatif). Mises à jour de sécurité garanties 5 ans ; double authentification.</div>
+  <div class="situation"><strong>AirCam Go — 79 €</strong><br>Caméra fixe sur batterie (autonomie annoncée : 3 mois), angle 130°. Résolution 1080p. Détecteur de mouvement infrarouge. Vision nocturne 6 m. Stockage uniquement dans le cloud : abonnement obligatoire 4 €/mois.</div>
+  </div>`,
+  problematique:`Quelles exigences la caméra de Léa doit-elle respecter, et quel modèle y répond le mieux ?`,
+  hypothese:{id:'s1-hyp', label:`Mes hypothèses : sans calcul, quel modèle conseillerais-tu à Léa ? Quelle information des notices t’a décidé ?`},
+  activites:[
+    {titre:`Je formule le besoin de Léa`, duree:'10 min', modalite:'en binôme',
+     contenu:[
+      {t:'schema', id:'s1-besoin', layout:'chaine',
+       options:[`À Léa (et à son chat)`,`Sur le salon et l’animal (image, son)`,`Voir et rassurer à distance pendant son absence`,`Sur le collège`,`Enregistrer des films de vacances`],
+       slots:[{titre:'À qui rend-elle service ?', a:0},{titre:'Sur quoi agit-elle ?', a:1},{titre:'Dans quel but ?', a:2}]},
+      {t:'tri', id:'s1-exigences', consigne:`Associe chaque besoin de Léa à une exigence mesurable.`,
+       cats:[`Prix d’achat ≤ 60 €`,`Voir tout le salon depuis le milieu du grand mur (angle ≥ 180° ou rotation)`,`Image visible dans le noir à au moins 5 m`,`Alerte sur le téléphone en moins de 10 s après un mouvement`,`Sans abonnement obligatoire`],
+       items:[
+        {l:`« Je n’ai que mes économies. »`, a:0},{l:`« Moustache se cache dans les coins. »`, a:1},{l:`« Je rentre quand il fait nuit. »`, a:2},{l:`« Je veux savoir tout de suite s’il bouge. »`, a:3},{l:`« Je ne veux pas payer chaque mois. »`, a:4}
+       ]}
+     ],
+     production:`La bête à cornes et la liste des exigences mesurables.`},
+    {titre:`Je lis les notices et je compare`, duree:'15 min', modalite:'en binôme',
+     contenu:[
+      {t:'tableau', id:'s1-carac', cols:['Caractéristique','MiniCam Fix','PetView 360','AirCam Go'], rows:[['Prix d’achat',null,null,null],['Couverture du salon depuis le milieu du mur',null,null,null],['Vision nocturne (portée)',null,null,null],['Abonnement obligatoire ?',null,null,null],['Puissance consommée',null,null,null],['Mises à jour de sécurité',null,null,null]]},
+      {t:'numerique', id:'s1-conso', qs:[
+        {q:`La MiniCam Fix consomme 2,5 W en permanence. Énergie consommée en un an (8 760 h), en kWh ?`, a:21.9, tol:0.1, u:'kWh', ex:`2,5 W × 8 760 h = 21 900 Wh = 21,9 kWh.`},
+        {q:`Même calcul pour la PetView 360 (3,5 W), en kWh ?`, a:30.66, tol:0.1, u:'kWh', ex:`3,5 × 8 760 = 30 660 Wh ≈ 30,7 kWh.`},
+        {q:`Coût annuel de l’abonnement de l’AirCam Go, en € ?`, a:48, tol:0, u:'€', ex:`4 € × 12 mois = 48 € par an, chaque année.`}
+      ]},
+      {t:'aides', items:[`Énergie (Wh) = puissance (W) × durée (h). Pour obtenir des kWh, divise par 1 000.`,`Une caméra fixe à 110° posée au milieu d’un mur ne voit pas les deux coins de ce mur.`]},
+      {t:'prof', html:`<p>Tableau attendu : MiniCam 29 € / ne voit pas tout (110° depuis le milieu du mur) / 8 m / non / 2,5 W / non garanties. PetView 45 € / oui (rotation 355°) / 10 m / non (cloud facultatif) / 3,5 W / 5 ans + double authentification. AirCam 79 € / non (130°) / 6 m / oui (48 €/an) / batterie / non précisé. Coût de l’électricité de la PetView ≈ 30,7 kWh × 0,25 € ≈ 7,7 € par an.</p>`}
+     ],
+     production:`Le tableau des caractéristiques et les calculs de consommation.`},
+    {titre:`Je décide avec un tableau pondéré`, duree:'18 min', modalite:'en binôme',
+     contenu:[
+      {t:'decision', id:'s1-decision',
+       produits:[{n:'MiniCam Fix'},{n:'PetView 360'},{n:'AirCam Go'}],
+       exigence:{label:`Appliquer les exigences éliminatoires : <strong>prix ≤ 60 €</strong> et <strong>sans abonnement obligatoire</strong>`, exclus:[2], motif:'exclue (prix, abonnement)'},
+       criteres:[
+        {c:'Couverture de tout le salon', notes:[2,5,3]},
+        {c:'Vision nocturne', notes:[4,5,3]},
+        {c:'Prix d’achat (moins cher = meilleure note)', notes:[5,4,2]},
+        {c:'Sécurité (mises à jour, double authentification)', notes:[1,5,3]},
+        {c:'Consommation d’énergie (faible = meilleure note)', notes:[4,3,5]},
+        {c:'Parler au chat (audio)', notes:[1,5,1]}
+       ],
+       alertes:[{i:0, msg:'Tu as donné un poids nul à la couverture du salon, alors que Moustache se cache dans les coins.'},{i:3, msg:'La sécurité a un poids nul : une caméra filme l’intérieur d’une maison !'}]},
+      {t:'reponse', id:'s1-argument', label:`Rédige un conseil à Léa (4 à 5 lignes) : modèle choisi, exigences respectées, deux critères décisifs et un point faible du modèle.`, rows:5},
+      {t:'prof', html:`<p>Attendu : PetView 360 — 45 € (≤ 60 €), voit tout le salon grâce à la rotation, vision nocturne 10 m, mises à jour garanties ; point faible : consommation plus élevée (3,5 W). L’AirCam est éliminée (79 € et abonnement). La MiniCam est moins chère mais ne couvre pas les coins.</p>`}
+     ],
+     production:`Le tableau de décision et le conseil argumenté.`}
+  ],
+  miseEnCommun:`<p>Comparaison des pondérations et vote argumenté. On retient la PetView 360 comme objet d’étude pour la suite : elle est <strong>motorisée</strong> (chaîne d’énergie en séance 2) et <strong>connectée</strong> (réseaux en séances 4 et 5).</p>`,
+  synthese:{
+    comprendre:[`On choisit un objet en comparant ses caractéristiques (lues dans la notice) aux exigences du besoin.`,`Le coût réel d’un objet connecté comprend l’achat, l’énergie consommée et parfois un abonnement.`],
+    savoir:[`Une exigence éliminatoire écarte un produit ; les critères pondérés départagent les autres.`,`Énergie (Wh) = puissance (W) × durée (h) ; 1 kWh = 1 000 Wh.`,`La notice et la documentation technique donnent les caractéristiques d’un objet.`],
+    savoirFaire:[`Extraire des caractéristiques d’une notice.`,`Calculer une consommation annuelle d’énergie.`,`Construire un tableau de décision et argumenter un choix.`],
+    vocab:[['Exigence','Ce que l’objet doit obligatoirement garantir.'],['Critère','Ce sur quoi on compare les produits.'],['Notice','Document qui décrit l’objet, son utilisation et ses caractéristiques.'],['Efficacité énergétique','Capacité à rendre le même service en consommant moins d’énergie.']]
+  },
+  verif:[
+    {t:'qcm', id:'s1-qcm', qs:[
+      {q:`Une caméra de 5 W fonctionne 24 h. Quelle énergie consomme-t-elle ?`, o:[`5 Wh`,`120 Wh`,`24 Wh`,`0,2 Wh`], a:1, ex:`5 W × 24 h = 120 Wh.`},
+      {q:`« Vision nocturne ≥ 5 m » est :`, o:[`un besoin`,`une exigence avec un critère mesurable`,`une notice`,`un abonnement`], a:1, ex:`Le critère (portée de vision nocturne) a un niveau mesurable (5 m).`}
+    ]}
+  ],
+  defi:`Calcule le coût total sur 3 ans (achat + électricité à 0,25 €/kWh + abonnement éventuel) des trois caméras. Le classement change-t-il ?`,
+  prof:{
+    objectifs:[`Évaluer des OST selon des exigences ou des critères identifiés (OST33) ; lire une notice.`],
+    deroulement:[['0-7','Situation et hypothèses','Le besoin de Léa, les trois notices.'],['7-17','Activité 1','Bête à cornes et exigences.'],['17-32','Activité 2','Tableau des caractéristiques, calculs.'],['32-50','Activité 3','Tableau de décision et conseil.'],['50-55','Mise en commun et synthèse','Choix de la PetView 360 comme support.']],
+    materiel:[`Notices (intégrées), facultatif : vraies notices ou fiches produits de caméras.`],
+    differenciation:{aide:[`Tableau de caractéristiques à moitié rempli ; aides sur le calcul d’énergie.`],defi:[`Coût global sur 3 ans : MiniCam ≈ 29 + 16,4 = 45,4 € ; PetView ≈ 45 + 23 = 68 € ; AirCam = 79 + 144 = 223 €.`]},
+    note:`Les caméras IP ne sont pas soumises à l’indice de réparabilité : la connaissance « indice énergétique et indice de réparabilité » de la carte OST33 est travaillée ici sous l’angle de la consommation d’énergie. Le choix des repères est détaillé dans l’espace enseignant.`
+  }
+});
+
+/* ===================== SÉANCE 2 — CHAÎNE D'ÉNERGIE (repère principal) ===================== */
+SEQUENCE.seances.push({
+  id:'s2', num:2, titre:`Comment la caméra tourne-t-elle la tête ?`, sous:`La chaîne d’énergie : du texte au schéma-bloc et du schéma au texte`,
+  duree:'55 min', etape:`Observer, analyser, modéliser`, reperes:['SFC11'], comp:['C4'],
+  situation:`<p>Depuis son téléphone, Léa fait glisser son doigt vers la gauche : la tête de la PetView 360 tourne pour suivre Moustache. Voici l’extrait « Comment ça marche ? » de la documentation technique.</p>
+  <blockquote>« La caméra est alimentée par un adaptateur secteur qui transforme la tension du réseau (230 V alternatif) en 5 V continu. La carte de commande distribue l’énergie électrique aux deux moteurs pas à pas, selon les ordres reçus. Chaque moteur transforme l’énergie électrique en énergie mécanique de rotation. Un réducteur à engrenages transmet cette rotation à la tête de la caméra en diminuant sa vitesse. La nuit, la carte alimente aussi six LED infrarouges qui éclairent la pièce d’une lumière invisible pour l’œil humain, mais visible pour le capteur d’image. »</blockquote>`,
+  problematique:`Comment l’énergie électrique de la prise devient-elle le mouvement de la tête de la caméra, et comment le représenter ?`,
+  hypothese:{id:'s2-hyp', label:`Mes hypothèses : souligne mentalement les verbes d’action du texte. Quelles grandes étapes l’énergie traverse-t-elle ?`},
+  activites:[
+    {titre:`Du texte au schéma-bloc`, duree:'15 min', modalite:'en binôme',
+     intro:`<p>Une <strong>chaîne d’énergie</strong> se représente par un schéma-bloc : chaque bloc est une <strong>fonction</strong> (un verbe) réalisée par un <strong>constituant</strong>. Complète le schéma de la fonction « orienter la tête de la caméra ».</p>`,
+     contenu:[
+      {t:'schema', id:'s2-blocs', layout:'chaine',
+       options:[`ALIMENTER : adaptateur secteur 230 V → 5 V`,`DISTRIBUER : carte de commande des moteurs`,`CONVERTIR : moteur pas à pas`,`TRANSMETTRE : réducteur à engrenages`,`ACQUÉRIR : capteur d’image`,`CONVERTIR : LED infrarouges`],
+       slots:[{titre:'Bloc 1', a:0},{titre:'Bloc 2', a:1},{titre:'Bloc 3', a:2},{titre:'Bloc 4', a:3}]},
+      {t:'schema', id:'s2-formes', layout:'chaine',
+       options:[`Énergie électrique`,`Énergie mécanique de rotation (cinétique)`,`Énergie lumineuse`,`Énergie thermique`],
+       slots:[{titre:'Entre la prise et l’adaptateur', a:0},{titre:'Entre la carte et le moteur', a:0},{titre:'Entre le moteur et le réducteur', a:1},{titre:'À la sortie du réducteur (tête)', a:1}]},
+      {t:'aides', items:[`Cherche les verbes du texte : « alimentée », « distribue », « transforme », « transmet ».`,`Un moteur électrique reçoit de l’énergie électrique et produit un mouvement de rotation.`,`Le réducteur ne change pas la forme de l’énergie : il transmet le mouvement en le ralentissant.`]}
+     ],
+     production:`Le schéma-bloc complété et les formes d’énergie (à recopier sur la fiche).`},
+    {titre:`Une deuxième chaîne : la vision nocturne`, duree:'10 min', modalite:'en binôme',
+     contenu:[
+      {t:'qcm', id:'s2-led', qs:[
+        {q:`Pour la vision nocturne, quel bloc réalise la fonction CONVERTIR ?`, o:[`L’adaptateur secteur`,`Les LED infrarouges`,`Le réducteur`,`Le capteur d’image`], a:1, ex:`Les LED convertissent l’énergie électrique en énergie lumineuse (infrarouge).`},
+        {q:`Quelle conversion réalisent les LED infrarouges ?`, o:[`électrique → lumineuse`,`lumineuse → électrique`,`électrique → mécanique`,`thermique → électrique`], a:0, ex:`Comme une lampe, mais dans l’infrarouge, invisible pour nous.`},
+        {q:`Le moteur chauffe un peu en fonctionnant. Cette énergie thermique est :`, o:[`l’énergie utile`,`une perte d’énergie`,`stockée dans la batterie`,`transmise à la tête`], a:1, ex:`Toute conversion s’accompagne de pertes, souvent sous forme de chaleur.`}
+      ]}
+     ],
+     production:`Les réponses sur la chaîne de la vision nocturne.`},
+    {titre:`Du schéma au texte`, duree:'12 min', modalite:'individuel',
+     intro:`<p>Le modèle sur batterie d’une autre marque possède la chaîne d’énergie suivante :</p>
+     <div class="schema-chaine" aria-label="Schéma-bloc : chaîne d’énergie du modèle sur batterie"><div class="bx"><b>STOCKER</b>Batterie lithium-ion 3,7 V</div><span class="fl">→</span><div class="bx"><b>DISTRIBUER</b>Carte de commande</div><span class="fl">→</span><div class="bx"><b>CONVERTIR</b>Moteur électrique</div><span class="fl">→</span><div class="bx"><b>TRANSMETTRE</b>Courroie crantée</div><span class="fl">→</span><div class="bx"><b>Action</b>Tête orientée</div></div>
+     <p class="petit muted">Une prise USB recharge la batterie (fonction ALIMENTER).</p>`,
+     contenu:[
+      {t:'reponse', id:'s2-texte', label:`Rédige un paragraphe (4 à 6 phrases) qui explique le fonctionnement de cette chaîne d’énergie, comme dans la documentation du fabricant. Utilise les mots : stocke, distribue, convertit, transmet, et nomme les formes d’énergie.`, rows:6},
+      {t:'prof', html:`<p>Texte attendu (exemple) : « La batterie stocke l’énergie (sous forme chimique) et la restitue sous forme électrique. La carte de commande distribue cette énergie électrique au moteur selon les ordres reçus. Le moteur convertit l’énergie électrique en énergie mécanique de rotation. La courroie crantée transmet cette rotation à la tête de la caméra. Une partie de l’énergie est perdue sous forme de chaleur. » Valoriser l’emploi correct des quatre verbes et des formes d’énergie.</p>`}
+     ],
+     production:`Le texte explicatif rédigé à partir du schéma.`},
+    {titre:`Combien de temps tient la batterie ?`, duree:'10 min', modalite:'individuel',
+     intro:`<p>La batterie du modèle de l’activité précédente indique : <strong>3,7 V – 5 200 mAh</strong>. L’énergie stockée vaut : E (Wh) = tension (V) × capacité (Ah).</p>`,
+     contenu:[
+      {t:'numerique', id:'s2-batterie', qs:[
+        {q:`Énergie stockée dans la batterie (en Wh, au dixième) ?`, a:19.24, tol:0.06, u:'Wh', ex:`3,7 V × 5,2 Ah = 19,24 Wh.`},
+        {q:`En veille avec détection de mouvement, la caméra consomme en moyenne 0,2 W. Autonomie (en heures, à l’unité) ?`, a:96, tol:0.5, u:'h', ex:`19,24 Wh ÷ 0,2 W ≈ 96 h, soit 4 jours.`},
+        {q:`En diffusion vidéo continue, elle consomme 2 W. Autonomie (en heures, au dixième) ?`, a:9.6, tol:0.06, u:'h', ex:`19,24 ÷ 2 ≈ 9,6 h : regarder en continu vide vite la batterie.`}
+      ]},
+      {t:'aides', items:[`5 200 mAh = 5,2 Ah.`,`Durée (h) = énergie (Wh) ÷ puissance (W).`]}
+     ],
+     production:`Les calculs d’énergie et d’autonomie.`}
+  ],
+  miseEnCommun:`<p>Correction du schéma-bloc au tableau. Deux textes d’élèves sont lus et comparés au schéma : chaque verbe correspond-il à un bloc ? On note que la fonction DISTRIBUER reçoit des <strong>ordres</strong> : elle fait le lien avec la chaîne d’information étudiée à la séance suivante.</p>`,
+  synthese:{
+    comprendre:[`L’énergie traverse plusieurs constituants ; chacun réalise une fonction : alimenter ou stocker, distribuer, convertir, transmettre.`,`Un schéma-bloc et un texte décrivent la même chaîne : on doit savoir passer de l’un à l’autre.`],
+    savoir:[`ALIMENTER : adaptateur secteur ; STOCKER : batterie ; DISTRIBUER : carte de commande, relais, interrupteur ; CONVERTIR : moteur (électrique → mécanique), LED ou lampe (électrique → lumineuse) ; TRANSMETTRE : engrenages, courroie, chaîne.`,`Formes d’énergie : électrique, cinétique (mécanique), potentielle, thermique, lumineuse. Toute conversion produit des pertes, souvent thermiques.`,`Énergie (Wh) = tension (V) × capacité (Ah) ; durée (h) = énergie (Wh) ÷ puissance (W).`],
+    savoirFaire:[`Compléter le schéma-bloc d’une chaîne d’énergie à partir d’un texte.`,`Rédiger un texte à partir d’un schéma-bloc.`,`Calculer l’autonomie d’une batterie.`],
+    vocab:[['Chaîne d’énergie','Suite des fonctions qui amènent l’énergie jusqu’à l’action.'],['Schéma-bloc','Représentation d’un système par des blocs reliés par des flèches.'],['Conversion','Transformation d’une forme d’énergie en une autre.'],['Réducteur','Ensemble d’engrenages qui transmet un mouvement en diminuant la vitesse.']]
+  },
+  verif:[
+    {t:'qcm', id:'s2-qcm', qs:[
+      {q:`Dans une chaîne d’énergie, la batterie réalise la fonction :`, o:[`CONVERTIR`,`STOCKER`,`TRANSMETTRE`,`ACQUÉRIR`], a:1, ex:`La batterie stocke l’énergie et la restitue sous forme électrique.`},
+      {q:`Une courroie crantée réalise la fonction :`, o:[`DISTRIBUER`,`TRANSMETTRE`,`ALIMENTER`,`CONVERTIR`], a:1, ex:`Elle transmet le mouvement sans changer la forme de l’énergie.`},
+      {q:`Un moteur électrique convertit l’énergie :`, o:[`mécanique en électrique`,`électrique en mécanique (cinétique)`,`lumineuse en électrique`,`thermique en mécanique`], a:1, ex:`L’inverse (mécanique → électrique) est réalisé par une génératrice.`}
+    ]}
+  ],
+  defi:`Recherche à quoi sert la fonction DISTRIBUER dans une lampe de chevet (indice : interrupteur). Dessine sa chaîne d’énergie complète.`,
+  prof:{
+    objectifs:[`Élaborer, à l’aide d’un schéma-bloc, la chaîne d’énergie d’un OST (SFC11, repère principal).`,`Passer du texte au schéma et du schéma au texte ; introduire TRANSMETTRE ; lien DISTRIBUER / chaîne d’information.`],
+    deroulement:[['0-5','Situation et hypothèses','Texte de la documentation.'],['5-20','Activité 1','Schéma-bloc et formes d’énergie.'],['20-30','Activité 2','Chaîne de la vision nocturne, pertes.'],['30-42','Activité 3','Du schéma au texte.'],['42-52','Activité 4','Calcul d’autonomie.'],['52-55','Mise en commun et synthèse','Lien avec la chaîne d’information.']],
+    materiel:[`Si possible : caméra motorisée démontée (moteurs, engrenages visibles) ou photos ; fiche de schéma-bloc vierge.`],
+    differenciation:{aide:[`Niveau de la fiche groupe « 5e » : circuit fourni, repérer seulement STOCKER et CONVERTIR et les formes d’énergie. Liste de verbes fournie.`],defi:[`Niveau « 3e » : représentation inspirée de SysML (blocs avec ports d’entrée et de sortie typés par la forme d’énergie) ; chaîne de la lampe de chevet.`]},
+    note:`La fiche groupe proposait une introduction à SysML : on reste ici sur un schéma-bloc dont les flèches sont étiquetées par la forme d’énergie, ce qui prépare la lecture d’un diagramme de blocs internes sans multiplier les diagrammes.`
+  }
+});
+
+/* ===================== SÉANCE 3 — CHAÎNE D'INFORMATION ===================== */
+SEQUENCE.seances.push({
+  id:'s3', num:3, titre:`Comment la caméra sait-elle que Moustache bouge ?`, sous:`La chaîne d’information et son lien avec la chaîne d’énergie`,
+  duree:'55 min', etape:`Analyser le fonctionnement`, reperes:['SFC13'], comp:['C4'],
+  situation:`<p>Léa a activé deux options : « m’alerter quand le chat bouge » et « suivre le chat automatiquement ». Quand Moustache traverse le salon, Léa reçoit une notification et la tête de la caméra tourne pour le garder dans l’image. La nuit, la caméra bascule toute seule en noir et blanc.</p>
+  <div class="tablewrap"><table><thead><tr><th>Constituant</th><th>Ce que dit la documentation</th></tr></thead><tbody>
+  <tr><td>Capteur d’image</td><td>Transforme la lumière (visible et infrarouge) en image numérique.</td></tr>
+  <tr><td>Détecteur infrarouge passif (PIR)</td><td>Détecte la chaleur émise par un corps vivant qui se déplace.</td></tr>
+  <tr><td>Capteur de luminosité</td><td>Mesure l’éclairement de la pièce.</td></tr>
+  <tr><td>Microphone</td><td>Capte les sons de la pièce.</td></tr>
+  <tr><td>Bouton « Reset »</td><td>Remet la caméra dans sa configuration d’usine.</td></tr>
+  <tr><td>Processeur (microcontrôleur)</td><td>Exécute le programme : compresse la vidéo, analyse les mouvements, décide.</td></tr>
+  <tr><td>Module Wi-Fi</td><td>Échange les données avec la box.</td></tr>
+  <tr><td>Voyant d’état</td><td>Bleu : connectée ; rouge clignotant : pas de réseau.</td></tr>
+  </tbody></table></div>`,
+  problematique:`Quelles informations la caméra acquiert-elle, comment les traite-t-elle et comment commande-t-elle sa chaîne d’énergie ?`,
+  hypothese:{id:'s3-hyp', label:`Mes hypothèses : quel constituant permet de savoir que le chat bouge ? Et que la nuit est tombée ?`},
+  activites:[
+    {titre:`Je range les constituants dans la chaîne d’information`, duree:'10 min', modalite:'en binôme',
+     contenu:[
+      {t:'tri', id:'s3-tri', consigne:`Indique le rôle de chaque constituant.`, cats:['Acquérir','Traiter','Communiquer','Chaîne d’énergie'],
+       items:[
+        {l:`Capteur d’image`, a:0},{l:`Détecteur infrarouge passif (PIR)`, a:0},{l:`Capteur de luminosité`, a:0},{l:`Microphone`, a:0},
+        {l:`Bouton « Reset »`, a:0, fb:`Un bouton de l’IHM fait entrer un ordre de l’utilisateur : acquisition.`},
+        {l:`Processeur (microcontrôleur)`, a:1},{l:`Module Wi-Fi`, a:2},{l:`Voyant d’état`, a:2, fb:`Le voyant transmet une information à l’utilisateur.`},
+        {l:`Moteurs pas à pas`, a:3, fb:`Ils convertissent l’énergie : chaîne d’énergie.`},{l:`Adaptateur secteur`, a:3, fb:`Il alimente : chaîne d’énergie.`}
+       ]}
+     ],
+     production:`Le classement des constituants.`},
+    {titre:`Je complète la chaîne de l’alerte`, duree:'12 min', modalite:'en binôme',
+     intro:`<p>Fonction étudiée : <strong>« prévenir Léa quand Moustache bouge »</strong>.</p>`,
+     contenu:[
+      {t:'schema', id:'s3-alerte', layout:'chaine',
+       options:[`Moustache se déplace dans le salon`,`Détecteur infrarouge passif`,`Processeur : vérifie qu’il s’agit d’un mouvement et décide d’alerter`,`Module Wi-Fi : envoie la notification vers le téléphone`,`Moteur pas à pas`,`Adaptateur secteur`],
+       slots:[{titre:'Information d’entrée', a:0},{titre:'ACQUÉRIR', a:1},{titre:'TRAITER', a:2},{titre:'COMMUNIQUER', a:3}]},
+      {t:'aides', items:[`Les constituants de la chaîne d’énergie (moteur, adaptateur) n’ont pas leur place dans ce schéma.`]}
+     ],
+     production:`Le schéma de la chaîne d’information de l’alerte.`},
+    {titre:`Je relie les deux chaînes : le suivi automatique`, duree:'15 min', modalite:'en binôme',
+     intro:`<p>Pour suivre Moustache, la chaîne d’information envoie des <strong>ordres</strong> à la fonction DISTRIBUER de la chaîne d’énergie. Remets dans l’ordre ce qui se passe.</p>`,
+     contenu:[
+      {t:'ordre', id:'s3-suivi', code:false, lignes:[`Le capteur d’image acquiert une image où Moustache s’est déplacé vers la gauche`,`Le processeur compare deux images successives et calcule le sens du déplacement`,`Le processeur envoie l’ordre « tourner à gauche » à la carte de commande`,`La carte de commande distribue l’énergie électrique au moteur horizontal`,`Le moteur convertit l’énergie électrique en rotation`,`Le réducteur transmet la rotation à la tête : Moustache est de nouveau au centre de l’image`]},
+      {t:'qcm', id:'s3-lien', qs:[
+        {q:`Quel bloc fait le lien entre la chaîne d’information et la chaîne d’énergie ?`, o:[`ACQUÉRIR`,`DISTRIBUER`,`TRANSMETTRE`,`STOCKER`], a:1, ex:`DISTRIBUER reçoit les ordres de la chaîne d’information et dose l’énergie envoyée aux actionneurs.`},
+        {q:`La nuit tombe. Quel constituant acquiert cette information ?`, o:[`Le microphone`,`Le capteur de luminosité`,`Le module Wi-Fi`,`Le moteur`], a:1, ex:`Le processeur décide alors d’allumer les LED infrarouges (ordre à la chaîne d’énergie).`}
+      ]},
+      {t:'reponse', id:'s3-nuit', label:`Décris en 3 phrases ce qui se passe quand la nuit tombe, en citant un constituant de chaque chaîne (information et énergie).`, rows:3}
+     ],
+     production:`La séquence de suivi ordonnée et la description de la bascule nocturne.`},
+    {titre:`Je compare deux détecteurs de mouvement`, duree:'8 min', modalite:'en binôme',
+     contenu:[
+      {t:'qcm', id:'s3-pir', qs:[
+        {q:`Le détecteur infrarouge passif réagit à la chaleur d’un corps qui bouge. Lequel risque de déclencher une fausse alerte ?`, o:[`Le soleil qui éclaire soudain le canapé`,`Une photo du chat posée sur l’étagère`,`Un bruit dans la rue`,`Le voyant d’état qui s’allume`], a:0, ex:`Un changement brusque de chaleur peut être pris pour un mouvement : c’est pourquoi le processeur vérifie aussi l’image.`},
+        {q:`Pourquoi combiner détecteur PIR et analyse de l’image ?`, o:[`Pour consommer plus`,`Pour réduire les fausses alertes : deux informations valent mieux qu’une`,`Parce que le PIR filme`,`Ce n’est pas utile`], a:1, ex:`Le traitement croise les informations de plusieurs capteurs.`}
+      ]}
+     ],
+     production:`Les réponses justifiées.`}
+  ],
+  miseEnCommun:`<p>On construit au tableau le schéma complet de la caméra : chaîne d’information au-dessus, chaîne d’énergie en dessous, flèche « ordres » de TRAITER vers DISTRIBUER. Question pour la suite : <em>le module Wi-Fi envoie l’image… mais comment arrive-t-elle jusqu’au téléphone de Léa, au collège ?</em></p>`,
+  synthese:{
+    comprendre:[`La chaîne d’information acquiert des informations, les traite et communique des messages ou des ordres.`,`Les deux chaînes travaillent ensemble : la chaîne d’information commande la chaîne d’énergie par l’intermédiaire de DISTRIBUER.`],
+    savoir:[`ACQUÉRIR : capteurs (image, mouvement, luminosité, son) et boutons de l’IHM. TRAITER : processeur ou microcontrôleur. COMMUNIQUER : module Wi-Fi, voyants, haut-parleur.`,`IHM : boutons, voyants, application sur le téléphone.`],
+    savoirFaire:[`Classer les constituants d’un objet dans la chaîne d’information.`,`Compléter le schéma de la chaîne d’information d’une fonction.`,`Relier chaîne d’information et chaîne d’énergie.`],
+    vocab:[['Capteur','Constituant qui acquiert une information.'],['Microcontrôleur','Circuit qui exécute le programme et décide.'],['IHM','Interface humain-machine.'],['Ordre','Information envoyée par la chaîne d’information à la chaîne d’énergie.']]
+  },
+  verif:[
+    {t:'qcm', id:'s3-qcm', qs:[
+      {q:`Le voyant rouge qui clignote quand le réseau est coupé appartient à la fonction :`, o:[`Acquérir`,`Traiter`,`Communiquer`,`Convertir`], a:2, ex:`Il communique une information à l’utilisateur.`},
+      {q:`Le capteur d’image transforme :`, o:[`une image en énergie électrique utile`,`la lumière reçue en image numérique`,`le son en image`,`la chaleur en mouvement`], a:1, ex:`C’est un capteur : il acquiert une information (l’image).`}
+    ]}
+  ],
+  defi:`La caméra possède aussi un haut-parleur pour parler à Moustache. Complète la chaîne d’information de la fonction « transmettre la voix de Léa au chat », du téléphone jusqu’au haut-parleur.`,
+  prof:{
+    objectifs:[`Décrire un OST en caractérisant sa chaîne d’information (SFC13) et la relier à la chaîne d’énergie (DISTRIBUER).`],
+    deroulement:[['0-5','Situation et hypothèses','Alerte et suivi automatique.'],['5-15','Activité 1','Classement.'],['15-27','Activité 2','Chaîne de l’alerte.'],['27-42','Activité 3','Lien entre les deux chaînes.'],['42-50','Activité 4','Détecteurs de mouvement.'],['50-55','Mise en commun et synthèse','Schéma complet de la caméra.']],
+    materiel:[`Caméra réelle ou photos ; schéma « deux chaînes » vierge à compléter.`],
+    differenciation:{aide:[`Le schéma « deux chaînes » est fourni avec les noms des fonctions.`],defi:[`Chaîne de la voix (téléphone → réseau → module Wi-Fi → processeur → haut-parleur).`]}
+  }
+});
+
+/* ===================== SÉANCE 4 — RÉSEAUX ===================== */
+SEQUENCE.seances.push({
+  id:'s4', num:4, titre:`Le voyage de l’image jusqu’au téléphone de Léa`, sous:`Réseau local, Internet, adresses IP et débit`,
+  duree:'55 min', etape:`Rechercher, modéliser une circulation d’information`, reperes:['SFC17'], comp:['C4'],
+  situation:`<p>Léa est au collège, à 3 km de chez elle. Elle ouvre l’application : en deux secondes, Moustache apparaît sur son écran. Pourtant, la caméra n’est reliée qu’à la box de la maison par Wi-Fi… Dans l’application, menu « Informations », on lit : <strong>adresse IP de la caméra : 192.168.1.23</strong>.</p>`,
+  problematique:`Par où passe l’image entre la caméra et le téléphone de Léa, et qu’est-ce qui permet de la diriger au bon endroit ?`,
+  hypothese:{id:'s4-hyp', label:`Mes hypothèses : dessine sur ta feuille le chemin que suit l’image, selon toi, de la caméra au téléphone.`},
+  activites:[
+    {titre:`J’identifie les éléments du réseau`, duree:'12 min', modalite:'en binôme',
+     contenu:[
+      {t:'tri', id:'s4-roles', consigne:`Associe chaque élément à son rôle dans le réseau.`, cats:['Terminal','Carte réseau','Liaison','Commutateur / point d’accès','Routeur','Serveur'],
+       items:[
+        {l:`La caméra IP`, a:0, fb:`Elle produit et consomme des données : c’est un terminal.`},
+        {l:`Le téléphone de Léa`, a:0},
+        {l:`La puce Wi-Fi intégrée à la caméra`, a:1, fb:`Elle permet à la caméra de se raccorder au réseau.`},
+        {l:`Les ondes Wi-Fi et la fibre optique`, a:2, fb:`Ce sont des supports physiques qui transportent les données.`},
+        {l:`Le boîtier à 8 prises Ethernet de la salle de technologie`, a:3, fb:`Il relie les appareils d’un même réseau local.`},
+        {l:`La box, qui relie le réseau de la maison à Internet`, a:4, fb:`Elle fait passer les données d’un réseau à un autre : c’est son rôle de routeur.`},
+        {l:`L’ordinateur du fabricant qui reçoit et relaie les vidéos`, a:5, fb:`Il rend un service à de nombreux clients : c’est un serveur.`}
+       ]}
+     ],
+     production:`Le classement des éléments du réseau.`},
+    {titre:`Je retrace le chemin de l’image`, duree:'10 min', modalite:'en binôme',
+     contenu:[
+      {t:'ordre', id:'s4-chemin', code:false, lignes:[`Caméra (terminal, 192.168.1.23)`,`Liaison Wi-Fi jusqu’à la box`,`Box : routeur entre le réseau local et Internet`,`Routeurs du fournisseur d’accès et d’Internet`,`Serveur du fabricant de la caméra`,`Réseau de l’opérateur mobile (antenne 4G/5G)`,`Téléphone de Léa (terminal)`]},
+      {t:'qcm', id:'s4-local', qs:[
+        {q:`Le réseau de la maison (caméra, box, ordinateur familial) est :`, o:[`un réseau local`,`le réseau mondial Internet`,`un serveur`,`une liaison`], a:0, ex:`Les appareils d’une même maison reliés par la box forment un réseau local.`},
+        {q:`Pourquoi l’image passe-t-elle par le serveur du fabricant ?`, o:[`Pour être imprimée`,`Le serveur relaie l’image vers le téléphone de Léa où qu’elle soit (et peut l’enregistrer)`,`La caméra n’a pas d’adresse`,`Pour la mettre en couleur`], a:1, ex:`Le serveur sert d’intermédiaire accessible depuis Internet entre la caméra et l’application.`}
+      ]}
+     ],
+     production:`Le chemin de l’image ordonné (à schématiser sur la fiche).`},
+    {titre:`Je comprends l’adresse IP`, duree:'13 min', modalite:'individuel',
+     intro:`<p>Une <strong>adresse IP</strong> (version 4) est formée de <strong>4 nombres de 0 à 255</strong> séparés par des points. Dans un réseau domestique courant, les trois premiers nombres identifient le <strong>réseau</strong>, le dernier identifie l’<strong>appareil</strong>. Les adresses commençant par 192.168. sont <strong>privées</strong> : elles ne servent qu’à l’intérieur d’un réseau local. La box possède aussi une adresse <strong>publique</strong> sur Internet (ici 203.0.113.57).</p>`,
+     contenu:[
+      {t:'qcm', id:'s4-ip', qs:[
+        {q:`Quelle adresse n’est pas une adresse IPv4 valide ?`, o:[`192.168.1.23`,`10.20.4.8`,`192.168.1.300`,`203.0.113.57`], a:2, ex:`300 dépasse 255 : chaque nombre va de 0 à 255.`},
+        {q:`Quels appareils sont dans le même réseau local que la caméra 192.168.1.23 ? (plusieurs réponses)`, o:[`L’ordinateur familial 192.168.1.42`,`La box 192.168.1.1`,`Le serveur 198.51.100.20`,`Le téléphone en 4G 10.20.4.8`], a:[0,1], ex:`Mêmes trois premiers nombres (192.168.1) : même réseau local.`},
+        {q:`Pourquoi un ordinateur d’Internet ne peut-il pas joindre directement 192.168.1.23 ?`, o:[`C’est une adresse privée, utilisée seulement dans le réseau local`,`L’adresse est trop longue`,`La caméra est éteinte la nuit`,`Les adresses commençant par 1 sont interdites`], a:0, ex:`Des milliers de maisons utilisent les mêmes adresses privées : seule l’adresse publique de la box est visible sur Internet.`}
+      ]},
+      {t:'numerique', id:'s4-nb', qs:[
+        {q:`Dans le réseau 192.168.1.x, le dernier nombre peut aller de 1 à 254 pour les appareils. Combien d’appareils au maximum ?`, a:254, tol:0, u:'appareils', ex:`De 1 à 254 : 254 adresses (0 et 255 ont un rôle particulier).`}
+      ]}
+     ],
+     production:`Les réponses sur les adresses IP.`},
+    {titre:`Je vérifie que l’image passe : le débit`, duree:'12 min', modalite:'en binôme',
+     intro:`<p>Le <strong>débit</strong> est la quantité de données transmise par seconde, en mégabits par seconde (Mbit/s). La vidéo de la caméra doit « monter » de la maison vers Internet : c’est le <strong>débit montant</strong> de la box qui compte.</p>`,
+     contenu:[
+      {t:'simDebit', id:'s4-debit'},
+      {t:'numerique', id:'s4-calc', qs:[
+        {q:`Une vidéo à 2 Mbit/s est regardée pendant 1 heure. Quantité de données en mégabits ?`, a:7200, tol:0, u:'Mbit', ex:`2 Mbit/s × 3 600 s = 7 200 Mbit.`},
+        {q:`Convertis en mégaoctets (1 octet = 8 bits).`, a:900, tol:0, u:'Mo', ex:`7 200 ÷ 8 = 900 Mo, presque 1 Go par heure !`},
+        {q:`Le forfait de Léa contient 10 Go (10 000 Mo). Combien d’heures de vidéo peut-elle regarder (à l’unité) ?`, a:11, tol:0.2, u:'h', ex:`10 000 ÷ 900 ≈ 11 h par mois.`}
+      ]},
+      {t:'aides', items:[`Quantité (Mbit) = débit (Mbit/s) × durée (s).`,`Pour passer des bits aux octets, divise par 8.`]}
+     ],
+     production:`Les calculs de débit et de volume de données.`}
+  ],
+  miseEnCommun:`<p>On schématise au tableau le chemin complet en distinguant le <strong>réseau local</strong> (maison) et le <strong>réseau mondial</strong> (Internet). On remarque que l’image traverse plusieurs réseaux différents : <em>comment chaque routeur sait-il où l’envoyer ?</em> — question de la séance 5.</p>`,
+  synthese:{
+    comprendre:[`L’image passe par plusieurs réseaux : le réseau local de la maison, Internet, puis le réseau de l’opérateur mobile.`,`Chaque appareil connecté possède une adresse IP qui permet de lui envoyer des données.`],
+    savoir:[`Terminal (caméra, téléphone), carte réseau, liaison (Wi-Fi, fibre), commutateur, routeur (box), serveur.`,`Adresse IPv4 : 4 nombres de 0 à 255. Les adresses privées (192.168.x.x) servent dans le réseau local ; la box a une adresse publique sur Internet.`,`Débit en Mbit/s ; quantité de données = débit × durée ; 1 octet = 8 bits.`],
+    savoirFaire:[`Identifier le rôle des éléments d’un réseau.`,`Représenter le chemin d’une information entre deux terminaux.`,`Vérifier si deux appareils sont dans le même réseau local ; calculer une quantité de données.`],
+    vocab:[['Réseau local','Réseau d’un même lieu (maison, collège).'],['Internet','Réseau mondial qui relie des millions de réseaux.'],['Adresse IP','Identifiant numérique d’un appareil dans un réseau.'],['Débit','Quantité de données transmise par seconde.']]
+  },
+  verif:[
+    {t:'qcm', id:'s4-qcm', qs:[
+      {q:`Quel appareil relie le réseau local de la maison à Internet ?`, o:[`La caméra`,`La box (routeur)`,`Le téléphone`,`Le serveur`], a:1, ex:`Le routeur fait passer les données d’un réseau à un autre.`},
+      {q:`Un débit de 4 Mbit/s pendant 10 s transporte :`, o:[`40 Mbit`,`0,4 Mbit`,`4 Mbit`,`400 Mbit`], a:0, ex:`4 × 10 = 40 Mbit.`}
+    ]}
+  ],
+  defi:`Dans les réglages, Léa peut choisir la résolution 720p (1 Mbit/s) en 4G. Combien d’heures de vidéo par mois pourrait-elle alors regarder avec son forfait de 10 Go ?`,
+  prof:{
+    objectifs:[`Identifier et représenter la circulation d’une information dans le réseau Internet (SFC17) : réseau local / Internet, rôles des équipements, adresse IP, débit.`],
+    deroulement:[['0-5','Situation et hypothèses','Le chemin dessiné par les élèves.'],['5-17','Activité 1','Rôles des équipements.'],['17-27','Activité 2','Chemin de l’image.'],['27-40','Activité 3','Adresses IP.'],['40-52','Activité 4','Débit (simulation, calculs).'],['52-55','Mise en commun','Réseau local / Internet, question du routage.']],
+    materiel:[`Si possible : box ou routeur du laboratoire, commutateur, câbles ; affichage de l’adresse IP d’un poste (commande ipconfig).`],
+    differenciation:{aide:[`Schéma du chemin à compléter au lieu de le dessiner.`],defi:[`720p : 1 Mbit/s → 450 Mo par heure → environ 22 h par mois.`]},
+    note:`Simplifications assumées : on ne détaille pas la traduction d’adresses (NAT) réalisée par la box, ni le fonctionnement interne du réseau mobile. Les adresses 203.0.113.x et 198.51.100.x sont des plages réservées à la documentation.`
+  }
+});
+
+/* ===================== SÉANCE 5 — ROUTAGE (débranchée) ===================== */
+SEQUENCE.seances.push({
+  id:'s5', num:5, titre:`Comment chaque routeur sait-il où envoyer l’image ?`, sous:`Activité débranchée : tables de routage et protocole de routage`,
+  duree:'55 min', etape:`Expérimenter (activité débranchée), interpréter`, reperes:['SFC18'], comp:['C4'],
+  situation:`<p>L’image de la caméra est découpée en <strong>paquets</strong>. Chaque paquet porte l’adresse IP de sa destination. Pour atteindre le serveur, puis le téléphone de Léa, il traverse plusieurs routeurs. Chaque routeur consulte sa <strong>table de routage</strong> et choisit vers où renvoyer le paquet. Dans cette activité, on ignore la traduction d’adresses faite par la box (simplification).</p>
+  ${RESEAU_SVG}
+  <div class="tablewrap"><table><thead><tr><th>Routeur</th><th>Destination</th><th>Envoyer vers</th></tr></thead><tbody>
+  <tr><td rowspan="2">R1 (box)</td><td>192.168.1.0/24 (maison)</td><td>Réseau local du routeur</td></tr><tr><td>Toute autre destination</td><td>R2</td></tr>
+  <tr><td rowspan="4">R2 (FAI)</td><td>192.168.1.0/24 et 203.0.113.57</td><td>R1</td></tr><tr><td>198.51.100.0/24</td><td>R3</td></tr><tr><td>10.20.0.0/16</td><td>R4</td></tr><tr><td>Toute autre destination</td><td>Reste d’Internet</td></tr>
+  <tr><td rowspan="2">R3 (data center)</td><td>198.51.100.0/24</td><td>Réseau local du routeur</td></tr><tr><td>Toute autre destination</td><td>R2</td></tr>
+  <tr><td rowspan="2">R4 (opérateur mobile)</td><td>10.20.0.0/16</td><td>Réseau local du routeur (antennes)</td></tr><tr><td>Toute autre destination</td><td>R2</td></tr>
+  </tbody></table></div>
+  <p class="petit muted">« /24 » signifie que les 3 premiers nombres désignent le réseau ; « /16 », les 2 premiers.</p>`,
+  problematique:`Comment un paquet trouve-t-il son chemin à travers plusieurs réseaux, et pourquoi faut-il un protocole de routage ?`,
+  hypothese:{id:'s5-hyp', label:`Mes hypothèses : un routeur connaît-il, à ton avis, le chemin complet jusqu’au téléphone de Léa ?`},
+  activites:[
+    {titre:`Jeu de rôle : nous sommes les routeurs`, duree:'15 min', modalite:'classe entière (débranchée)',
+     intro:`<p>Quatre élèves jouent R1, R2, R3 et R4 avec leur table de routage. Les autres préparent des « paquets » (enveloppes) avec une adresse de destination. Chaque routeur ne regarde <strong>que</strong> l’adresse de destination et sa propre table, puis passe l’enveloppe au voisin indiqué. Notez le trajet de chaque paquet.</p>`,
+     contenu:[
+      {t:'tableau', id:'s5-jeu', cols:['Paquet','Départ','Destination','Routeurs traversés'], rows:[['1','Caméra 192.168.1.23','Serveur 198.51.100.20',null],['2','Serveur 198.51.100.20','Téléphone 10.20.4.8',null],['3','Téléphone 10.20.4.8','Caméra (adresse publique de la box 203.0.113.57)',null]]},
+      {t:'prof', html:`<p>Trajets attendus : paquet 1 : R1 → R2 → R3 ; paquet 2 : R3 → R2 → R4 ; paquet 3 : R4 → R2 → R1 (puis la box retrouve la caméra dans le réseau local). Insister : aucun routeur ne connaît le trajet complet, chacun ne connaît que « la prochaine étape ».</p>`}
+     ],
+     production:`Le relevé des trajets.`},
+    {titre:`J’applique les tables de routage`, duree:'12 min', modalite:'individuel',
+     contenu:[
+      {t:'tri', id:'s5-tables', consigne:`Pour chaque situation, indique où le routeur envoie le paquet.`, cats:['Vers R1','Vers R2','Vers R3','Vers R4','Réseau local du routeur'],
+       items:[
+        {l:`R1 reçoit un paquet de la caméra pour 198.51.100.20`, a:1, fb:`La destination n’est pas dans le réseau de la maison : « toute autre destination ».`},
+        {l:`R2 reçoit un paquet pour 198.51.100.20`, a:2},
+        {l:`R3 reçoit un paquet pour 198.51.100.20`, a:4, fb:`La destination est dans le réseau du data center.`},
+        {l:`R3 reçoit un paquet du serveur pour 10.20.4.8`, a:1, fb:`R3 ne connaît que son réseau local ; tout le reste part vers R2.`},
+        {l:`R2 reçoit un paquet pour 10.20.4.8`, a:3},
+        {l:`R4 reçoit un paquet pour 10.20.4.8`, a:4},
+        {l:`R2 reçoit un paquet pour 203.0.113.57`, a:0}
+       ]}
+     ],
+     production:`Les décisions de routage.`},
+    {titre:`Une liaison est coupée !`, duree:'15 min', modalite:'en binôme',
+     intro:`<p>Des travaux coupent la liaison <strong>R2 – R3</strong>. Heureusement, il existe un autre routeur, R5, relié à la fois à R2 et à R3.</p>`,
+     contenu:[
+      {t:'qcm', id:'s5-panne', qs:[
+        {q:`Avec les tables actuelles, que devient un paquet de la caméra vers le serveur ?`, o:[`Il arrive normalement`,`R2 l’envoie toujours vers R3 par la liaison coupée : il est perdu`,`Il passe automatiquement par R5`,`Il revient à la caméra`], a:1, ex:`Les tables ne savent pas que la liaison est coupée : elles doivent être modifiées.`},
+        {q:`Quelle ligne faut-il modifier dans la table de R2 ?`, o:[`198.51.100.0/24 → R5`,`10.20.0.0/16 → R5`,`192.168.1.0/24 → R5`,`Aucune`], a:0, ex:`Les paquets pour le data center doivent passer par R5.`}
+      ]},
+      {t:'reponse', id:'s5-protocole', label:`Internet compte des dizaines de milliers de réseaux, et des liaisons tombent en panne chaque jour. Explique pourquoi les routeurs ont besoin d’un protocole de routage qui met à jour leurs tables automatiquement, au lieu d’un humain qui les modifie à la main.`, rows:4},
+      {t:'prof', html:`<p>Attendu : trop de routeurs et de changements pour une mise à jour manuelle ; il faut réagir vite (en secondes) ; les routeurs s’échangent des informations sur les chemins disponibles grâce à un protocole de routage, ce qui permet de contourner une panne et de choisir un chemin plus court.</p>`}
+     ],
+     production:`La modification de table et la justification du protocole de routage.`}
+  ],
+  miseEnCommun:`<p>Retour sur l’hypothèse : un routeur ne connaît pas le chemin complet, seulement le « prochain saut ». Le réseau fonctionne parce que tous les routeurs coopèrent et mettent à jour leurs tables grâce à un protocole de routage.</p>`,
+  synthese:{
+    comprendre:[`Un paquet traverse plusieurs réseaux ; chaque routeur décide seulement du prochain saut, d’après l’adresse de destination et sa table de routage.`,`Les tables de routage doivent être mises à jour automatiquement par un protocole de routage, car les réseaux sont nombreux et changent sans cesse.`],
+    savoir:[`Le routeur relie plusieurs réseaux et achemine les paquets de l’un à l’autre.`,`Une adresse IP comporte une partie réseau et une partie appareil (« /24 » : les 3 premiers nombres désignent le réseau).`,`La table de routage associe une destination (réseau) à une direction (routeur voisin ou réseau local) ; une ligne « par défaut » traite toutes les autres destinations.`],
+    savoirFaire:[`Lire une table de routage et déterminer le prochain saut d’un paquet.`,`Retrouver le trajet d’un paquet entre deux réseaux.`,`Justifier la nécessité d’un protocole de routage.`],
+    vocab:[['Paquet','Morceau de données qui voyage avec l’adresse de sa destination.'],['Routeur','Équipement qui relie des réseaux et oriente les paquets.'],['Table de routage','Liste « destination → direction » d’un routeur.'],['Protocole de routage','Règles qui permettent aux routeurs de mettre à jour leurs tables ensemble.']]
+  },
+  verif:[
+    {t:'qcm', id:'s5-qcm', qs:[
+      {q:`R4 reçoit un paquet pour 198.51.100.20. Où l’envoie-t-il ?`, o:[`Réseau local (antennes)`,`Vers R2`,`Vers R3 directement`,`Il le détruit`], a:1, ex:`R4 ne connaît que son réseau ; « toute autre destination » → R2.`},
+      {q:`Dans l’adresse 198.51.100.20 avec « /24 », quelle partie désigne le réseau ?`, o:[`198`,`198.51`,`198.51.100`,`20`], a:2, ex:`/24 : les trois premiers nombres.`}
+    ]}
+  ],
+  defi:`Ajoute à la table de R2 une ligne pour un nouveau réseau 172.16.0.0/16 relié à R5, puis indique le trajet d’un paquet du téléphone vers 172.16.3.9.`,
+  prof:{
+    objectifs:[`Justifier la nécessité d’un protocole de routage pour faire communiquer plusieurs réseaux (SFC18 — activité débranchée, table de routage donnée).`],
+    deroulement:[['0-5','Situation et hypothèses','Schéma du réseau, tables.'],['5-20','Activité 1','Jeu de rôle débranché.'],['20-32','Activité 2','Application des tables.'],['32-47','Activité 3','Panne et protocole de routage.'],['47-55','Mise en commun et synthèse','Prochain saut, coopération des routeurs.']],
+    materiel:[`Pancartes R1 à R4 (et R5), tables imprimées, enveloppes « paquets » avec adresses source et destination, ficelles pour matérialiser les liaisons (une à couper).`],
+    differenciation:{aide:[`Tables surlignées par couleur de destination.`],defi:[`Nouveau réseau 172.16.0.0/16 via R5 : téléphone → R4 → R2 → R5.`]}
+  }
+});
+
+/* ===================== SÉANCE 6 — INTERFACER DEUX OBJETS ===================== */
+SEQUENCE.seances.push({
+  id:'s6', num:6, titre:`Faire dialoguer deux objets`, sous:`Appairer la caméra et prototyper une alerte avec deux cartes communicantes`,
+  duree:'55 min', etape:`Concevoir, réaliser et tester un prototype`, reperes:['CCRI18'], comp:['C7'],
+  situation:`<p>La caméra et le téléphone de Léa sont deux objets communicants : il a fallu les « présenter » l’un à l’autre (l’appairage). Léa voudrait aussi savoir quand Moustache mange, sans regarder la vidéo en continu. Votre équipe réalise un <strong>prototype</strong> : une carte micro:bit posée sur la gamelle détecte qu’elle bouge et prévient une seconde carte, que Léa garde sur elle.</p>`,
+  problematique:`Comment faire communiquer deux objets techniques pour qu’une information de l’un déclenche une action sur l’autre ?`,
+  hypothese:{id:'s6-hyp', label:`Mes hypothèses : de quoi deux objets ont-ils besoin pour communiquer ? (pense à la caméra et au téléphone)`},
+  activites:[
+    {titre:`J’ordonne l’appairage de la caméra`, duree:'8 min', modalite:'en binôme',
+     contenu:[
+      {t:'ordre', id:'s6-appairage', code:false, lignes:[`Brancher la caméra et attendre que le voyant clignote`,`Installer l’application du fabricant et créer un compte`,`Dans l’application, choisir « ajouter un appareil »`,`Choisir le réseau Wi-Fi de la maison et saisir son mot de passe`,`Présenter le code QR affiché par l’application devant l’objectif de la caméra`,`Attendre que le voyant passe au bleu : la caméra est connectée`,`Tester l’image depuis le téléphone en 4G, hors du Wi-Fi de la maison`]},
+      {t:'qcm', id:'s6-ihm', qs:[
+        {q:`Pendant l’appairage, quels éléments servent d’IHM à la caméra ? (plusieurs réponses)`, o:[`Le voyant d’état`,`L’application du téléphone`,`Le réducteur à engrenages`,`L’adaptateur secteur`], a:[0,1], ex:`Le voyant et l’application permettent le dialogue avec l’utilisateur.`}
+      ]}
+     ],
+     production:`La procédure d’appairage ordonnée.`},
+    {titre:`Je réalise le prototype à deux cartes`, duree:'22 min', modalite:'en binôme',
+     intro:`<p>Les deux cartes communiquent par <strong>radio</strong> sur un même <strong>canal</strong> (groupe). La carte A est l’objet « capteur » ; la carte B est l’objet « récepteur » avec son IHM (afficheur, bouton).</p>`,
+     contenu:[
+      {t:'code', titre:`Programme de la carte A (émetteur)`, html:CODE_EMETTEUR},
+      {t:'trous', id:'s6-recepteur', intro:`Complète le programme de la carte B (récepteur) :`, code:[
+`from microbit import *`,`import radio`,``,`radio.config(group=[[0]])      # même canal que la carte A`,`radio.on()`,`alertes = 0`,``,`while True:`,`    message = radio.receive()`,`    if message == [[1]]:`,`        alertes = alertes + 1`,`        display.scroll('Chat ' + str(alertes))`,`    if button_a.was_pressed():   # Léa remet le compteur à zéro`,`        alertes = [[2]]`,`        display.show(0)`],
+       blancs:[{type:'input', w:4, ok:['7'], fb:`Les deux cartes doivent utiliser le même groupe radio que la carte A.`},{type:'input', w:8, ok:[`'CHAT'`,`"CHAT"`], fb:`Le message comparé doit être exactement celui envoyé par la carte A, entre guillemets.`},{type:'input', w:4, ok:['0'], fb:`Remettre à zéro le compteur.`}]},
+      {t:'lien', url:'https://python.microbit.org/', titre:`Éditeur Python micro:bit`, texte:`Transfère le programme A sur une carte, le programme B sur l’autre. Sans Internet : utiliser l’éditeur Mu installé sur le poste.`},
+      {t:'prof', html:`<h4>Programme corrigé de la carte B</h4><pre class="code">${CODE_RECEPTEUR}</pre><p>Attribuer un numéro de groupe différent à chaque binôme (1 à 30) pour éviter les interférences ; puis, en fin d’activité, faire volontairement partager le même groupe à deux binômes : cela prépare la séance 7 (un objet mal configuré reçoit les messages des autres).</p>`}
+     ],
+     production:`Les deux cartes programmées.`},
+    {titre:`Je teste le prototype`, duree:'15 min', modalite:'en binôme',
+     contenu:[
+      {t:'tableau', id:'s6-tests', cols:['Test','Résultat attendu','Résultat observé','Conforme ?'], rows:[['Secouer la carte A','B affiche « Chat 1 »',null,null],['Secouer A trois fois','B affiche « Chat 3 »',null,null],['Appuyer sur le bouton A de la carte B','B affiche 0',null,null],['Éloigner B de A (10 m, puis 30 m, avec un mur)','À noter',null,null],['Un autre binôme utilise le même groupe','À noter',null,null]]},
+      {t:'reponse', id:'s6-bilan', label:`Bilan : le prototype répond-il au besoin de Léa ? Quelles limites as-tu observées (portée, autres groupes…) ? Pourquoi la vraie caméra utilise-t-elle le Wi-Fi et Internet plutôt que cette radio ?`, rows:4},
+      {t:'prof', html:`<p>Limites attendues : portée de quelques dizaines de mètres, réduite par les murs ; un autre objet sur le même groupe reçoit les alertes (aucune authentification, aucun chiffrement). La caméra passe par la box et Internet pour être joignable de n’importe où. Grille CCRI18 : programmes fonctionnels (deux cartes), protocole de test rempli, limites identifiées, IHM utilisée (afficheur + bouton).</p>`}
+     ],
+     production:`Le protocole de test rempli et le bilan.`}
+  ],
+  miseEnCommun:`<p>Démonstration de deux prototypes. On compare la liaison radio directe entre deux cartes et le chemin réseau de la caméra (box, routeurs, serveur). On constate qu’un binôme a pu « espionner » les alertes d’un autre : <em>comment protéger un objet connecté ?</em></p>`,
+  synthese:{
+    comprendre:[`Pour communiquer, deux objets ont besoin d’une liaison commune (même canal, même réseau) et d’un langage commun (même message attendu).`,`Interfacer deux objets, c’est faire qu’une information acquise par l’un déclenche une action ou un affichage sur l’autre.`],
+    savoir:[`Rôles : terminal émetteur, terminal récepteur, liaison (radio, Wi-Fi), et selon le cas box, routeur, serveur.`,`IHM du récepteur : afficheur (sortie), bouton (entrée).`,`L’appairage associe un objet à un compte et à un réseau.`],
+    savoirFaire:[`Programmer l’envoi et la réception d’un message entre deux cartes.`,`Tester un prototype avec un protocole et identifier ses limites.`],
+    vocab:[['Objet communicant','Objet capable d’échanger des données avec un autre.'],['Appairage','Association de deux objets pour qu’ils communiquent.'],['Canal (groupe)','Réglage commun qui permet à deux objets de s’entendre.'],['Prototype','Premier modèle fonctionnel pour tester une solution.']]
+  },
+  verif:[
+    {t:'qcm', id:'s6-qcm', qs:[
+      {q:`La carte B ne reçoit rien. Quelle est la cause la plus probable ?`, o:[`Les deux cartes n’utilisent pas le même groupe radio`,`La carte B est trop neuve`,`Le message est trop court`,`Le bouton A est cassé`], a:0, ex:`Sans canal commun, pas de communication.`}
+    ]}
+  ],
+  defi:`Modifie le programme pour que la carte A envoie aussi 'NUIT' quand la luminosité (display.read_light_level()) devient faible, et que B affiche une lune.`,
+  prof:{
+    objectifs:[`Interfacer deux objets techniques communicants (CCRI18) ; mobiliser les rôles des terminaux et liaisons et les composants d’une IHM.`],
+    deroulement:[['0-5','Situation et hypothèses','Appairage et besoin de Léa.'],['5-13','Activité 1','Procédure d’appairage.'],['13-35','Activité 2','Programmation des deux cartes.'],['35-50','Activité 3','Tests et limites.'],['50-55','Mise en commun','Vers la sécurité.']],
+    materiel:[`Par binôme : 2 micro:bit V2, 2 câbles USB, 1 boîtier de piles ; postes avec éditeur Python (en ligne) ou Mu (hors ligne). MakeCode accepté pour les élèves les moins à l’aise.`],
+    differenciation:{aide:[`Programme de la carte B fourni en blocs MakeCode puis comparé au Python.`],defi:[`Message 'NUIT' avec le capteur de luminosité.`]},
+    note:`Grille d’évaluation de la production (C7 · CCRI18) — Insuffisante : aucune carte fonctionnelle. Fragile : une seule carte fonctionne ou messages non reçus. Satisfaisante : les deux cartes communiquent, protocole de test rempli. Très bonne : en plus, limites expliquées (portée, groupe partagé) et IHM complète (compteur et remise à zéro).`
+  }
+});
+
+/* ===================== SÉANCE 7 — SÉCURITÉ ===================== */
+SEQUENCE.seances.push({
+  id:'s7', num:7, titre:`Qui d’autre regarde chez Léa ?`, sous:`Cybersécurité d’un objet connecté et données personnelles`,
+  duree:'55 min', etape:`Analyser des risques et argumenter`, reperes:['OST15'], comp:['C1'],
+  situation:`<p>En 2016, des centaines de milliers d’objets connectés (caméras, box, enregistreurs) restés avec leur <strong>mot de passe d’usine</strong> ont été piratés et utilisés ensemble pour bloquer de grands sites Internet. Régulièrement, des images de caméras mal protégées se retrouvent visibles sur Internet. La caméra de Léa filme l’intérieur de sa maison : <strong>ce sont des données personnelles</strong>.</p>`,
+  problematique:`Comment protéger la caméra et les images de Léa, et quelles règles respecter quand on filme chez soi ?`,
+  hypothese:{id:'s7-hyp', label:`Mes hypothèses : comment un pirate pourrait-il accéder à la caméra de Léa ? Propose deux façons.`},
+  activites:[
+    {titre:`Bonnes ou mauvaises pratiques ?`, duree:'10 min', modalite:'en binôme',
+     contenu:[
+      {t:'tri', id:'s7-pratiques', consigne:`Classe chaque pratique.`, cats:['Protège la caméra','Met la caméra en danger'],
+       items:[
+        {l:`Garder le mot de passe d’usine « admin / 1234 »`, a:1},{l:`Choisir un mot de passe long et unique pour l’application`, a:0},
+        {l:`Activer la double authentification (code reçu sur le téléphone)`, a:0},{l:`Refuser les mises à jour pour ne pas être dérangé`, a:1, fb:`Les mises à jour corrigent des failles de sécurité.`},
+        {l:`Partager l’accès avec un camarade en lui donnant son mot de passe`, a:1, fb:`Il vaut mieux utiliser la fonction « partager » qui crée un accès séparé et révocable.`},
+        {l:`Mettre à jour régulièrement le logiciel de la caméra et de la box`, a:0},{l:`Activer le mode « vie privée » (objectif fermé) quand Léa est à la maison`, a:0}
+       ]}
+     ],
+     production:`Le classement des pratiques.`},
+    {titre:`Combien de temps pour deviner un mot de passe ?`, duree:'15 min', modalite:'individuel',
+     intro:`<p>Un programme pirate peut essayer des combinaisons très vite. On suppose ici <strong>1 milliard d’essais par seconde</strong> (10⁹), pour un mot de passe volé sous forme chiffrée.</p>`,
+     contenu:[
+      {t:'numerique', id:'s7-mdp', qs:[
+        {q:`Code de 4 chiffres : combien de combinaisons ?`, a:10000, tol:0, u:'combinaisons', ex:`10 × 10 × 10 × 10 = 10⁴ = 10 000 : deviné instantanément.`},
+        {q:`8 lettres minuscules : 26⁸ ≈ 2,09 × 10¹¹ combinaisons. Temps pour toutes les essayer, en secondes (à l’unité) ?`, a:209, tol:1, u:'s', ex:`2,09 × 10¹¹ ÷ 10⁹ ≈ 209 s, soit moins de 4 minutes.`},
+        {q:`12 caractères parmi 94 (majuscules, minuscules, chiffres, symboles) : 94¹² ≈ 4,76 × 10²³. Temps en années (1 an ≈ 3,15 × 10⁷ s), en millions d’années (à l’unité) ?`, a:15, tol:0.5, u:'millions d’années', ex:`4,76 × 10²³ ÷ 10⁹ ≈ 4,76 × 10¹⁴ s ÷ 3,15 × 10⁷ ≈ 1,5 × 10⁷ ans, soit environ 15 millions d’années.`}
+      ]},
+      {t:'aides', items:[`Temps (s) = nombre de combinaisons ÷ nombre d’essais par seconde.`,`Diviser par 10⁹, c’est enlever 9 à l’exposant de 10.`]},
+      {t:'qcm', id:'s7-mdp-qcm', qs:[
+        {q:`Qu’est-ce qui rend un mot de passe le plus difficile à deviner ?`, o:[`Sa longueur et la variété des caractères`,`Le prénom de son chat`,`Sa date de naissance`,`Le fait de l’écrire sur la caméra`], a:0, ex:`Chaque caractère en plus multiplie le nombre de combinaisons.`}
+      ]}
+     ],
+     production:`Les calculs de combinaisons et de durée.`},
+    {titre:`Identification, authentification et traces`, duree:'15 min', modalite:'en binôme',
+     contenu:[
+      {t:'qcm', id:'s7-auth', qs:[
+        {q:`Quand Léa tape son adresse électronique dans l’application, elle :`, o:[`s’identifie (elle dit qui elle est)`,`s’authentifie (elle prouve qui elle est)`,`chiffre ses images`,`met à jour la caméra`], a:0, ex:`L’identification dit « qui je suis » ; l’authentification le prouve (mot de passe, code).`},
+        {q:`La double authentification combine :`, o:[`deux mots de passe identiques`,`un élément que je connais (mot de passe) et un élément que je possède (téléphone qui reçoit un code)`,`deux comptes`,`deux caméras`], a:1, ex:`Même si le mot de passe est volé, le pirate n’a pas le téléphone.`},
+        {q:`Les vidéos enregistrées dans le cloud du fabricant :`, o:[`n’existent que sur la caméra`,`sont stockées sur des serveurs du fabricant, parfois dans un autre pays : ce sont des traces numériques`,`disparaissent quand on éteint la box`,`ne sont pas des données personnelles`], a:1, ex:`Il faut lire la politique de confidentialité : où, combien de temps, qui y a accès.`},
+        {q:`Léa peut-elle orienter sa caméra pour filmer la rue ou le jardin du voisin ?`, o:[`Oui, c’est sa caméra`,`Non : un particulier ne doit filmer que l’intérieur de sa propriété`,`Oui, la nuit seulement`,`Oui, si l’image est floue`], a:1, ex:`Filmer la voie publique ou chez les voisins porte atteinte à leur vie privée. Les personnes filmées chez soi (baby-sitter, invités) doivent être informées.`}
+      ]}
+     ],
+     production:`Les réponses justifiées.`},
+    {titre:`Je rédige la charte de sécurité de Léa`, duree:'10 min', modalite:'en binôme',
+     contenu:[
+      {t:'reponse', id:'s7-charte', label:`Rédige 5 règles courtes que Léa doit appliquer pour sa caméra (mot de passe, authentification, mises à jour, partage, respect de la vie privée des autres), avec pour chacune la raison.`, rows:7},
+      {t:'prof', html:`<p>Règles attendues : changer le mot de passe d’usine (long, unique) ; activer la double authentification ; accepter les mises à jour de la caméra et de la box ; partager l’accès sans donner son mot de passe ; ne filmer que l’intérieur, informer les personnes présentes, activer le mode vie privée ; vérifier où et combien de temps sont stockées les vidéos. Lien avec la séance 6 : la radio sans authentification était lisible par tous.</p>`}
+     ],
+     production:`La charte de sécurité.`}
+  ],
+  miseEnCommun:`<p>Mise en commun des chartes et affichage d’une charte de classe. On revient à la problématique générale : être présent chez soi tout en étant absent est possible, à condition de <strong>maîtriser qui voit quoi</strong>.</p>`,
+  synthese:{
+    comprendre:[`Un objet connecté ouvre une porte numérique sur la maison : mal protégé, il peut être piraté ou exposer la vie privée.`,`Les images d’une caméra sont des données personnelles, stockées et transmises : elles laissent des traces numériques.`],
+    savoir:[`Identification : dire qui l’on est. Authentification : le prouver (mot de passe, code, empreinte). Double authentification : deux preuves de nature différente.`,`Nombre de combinaisons = (nombre de caractères possibles) puissance (longueur).`,`Les mises à jour corrigent des failles ; le mot de passe d’usine doit toujours être changé.`],
+    savoirFaire:[`Évaluer la robustesse d’un mot de passe par un calcul.`,`Distinguer bonnes et mauvaises pratiques de cybersécurité.`,`Rédiger des règles d’usage d’un objet connecté.`],
+    vocab:[['Donnée personnelle','Information qui permet d’identifier une personne (image, voix, adresse…).'],['Authentification','Preuve de son identité.'],['Trace numérique','Donnée laissée lors de l’usage d’un service numérique.'],['Mise à jour','Nouvelle version du logiciel qui corrige ou améliore l’objet.']]
+  },
+  verif:[
+    {t:'qcm', id:'s7-qcm', qs:[
+      {q:`Un mot de passe de 6 chiffres offre :`, o:[`6 combinaisons`,`60 combinaisons`,`1 000 000 de combinaisons`,`600 combinaisons`], a:2, ex:`10⁶ = 1 000 000.`},
+      {q:`Pourquoi faut-il installer les mises à jour de la caméra ?`, o:[`Pour changer sa couleur`,`Pour corriger des failles de sécurité découvertes`,`Pour consommer plus`,`Ce n’est pas utile`], a:1, ex:`Une faille connue et non corrigée est une porte ouverte.`}
+    ]}
+  ],
+  defi:`Recherche ce qu’est le « chiffrement » des données et explique pourquoi les messages radio de la séance 6 pouvaient être lus par n’importe quel binôme.`,
+  prof:{
+    objectifs:[`Cybersécurité : données personnelles, traces numériques, identification et authentification (connaissances de la carte OST15) ; argumenter sur le rôle du numérique.`],
+    deroulement:[['0-5','Situation et hypothèses','Objets piratés, données personnelles.'],['5-15','Activité 1','Bonnes et mauvaises pratiques.'],['15-30','Activité 2','Robustesse des mots de passe.'],['30-45','Activité 3','Authentification, traces, vie privée.'],['45-55','Activité 4 et synthèse','Charte de sécurité.']],
+    materiel:[`Fichier HTML ; facultatif : interface d’administration d’une box ou d’une caméra (sans modifier de réglage réel).`],
+    differenciation:{aide:[`Calculatrice ; puissances de 10 rappelées ; amorces pour la charte.`],defi:[`Chiffrement.`]},
+    note:`Cette séance n’était associée à aucun repère dans la fiche groupe. Les connaissances de cybersécurité relèvent de la carte OST15 (connaissance « Cybersécurité : données personnelles, traces numériques, identification et authentification ») ; ce repère est donc ajouté pour ancrer la séance. Rester factuel sur les attaques évoquées (botnet de 2016 utilisant des objets connectés aux mots de passe par défaut) sans entrer dans des détails techniques d’intrusion.`
+  }
+});
+
+/* ===================== SÉANCE 8 — ÉVALUATION ===================== */
+SEQUENCE.seances.push({
+  id:'s8', num:8, titre:`Évaluation : la sonnette vidéo connectée`, sous:`Situation nouvelle de transfert — évaluation par compétences`,
+  duree:'55 min', etape:`Évaluer les acquis`, reperes:['SFC11','SFC13','SFC17','SFC18','OST15','OST33'], comp:['C4','C1','C3'], evaluation:true,
+  situation:`<p>M. Durand veut voir qui sonne à sa porte quand il est au travail. Il envisage une <strong>sonnette vidéo connectée</strong> sur batterie : quand un visiteur appuie sur le bouton, la sonnette envoie une notification et la vidéo au téléphone de M. Durand, qui peut parler au visiteur. La nuit, des LED infrarouges éclairent l’entrée.</p><p><strong>Travail individuel.</strong> Les parties sont indépendantes.</p>`,
+  problematique:`Comment fonctionne la sonnette vidéo, comment son image arrive-t-elle au téléphone, et laquelle choisir en sécurité ?`,
+  hypothese:null,
+  activites:[
+    {titre:`Partie A — Chaîne d’énergie (C4 · SFC11)`, duree:'14 min', modalite:'individuel',
+     intro:`<blockquote>« La batterie lithium-ion stocke l’énergie. Le circuit de commande distribue l’énergie électrique aux LED infrarouges, qui la convertissent en lumière invisible pour éclairer l’entrée la nuit. La batterie se recharge par un câble USB. »</blockquote>`,
+     contenu:[
+      {t:'schema', id:'s8-A', layout:'chaine', options:[`STOCKER : batterie lithium-ion`,`DISTRIBUER : circuit de commande`,`CONVERTIR : LED infrarouges`,`TRANSMETTRE : engrenages`,`ACQUÉRIR : bouton`], slots:[{titre:'Bloc 1', a:0},{titre:'Bloc 2', a:1},{titre:'Bloc 3', a:2}]},
+      {t:'qcm', id:'s8-A-qcm', qs:[{q:`Les LED convertissent l’énergie :`, o:[`électrique en lumineuse`,`lumineuse en électrique`,`électrique en cinétique`,`thermique en lumineuse`], a:0, ex:`Comme une lampe.`}]},
+      {t:'numerique', id:'s8-A-num', qs:[
+        {q:`Batterie 3,6 V – 6 Ah : énergie stockée (Wh, au dixième) ?`, a:21.6, tol:0.05, u:'Wh', ex:`3,6 × 6 = 21,6 Wh.`},
+        {q:`Consommation moyenne 0,15 W : autonomie en heures ?`, a:144, tol:0.5, u:'h', ex:`21,6 ÷ 0,15 = 144 h, soit 6 jours.`}
+      ]}
+     ]},
+    {titre:`Partie B — Chaîne d’information (C4 · SFC13)`, duree:'8 min', modalite:'individuel',
+     contenu:[
+      {t:'schema', id:'s8-B', layout:'chaine', options:[`Un visiteur appuie sur la sonnette`,`Bouton poussoir`,`Microcontrôleur : décide d’envoyer l’alerte`,`Module Wi-Fi : envoie la notification`,`Batterie`,`LED infrarouges`],
+       slots:[{titre:'Information d’entrée', a:0},{titre:'ACQUÉRIR', a:1},{titre:'TRAITER', a:2},{titre:'COMMUNIQUER', a:3}]}
+     ]},
+    {titre:`Partie C — Réseaux et routage (C4 · SFC17, SFC18)`, duree:'13 min', modalite:'individuel',
+     intro:`<p>Sonnette : 192.168.0.15 ; box : 192.168.0.1 (adresse publique 203.0.113.80) ; serveur du fabricant : 198.51.100.40 ; téléphone en 4G : 10.20.7.2. Le réseau et les tables de routage sont ceux de la séance 5 (R2 a une ligne vers la box de M. Durand).</p>`,
+     contenu:[
+      {t:'qcm', id:'s8-C', qs:[
+        {q:`Quel appareil est dans le même réseau local que la sonnette ?`, o:[`La box 192.168.0.1`,`Le serveur 198.51.100.40`,`Le téléphone 10.20.7.2`,`Aucun`], a:0, ex:`Mêmes trois premiers nombres : 192.168.0.`},
+        {q:`Le routeur R2 reçoit un paquet pour 198.51.100.40. Il l’envoie :`, o:[`vers R1`,`vers R3`,`vers R4`,`dans son réseau local`], a:1, ex:`Ligne 198.51.100.0/24 → R3.`},
+        {q:`Pourquoi les routeurs d’Internet utilisent-ils un protocole de routage ?`, o:[`Pour mettre à jour automatiquement leurs tables quand le réseau change`,`Pour filmer`,`Pour recharger la batterie`,`Pour donner une adresse privée`], a:0, ex:`Réseaux très nombreux, pannes fréquentes : mise à jour automatique indispensable.`}
+      ]},
+      {t:'ordre', id:'s8-C-ordre', code:false, lignes:[`Sonnette`,`Box (routeur R1)`,`Routeur du FAI (R2)`,`Serveur du fabricant (via R3)`,`Réseau mobile (R4)`,`Téléphone de M. Durand`]},
+      {t:'numerique', id:'s8-C-num', qs:[{q:`Une vidéo de 30 s à 4 Mbit/s représente combien de mégaoctets ?`, a:15, tol:0, u:'Mo', ex:`4 × 30 = 120 Mbit ÷ 8 = 15 Mo.`}]}
+     ]},
+    {titre:`Partie D — Sécurité (C1 · OST15)`, duree:'8 min', modalite:'individuel',
+     contenu:[
+      {t:'qcm', id:'s8-D', qs:[{q:`Quelle mesure protège le compte de M. Durand même si son mot de passe est volé ?`, o:[`La double authentification`,`Un mot de passe de 4 chiffres`,`Éteindre la box la nuit`,`Changer de sonnette`], a:0, ex:`Il faut aussi le second facteur (téléphone).`}]},
+      {t:'reponse', id:'s8-D-rep', label:`La sonnette filme l’entrée de la maison, devant le trottoir. Donne deux règles que M. Durand doit respecter (sécurité et vie privée), avec leur justification.`, rows:3}
+     ]},
+    {titre:`Partie E — Choisir (C3 · OST33)`, duree:'12 min', modalite:'individuel',
+     intro:`<div class="tablewrap"><table><thead><tr><th>Caractéristique</th><th>Sonnette S1</th><th>Sonnette S2</th></tr></thead><tbody><tr><td>Prix</td><td>59 €</td><td>99 €</td></tr><tr><td>Abonnement</td><td>Obligatoire, 5 €/mois</td><td>Aucun (stockage local)</td></tr><tr><td>Vision nocturne</td><td>Non</td><td>Oui, 5 m</td></tr><tr><td>Double authentification</td><td>Non</td><td>Oui</td></tr><tr><td>Masquage de zones (trottoir)</td><td>Non</td><td>Oui</td></tr></tbody></table></div><p class="petit muted">Modèles fictifs. Exigences : voir les visiteurs la nuit ; budget total ≤ 150 € sur 2 ans.</p>`,
+     contenu:[
+      {t:'numerique', id:'s8-E-num', qs:[{q:`Coût total de S1 sur 2 ans (en €) ?`, a:179, tol:0, u:'€', ex:`59 + 5 × 24 = 179 € : l’exigence de budget n’est pas respectée.`}]},
+      {t:'reponse', id:'s8-E-arg', label:`Quelle sonnette conseiller ? Rédige un argumentaire court citant les exigences et deux critères.`, rows:4}
+     ]}
+  ],
+  miseEnCommun:`<p>Correction différée : l’enseignant restitue la grille de compétences remplie à la séance suivante.</p>`,
+  synthese:null, verif:[],
+  prof:{
+    objectifs:[`Évaluer en situation nouvelle C4 (SFC11, SFC13, SFC17, SFC18), C1 (OST15), C3 (OST33). C7 (CCRI18) est évaluée sur le prototype de la séance 6.`],
+    deroulement:[['0-2','Consignes','Lecture de la situation.'],['2-16','Partie A','Chaîne d’énergie.'],['16-24','Partie B','Chaîne d’information.'],['24-37','Partie C','Réseaux et routage.'],['37-45','Partie D','Sécurité.'],['45-55','Partie E','Choix argumenté.']],
+    materiel:[`Fichier HTML (mode élève) ou version imprimée ; calculatrice.`],
+    differenciation:{aide:[`Tiers-temps : parties A, B, C obligatoires ; D et E au choix.`],defi:[`Partie A : ajouter la chaîne d’énergie du haut-parleur.`]},
+    corrige:`<h4>Corrigé détaillé</h4>
+    <p><strong>Partie A.</strong> STOCKER (batterie) → DISTRIBUER (circuit de commande) → CONVERTIR (LED infrarouges) ; électrique → lumineuse. 3,6 × 6 = 21,6 Wh ; 21,6 ÷ 0,15 = 144 h (6 jours). La fonction ALIMENTER est assurée par la recharge USB.</p>
+    <p><strong>Partie B.</strong> Appui du visiteur → bouton poussoir → microcontrôleur → module Wi-Fi. Batterie et LED appartiennent à la chaîne d’énergie.</p>
+    <p><strong>Partie C.</strong> Même réseau local : la box. R2 → R3. Protocole de routage : mise à jour automatique des tables. Chemin : sonnette → R1 → R2 → serveur (via R3) → R4 → téléphone. 4 Mbit/s × 30 s = 120 Mbit = 15 Mo.</p>
+    <p><strong>Partie D.</strong> Double authentification. Règles : changer le mot de passe d’usine / activer la double authentification / mettre à jour ; ne pas filmer le trottoir (vie privée des passants, masquage de zone), informer les visiteurs.</p>
+    <p><strong>Partie E.</strong> S1 : pas de vision nocturne et 179 € sur 2 ans > 150 € → deux exigences non respectées. S2 (99 €, sans abonnement) respecte les exigences ; critères : double authentification, masquage du trottoir (vie privée), stockage local.</p>`
+  }
+});
+
+/* ---------- 4. GRILLE D'ÉVALUATION ---------- */
+const GRILLE = [
+  {c:'C4', r:'SFC11', crit:`Partie A : schéma-bloc de la chaîne d’énergie, conversion, calcul d’autonomie`,
+   n:[`Moins de 2 blocs justes ; pas de calcul.`,`2 blocs justes ou conversion juste ; calculs faux.`,`3 blocs et conversion justes ; un calcul juste.`,`Tout est juste, unités comprises.`]},
+  {c:'C4', r:'SFC13', crit:`Partie B : chaîne d’information`,
+   n:[`Moins de 2 blocs justes.`,`2 blocs justes.`,`3 blocs justes.`,`4 blocs justes, sans constituant de la chaîne d’énergie.`]},
+  {c:'C4', r:'SFC17 · SFC18', crit:`Partie C : réseau local, routage, chemin, débit`,
+   n:[`Moins de 2 réponses justes.`,`2 ou 3 réponses justes.`,`4 réponses justes dont le chemin.`,`Tout est juste (réseau local, routage, protocole, chemin, débit).`]},
+  {c:'C1', r:'OST15', crit:`Partie D : authentification et règles de sécurité / vie privée`,
+   n:[`Aucune règle pertinente.`,`Une règle sans justification.`,`Deux règles justifiées.`,`Deux règles justifiées (sécurité ET vie privée) et QCM juste.`]},
+  {c:'C3', r:'OST33', crit:`Partie E : exigences appliquées et choix argumenté`,
+   n:[`Choix sans justification.`,`Choix juste, une seule exigence citée.`,`Les deux exigences appliquées (calcul juste) et un critère.`,`Exigences appliquées, deux critères argumentés.`]}
+];
+
+/* ---------- 5. TRAÇABILITÉ ---------- */
+const TRACABILITE = [
+  ['s1','C3','OST33',2,`Formuler le besoin et les exigences ; lire trois notices`,`Bête à cornes, exigences, tableau des caractéristiques`,`Exigences mesurables ; tableau rempli sans erreur à partir des notices`],
+  ['s1','C3','OST33',0,`Calculer la consommation annuelle (efficacité énergétique)`,`Calculs en kWh`,`Calculs justes avec unités`],
+  ['s1','C3','OST33',2,`Tableau de décision et conseil argumenté`,`Tableau + argumentaire`,`Exigences éliminatoires appliquées, deux critères cités`],
+  ['s2','C4','SFC11',0,`Identifier les formes d’énergie entre les blocs ; pertes`,`Schéma des formes d’énergie`,`Formes d’énergie justes, pertes thermiques identifiées`],
+  ['s2','C4','SFC11',1,`Du texte au schéma-bloc (moteur, LED)`,`Schéma-bloc complété`,`4 blocs justes dans l’ordre`],
+  ['s2','C4','SFC11',3,`Identifier la transmission (réducteur, courroie)`,`Schéma et texte`,`TRANSMETTRE attribué au réducteur / à la courroie`],
+  ['s2','C4','SFC11',2,`Du schéma au texte ; autonomie de la batterie`,`Texte explicatif et calculs`,`Les 4 verbes employés correctement ; autonomie calculée`],
+  ['s3','C4','SFC13',0,`Classer les capteurs ; chaîne de l’alerte`,`Classement et schéma`,`Capteurs en « acquérir » ; 4 blocs justes`],
+  ['s3','C4','SFC13',1,`Lien chaîne d’information → DISTRIBUER (suivi automatique)`,`Séquence ordonnée et description`,`Rôle du processeur et de DISTRIBUER expliqué`],
+  ['s3','C4','SFC13',2,`Identifier l’IHM (boutons, voyant)`,`Classement`,`Bouton en « acquérir », voyant en « communiquer »`],
+  ['s4','C4','SFC17',1,`Rôles des équipements du réseau`,`Classement`,`6 éléments sur 7 bien classés`],
+  ['s4','C4','SFC17',0,`Chemin de l’image (réseau local / Internet)`,`Chemin ordonné et schématisé`,`Chemin correct ; réseau local distingué d’Internet`],
+  ['s4','C4','SFC17',2,`Adresses IP privées / publiques, même réseau`,`Réponses`,`Même réseau local reconnu ; adresse invalide repérée`],
+  ['s4','C4','SFC17',3,`Débit et quantité de données`,`Calculs`,`900 Mo par heure ; conversion bits / octets juste`],
+  ['s5','C4','SFC18',2,`Jeu de rôle et application des tables de routage`,`Trajets relevés, décisions de routage`,`Trajets justes ; prochain saut correct`],
+  ['s5','C4','SFC18',0,`Panne de liaison : modifier une table`,`Ligne de table modifiée`,`Ligne 198.51.100.0/24 → R5`],
+  ['s5','C4','SFC18',1,`Structure de l’adresse (partie réseau /24, /16)`,`Réponses`,`Partie réseau identifiée`],
+  ['s6','C7','CCRI18',0,`Appairage ; programmer deux cartes communicantes`,`Procédure ordonnée, deux cartes programmées`,`Les deux cartes communiquent (grille de la séance 6)`],
+  ['s6','C7','CCRI18',1,`IHM du récepteur (afficheur, bouton) ; tests`,`Protocole de test rempli, bilan`,`Tests conformes, limites identifiées`],
+  ['s7','C1','OST15',2,`Pratiques, mots de passe, authentification, traces, vie privée`,`Classement, calculs, charte`,`Calculs justes ; charte de 5 règles justifiées`],
+  ['s8','C4','SFC11',0,`Évaluation partie A`,`Schéma et calculs`,`Grille, ligne SFC11`],
+  ['s8','C4','SFC13',0,`Évaluation partie B`,`Schéma`,`Grille, ligne SFC13`],
+  ['s8','C4','SFC17',3,`Évaluation partie C`,`Réponses et calcul`,`Grille, ligne SFC17 · SFC18`],
+  ['s8','C4','SFC18',2,`Évaluation partie C`,`Routage`,`Grille, ligne SFC17 · SFC18`],
+  ['s8','C1','OST15',2,`Évaluation partie D`,`Règles`,`Grille, ligne OST15`],
+  ['s8','C3','OST33',2,`Évaluation partie E`,`Argumentaire`,`Grille, ligne OST33`]
+];
+
+/* ---------- 6. ANALYSE DE LA FICHE GROUPE ---------- */
+const ANALYSE_JSON = `
+<ul>
+<li><strong>Conservé :</strong> l’objet (caméra IP), la problématique de Léa et de son chat, le repère principal SFC11 (chaîne d’énergie), les repères cités (OST33, SFC11, SFC13, SFC17, SFC18, CCRI18) et les quatre séances proposées (besoin et notices ; analyse fonctionnelle ; réseau et connexion ; sécurité).</li>
+<li><strong>Différenciation reprise :</strong> les trois niveaux de la fiche (5e : identifier STOCKER, CONVERTIR et les formes d’énergie sur un circuit fourni ; 4e : du texte au schéma et inversement, lien avec DISTRIBUER, notion de TRANSMETTRE ; 3e : idem avec introduction de SysML) sont intégrés dans la séance 2 (activités et aides) et dans sa fiche de préparation.</li>
+<li><strong>Restructuré :</strong> la séance « analyse fonctionnelle » est dédoublée (chaîne d’énergie, puis chaîne d’information reliée par DISTRIBUER), car SFC11 est le repère principal ; la séance « réseau et connexion » est dédoublée en SFC17 (circulation de l’information, adresse IP, débit) et SFC18 (routage, activité débranchée imposée par le repère).</li>
+<li><strong>Complété :</strong> CCRI18 (interfacer deux objets communicants) était annoncé sans activité : une séance de prototypage avec deux cartes micro:bit lui est consacrée. La séance « sécurité » n’avait pas de repère : ses connaissances relèvent de la carte <strong>OST15</strong> (cybersécurité, données personnelles, authentification), ajoutée en conséquence.</li>
+<li><strong>Bilan :</strong> 7 repères sur 4 compétences (C1, C3, C4, C7), 8 séances dont une évaluation de transfert (sonnette vidéo connectée).</li>
+<li><strong>Points de vigilance :</strong> les caméras IP ne relèvent pas de l’indice de réparabilité ; la connaissance « indices » d’OST33 est abordée par la consommation d’énergie. Les plages d’adresses 203.0.113.x et 198.51.100.x sont réservées à la documentation ; la traduction d’adresses (NAT) de la box est volontairement ignorée.</li>
+</ul>`;
+
+
+/* =====================================================================
+   7. ÉTAT ET SAUVEGARDE LOCALE
+   ===================================================================== */
+const CLE = 'techno3e-camera-ip-v1';
+let ETAT = {answers:{}, scores:{}, done:{}};
+let stockageOK = true;
+try { const s = localStorage.getItem(CLE); if (s) ETAT = Object.assign(ETAT, JSON.parse(s)); }
+catch(e){ stockageOK = false; }
+function sauver(){ try { localStorage.setItem(CLE, JSON.stringify(ETAT)); } catch(e){ stockageOK = false; } }
+let PROF = false;
+try { PROF = sessionStorage.getItem(CLE + '-prof') === '1'; } catch(e){}
+
+/* =====================================================================
+   8. OUTILS
+   ===================================================================== */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const strip = s => String(s).replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/gi,' ').replace(/\s+/g,' ').trim();
+const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+function hash(str){ let h = 2166136261; for (const ch of str){ h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
+/* Mélange déterministe (même ordre à chaque visite) */
+function melange(arr, graine){ const a = arr.slice(); let s = hash(graine); for (let i = a.length - 1; i > 0; i--){ s = (Math.imul(s, 1103515245) + 12345) >>> 0; const j = s % (i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const seance = id => SEQUENCE.seances.find(s => s.id === id);
+const tagRep = code => { const r = repere(code); return `<span class="tag ${theme(code)}" title="${esc(r ? r[2] : '')}">${code} · ${r ? r[1] : ''}</span>`; };
+function classeScore(ok, tot){ const p = tot ? ok / tot : 0; return p >= .8 ? 'bon' : p >= .5 ? 'moyen' : 'faible'; }
+
+/* Registre de tous les widgets : id → {def, seance} (utile pour l'export et les vérifications) */
+const WIDGETS = {};
+const VERIFIABLES = ['tri','qcm','ordre','trous','numerique','schema','diag'];
+SEQUENCE.seances.forEach(s => {
+  const tout = [];
+  if (s.hypothese) tout.push(Object.assign({t:'reponse'}, s.hypothese));
+  s.activites.forEach(a => a.contenu.forEach(w => tout.push(w)));
+  (s.verif || []).forEach(w => tout.push(w));
+  tout.forEach(w => { if (w.id) WIDGETS[w.id] = {def:w, seance:s.id}; });
+  s._verifiables = tout.filter(w => VERIFIABLES.includes(w.t)).map(w => w.id);
+});
+function progression(s){ const v = s._verifiables; const faits = v.filter(id => ETAT.scores[id]).length; return {faits, total:v.length}; }
+
+/* =====================================================================
+   9. RENDU DES WIDGETS
+   ===================================================================== */
+const R = {};
+const actionsHTML = (id, extra='') => `<div class="actions"><button class="btn plein" type="button" data-act="verifier" data-id="${id}">Vérifier</button><button class="btn petit" type="button" data-act="effacer" data-id="${id}">Recommencer</button><span class="score" id="sc-${id}" aria-live="polite"></span>${extra}</div>`;
+
+R.texte = w => w.html;
+R.code = w => `<div class="widget"><p class="consigne">${w.titre || 'Programme'}</p><pre class="code">${w.html}</pre></div>`;
+R.prof = w => `<div class="boite-prof prof-only">${w.html}</div>`;
+R.lien = w => `<div class="lien-ext"><span class="badge">🌐 Internet requis</span><div><a href="${w.url}" target="_blank" rel="noopener">${w.titre} ↗</a><div class="petit">${w.texte || ''}</div></div></div>`;
+R.aides = w => `<div class="aides" data-n="0">${w.items.map((a,i)=>`<div class="aide" hidden><strong>Aide ${i+1} :</strong> ${a}</div>`).join('')}<button class="btn petit" type="button" data-act="aide">💡 Afficher l’aide 1 / ${w.items.length}</button></div>`;
+R.reponse = w => { const v = ETAT.answers[w.id] || ''; return `<div class="widget"><label class="lbl" for="r-${w.id}">${w.label}</label><textarea id="r-${w.id}" data-save="${w.id}" rows="${w.rows || 4}" placeholder="Écris ta réponse ici…">${esc(v)}</textarea><div class="sauve">Enregistré automatiquement dans ce navigateur.</div></div>`; };
+
+R.tri = w => {
+  const sv = ETAT.answers[w.id] || [];
+  const items = melange(w.items.map((it,i)=>Object.assign({i}, it)), w.id);
+  const opts = w.cats.map((c,i)=>({c,i}));
+  const optsAff = w.cats.length > 4 ? melange(opts, w.id + 'c') : opts;
+  return `<div class="widget" data-w="${w.id}">${w.consigne ? `<p class="consigne">${w.consigne}</p>` : ''}
+  ${items.map(it => `<div class="ligne-tri"><div><span id="lb-${w.id}-${it.i}">${it.l}</span><div class="fb" id="fb-${w.id}-${it.i}"></div></div>
+   <select data-champ="${w.id}" data-i="${it.i}" aria-labelledby="lb-${w.id}-${it.i}" ${w.mono ? 'style="font-family:var(--mono)"' : ''}><option value="">— choisir —</option>${optsAff.map(o=>`<option value="${o.i}" ${String(sv[it.i]) === String(o.i) ? 'selected' : ''}>${esc(o.c)}</option>`).join('')}</select></div>`).join('')}
+  ${actionsHTML(w.id)}</div>`;
+};
+
+R.qcm = w => {
+  const sv = ETAT.answers[w.id] || {};
+  return `<div class="widget" data-w="${w.id}">${w.qs.map((q,qi) => {
+    const multi = Array.isArray(q.a); const type = multi ? 'checkbox' : 'radio'; const sel = sv[qi] || [];
+    return `<fieldset><legend>${qi+1}. ${q.q}${multi ? ' <span class="muted petit">(plusieurs réponses)</span>' : ''}</legend>
+    ${q.o.map((o,oi)=>`<label class="opt"><input type="${type}" name="${w.id}-${qi}" value="${oi}" data-champ="${w.id}" data-q="${qi}" ${sel.includes(oi) ? 'checked' : ''}><span>${o}</span></label>`).join('')}
+    <div class="fb" id="fb-${w.id}-${qi}"></div></fieldset>`; }).join('')}${actionsHTML(w.id)}</div>`;
+};
+
+R.ordre = w => {
+  let ordre = ETAT.answers[w.id];
+  if (!Array.isArray(ordre) || ordre.length !== w.lignes.length){
+    const idx = w.lignes.map((_,i)=>i); let m = melange(idx, w.id); let k = 0;
+    while (m.every((v,i)=>v===i) && k < 5){ m = melange(idx, w.id + k); k++; }
+    ordre = m;
+  }
+  return `<div class="widget" data-w="${w.id}"><p class="consigne">Remets les lignes dans le bon ordre avec les flèches ↑ ↓.</p>
+  <ol class="ordre-liste" id="ol-${w.id}">${ordre.map(i => `<li data-i="${i}"><button type="button" data-act="haut" aria-label="Monter la ligne">↑</button><button type="button" data-act="bas" aria-label="Descendre la ligne">↓</button>${w.code ? `<code>${esc(w.lignes[i])}</code>` : `<span class="txt" style="white-space:pre-wrap">${esc(w.lignes[i])}</span>`}</li>`).join('')}</ol>
+  ${actionsHTML(w.id)}<div class="fb" id="fb-${w.id}"></div></div>`;
+};
+
+R.trous = w => {
+  const sv = ETAT.answers[w.id] || [];
+  const ligne = l => esc(l).replace(/\[\[(\d+)\]\]/g, (_, n) => {
+    const b = w.blancs[+n]; const v = sv[+n] || '';
+    if (b.type === 'select') return `<select data-champ="${w.id}" data-i="${n}" aria-label="Case ${+n+1}"><option value="">?</option>${b.opts.map(o=>`<option ${o===v?'selected':''}>${esc(o)}</option>`).join('')}</select>`;
+    return `<input type="text" data-champ="${w.id}" data-i="${n}" aria-label="Case ${+n+1}" size="${b.w || 8}" value="${esc(v)}" autocomplete="off" spellcheck="false">`;
+  }).replace(/(#[^\n]*)$/, '<span class="com">$1</span>');
+  return `<div class="widget" data-w="${w.id}">${w.intro ? `<p class="consigne">${w.intro}</p>` : '<p class="consigne">Complète les cases du programme.</p>'}
+  <pre class="code">${w.code.map(ligne).join('\n')}</pre>
+  <div id="fbt-${w.id}">${w.blancs.map((b,i)=>`<div class="fb" id="fb-${w.id}-${i}"></div>`).join('')}</div>${actionsHTML(w.id)}</div>`;
+};
+
+R.numerique = w => {
+  const sv = ETAT.answers[w.id] || [];
+  return `<div class="widget" data-w="${w.id}">${w.qs.map((q,i)=>`<div class="num-q"><label for="n-${w.id}-${i}">${q.q}</label><div class="champ"><input type="text" inputmode="decimal" id="n-${w.id}-${i}" data-champ="${w.id}" data-i="${i}" value="${esc(sv[i] || '')}" autocomplete="off"><span>${q.u || ''}</span></div><div class="fb" id="fb-${w.id}-${i}" style="grid-column:1/-1"></div></div>`).join('')}${actionsHTML(w.id)}</div>`;
+};
+
+R.schema = w => {
+  const sv = ETAT.answers[w.id] || [];
+  const opts = melange(w.options.map((o,i)=>({o,i})), w.id);
+  const sel = (s,i) => `<select data-champ="${w.id}" data-i="${i}" aria-label="${esc(s.titre)}"><option value="">— choisir —</option>${opts.map(o=>`<option value="${o.i}" ${String(sv[i])===String(o.i)?'selected':''}>${esc(o.o)}</option>`).join('')}</select>`;
+  if (w.layout === 'arbre'){
+    return `<div class="widget arbre" data-w="${w.id}"><div class="racine">${w.racine}</div><div class="enfants">${w.slots.map((s,i)=>`<div class="bx" id="bx-${w.id}-${i}"><b>${s.titre}</b><span>${s.texte}</span><span class="petit muted">Critère :</span>${sel(s,i)}</div>`).join('')}</div>${actionsHTML(w.id)}</div>`;
+  }
+  return `<div class="widget" data-w="${w.id}"><div class="schema-chaine">${w.slots.map((s,i)=>`${i ? '<span class="fl" aria-hidden="true">→</span>' : ''}<div class="bx" id="bx-${w.id}-${i}"><b>${s.titre}</b>${sel(s,i)}</div>`).join('')}</div>${actionsHTML(w.id)}</div>`;
+};
+
+R.tableau = w => {
+  const sv = ETAT.answers[w.id] || {};
+  return `<div class="widget"><div class="tablewrap"><table class="tab-saisie"><thead><tr>${w.cols.map(c=>`<th scope="col">${esc(c)}</th>`).join('')}</tr></thead><tbody>
+  ${w.rows.map((r,ri)=>`<tr>${r.map((c,ci)=> c === null ? `<td><input type="text" data-tab="${w.id}" data-k="${ri}-${ci}" value="${esc(sv[ri+'-'+ci] || '')}" aria-label="${esc(w.cols[ci])}, ligne ${ri+1}"></td>` : `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}
+  </tbody></table></div><div class="sauve">Tableau enregistré automatiquement dans ce navigateur.</div></div>`;
+};
+
+/* ----- Simulateur : débit montant et fluidité de la vidéo ----- */
+const RESOLUTIONS = {'720p':1, '1080p':2, '2K':4};
+const CONNEXIONS = {'ADSL (montant ≈ 1 Mbit/s)':1, 'VDSL (montant ≈ 8 Mbit/s)':8, 'Fibre (montant ≈ 300 Mbit/s)':300};
+R.simDebit = w => `<div class="sim" id="sim-${w.id}">
+  <div class="ctrl">
+    <label>Résolution : <select data-r="res">${Object.keys(RESOLUTIONS).map(k=>`<option ${k==='1080p'?'selected':''}>${k}</option>`).join('')}</select></label>
+    <label>Connexion de la maison : <select data-r="cx">${Object.keys(CONNEXIONS).map(k=>`<option>${k}</option>`).join('')}</select></label>
+    <label>Personnes qui regardent : <input type="range" min="1" max="4" value="1" data-r="n"> <output data-o="n">1</output></label>
+  </div>
+  <canvas width="760" height="70" aria-label="Jauge : débit nécessaire comparé au débit montant disponible"></canvas>
+  <div class="resultat" data-o="res" aria-live="polite"></div>
+  <p class="petit muted">Modèle simplifié : la caméra envoie un flux par personne qui regarde ; débits typiques (720p ≈ 1 Mbit/s, 1080p ≈ 2 Mbit/s, 2K ≈ 4 Mbit/s).</p></div>`;
+function initSimDebit(id){
+  const box = $('#sim-' + id); if (!box) return;
+  const g = k => $(`[data-r=${k}]`, box), cv = $('canvas', box), ctx = cv.getContext('2d'), out = $('[data-o=res]', box);
+  function maj(){
+    $('[data-o=n]', box).textContent = g('n').value;
+    const besoin = RESOLUTIONS[g('res').value] * +g('n').value, dispo = CONNEXIONS[g('cx').value];
+    const ok = besoin <= dispo * 0.8; const max = Math.max(besoin, Math.min(dispo, 20)) * 1.2;
+    ctx.clearRect(0,0,cv.width,cv.height); ctx.font = '13px sans-serif';
+    const L = cv.width - 40, x = v => 20 + Math.min(v / max, 1) * L;
+    ctx.fillStyle = '#e6eded'; ctx.fillRect(20, 12, L, 18); ctx.fillStyle = ok ? '#2E7D5B' : '#B3261E'; ctx.fillRect(20, 12, x(besoin) - 20, 18);
+    ctx.fillStyle = '#14262B'; ctx.fillText(`débit nécessaire : ${besoin} Mbit/s`, 24, 26 + 24);
+    ctx.strokeStyle = '#12395F'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(x(dispo), 6); ctx.lineTo(x(dispo), 36); ctx.stroke(); ctx.lineWidth = 1;
+    ctx.fillStyle = '#12395F'; ctx.fillText(dispo > max ? `débit montant : ${dispo} Mbit/s (hors échelle) →` : `débit montant : ${dispo} Mbit/s`, Math.max(20, Math.min(x(dispo) - 60, cv.width - 280)), 66);
+    out.textContent = ok ? `✔ Vidéo fluide : ${besoin} Mbit/s nécessaires pour ${dispo} Mbit/s disponibles. Données envoyées en 1 h : ${besoin * 3600 / 8} Mo.` : `✘ Vidéo saccadée ou de qualité réduite : il faudrait ${besoin} Mbit/s, la connexion n’en offre que ${dispo} en montant (une marge est nécessaire pour les autres usages de la maison).`;
+    out.className = 'resultat ' + (ok ? 'ok-bg' : 'ko-bg');
+  }
+  ['res','cx'].forEach(k => g(k).addEventListener('change', maj)); g('n').addEventListener('input', maj); maj();
+}
+
+/* ----- Outil 3 : diagnostic de panne par tests ----- */
+R.diag = w => {
+  const faits = ETAT.answers[w.id + '-tests'] || []; const sv = ETAT.answers[w.id] || [];
+  return `<div class="widget" data-w="${w.id}"><p class="consigne">Tests disponibles (clique pour réaliser un test) :</p>
+  <div class="diag-tests">${w.tests.map((te,i)=>`<div class="diag-test"><button class="btn petit" type="button" data-act="diagtest" data-id="${w.id}" data-i="${i}" ${faits.includes(i)?'disabled':''}>${faits.includes(i)?'✔ ':''}Test ${i+1} — ${te.l}</button><div class="fb ok" id="dt-${w.id}-${i}">${faits.includes(i) ? te.r : ''}</div></div>`).join('')}</div>
+  <p class="petit"><strong>Tests réalisés : <span id="nbt-${w.id}">${faits.length}</span></strong></p>
+  <label class="lbl" for="dg-${w.id}">Mon diagnostic : la cause de la panne est…</label>
+  <select id="dg-${w.id}" data-champ="${w.id}" data-i="0"><option value="">— choisir —</option>${w.options.map((o,i)=>`<option value="${i}" ${String(sv[0])===String(i)?'selected':''}>${esc(o)}</option>`).join('')}</select>
+  <div class="fb" id="fb-${w.id}-0"></div>${actionsHTML(w.id)}</div>`;
+};
+function testDiag(id, i){
+  const w = WIDGETS[id].def; const k = id + '-tests'; const faits = ETAT.answers[k] || [];
+  if (!faits.includes(i)) faits.push(i); ETAT.answers[k] = faits; sauver();
+  const b = $(`[data-act="diagtest"][data-id="${id}"][data-i="${i}"]`); b.disabled = true; b.textContent = '✔ ' + b.textContent;
+  $(`#dt-${id}-${i}`).textContent = w.tests[i].r; $(`#nbt-${id}`).textContent = faits.length;
+}
+
+/* ----- Outil 4 : tableau de décision pondéré (générique) ----- */
+R.decision = w => {
+  const sv = ETAT.answers[w.id] || {p:w.criteres.map(()=>1), budget:true};
+  return `<div class="widget decision" data-w="${w.id}"><label class="opt" style="margin-bottom:8px"><input type="checkbox" data-dec="budget" ${sv.budget ? 'checked' : ''}><span>${w.exigence.label}</span></label>
+  <div class="tablewrap"><table><thead><tr><th>Critère (note sur 5)</th><th class="num">Poids (0 à 3)</th>${w.produits.map(r=>`<th class="num">${r.n}</th>`).join('')}</tr></thead><tbody>
+  ${w.criteres.map((c,i)=>`<tr><td>${c.c}</td><td class="num"><select data-dec="p" data-i="${i}" aria-label="Poids : ${esc(c.c)}">${[0,1,2,3].map(v=>`<option ${sv.p[i]==v?'selected':''}>${v}</option>`).join('')}</select></td>${c.notes.map(n=>`<td class="num">${n}</td>`).join('')}</tr>`).join('')}
+  </tbody><tfoot><tr><th colspan="2">Score pondéré (Σ poids × note)</th>${w.produits.map((r,i)=>`<th class="num" id="tot-${w.id}-${i}"></th>`).join('')}</tr></tfoot></table></div>
+  <div class="resultat" id="res-${w.id}" aria-live="polite"></div></div>`;
+};
+function majDecision(id){
+  const box = $(`[data-w="${id}"]`); if (!box) return; const w = WIDGETS[id].def;
+  const p = $$('[data-dec=p]', box).map(s => +s.value); const budget = $('[data-dec=budget]', box).checked;
+  ETAT.answers[id] = {p, budget}; sauver();
+  const tot = w.produits.map((r,i) => w.criteres.reduce((a,c,k)=>a + p[k]*c.notes[i], 0));
+  const exclu = w.produits.map((r,i) => budget && w.exigence.exclus.includes(i));
+  w.produits.forEach((r,i) => { $(`#tot-${id}-${i}`).textContent = exclu[i] ? `${tot[i]} — ${w.exigence.motif}` : tot[i]; });
+  const cands = w.produits.map((r,i)=>({r,i,t:tot[i]})).filter(o=>!exclu[o.i]).sort((a,b)=>b.t-a.t);
+  let msg = cands.length ? `Classement : ${cands.map((o,k)=>`${k+1}. ${o.r.n} (${o.t})`).join(' · ')}.` : 'Aucun modèle retenu.';
+  if (cands.length > 1 && cands[0].t === cands[1].t) msg += ' Égalité : il faut départager par un argument supplémentaire.';
+  let alerte = false; (w.alertes || []).forEach(a => { if (p[a.i] === 0){ msg += ' ⚠ ' + a.msg; alerte = true; } });
+  const res = $(`#res-${id}`); res.textContent = msg; res.className = 'resultat ' + (alerte ? 'ko-bg' : 'ok-bg');
+}
+
+/* =====================================================================
+   10. VÉRIFICATIONS ET SCORES
+   ===================================================================== */
+function collecter(id){
+  const w = WIDGETS[id] && WIDGETS[id].def; if (!w) return;
+  const box = $(`[data-w="${id}"]`); if (!box) return;
+  if (w.t === 'qcm'){ const o = {}; w.qs.forEach((q,qi)=>{ o[qi] = $$(`input[data-q="${qi}"]`, box).filter(i=>i.checked).map(i=>+i.value); }); ETAT.answers[id] = o; }
+  else if (w.t === 'ordre'){ ETAT.answers[id] = $$('li', $('#ol-' + id)).map(li => +li.dataset.i); }
+  else { const a = []; $$('[data-champ]', box).forEach(el => { a[+el.dataset.i] = el.value; }); ETAT.answers[id] = a; }
+  sauver();
+}
+const VERIF = {
+  diag(w, box){ const sel = $(`#dg-${w.id}`); const n = (ETAT.answers[w.id + '-tests'] || []).length; const bon = sel.value !== '' && +sel.value === w.a; sel.classList.toggle('ok-bg', bon); sel.classList.toggle('ko-bg', !bon); const f = $(`#fb-${w.id}-0`);
+    if (sel.value === ''){ f.className = 'fb ko'; f.textContent = 'Choisis un diagnostic.'; return [0,1]; }
+    if (!n){ f.className = 'fb ko'; f.textContent = 'Un diagnostic se justifie par des tests : réalise d’abord des tests.'; return [0,1]; }
+    f.className = 'fb ' + (bon ? 'ok' : 'ko'); f.textContent = bon ? `✔ Bon diagnostic, avec ${n} test(s). ${n <= 4 ? 'Démarche efficace.' : 'Tu aurais pu conclure avec moins de tests : lesquels étaient inutiles ?'}` : '✘ Ce diagnostic est contredit par au moins un de tes tests. Relis les résultats (ou réalise un autre test).'; return [bon ? 1 : 0, 1]; },
+  tri(w, box){ let ok = 0; w.items.forEach((it,i) => { const s = $(`select[data-i="${i}"]`, box); const bon = s.value !== '' && +s.value === it.a; ok += bon; s.classList.toggle('ok-bg', bon); s.classList.toggle('ko-bg', !bon); const f = $(`#fb-${w.id}-${i}`); f.className = 'fb ' + (bon ? '' : 'ko'); f.textContent = bon ? '' : (s.value === '' ? 'Choisis une réponse.' : (it.fb ? '↺ ' + 'Indice : ' + it.fb : 'Ce n’est pas la bonne famille.')); }); return [ok, w.items.length]; },
+  schema(w, box){ let ok = 0; w.slots.forEach((sl,i) => { const s = $(`select[data-i="${i}"]`, box); const bon = s.value !== '' && +s.value === sl.a; ok += bon; $(`#bx-${w.id}-${i}`).classList.toggle('ok-bg', bon); $(`#bx-${w.id}-${i}`).classList.toggle('ko-bg', !bon); }); return [ok, w.slots.length]; },
+  qcm(w, box){ let ok = 0; w.qs.forEach((q,qi) => { const sel = $$(`input[data-q="${qi}"]`, box).filter(i=>i.checked).map(i=>+i.value).sort(); const att = (Array.isArray(q.a) ? q.a.slice() : [q.a]).sort(); const bon = sel.length === att.length && sel.every((v,k)=>v===att[k]); ok += bon; const f = $(`#fb-${w.id}-${qi}`);
+      if (!sel.length){ f.className = 'fb ko'; f.textContent = 'Choisis une réponse.'; return; }
+      const fbOpt = !bon && q.fb && sel.length === 1 && q.fb[sel[0]] ? q.fb[sel[0]] + ' ' : '';
+      f.className = 'fb ' + (bon ? 'ok' : 'ko'); f.textContent = bon ? '✔ ' + q.ex : '✘ ' + (fbOpt || (Array.isArray(q.a) ? 'Vérifie chaque proposition : il y a ' + q.a.length + ' bonnes réponses. ' : 'Relis la question et réessaie. ')); }); return [ok, w.qs.length]; },
+  ordre(w, box){ const ord = $$('li', $('#ol-' + w.id)).map(li => +li.dataset.i); const bons = [w.lignes.map((_,i)=>i)].concat(w.alt || []);
+      const ref = bons.find(b => b.every((v,i)=>v===ord[i])) || bons[0]; let ok = 0;
+      $$('li', $('#ol-' + w.id)).forEach((li,i) => { const b = ord[i] === ref[i]; ok += b; li.classList.toggle('ok-bg', b); li.classList.toggle('ko-bg', !b); });
+      const f = $('#fb-' + w.id); f.className = 'fb ' + (ok === ord.length ? 'ok' : 'ko'); f.textContent = ok === ord.length ? '✔ Programme dans le bon ordre.' : `✘ ${ord.length - ok} ligne(s) mal placée(s) (en rouge). Utilise les aides si besoin.`; return [ok, ord.length]; },
+  trous(w, box){ let ok = 0; w.blancs.forEach((b,i) => { const el = $(`[data-champ][data-i="${i}"]`, box); const v = el.value.trim().replace(/\s+/g,''); let bon;
+      if (b.range){ const n = Number(v); bon = v !== '' && Number.isInteger(n) && n >= b.range[0] && n <= b.range[1]; }
+      else bon = b.ok.map(x=>x.replace(/\s+/g,'')).includes(v);
+      ok += bon; el.classList.toggle('ok-bg', bon); el.classList.toggle('ko-bg', !bon); const f = $(`#fb-${w.id}-${i}`); f.className = 'fb ' + (bon ? '' : 'ko'); f.textContent = bon ? '' : `Case ${i+1} : ${b.fb}`; }); return [ok, w.blancs.length]; },
+  numerique(w, box){ let ok = 0; w.qs.forEach((q,i) => { const el = $(`#n-${w.id}-${i}`); const v = parseFloat(el.value.replace(/\s/g,'').replace(',', '.')); const bon = !isNaN(v) && Math.abs(v - q.a) <= q.tol; ok += bon; el.classList.toggle('ok-bg', bon); el.classList.toggle('ko-bg', !bon); const f = $(`#fb-${w.id}-${i}`); f.className = 'fb ' + (bon ? 'ok' : 'ko'); f.textContent = bon ? '✔ ' + q.ex : (isNaN(v) ? 'Écris un nombre.' : '✘ Ce n’est pas la bonne valeur. Vérifie tes calculs (aides disponibles) et réessaie.'); }); return [ok, w.qs.length]; }
+};
+function verifier(id){
+  const w = WIDGETS[id].def, box = $(`[data-w="${id}"]`);
+  collecter(id);
+  const [ok, tot] = VERIF[w.t](w, box);
+  ETAT.scores[id] = {ok, tot, date:new Date().toISOString()}; sauver();
+  const sc = $('#sc-' + id); sc.textContent = `Score : ${ok} / ${tot}`; sc.className = 'score ' + classeScore(ok, tot);
+}
+function afficherScoresExistants(){
+  Object.keys(ETAT.scores).forEach(id => { const sc = $('#sc-' + id); if (sc){ const s = ETAT.scores[id]; sc.textContent = `Dernier score : ${s.ok} / ${s.tot}`; sc.className = 'score ' + classeScore(s.ok, s.tot); } });
+}
+
+/* =====================================================================
+   11. PAGES
+   ===================================================================== */
+const ROBOT_SVG = `<svg viewBox="0 0 300 200" role="img" aria-label="Illustration : caméra IP, chat et téléphone" style="width:100%;max-width:340px;display:block;margin:auto">
+<rect x="0" y="178" width="300" height="22" fill="#dfe9e8"/>
+<rect x="40" y="140" width="70" height="14" rx="5" fill="#5A6C71"/><rect x="62" y="120" width="26" height="22" fill="#5A6C71"/>
+<circle cx="75" cy="92" r="38" fill="#fff" stroke="#0E6E6B" stroke-width="5"/><circle cx="75" cy="92" r="20" fill="#14262B"/><circle cx="75" cy="92" r="9" fill="#12395F"/><circle cx="70" cy="87" r="3" fill="#fff"/>
+<circle cx="46" cy="70" r="3" fill="#C2185B"/><circle cx="104" cy="70" r="3" fill="#C2185B"/>
+<path d="M120 60 q14 -14 28 0 M114 50 q20 -24 40 0" stroke="#0E6E6B" stroke-width="3" fill="none"/>
+<ellipse cx="160" cy="160" rx="30" ry="18" fill="#c98b4a"/><circle cx="135" cy="140" r="14" fill="#c98b4a"/><path d="M125 130 l2 -12 l8 8 M138 126 l7 -9 l3 12" fill="#c98b4a"/><path d="M188 158 q24 -6 20 -30" stroke="#c98b4a" stroke-width="6" fill="none" stroke-linecap="round"/>
+<rect x="236" y="70" width="44" height="80" rx="7" fill="#14262B"/><rect x="241" y="78" width="34" height="58" fill="#E2EFEE"/><ellipse cx="258" cy="117" rx="10" ry="6" fill="#c98b4a"/><circle cx="252" cy="108" r="5" fill="#c98b4a"/>
+<path d="M205 95 q14 -10 28 0" stroke="#C2185B" stroke-width="2.5" fill="none" stroke-dasharray="4 3"/></svg>`;
+
+function filAriane(items){ return `<nav class="fil" aria-label="Fil d’Ariane">${items.map((it,i)=> it[1] ? `<a href="${it[1]}">${it[0]}</a>` : `<span aria-current="page">${it[0]}</span>`).join('<span aria-hidden="true">›</span>')}</nav>`; }
+
+function pageAccueil(){
+  const comps = SEQUENCE.competences;
+  return `${filAriane([['Accueil']])}
+  <section class="entete"><div class="hero"><div>
+    <span class="kicker">Technologie 3e · Cycle 4 · Séquence</span>
+    <h1>${SEQUENCE.titre}</h1>
+    <p class="probleme">${SEQUENCE.problematique}</p>
+    <div class="meta">${SEQUENCE.reperes.map(tagRep).join('')}<span class="tag gris">${SEQUENCE.duree}</span></div>
+    <p><a class="btn plein" href="#sequence">Découvrir la séquence →</a> <a class="btn" href="#s1">Commencer la séance 1</a></p>
+  </div><div>${ROBOT_SVG}</div></div></section>
+
+  <section class="bloc"><h2>Sommaire des séances</h2>
+    <p class="muted petit">Filtrer par compétence :</p>
+    <div class="chips" role="group" aria-label="Filtrer les séances par compétence">${comps.map(c=>`<button class="chip" type="button" data-act="filtre" data-c="${c}" aria-pressed="false" title="${esc(COMPETENCES[c])}">${c}</button>`).join('')}<button class="chip" type="button" data-act="filtre" data-c="" aria-pressed="true">Toutes</button></div>
+    <div class="cartes" id="cartesSeances">${SEQUENCE.seances.map(s => { const p = progression(s); const pc = p.total ? Math.round(100*p.faits/p.total) : 0; return `<a class="carte" href="#${s.id}" data-comp="${s.comp.join(' ')}">
+      <span class="n">Séance ${s.num} · ${s.duree}${s.evaluation ? ' · Évaluation' : ''}</span><h3>${s.titre}</h3><span class="muted petit">${s.sous}</span>
+      <span class="meta">${s.reperes.map(tagRep).join('')}</span>
+      <span class="petit">${ETAT.done[s.id] ? '<span class="fait">✔ Séance terminée</span>' : `Exercices vérifiés : ${p.faits} / ${p.total}`}</span>
+      <span class="barre" aria-hidden="true"><span style="width:${pc}%"></span></span><span class="fleche">Ouvrir →</span></a>`; }).join('')}</div>
+  </section>
+
+  <section class="bloc"><h2>Mes données</h2>
+    <p>Tes réponses, tes scores et ta progression sont enregistrés <strong>uniquement dans ce navigateur, sur cet appareil</strong>. Ils ne sont pas synchronisés entre plusieurs appareils et peuvent être effacés si l’historique du navigateur est vidé. Pense à exporter ton travail.</p>
+    ${stockageOK ? '' : '<p class="fb ko">⚠ Le stockage local est indisponible dans ce navigateur (mode privé ?) : tes réponses ne seront pas conservées après fermeture.</p>'}
+    <div class="actions"><button class="btn plein" type="button" data-act="exporter">⬇ Exporter mes réponses (.txt)</button><button class="btn" type="button" onclick="window.print()">🖨 Imprimer la page</button><button class="btn" type="button" data-act="reinit">Réinitialiser toutes mes réponses</button></div>
+  </section>
+
+  <section class="bloc prof-only boite-prof"><h2>Espace enseignant</h2><p>Fiches de préparation, analyse de la fiche groupe, traçabilité des compétences, grille d’évaluation et corrigés : <a href="#enseignant">ouvrir l’espace enseignant</a>. Dans chaque séance, les encadrés jaunes donnent le déroulement, le matériel, les réponses attendues et la différenciation.</p></section>`;
+}
+
+function pageSequence(){
+  return `${filAriane([['Accueil','#accueil'],['La séquence']])}
+  <section class="entete"><span class="kicker">Présentation générale</span><h1>${SEQUENCE.titre}</h1><p class="probleme">${SEQUENCE.problematique}</p></section>
+  <section class="bloc"><h2>Situation de départ</h2><div class="situation">${SEQUENCE.situation}</div>
+    <div class="grille2" style="margin-top:14px"><div><h3>Objet technique étudié</h3><p>${SEQUENCE.objet}</p></div><div><h3>Durée</h3><p>${SEQUENCE.duree}</p></div></div></section>
+  <section class="bloc"><h2>Objectifs d’apprentissage</h2><ul>${SEQUENCE.objectifs.map(o=>`<li>${o}</li>`).join('')}</ul></section>
+  <section class="bloc"><h2>Compétences et repères mobilisés</h2>
+    <div class="tablewrap"><table><thead><tr><th>Compétence</th><th>Repère (carte 3e)</th><th>Connaissances associées</th><th>Séances</th></tr></thead><tbody>
+    ${SEQUENCE.reperes.map(code => { const r = repere(code); const ss = SEQUENCE.seances.filter(s=>s.reperes.includes(code)).map(s=>`<a href="#${s.id}">S${s.num}</a>`).join(', '); return `<tr><td><strong>${r[1]}</strong><br><span class="petit muted">${COMPETENCES[r[1]]}</span></td><td>${tagRep(code)}${code===SEQUENCE.reperePrincipal?' <span class="tag gris">repère principal</span>':''}<br>${r[2]}</td><td><ul>${CONNAISSANCES[code].map(k=>`<li>${k}</li>`).join('')}</ul></td><td>${ss}</td></tr>`; }).join('')}
+    </tbody></table></div></section>
+  <section class="bloc"><h2>Prérequis</h2><ul>${SEQUENCE.prerequis.map(p=>`<li>${p}</li>`).join('')}</ul></section>
+  <section class="bloc"><h2>Progression et productions attendues</h2>
+    <div class="tablewrap"><table><thead><tr><th>Séance</th><th>Étape de la démarche</th><th>Problématique de la séance</th><th>Repères</th></tr></thead><tbody>
+    ${SEQUENCE.seances.map(s=>`<tr><td><a href="#${s.id}">S${s.num} — ${s.titre}</a></td><td>${s.etape}</td><td>${s.problematique}</td><td>${s.reperes.join(', ')}</td></tr>`).join('')}</tbody></table></div>
+    <h3>Productions des élèves</h3><ul>${SEQUENCE.productions.map(p=>`<li>${p}</li>`).join('')}</ul></section>`;
+}
+
+function blocWidgets(liste){ return liste.map(w => R[w.t] ? R[w.t](w) : '').join(''); }
+
+function pageSeance(s){
+  const i = SEQUENCE.seances.indexOf(s), prec = SEQUENCE.seances[i-1], suiv = SEQUENCE.seances[i+1];
+  const P = s.prof;
+  const prep = `<section class="boite-prof prof-only"><h2>Fiche de préparation — séance ${s.num}</h2>
+    <div class="grille2"><div><h4>Objectifs</h4><ul>${P.objectifs.map(o=>`<li>${o}</li>`).join('')}</ul></div>
+    <div><h4>Repères et connaissances</h4><ul>${s.reperes.map(c=>`<li><strong>${c}</strong> (${repere(c)[1]}) — ${repere(c)[2]}</li>`).join('')}</ul></div></div>
+    <h4>Déroulement (55 min)</h4><div class="tablewrap"><table><thead><tr><th>Minutes</th><th>Phase</th><th>Ce qui se passe</th></tr></thead><tbody>${P.deroulement.map(d=>`<tr><td>${d[0]}</td><td>${d[1]}</td><td>${d[2]}</td></tr>`).join('')}</tbody></table></div>
+    <h4>Matériel</h4><ul>${P.materiel.map(m=>`<li>${m}</li>`).join('')}</ul>
+    <div class="grille2"><div><h4>Différenciation — soutien</h4><ul>${P.differenciation.aide.map(m=>`<li>${m}</li>`).join('')}</ul></div><div><h4>Différenciation — approfondissement</h4><ul>${P.differenciation.defi.map(m=>`<li>${m}</li>`).join('')}</ul></div></div>
+    ${P.note ? `<h4>Point de vigilance</h4><p>${P.note}</p>` : ''}
+    ${P.corrige ? P.corrige : ''}
+    ${s.evaluation ? grilleHTML() : ''}</section>`;
+  const syn = s.synthese ? `<section class="bloc"><h2>Ma synthèse</h2><details class="depli"><summary>Afficher la synthèse (après les activités et la mise en commun)</summary>
+    <div class="synthese" style="margin-top:10px"><section><h3>Ce que je dois comprendre</h3><ul>${s.synthese.comprendre.map(x=>`<li>${x}</li>`).join('')}</ul></section>
+    <section><h3>Ce que je dois savoir</h3><ul>${s.synthese.savoir.map(x=>`<li>${x}</li>`).join('')}</ul></section>
+    <section><h3>Ce que je dois savoir faire</h3><ul>${s.synthese.savoirFaire.map(x=>`<li>${x}</li>`).join('')}</ul></section>
+    <section><h3>Vocabulaire essentiel</h3><dl class="vocab">${s.synthese.vocab.map(v=>`<dt>${v[0]}</dt><dd>${v[1]}</dd>`).join('')}</dl></section></div></details></section>` : '';
+  return `${filAriane([['Accueil','#accueil'],[SEQUENCE.court,'#sequence'],['Séance ' + s.num]])}
+  <section class="entete"><span class="kicker">Séance ${s.num} / ${SEQUENCE.seances.length} · ${s.duree} · ${s.etape}</span>
+    <h1>${s.titre}</h1><p class="lead">${s.sous}</p><div class="meta">${s.reperes.map(tagRep).join('')}</div></section>
+  ${prep}
+  <section class="bloc"><h2>${s.evaluation ? 'La situation' : 'Mise en situation'}</h2><div class="situation">${s.situation}</div></section>
+  <section class="bloc"><h2>${s.evaluation ? 'Le problème' : 'Mon problème à résoudre'}</h2><p class="probleme">${s.problematique}</p>${s.hypothese ? R.reponse(s.hypothese) : ''}</section>
+  ${s.activites.map((a,k)=>`<section class="bloc" id="${s.id}-a${k+1}"><div class="activite-h"><h2>${s.evaluation ? '' : `<span class="num">${k+1}</span>Activité ${k+1} — `}${a.titre}</h2><span class="duree">⏱ ${a.duree} · ${a.modalite}</span></div>${a.intro || ''}${blocWidgets(a.contenu)}${a.production ? `<span class="production">${a.production}</span>` : ''}</section>`).join('')}
+  <section class="bloc"><h2>${s.evaluation ? 'Après l’évaluation' : 'Mise en commun'}</h2>${s.miseEnCommun}</section>
+  ${syn}
+  ${s.verif && s.verif.length ? `<section class="bloc"><h2>Je vérifie mes acquis</h2>${blocWidgets(s.verif)}</section>` : ''}
+  ${s.defi ? `<section class="bloc"><h2>Pour aller plus loin — défi</h2><p>${s.defi}</p>${R.reponse({id:s.id+'-defi', label:'Ma réponse au défi :', rows:3})}</section>` : ''}
+  <div class="actions noprint" style="margin-top:16px"><button class="btn ${ETAT.done[s.id] ? '' : 'plein'}" type="button" data-act="terminer" data-s="${s.id}">${ETAT.done[s.id] ? '✔ Séance marquée comme terminée (annuler)' : 'J’ai terminé cette séance'}</button></div>
+  <nav class="navseance" aria-label="Séances précédente et suivante">${prec ? `<a class="btn" href="#${prec.id}">← Séance ${prec.num}</a>` : '<a class="btn" href="#sequence">← La séquence</a>'}<a class="btn" href="#accueil">⌂ Accueil</a>${suiv ? `<a class="btn plein" href="#${suiv.id}">Séance ${suiv.num} →</a>` : ''}</nav>`;
+}
+
+function grilleHTML(){
+  return `<h4>Grille d’évaluation par compétences</h4><div class="tablewrap"><table><thead><tr><th>Compétence · repère</th><th>Critère observable</th><th>Maîtrise insuffisante</th><th>Maîtrise fragile</th><th>Maîtrise satisfaisante</th><th>Très bonne maîtrise</th></tr></thead><tbody>
+  ${GRILLE.map(g=>`<tr><td><strong>${g.c}</strong> · ${g.r}</td><td>${g.crit}</td>${g.n.map(n=>`<td>${n}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${SEQUENCE.noteGrille ? `<p class="petit">${SEQUENCE.noteGrille}</p>` : ''}`;
+}
+
+function pageReperes(){
+  const usage = code => SEQUENCE.seances.filter(s=>s.reperes.includes(code));
+  return `${filAriane([['Accueil','#accueil'],['Les 38 repères de 3e']])}
+  <section class="entete"><span class="kicker">Tableau récapitulatif</span><h1>Les 38 repères de progressivité de 3e</h1><p class="lead">Intitulés des cartes 3e (BO n° 9 du 29 février 2024). Les repères non abordés dans cette séquence sont indiqués « non traité ».</p></section>
+  <section class="bloc"><div class="tablewrap"><table><thead><tr><th>Code</th><th>Compétence</th><th>Intitulé du repère</th><th>Séances de la séquence</th></tr></thead><tbody>
+  ${REPERES.map(r=>{ const u = usage(r[0]); return `<tr><td>${tagRep(r[0])}</td><td>${r[1]}</td><td>${r[2]}</td><td>${u.length ? u.map(s=>`<a href="#${s.id}">S${s.num}</a>`).join(', ') : '<span class="muted">Non traité</span>'}</td></tr>`; }).join('')}
+  </tbody></table></div>
+  <p class="petit muted">Bilan : ${SEQUENCE.reperes.length} repères traités sur 38, répartis sur ${SEQUENCE.competences.length} compétences (${SEQUENCE.competences.join(', ')}).</p></section>`;
+}
+
+function pageEnseignant(){
+  if (!PROF) return `${filAriane([['Accueil','#accueil'],['Espace enseignant']])}<section class="entete"><h1>Espace enseignant</h1><p>Active le <strong>mode enseignant</strong> (bouton en haut à droite) pour afficher cette page. Rappel : ce mode n’est qu’un affichage et ne protège pas les corrigés.</p><button class="btn plein" type="button" data-act="prof">Activer le mode enseignant</button></section>`;
+  return `${filAriane([['Accueil','#accueil'],['Espace enseignant']])}
+  <section class="entete"><span class="kicker">Espace enseignant</span><h1>Préparer et conduire la séquence</h1><p class="lead">Analyse de la fiche groupe, traçabilité des compétences, grille d’évaluation, préparation de chaque séance.</p>
+  <p class="petit">Accès rapide aux fiches de préparation : ${SEQUENCE.seances.map(s=>`<a href="#${s.id}">S${s.num}</a>`).join(' · ')}</p></section>
+  <section class="bloc boite-prof"><h2>Analyse de la fiche groupe (JSON)</h2>${ANALYSE_JSON}</section>
+  <section class="bloc boite-prof"><h2>Tableau de traçabilité des compétences</h2>
+   <p class="petit">Filtrer : <span class="chips" role="group" aria-label="Filtrer par compétence">${SEQUENCE.competences.map(c=>`<button class="chip" type="button" data-act="filtreT" data-c="${c}" aria-pressed="false">${c}</button>`).join('')}<button class="chip" type="button" data-act="filtreT" data-c="" aria-pressed="true">Toutes</button></span></p>
+   <div class="tablewrap"><table id="tabTrace"><thead><tr><th>Séance</th><th>Compétence</th><th>Repère</th><th>Connaissance (intitulé de la carte)</th><th>Activité réalisée</th><th>Production</th><th>Critère d’évaluation</th></tr></thead><tbody>
+   ${TRACABILITE.map(t=>{ const s = seance(t[0]); return `<tr data-comp="${t[1]}"><td><a href="#${s.id}">S${s.num}</a> ${s.titre}</td><td>${t[1]}</td><td>${t[2]}</td><td>${CONNAISSANCES[t[2]][t[3]]}</td><td>${t[4]}</td><td>${t[5]}</td><td>${t[6]}</td></tr>`; }).join('')}
+   </tbody></table></div></section>
+  <section class="bloc boite-prof"><h2>Évaluation sommative (séance 7)</h2>${grilleHTML()}<p><a href="#s7">Ouvrir la séance 7 et son corrigé détaillé →</a></p></section>
+  <section class="bloc boite-prof"><h2>Matériel pour la séquence</h2><ul>${SEQUENCE.materiel.map(m=>`<li>${m}</li>`).join('')}</ul></section>
+  <section class="bloc boite-prof"><h2>Données des élèves</h2><p>Les réponses sont stockées dans le navigateur de chaque poste (stockage local), sans compte ni serveur. Pour récupérer un travail : bouton « Exporter mes réponses » sur la page d’accueil (fichier texte), à déposer par exemple via le formulaire de dépôt du site techno-3e.</p></section>`;
+}
+
+function pageRecherche(q){
+  /* normalisation qui conserve la longueur (pour retrouver la position dans le texte d'origine) */
+  const nl = t => t.split('').map(c => c.normalize('NFD').charAt(0)).join('').toLowerCase();
+  const rassembler = (o, acc) => { if (typeof o === 'string') acc.push(strip(o)); else if (Array.isArray(o)) o.forEach(x => rassembler(x, acc)); else if (o && typeof o === 'object') Object.entries(o).forEach(([k,v]) => { if (['id','t','a','layout','_verifiables','comp'].includes(k)) return; if (k === 'prof' && !PROF) return; if (k === 'html' && o.t === 'prof' && !PROF) return; rassembler(v, acc); }); return acc; };
+  const nq = nl(q.trim());
+  const res = [];
+  if (nq.length >= 2){
+    SEQUENCE.seances.forEach(s => {
+      const txt = rassembler(s, []).join(' · ');
+      const n = nl(txt); const pos = n.indexOf(nq);
+      if (pos >= 0){ const deb = Math.max(0, pos - 70); const count = n.split(nq).length - 1;
+        const avant = txt.slice(deb, pos), mot = txt.slice(pos, pos + nq.length), apres = txt.slice(pos + nq.length, pos + nq.length + 110);
+        res.push({s, count, ext: (deb ? '…' : '') + esc(avant) + '<mark>' + esc(mot) + '</mark>' + esc(apres) + '…'}); }
+    });
+    res.sort((a,b)=>b.count-a.count);
+  }
+  return `${filAriane([['Accueil','#accueil'],['Recherche']])}
+  <section class="entete"><h1>Recherche : « ${esc(q)} »</h1><p class="lead">${nq.length < 2 ? 'Saisis au moins deux caractères.' : res.length ? `${res.length} séance(s) contiennent ce mot.` : 'Aucun résultat. Essaie un autre mot (par exemple : capteur, variable, réparabilité, exigence).'}</p></section>
+  ${res.map(r=>`<a class="carte bloc" href="#${r.s.id}" style="display:block"><span class="n">Séance ${r.s.num} · ${r.count} occurrence(s)</span><h3>${r.s.titre}</h3><p class="petit">${r.ext}</p></a>`).join('')}`;
+}
+
+/* =====================================================================
+   12. ROUTEUR ET ÉVÉNEMENTS
+   ===================================================================== */
+function afficher(){
+  const h = decodeURIComponent(location.hash.slice(1)) || 'accueil';
+  const main = $('#main'); let html; let titre = SEQUENCE.titre;
+  const s = seance(h);
+  if (s){ html = pageSeance(s); titre = `Séance ${s.num} — ${s.titre}`; }
+  else if (h === 'sequence'){ html = pageSequence(); titre = 'La séquence — ' + SEQUENCE.court; }
+  else if (h === 'reperes'){ html = pageReperes(); titre = 'Les 38 repères de 3e'; }
+  else if (h === 'enseignant'){ html = pageEnseignant(); titre = 'Espace enseignant'; }
+  else if (h.startsWith('recherche/')){ const q = h.slice(10); html = pageRecherche(q); titre = 'Recherche'; $('#q').value = q; }
+  else if (/^s\d-a\d$/.test(h)){ const [sid] = h.split('-'); location.replace('#' + sid); return; }
+  else html = pageAccueil();
+  main.innerHTML = html; document.title = titre + ' · Technologie 3e';
+  if (s){ const INITS = {simDebit:initSimDebit}; $$('.sim', main).forEach(b => { const id = b.id.slice(4); const w = WIDGETS[id] && WIDGETS[id].def; if (w && INITS[w.t]) INITS[w.t](id); });
+    $$('.decision', main).forEach(b => majDecision(b.dataset.w)); }
+  afficherScoresExistants();
+  window.scrollTo(0,0); main.focus({preventScroll:true});
+}
+window.addEventListener('hashchange', afficher);
+
+function appliquerProf(){ document.body.classList.toggle('prof', PROF); $('#btnProf').setAttribute('aria-pressed', String(PROF)); $('#btnProf').textContent = PROF ? 'Mode enseignant : activé' : 'Mode enseignant'; try { sessionStorage.setItem(CLE + '-prof', PROF ? '1' : '0'); } catch(e){} }
+$('#btnProf').addEventListener('click', () => { PROF = !PROF; appliquerProf(); if (/enseignant|recherche/.test(location.hash)) afficher(); });
+$('#formRecherche').addEventListener('submit', e => { e.preventDefault(); const q = $('#q').value.trim(); if (q) location.hash = 'recherche/' + encodeURIComponent(q); });
+
+/* Délégation : clics */
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  const act = b.dataset.act;
+  if (act === 'verifier') verifier(b.dataset.id);
+  else if (act === 'effacer'){ const id = b.dataset.id; delete ETAT.answers[id]; delete ETAT.answers[id + '-tests']; delete ETAT.scores[id]; sauver(); const box = $(`[data-w="${id}"]`); const w = WIDGETS[id].def; const tmp = document.createElement('div'); tmp.innerHTML = R[w.t](w); box.replaceWith(tmp.firstElementChild); }
+  else if (act === 'aide'){ const box = b.parentElement; const n = +box.dataset.n; const aides = $$('.aide', box); if (aides[n]) aides[n].hidden = false; box.dataset.n = n + 1; if (n + 1 >= aides.length) b.remove(); else b.textContent = `💡 Afficher l’aide ${n+2} / ${aides.length}`; }
+  else if (act === 'haut' || act === 'bas'){ const li = b.closest('li'); const ol = li.parentElement; if (act === 'haut' && li.previousElementSibling) ol.insertBefore(li, li.previousElementSibling); if (act === 'bas' && li.nextElementSibling) ol.insertBefore(li.nextElementSibling, li); $$('li', ol).forEach(x=>x.classList.remove('ok-bg','ko-bg')); collecter(ol.id.slice(3)); b.focus(); }
+  else if (act === 'diagtest') testDiag(b.dataset.id, +b.dataset.i);
+  else if (act === 'terminer'){ const id = b.dataset.s; ETAT.done[id] = !ETAT.done[id]; if (!ETAT.done[id]) delete ETAT.done[id]; sauver(); b.textContent = ETAT.done[id] ? '✔ Séance marquée comme terminée (annuler)' : 'J’ai terminé cette séance'; b.classList.toggle('plein', !ETAT.done[id]); }
+  else if (act === 'filtre' || act === 'filtreT'){ const c = b.dataset.c; $$(`[data-act="${act}"]`).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    const cibles = act === 'filtre' ? $$('#cartesSeances .carte') : $$('#tabTrace tbody tr');
+    cibles.forEach(el => { el.hidden = !!c && !el.dataset.comp.split(' ').includes(c); }); }
+  else if (act === 'exporter') exporter();
+  else if (act === 'reinit'){ if (confirm('Effacer toutes tes réponses, tes scores et ta progression sur cet appareil ? Cette action est définitive.')){ ETAT = {answers:{}, scores:{}, done:{}}; sauver(); afficher(); } }
+  else if (act === 'prof'){ PROF = true; appliquerProf(); afficher(); }
+});
+/* Délégation : saisies */
+document.addEventListener('input', e => {
+  const el = e.target;
+  if (el.dataset.save){ ETAT.answers[el.dataset.save] = el.value; sauver(); }
+  else if (el.dataset.tab){ const id = el.dataset.tab; ETAT.answers[id] = ETAT.answers[id] || {}; ETAT.answers[id][el.dataset.k] = el.value; sauver(); }
+  else if (el.dataset.champ && el.type === 'text'){ el.classList.remove('ok-bg','ko-bg'); collecter(el.dataset.champ); }
+});
+document.addEventListener('change', e => {
+  const el = e.target;
+  if (el.dataset.champ){ el.classList.remove('ok-bg','ko-bg'); collecter(el.dataset.champ); }
+  else if (el.dataset.dec){ majDecision(el.closest('[data-w]').dataset.w); }
+});
+
+/* Export des réponses (fichier texte) */
+function exporter(){
+  const L = [`Technologie 3e — ${SEQUENCE.titre}`, `Export du ${new Date().toLocaleString('fr-FR')}`, `Nom et classe : ______________________`, ''];
+  SEQUENCE.seances.forEach(s => {
+    L.push('='.repeat(60), `SÉANCE ${s.num} — ${s.titre}${ETAT.done[s.id] ? ' (terminée)' : ''}`, '='.repeat(60));
+    Object.entries(WIDGETS).filter(([id,o]) => o.seance === s.id).forEach(([id,o]) => {
+      const w = o.def, a = ETAT.answers[id], sc = ETAT.scores[id];
+      if (w.t === 'reponse' && a) L.push(`• ${strip(w.label)}`, `  ${a.replace(/\n/g,'\n  ')}`, '');
+      if (w.t === 'tableau' && a && Object.values(a).some(v=>v)){ L.push(`• Tableau : ${w.cols.join(' | ')}`); w.rows.forEach((r,ri)=>L.push('  ' + r.map((c,ci)=> c === null ? (a[ri+'-'+ci] || '…') : c).join(' | '))); L.push(''); }
+      if (w.t === 'decision' && a) L.push(`• Tableau de décision — poids : ${a.p.join(', ')} ; exigence budget : ${a.budget ? 'oui' : 'non'}`, '');
+      if (sc) L.push(`• Exercice « ${id} » : score ${sc.ok} / ${sc.tot}`);
+    });
+    const d = ETAT.answers[s.id + '-defi']; if (d) L.push(`• Défi : ${d}`);
+    L.push('');
+  });
+  const blob = new Blob([L.join('\n')], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'mes-reponses-camera-ip.txt'; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+
+appliquerProf();
+afficher();
+</script>
+</body>
+</html>
