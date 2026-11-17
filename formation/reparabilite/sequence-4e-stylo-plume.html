@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Technologie 4e · Réparabilité · Mon stylo plume n'écrit plus</title>
+<style>
+:root{
+  --ink:#1d3c8f;        /* encre bleue */
+  --ink-dark:#0f2257;
+  --ink-soft:#e8edfa;
+  --paper:#fbf8f1;      /* papier */
+  --line:#d9d2c3;
+  --text:#1f2430;
+  --muted:#5d6475;
+  --red:#c0262d;        /* stylo rouge de correction */
+  --red-soft:#fdeeee;
+  --green:#1f7a4d;
+  --green-soft:#e6f4ec;
+  --amber:#a86400;
+  --amber-soft:#fff4e0;
+  --radius:12px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--text);background:var(--paper);line-height:1.55;font-size:16px}
+a{color:var(--ink)}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;color:var(--ink-dark);line-height:1.2}
+h2{font-size:1.75rem;margin:0 0 .4rem}
+h3{font-size:1.25rem;margin:1.6rem 0 .5rem}
+h4{font-size:1.05rem;margin:1.1rem 0 .4rem}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* ---------- En-tête ---------- */
+header.top{background:linear-gradient(135deg,var(--ink-dark),var(--ink));color:#fff;padding:34px 0 26px}
+header.top .kicker{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+header.top h1{color:#fff;font-size:2.3rem;margin:.3rem 0 .4rem}
+header.top p{margin:.2rem 0;opacity:.95;max-width:780px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:4px 11px;border-radius:999px;font-size:.85rem}
+
+/* ---------- Barre d'outils / navigation ---------- */
+nav.bar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+nav.bar .wrap{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+nav.bar a{text-decoration:none;font-size:.88rem;padding:5px 10px;border-radius:8px;color:var(--ink-dark)}
+nav.bar a:hover{background:var(--ink-soft)}
+nav.bar .spacer{flex:1}
+button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--ink);background:#fff;color:var(--ink);padding:6px 12px;font-size:.88rem}
+button.primary{background:var(--ink);color:#fff}
+button:hover{filter:brightness(.95)}
+
+/* ---------- Sections ---------- */
+section.block{padding:42px 0 10px;border-bottom:1px dashed var(--line)}
+.lead{font-size:1.08rem;color:var(--muted);max-width:820px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.card h4{margin-top:0}
+.problem{background:#fff;border-left:6px solid var(--ink);border-radius:var(--radius);padding:18px 22px;margin:16px 0;font-size:1.15rem;font-family:Georgia,serif;color:var(--ink-dark)}
+.problem small{display:block;font-family:"Segoe UI",system-ui,sans-serif;font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+
+.box{border-radius:var(--radius);padding:14px 18px;margin:14px 0;border:1px solid}
+.box.info{background:var(--ink-soft);border-color:#c6d2f2}
+.box.safe{background:var(--amber-soft);border-color:#f1d29b}
+.box.retiens{background:var(--green-soft);border-color:#a9d9bd}
+.box.retiens h4{color:var(--green);margin-top:0}
+.box.safe h4{color:var(--amber);margin-top:0}
+.box.info h4{margin-top:0}
+
+table{border-collapse:collapse;width:100%;margin:10px 0;background:#fff;font-size:.93rem}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--ink-soft);color:var(--ink-dark);font-weight:600}
+td.blank{height:34px}
+.tick{text-align:center}
+
+/* ---------- Séances ---------- */
+.seance-head{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.num{flex:0 0 auto;width:64px;height:64px;border-radius:16px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:1.7rem;font-weight:bold}
+.seance-head .meta{flex:1;min-width:260px}
+.seance-head .meta p{margin:.2rem 0;color:var(--muted)}
+.temps{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:6px;background:var(--ink-soft);color:var(--ink-dark);margin-right:4px}
+
+.timeline{display:flex;margin:16px 0 8px;border-radius:10px;overflow:hidden;border:1px solid var(--line);font-size:.8rem}
+.timeline div{padding:8px 6px;color:#fff;text-align:center;line-height:1.25}
+.timeline div b{display:block;font-size:.9rem}
+.t1{background:#3a5bb8}.t2{background:#2b4aa0}.t3{background:#1d3c8f}.t4{background:#163178}.t5{background:#0f2257}
+
+.objectifs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}
+@media (max-width:820px){.objectifs{grid-template-columns:1fr}}
+.objectifs ul{margin:.3rem 0 0;padding-left:20px}
+.lvl{display:inline-block;font-size:.72rem;font-weight:700;border-radius:5px;padding:1px 6px;margin-right:5px;color:#fff;background:var(--ink)}
+.lvl.n1{background:#5a7bd0}.lvl.n2{background:#3a5bb8}.lvl.n3{background:#1d3c8f}.lvl.n4{background:#0f2257}
+
+.step{display:grid;grid-template-columns:90px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.step:first-of-type{border-top:none}
+.step .when{font-weight:700;color:var(--ink);font-size:.92rem}
+.step .when span{display:block;font-weight:400;color:var(--muted);font-size:.8rem}
+.step p{margin:.2rem 0 .4rem}
+.who{font-size:.8rem;color:var(--muted);font-style:italic}
+
+/* ---------- Fiches élèves ---------- */
+.fiche{background:#fff;border:2px solid var(--ink);border-radius:var(--radius);padding:18px 22px;margin:22px 0;position:relative}
+.fiche::before{content:"FICHE ÉLÈVE";position:absolute;top:-11px;left:18px;background:var(--ink);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.08em;padding:2px 10px;border-radius:6px}
+.fiche .ident{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.88rem;color:var(--muted);border-bottom:1px dotted var(--line);padding-bottom:8px;margin-bottom:10px}
+.fiche .ident span{min-width:150px}
+.q{margin:14px 0 6px}
+.q b.qn{display:inline-block;background:var(--ink);color:#fff;border-radius:6px;padding:0 7px;margin-right:6px;font-size:.85rem}
+.lines{background:repeating-linear-gradient(to bottom,transparent 0,transparent 29px,#c8cfdf 29px,#c8cfdf 30px);min-height:90px;margin:6px 0 10px}
+.lines.l2{min-height:60px}.lines.l4{min-height:120px}.lines.l6{min-height:180px}
+
+/* ---------- Aides graduées ---------- */
+details.aide{background:var(--amber-soft);border:1px solid #f1d29b;border-radius:10px;padding:8px 14px;margin:8px 0}
+details.aide summary{cursor:pointer;font-weight:600;color:var(--amber)}
+
+/* ---------- Corrigés (mode professeur) ---------- */
+.corrige{display:none;background:var(--red-soft);border:1px solid #f3b9bb;border-left:5px solid var(--red);border-radius:10px;padding:12px 16px;margin:10px 0;color:#5a1215}
+.corrige::before{content:"✎ Corrigé / attendus";display:block;font-weight:700;color:var(--red);font-size:.85rem;margin-bottom:4px;letter-spacing:.03em}
+body.prof .corrige{display:block}
+.prof-only{display:none}
+body.prof .prof-only{display:block}
+.mode-flag{font-size:.8rem;padding:3px 9px;border-radius:999px;background:var(--green-soft);color:var(--green);font-weight:700}
+body.prof .mode-flag{background:var(--red-soft);color:var(--red)}
+
+/* ---------- Figures ---------- */
+figure{margin:16px 0;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:.85rem;color:var(--muted);margin-top:6px;text-align:center}
+
+/* ---------- Six temps ---------- */
+.six{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:14px 0}
+@media (max-width:820px){.six{grid-template-columns:repeat(2,1fr)}}
+.six div{background:#fff;border:1px solid var(--line);border-top:5px solid var(--ink);border-radius:10px;padding:10px;font-size:.85rem}
+.six div b{display:block;font-family:Georgia,serif;color:var(--ink-dark);font-size:1rem}
+.six div i{display:block;color:var(--muted);font-style:normal;font-size:.78rem;margin-bottom:4px}
+
+footer{padding:30px 0 50px;color:var(--muted);font-size:.85rem}
+
+/* ---------- Impression ---------- */
+@media print{
+  nav.bar,.noprint{display:none!important}
+  body{background:#fff;font-size:12pt}
+  header.top{background:#fff;color:#000;padding:0}
+  header.top h1,header.top p,header.top .kicker{color:#000}
+  .badge{border-color:#999;color:#000}
+  section.block{border:none;padding-top:10px}
+  .fiche{break-inside:avoid;page-break-inside:avoid}
+  .fiche.newpage{page-break-before:always}
+  figure{break-inside:avoid}
+  details.aide{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="kicker">Technologie · Cycle 4 · Classe de 4e · Parcours « Réparabilité »</div>
+    <h1>Mon stylo plume n'écrit plus : on le jette ?</h1>
+    <p>Une séquence de diagnostic : du symptôme à la cause, de la cause au protocole de réparation, puis à la décision « réparer ou remplacer ».</p>
+    <div class="badges">
+      <span class="badge">5 séances × 50 min</span>
+      <span class="badge">Dominante 4e : DIAGNOSTIQUER</span>
+      <span class="badge">Démarche d'investigation</span>
+      <span class="badge">Groupes de 4</span>
+      <span class="badge">Programme BO n° 9 du 29/02/2024</span>
+    </div>
+  </div>
+</header>
+
+<nav class="bar noprint">
+  <div class="wrap">
+    <a href="index.html">← Atelier réparabilité</a>
+    <a href="#vue">Vue d'ensemble</a>
+    <a href="#prof">Fiche prof</a>
+    <a href="#objet">L'objet</a>
+    <a href="#s1">S1</a><a href="#s2">S2</a><a href="#s3">S3</a><a href="#s4">S4</a><a href="#s5">S5</a>
+    <a href="#eval">Évaluation</a>
+    <a href="#annexes">Annexes</a>
+    <span class="spacer"></span>
+    <span class="mode-flag" id="modeFlag">Mode élève</span>
+    <button id="toggleMode" class="primary">Afficher les corrigés</button>
+    <button onclick="window.print()">Imprimer</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- =========================================================
+     VUE D'ENSEMBLE
+========================================================== -->
+<section class="block" id="vue">
+  <h2>Vue d'ensemble de la séquence</h2>
+  <p class="lead">Le jour d'un contrôle, un stylo plume refuse d'écrire. Réflexe habituel : en racheter un. Les élèves vont montrer qu'on peut <strong>comprendre</strong> la panne, <strong>la prouver</strong> par des tests, puis <strong>réparer</strong> — ou décider en connaissance de cause de ne pas réparer.</p>
+
+  <div class="problem"><small>Problématique de la séquence</small>
+    Comment trouver, de façon méthodique, pourquoi un stylo plume n'écrit plus, pour le réparer plutôt que le jeter ?
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 1000 210" role="img" aria-label="Frise des cinq séances">
+      <defs>
+        <marker id="arrS" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#1d3c8f"/></marker>
+      </defs>
+      <line x1="40" y1="70" x2="965" y2="70" stroke="#1d3c8f" stroke-width="3" marker-end="url(#arrS)"/>
+      <!-- 5 jalons -->
+      <g font-family="Georgia,serif" text-anchor="middle">
+        <g transform="translate(110,70)"><circle r="30" fill="#3a5bb8"/><text y="9" fill="#fff" font-size="26">1</text></g>
+        <g transform="translate(300,70)"><circle r="30" fill="#2b4aa0"/><text y="9" fill="#fff" font-size="26">2</text></g>
+        <g transform="translate(490,70)"><circle r="30" fill="#1d3c8f"/><text y="9" fill="#fff" font-size="26">3</text></g>
+        <g transform="translate(680,70)"><circle r="30" fill="#163178"/><text y="9" fill="#fff" font-size="26">4</text></g>
+        <g transform="translate(870,70)"><circle r="30" fill="#0f2257"/><text y="9" fill="#fff" font-size="26">5</text></g>
+      </g>
+      <g font-family="Segoe UI,Arial,sans-serif" text-anchor="middle" fill="#1f2430">
+        <text x="110" y="128" font-weight="700" font-size="15">COMPRENDRE</text>
+        <text x="110" y="148" font-size="13">Comment l'encre</text><text x="110" y="164" font-size="13">arrive-t-elle au papier ?</text>
+        <text x="300" y="128" font-weight="700" font-size="15">SUPPOSER</text>
+        <text x="300" y="148" font-size="13">Schéma fonctionnel</text><text x="300" y="164" font-size="13">+ carnet d'hypothèses</text>
+        <text x="490" y="128" font-weight="700" font-size="15">TESTER</text>
+        <text x="490" y="148" font-size="13">Tests qui éliminent</text><text x="490" y="164" font-size="13">→ cause prouvée</text>
+        <text x="680" y="128" font-weight="700" font-size="15">RÉPARER</text>
+        <text x="680" y="148" font-size="13">Protocole écrit,</text><text x="680" y="164" font-size="13">éprouvé par un autre groupe</text>
+        <text x="870" y="128" font-weight="700" font-size="15">JUGER + ÉVALUER</text>
+        <text x="870" y="148" font-size="13">Réparer ou remplacer ?</text><text x="870" y="164" font-size="13">Évaluation de transfert</text>
+      </g>
+      <g font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#5d6475" text-anchor="middle">
+        <text x="110" y="25">Temps 1 · 2</text>
+        <text x="300" y="25">Temps 2 · 3 · 4</text>
+        <text x="490" y="25">Temps 5 · 6</text>
+        <text x="680" y="25">Remettre en état · valider</text>
+        <text x="870" y="25">Évaluer · décider</text>
+      </g>
+      <text x="500" y="200" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="12" fill="#5d6475">Fil rouge : le même stylo en panne (« cas mystère ») suit chaque groupe de la séance 2 à la séance 4.</text>
+    </svg>
+    <figcaption>Frise de la séquence : chaque séance correspond à une ou plusieurs étapes de la méthode de diagnostic en six temps.</figcaption>
+  </figure>
+
+  <table>
+    <thead><tr><th style="width:9%">Séance</th><th style="width:27%">Question de la séance</th><th>Ce que font les élèves</th><th style="width:24%">Trace / production</th></tr></thead>
+    <tbody>
+      <tr><td><b>S1</b></td><td>Comment un stylo plume fait-il arriver l'encre sur le papier ?</td><td>Comparent un stylo qui marche et un stylo en panne, démontent le stylo témoin, légendent la vue éclatée, observent la capillarité.</td><td>Vue éclatée légendée, tableau de comparaison, « Ce que je retiens »</td></tr>
+      <tr><td><b>S2</b></td><td>Quelles pannes peuvent empêcher l'encre d'arriver ?</td><td>Construisent le schéma fonctionnel (fonctions/solutions, flux d'encre et d'air), reçoivent leur cas mystère, relèvent des indices, formulent et classent des hypothèses.</td><td>Schéma fonctionnel, carnet d'hypothèses</td></tr>
+      <tr><td><b>S3</b></td><td>Quel test permet d'éliminer le plus d'hypothèses ?</td><td>Choisissent des tests dans une banque, anticipent leurs résultats, les réalisent, concluent sur la cause.</td><td>Tableau des tests, conclusion argumentée</td></tr>
+      <tr><td><b>S4</b></td><td>Un autre groupe peut-il réparer le stylo avec mon protocole ?</td><td>Rédigent un protocole de réparation avec un test de validation ; un autre groupe l'applique ; amélioration du protocole.</td><td>Protocole v1 et v2, fiche retour, fiche d'entretien</td></tr>
+      <tr><td><b>S5</b></td><td>Faut-il toujours réparer ?</td><td>Comparent trois solutions d'écriture avec une grille de réparabilité, débattent, puis passent une évaluation de transfert (vaporisateur).</td><td>Grille de réparabilité, évaluation sommative</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- =========================================================
+     FICHE PROFESSEUR
+========================================================== -->
+<section class="block" id="prof">
+  <h2>Fiche professeur</h2>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Intentions pédagogiques</h4>
+      <p>Faire passer les élèves du « je change la cartouche et on verra » à un <strong>raisonnement justifié</strong> : observer, relier les indices aux blocs fonctionnels, supposer, tester, conclure. La réparation est la conséquence du diagnostic, pas son but. Le stylo plume est idéal : pas de tension, peu coûteux, démontable à la main, et son fonctionnement (capillarité, échange encre/air) est invisible au premier regard — il faut le découvrir.</p>
+    </div>
+    <div class="card">
+      <h4>Situation déclenchante</h4>
+      <p>Le professeur projette (ou joue) la scène : « Contrôle dans 2 minutes. Léa ouvre son stylo plume : rien ne sort. Elle secoue, appuie, griffe la feuille… Le soir, elle en rachète un neuf. » Puis il pose le stylo en panne sur le bureau : <em>« Il est vraiment fichu ? Comment le savoir ? »</em></p>
+      <p>Mini-sondage à main levée : <em>qui a déjà jeté un stylo plume qui n'écrivait plus ? qui sait pourquoi il n'écrivait plus ?</em> L'écart entre les deux réponses lance la séquence.</p>
+    </div>
+  </div>
+
+  <h3>Ancrage dans le programme (BO n° 9 du 29 février 2024)</h3>
+  <p class="who">Les intitulés ci-dessous reprennent le programme du cycle 4. Les colonnes « Dans la séquence » sont des propositions pédagogiques.</p>
+  <table>
+    <thead><tr><th style="width:20%">Thème du programme</th><th style="width:38%">Compétence ou repère visé</th><th>Dans la séquence</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="2"><b>Thème 2</b><br>Structure, fonctionnement, comportement</td><td><b>Identifier un dysfonctionnement et y remédier</b> (détecter, analyser, proposer une solution, réparer, tester, valider).<br><i>Repère 4e : après avoir repéré un dysfonctionnement, définir un protocole de réparation et le mettre en œuvre.</i></td><td>Compétence <b>centrale</b> : S2 à S4, évaluée en S4 (protocole) et en S5 (transfert).</td></tr>
+      <tr><td><b>Décrire et caractériser l'organisation interne d'un objet</b>.<br><i>Repère 4e : étudier la composition interne des objets ; caractériser les flux d'information, d'énergie et de matière.</i></td><td>S1–S2 : vue éclatée, schéma fonctionnel, flux de matière (encre) et flux d'air.</td></tr>
+      <tr><td><b>Thème 3</b><br>Création, conception, réalisation</td><td><b>Valider les solutions par des protocoles de tests</b> (comparer aux exigences, identifier les écarts).<br><i>Repère 4e : identifier et résoudre un problème sur un objet existant.</i></td><td>S3–S4 : tests discriminants, test de validation avec critère mesurable.</td></tr>
+      <tr><td><b>Thème 1</b><br>Usages et interactions</td><td><b>Caractériser et choisir un objet selon différents critères</b> (dont incidences environnementales sur le cycle de vie).<br><i>Connaissances : indice de réparabilité, durabilité, cycle de vie. Repère 4e : argumenter un choix en tenant compte du cycle de vie.</i></td><td>S5 : grille de réparabilité, débat « réparer ou remplacer ».</td></tr>
+    </tbody>
+  </table>
+
+  <div class="grid3">
+    <div class="card"><h4>Prérequis</h4><ul><li>Notion de fonction technique / solution technique (5e).</li><li>Lire un schéma simple, une nomenclature.</li><li>Règles de travail en îlot.</li></ul></div>
+    <div class="card"><h4>Organisation</h4><ul><li>7 groupes de 4 (classe de 28).</li><li>Rôles tournants : <b>manipulateur</b>, <b>secrétaire</b>, <b>gardien du temps et de la sécurité</b>, <b>porte-parole</b>.</li><li>Le même cas mystère suit le groupe de S2 à S4.</li></ul></div>
+    <div class="card"><h4>Vocabulaire travaillé</h4><p>capuchon · plume · bec · fente · trou d'aération · conduit (alimentateur) · ailettes · perçoir · cartouche · convertisseur · corps · capillarité · symptôme · indice · hypothèse · test discriminant · protocole · critère de validation</p></div>
+  </div>
+
+  <h3>Matériel</h3>
+  <table>
+    <thead><tr><th>Par groupe</th><th>Pour la classe (bureau du professeur)</th></tr></thead>
+    <tbody><tr>
+      <td><ul>
+        <li>1 <b>stylo témoin</b> qui fonctionne (même modèle que le stylo en panne)</li>
+        <li>1 <b>stylo en panne</b> préparé (« cas mystère », étiqueté A à H)</li>
+        <li>1 loupe (ou un smartphone en mode macro)</li>
+        <li>1 gobelet d'eau tiède du robinet, 1 petit godet d'encre bleue</li>
+        <li>Papier absorbant, 1 sous-main plastique ou journal</li>
+        <li>Feuilles de test d'écriture (annexe 3)</li>
+      </ul></td>
+      <td><ul>
+        <li>Cartouches « internationales standard » neuves</li>
+        <li>Quelques plumes ou stylos de rechange</li>
+        <li>Feuilles de papier fin (type calque) pour nettoyer une fente</li>
+        <li>2 lames de verre ou 2 plaques plastiques transparentes + eau colorée (expérience de capillarité)</li>
+        <li>Affiche des six temps du diagnostic (annexe 1)</li>
+        <li>Stylos bille jetables et un stylo plume avec convertisseur (S5)</li>
+      </ul></td>
+    </tr></tbody>
+  </table>
+
+  <div class="box safe">
+    <h4>⚠ Sécurité et précautions</h4>
+    <ul>
+      <li>Pas d'eau chaude : <b>eau tiède du robinet</b> uniquement. Pas d'aiguille, de cutter ni d'épingle pour « déboucher » : seul le professeur intervient si nécessaire.</li>
+      <li>La pointe de la plume est fine : on la manipule <b>par le corps</b>, on ne la pose jamais pointe vers le haut.</li>
+      <li>L'encre tache : sous-main, papier absorbant, manches remontées.</li>
+      <li><b>On ne force jamais une pièce.</b> L'extraction de la plume et du conduit ne se fait que sur les modèles où elle est prévue (plume enfichée qu'on retire à la main) et après démonstration du professeur. Sur les autres modèles, le démontage s'arrête à : capuchon, corps, cartouche.</li>
+    </ul>
+  </div>
+
+  <h3>Préparer les cas mystères (à faire 3 à 5 jours avant la séance 2)</h3>
+  <p>Chaque groupe reçoit un stylo étiqueté par une lettre. Seul le professeur connaît la panne. Les cas A, B et F conviennent à des groupes qui ont besoin d'un point d'appui ; les cas C, D, E et surtout H sont plus exigeants.</p>
+  <table>
+    <thead><tr><th style="width:7%">Cas</th><th style="width:28%">Panne réelle</th><th>Comment la préparer</th><th style="width:22%">Difficulté</th></tr></thead>
+    <tbody>
+      <tr><td><b>A</b></td><td>Cartouche vide</td><td>Laisser une cartouche se vider en écrivant (ou la vider et la rincer), puis la remettre en place.</td><td>★☆☆ (indice visible à contre-jour)</td></tr>
+      <tr><td><b>B</b></td><td>Cartouche mal enfoncée : non percée</td><td>Poser une cartouche pleine sur le perçoir sans l'enfoncer, revisser le corps sans pousser.</td><td>★☆☆</td></tr>
+      <tr><td><b>C</b></td><td>Encre séchée dans la fente et le conduit</td><td>Faire écrire le stylo, puis le laisser <b>sans capuchon</b> 3 à 5 jours, plume à l'air.</td><td>★★☆</td></tr>
+      <tr><td><b>D</b></td><td>Becs de la plume désalignés ou écartés</td><td>Sur une plume de rechange : appuyer fortement la pointe sur une surface dure (simule une chute sur la pointe).</td><td>★★☆ (indice à la loupe)</td></tr>
+      <tr><td><b>E</b></td><td>Fente obstruée par une fibre ou un dépôt</td><td>Glisser une fibre de papier ou de tissu dans la fente, puis laisser sécher un peu d'encre dessus.</td><td>★★☆</td></tr>
+      <tr><td><b>F</b></td><td>Cartouche incompatible (mauvais format)</td><td>Mettre une cartouche d'un autre format (courte ou propriétaire) qui ne se perce pas sur ce perçoir.</td><td>★★☆ (comparer au témoin)</td></tr>
+      <tr><td><b>H</b></td><td><b>Fausse panne</b> : le stylo marche, il est mal utilisé</td><td>Stylo en parfait état. Fiche « témoignage » jointe : « Je l'utilise plume retournée, très incliné, en appuyant fort. »</td><td>★★★ (distinguer panne et usage)</td></tr>
+    </tbody>
+  </table>
+  <p class="who">Variante sans matériel : photographier ou filmer les résultats des tests de chaque cas et les donner sous forme de « cartes-résultats » que les groupes retournent quand ils choisissent un test.</p>
+</section>
+
+<!-- =========================================================
+     L'OBJET : STYLO PLUME
+========================================================== -->
+<section class="block" id="objet">
+  <h2>L'objet technique : le stylo plume</h2>
+  <p class="lead">Documents de référence pour le professeur et pour la synthèse de la séance 1. Les schémas sont simplifiés : les formes réelles varient selon les modèles.</p>
+
+  <figure id="fig-eclatee">
+    <svg viewBox="0 0 960 300" role="img" aria-label="Vue éclatée du stylo plume">
+      <defs>
+        <linearGradient id="gBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4f6fc6"/><stop offset=".5" stop-color="#1d3c8f"/><stop offset="1" stop-color="#132a6b"/></linearGradient>
+        <linearGradient id="gNib" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3f4f7"/><stop offset=".5" stop-color="#b8bdc8"/><stop offset="1" stop-color="#8d93a1"/></linearGradient>
+        <linearGradient id="gGrip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#555"/><stop offset=".5" stop-color="#2b2b2b"/><stop offset="1" stop-color="#1a1a1a"/></linearGradient>
+        <linearGradient id="gCart" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef2ff"/><stop offset="1" stop-color="#cfd8f3"/></linearGradient>
+      </defs>
+      <!-- axe -->
+      <line x1="20" y1="150" x2="940" y2="150" stroke="#c8cfdf" stroke-dasharray="6 6"/>
+
+      <!-- 1 Capuchon -->
+      <rect x="20" y="126" width="180" height="48" rx="22" fill="url(#gBody)"/>
+      <rect x="70" y="114" width="110" height="9" rx="4" fill="#9aa3b5"/>
+      <rect x="70" y="114" width="9" height="20" rx="3" fill="#9aa3b5"/>
+
+      <!-- 2 Plume (pointe à gauche) -->
+      <path d="M232,140 Q258,128 292,126 L330,126 L330,146 L292,146 Q262,146 232,140 Z" fill="url(#gNib)" stroke="#6b7180"/>
+      <line x1="233" y1="140" x2="286" y2="137" stroke="#3a3f4b" stroke-width="1.4"/>
+      <circle cx="290" cy="136.5" r="3.2" fill="#3a3f4b"/>
+
+      <!-- 3 Conduit / alimentateur -->
+      <path d="M246,162 L338,158 L338,172 L256,172 Q248,170 246,162 Z" fill="#2f2f2f"/>
+      <g stroke="#777" stroke-width="2">
+        <line x1="290" y1="163" x2="290" y2="172"/><line x1="298" y1="162" x2="298" y2="172"/><line x1="306" y1="162" x2="306" y2="172"/><line x1="314" y1="161" x2="314" y2="172"/><line x1="322" y1="160" x2="322" y2="172"/>
+      </g>
+      <line x1="252" y1="163" x2="336" y2="160" stroke="#4c74e0" stroke-width="1.6"/>
+
+      <!-- 4 Section (corps avant) + perçoir -->
+      <path d="M370,134 L470,128 L470,172 L370,166 Q362,150 370,134 Z" fill="url(#gGrip)"/>
+      <rect x="470" y="143" width="22" height="14" rx="3" fill="#6b6b6b"/>
+      <polygon points="492,145 504,150 492,155" fill="#6b6b6b"/>
+
+      <!-- 5 Cartouche -->
+      <rect x="530" y="132" width="140" height="36" rx="8" fill="url(#gCart)" stroke="#8ea0d6"/>
+      <rect x="532" y="134" width="96" height="32" rx="6" fill="#2448b5" opacity=".85"/>
+      <rect x="524" y="138" width="10" height="24" rx="3" fill="#cfd8f3" stroke="#8ea0d6"/>
+      <circle cx="645" cy="150" r="4" fill="#fff" stroke="#8ea0d6"/>
+      <circle cx="656" cy="144" r="3" fill="#fff" stroke="#8ea0d6"/>
+
+      <!-- 6 Corps -->
+      <path d="M710,128 L900,128 Q936,128 936,150 Q936,172 900,172 L710,172 Z" fill="url(#gBody)"/>
+      <rect x="704" y="132" width="10" height="36" rx="3" fill="#9aa3b5"/>
+
+      <!-- Repères -->
+      <g font-family="Segoe UI,Arial,sans-serif" font-size="14" fill="#1f2430">
+        <g stroke="#1d3c8f" stroke-width="1.2">
+          <line x1="110" y1="112" x2="110" y2="70"/>
+          <line x1="280" y1="126" x2="280" y2="70"/>
+          <line x1="300" y1="172" x2="300" y2="228"/>
+          <line x1="420" y1="130" x2="420" y2="70"/>
+          <line x1="498" y1="157" x2="498" y2="228"/>
+          <line x1="600" y1="132" x2="600" y2="70"/>
+          <line x1="820" y1="128" x2="820" y2="70"/>
+        </g>
+        <g text-anchor="middle">
+          <circle cx="110" cy="56" r="13" fill="#1d3c8f"/><text x="110" y="61" fill="#fff" font-weight="700">1</text>
+          <circle cx="280" cy="56" r="13" fill="#1d3c8f"/><text x="280" y="61" fill="#fff" font-weight="700">2</text>
+          <circle cx="300" cy="242" r="13" fill="#1d3c8f"/><text x="300" y="247" fill="#fff" font-weight="700">3</text>
+          <circle cx="420" cy="56" r="13" fill="#1d3c8f"/><text x="420" y="61" fill="#fff" font-weight="700">4</text>
+          <circle cx="498" cy="242" r="13" fill="#1d3c8f"/><text x="498" y="247" fill="#fff" font-weight="700">5</text>
+          <circle cx="600" cy="56" r="13" fill="#1d3c8f"/><text x="600" y="61" fill="#fff" font-weight="700">6</text>
+          <circle cx="820" cy="56" r="13" fill="#1d3c8f"/><text x="820" y="61" fill="#fff" font-weight="700">7</text>
+        </g>
+        <g class="lbl" text-anchor="middle" font-size="13" fill="#1d3c8f">
+          <text x="110" y="30">Capuchon</text>
+          <text x="280" y="30">Plume</text>
+          <text x="300" y="275">Conduit (alimentateur)</text>
+          <text x="420" y="30">Section (corps avant)</text>
+          <text x="498" y="275">Perçoir</text>
+          <text x="600" y="30">Cartouche d'encre</text>
+          <text x="820" y="30">Corps</text>
+        </g>
+      </g>
+    </svg>
+    <figcaption>Vue éclatée simplifiée d'un stylo plume à cartouche. Version élève : masquer les noms (bouton ci-dessous) et faire légender les numéros.</figcaption>
+  </figure>
+  <p class="noprint" style="text-align:center"><button id="toggleLabels">Masquer / afficher les noms de la vue éclatée</button></p>
+
+  <figure id="fig-coupe">
+    <svg viewBox="0 0 960 330" role="img" aria-label="Coupe du stylo plume : flux d'encre et flux d'air">
+      <defs>
+        <marker id="arrInk" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#1d3c8f"/></marker>
+        <marker id="arrAir" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#8a8f9c"/></marker>
+      </defs>
+      <!-- papier -->
+      <rect x="18" y="120" width="14" height="130" fill="#f3efe4" stroke="#d9d2c3"/>
+      <text x="25" y="270" text-anchor="middle" font-family="Segoe UI,Arial" font-size="12" fill="#5d6475">papier</text>
+      <!-- section (corps avant) en transparence -->
+      <path d="M200,118 L420,108 L420,232 L200,222 Z" fill="#2b2b2b" opacity=".12" stroke="#2b2b2b" stroke-opacity=".35"/>
+      <text x="300" y="248" text-anchor="middle" font-family="Segoe UI,Arial" font-size="12" fill="#5d6475">section (corps avant), en transparence</text>
+      <!-- plume -->
+      <path d="M34,150 Q80,128 150,124 L330,124 L330,150 Z" fill="#c9ced8" stroke="#6b7180" stroke-width="1.5"/>
+      <line x1="34" y1="150" x2="140" y2="141" stroke="#3a3f4b" stroke-width="2"/>
+      <circle cx="146" cy="140" r="5" fill="#3a3f4b"/>
+      <text x="120" y="112" text-anchor="middle" font-family="Segoe UI,Arial" font-size="12" fill="#1f2430">plume : fente + trou d'aération</text>
+      <!-- conduit -->
+      <path d="M40,152 L400,152 L400,200 L120,200 Q60,196 40,152 Z" fill="#2f2f2f"/>
+      <g stroke="#777" stroke-width="3"><line x1="210" y1="176" x2="210" y2="200"/><line x1="230" y1="176" x2="230" y2="200"/><line x1="250" y1="176" x2="250" y2="200"/><line x1="270" y1="176" x2="270" y2="200"/><line x1="290" y1="176" x2="290" y2="200"/></g>
+      <!-- canal d'encre (haut) et canal d'air (bas) -->
+      <line x1="44" y1="157" x2="430" y2="157" stroke="#4c74e0" stroke-width="4"/>
+      <line x1="70" y1="170" x2="430" y2="170" stroke="#bfc4cf" stroke-width="3"/>
+      <text x="250" y="216" text-anchor="middle" font-family="Segoe UI,Arial" font-size="12" fill="#1f2430">conduit + ailettes</text>
+      <!-- perçoir -->
+      <rect x="420" y="150" width="30" height="26" rx="3" fill="#6b6b6b"/>
+      <!-- cartouche -->
+      <rect x="450" y="128" width="150" height="70" rx="12" fill="#eef2ff" stroke="#8ea0d6" stroke-width="2"/>
+      <rect x="454" y="132" width="104" height="62" rx="9" fill="#2448b5" opacity=".85"/>
+      <circle cx="574" cy="150" r="8" fill="#fff" stroke="#8ea0d6"/>
+      <circle cx="586" cy="174" r="6" fill="#fff" stroke="#8ea0d6"/>
+      <circle cx="570" cy="182" r="4" fill="#fff" stroke="#8ea0d6"/>
+      <text x="525" y="118" text-anchor="middle" font-family="Segoe UI,Arial" font-size="12" fill="#1f2430">cartouche</text>
+      <!-- flux d'encre : vers la gauche -->
+      <path d="M520,70 L60,70" stroke="#1d3c8f" stroke-width="3" fill="none" marker-end="url(#arrInk)"/>
+      <path d="M60,70 L36,140" stroke="#1d3c8f" stroke-width="3" fill="none" marker-end="url(#arrInk)"/>
+      <text x="290" y="60" text-anchor="middle" font-family="Segoe UI,Arial" font-size="13" font-weight="700" fill="#1d3c8f">l'encre descend vers la pointe (capillarité)</text>
+      <!-- flux d'air : vers la droite -->
+      <path d="M60,285 L560,285 L575,205" stroke="#8a8f9c" stroke-width="2.5" stroke-dasharray="7 5" fill="none" marker-end="url(#arrAir)"/>
+      <text x="300" y="305" text-anchor="middle" font-family="Segoe UI,Arial" font-size="13" font-weight="700" fill="#5d6475">l'air remonte par le canal d'air et forme des bulles dans la cartouche</text>
+      <!-- légendes -->
+      <g font-family="Segoe UI,Arial,sans-serif" font-size="13">
+        <rect x="625" y="20" width="320" height="292" rx="10" fill="#fff" stroke="#d9d2c3"/>
+        <line x1="643" y1="48" x2="683" y2="48" stroke="#1d3c8f" stroke-width="3" marker-end="url(#arrInk)"/>
+        <text x="693" y="52" fill="#1d3c8f" font-weight="700">Flux de matière : l'encre</text>
+        <text x="643" y="74" fill="#1f2430">cartouche → perçoir → canal du conduit</text>
+        <text x="643" y="92" fill="#1f2430">→ fente de la plume → papier.</text>
+        <text x="643" y="112" fill="#1f2430">L'encre avance par <tspan font-weight="700">capillarité</tspan> : elle</text>
+        <text x="643" y="130" fill="#1f2430">monte dans les espaces très étroits.</text>
+        <line x1="643" y1="162" x2="683" y2="162" stroke="#8a8f9c" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arrAir)"/>
+        <text x="693" y="166" fill="#5d6475" font-weight="700">Flux d'air (sens inverse)</text>
+        <text x="643" y="188" fill="#1f2430">Chaque goutte d'encre qui sort est</text>
+        <text x="643" y="206" fill="#1f2430">remplacée par une bulle d'air qui entre</text>
+        <text x="643" y="224" fill="#1f2430">par le canal d'air du conduit.</text>
+        <text x="643" y="252" fill="#1f2430"><tspan font-weight="700">Ailettes</tspan> : réserve tampon d'encre,</text>
+        <text x="643" y="270" fill="#1f2430">évitent les pâtés (chaleur, altitude).</text>
+        <text x="643" y="296" fill="#1f2430"><tspan font-weight="700">Capuchon</tspan> : empêche l'encre de sécher.</text>
+      </g>
+    </svg>
+    <figcaption>Coupe de principe (stylo à l'horizontale, pointe à gauche) : l'encre va vers la pointe, l'air remonte vers la cartouche. Si l'un des deux flux est bloqué, le stylo n'écrit plus.</figcaption>
+  </figure>
+
+  <figure id="fig-becs">
+    <svg viewBox="0 0 960 250" role="img" aria-label="Becs de plume alignés ou désalignés">
+      <g font-family="Segoe UI,Arial,sans-serif" font-size="14" text-anchor="middle">
+        <!-- bon -->
+        <g transform="translate(150,30)">
+          <path d="M0,150 L-40,30 Q-38,0 0,-10 Q38,0 40,30 Z" fill="#c9ced8" stroke="#6b7180" stroke-width="2"/>
+          <line x1="0" y1="150" x2="0" y2="60" stroke="#3a3f4b" stroke-width="2"/>
+          <circle cx="0" cy="54" r="6" fill="#3a3f4b"/>
+          <text y="185" fill="#1f7a4d" font-weight="700">Becs alignés, fente fine</text>
+          <text y="203" fill="#5d6475" font-size="12">l'encre descend : le stylo écrit</text>
+        </g>
+        <!-- écartés -->
+        <g transform="translate(480,30)">
+          <path d="M-8,150 L-40,30 Q-38,0 0,-10 Q38,0 40,30 L8,150 L2,62 L-2,62 Z" fill="#c9ced8" stroke="#6b7180" stroke-width="2"/>
+          <circle cx="0" cy="54" r="6" fill="#3a3f4b"/>
+          <text y="185" fill="#c0262d" font-weight="700">Becs écartés</text>
+          <text y="203" fill="#5d6475" font-size="12">fente trop large : plus de capillarité</text>
+        </g>
+        <!-- croisés -->
+        <g transform="translate(810,30)">
+          <path d="M0,150 L-40,30 Q-38,0 0,-10 Q38,0 40,30 Z" fill="#c9ced8" stroke="#6b7180" stroke-width="2"/>
+          <path d="M0,150 L-2,128 L14,140 Z" fill="#9aa1b0" stroke="#6b7180"/>
+          <line x1="0" y1="150" x2="0" y2="60" stroke="#3a3f4b" stroke-width="2"/>
+          <circle cx="0" cy="54" r="6" fill="#3a3f4b"/>
+          <text y="185" fill="#c0262d" font-weight="700">Becs désalignés</text>
+          <text y="203" fill="#5d6475" font-size="12">un bec plus haut : la plume gratte</text>
+        </g>
+      </g>
+    </svg>
+    <figcaption>Ce qu'on observe à la loupe sur la pointe de la plume (vue de dessus, très agrandie).</figcaption>
+  </figure>
+</section>
+
+<!-- =========================================================
+     SÉANCE 1
+========================================================== -->
+<section class="block" id="s1">
+  <div class="seance-head">
+    <div class="num">1</div>
+    <div class="meta">
+      <h2>Comment l'encre arrive-t-elle sur le papier ?</h2>
+      <p><span class="temps">Temps 1 · Observer</span><span class="temps">Temps 2 · Décomposer</span> 50 min · groupes de 4</p>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="t1" style="width:10%"><b>5'</b>Situation</div>
+    <div class="t2" style="width:20%"><b>10'</b>Comparer témoin / panne</div>
+    <div class="t3" style="width:30%"><b>15'</b>Démonter, légender</div>
+    <div class="t4" style="width:24%"><b>12'</b>Expérience capillarité</div>
+    <div class="t5" style="width:16%"><b>8'</b>Synthèse</div>
+  </div>
+
+  <div class="objectifs">
+    <div class="card"><b>Ce que je travaille dans cette activité</b>
+      <ul><li>Décrire un symptôme avec précision.</li><li>Nommer les éléments d'un objet à partir d'un démontage.</li><li>Expliquer le trajet de l'encre.</li></ul></div>
+    <div class="card"><b>Ce que je dois savoir faire</b>
+      <ul><li><span class="lvl n1">N1</span>Nommer les 7 éléments du stylo.</li><li><span class="lvl n2">N2</span>Décrire ce qui marche et ce qui ne marche pas.</li><li><span class="lvl n3">N3</span>Expliquer le rôle de la capillarité.</li><li><span class="lvl n4">N4</span>Expliquer pourquoi l'air doit entrer dans la cartouche.</li></ul></div>
+  </div>
+
+  <h3>Déroulement</h3>
+  <div class="step"><div class="when">0 – 5'<span>classe entière</span></div><div>
+    <p><b>Situation déclenchante.</b> Le professeur raconte l'histoire de Léa (voir fiche professeur), essaie d'écrire au visualiseur avec le stylo en panne, puis demande : « On le jette ? ». Sondage à main levée. La problématique est écrite au tableau.</p>
+  </div></div>
+  <div class="step"><div class="when">5 – 15'<span>groupes</span></div><div>
+    <p><b>Activité 1 — Caractériser le symptôme.</b> Chaque groupe reçoit le stylo témoin et un stylo en panne (cas A, le plus simple, pour toute la classe à cette étape). Les élèves écrivent avec les deux sur la feuille de test et complètent le tableau de comparaison.</p>
+    <p class="who">Point de vigilance : obtenir des constats précis (« aucune trace, même en appuyant ; la plume gratte le papier ») et pas des conclusions (« la cartouche est vide »).</p>
+  </div></div>
+  <div class="step"><div class="when">15 – 30'<span>groupes</span></div><div>
+    <p><b>Activité 2 — Démonter pour comprendre.</b> Démontage du <b>stylo témoin</b> dans l'ordre : capuchon → corps → cartouche. Le professeur montre ensuite (si le modèle le permet) comment retirer plume et conduit. Les élèves posent les pièces sur le sous-main dans l'ordre, puis légendent la vue éclatée. Remontage et test d'écriture.</p>
+  </div></div>
+  <div class="step"><div class="when">30 – 42'<span>groupes</span></div><div>
+    <p><b>Activité 3 — Expérience : l'encre peut-elle monter toute seule ?</b> Deux lames de verre (ou plaques plastiques) serrées entre les doigts, trempées par le bas dans de l'eau colorée : le liquide monte entre les lames, d'autant plus haut qu'elles sont serrées. Puis on trempe <b>seulement la pointe</b> de la plume du stylo témoin (sans cartouche) dans le godet d'encre : l'encre monte dans la fente.</p>
+  </div></div>
+  <div class="step"><div class="when">42 – 50'<span>classe entière</span></div><div>
+    <p><b>Synthèse.</b> Les porte-parole proposent une explication ; le professeur complète la coupe (flux d'encre / flux d'air). Les élèves recopient « Ce que je retiens ».</p>
+  </div></div>
+
+  <div class="fiche">
+    <div class="ident"><span>Nom : ………………</span><span>Prénom : ………………</span><span>Classe : 4e …</span><span>Groupe : …</span><span>Mon rôle : ………………</span></div>
+    <h4>Mes constats, mes observations</h4>
+    <p class="q"><b class="qn">1</b>Écris la même ligne avec les deux stylos, puis complète le tableau. <em>Écris ce que tu vois, pas ce que tu penses.</em></p>
+    <table>
+      <thead><tr><th style="width:36%">Observation</th><th>Stylo témoin</th><th>Stylo en panne</th></tr></thead>
+      <tbody>
+        <tr><td>Une trace apparaît-elle ?</td><td class="blank"></td><td></td></tr>
+        <tr><td>La trace est-elle régulière ? (continue, pâle, coupée…)</td><td class="blank"></td><td></td></tr>
+        <tr><td>Bruit ou sensation (glisse, gratte…)</td><td class="blank"></td><td></td></tr>
+        <tr><td>Aspect de la pointe (propre, encre sèche, encre humide…)</td><td class="blank"></td><td></td></tr>
+        <tr><td>Ce que je vois de la cartouche (sans démonter)</td><td class="blank"></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="corrige">Témoin : trace continue, la plume glisse, pointe humide. Stylo en panne (cas A) : aucune trace même en appuyant, la plume gratte le papier, pointe sèche ; la cartouche n'est pas visible sans démonter (sauf corps à fenêtre). Valoriser la distinction <b>constat</b> / <b>interprétation</b>.</div>
+
+    <p class="q"><b class="qn">2</b>Rédige le symptôme en une phrase : <em>Quand …………, le stylo …………, alors que …………</em></p>
+    <div class="lines l2"></div>
+    <div class="corrige">Exemple : « Quand j'écris en tenant le stylo correctement, le stylo ne laisse aucune trace, alors que le stylo témoin du même modèle écrit normalement. »</div>
+
+    <h4>Démonter pour comprendre</h4>
+    <p class="q"><b class="qn">3</b>Retrouve le nom de chaque élément numéroté sur la vue éclatée.</p>
+    <table>
+      <thead><tr><th>N°</th><th>Nom de l'élément</th><th>N°</th><th>Nom de l'élément</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="blank"></td><td>5</td><td></td></tr>
+        <tr><td>2</td><td class="blank"></td><td>6</td><td></td></tr>
+        <tr><td>3</td><td class="blank"></td><td>7</td><td></td></tr>
+        <tr><td>4</td><td class="blank"></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="corrige">1 capuchon · 2 plume · 3 conduit (alimentateur) · 4 section (corps avant) · 5 perçoir · 6 cartouche d'encre · 7 corps.</div>
+
+    <h4>Mon expérience</h4>
+    <p class="q"><b class="qn">4</b>Que se passe-t-il quand on trempe le bas des deux lames serrées dans l'eau colorée ? Et si on les écarte un peu ?</p>
+    <div class="lines l2"></div>
+    <div class="corrige">Le liquide monte entre les lames sans qu'on le pousse. Quand on les écarte, il monte moins haut : la capillarité agit dans les espaces <b>très étroits</b>.</div>
+    <p class="q"><b class="qn">5</b>Quand on trempe seulement la pointe de la plume dans l'encre, où va l'encre ? Quelle partie de la plume joue le rôle des deux lames ?</p>
+    <div class="lines l2"></div>
+    <div class="corrige">L'encre monte dans la <b>fente</b> de la plume : les deux becs de part et d'autre de la fente jouent le rôle des deux lames serrées.</div>
+    <p class="q"><b class="qn">6</b><span class="lvl n4">N4</span>Une bouteille d'eau retournée et fermée par un bouchon percé d'un trou minuscule ne se vide pas. Pourquoi la cartouche, elle, peut-elle se vider dans la plume ?</p>
+    <div class="lines l2"></div>
+    <div class="corrige">Pour qu'un liquide sorte d'un récipient fermé, il faut que de l'air puisse entrer pour prendre sa place. Dans le stylo, le conduit a un <b>canal d'air</b> : à chaque goutte d'encre qui part, une bulle d'air remonte dans la cartouche.</div>
+
+    <div class="box retiens">
+      <h4>Ce que je retiens</h4>
+      <p>Un stylo plume est composé d'un <b>capuchon</b>, d'une <b>plume</b>, d'un <b>conduit</b>, d'une <b>section</b> munie d'un <b>perçoir</b>, d'une <b>cartouche</b> et d'un <b>corps</b>.</p>
+      <p>L'encre (un <b>flux de matière</b>) va de la cartouche au papier en passant par le conduit et la fente de la plume. Elle avance par <b>capillarité</b> : un liquide monte tout seul dans un espace très étroit. En même temps, de l'<b>air</b> entre dans la cartouche pour remplacer l'encre consommée.</p>
+      <p>Pour décrire une panne, on note d'abord le <b>symptôme</b> : ce qui ne marche pas, dans quelles conditions, et ce qui marche encore.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SÉANCE 2
+========================================================== -->
+<section class="block" id="s2">
+  <div class="seance-head">
+    <div class="num">2</div>
+    <div class="meta">
+      <h2>Quelles pannes peuvent empêcher l'encre d'arriver ?</h2>
+      <p><span class="temps">Temps 2 · Décomposer</span><span class="temps">Temps 3 · Relier</span><span class="temps">Temps 4 · Supposer</span> 50 min</p>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="t1" style="width:10%"><b>5'</b>Rappel</div>
+    <div class="t2" style="width:30%"><b>15'</b>Schéma fonctionnel</div>
+    <div class="t3" style="width:10%"><b>5'</b>Méthode</div>
+    <div class="t4" style="width:40%"><b>20'</b>Cas mystère : indices et hypothèses</div>
+    <div class="t5" style="width:10%"><b>5'</b>Mise en commun</div>
+  </div>
+
+  <div class="objectifs">
+    <div class="card"><b>Ce que je travaille dans cette activité</b>
+      <ul><li>Associer à chaque fonction technique la solution technique qui la réalise.</li><li>Relier un symptôme aux blocs qui peuvent le produire.</li><li>Formuler et classer des hypothèses.</li></ul></div>
+    <div class="card"><b>Ce que je dois savoir faire</b>
+      <ul><li><span class="lvl n1">N1</span>Compléter le tableau fonctions / solutions.</li><li><span class="lvl n2">N2</span>Relever au moins 3 indices sur mon stylo.</li><li><span class="lvl n3">N3</span>Formuler 3 hypothèses dans des blocs différents.</li><li><span class="lvl n4">N4</span>Classer mes hypothèses et justifier le classement par un indice.</li></ul></div>
+  </div>
+
+  <h3>Déroulement</h3>
+  <div class="step"><div class="when">0 – 5'<span>classe</span></div><div><p>Rappel oral : trajet de l'encre et de l'air. Question relance : « Si le stylo n'écrit plus, où le trajet peut-il être coupé ? »</p></div></div>
+  <div class="step"><div class="when">5 – 20'<span>groupes</span></div><div><p><b>Activité 4 — Le schéma fonctionnel.</b> Les élèves complètent le tableau fonctions / solutions puis le schéma en blocs (flux d'encre et d'air). Correction collective au tableau.</p></div></div>
+  <div class="step"><div class="when">20 – 25'<span>classe</span></div><div><p><b>Présentation de la méthode de diagnostic en six temps</b> (affiche, annexe 1). Message clé : « Un bon réparateur ne change pas les pièces au hasard : il prouve la cause. »</p></div></div>
+  <div class="step"><div class="when">25 – 45'<span>groupes</span></div><div><p><b>Activité 5 — Le cas mystère.</b> Chaque groupe reçoit son stylo étiqueté. <b>Interdiction de réparer aujourd'hui.</b> On peut écrire, regarder à la loupe, ouvrir le corps pour regarder la cartouche, comparer avec le témoin. Les élèves remplissent le carnet d'hypothèses.</p>
+  <p class="who">Le professeur passe dans les groupes et pose des questions : « Quel indice te fait penser ça ? », « Cette hypothèse explique-t-elle <em>tous</em> les indices ? ». Il ne valide aucune hypothèse.</p></div></div>
+  <div class="step"><div class="when">45 – 50'<span>classe</span></div><div><p>Deux porte-parole présentent leur hypothèse n° 1 et l'indice qui la soutient. Le professeur construit au tableau une <b>banque d'hypothèses de la classe</b>, classée par bloc.</p></div></div>
+
+  <figure>
+    <svg viewBox="0 0 960 300" role="img" aria-label="Schéma fonctionnel du stylo plume">
+      <defs>
+        <marker id="aI" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#1d3c8f"/></marker>
+        <marker id="aA" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#8a8f9c"/></marker>
+      </defs>
+      <g font-family="Segoe UI,Arial,sans-serif" text-anchor="middle">
+        <!-- Blocs -->
+        <rect x="40" y="90" width="200" height="90" rx="12" fill="#e8edfa" stroke="#1d3c8f" stroke-width="2"/>
+        <text x="140" y="125" font-weight="700" fill="#0f2257" font-size="16">STOCKER</text>
+        <text x="140" y="145" font-size="13">l'encre</text>
+        <text x="140" y="166" font-size="12" fill="#1d3c8f" class="sol">cartouche / convertisseur</text>
+
+        <rect x="300" y="90" width="200" height="90" rx="12" fill="#e8edfa" stroke="#1d3c8f" stroke-width="2"/>
+        <text x="400" y="118" font-weight="700" fill="#0f2257" font-size="16">ACHEMINER</text>
+        <text x="400" y="136" font-weight="700" fill="#0f2257" font-size="16">ET RÉGULER</text>
+        <text x="400" y="166" font-size="12" fill="#1d3c8f" class="sol">perçoir + conduit (canaux, ailettes)</text>
+
+        <rect x="560" y="90" width="200" height="90" rx="12" fill="#e8edfa" stroke="#1d3c8f" stroke-width="2"/>
+        <text x="660" y="125" font-weight="700" fill="#0f2257" font-size="16">DÉPOSER</text>
+        <text x="660" y="145" font-size="13">l'encre sur le papier</text>
+        <text x="660" y="166" font-size="12" fill="#1d3c8f" class="sol">plume (becs, fente)</text>
+
+        <rect x="300" y="222" width="200" height="60" rx="12" fill="#fff" stroke="#1d3c8f" stroke-dasharray="6 4" stroke-width="2"/>
+        <text x="400" y="248" font-weight="700" fill="#0f2257" font-size="14">PROTÉGER DU SÉCHAGE</text>
+        <text x="400" y="268" font-size="12" fill="#1d3c8f" class="sol">capuchon</text>
+
+        <rect x="300" y="8" width="200" height="56" rx="12" fill="#fff" stroke="#1d3c8f" stroke-dasharray="6 4" stroke-width="2"/>
+        <text x="400" y="32" font-weight="700" fill="#0f2257" font-size="14">TENIR ET GUIDER</text>
+        <text x="400" y="52" font-size="12" fill="#1d3c8f" class="sol">corps + section</text>
+
+        <!-- sortie -->
+        <rect x="810" y="105" width="120" height="60" rx="30" fill="#fbf8f1" stroke="#d9d2c3" stroke-width="2"/>
+        <text x="870" y="132" font-size="13" font-weight="700">Trait</text>
+        <text x="870" y="150" font-size="12">sur le papier</text>
+      </g>
+      <!-- flux encre -->
+      <line x1="240" y1="125" x2="296" y2="125" stroke="#1d3c8f" stroke-width="3" marker-end="url(#aI)"/>
+      <line x1="500" y1="125" x2="556" y2="125" stroke="#1d3c8f" stroke-width="3" marker-end="url(#aI)"/>
+      <line x1="760" y1="135" x2="806" y2="135" stroke="#1d3c8f" stroke-width="3" marker-end="url(#aI)"/>
+      <!-- flux air -->
+      <line x1="556" y1="190" x2="504" y2="190" stroke="#8a8f9c" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#aA)"/>
+      <line x1="296" y1="190" x2="244" y2="190" stroke="#8a8f9c" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#aA)"/>
+      <g font-family="Segoe UI,Arial,sans-serif" font-size="12">
+        <text x="20" y="215" fill="#1d3c8f" font-weight="700">━ encre (matière)</text>
+        <text x="20" y="235" fill="#8a8f9c" font-weight="700">┅ air (entre pour remplacer l'encre)</text>
+      </g>
+    </svg>
+    <figcaption>Schéma fonctionnel du stylo plume. Version élève : les solutions techniques (texte bleu) sont à compléter.</figcaption>
+  </figure>
+
+  <div class="fiche newpage">
+    <div class="ident"><span>Nom : ………………</span><span>Classe : 4e …</span><span>Groupe : …</span><span>Cas mystère : lettre ……</span></div>
+    <h4>Activité 4 — Fonctions et solutions</h4>
+    <p class="q"><b class="qn">1</b>Complète le tableau. Pour t'aider, utilise la vue éclatée et le stylo témoin.</p>
+    <table>
+      <thead><tr><th>Fonction technique (ce que ça doit faire)</th><th>Solution technique (ce qui le fait)</th></tr></thead>
+      <tbody>
+        <tr><td>Stocker l'encre</td><td class="blank"></td></tr>
+        <tr><td>Ouvrir la réserve d'encre</td><td class="blank"></td></tr>
+        <tr><td>Acheminer l'encre et laisser entrer l'air</td><td class="blank"></td></tr>
+        <tr><td>Déposer l'encre sur le papier</td><td class="blank"></td></tr>
+        <tr><td>Protéger l'encre du séchage</td><td class="blank"></td></tr>
+        <tr><td>Tenir et guider le stylo</td><td class="blank"></td></tr>
+      </tbody>
+    </table>
+    <div class="corrige">Stocker → cartouche (ou convertisseur) · Ouvrir → perçoir · Acheminer + air → conduit (canal d'encre, canal d'air, ailettes) · Déposer → plume (becs + fente) · Protéger → capuchon · Tenir → corps et section.</div>
+
+    <h4>Activité 5 — Mon cas mystère</h4>
+    <p class="q"><b class="qn">2</b><span class="temps">Temps 1</span>Observe ton stylo <b>sans rien réparer</b>. Relève au moins 3 indices (ce que tu vois, entends, sens).</p>
+    <table>
+      <thead><tr><th style="width:8%">N°</th><th>Indice observé</th><th style="width:28%">Comment je l'ai observé</th></tr></thead>
+      <tbody><tr><td>I1</td><td class="blank"></td><td></td></tr><tr><td>I2</td><td class="blank"></td><td></td></tr><tr><td>I3</td><td class="blank"></td><td></td></tr><tr><td>I4</td><td class="blank"></td><td></td></tr></tbody>
+    </table>
+    <p class="q"><b class="qn">3</b><span class="temps">Temps 3</span>Entoure les blocs qui <b>peuvent</b> expliquer le symptôme, et barre ceux qu'un indice met hors de cause.</p>
+    <p style="font-size:1.05rem">STOCKER &nbsp;·&nbsp; ACHEMINER ET RÉGULER &nbsp;·&nbsp; DÉPOSER &nbsp;·&nbsp; PROTÉGER DU SÉCHAGE &nbsp;·&nbsp; TENIR ET GUIDER &nbsp;·&nbsp; UTILISATEUR</p>
+    <p class="q"><b class="qn">4</b><span class="temps">Temps 4</span>Mon carnet d'hypothèses.</p>
+    <table>
+      <thead><tr><th style="width:6%">H</th><th>Je suppose que… (cause possible)</th><th style="width:16%">Bloc concerné</th><th style="width:18%">Indice qui la soutient</th><th style="width:11%">Probable ?<br>★ à ★★★</th><th style="width:11%">Facile à tester ?<br>★ à ★★★</th></tr></thead>
+      <tbody><tr><td>H1</td><td class="blank"></td><td></td><td></td><td></td><td></td></tr><tr><td>H2</td><td class="blank"></td><td></td><td></td><td></td><td></td></tr><tr><td>H3</td><td class="blank"></td><td></td><td></td><td></td><td></td></tr><tr><td>H4</td><td class="blank"></td><td></td><td></td><td></td><td></td></tr></tbody>
+    </table>
+    <p class="q"><b class="qn">5</b>Quelle hypothèse testerez-vous en premier ? Pourquoi ?</p>
+    <div class="lines l2"></div>
+
+    <details class="aide noprint"><summary>Coup de pouce 1 — Je ne trouve pas d'indice</summary><p>Regarde la cartouche à contre-jour. Regarde la pointe de la plume à la loupe et compare-la à celle du témoin. Écoute le bruit de la plume sur le papier. Touche la pointe avec un coin de papier absorbant.</p></details>
+    <details class="aide noprint"><summary>Coup de pouce 2 — Je n'ai qu'une hypothèse</summary><p>Reprends le trajet de l'encre : la panne peut venir de la réserve (il n'y a plus d'encre, ou elle ne sort pas), du chemin (bouché), de la sortie (plume abîmée ou bouchée)… ou de la façon d'utiliser le stylo.</p></details>
+    <details class="aide noprint"><summary>Coup de pouce 3 — Liste d'hypothèses possibles</summary><p>Cartouche vide · cartouche non percée · cartouche qui ne correspond pas au stylo · encre sèche dans la plume · conduit bouché · fente bouchée · becs tordus · plume mal placée sur le conduit · stylo mal tenu.</p></details>
+
+    <div class="corrige">
+      <b>Attendus par cas (à utiliser pour questionner, pas pour donner la réponse) :</b><br>
+      A : cartouche légère, quasi transparente à contre-jour → H « cartouche vide » ★★★.<br>
+      B : cartouche pleine, trou de perçage absent, la cartouche « flotte » → H « non percée » ★★★.<br>
+      C : croûte d'encre sèche sur la pointe, le témoin dit « oublié sans capuchon » → H « encre sèche » ★★★.<br>
+      D : la plume gratte, trace double ou rayure à vide ; à la loupe un bec plus haut → H « becs abîmés » ★★★.<br>
+      E : trace irrégulière ou nulle, fibre visible à la loupe → H « fente obstruée ».<br>
+      F : cartouche plus courte ou de forme différente de celle du témoin, non percée → H « mauvaise cartouche ».<br>
+      H : le stylo écrit si on le tient correctement ; indice dans le témoignage → H « mauvaise utilisation ».<br>
+      Exigence N4 : le classement « probable » doit s'appuyer sur un indice ; le classement « facile » sur le matériel disponible.
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SÉANCE 3
+========================================================== -->
+<section class="block" id="s3">
+  <div class="seance-head">
+    <div class="num">3</div>
+    <div class="meta">
+      <h2>Quel test permet d'éliminer le plus d'hypothèses ?</h2>
+      <p><span class="temps">Temps 5 · Tester</span><span class="temps">Temps 6 · Conclure</span> 50 min</p>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="t1" style="width:10%"><b>5'</b>Sécurité</div>
+    <div class="t2" style="width:30%"><b>15'</b>Choisir et anticiper</div>
+    <div class="t3" style="width:40%"><b>20'</b>Tester, consigner</div>
+    <div class="t5" style="width:20%"><b>10'</b>Conclure + ticket</div>
+  </div>
+
+  <div class="objectifs">
+    <div class="card"><b>Ce que je travaille dans cette activité</b>
+      <ul><li>Choisir un test adapté à une hypothèse.</li><li>Prévoir le résultat d'un test avant de le faire.</li><li>Conclure à partir de résultats.</li></ul></div>
+    <div class="card"><b>Ce que je dois savoir faire</b>
+      <ul><li><span class="lvl n1">N1</span>Réaliser un test en respectant les consignes de sécurité.</li><li><span class="lvl n2">N2</span>Noter le résultat obtenu sans l'interpréter.</li><li><span class="lvl n3">N3</span>Prévoir le résultat si l'hypothèse est vraie / fausse.</li><li><span class="lvl n4">N4</span>Choisir le test qui élimine plusieurs hypothèses à la fois.</li></ul></div>
+  </div>
+
+  <h3>Déroulement</h3>
+  <div class="step"><div class="when">0 – 5'<span>classe</span></div><div><p>Rappel des règles de sécurité (eau tiède, pas d'outil pointu, on ne force pas). Distribution de la banque de tests.</p></div></div>
+  <div class="step"><div class="when">5 – 20'<span>groupes</span></div><div><p><b>Activité 6 — Choisir ses tests.</b> Pour chaque hypothèse du carnet, le groupe choisit un test de la banque et écrit <b>avant de le faire</b> ce qu'il observera si l'hypothèse est vraie et si elle est fausse. <b>Point d'arrêt :</b> le professeur valide le tableau (« feu vert ») avant toute manipulation.</p>
+  <p class="who">Question clé à poser : « Quel test vous dirait tout de suite si le problème vient de la plume ou de ce qu'il y a derrière ? » → test T2.</p></div></div>
+  <div class="step"><div class="when">20 – 40'<span>groupes</span></div><div><p><b>Activité 7 — Tester.</b> Les tests sont réalisés dans l'ordre choisi. Le secrétaire note les résultats bruts, puis le groupe barre les hypothèses éliminées. Un groupe qui a trouvé sa cause tôt passe au défi.</p></div></div>
+  <div class="step"><div class="when">40 – 50'<span>individuel</span></div><div><p><b>Conclure</b> (question 4 de la fiche), puis <b>ticket de sortie</b> individuel (évaluation formative).</p></div></div>
+
+  <h3>La banque de tests</h3>
+  <table>
+    <thead><tr><th style="width:6%">Test</th><th style="width:34%">Ce que je fais</th><th>Ce que ce test peut m'apprendre</th></tr></thead>
+    <tbody>
+      <tr><td><b>T1</b></td><td>J'ouvre le corps et je regarde la cartouche à contre-jour (niveau, trou de perçage). Je la compare à celle du témoin.</td><td>Y a-t-il de l'encre ? La cartouche est-elle percée ? Est-ce le bon format ?</td></tr>
+      <tr><td><b>T2</b></td><td>Je trempe <b>seulement la pointe</b> de la plume dans le godet d'encre 3 s, puis j'écris.</td><td>Si le stylo écrit, la plume sait déposer l'encre : le problème est <b>derrière</b> (réserve ou chemin). S'il n'écrit pas, le problème est <b>dans la plume</b>.</td></tr>
+      <tr><td><b>T3</b></td><td>J'observe la pointe à la loupe, de dessus et de profil, et je la compare au témoin.</td><td>Becs alignés ? Fente fine et propre ? Dépôt, fibre, croûte d'encre ?</td></tr>
+      <tr><td><b>T4</b></td><td>Je pose la pointe 10 s sur du papier absorbant.</td><td>L'encre arrive-t-elle jusqu'à la pointe ?</td></tr>
+      <tr><td><b>T5</b></td><td>Cartouche retirée, je trempe la section (plume vers le bas) dans l'eau tiède 5 à 10 min.</td><td>L'eau se colore-t-elle fortement ? (encre séchée dans la plume et le conduit)</td></tr>
+      <tr><td><b>T6</b></td><td>J'installe une cartouche neuve du bon format, enfoncée jusqu'au « clic », j'attends 1 min, j'écris.</td><td>Le stylo marche-t-il avec une réserve dont je suis sûr ?</td></tr>
+      <tr><td><b>T7</b></td><td>Un autre élève écrit avec le stylo en le tenant correctement (plume vers le haut, peu inclinée, sans appuyer).</td><td>La panne vient-elle de l'utilisation ?</td></tr>
+    </tbody>
+  </table>
+
+  <figure>
+    <svg viewBox="0 0 960 390" role="img" aria-label="Arbre de décision du diagnostic">
+      <defs><marker id="aD" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#1d3c8f"/></marker></defs>
+      <g font-family="Segoe UI,Arial,sans-serif" text-anchor="middle" font-size="13">
+        <rect x="330" y="10" width="300" height="50" rx="10" fill="#0f2257"/>
+        <text x="480" y="32" fill="#fff" font-weight="700">Symptôme : le stylo n'écrit plus</text>
+        <text x="480" y="50" fill="#cfd8f3" font-size="12">T7 : bien tenu, il n'écrit toujours pas</text>
+
+        <rect x="330" y="95" width="300" height="56" rx="28" fill="#fff" stroke="#1d3c8f" stroke-width="2.5"/>
+        <text x="480" y="118" font-weight="700" fill="#0f2257">T2 : plume trempée dans l'encre</text>
+        <text x="480" y="138" fill="#5d6475" font-size="12">le test qui coupe le problème en deux</text>
+
+        <rect x="70" y="190" width="320" height="50" rx="10" fill="#e6f4ec" stroke="#1f7a4d"/>
+        <text x="230" y="212" font-weight="700" fill="#1f7a4d">Il écrit → la plume est hors de cause</text>
+        <text x="230" y="230" font-size="12">chercher dans la réserve ou le chemin</text>
+
+        <rect x="570" y="190" width="320" height="50" rx="10" fill="#fdeeee" stroke="#c0262d"/>
+        <text x="730" y="212" font-weight="700" fill="#c0262d">Il n'écrit pas → la plume est en cause</text>
+        <text x="730" y="230" font-size="12">regarder la pointe et la fente</text>
+
+        <rect x="20" y="275" width="200" height="72" rx="10" fill="#fff" stroke="#d9d2c3"/>
+        <text x="120" y="296" font-weight="700">T1 + T6</text>
+        <text x="120" y="313" font-size="12">vide → A · non percée → B</text>
+        <text x="120" y="331" font-size="12">mauvais format → F</text>
+
+        <rect x="240" y="275" width="200" height="72" rx="10" fill="#fff" stroke="#d9d2c3"/>
+        <text x="340" y="296" font-weight="700">T4 + T5</text>
+        <text x="340" y="314" font-size="12">l'encre n'arrive pas, l'eau</text>
+        <text x="340" y="330" font-size="12">se colore fort → C (encre sèche)</text>
+
+        <rect x="520" y="275" width="200" height="72" rx="10" fill="#fff" stroke="#d9d2c3"/>
+        <text x="620" y="296" font-weight="700">T3 : becs</text>
+        <text x="620" y="314" font-size="12">désalignés ou écartés → D</text>
+
+        <rect x="740" y="275" width="200" height="72" rx="10" fill="#fff" stroke="#d9d2c3"/>
+        <text x="840" y="296" font-weight="700">T3 : fente</text>
+        <text x="840" y="314" font-size="12">fibre ou dépôt → E</text>
+        <text x="840" y="330" font-size="12">croûte d'encre → C</text>
+      </g>
+      <g stroke="#1d3c8f" stroke-width="2" fill="none" marker-end="url(#aD)">
+        <line x1="480" y1="60" x2="480" y2="92"/>
+        <path d="M400,151 L260,186"/>
+        <path d="M560,151 L700,186"/>
+        <path d="M180,240 L130,272"/>
+        <path d="M280,240 L330,272"/>
+        <path d="M690,240 L630,272"/>
+        <path d="M770,240 L830,272"/>
+      </g>
+      <text x="480" y="378" text-anchor="middle" font-family="Segoe UI,Arial" font-size="12" fill="#5d6475">Cas H : si T7 fait écrire le stylo, il n'y a pas de panne mais un mauvais usage.</text>
+    </svg>
+    <figcaption>Arbre de décision (document professeur, à révéler en synthèse) : un bon test élimine plusieurs hypothèses d'un coup. Le cas C peut apparaître des deux côtés selon l'endroit où l'encre a séché.</figcaption>
+  </figure>
+
+  <div class="fiche newpage">
+    <div class="ident"><span>Nom : ………………</span><span>Classe : 4e …</span><span>Groupe : …</span><span>Cas mystère : lettre ……</span></div>
+    <h4>Activité 6 — Je prévois avant de tester</h4>
+    <p class="q"><b class="qn">1</b>Pour chaque hypothèse, choisis un test et écris ce que tu observeras <b>avant</b> de le faire.</p>
+    <table>
+      <thead><tr><th style="width:6%">H</th><th style="width:9%">Test</th><th>Si l'hypothèse est VRAIE, j'observerai…</th><th>Si elle est FAUSSE, j'observerai…</th><th style="width:9%">Ordre</th></tr></thead>
+      <tbody><tr><td>H1</td><td class="blank"></td><td></td><td></td><td></td></tr><tr><td>H2</td><td class="blank"></td><td></td><td></td><td></td></tr><tr><td>H3</td><td class="blank"></td><td></td><td></td><td></td></tr></tbody>
+    </table>
+    <p style="text-align:right"><b>Feu vert du professeur :</b> ☐</p>
+
+    <h4>Activité 7 — Je teste et je consigne</h4>
+    <p class="q"><b class="qn">2</b>Note le résultat <b>tel que tu l'observes</b>, puis ce que tu en déduis.</p>
+    <table>
+      <thead><tr><th style="width:9%">Test</th><th>Résultat observé</th><th>Hypothèse(s) éliminée(s)</th><th>Hypothèse(s) encore possible(s)</th></tr></thead>
+      <tbody><tr><td class="blank"></td><td></td><td></td><td></td></tr><tr><td class="blank"></td><td></td><td></td><td></td></tr><tr><td class="blank"></td><td></td><td></td><td></td></tr></tbody>
+    </table>
+    <p class="q"><b class="qn">3</b><span class="lvl n4">N4</span>Quel test vous a permis d'éliminer le plus d'hypothèses d'un coup ? Explique pourquoi.</p>
+    <div class="lines l2"></div>
+    <div class="corrige">T2 dans la plupart des cas : il sépare les pannes de la plume (D, E, souvent C) des pannes de la réserve et du chemin (A, B, F). En une manipulation, on élimine la moitié des hypothèses.</div>
+
+    <h4>Je conclus</h4>
+    <p class="q"><b class="qn">4</b>Complète : <em>La cause de la panne est …………… . Je le sais car le test …… a montré …………… . Cette cause explique aussi l'indice …… . À mon avis, cette panne est arrivée parce que …………… .</em></p>
+    <div class="lines l4"></div>
+    <table>
+      <thead><tr><th>Cas</th><th>Résultats attendus des tests clés</th><th>Conclusion attendue et origine probable</th></tr></thead>
+      <tbody class="corrige-table">
+        <tr><td>A</td><td>T1 : cartouche presque transparente. T2 : écrit. T6 : écrit.</td><td>Cartouche vide — usure normale : la réserve est consommée.</td></tr>
+        <tr><td>B</td><td>T1 : cartouche pleine, sans trou. T2 : écrit. T6 : écrit.</td><td>Cartouche non percée — mauvais montage.</td></tr>
+        <tr><td>C</td><td>T4 : rien. T3 : croûte. T5 : l'eau se colore fortement. Après rinçage et nouvelle cartouche : écrit.</td><td>Encre séchée — stylo laissé sans capuchon (usage).</td></tr>
+        <tr><td>D</td><td>T3 : becs désalignés. T2 : n'écrit pas ou trace double. T4 : l'encre arrive.</td><td>Plume abîmée — choc sur la pointe ou appui trop fort.</td></tr>
+        <tr><td>E</td><td>T3 : fibre ou dépôt dans la fente. T4 : peu ou pas d'encre.</td><td>Fente obstruée — saleté, papier qui peluche, gomme.</td></tr>
+        <tr><td>F</td><td>T1 : cartouche différente de celle du témoin, non percée. T6 avec le bon format : écrit.</td><td>Cartouche incompatible — erreur d'achat.</td></tr>
+        <tr><td>H</td><td>T7 : écrit normalement quand il est bien tenu. Tous les autres tests normaux.</td><td>Pas de panne : mauvaise utilisation (plume retournée, appui trop fort).</td></tr>
+      </tbody>
+    </table>
+    <p class="who prof-only">Le tableau ci-dessus est le corrigé : il n'apparaît qu'en mode professeur.</p>
+
+    <details class="aide noprint"><summary>Défi pour les groupes en avance</summary><p>Un stylo écrit bien le matin, puis plus du tout après la récréation passée au soleil, capuchon fermé, et il fait des pâtés au moment où on le rouvre. Propose une hypothèse liée à l'air contenu dans la cartouche.</p>
+      <div class="corrige">La chaleur dilate l'air de la cartouche : il pousse l'encre vers la plume (pâté). Les ailettes du conduit servent justement de réserve tampon pour absorber ce surplus.</div></details>
+  </div>
+
+  <div class="fiche">
+    <h4>Ticket de sortie (individuel, 3 min) — évaluation formative</h4>
+    <p class="q"><b class="qn">1</b>Un stylo écrit quand on trempe sa plume dans l'encre, mais pas avec sa cartouche. Quel bloc est hors de cause ? ☐ Stocker ☐ Acheminer ☐ Déposer</p>
+    <p class="q"><b class="qn">2</b>Pourquoi faut-il écrire le résultat attendu <b>avant</b> de faire un test ?</p>
+    <div class="lines l2"></div>
+    <div class="corrige">1 : Déposer (la plume). 2 : Pour savoir à l'avance ce que le résultat prouvera, ne pas « interpréter après coup » et choisir un test qui sert vraiment à éliminer une hypothèse.</div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SÉANCE 4
+========================================================== -->
+<section class="block" id="s4">
+  <div class="seance-head">
+    <div class="num">4</div>
+    <div class="meta">
+      <h2>Un autre groupe peut-il réparer le stylo avec mon protocole ?</h2>
+      <p><span class="temps">Remettre en état</span><span class="temps">Valider</span> 50 min</p>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="t1" style="width:30%"><b>15'</b>Rédiger le protocole</div>
+    <div class="t3" style="width:40%"><b>20'</b>Échange : un autre groupe répare</div>
+    <div class="t4" style="width:20%"><b>10'</b>Retour, protocole v2</div>
+    <div class="t5" style="width:10%"><b>5'</b>Synthèse</div>
+  </div>
+
+  <div class="objectifs">
+    <div class="card"><b>Ce que je travaille dans cette activité</b>
+      <ul><li>Rédiger un protocole de réparation que quelqu'un d'autre peut suivre.</li><li>Définir un test de validation avec un critère mesurable.</li><li>Améliorer un protocole à partir d'un retour.</li></ul></div>
+    <div class="card"><b>Ce que je dois savoir faire</b>
+      <ul><li><span class="lvl n1">N1</span>Lister le matériel et les consignes de sécurité.</li><li><span class="lvl n2">N2</span>Écrire des étapes numérotées avec un verbe d'action.</li><li><span class="lvl n3">N3</span>Écrire un test de validation mesurable.</li><li><span class="lvl n4">N4</span>Ajouter un conseil qui évite que la panne revienne.</li></ul></div>
+  </div>
+
+  <h3>Déroulement</h3>
+  <div class="step"><div class="when">0 – 15'<span>groupes</span></div><div><p><b>Activité 8 — Rédiger le protocole (version 1).</b> À partir de la cause trouvée en S3. Le professeur montre un exemple de <b>mauvais</b> protocole (« Réparer le stylo. Vérifier que ça marche. ») et fait dire à la classe pourquoi il est inutilisable.</p></div></div>
+  <div class="step"><div class="when">15 – 35'<span>2 groupes</span></div><div><p><b>Activité 9 — L'épreuve du protocole.</b> Les groupes échangent stylo <b>et</b> protocole (A ↔ C, B ↔ D…). Le groupe receveur applique le protocole <b>à la lettre</b>, sans poser de question aux auteurs, et remplit la fiche retour. Puis il réalise le test de validation.</p>
+  <p class="who">Cas D (becs abîmés) : le redressement des becs est délicat. Le protocole attendu peut conclure au <b>remplacement de la plume</b> par une pièce de rechange : c'est une vraie réparation, qui prépare la séance 5. Cas H : le « protocole » devient une <b>notice d'utilisation</b>.</p></div></div>
+  <div class="step"><div class="when">35 – 45'<span>groupes</span></div><div><p>Retour aux auteurs : lecture de la fiche retour, écriture de la <b>version 2</b> du protocole (en couleur). Rédaction collective des « conseils d'entretien » de la classe.</p></div></div>
+  <div class="step"><div class="when">45 – 50'<span>classe</span></div><div><p><b>Institutionnalisation</b> : panne due à l'usure, panne due à l'usage, fausse panne ; ce qu'est un protocole utilisable.</p></div></div>
+
+  <div class="fiche newpage">
+    <div class="ident"><span>Groupe auteur : …</span><span>Cas : ……</span><span>Groupe testeur : …</span></div>
+    <h4>Activité 8 — Notre protocole de réparation (version 1)</h4>
+    <table>
+      <tbody>
+        <tr><th style="width:28%">Panne traitée (cause prouvée)</th><td class="blank"></td></tr>
+        <tr><th>Matériel nécessaire</th><td class="blank"></td></tr>
+        <tr><th>Sécurité / précautions</th><td class="blank"></td></tr>
+      </tbody>
+    </table>
+    <table>
+      <thead><tr><th style="width:8%">Étape</th><th>Action (verbe à l'infinitif + objet + précision)</th><th style="width:28%">Point de contrôle (comment je sais que c'est bien fait)</th></tr></thead>
+      <tbody><tr><td>1</td><td class="blank"></td><td></td></tr><tr><td>2</td><td class="blank"></td><td></td></tr><tr><td>3</td><td class="blank"></td><td></td></tr><tr><td>4</td><td class="blank"></td><td></td></tr><tr><td>5</td><td class="blank"></td><td></td></tr></tbody>
+    </table>
+    <table>
+      <tbody>
+        <tr><th style="width:28%">Test de validation</th><td class="blank">Le stylo est réparé si …</td></tr>
+        <tr><th>Conseil pour éviter que la panne revienne</th><td class="blank"></td></tr>
+      </tbody>
+    </table>
+
+    <div class="box info"><h4>Test de validation commun (feuille de test, annexe 3)</h4>
+      <p>Le stylo est considéré comme réparé s'il écrit <b>sans interruption</b> une ligne de boucles « llllll » sur 15 cm, puis s'il réécrit <b>immédiatement</b> après être resté 1 min sans capuchon. Les groupes peuvent ajouter un critère.</p></div>
+
+    <div class="corrige">
+      <b>Exemple de protocole attendu — cas C (encre séchée) :</b><br>
+      Matériel : gobelet d'eau tiède, papier absorbant, cartouche neuve standard, feuille de test. Sécurité : eau tiède seulement, pas d'outil pointu, manipuler la plume par la section.<br>
+      1. Dévisser le corps et retirer la cartouche (la jeter si elle est vide, sinon la garder debout).<br>
+      2. Tremper la section, plume vers le bas, dans l'eau tiède pendant 10 min. <i>Contrôle : l'eau se colore.</i><br>
+      3. Changer l'eau et recommencer jusqu'à ce qu'elle reste presque claire. <i>Contrôle : eau à peine teintée.</i><br>
+      4. Sécher la plume en la posant sur du papier absorbant, sans frotter la pointe. <i>Contrôle : plus de trace bleue sur le papier.</i><br>
+      5. Enfoncer une cartouche neuve jusqu'au « clic », revisser le corps, attendre 1 min plume vers le bas. <i>Contrôle : une goutte apparaît si on pose la pointe sur le papier absorbant.</i><br>
+      Validation : test commun réussi. Conseil : toujours refermer le capuchon ; rincer le stylo s'il ne sert pas pendant plusieurs semaines.<br><br>
+      <b>Autres cas :</b> A → remplacer la cartouche (ou remplir un convertisseur) ; B → enfoncer la cartouche jusqu'au clic ; E → passer une feuille de papier fin dans la fente, puis rincer ; F → utiliser le format de cartouche indiqué par le fabricant ; D → remplacer la plume par une plume de rechange compatible (redressement des becs réservé à l'adulte) ; H → notice : tenir la plume ajourée vers le haut, incliner d'environ 45°, ne pas appuyer.
+    </div>
+  </div>
+
+  <div class="fiche">
+    <h4>Activité 9 — Fiche retour du groupe testeur</h4>
+    <table>
+      <thead><tr><th>Question</th><th style="width:12%">Oui</th><th style="width:12%">Non</th><th>Précision (n° d'étape, mot imprécis…)</th></tr></thead>
+      <tbody>
+        <tr><td>Le matériel était complet</td><td></td><td></td><td class="blank"></td></tr>
+        <tr><td>Chaque étape était claire, sans deviner</td><td></td><td></td><td class="blank"></td></tr>
+        <tr><td>L'ordre des étapes était correct</td><td></td><td></td><td class="blank"></td></tr>
+        <tr><td>La sécurité était indiquée</td><td></td><td></td><td class="blank"></td></tr>
+        <tr><td>Le test de validation est réussi</td><td></td><td></td><td class="blank"></td></tr>
+      </tbody>
+    </table>
+    <p class="q"><b class="qn">1</b>Une amélioration que vous proposez aux auteurs :</p>
+    <div class="lines l2"></div>
+  </div>
+
+  <div class="box retiens">
+    <h4>Ce que je retiens</h4>
+    <p>Une panne peut venir de l'<b>usure</b> (cartouche consommée), de l'<b>usage</b> (capuchon oublié, choc, mauvaise cartouche) ou n'être qu'une <b>fausse panne</b> (mauvaise utilisation). Réparer sans connaître la cause, c'est risquer que la panne revienne.</p>
+    <p>Un <b>protocole de réparation</b> liste le matériel, la sécurité, des étapes numérotées avec des points de contrôle, et se termine par un <b>test de validation</b> avec un critère mesurable. Il est bon s'il permet à quelqu'un d'autre de réparer sans aide.</p>
+  </div>
+</section>
+
+<!-- =========================================================
+     SÉANCE 5
+========================================================== -->
+<section class="block" id="s5">
+  <div class="seance-head">
+    <div class="num">5</div>
+    <div class="meta">
+      <h2>Faut-il toujours réparer ?</h2>
+      <p><span class="temps">Évaluer · juger</span><span class="temps">Évaluation sommative</span> 50 min</p>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="t2" style="width:30%"><b>15'</b>Grille de réparabilité + débat</div>
+    <div class="t5" style="width:60%"><b>30'</b>Évaluation individuelle</div>
+    <div class="t1" style="width:10%"><b>5'</b>Bilan</div>
+  </div>
+
+  <div class="objectifs">
+    <div class="card"><b>Ce que je travaille dans cette activité</b>
+      <ul><li>Comparer des objets selon des critères de réparabilité.</li><li>Argumenter un choix réparer / remplacer.</li><li>Réutiliser la méthode de diagnostic sur un objet nouveau.</li></ul></div>
+    <div class="card"><b>Ce que je dois savoir faire</b>
+      <ul><li><span class="lvl n2">N2</span>Remplir une grille de critères.</li><li><span class="lvl n3">N3</span>Justifier un choix avec 3 critères.</li><li><span class="lvl n4">N4</span>Tenir compte du cycle de vie (déchets, durée d'utilisation).</li></ul></div>
+  </div>
+
+  <h3>Déroulement</h3>
+  <div class="step"><div class="when">0 – 10'<span>groupes</span></div><div><p><b>Activité 10 — Trois façons d'écrire.</b> Sur le bureau : un stylo plume à cartouches, un stylo plume avec convertisseur (pompe) et un stylo bille jetable. Chaque groupe remplit la grille de réparabilité (inspirée des critères de l'indice de réparabilité : documentation, démontage, pièces disponibles, prix des pièces). Les données de prix sont fournies par le professeur à partir des fournitures réellement utilisées.</p></div></div>
+  <div class="step"><div class="when">10 – 15'<span>classe</span></div><div><p>Mini-débat : « Le stylo bille jetable n'a jamais besoin d'être réparé : c'est donc le plus durable ? » Le professeur fait émerger : durée d'utilisation, déchets produits sur une année, pièces remplaçables.</p></div></div>
+  <div class="step"><div class="when">15 – 45'<span>individuel</span></div><div><p><b>Évaluation sommative</b> (voir section suivante). Le stylo témoin, la vue éclatée et l'affiche des six temps restent visibles.</p></div></div>
+  <div class="step"><div class="when">45 – 50'<span>individuel</span></div><div><p>Auto-évaluation : chaque élève situe son niveau sur les compétences de la séquence (grille d'auto-positionnement, annexe 2).</p></div></div>
+
+  <div class="fiche">
+    <h4>Activité 10 — Grille de réparabilité de la classe</h4>
+    <p>Note chaque critère de 0 (pas du tout) à 2 (tout à fait).</p>
+    <table>
+      <thead><tr><th>Critère</th><th>Stylo plume à cartouches</th><th>Stylo plume + convertisseur</th><th>Stylo bille jetable</th></tr></thead>
+      <tbody>
+        <tr><td>On trouve une notice ou des informations pour l'entretenir</td><td class="blank"></td><td></td><td></td></tr>
+        <tr><td>On le démonte à la main, sans outil, sans casser</td><td class="blank"></td><td></td><td></td></tr>
+        <tr><td>On trouve les pièces de rechange (cartouche, plume, recharge)</td><td class="blank"></td><td></td><td></td></tr>
+        <tr><td>Les pièces coûtent peu par rapport à l'objet neuf</td><td class="blank"></td><td></td><td></td></tr>
+        <tr><td>Il produit peu de déchets sur une année d'utilisation</td><td class="blank"></td><td></td><td></td></tr>
+        <tr><th>Total / 10</th><td class="blank"></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <p class="q"><b class="qn">1</b>Lequel choisirais-tu pour toute ta scolarité au collège ? Justifie avec au moins deux critères.</p>
+    <div class="lines l2"></div>
+    <div class="corrige">Résultat attendu (à discuter, pas à imposer) : le stylo plume avec convertisseur obtient en général le meilleur total (démontable, pièces remplaçables, encre en flacon : pas de cartouche plastique jetée). Le stylo bille jetable a un démontage et des pièces quasi nuls et produit un déchet entier à chaque fin de vie. Les quatre premiers critères reprennent l'esprit des critères de l'indice de réparabilité français ; le cinquième ajoute le cycle de vie.</div>
+  </div>
+</section>
+
+<!-- =========================================================
+     ÉVALUATION SOMMATIVE
+========================================================== -->
+<section class="block" id="eval">
+  <h2>Évaluation sommative (30 min, individuelle)</h2>
+  <p class="lead">L'évaluation porte sur la <b>méthode</b>, pas sur la mémoire des pannes du stylo : la partie B transfère le raisonnement à un objet nouveau, le vaporisateur à gâchette.</p>
+
+  <table>
+    <thead><tr><th>Partie</th><th>Compétence évaluée (programme 2024)</th><th>Points</th></tr></thead>
+    <tbody>
+      <tr><td>A — Le stylo plume</td><td>Décrire et caractériser l'organisation interne d'un objet (thème 2)</td><td>6</td></tr>
+      <tr><td>B — Le vaporisateur</td><td>Identifier un dysfonctionnement et y remédier (thème 2)</td><td>10</td></tr>
+      <tr><td>C — Réparer ou remplacer ?</td><td>Caractériser et choisir un objet selon différents critères (thème 1)</td><td>4</td></tr>
+    </tbody>
+  </table>
+  <p class="who">La compétence « Valider par des protocoles de tests » (thème 3) est évaluée en séance 4 sur le protocole v2 (grille ci-dessous).</p>
+
+  <div class="fiche newpage">
+    <div class="ident"><span>Nom : ………………</span><span>Prénom : ………………</span><span>Classe : 4e …</span><span>Date : ………</span></div>
+    <h3 style="margin-top:0">Évaluation — Diagnostiquer pour réparer</h3>
+
+    <h4>Partie A — Le stylo plume (6 points)</h4>
+    <figure style="margin:8px 0">
+      <svg viewBox="0 0 800 120" role="img" aria-label="Stylo plume à légender">
+        <rect x="20" y="40" width="140" height="40" rx="18" fill="#1d3c8f"/>
+        <path d="M185,60 Q205,50 235,49 L265,49 L265,69 L235,69 Q205,69 185,60 Z" fill="#c9ced8" stroke="#6b7180"/>
+        <path d="M200,74 L270,72 L270,82 L208,82 Z" fill="#2f2f2f"/>
+        <path d="M300,46 L380,42 L380,78 L300,74 Z" fill="#2b2b2b"/>
+        <rect x="420" y="44" width="120" height="32" rx="8" fill="#cfd8f3" stroke="#8ea0d6"/><rect x="422" y="46" width="80" height="28" rx="6" fill="#2448b5" opacity=".85"/>
+        <path d="M580,40 L740,40 Q770,40 770,60 Q770,80 740,80 L580,80 Z" fill="#1d3c8f"/>
+        <g font-family="Segoe UI,Arial" font-size="14" text-anchor="middle" font-weight="700">
+          <circle cx="90" cy="18" r="12" fill="#c0262d"/><text x="90" y="23" fill="#fff">a</text>
+          <circle cx="230" cy="18" r="12" fill="#c0262d"/><text x="230" y="23" fill="#fff">b</text>
+          <circle cx="235" cy="104" r="12" fill="#c0262d"/><text x="235" y="109" fill="#fff">c</text>
+          <circle cx="480" cy="18" r="12" fill="#c0262d"/><text x="480" y="23" fill="#fff">d</text>
+          <circle cx="675" cy="18" r="12" fill="#c0262d"/><text x="675" y="23" fill="#fff">e</text>
+        </g>
+      </svg>
+    </figure>
+    <p class="q"><b class="qn">A1</b>Nomme les éléments a à e. <i>(2,5 pts)</i></p>
+    <p>a : ………………… &nbsp; b : ………………… &nbsp; c : ………………… &nbsp; d : ………………… &nbsp; e : …………………</p>
+    <div class="corrige">a capuchon · b plume · c conduit (alimentateur) · d cartouche · e corps. 0,5 pt par élément.</div>
+    <p class="q"><b class="qn">A2</b>Explique en deux ou trois phrases comment l'encre arrive sur le papier, et pourquoi de l'air doit entrer dans la cartouche. <i>(2 pts)</i></p>
+    <div class="lines l4"></div>
+    <div class="corrige">L'encre va de la cartouche au papier par le conduit puis la fente de la plume, par capillarité (1 pt). L'air entre par le canal d'air du conduit pour remplacer l'encre qui sort ; sinon la cartouche ne pourrait pas se vider (1 pt).</div>
+    <p class="q"><b class="qn">A3</b>Un stylo écrit quand on trempe sa plume dans l'encre, mais n'écrit pas avec sa cartouche. Coche la bonne réponse. <i>(1,5 pt)</i></p>
+    <p>☐ La plume est sûrement abîmée. &nbsp; ☐ La panne vient de la réserve ou du chemin de l'encre. &nbsp; ☐ On ne peut rien conclure.</p>
+    <div class="corrige">« La panne vient de la réserve ou du chemin de l'encre » : la plume sait déposer l'encre quand on l'alimente directement, elle est donc hors de cause.</div>
+
+    <h4>Partie B — Nouveau cas : le vaporisateur de Sam (10 points)</h4>
+    <div class="grid2">
+      <figure style="margin:6px 0">
+        <svg viewBox="0 0 420 380" role="img" aria-label="Schéma du vaporisateur">
+          <!-- réservoir -->
+          <path d="M120,170 L300,170 L310,360 Q310,372 296,372 L124,372 Q110,372 110,360 Z" fill="#eef6ff" stroke="#6b7180" stroke-width="2"/>
+          <path d="M113,250 L307,250 L310,360 Q310,372 296,372 L124,372 Q110,372 110,360 Z" fill="#9cc3f0" opacity=".8"/>
+          <!-- col -->
+          <rect x="170" y="150" width="80" height="22" fill="#d9d2c3" stroke="#6b7180"/>
+          <!-- tête -->
+          <path d="M120,70 L300,70 L300,150 L120,150 Z" fill="#f2c14e" stroke="#6b7180" stroke-width="2"/>
+          <!-- buse -->
+          <rect x="70" y="88" width="50" height="26" rx="5" fill="#e07a2f" stroke="#6b7180"/>
+          <circle cx="72" cy="101" r="3" fill="#333"/>
+          <!-- pompe -->
+          <rect x="160" y="85" width="100" height="34" rx="4" fill="#fff" stroke="#6b7180"/>
+          <path d="M175,102 l8,-8 l8,16 l8,-16 l8,16 l8,-16 l8,16 l8,-8" stroke="#555" fill="none" stroke-width="2"/>
+          <rect x="230" y="88" width="10" height="28" fill="#888"/>
+          <!-- clapet -->
+          <circle cx="210" cy="132" r="7" fill="#c0262d"/>
+          <!-- gâchette -->
+          <path d="M120,120 Q95,150 105,210 L120,210 Q115,160 135,130 Z" fill="#e07a2f" stroke="#6b7180"/>
+          <!-- tube plongeur -->
+          <line x1="210" y1="140" x2="210" y2="362" stroke="#555" stroke-width="5"/>
+          <g font-family="Segoe UI,Arial" font-size="13" font-weight="700" text-anchor="middle">
+            <g fill="#fff"><circle cx="85" cy="60" r="12" fill="#1d3c8f"/><text x="85" y="65">6</text></g>
+            <g fill="#fff"><circle cx="340" cy="100" r="12" fill="#1d3c8f"/><text x="340" y="105">4</text></g>
+            <g fill="#fff"><circle cx="340" cy="140" r="12" fill="#1d3c8f"/><text x="340" y="145">5</text></g>
+            <g fill="#fff"><circle cx="70" cy="200" r="12" fill="#1d3c8f"/><text x="70" y="205">3</text></g>
+            <g fill="#fff"><circle cx="250" cy="300" r="12" fill="#1d3c8f"/><text x="250" y="305">2</text></g>
+            <g fill="#fff"><circle cx="350" cy="320" r="12" fill="#1d3c8f"/><text x="350" y="325">1</text></g>
+          </g>
+          <g stroke="#1d3c8f" stroke-width="1.2"><line x1="328" y1="100" x2="262" y2="100"/><line x1="328" y1="140" x2="217" y2="133"/><line x1="82" y1="200" x2="104" y2="190"/><line x1="238" y1="300" x2="213" y2="300"/><line x1="338" y1="320" x2="305" y2="320"/><line x1="88" y1="72" x2="92" y2="88"/></g>
+        </svg>
+        <figcaption>1 réservoir · 2 tube plongeur · 3 gâchette · 4 pompe (piston + ressort) · 5 clapet anti-retour · 6 buse</figcaption>
+      </figure>
+      <div>
+        <div class="box info" style="margin-top:6px">
+          <h4>Comment ça marche</h4>
+          <p>Quand on appuie sur la gâchette, le piston de la pompe pousse l'eau vers la buse, qui la transforme en fines gouttelettes. Quand on relâche, le ressort ramène le piston et l'eau du réservoir est aspirée par le tube plongeur. Le clapet empêche l'eau de redescendre dans le réservoir.</p>
+        </div>
+        <div class="card">
+          <h4>Ce que Sam a remarqué</h4>
+          <ul>
+            <li>Le réservoir est à moitié plein.</li>
+            <li>La gâchette s'enfonce et revient normalement.</li>
+            <li>Rien ne sort par la buse : ni jet, ni brume.</li>
+            <li>Quand il appuie fort, quelques gouttes coulent sous la buse.</li>
+            <li>Chez Sam, l'eau du robinet laisse des traces blanches (calcaire) dans la bouilloire.</li>
+            <li>Le vaporisateur a deux ans.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="q"><b class="qn">B1</b><span class="temps">Observer</span>Décris le symptôme en une phrase, puis cite deux choses qui fonctionnent encore. <i>(2 pts)</i></p>
+    <div class="lines l2"></div>
+    <div class="corrige">Symptôme : quand on appuie sur la gâchette, aucun jet ne sort de la buse (1 pt). Fonctionne encore : la gâchette et le ressort (elle revient), et l'eau arrive jusqu'à la tête puisque des gouttes coulent sous la buse (0,5 pt chacun).</div>
+    <p class="q"><b class="qn">B2</b><span class="temps">Relier · Supposer</span>Formule trois hypothèses de panne (élément en cause + ce qui lui arrive). Classe-les de la plus probable à la moins probable et justifie la première avec un indice. <i>(3 pts)</i></p>
+    <table>
+      <thead><tr><th style="width:8%">Rang</th><th>Hypothèse</th><th>Indice qui la soutient ou l'affaiblit</th></tr></thead>
+      <tbody><tr><td>1</td><td class="blank"></td><td></td></tr><tr><td>2</td><td class="blank"></td><td></td></tr><tr><td>3</td><td class="blank"></td><td></td></tr></tbody>
+    </table>
+    <div class="corrige">
+      1. <b>La buse est bouchée par du calcaire</b> — indices : eau calcaire chez Sam ; des gouttes arrivent jusqu'à la tête mais ne sortent pas par la buse.<br>
+      2. <b>Le clapet est bloqué ou la pompe fuit</b> (joint usé) — affaiblie par : la gâchette revient normalement et de l'eau arrive en haut.<br>
+      3. <b>Le tube plongeur est détaché, fendu ou ne trempe plus</b> — affaiblie par : le réservoir est à moitié plein et de l'eau arrive à la tête.<br>
+      Barème : 0,5 pt par hypothèse pertinente (1,5) ; classement cohérent (0,5) ; justification de la n° 1 par un indice (1).
+    </div>
+    <p class="q"><b class="qn">B3</b><span class="temps">Tester</span>Propose un test sans danger qui élimine au moins une hypothèse. Écris ce que tu observeras si ton hypothèse n° 1 est vraie, et si elle est fausse. <i>(3 pts)</i></p>
+    <div class="lines l4"></div>
+    <div class="corrige">Test : dévisser ou retirer la buse, puis appuyer sur la gâchette au-dessus de l'évier (1 pt). Si la buse est la cause : un jet d'eau sort de la tête sans buse (1 pt). Si elle n'est pas la cause : rien ne sort non plus sans buse → la panne est dans la pompe, le clapet ou le tube (1 pt). Accepter aussi : observer la buse à la loupe (dépôt blanc) — 2 pts maximum car il n'élimine pas les autres hypothèses.</div>
+    <p class="q"><b class="qn">B4</b><span class="temps">Conclure</span>Sam a fait ton test : sans la buse, un beau jet d'eau sort à chaque appui. Conclus, puis propose une réparation et un conseil pour éviter que la panne revienne. <i>(2 pts)</i></p>
+    <div class="lines l4"></div>
+    <div class="corrige">La pompe, le clapet et le tube fonctionnent : la cause est la buse bouchée (calcaire) (1 pt). Réparation : faire tremper la buse dans du vinaigre blanc pour dissoudre le calcaire, rincer, remonter, tester (0,5 pt). Conseil : utiliser de l'eau filtrée ou déminéralisée, rincer la buse régulièrement (0,5 pt).</div>
+
+    <h4>Partie C — Réparer ou remplacer ? (4 points)</h4>
+    <div class="card">
+      <p>Le stylo plume de Léa est tombé sur la pointe : les becs sont tordus. Le reste du stylo est en bon état.<br>
+      <i>Données de l'exercice :</i> une plume de rechange compatible coûte 6 € et se change à la main en 1 min ; un stylo plume neuf coûte 12 € ; un stylo bille jetable coûte 0,50 €.</p>
+    </div>
+    <p class="q"><b class="qn">C1</b>Que conseilles-tu à Léa ? Argumente avec <b>au moins trois critères</b> (coût, déchets, durée de vie, facilité de réparation…). <i>(4 pts)</i></p>
+    <div class="lines l6"></div>
+    <div class="corrige">Réponse attendue : changer la plume. Critères : coût (6 € contre 12 €), déchets (on ne jette qu'une petite pièce au lieu d'un stylo entier), durée de vie (le corps, la section et le conduit continuent à servir), facilité (réparation à la main, sans outil). Une réponse « stylo bille » est acceptée si elle est argumentée, mais doit intégrer les déchets et la durée d'usage pour obtenir le maximum. Barème : décision (1 pt) + 1 pt par critère correctement argumenté (3 pts max).</div>
+  </div>
+
+  <h3>Grille d'évaluation par compétences</h3>
+  <table>
+    <thead><tr><th style="width:22%">Compétence</th><th>Maîtrise insuffisante</th><th>Maîtrise fragile</th><th>Maîtrise satisfaisante</th><th>Très bonne maîtrise</th></tr></thead>
+    <tbody>
+      <tr><td><b>Décrire l'organisation interne et les flux</b><br><small>Partie A, activités S1–S2</small></td><td>Nomme moins de 3 éléments.</td><td>Nomme les éléments, décrit le trajet de l'encre de façon incomplète.</td><td>Nomme les éléments et décrit le trajet de l'encre (capillarité).</td><td>Explique aussi le rôle de l'air et des ailettes.</td></tr>
+      <tr><td><b>Identifier un dysfonctionnement et y remédier</b><br><small>Partie B, carnet d'hypothèses, S3</small></td><td>Propose une réparation sans hypothèse ni test.</td><td>Formule des hypothèses, mais le test choisi ne permet pas de conclure.</td><td>Formule et classe des hypothèses, propose un test pertinent, conclut correctement.</td><td>Choisit un test qui élimine plusieurs hypothèses et anticipe les deux résultats.</td></tr>
+      <tr><td><b>Valider par un protocole de test</b><br><small>Protocole v2, S4</small></td><td>Protocole inutilisable par un autre groupe.</td><td>Étapes présentes, mais imprécises ou sans test de validation.</td><td>Protocole suivi sans aide, test de validation présent.</td><td>Critère de validation mesurable, points de contrôle, conseil de prévention.</td></tr>
+      <tr><td><b>Caractériser et choisir selon des critères</b><br><small>Partie C, grille S5</small></td><td>Choix sans argument.</td><td>Un seul critère (souvent le prix).</td><td>Trois critères dont un lié aux déchets ou à la durée de vie.</td><td>Argumentation qui met en balance les critères (cycle de vie).</td></tr>
+    </tbody>
+  </table>
+
+  <div class="card">
+    <h4>Différenciation et remédiation</h4>
+    <ul>
+      <li><b>Pendant la séquence</b> : cas mystères de difficulté graduée (A, B, F ★ ; C, D, E ★★ ; H ★★★), cartes « coup de pouce » à trois niveaux, banque d'hypothèses collective affichée dès la fin de S2.</li>
+      <li><b>Évaluation aménagée</b> : partie B avec hypothèses à choisir dans une liste (B2) et test à choisir parmi trois (B3) ; la compétence évaluée reste la même (relier indice → hypothèse → test → conclusion).</li>
+      <li><b>Remédiation</b> : rejouer les six temps sur une panne présentée en photos (par exemple une lampe de poche à piles qui ne s'allume plus, piles retirées pour la sécurité), avec un camarade tuteur.</li>
+      <li><b>Approfondissement</b> : proposer une amélioration de conception du stylo qui faciliterait le diagnostic (fenêtre pour voir le niveau d'encre, cartouche standard, plume enfichable) — passerelle vers la 3e (« Améliorer »).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- =========================================================
+     ANNEXES
+========================================================== -->
+<section class="block" id="annexes">
+  <h2>Annexes</h2>
+
+  <h3>Annexe 1 — Affiche : les six temps du diagnostic</h3>
+  <div class="six">
+    <div><i>Temps 1</i><b>Observer</b>Qu'est-ce qui ne marche pas ? Quand ? Qu'est-ce qui marche encore ?</div>
+    <div><i>Temps 2</i><b>Décomposer</b>Quels sont les blocs de l'objet et leurs solutions techniques ?</div>
+    <div><i>Temps 3</i><b>Relier</b>Quels blocs peuvent produire ce symptôme ? Lesquels sont hors de cause ?</div>
+    <div><i>Temps 4</i><b>Supposer</b>Quelles causes possibles ? Laquelle est la plus probable, la plus facile à tester ?</div>
+    <div><i>Temps 5</i><b>Tester</b>Quel test, sans danger, élimine le plus d'hypothèses ? Qu'est-ce que j'attends ?</div>
+    <div><i>Temps 6</i><b>Conclure</b>La cause explique-t-elle tous les indices ? Pourquoi a-t-elle lâché ? Je répare ?</div>
+  </div>
+  <p class="who">Méthode issue de l'atelier de formation « Réparer, est-ce apprendre ? ». Ce n'est pas une fiche à remplir mécaniquement : c'est une façon de raisonner, que les élèves doivent pouvoir expliquer.</p>
+
+  <h3>Annexe 2 — Auto-positionnement de l'élève (fin de S5)</h3>
+  <div class="fiche">
+    <table>
+      <thead><tr><th>Je suis capable de…</th><th class="tick">Pas encore</th><th class="tick">Avec aide</th><th class="tick">Seul(e)</th><th class="tick">Je peux l'expliquer à un autre</th></tr></thead>
+      <tbody>
+        <tr><td>nommer les éléments d'un stylo plume et dire le trajet de l'encre</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>décrire un symptôme sans donner tout de suite la cause</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>formuler plusieurs hypothèses et les classer</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>choisir un test et prévoir son résultat</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>écrire un protocole qu'un autre peut suivre</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>argumenter un choix « réparer ou remplacer »</td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Annexe 3 — Feuille de test d'écriture</h3>
+  <div class="fiche">
+    <p><b>Stylo :</b> ☐ témoin &nbsp; ☐ cas …… &nbsp;&nbsp; <b>Date :</b> ………</p>
+    <table>
+      <thead><tr><th style="width:30%">Essai</th><th>Écris ici</th></tr></thead>
+      <tbody>
+        <tr><td>Ligne de boucles « llllll » (15 cm)</td><td style="height:44px"></td></tr>
+        <tr><td>Mon prénom</td><td style="height:44px"></td></tr>
+        <tr><td>Après 1 min sans capuchon</td><td style="height:44px"></td></tr>
+        <tr><td>Après trempage de la plume (T2)</td><td style="height:44px"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Annexe 4 — Conseils d'entretien (trace collective, S4)</h3>
+  <div class="box retiens">
+    <ul>
+      <li>Je referme le capuchon dès que je n'écris plus.</li>
+      <li>J'utilise le format de cartouche indiqué par le fabricant et je l'enfonce jusqu'au « clic ».</li>
+      <li>Je n'appuie pas sur la plume et je ne prête pas mon stylo plume (chacun l'use à son angle).</li>
+      <li>Je range le stylo debout, plume vers le haut, et je le rince à l'eau tiède s'il ne sert pas pendant plusieurs semaines.</li>
+      <li>Si une plume est abîmée, je cherche une plume de rechange avant de jeter le stylo.</li>
+    </ul>
+  </div>
+
+  <h3>Sources</h3>
+  <ul>
+    <li>Programme de technologie du cycle 4, <a href="https://www.education.gouv.fr/sites/default/files/ensel802_annexe.pdf">BO n° 9 du 29 février 2024 (annexe)</a> — compétences, connaissances et repères de 4e cités dans la fiche professeur.</li>
+    <li>Atelier de formation <a href="https://xseorkly.github.io/techno-3e/formation/reparabilite/index.html">« Réparer, est-ce apprendre ? »</a> — méthode en six temps et niveaux d'ambition.</li>
+    <li>Structure des fiches d'activité : <a href="https://xseorkly.github.io/techno-3e/">site Technologie 3e</a> (objectifs N1–N4, « Ce que je travaille », « Ce que je dois savoir faire », « Mes constats, mes observations »).</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Technologie cycle 4 · Parcours réparabilité · Séquence 4e « Mon stylo plume n'écrit plus ». Les corrigés n'apparaissent qu'en mode professeur (bouton en haut de page) ; imprimer en mode élève pour obtenir les fiches vierges.</div>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('toggleMode'), flag=document.getElementById('modeFlag');
+  function apply(on){
+    document.body.classList.toggle('prof',on);
+    btn.textContent=on?'Masquer les corrigés':'Afficher les corrigés';
+    flag.textContent=on?'Mode professeur':'Mode élève';
+    // tableau de corrigé des cas (S3)
+    document.querySelectorAll('tbody.corrige-table').forEach(function(tb){
+      tb.closest('table').style.display=on?'':'none';
+    });
+  }
+  var on=false;
+  btn.addEventListener('click',function(){on=!on;apply(on);});
+  apply(false);
+
+  var lb=document.getElementById('toggleLabels'), shown=true;
+  lb.addEventListener('click',function(){
+    shown=!shown;
+    document.querySelectorAll('#fig-eclatee .lbl').forEach(function(g){g.style.visibility=shown?'visible':'hidden';});
+  });
+})();
+</script>
+</body>
+</html>
