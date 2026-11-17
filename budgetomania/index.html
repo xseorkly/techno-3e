@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#ff5f9e">
+<title>Budgetomania – La mission de Pépite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none;background:#7cc8ff}
+body{font-family:'Fredoka',system-ui,'Segoe UI',Roboto,sans-serif;color:var(--ink);-webkit-user-select:none;user-select:none;
+  --ink:#2a2140;--sky1:#7cc8ff;--sky2:#ffe49a;--sky3:#ffc2dc;--city:#7fb0e0;--city2:#a3c9ef;--win:#fff6c2;
+  --accent:#ff5f9e;--accent-d:#d63c7c;--need:#16a36f;--want:#9b5cf6;--panel:rgba(255,255,255,.93)}
+body.ados{--sky1:#2d1263;--sky2:#ff8a4c;--sky3:#c2418e;--city:#1d0b3d;--city2:#341a6b;--win:#ffd166;--accent:#ff4f8b;--accent-d:#c42a63}
+button{font-family:inherit;cursor:pointer;border:0;color:inherit}
+input{font-family:inherit}
+
+/* ---------- FOND ANIMÉ ---------- */
+#bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:linear-gradient(175deg,var(--sky1) 0%,var(--sky3) 62%,var(--sky2) 100%);background-size:100% 160%;animation:sky 16s ease-in-out infinite alternate}
+@keyframes sky{to{background-position:0 100%}}
+.layer{position:absolute;inset:-40px;transform:translate(calc(var(--px,0px)*var(--d)),calc(var(--py,0px)*var(--d)));transition:transform .3s ease-out}
+.sun{position:absolute;top:8%;right:10%;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,#fffbd6 0,#ffd54a 55%,rgba(255,213,74,0) 72%);animation:glow 4s ease-in-out infinite}
+body.ados .sun{top:auto;bottom:14%;right:calc(50% - 130px);width:260px;height:260px;background:radial-gradient(circle,#fff1c9 0,#ff9f5a 50%,rgba(255,120,80,0) 72%)}
+@keyframes glow{50%{filter:brightness(1.15)}}
+.cloud{position:absolute;left:0;height:calc(var(--w)*.38);width:var(--w);background:#fff;border-radius:999px;opacity:.9;animation:drift var(--t) linear infinite;animation-delay:var(--dl)}
+.cloud::before,.cloud::after{content:'';position:absolute;background:#fff;border-radius:50%}
+.cloud::before{width:55%;height:140%;left:14%;bottom:20%}
+.cloud::after{width:40%;height:110%;right:12%;bottom:25%}
+body.ados .cloud,body.ados .cloud::before,body.ados .cloud::after{background:#ffb3d1}
+body.ados .cloud{opacity:.22}
+@keyframes drift{from{transform:translateX(-40vw)}to{transform:translateX(140vw)}}
+.fcoin{position:absolute;bottom:-70px;width:var(--s);height:var(--s);animation:rise var(--t) linear infinite;animation-delay:var(--dl);opacity:.85}
+@keyframes rise{from{transform:translateY(0) rotate(0)}to{transform:translateY(-125vh) rotate(540deg)}}
+.spark{position:absolute;width:3px;height:3px;background:#fff;border-radius:50%;animation:tw 2s infinite alternate}
+body.junior .spark{display:none}
+@keyframes tw{from{opacity:.2}to{opacity:1}}
+.city{position:absolute;left:0;right:0;bottom:0;width:100%;height:30vh}
+.city .b{fill:var(--city)}.city .b2{fill:var(--city2)}
+.city .w{fill:var(--win);animation:tw 3s infinite alternate}
+.hills{position:absolute;left:0;right:0;bottom:0;width:100%;height:14vh}
+body.ados .hills{display:none}
+
+/* ---------- ÉCRANS ---------- */
+.screen{position:fixed;inset:0;z-index:2;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 10px) 12px calc(env(safe-area-inset-bottom) + 10px);opacity:0;visibility:hidden;transform:translateY(18px) scale(.98);transition:opacity .4s,transform .4s,visibility .4s}
+.screen.active{opacity:1;visibility:visible;transform:none}
+.btn{background:var(--accent);color:#fff;font-weight:700;font-size:20px;padding:13px 24px;border-radius:20px;box-shadow:0 6px 0 var(--accent-d),0 12px 24px rgba(0,0,0,.18);transition:transform .1s,box-shadow .1s}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--accent-d)}
+.btn:disabled{filter:grayscale(1);opacity:.45}
+.btn.big{font-size:24px;padding:16px 34px}
+.btn.ghost{background:#fff;color:var(--ink);box-shadow:0 6px 0 #cfc6e6}
+.btn.pulse{animation:pulseS 1.2s infinite}
+.ibtn{width:42px;height:42px;border-radius:14px;background:var(--panel);font-size:20px;box-shadow:0 4px 0 rgba(0,0,0,.12);flex:none;display:flex;align-items:center;justify-content:center}
+.ibtn:active{transform:translateY(3px);box-shadow:none}
+.panel{background:var(--panel);border-radius:24px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+.bar{display:flex;align-items:center;gap:8px}
+.bar-title{flex:1;text-align:center;font-weight:700;font-size:19px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.25)}
+@keyframes pulseS{50%{transform:scale(1.06)}}
+@keyframes popIn{from{opacity:0;transform:translateY(30px) scale(.9)}}
+@keyframes bounce{0%,100%{transform:translateY(0) scale(1,1)}45%{transform:translateY(-14px) scale(.97,1.03)}55%{transform:translateY(-14px)}90%{transform:translateY(0) scale(1.06,.94)}}
+@keyframes shakeX{0%,100%{transform:none}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+
+/* Accueil */
+.home-wrap{flex:1;overflow:auto;display:flex;flex-direction:column;align-items:center;gap:12px;padding:6px 0 20px;max-width:520px;margin:0 auto;width:100%}
+.logo{font-weight:700;font-size:clamp(42px,12vw,66px);line-height:1;text-align:center;color:#fff;text-shadow:0 4px 0 var(--accent-d),0 10px 20px rgba(0,0,0,.25);animation:wobble 3s ease-in-out infinite;margin-top:6px}
+.logo .l2{color:#ffe14d}
+@keyframes wobble{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg) scale(1.03)}}
+.tag{background:#fff;color:var(--accent-d);font-weight:700;padding:6px 16px;border-radius:999px;box-shadow:0 4px 0 rgba(0,0,0,.1)}
+.pep-big{width:160px;height:150px;animation:bounce 1.8s ease-in-out infinite;cursor:pointer}
+.jump{animation:jump .8s !important}
+@keyframes jump{30%{transform:translateY(-60px) rotate(-12deg)}70%{transform:translateY(-60px) rotate(360deg)}100%{transform:rotate(360deg)}}
+.panel label{display:block;font-weight:700;margin:6px 0}
+#inName{width:100%;font-size:20px;padding:10px 14px;border-radius:14px;border:3px solid #e9e2fb;outline:none;color:var(--ink)}
+#inName:focus{border-color:var(--accent)}
+.ages{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.age{font-size:21px;font-weight:700;padding:10px 0;border-radius:14px;background:#f2edff;color:var(--ink);box-shadow:0 4px 0 #d9cff5;transition:transform .15s}
+.age.sel{background:var(--accent);color:#fff;box-shadow:0 4px 0 var(--accent-d);transform:scale(1.12)}
+.mode-badge{margin-top:12px;text-align:center;font-weight:500;min-height:26px;font-size:15px}
+.mode-badge b{display:inline-block;padding:4px 12px;border-radius:999px;color:#fff;margin-bottom:4px;font-size:16px}
+.dev-badge{background:rgba(255,255,255,.88);border-radius:16px;padding:8px 14px;font-size:15px;text-align:center}
+
+/* Carte des familles */
+.map-intro{display:flex;align-items:center;gap:10px;margin:12px auto;max-width:720px;width:100%}
+.pep-s{width:80px;height:74px;flex:none;animation:bounce 2s infinite}
+.bubble{position:relative;background:#fff;border-radius:18px;padding:10px 14px;font-weight:500;box-shadow:0 6px 16px rgba(0,0,0,.12);font-size:16px}
+.bubble::before{content:'';position:absolute;left:-8px;top:50%;margin-top:-8px;border:8px solid transparent;border-right-color:#fff;border-left:0}
+.chapters{flex:1;overflow:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;padding:4px 2px 20px;max-width:1100px;margin:0 auto;width:100%;align-content:start}
+.chap{background:var(--panel);border-radius:24px;padding:14px;box-shadow:0 8px 0 rgba(0,0,0,.08),0 12px 24px rgba(0,0,0,.12);text-align:left;color:var(--ink);display:flex;flex-direction:column;gap:6px;animation:popIn .5s backwards;transition:transform .15s}
+.chap:active{transform:scale(.97)}
+.chap-top{display:flex;justify-content:space-between;align-items:center}
+.chap-n{font-size:21px;font-weight:700}
+.chap-meta{font-size:14px;opacity:.75}
+.chap-goal{font-size:15px;background:#fff6d6;border-radius:12px;padding:6px 10px}
+.chap-stars{font-size:22px;letter-spacing:2px}
+.off{filter:grayscale(1);opacity:.3}
+.chap-num{background:var(--accent);color:#fff;border-radius:999px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:700}
+
+/* Visages */
+.family{display:flex;align-items:flex-end;justify-content:center;gap:2px}
+.face{width:64px;flex:none;animation:bob 2.4s ease-in-out infinite}
+.face.kid{width:48px}
+.face svg{width:100%;height:auto;display:block;overflow:visible}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px) rotate(1.5deg)}}
+.family.big .face{width:min(26vw,120px)}.family.big .face.kid{width:min(19vw,88px)}
+.family.mid .face{width:min(17vw,96px)}.family.mid .face.kid{width:min(13vw,70px)}
+.family.mini .face{width:30px}.family.mini .face.kid{width:23px}
+.chap .face{width:62px}.chap .face.kid{width:46px}
+.family.hop .face{animation:hop .55s}
+@keyframes hop{40%{transform:translateY(-14px) scale(1.08)}}
+.face.talk{animation:talk .3s infinite alternate}
+@keyframes talk{to{transform:translateY(-7px) scale(1.05)}}
+.blink{animation:blink 4.2s infinite;transform-origin:center;transform-box:fill-box}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+
+/* Histoire */
+.story-stage{flex:1;display:flex;align-items:flex-end;justify-content:center;gap:6px;overflow:hidden;padding-bottom:10px;min-height:0}
+.pep-m{width:min(24vw,110px);height:min(22vw,100px);flex:none;animation:bounce 2s infinite}
+.pep-m.talk{animation:talk .3s infinite alternate}
+.story-box{background:#fff;border-radius:26px;padding:16px;box-shadow:0 12px 30px rgba(0,0,0,.2);max-width:640px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:8px;min-height:190px;animation:popIn .4s}
+.story-who{font-weight:700;color:var(--accent-d);font-size:17px}
+.story-text{font-size:20px;line-height:1.35;flex:1}
+#storyNext{align-self:flex-end}
+
+/* ---------- JEU ---------- */
+#scr-game{gap:8px;padding-left:10px;padding-right:10px}
+#gFamily{flex:none;justify-content:flex-start;width:max-content}
+.g-title{flex:1;min-width:0;font-weight:700;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.25);font-size:16px;line-height:1.1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.g-gauge{background:var(--panel);border-radius:18px;padding:8px 12px;box-shadow:0 6px 16px rgba(0,0,0,.12);transition:background .3s}
+.gauge-row{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;gap:8px}
+.gauge-row b{font-size:16px}
+.rem b{font-size:21px;color:var(--need)}
+.rem.neg b{color:#e11d48}
+.gauge{height:16px;border-radius:999px;background:#ece6fb;overflow:hidden;margin-top:4px;border:2px solid #fff;box-shadow:inset 0 2px 4px rgba(0,0,0,.12)}
+#gBar{height:100%;width:100%;border-radius:999px;background:linear-gradient(90deg,#34d399,#a3e635);transition:width .7s cubic-bezier(.3,1.4,.5,1)}
+#gBar.mid{background:linear-gradient(90deg,#fbbf24,#fb923c)}
+#gBar.low{background:#ef4444}
+.g-gauge.neg{background:#ffe1e6;animation:shakeX .45s}
+.goal{font-size:13px;margin-top:4px;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g-stage{flex:1;position:relative;min-height:0;display:flex;align-items:center;justify-content:center}
+.deck-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;cursor:pointer;animation:popIn .4s}
+.deck-wrap[hidden]{display:none}
+.deck{position:relative;width:min(44vw,180px);aspect-ratio:3/4}
+.cback{position:absolute;inset:0;border-radius:22px;background:repeating-linear-gradient(45deg,#ff7eb3 0 14px,#ff96c2 14px 28px);border:5px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+body.ados .cback{background:repeating-linear-gradient(45deg,#7c3aed 0 14px,#8b5cf6 14px 28px)}
+.cback:nth-child(1){transform:rotate(-9deg) translate(-12px,6px)}
+.cback:nth-child(2){transform:rotate(7deg) translate(12px,4px)}
+.cback:nth-child(3){display:flex;align-items:center;justify-content:center}
+.cback-logo{width:76px;height:76px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:700;color:var(--accent);box-shadow:0 4px 0 rgba(0,0,0,.1)}
+.deck.idle{animation:idleWiggle 2.6s infinite}
+@keyframes idleWiggle{0%,78%,100%{transform:rotate(0)}82%{transform:rotate(-5deg)}86%{transform:rotate(5deg)}90%{transform:rotate(-3deg)}94%{transform:rotate(2deg)}}
+.deck.shake{animation:shakeHard .48s}
+@keyframes shakeHard{0%,100%{transform:none}15%{transform:translateX(-16px) rotate(-8deg)}35%{transform:translateX(16px) rotate(8deg)}55%{transform:translateX(-12px) rotate(-5deg)}75%{transform:translateX(9px) rotate(4deg)}}
+.deck-label{background:#fff;padding:8px 18px;border-radius:999px;font-weight:700;box-shadow:0 5px 0 rgba(0,0,0,.1);text-align:center;font-size:17px;animation:pulseS 1.6s infinite}
+.deck-label small{display:block;font-weight:500;font-size:12px;opacity:.7}
+.phone-ic{display:inline-block;animation:phoneShake .7s infinite}
+@keyframes phoneShake{0%,100%{transform:rotate(0)}25%{transform:rotate(-20deg)}75%{transform:rotate(20deg)}}
+.chip{background:rgba(255,255,255,.85);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;box-shadow:0 3px 0 rgba(0,0,0,.08)}
+
+#cardHolder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;transform-origin:center}
+.card-outer{pointer-events:auto;touch-action:none;width:min(80vw,300px);cursor:grab;will-change:transform;position:relative}
+.card-outer.dragging{cursor:grabbing}
+.card-inner{position:relative;background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 16px 36px rgba(0,0,0,.3);border:5px solid #fff}
+.card-inner.flip-in{animation:flipIn .65s cubic-bezier(.3,1.5,.5,1)}
+@keyframes flipIn{0%{transform:perspective(800px) translateY(90px) rotateY(110deg) scale(.35);opacity:0}55%{opacity:1}100%{transform:none}}
+.card-inner.nope{animation:nope .45s}
+@keyframes nope{0%,100%{transform:none}20%{transform:translateX(-14px) rotate(-4deg)}40%{transform:translateX(14px) rotate(4deg)}60%{transform:translateX(-9px)}80%{transform:translateX(6px)}}
+.card-art{height:150px;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.card-art::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 25% 15%,rgba(255,255,255,.55),transparent 50%)}
+.card-art .ray{position:absolute;width:300%;height:300%;background:repeating-conic-gradient(rgba(255,255,255,.14) 0 10deg,transparent 10deg 20deg);animation:spin 18s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.card-emoji{font-size:86px;position:relative;z-index:1;animation:emojiBounce 1.6s ease-in-out infinite;filter:drop-shadow(0 6px 6px rgba(0,0,0,.25))}
+@keyframes emojiBounce{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-9px) rotate(5deg) scale(1.07)}}
+.card-ppl{position:absolute;bottom:7px;right:9px;background:rgba(255,255,255,.88);border-radius:999px;padding:2px 9px;font-size:12px;font-weight:600;z-index:2}
+.card-body{padding:10px 14px 12px;text-align:center}
+.card-title{font-size:23px;font-weight:700;line-height:1.1}
+.card-sub{font-size:15px;opacity:.7;margin-top:2px}
+.card-price{font-size:36px;font-weight:700;color:var(--accent-d);margin-top:2px;line-height:1.15}
+.card-price small{font-size:14px;color:var(--ink);opacity:.6;font-weight:500}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.tier{background:#f3effd;border-radius:14px;padding:5px 2px;font-size:12px;font-weight:600;color:var(--ink);box-shadow:0 3px 0 #dcd3f3;line-height:1.15;transition:transform .15s}
+.tier span{display:block;font-size:20px}
+.tier.sel{background:var(--tc);color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.25);transform:scale(1.07)}
+.stats{display:flex;justify-content:center;gap:6px;margin-top:8px;font-size:13px;font-weight:600;flex-wrap:wrap}
+.stats span{background:#f6f3ff;border-radius:999px;padding:3px 8px}
+.card-q{margin-top:8px;font-size:14px;opacity:.6}
+.stamp{position:absolute;top:24px;padding:4px 12px;border:4px solid;border-radius:12px;font-weight:700;font-size:24px;opacity:0;z-index:5;background:rgba(255,255,255,.92);pointer-events:none}
+.stamp.need{right:14px;color:var(--need);border-color:var(--need);transform:rotate(12deg)}
+.stamp.want{left:14px;color:var(--want);border-color:var(--want);transform:rotate(-12deg)}
+.stamp.skip{left:50%;top:auto;bottom:18px;transform:translateX(-50%);color:#64748b;border-color:#64748b;white-space:nowrap}
+.card-outer.event .card-inner{border-color:#ffd54a;box-shadow:0 0 0 4px #ffb703,0 16px 44px rgba(255,183,3,.55)}
+.ev-tag{display:inline-block;background:#ffb703;color:#fff;font-weight:700;border-radius:999px;padding:2px 12px;font-size:13px;letter-spacing:1px}
+.ev-amount{font-size:40px;font-weight:700}
+.ev-amount.plus{color:var(--need)}.ev-amount.minus{color:#e11d48}
+.hint-down{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-weight:700;color:#fff;background:#64748b;padding:4px 14px;border-radius:999px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:4}
+.hint-down.on{opacity:1}
+.done-box{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;background:var(--panel);padding:20px;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,.15);animation:popIn .5s;max-width:340px}
+.done-box[hidden]{display:none}
+.done-box .big-ic{font-size:54px}
+
+.g-actions{display:flex;justify-content:center;gap:8px}
+.g-actions.off{visibility:hidden}
+.act{flex:1;max-width:150px;padding:10px 6px;border-radius:16px;font-weight:700;font-size:16px;color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.2)}
+.act:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.2)}
+.act.need{background:var(--need)}.act.want{background:var(--want)}.act.skip{background:#94a3b8;max-width:110px}
+
+.g-tray{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:stretch}
+.pile{border-radius:20px;padding:8px 6px;color:#fff;display:flex;flex-direction:column;align-items:center;gap:1px;box-shadow:0 6px 0 rgba(0,0,0,.18);transition:transform .2s,box-shadow .2s;min-width:0;cursor:pointer}
+.pile.want{background:linear-gradient(160deg,#b98aff,var(--want))}
+.pile.need{background:linear-gradient(160deg,#35d99a,var(--need))}
+.pile.hot{transform:scale(1.08);box-shadow:0 0 0 5px #fff,0 0 34px #fff}
+.pile.got{animation:gulp .5s}
+.pile-head{display:flex;align-items:center;gap:4px;font-size:16px}
+.pile-total{font-weight:700;font-size:18px}
+.pile-stack{display:flex;justify-content:center;height:32px;align-items:center}
+.pile-stack span{display:inline-flex;width:28px;height:32px;background:#fff;border-radius:8px;align-items:center;justify-content:center;margin-left:-10px;box-shadow:0 2px 4px rgba(0,0,0,.2);font-size:17px}
+.pile-stack span:first-child{margin-left:0}
+.pile-stack em{font-size:12px;opacity:.85}
+.pile-cnt{font-size:12px;opacity:.9}
+.pile-list{display:none}
+.piggy-box{background:var(--panel);border-radius:20px;padding:6px 8px;display:flex;flex-direction:column;align-items:center;box-shadow:0 6px 0 rgba(0,0,0,.1);width:120px}
+.piggy{width:70px;height:62px;transition:filter .2s}
+.piggy.gulp{animation:gulp .5s}
+@keyframes gulp{30%{transform:scale(1.22,.84)}60%{transform:scale(.92,1.1)}}
+.piggy.target{filter:drop-shadow(0 0 12px #ffd54a) brightness(1.1)}
+.sav{text-align:center;line-height:1.05}
+.sav b{font-size:15px}.sav b.ok{color:var(--need)}
+.sav small{display:block;font-size:11px;opacity:.7}
+.coin-row{display:flex;align-items:center;gap:6px;margin-top:4px}
+.mini{width:28px;height:28px;border-radius:50%;background:#efe9fb;font-weight:700;font-size:18px}
+.coin{width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3a8,#ffcf33 45%,#e0a100);border:3px solid #c98a00;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#7a4d00;touch-action:none;cursor:grab;animation:coinSpin 3s infinite;box-shadow:0 3px 0 #a87300}
+@keyframes coinSpin{0%,85%,100%{transform:rotateY(0)}92%{transform:rotateY(180deg)}}
+.coin-ghost{position:fixed;z-index:60;pointer-events:none;width:54px;height:54px;margin:-27px 0 0 -27px;animation:none;box-shadow:0 8px 16px rgba(0,0,0,.3)}
+.fly{position:fixed;z-index:60;pointer-events:none;font-size:24px;transition:transform .75s cubic-bezier(.5,-.4,.6,1),opacity .75s}
+.say{position:fixed;left:50%;bottom:160px;transform:translateX(-50%) scale(.6);background:#fff;border-radius:20px;padding:10px 16px;width:max-content;max-width:min(90vw,440px);font-weight:600;font-size:16px;box-shadow:0 10px 30px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .25s,transform .35s cubic-bezier(.3,1.6,.5,1);z-index:30;text-align:center;line-height:1.3}
+.say.on{opacity:1;transform:translateX(-50%) scale(1)}
+.say::after{content:'';position:absolute;bottom:-10px;left:50%;margin-left:-10px;border:10px solid transparent;border-top-color:#fff;border-bottom:0}
+.say b{color:var(--accent-d)}
+.kbd{display:none;text-align:center;font-size:13px;color:#fff;opacity:.9;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+
+/* Tiroir, tuto, résultat */
+.drawer{position:fixed;inset:0;background:rgba(20,10,40,.45);z-index:40;display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;transition:.3s}
+.drawer.on{opacity:1;visibility:visible}
+.sheet{background:#fff;width:100%;max-width:520px;border-radius:26px 26px 0 0;padding:14px 14px calc(env(safe-area-inset-bottom) + 16px);max-height:75vh;overflow:auto;transform:translateY(100%);transition:transform .35s cubic-bezier(.3,1.3,.5,1)}
+.drawer.on .sheet{transform:none}
+.sheet-h{display:flex;justify-content:space-between;align-items:center;font-size:20px;margin-bottom:8px}
+.row{display:flex;align-items:center;gap:10px;padding:8px;border-radius:14px;background:#f7f4ff;margin-bottom:6px;color:var(--ink)}
+.row .em{font-size:26px}
+.row .tx{flex:1;min-width:0;line-height:1.15;text-align:left}
+.row .tx small{display:block;opacity:.65}
+.row .pr{font-weight:700}
+.row button{background:#fff;border-radius:10px;padding:6px 8px;font-weight:600;box-shadow:0 2px 0 #ddd;font-size:13px}
+.empty{opacity:.75;text-align:center;padding:16px}
+.tuto{position:fixed;inset:0;z-index:50;background:rgba(30,10,60,.6);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:.3s}
+.tuto.on{opacity:1;visibility:visible}
+.tuto-card{background:#fff;border-radius:28px;padding:22px;max-width:380px;width:100%;text-align:center;animation:popIn .4s}
+.tuto-ic{font-size:72px;height:110px;display:flex;align-items:center;justify-content:center;gap:10px}
+.tuto-ic .pep-s{width:90px;height:84px}
+.tuto-t{font-size:23px;font-weight:700;margin:6px 0}
+.tuto-p{font-size:17px;margin-bottom:14px;line-height:1.4}
+.dots{display:flex;gap:6px;justify-content:center;margin-bottom:12px}
+.dots i{width:10px;height:10px;border-radius:50%;background:#ddd}
+.dots i.on{background:var(--accent)}
+.swipe-demo{display:inline-block;animation:swipeDemo 2.4s infinite}
+@keyframes swipeDemo{0%,100%{transform:none}25%{transform:translateX(60px) rotate(14deg)}50%{transform:none}75%{transform:translateX(-60px) rotate(-14deg)}}
+.res-wrap{flex:1;overflow:auto;display:flex;flex-direction:column;align-items:center;gap:10px;max-width:640px;margin:0 auto;width:100%;padding-bottom:20px}
+.res-title{font-size:clamp(30px,8vw,46px);font-weight:700;color:#fff;text-align:center;text-shadow:0 4px 0 rgba(0,0,0,.25);animation:popIn .6s;line-height:1.1;margin-top:6px}
+.stars{display:flex;gap:10px;font-size:56px}
+.stars span{filter:grayscale(1);opacity:.3;transform:scale(.6);transition:all .45s cubic-bezier(.3,1.9,.5,1)}
+.stars span.on{filter:none;opacity:1;transform:scale(1.15) rotate(-8deg)}
+.res-quote{background:#fff;border-radius:18px;padding:8px 14px;font-weight:600;text-align:center}
+.res-nums{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;width:100%}
+.num{background:var(--panel);border-radius:16px;padding:8px 4px;text-align:center;font-size:12px}
+.num b{display:block;font-size:17px}
+.res-pep{display:flex;gap:10px;align-items:center;width:100%}
+.checks{list-style:none;padding:0;margin:0;width:100%;display:flex;flex-direction:column;gap:6px}
+.checks li{background:var(--panel);border-radius:14px;padding:8px 12px;display:flex;gap:8px;font-size:15px;align-items:flex-start;animation:popIn .4s backwards}
+.res-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.link{background:none;color:#fff;font-weight:700;text-decoration:underline;font-size:16px;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+.statbars{background:var(--panel);border-radius:16px;padding:10px 14px;width:100%}
+.sb{display:flex;align-items:center;gap:8px;font-size:14px;margin:4px 0}
+.sb .lb{width:130px;white-space:nowrap}
+.sb .tr{flex:1;height:12px;background:#eee;border-radius:9px;overflow:hidden}
+.sb .tr i{display:block;height:100%;border-radius:9px;width:0;transition:width 1s .3s}
+#confetti{position:fixed;inset:0;z-index:70;pointer-events:none;width:100%;height:100%}
+
+/* Petits écrans */
+@media (max-height:720px){
+  .card-art{height:105px}.card-emoji{font-size:62px}.card-price{font-size:30px}.card-title{font-size:20px}
+  .card-q{display:none}.piggy{width:58px;height:52px}.pile-stack{height:26px}.g-gauge{padding:6px 10px}
+  .act{padding:8px 6px;font-size:15px}.goal{display:none}
+}
+
+/* ---------- ORDINATEUR ---------- */
+@media (min-width:900px){
+  body.desktop #scr-game{display:grid;grid-template-columns:1fr minmax(360px,420px) 1fr;grid-template-rows:auto auto 1fr auto;
+    grid-template-areas:"top top top" "gauge gauge piggy" "want stage need" "want act need";gap:14px;padding:16px 24px}
+  body.desktop .g-top{grid-area:top}
+  body.desktop .g-gauge{grid-area:gauge}
+  body.desktop .g-stage{grid-area:stage}
+  body.desktop .g-actions{grid-area:act;flex-wrap:wrap}
+  body.desktop .g-tray{display:contents}
+  body.desktop #pile-want{grid-area:want}
+  body.desktop #pile-need{grid-area:need}
+  body.desktop #piggyBox{grid-area:piggy;flex-direction:row;width:auto;gap:14px;justify-content:center}
+  body.desktop .pile{justify-content:flex-start;padding:14px;cursor:default;min-height:0;border:4px dashed rgba(255,255,255,.55)}
+  body.desktop .pile-stack,body.desktop .pile-cnt{display:none}
+  body.desktop .pile-list{display:block;width:100%;overflow:auto;flex:1;margin-top:8px}
+  body.desktop .pile-head{font-size:24px}
+  body.desktop .pile-total{font-size:22px}
+  body.desktop .pile.hot{transform:scale(1.03)}
+  body.desktop .card-outer{width:340px}
+  body.desktop .say{bottom:20px}
+  body.desktop .kbd{display:block;width:100%}
+  body.desktop .piggy{width:96px;height:86px}
+  body.desktop .deck{width:200px}
+  body.desktop .family.big .face{width:130px}body.desktop .family.big .face.kid{width:96px}
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body class="junior">
+
+<div id="bg">
+  <div class="layer" style="--d:.3"><div class="sun"></div><div id="sparks"></div></div>
+  <div class="layer" style="--d:.6" id="clouds"></div>
+  <div class="layer" style="--d:.9" id="coins"></div>
+  <div class="layer" style="--d:1.2"><svg class="city" id="city" viewBox="0 0 1200 220" preserveAspectRatio="xMidYMax slice"></svg>
+    <svg class="hills" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,70 Q150,10 320,60 T650,50 T980,40 T1200,60 V120 H0Z" fill="#7ed9a0"/><path d="M0,95 Q200,50 420,90 T860,80 T1200,85 V120 H0Z" fill="#5cc887"/></svg></div>
+</div>
+
+<!-- ACCUEIL -->
+<section class="screen" id="scr-home">
+  <div class="home-wrap">
+    <div class="logo"><span>Budget</span><span class="l2">omania</span></div>
+    <div class="tag">🐷 La mission de Pépite</div>
+    <div id="homePep" class="pep-big" onclick="pepJump(this)"></div>
+    <div class="panel" style="width:100%">
+      <label for="inName">Ton prénom <small style="font-weight:400;opacity:.6">(facultatif)</small></label>
+      <input id="inName" maxlength="14" placeholder="Ex : Lina" autocomplete="off">
+      <label style="margin-top:12px">Quel âge as-tu ?</label>
+      <div id="ages" class="ages"></div>
+      <div id="modeBadge" class="mode-badge">Choisis ton âge pour découvrir ton mode de jeu</div>
+    </div>
+    <div id="devBadge" class="dev-badge"></div>
+    <button id="btnGo" class="btn big" onclick="start()" disabled>🚀 C'est parti !</button>
+  </div>
+</section>
+
+<!-- CARTE DES FAMILLES -->
+<section class="screen" id="scr-map">
+  <header class="bar"><button class="ibtn" onclick="go('home')" title="Changer d'âge / de mode">⚙️</button><div class="bar-title" id="mapTitle">Choisis une famille à aider</div><button class="ibtn snd" onclick="toggleSound()">🔊</button></header>
+  <div class="map-intro"><div class="pep-s" id="mapPep" onclick="pepJump(this)"></div><div class="bubble" id="mapSay"></div></div>
+  <div id="chapters" class="chapters"></div>
+</section>
+
+<!-- HISTOIRE -->
+<section class="screen" id="scr-story" onclick="if(!event.target.closest('button,header'))storyNext()">
+  <header class="bar"><button class="ibtn" onclick="go('map')">←</button><div class="bar-title" id="storyTitle"></div><button class="ibtn snd" onclick="toggleSound()">🔊</button></header>
+  <div class="story-stage"><div id="storyFamily" class="family big"></div><div id="storyPep" class="pep-m"></div></div>
+  <div class="story-box"><div class="story-who" id="storyWho"></div><div class="story-text" id="storyText"></div>
+    <button class="btn" id="storyNext" onclick="storyNext()">Suivant ▶</button></div>
+</section>
+
+<!-- JEU -->
+<section class="screen" id="scr-game">
+  <header class="bar g-top"><button class="ibtn" onclick="go('map')" title="Retour aux familles">←</button><div id="gFamily" class="family mini"></div><div class="g-title" id="gTitle"></div><button class="ibtn snd" onclick="toggleSound()">🔊</button><button class="ibtn" onclick="bilan()" title="Voir le bilan">🏁</button></header>
+  <div class="g-gauge" id="gGauge">
+    <div class="gauge-row"><span>💰 Argent du mois : <b id="gIncome"></b></span><span class="rem" id="gRemBox">Reste <b id="gRem"></b></span></div>
+    <div class="gauge"><div id="gBar"></div></div>
+    <div class="goal" id="gGoal"></div>
+  </div>
+  <div class="g-stage" id="stage">
+    <div id="deckWrap" class="deck-wrap" onclick="draw()">
+      <div class="deck idle" id="deck"><div class="cback"></div><div class="cback"></div><div class="cback"><div class="cback-logo">?</div></div></div>
+      <div class="deck-label" id="deckLabel"></div>
+      <div id="skipChip"></div>
+    </div>
+    <div id="cardHolder"></div>
+    <div id="doneBox" class="done-box" hidden></div>
+    <div class="hint-down" id="hintDown">⬇ Je passe</div>
+  </div>
+  <div class="g-actions off" id="gActions">
+    <button class="act want" onclick="decide('want')">🎈 Envie</button>
+    <button class="act skip" onclick="decide('skip')">⏭️ Passer</button>
+    <button class="act need" onclick="decide('need')">🏠 Besoin</button>
+    <div class="kbd">⌨️ ← Envie · → Besoin · ↓ Passer · Espace : piocher · 1 2 3 : niveau · + : épargner</div>
+  </div>
+  <div class="g-tray">
+    <div class="pile want" id="pile-want" onclick="openPile('optional')"></div>
+    <div class="piggy-box" id="piggyBox">
+      <div id="piggy" class="piggy" onclick="addSavings(50)"></div>
+      <div><div class="sav"><b id="gSav"></b><small id="gTarget"></small></div>
+      <div class="coin-row"><button class="mini" onclick="addSavings(-50)" title="Reprendre 50 €">−</button><div class="coin" id="coin" title="Glisse la pièce dans Pépite">50€</div></div></div>
+    </div>
+    <div class="pile need" id="pile-need" onclick="openPile('priority')"></div>
+  </div>
+</section>
+
+<!-- RÉSULTAT -->
+<section class="screen" id="scr-result">
+  <div class="res-wrap">
+    <div class="res-title" id="rTitle"></div>
+    <div class="stars" id="rStars"><span>⭐</span><span>⭐</span><span>⭐</span></div>
+    <div id="rFamily" class="family mid"></div>
+    <div class="res-quote" id="rQuote"></div>
+    <div class="res-nums" id="rNums"></div>
+    <div class="res-pep"><div class="pep-s" id="rPep"></div><div class="bubble" id="rSay"></div></div>
+    <ul class="checks" id="rChecks"></ul>
+    <div id="rStats" style="width:100%"></div>
+    <div class="res-btns"><button class="btn ghost" onclick="replay()">🔁 Rejouer</button><button class="btn" onclick="nextFamily()">➡️ Famille suivante</button></div>
+    <button class="link" onclick="go('map')">🗺️ Toutes les familles</button>
+  </div>
+</section>
+
+<div class="drawer" id="drawer" onclick="if(event.target===this)closeDrawer()"><div class="sheet"><div class="sheet-h"><b id="dTitle"></b><button class="ibtn" onclick="closeDrawer()">✕</button></div><div id="dList"></div></div></div>
+<div class="tuto" id="tuto"><div class="tuto-card"><div class="dots" id="tDots"></div><div class="tuto-ic" id="tIc"></div><div class="tuto-t" id="tT"></div><div class="tuto-p" id="tP"></div><button class="btn" id="tBtn" onclick="tutoNext()">Suivant ▶</button></div></div>
+<div class="say" id="say"></div>
+<canvas id="confetti"></canvas>
+
+<script>
+/* =====================================================================
+   BUDGETOMANIA – LA MISSION DE PÉPITE
+   Jeu d'éducation budgétaire : mode Junior (≤ 11 ans) / Ados (12 ans +)
+   Téléphone : secouer + glisser du doigt · Ordinateur : souris + clavier
+   ===================================================================== */
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+const fmt=n=>(n<0?'−':'')+Math.abs(Math.round(n)).toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')+' €';
+const sign=v=>v>0?'+'+v:''+v;
+const KEY='budgetomania_pepite_v1';
+const store={get(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}},set(o){try{localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}}};
+let SAVE=store.get();SAVE.progress=SAVE.progress||{};
+const S={age:null,name:SAVE.name||'',mode:'junior',sound:true,motionOK:false,motionOn:false,device:{mobile:true},screen:'home'};
+let G=null,busy=false,fitS=1;
+
+/* ---------- PERSONNAGES (visages SVG originaux) ---------- */
+function faceSVG(p,mood){
+  mood=mood||'happy';const s=p.skin,h=p.hair;let back='',front='';
+  switch(p.style){
+    case'long':back=`<path d="M16,56 Q14,14 50,14 Q86,14 84,56 L88,100 Q72,104 68,84 L32,84 Q28,104 12,100 Z" fill="${h}"/>`;front=`<path d="M21,50 Q22,20 50,20 Q78,20 79,50 Q70,30 52,31 Q40,40 21,50Z" fill="${h}"/>`;break;
+    case'bun':back=`<circle cx="50" cy="15" r="13" fill="${h}"/>`;front=`<path d="M20,52 Q18,21 50,21 Q82,21 80,52 Q74,33 50,32 Q26,33 20,52Z" fill="${h}"/>`;break;
+    case'pony':back=`<path d="M76,32 Q102,36 94,82 Q88,62 74,52Z" fill="${h}"/>`;front=`<path d="M20,52 Q18,18 50,18 Q82,18 80,52 Q66,30 44,33 Q30,36 20,52Z" fill="${h}"/><circle cx="79" cy="35" r="5" fill="#f472b6"/>`;break;
+    case'curly':front=[[27,36],[37,25],[50,21],[63,25],[73,36],[22,48],[78,48]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="11" fill="${h}"/>`).join('');break;
+    case'cap':front=`<path d="M19,49 Q18,16 50,16 Q82,16 81,49Z" fill="${p.cap||'#ef4444'}"/><path d="M48,44 L95,47 Q91,54 48,53Z" fill="${p.cap||'#ef4444'}" opacity=".85"/><circle cx="50" cy="17" r="3.5" fill="#fff"/><path d="M22,50 Q24,42 32,42" stroke="${h}" stroke-width="6" fill="none"/>`;break;
+    case'bald':front=`<path d="M19,54 Q17,40 25,34 Q27,48 23,60Z" fill="${h}"/><path d="M81,54 Q83,40 75,34 Q73,48 77,60Z" fill="${h}"/>`;break;
+    default:front=`<path d="M20,50 Q17,16 50,16 Q83,16 80,50 Q76,30 60,30 Q52,24 40,30 Q26,32 20,50Z" fill="${h}"/>`;
+  }
+  const brows={happy:'M33,45 Q38,41 44,44 M56,44 Q62,41 67,45',ok:'M34,45 L44,45 M56,45 L66,45',worried:'M33,43 L44,47 M67,43 L56,47',sad:'M33,47 L44,43 M67,47 L56,43'}[mood];
+  const mouth={happy:'<path d="M38,69 Q50,85 62,69 Q50,75 38,69Z" fill="#9f2d45"/><path d="M44,76 Q50,80 56,76" fill="#ff8fa3"/>',
+    ok:'<path d="M41,71 Q50,78 59,71" stroke="#5b2333" stroke-width="3" fill="none" stroke-linecap="round"/>',
+    worried:'<path d="M41,75 Q45.5,71 50,75 Q54.5,79 59,75" stroke="#5b2333" stroke-width="3" fill="none" stroke-linecap="round"/>',
+    sad:'<path d="M41,78 Q50,69 59,78" stroke="#5b2333" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M32,62 q-3,6 0,8 q3,-2 0,-8z" fill="#60a5fa"/>'}[mood];
+  const glasses=p.glasses?`<g fill="none" stroke="#3b2f2f" stroke-width="2.4"><circle cx="39" cy="56" r="8"/><circle cx="61" cy="56" r="8"/><path d="M47,56 L53,56"/></g>`:'';
+  const freckles=p.kid?'<g fill="#c47a5a" opacity=".5"><circle cx="32" cy="66" r="1.3"/><circle cx="35" cy="69" r="1.3"/><circle cx="68" cy="66" r="1.3"/><circle cx="65" cy="69" r="1.3"/></g>':'';
+  return `<svg viewBox="0 0 100 120">${back}
+  <path d="M10,120 Q14,92 50,90 Q86,92 90,120 Z" fill="${p.shirt}"/><path d="M40,91 Q50,100 60,91" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="3"/>
+  <rect x="42" y="78" width="16" height="16" rx="6" fill="${s}"/>
+  <circle cx="20" cy="58" r="6" fill="${s}"/><circle cx="80" cy="58" r="6" fill="${s}"/>
+  <ellipse cx="50" cy="55" rx="30" ry="31" fill="${s}"/>
+  ${front}
+  <circle cx="31" cy="66" r="6" fill="#ff7b9c" opacity=".35"/><circle cx="69" cy="66" r="6" fill="#ff7b9c" opacity=".35"/>${freckles}
+  <g class="blink"><ellipse cx="39" cy="57" rx="3.8" ry="4.6" fill="#2b2140"/><ellipse cx="61" cy="57" rx="3.8" ry="4.6" fill="#2b2140"/><circle cx="40.3" cy="55.3" r="1.3" fill="#fff"/><circle cx="62.3" cy="55.3" r="1.3" fill="#fff"/></g>
+  <path d="${brows}" stroke="#3b2a20" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  ${glasses}${mouth}</svg>`;
+}
+function pepiteSVG(mood){
+  mood=mood||'happy';
+  const mouth={happy:'<path d="M50,86 Q60,96 70,86" stroke="#9b1d4f" stroke-width="3.5" fill="#ff5f9e" stroke-linecap="round"/>',ok:'<path d="M53,88 Q60,92 67,88" stroke="#9b1d4f" stroke-width="3.5" fill="none" stroke-linecap="round"/>',sad:'<path d="M52,92 Q60,85 68,92" stroke="#9b1d4f" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M36,62 q-4,7 0,9 q4,-2 0,-9z" fill="#60a5fa"/>'}[mood]||'';
+  return `<svg viewBox="0 0 120 112" style="width:100%;height:100%;overflow:visible">
+  <path d="M103,58 q15,-3 9,-14 q-7,-6 -11,3" stroke="#e0457f" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <rect x="32" y="84" width="15" height="20" rx="7" fill="#ff86b3" stroke="#e0457f" stroke-width="3"/><rect x="73" y="84" width="15" height="20" rx="7" fill="#ff86b3" stroke="#e0457f" stroke-width="3"/>
+  <path d="M28,36 L33,9 L53,28Z" fill="#ff86b3" stroke="#e0457f" stroke-width="3" stroke-linejoin="round"/><path d="M92,36 L87,9 L67,28Z" fill="#ff86b3" stroke="#e0457f" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="60" cy="60" rx="46" ry="38" fill="#ff9cc2" stroke="#e0457f" stroke-width="3"/>
+  <ellipse cx="42" cy="40" rx="14" ry="7" fill="#fff" opacity=".45" transform="rotate(-18 42 40)"/>
+  <rect x="47" y="24" width="26" height="6" rx="3" fill="#b3245c"/>
+  <g class="blink"><ellipse cx="41" cy="55" rx="5.2" ry="6.4" fill="#2a2140"/><ellipse cx="79" cy="55" rx="5.2" ry="6.4" fill="#2a2140"/><circle cx="43" cy="52.5" r="2" fill="#fff"/><circle cx="81" cy="52.5" r="2" fill="#fff"/></g>
+  <circle cx="28" cy="70" r="7" fill="#ff5f9e" opacity=".4"/><circle cx="92" cy="70" r="7" fill="#ff5f9e" opacity=".4"/>
+  <ellipse cx="60" cy="71" rx="15" ry="11" fill="#ffc0d8" stroke="#e0457f" stroke-width="2.5"/><ellipse cx="55" cy="71" rx="2.8" ry="4.2" fill="#b3245c"/><ellipse cx="65" cy="71" rx="2.8" ry="4.2" fill="#b3245c"/>
+  ${mouth}</svg>`;
+}
+function familyHTML(p,mood){return p.people.map((q,i)=>`<div class="face ${q.kid?'kid':''}" style="animation-delay:${(i*.17).toFixed(2)}s">${faceSVG(q,mood)}</div>`).join('');}
+
+/* ---------- FAMILLES ---------- */
+const PROFILES=[
+ {id:'solo',title:'Léo, premier appart',adults:1,children:0,isSenior:false,income:1950,target:250,place:'🏙️ Seul en ville',
+  goal:t=>`Épargner ${t} pour un vélo électrique`,
+  people:[{n:'Léo',skin:'#f2c4a0',hair:'#3b2416',style:'short',shirt:'#3b82f6'}],
+  story:[[0,"Salut {nom} ! Moi c'est Léo. J'ai 24 ans et je viens de commencer mon premier travail : je suis boulanger 🥖"],[0,"Je viens d'emménager tout seul dans un petit appartement… mais gérer mon argent, c'est pas facile !"],['pep',"Pas de panique Léo ! Je suis Pépite, la tirelire magique 🐷 Avec {nom}, on va t'aider."],[0,"Mon rêve : mettre {target} de côté chaque mois pour m'acheter un vélo électrique ⚡🚲"]]},
+ {id:'couple',title:'Maya & Karim',adults:2,children:0,isSenior:false,income:3800,target:600,place:'💑 Couple sans enfant',
+  goal:t=>`Épargner ${t} pour un futur appartement`,
+  people:[{n:'Maya',skin:'#d9a07a',hair:'#2a1a12',style:'long',shirt:'#ec4899'},{n:'Karim',skin:'#b97a52',hair:'#141414',style:'short',shirt:'#10b981',glasses:true}],
+  story:[[0,"Coucou {nom} ! Moi c'est Maya, je suis infirmière 🩺"],[1,"Et moi Karim, prof de musique 🎸 On vit ensemble depuis peu."],[0,"On rêve d'acheter un appartement un jour. Pour ça, il faut mettre {target} de côté chaque mois !"],[1,"Mais on adore aussi sortir et voyager… On a besoin de toi pour faire les bons choix 😅"]]},
+ {id:'singleParent',title:'Sofia & Nino',adults:1,children:1,isSenior:false,income:2350,target:150,place:'👩‍👦 Maman solo + 1 enfant',
+  goal:t=>`Garder ${t} pour les imprévus`,
+  people:[{n:'Sofia',skin:'#e8b48f',hair:'#5a2d14',style:'bun',shirt:'#0ea5e9'},{n:'Nino',kid:true,skin:'#f1c19c',hair:'#2b1a0e',style:'cap',cap:'#ef4444',shirt:'#facc15'}],
+  story:[[0,"Bonjour {nom} ! Je m'appelle Sofia, et voici mon fils Nino. Il a 8 ans."],[1,"Salut ! Moi j'adore le foot ⚽ et les dinosaures 🦖 !"],[0,"J'élève Nino toute seule, avec un seul salaire. L'école, la garde… chaque euro compte !"],[0,"J'aimerais garder {target} de côté chaque mois, au cas où il y aurait un imprévu."]]},
+ {id:'family',title:'La famille Morales',adults:2,children:3,isSenior:false,income:4400,target:300,place:'👨‍👩‍👧‍👦 2 parents + 3 enfants',
+  goal:t=>`Épargner ${t} pour les cadeaux de Noël`,
+  people:[{n:'Ana',skin:'#c98b62',hair:'#2a160c',style:'long',shirt:'#f97316'},{n:'Diego',skin:'#b5774e',hair:'#1a1a1a',style:'short',shirt:'#334155'},{n:'Lucas',kid:true,skin:'#c98b62',hair:'#1a1a1a',style:'curly',shirt:'#22c55e'},{n:'Inès',kid:true,skin:'#d49a70',hair:'#3a1f10',style:'pony',shirt:'#a855f7'},{n:'Tom',kid:true,skin:'#c98b62',hair:'#1a1a1a',style:'short',shirt:'#ef4444'}],
+  story:[[0,"¡Hola {nom} ! Nous sommes la famille Morales. Moi c'est Ana…"],[1,"…et moi Diego ! Voici nos trois enfants !"],[2,"Lucas, 12 ans. Moi, c'est le skate 🛹"],[3,"Inès, 9 ans ! J'adore dessiner 🎨"],[4,"Tom, 5 ans… J'ai faim ! 🍪"],[0,"À 5, tout coûte plus cher : la nourriture, l'école, le logement… On veut quand même garder {target} pour les cadeaux de Noël 🎄"]]},
+ {id:'senior',title:'Papi Victor & Mamie Hélène',adults:2,children:0,isSenior:true,income:3100,target:400,requireVac:true,place:'👴👵 Couple de retraités',
+  goal:t=>`Partir en vacances + épargner ${t}`,
+  people:[{n:'Papi Victor',skin:'#f1c4a4',hair:'#e5e7eb',style:'bald',shirt:'#06b6d4',glasses:true},{n:'Mamie Hélène',skin:'#f5d0b5',hair:'#eef0f3',style:'bun',shirt:'#a855f7',glasses:true}],
+  story:[[0,"Bonjour {nom} ! Moi c'est Papi Victor, et voici Mamie Hélène 👴👵"],[1,"Nous sommes à la retraite ! Après 40 ans de travail, on a enfin le temps de voyager ✈️"],[0,"Notre condition : ce mois-ci, on veut ABSOLUMENT partir en vacances 🏖️"],[1,"Et mettre {target} de côté pour gâter nos petits-enfants 🎁"]]}
+];
+const PROF=Object.fromEntries(PROFILES.map(p=>[p.id,p]));
+
+/* ---------- CARTES (formules du jeu d'origine) ---------- */
+const m3=(t,a,b)=>t==='eco'?a:t==='vip'?b:1;
+const st3=(t,e,s,v)=>t==='eco'?e:t==='vip'?v:s;
+const CARDS=[
+ {id:'housing',title:'Logement',short:'Le logement',hint:'priority',vital:true,junior:true,c1:'#7dd3fc',c2:'#3b82f6',
+  tiers:{eco:['Petit studio','🏠'],std:['Appartement','🏢'],vip:['Villa avec piscine','🏰']},
+  compute:(s,t)=>{const base=s.adults===1?580:780,ce=s.children*140;return{cost:Math.round((base+ce)*m3(t,.8,1.55)/10)*10,stats:st3(t,{eco:5,comfort:-5,health:0},{eco:0,comfort:10,health:5},{eco:-15,comfort:20,health:10})}}},
+ {id:'food',title:'Courses & repas',short:'La nourriture',hint:'priority',vital:true,junior:true,c1:'#fde68a',c2:'#f97316',
+  tiers:{eco:['Cuisine maison','🥕'],std:['Courses équilibrées','🛒'],vip:['Bio & traiteur','🍱']},
+  compute:(s,t)=>{const base=s.adults*220+s.children*110;return{cost:Math.round(base*m3(t,.78,1.45)/10)*10,stats:st3(t,{eco:10,comfort:0,health:5},{eco:5,comfort:5,health:10},{eco:5,comfort:15,health:15})}}},
+ {id:'transport',title:'Transports',short:'Le transport',hint:'priority',vital:true,junior:true,c1:'#6ee7b7',c2:'#059669',
+  tiers:{eco:['Bus & vélo','🚲'],std:['Petite voiture','🚗'],vip:['Voiture de sport','🏎️']},
+  compute:(s,t)=>{const base=s.adults*95+s.children*25;return{cost:Math.round(base*m3(t,.55,2.1)/5)*5,stats:st3(t,{eco:15,comfort:-5,health:10},{eco:-5,comfort:10,health:0},{eco:-20,comfort:20,health:0})}}},
+ {id:'utilities',title:'Énergie & internet',short:"L'électricité et l'eau",hint:'priority',vital:true,junior:true,c1:'#fef08a',c2:'#eab308',icon:'⚡',sub:'Lumière, chauffage, eau, wifi',
+  compute:s=>({cost:85+(s.adults-1)*20+s.children*15,stats:{eco:0,comfort:5,health:5}})},
+ {id:'health',title:'Santé & mutuelle',short:'La santé',hint:'priority',vital:true,junior:true,c1:'#fda4af',c2:'#e11d48',icon:'🩺',sub:'Médecin, pharmacie, mutuelle',
+  compute:s=>({cost:s.adults*55+s.children*25+(s.isSenior?30:0),stats:{eco:0,comfort:5,health:20}})},
+ {id:'education',title:'École & fournitures',short:"L'école",hint:'priority',vital:true,kids:true,junior:true,c1:'#c4b5fd',c2:'#7c3aed',
+  tiers:{eco:['École publique','🎒'],std:['Fournitures + cantine','📚'],vip:['École privée','🎓']},
+  compute:(s,t)=>{const base={1:160,2:290,3:420}[s.children]||s.children*140;return{cost:Math.round(base*m3(t,.75,1.5)/10)*10,stats:st3(t,{eco:5,comfort:0,health:5},{eco:0,comfort:10,health:10},{eco:0,comfort:15,health:10})}}},
+ {id:'childcare',title:'Garde & activités',short:'La garde des enfants',hint:'priority',vital:false,kids:true,junior:true,c1:'#fbcfe8',c2:'#ec4899',
+  tiers:{eco:["Garderie de l'école",'🏫'],std:['Centre de loisirs','🧸'],vip:['Nounou + clubs','🎨']},
+  compute:(s,t)=>{const base={1:190,2:340,3:480}[s.children]||s.children*160;return{cost:Math.round(base*m3(t,.65,1.45)/10)*10,stats:st3(t,{eco:5,comfort:5,health:5},{eco:0,comfort:10,health:10},{eco:0,comfort:15,health:15})}}},
+ {id:'vacations',title:'Vacances',short:'Les vacances',hint:'optional',vital:false,junior:true,c1:'#67e8f9',c2:'#0891b2',
+  tiers:{eco:['Camping','⛺'],std:['Séjour au soleil','🏖️'],vip:['Croisière de luxe','🛳️']},
+  compute:(s,t)=>{let b=180;if(s.isSenior)b=420;else if(s.adults===1&&s.children===0)b=180;else if(s.adults===2&&s.children===0)b=360;else if(s.adults===1&&s.children===1)b=280;else if(s.adults===2&&s.children===3)b=620;else b=s.adults*180+s.children*90;
+   return{cost:Math.round(b*m3(t,.55,1.85)/10)*10,stats:st3(t,{eco:10,comfort:5,health:10},{eco:-5,comfort:15,health:10},{eco:-20,comfort:25,health:15})}}},
+ {id:'telecom',title:'Téléphones',short:'Le téléphone',hint:'optional',vital:false,junior:false,c1:'#cbd5e1',c2:'#475569',
+  tiers:{eco:['Forfait mini','📞'],std:['Forfait 5G','📱'],vip:['Dernier smartphone','🤳']},
+  compute:(s,t)=>{const base=s.adults*25+s.children*15;return{cost:Math.round(base*m3(t,.6,1.8)/5)*5,stats:st3(t,{eco:5,comfort:0,health:0},{eco:-5,comfort:5,health:0},{eco:-10,comfort:10,health:-5})}}},
+ {id:'leisure',title:'Loisirs & sport',short:'Les loisirs',hint:'optional',vital:false,junior:true,c1:'#86efac',c2:'#16a34a',
+  tiers:{eco:['Parc & jeux','🛝'],std:['Sport & cinéma','⚽'],vip:["Parc d'attractions",'🎢']},
+  compute:(s,t)=>{const base=s.adults*75+s.children*45;return{cost:Math.round(base*m3(t,.5,1.9)/5)*5,stats:st3(t,{eco:10,comfort:5,health:10},{eco:0,comfort:10,health:10},{eco:-5,comfort:20,health:10})}}},
+ {id:'shopping',title:'Vêtements & shopping',short:'Le shopping',hint:'optional',vital:false,junior:true,c1:'#f9a8d4',c2:'#db2777',
+  tiers:{eco:['Seconde main','♻️'],std:['Vêtements neufs','👕'],vip:['Grandes marques','👟']},
+  compute:(s,t)=>{const base=s.adults*70+s.children*40;return{cost:Math.round(base*m3(t,.5,2.2)/5)*5,stats:st3(t,{eco:10,comfort:0,health:0},{eco:-5,comfort:10,health:0},{eco:-15,comfort:20,health:0})}}},
+ {id:'nightlife',title:'Restos & sorties',short:'Les sorties',hint:'optional',vital:false,junior:false,c1:'#fdba74',c2:'#ea580c',
+  tiers:{eco:['Pique-nique','🧺'],std:['Pizzeria','🍕'],vip:['Grand restaurant','🍽️']},
+  compute:(s,t)=>{const base=s.adults*90+s.children*30;return{cost:Math.round(base*m3(t,.55,2)/5)*5,stats:st3(t,{eco:0,comfort:5,health:-5},{eco:-5,comfort:10,health:0},{eco:-10,comfort:20,health:5})}}}
+];
+const CARD=Object.fromEntries(CARDS.map(c=>[c.id,c]));
+const EVENTS=[
+ {id:'wash',icon:'🧺',title:'La machine à laver tombe en panne !',text:'Il faut la réparer tout de suite.',amount:-150},
+ {id:'bday',icon:'🎁',title:'Anniversaire surprise',text:'Il faut offrir un cadeau à un ami.',amount:-50},
+ {id:'bonus',icon:'💶',title:'Prime au travail !',text:'Bravo, un petit bonus ce mois-ci.',amount:120},
+ {id:'tyre',icon:'🛞',title:'Pneu crevé',text:"Le garage, ce n'est pas gratuit…",amount:-90},
+ {id:'sell',icon:'♻️',title:'Vide-grenier réussi',text:"Tu revends des affaires que tu n'utilises plus.",amount:60},
+ {id:'dent',icon:'🦷',title:'Rendez-vous chez le dentiste',text:"Une partie n'est pas remboursée.",amount:-70}
+];
+const TN={eco:'Éco',std:'Normal',vip:'Luxe'},TC={eco:'#16a36f',std:'#3b82f6',vip:'#f59e0b'};
+
+/* ---------- SONS (Web Audio, aucun fichier) ---------- */
+let AC=null;
+function ac(){if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+function tone(f,d,type,v,delay,f2){if(!S.sound)return;const a=ac();if(!a)return;try{const t=a.currentTime+(delay||0);const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v||.08,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+d+.03)}catch(e){}}
+const sfx={pop:()=>tone(520,.09,'triangle',.08,0,900),
+ flip:()=>{tone(300,.08,'triangle',.06,0,700);tone(700,.1,'triangle',.05,.07,1200)},
+ coin:()=>{tone(988,.08,'square',.035);tone(1319,.2,'square',.035,.07)},
+ shuffle:()=>{for(let i=0;i<6;i++)tone(180+Math.random()*260,.05,'triangle',.05,i*.065,500)},
+ whoosh:()=>tone(900,.22,'sine',.04,0,180),
+ oops:()=>{tone(330,.14,'sawtooth',.045,0,220);tone(250,.22,'sawtooth',.045,.14,150)},
+ win:()=>[523,659,784,1047].forEach((f,i)=>tone(f,.28,'triangle',.08,i*.12)),
+ lose:()=>[392,330,262].forEach((f,i)=>tone(f,.32,'triangle',.07,i*.17)),
+ star:i=>{tone(880+i*220,.25,'triangle',.08);tone(1320+i*220,.25,'sine',.04,.05)},
+ event:()=>[660,880,660,880].forEach((f,i)=>tone(f,.1,'square',.035,i*.09))};
+const vib=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
+function toggleSound(){S.sound=!S.sound;$$('.snd').forEach(b=>b.textContent=S.sound?'🔊':'🔇');if(S.sound)sfx.pop()}
+
+/* ---------- APPAREIL : téléphone ou ordinateur ---------- */
+function detectDevice(){
+  const coarse=matchMedia('(pointer:coarse)').matches,hover=matchMedia('(hover:hover)').matches;
+  const touch=('ontouchstart' in window)||navigator.maxTouchPoints>0;
+  const small=Math.min(screen.width,screen.height)<=820;
+  const mobile=((coarse||touch)&&small)||(coarse&&!hover);
+  S.device={mobile,touch:coarse||touch};
+  document.body.classList.toggle('mobile',mobile);document.body.classList.toggle('desktop',!mobile);
+  $('#devBadge').innerHTML=mobile?'📱 <b>Téléphone détecté</b> : tu vas <b>secouer</b> et <b>glisser</b> les cartes du doigt !':'💻 <b>Ordinateur détecté</b> : glisse les cartes à la <b>souris</b>, ou joue au <b>clavier</b> ⌨️';
+}
+/* Secouer le téléphone */
+let last=null,shakeHits=0,shakeT=0,lastShake=0,par={x:0,y:0};
+function onMotion(e){
+  const a=e.accelerationIncludingGravity;if(!a||a.x==null)return;
+  if(!S.motionOK){S.motionOK=true;if(G&&S.screen==='game')renderGame()}
+  if(last){const d=Math.abs(a.x-last.x)+Math.abs(a.y-last.y)+Math.abs(a.z-last.z);const now=performance.now();
+    if(d>26){if(now-shakeT>600)shakeHits=0;shakeHits++;shakeT=now;if(shakeHits>=3&&now-lastShake>1100){lastShake=now;shakeHits=0;onShake()}}}
+  last={x:a.x,y:a.y,z:a.z};
+  par.x+=((-a.x*3)-par.x)*.08;setPar(par.x,0);
+}
+async function enableMotion(){
+  if(S.motionOn)return;S.motionOn=true;
+  try{if(typeof DeviceMotionEvent!=='undefined'&&typeof DeviceMotionEvent.requestPermission==='function'){const r=await DeviceMotionEvent.requestPermission();if(r!=='granted')return}
+    window.addEventListener('devicemotion',onMotion)}catch(e){}
+}
+function onShake(){
+  vib(40);
+  if(S.screen==='game')draw();
+  else if(S.screen==='home')pepJump($('#homePep'));
+  else if(S.screen==='map')pepJump($('#mapPep'));
+  else if(S.screen==='result')confetti(50);
+}
+function setPar(x,y){const b=$('#bg');b.style.setProperty('--px',x+'px');b.style.setProperty('--py',y+'px')}
+
+/* ---------- FOND ---------- */
+function initBg(){
+  let h='';for(let i=0;i<6;i++){const w=90+Math.random()*130;h+=`<div class="cloud" style="--w:${w}px;top:${4+Math.random()*40}%;--t:${40+Math.random()*50}s;--dl:-${Math.random()*80}s"></div>`}$('#clouds').innerHTML=h;
+  const coin=`<svg viewBox="0 0 40 40" width="100%" height="100%"><circle cx="20" cy="20" r="18" fill="#ffcf33" stroke="#c98a00" stroke-width="3"/><circle cx="20" cy="20" r="12" fill="none" stroke="#e0a100" stroke-width="2"/><text x="20" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#a86b00" font-family="sans-serif">€</text></svg>`;
+  h='';for(let i=0;i<12;i++)h+=`<div class="fcoin" style="left:${Math.random()*100}%;--s:${18+Math.random()*26}px;--t:${14+Math.random()*16}s;--dl:-${Math.random()*30}s">${coin}</div>`;$('#coins').innerHTML=h;
+  h='';for(let i=0;i<40;i++)h+=`<div class="spark" style="left:${Math.random()*100}%;top:${Math.random()*60}%;animation-delay:${Math.random()*2}s"></div>`;$('#sparks').innerHTML=h;
+  let c='',x=0;while(x<1200){const w=50+Math.random()*80,ht=60+Math.random()*130,cls=Math.random()<.5?'b':'b2';c+=`<rect class="${cls}" x="${x}" y="${220-ht}" width="${w}" height="${ht}" rx="4"/>`;
+    for(let wy=220-ht+12;wy<205;wy+=20)for(let wx=x+8;wx<x+w-12;wx+=16)if(Math.random()<.45)c+=`<rect class="w" x="${wx}" y="${wy}" width="8" height="10" rx="2" style="animation-delay:${(Math.random()*3).toFixed(1)}s"/>`;x+=w+4}
+  $('#city').innerHTML=c;
+  window.addEventListener('mousemove',e=>{if(!S.device.mobile)setPar((e.clientX/innerWidth-.5)*-30,(e.clientY/innerHeight-.5)*-16)});
+}
+
+/* ---------- NAVIGATION ---------- */
+function go(id){$('#say').classList.remove('on');$$('.screen').forEach(s=>s.classList.toggle('active',s.id==='scr-'+id));S.screen=id;closeDrawer();
+  if(id==='map')renderMap();if(id==='home')$('#homePep').innerHTML=pepiteSVG('happy')}
+function pepJump(el){if(!el)return;el.classList.remove('jump');void el.offsetWidth;el.classList.add('jump');sfx.pop();setTimeout(()=>el.classList.remove('jump'),850)}
+function nom(){return S.name||'toi'}
+
+/* ---------- ACCUEIL : âge → mode ---------- */
+function renderAges(){$('#ages').innerHTML=[7,8,9,10,11,12,13,14,15,16].map(a=>`<button class="age" data-a="${a}" onclick="pickAge(${a})">${a===16?'16+':a}</button>`).join('')}
+function applyMode(){document.body.classList.toggle('junior',S.mode==='junior');document.body.classList.toggle('ados',S.mode==='ados')}
+function pickAge(a,silent){S.age=a;S.mode=a<=11?'junior':'ados';applyMode();
+  $$('.age').forEach(b=>b.classList.toggle('sel',+b.dataset.a===a));
+  $('#modeBadge').innerHTML=S.mode==='junior'?'<b style="background:#16a36f">🧸 Mode Junior</b><br>Une histoire simple : range les cartes en <b>Besoins</b> ou <b>Envies</b> et remplis la tirelire !':'<b style="background:#8b5cf6">🚀 Mode Ados</b><br>Niveaux Éco / Normal / Luxe, imprévus ⚡ et jauges Planète, Confort, Santé.';
+  $('#btnGo').disabled=false;if(!silent){sfx.pop();vib(15)}}
+function start(){ac();S.name=$('#inName').value.trim().slice(0,14);SAVE.name=S.name;SAVE.age=S.age;store.set(SAVE);
+  if(S.device.mobile)enableMotion();sfx.win();go('map')}
+
+/* ---------- CARTE DES FAMILLES ---------- */
+function renderMap(){
+  $('#mapPep').innerHTML=pepiteSVG('happy');
+  $('#mapTitle').textContent=S.mode==='junior'?'🧸 Mode Junior':'🚀 Mode Ados';
+  $('#mapSay').innerHTML=`Bonjour ${S.name?'<b>'+S.name+'</b>':''} ! Chaque famille a besoin de toi pour <b>finir le mois sans être dans le rouge</b>. Qui veux-tu aider ?`;
+  $('#chapters').innerHTML=PROFILES.map((p,i)=>{const st=SAVE.progress[S.mode+':'+p.id]||0;
+    return `<button class="chap" style="animation-delay:${i*.08}s" onclick="openStory('${p.id}')">
+      <div class="chap-top"><div class="chap-num">${i+1}</div><div class="chap-stars">${[1,2,3].map(k=>`<span class="${k<=st?'':'off'}">⭐</span>`).join('')}</div></div>
+      <div class="family">${familyHTML(p,'happy')}</div>
+      <div class="chap-n">${p.title}</div>
+      <div class="chap-meta">${p.place}${S.mode==='ados'?' · '+fmt(p.income)+'/mois':''}</div>
+      <div class="chap-goal">🎯 ${p.goal(fmt(p.target))}</div></button>`}).join('');
+}
+
+/* ---------- HISTOIRE ---------- */
+let ST=null,typing=null;
+function storyLines(p){const L=p.story.slice();
+  if(S.mode==='ados')L.push(['pep',`Ce mois-ci, le foyer gagne ${fmt(p.income)}. Pour chaque carte, choisis le niveau Éco, Normal ou Luxe… et attention aux imprévus ⚡`]);
+  L.push(['pep',S.mode==='junior'?"Ta mission : range chaque carte dans BESOINS 🏠 ou ENVIES 🎈, sans dépenser plus que l'argent du mois. Et donne-moi des pièces pour épargner ! 🐷":"Ta mission : payer tous les besoins, bien ranger chaque carte, ne pas finir dans le rouge et m'apporter {target} d'épargne. À toi de jouer !"]);
+  return L.map(([w,t])=>[w,t.replace(/\{nom\}/g,nom()).replace(/\{target\}/g,fmt(p.target))]);}
+function openStory(pid){const p=PROF[pid];ST={p,i:0,lines:storyLines(p)};sfx.pop();
+  $('#storyTitle').textContent=p.title;$('#storyFamily').innerHTML=familyHTML(p,'happy');$('#storyFamily').className='family '+(p.people.length>3?'mid':'big');$('#storyPep').innerHTML=pepiteSVG('happy');
+  go('story');setTimeout(showLine,300)}
+function showLine(){const [who,txt]=ST.lines[ST.i];
+  $$('#storyFamily .face').forEach((f,i)=>f.classList.toggle('talk',i===who));$('#storyPep').classList.toggle('talk',who==='pep');
+  $('#storyWho').textContent=who==='pep'?'🐷 Pépite':ST.p.people[who].n;
+  $('#storyNext').textContent=ST.i===ST.lines.length-1?'🚀 Commencer la mission':'Suivant ▶';
+  const chars=Array.from(txt);let k=0;clearInterval(typing);$('#storyText').textContent='';
+  typing=setInterval(()=>{k+=2;$('#storyText').textContent=chars.slice(0,k).join('');if(k%6===0)tone(600+Math.random()*300,.03,'triangle',.02);if(k>=chars.length){clearInterval(typing);typing=null}},22);
+  ST.full=txt;}
+function storyNext(){if(!ST||S.screen!=='story')return;if(typing){clearInterval(typing);typing=null;$('#storyText').textContent=ST.full;return}
+  ST.i++;if(ST.i>=ST.lines.length){startGame(ST.p.id);return}sfx.pop();showLine()}
+
+/* ---------- MOTEUR DU JEU ---------- */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+function activeCards(){return CARDS.filter(c=>(!c.kids||G.p.children>0)&&(S.mode==='ados'||c.junior))}
+function tierOf(id){return S.mode==='ados'?(G.tiers[id]||'std'):'std'}
+function cardData(c,t){t=t||tierOf(c.id);const d=c.compute(G.p,t);if(S.mode==='junior')d.cost=Math.round(d.cost/10)*10;return d}
+function emojiOf(id){const c=CARD[id];return c.tiers?c.tiers[tierOf(id)][1]:c.icon}
+function summary(){const cards=activeCards();let spent=0,eco=0,com=0,hea=0;const wrong=[];
+  cards.forEach(c=>{const z=G.placed[c.id];if(!z)return;const d=cardData(c);spent+=d.cost;eco+=d.stats.eco;com+=d.stats.comfort;hea+=d.stats.health;if(z!==c.hint)wrong.push(c)});
+  const ev=G.events.reduce((a,e)=>a+e.amount,0),income=G.p.income+ev,rem=income-spent-G.savings;
+  return{cards,spent,eco,com,hea,wrong,ev,income,rem,missing:cards.filter(c=>c.vital&&!G.placed[c.id])}}
+function moodFor(s){if(s.rem<0)return'sad';if(s.rem<s.income*.08)return'worried';return'happy'}
+function pepMood(s){if(s.rem<0)return'sad';if(G.savings>=G.p.target)return'happy';return'ok'}
+
+function startGame(pid){
+  const p=PROF[pid];G={p,deck:[],current:null,placed:{},tiers:{},skipped:[],savings:0,events:[],eventsShown:0,drawn:0,usedEv:[],targetHit:false};
+  G.deck=shuffle(activeCards().map(c=>c.id));
+  $('#cardHolder').innerHTML='';busy=false;go('game');renderGame();
+  setTimeout(()=>{if(!SAVE['tuto_'+S.mode])openTuto();else say(S.device.mobile?(S.motionOK?'📳 Secoue ton téléphone pour piocher la première carte !':'👆 Touche le paquet pour piocher la première carte !'):'🖱️ Clique sur le paquet (ou Espace) pour piocher !')},500);
+}
+function renderGame(){
+  if(!G)return;const s=summary(),p=G.p;
+  $('#gTitle').textContent=p.title;$('#gFamily').innerHTML=familyHTML(p,moodFor(s));
+  $('#gIncome').textContent=fmt(s.income);$('#gRem').textContent=fmt(s.rem);$('#gRemBox').classList.toggle('neg',s.rem<0);
+  const pct=Math.max(0,Math.min(100,s.rem/s.income*100));const bar=$('#gBar');bar.style.width=(s.rem<0?100:pct)+'%';
+  bar.className=s.rem<0?'low':pct<15?'mid':'';
+  const gg=$('#gGauge');if(s.rem<0&&!gg.classList.contains('neg')){gg.classList.add('neg')}else if(s.rem>=0)gg.classList.remove('neg');
+  $('#gGoal').innerHTML='🎯 '+p.goal(fmt(p.target))+(G.events.length?` · ⚡ imprévus : ${sign(s.ev)} €`:'');
+  renderPile('optional');renderPile('priority');
+  $('#piggy').innerHTML=pepiteSVG(pepMood(s));
+  $('#gSav').textContent=fmt(G.savings);$('#gSav').className=G.savings>=p.target?'ok':'';$('#gTarget').textContent='objectif '+fmt(p.target);
+  const has=!!G.current,empty=!G.deck.length;
+  $('#deckWrap').hidden=has||empty;$('#deck').classList.toggle('idle',!has);
+  const n=G.deck.length;
+  const how=S.device.mobile?(S.motionOK?'<span class="phone-ic">📳</span> Secoue ton téléphone !':'👆 Touche le paquet !'):'🖱️ Clique sur le paquet';
+  const sub=S.device.mobile?(S.motionOK?' · ou touche le paquet':''):' · ou appuie sur Espace';
+  $('#deckLabel').innerHTML=`${how}<small>${n} carte${n>1?'s':''} à piocher${sub}</small>`;
+  $('#skipChip').innerHTML=G.skipped.length?`<button class="chip" onclick="event.stopPropagation();openPile('skip')">⏭️ ${G.skipped.length} carte${G.skipped.length>1?'s':''} laissée${G.skipped.length>1?'s':''} · voir</button>`:'';
+  const done=$('#doneBox');
+  if(!has&&empty){done.hidden=false;done.innerHTML=`<div class="big-ic">🎉</div><b style="font-size:20px">Toutes les cartes sont jouées !</b><div>${s.rem<0?'⚠️ Le compte est dans le rouge… tu peux encore reprendre une carte ou une pièce.':G.savings<p.target?'💡 Pense à nourrir Pépite avant le bilan !':'Tout a l\'air prêt 👌'}</div>${G.skipped.length?`<button class="chip" onclick="openPile('skip')">⏭️ Cartes laissées (${G.skipped.length})</button>`:''}<button class="btn pulse" onclick="bilan(true)">🏁 Voir le bilan</button>`}else done.hidden=true;
+  $('#gActions').classList.toggle('off',!(G.current&&G.current.type==='card'));
+}
+function rowsHTML(ids,emptyTxt,back){if(!ids.length)return`<div class="empty">${emptyTxt}</div>`;
+  return ids.map(k=>{const c=CARD[k],t=tierOf(k);return`<div class="row"><span class="em">${emojiOf(k)}</span><span class="tx"><b>${c.title}</b><small>${c.tiers?c.tiers[t][0]:c.sub}</small></span><span class="pr">${fmt(cardData(c).cost)}</span><button onclick="event.stopPropagation();takeBack('${k}')">${back}</button></div>`}).join('')}
+function renderPile(zone){
+  const need=zone==='priority',ids=Object.keys(G.placed).filter(k=>G.placed[k]===zone),el=$(need?'#pile-need':'#pile-want');
+  const total=ids.reduce((a,k)=>a+cardData(CARD[k]).cost,0);
+  el.innerHTML=`<div class="pile-head"><span>${need?'🏠':'🎈'}</span><b>${need?'Besoins':'Envies'}</b></div><div class="pile-total">${fmt(total)}</div>
+   <div class="pile-stack">${ids.slice(-4).map(k=>`<span>${emojiOf(k)}</span>`).join('')||'<em>vide</em>'}</div><div class="pile-cnt">${ids.length} carte${ids.length>1?'s':''}</div>
+   <div class="pile-list">${rowsHTML(ids,need?'Glisse ici les <b>besoins</b> :<br>ce qu\'on ne peut pas éviter 🏠':'Glisse ici les <b>envies</b> :<br>ce qui fait plaisir mais n\'est pas obligatoire 🎈','↩️')}</div>`;
+}
+
+/* Piocher */
+function draw(){
+  if(!G||busy||S.screen!=='game')return;
+  if(G.current){const el=$('#cardEl .card-inner');if(el){el.classList.remove('nope');void el.offsetWidth;el.classList.add('nope')}
+    say(G.current.type==='event'?'Appuie sur <b>« D\'accord ! »</b> pour continuer.':'Range d\'abord cette carte : <b>besoin</b> ou <b>envie</b> ?');return}
+  if(!G.deck.length)return;
+  busy=true;sfx.shuffle();vib([30,30,30]);const d=$('#deck');d.classList.remove('idle');d.classList.add('shake');
+  setTimeout(()=>{d.classList.remove('shake');
+    const canEv=S.mode==='ados'&&G.eventsShown<2&&G.drawn>=2&&G.usedEv.length<EVENTS.length;
+    const force=canEv&&G.eventsShown===0&&G.deck.length<=2;
+    if(canEv&&(force||Math.random()<.3))showEvent(EVENTS.filter(e=>!G.usedEv.includes(e.id))[Math.random()*(EVENTS.length-G.usedEv.length)|0]);
+    else showCard(G.deck.shift());
+    G.drawn++;busy=false},480);
+}
+function cardInner(c,anim){
+  const t=tierOf(c.id),d=cardData(c,t),emoji=c.tiers?c.tiers[t][1]:c.icon,sub=c.tiers?c.tiers[t][0]:c.sub,n=G.p.adults+G.p.children;
+  const tiers=S.mode==='ados'&&c.tiers?`<div class="tiers">${['eco','std','vip'].map(k=>`<button class="tier ${k===t?'sel':''}" style="--tc:${TC[k]}" onclick="setTier('${k}')"><span>${c.tiers[k][1]}</span>${TN[k]}<br><b>${fmt(cardData(c,k).cost)}</b></button>`).join('')}</div>`:'';
+  const stats=S.mode==='ados'?`<div class="stats"><span>🌿 Planète ${sign(d.stats.eco)}</span><span>😊 Confort ${sign(d.stats.comfort)}</span><span>❤️ Santé ${sign(d.stats.health)}</span></div>`:'';
+  return`<div class="card-inner ${anim?'flip-in':''}"><div class="stamp need">BESOIN 🏠</div><div class="stamp want">🎈 ENVIE</div><div class="stamp skip">JE PASSE ⏭️</div>
+   <div class="card-art" style="--c1:${c.c1};--c2:${c.c2}"><div class="ray"></div><div class="card-emoji">${emoji}</div><div class="card-ppl">👥 ${n} pers.</div></div>
+   <div class="card-body"><div class="card-title">${c.title}</div><div class="card-sub">${sub}</div><div class="card-price">${fmt(d.cost)}<small> /mois</small></div>${tiers}${stats}
+   <div class="card-q">${S.device.mobile?'⬅️ Envie · Besoin ➡️ · ⬇️ Passer':'Glisse vers ⬅️ Envies ou Besoins ➡️'}</div></div></div>`;
+}
+function showCard(id){G.current={type:'card',id};sfx.flip();vib(20);
+  $('#cardHolder').innerHTML=`<div class="card-outer" id="cardEl">${cardInner(CARD[id],true)}</div>`;bindDrag($('#cardEl'));renderGame();requestAnimationFrame(fitCard)}
+function setTier(k){if(!G.current||G.current.type!=='card')return;G.tiers[G.current.id]=k;sfx.pop();vib(10);
+  const el=$('#cardEl');el.innerHTML=cardInner(CARD[G.current.id],false);const em=el.querySelector('.card-emoji');em.style.animation='none';void em.offsetWidth;em.style.animation='';renderGame();requestAnimationFrame(fitCard)}
+function fitCard(){const el=$('#cardEl'),h=$('#cardHolder');if(!el)return;h.style.transform='';const st=$('#stage').getBoundingClientRect();
+  fitS=Math.min(1,(st.height-8)/el.offsetHeight,(st.width-8)/el.offsetWidth);h.style.transform=fitS<1?`scale(${fitS})`:''}
+window.addEventListener('resize',()=>{fitCard()});
+
+/* Imprévus */
+function showEvent(ev){G.current={type:'event',ev};G.eventsShown++;G.usedEv.push(ev.id);sfx.event();vib([60,40,60]);
+  $('#cardHolder').innerHTML=`<div class="card-outer event" id="cardEl"><div class="card-inner flip-in"><div class="card-art" style="--c1:#ffe066;--c2:#ff9f1c"><div class="ray"></div><div class="card-emoji">${ev.icon}</div></div>
+   <div class="card-body"><span class="ev-tag">⚡ IMPRÉVU</span><div class="card-title" style="margin-top:6px">${ev.title}</div><div class="card-sub">${ev.text}</div>
+   <div class="ev-amount ${ev.amount>0?'plus':'minus'}">${ev.amount>0?'+':''}${fmt(ev.amount)}</div><button class="btn" style="margin-top:6px" onclick="acceptEvent()">D'accord !</button></div></div></div>`;
+  renderGame();requestAnimationFrame(fitCard)}
+function acceptEvent(){if(!G.current||G.current.type!=='event'||busy)return;busy=true;const ev=G.current.ev,el=$('#cardEl');
+  G.events.push(ev);flyBits(el,$('#gGauge'),ev.amount>0?'💶':'💸',7);ev.amount>0?sfx.coin():sfx.oops();
+  el.style.transition='transform .4s,opacity .4s';el.style.transform='scale(1.25)';el.style.opacity='0';
+  setTimeout(()=>{G.current=null;$('#cardHolder').innerHTML='';busy=false;renderGame();
+    say(ev.amount>0?'Super, un petit bonus ! 🎉 Tu peux en profiter… ou l\'épargner.':(summary().rem<0?'Aïe ! Avec cet imprévu, le compte passe dans le rouge 😱 Change une carte en <b>Éco</b> ou laisse une envie.':'Un imprévu ! Tu vois pourquoi c\'est utile de garder <b>un peu d\'argent de côté</b> ?'),4200)},420)}
+
+/* Glisser la carte (doigt ET souris : Pointer Events) */
+let drag=null;
+function hit(e,r,m){m=m||0;return e.clientX>=r.left-m&&e.clientX<=r.right+m&&e.clientY>=r.top-m&&e.clientY<=r.bottom+m}
+function intentFrom(e,dx,dy){const T=S.device.mobile?70:110;
+  if(hit(e,$('#pile-need').getBoundingClientRect()))return'need';if(hit(e,$('#pile-want').getBoundingClientRect()))return'want';
+  if(dx>T)return'need';if(dx<-T)return'want';if(dy>T*1.15&&Math.abs(dx)<T)return'skip';return null}
+function bindDrag(el){el._dx=0;el._dy=0;
+  el.addEventListener('pointerdown',e=>{if(e.target.closest('button')||!G.current||G.current.type!=='card'||busy)return;
+    drag={x:e.clientX,y:e.clientY,id:e.pointerId,intent:null};el.setPointerCapture(e.pointerId);el.classList.add('dragging');el.style.transition='none';tone(400,.04,'triangle',.03)});
+  el.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id)return;const dx=(e.clientX-drag.x)/fitS,dy=(e.clientY-drag.y)/fitS;el._dx=dx;el._dy=dy;
+    el.style.transform=`translate(${dx}px,${dy}px) rotate(${dx/14}deg)`;const it=intentFrom(e,dx,dy);
+    if(it!==drag.intent){drag.intent=it;if(it){tone(it==='need'?660:it==='want'?520:300,.06,'triangle',.04);vib(8)}}
+    const T=S.device.mobile?70:110;const q=x=>Math.max(0,Math.min(1,x));
+    el.querySelector('.stamp.need').style.opacity=it==='need'?1:q(dx/T)*.6;el.querySelector('.stamp.want').style.opacity=it==='want'?1:q(-dx/T)*.6;el.querySelector('.stamp.skip').style.opacity=it==='skip'?1:0;
+    $('#pile-need').classList.toggle('hot',it==='need');$('#pile-want').classList.toggle('hot',it==='want');$('#hintDown').classList.toggle('on',it==='skip'||dy>40)});
+  const end=e=>{if(!drag||e.pointerId!==drag.id)return;const it=drag.intent;drag=null;el.classList.remove('dragging');clearHot();
+    if(it)decide(it);else springBack(el)};
+  el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end)}
+function clearHot(){$$('.pile').forEach(p=>p.classList.remove('hot'));$('#hintDown').classList.remove('on')}
+function springBack(el){if(!el)return;el.style.transition='transform .45s cubic-bezier(.3,1.6,.5,1)';el.style.transform='';el._dx=0;el._dy=0;
+  el.querySelectorAll('.stamp').forEach(s=>s.style.opacity=0)}
+function reject(el,msg){springBack(el);const i=el&&el.querySelector('.card-inner');if(i){i.classList.remove('nope');void i.offsetWidth;i.classList.add('nope')}
+  sfx.oops();vib([50,40,50]);say('🤔 '+msg,3800)}
+function decide(zone){
+  if(!G||!G.current||G.current.type!=='card'||busy)return;
+  const c=CARD[G.current.id],el=$('#cardEl'),target=zone==='need'?'priority':zone==='want'?'optional':'skip';
+  if(target==='skip'&&c.vital){reject(el,`${c.short}, c'est <b>indispensable</b> pour vivre : impossible de passer cette carte !`);return}
+  if(S.mode==='junior'&&target!=='skip'&&target!==c.hint){reject(el,c.hint==='priority'?`Hmm… ${c.short.toLowerCase()}, c'est un <b>besoin</b> : on ne peut pas s'en passer !`:`${c.short}, c'est chouette… mais c'est une <b>envie</b> : on peut vivre sans.`);return}
+  busy=true;vib(25);sfx.whoosh();
+  const pile=target==='skip'?null:$(target==='priority'?'#pile-need':'#pile-want');
+  const a=el.getBoundingClientRect();let tr;
+  if(!pile)tr=`translate(${el._dx}px,${innerHeight/fitS}px) rotate(25deg)`;
+  else{const b=pile.getBoundingClientRect();tr=`translate(${(b.left+b.width/2-(a.left+a.width/2))/fitS+el._dx}px,${(b.top+b.height/2-(a.top+a.height/2))/fitS+el._dy}px) scale(.12) rotate(${target==='priority'?35:-35}deg)`}
+  el.style.transition='transform .45s cubic-bezier(.55,0,.75,.2),opacity .45s';el.style.transform=tr;el.style.opacity='.3';
+  setTimeout(()=>{
+    const id=G.current.id;G.current=null;$('#cardHolder').innerHTML='';
+    if(target==='skip'){G.skipped.push(id)}else{G.placed[id]=target;sfx.coin();
+      setTimeout(()=>{const p=$(target==='priority'?'#pile-need':'#pile-want');p.classList.remove('got');void p.offsetWidth;p.classList.add('got');flyBits($('#gGauge'),p,'🪙',5)},10)}
+    busy=false;renderGame();const fam=$('#gFamily');fam.classList.remove('hop');void fam.offsetWidth;fam.classList.add('hop');
+    const s=summary();
+    if(s.rem<0)say(`Attention ! Le compte passe <b>dans le rouge</b> 😱 ${S.mode==='ados'?'Choisis une version <b>Éco</b> ou laisse une envie.':'Tu peux reprendre une <b>envie</b> (↩️) pour la laisser de côté.'}`,4200);
+    else if(target!=='skip'&&Math.random()<.4)say(['Bien joué ! 👍','Super choix ! ✨','Bien rangé ! 🙌','Bravo ! 🎯'][Math.random()*4|0],1600);
+    else if(target==='skip')say('Carte laissée de côté : on économise ! 💪',1800);
+  },460);
+}
+function takeBack(id){if(!G)return;delete G.placed[id];G.skipped=G.skipped.filter(x=>x!==id);closeDrawer();sfx.pop();
+  if(G.current&&G.current.type==='card'){G.deck.unshift(G.current.id);G.current=null}
+  if(!G.current)showCard(id);else{G.deck.unshift(id);renderGame()}}
+
+/* Tiroir des piles (téléphone) */
+function openPile(zone){if(!G)return;if(!S.device.mobile&&zone!=='skip'&&innerWidth>=900)return;
+  const ids=zone==='skip'?G.skipped:Object.keys(G.placed).filter(k=>G.placed[k]===zone);
+  $('#dTitle').textContent=zone==='priority'?'🏠 Mes besoins':zone==='optional'?'🎈 Mes envies':'⏭️ Cartes laissées';
+  $('#dList').innerHTML=rowsHTML(ids,'Aucune carte ici pour l\'instant.','↩️ Reprendre');$('#drawer').classList.add('on');sfx.pop()}
+function closeDrawer(){$('#drawer').classList.remove('on')}
+
+/* Tirelire Pépite : glisser la pièce */
+function addSavings(d){if(!G)return;const before=G.savings;G.savings=Math.max(0,G.savings+d);if(G.savings===before)return;
+  const pig=$('#piggy');if(d>0){sfx.coin();vib(20);pig.classList.remove('gulp');void pig.offsetWidth;pig.classList.add('gulp')}else sfx.pop();
+  renderGame();
+  if(d>0&&!G.targetHit&&G.savings>=G.p.target){G.targetHit=true;say(`Miam ! Objectif d'épargne atteint : <b>${fmt(G.savings)}</b> 🎉`,3200);confetti(70)}
+  else if(d>0&&summary().rem<0)say('Oups, avec cette pièce le compte est <b>dans le rouge</b>. Reprends-la avec le bouton <b>−</b>.',3600)}
+function bindCoin(){const coin=$('#coin');
+  coin.addEventListener('pointerdown',e=>{e.preventDefault();if(!G)return;const g=document.createElement('div');g.className='coin coin-ghost';g.textContent='50€';document.body.appendChild(g);
+    const st={x:e.clientX,y:e.clientY,moved:false};const pig=$('#piggy');
+    const mv=ev=>{g.style.left=ev.clientX+'px';g.style.top=ev.clientY+'px';if(Math.hypot(ev.clientX-st.x,ev.clientY-st.y)>8)st.moved=true;pig.classList.toggle('target',hit(ev,pig.getBoundingClientRect(),30))};mv(e);
+    const up=ev=>{window.removeEventListener('pointermove',mv);window.removeEventListener('pointerup',up);window.removeEventListener('pointercancel',up);pig.classList.remove('target');
+      const r=pig.getBoundingClientRect();if(hit(ev,r,30)||!st.moved){g.style.transition='all .25s';g.style.left=(r.left+r.width/2)+'px';g.style.top=(r.top+8)+'px';g.style.transform='scale(.3)';setTimeout(()=>g.remove(),260);addSavings(50)}
+      else{g.style.transition='all .3s';g.style.left=st.x+'px';g.style.top=st.y+'px';setTimeout(()=>g.remove(),300)}};
+    window.addEventListener('pointermove',mv);window.addEventListener('pointerup',up);window.addEventListener('pointercancel',up)})}
+
+/* Effets */
+function flyBits(fromEl,toEl,txt,n){if(!fromEl||!toEl)return;const a=fromEl.getBoundingClientRect(),b=toEl.getBoundingClientRect();
+  for(let i=0;i<n;i++){const s=document.createElement('div');s.className='fly';s.textContent=txt;const x=a.left+a.width/2+(Math.random()-.5)*60,y=a.top+a.height/2+(Math.random()-.5)*30;
+    s.style.left=x+'px';s.style.top=y+'px';s.style.transitionDelay=(i*.05)+'s';document.body.appendChild(s);
+    setTimeout(()=>{s.style.transform=`translate(${b.left+b.width/2-x}px,${b.top+b.height/2-y}px) scale(.5)`;s.style.opacity='.15'},30);setTimeout(()=>s.remove(),1200)}}
+let sayT=null;
+function say(html,ms){const el=$('#say');el.innerHTML='🐷 '+html;
+  if(S.screen==='game'&&S.device.mobile){const t=document.querySelector('.g-tray').getBoundingClientRect().top;el.style.bottom=(innerHeight-t+14)+'px'}else el.style.bottom='';
+  el.classList.add('on');clearTimeout(sayT);sayT=setTimeout(()=>el.classList.remove('on'),ms||2800)}
+let CONF=[],confRun=false;
+function confetti(n){const cv=$('#confetti'),dpr=devicePixelRatio||1;cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;
+  const cols=['#ff5f9e','#ffd54a','#34d399','#60a5fa','#a78bfa','#fb923c'];
+  for(let i=0;i<n;i++)CONF.push({x:Math.random()*innerWidth,y:-20-Math.random()*innerHeight*.4,vx:(Math.random()-.5)*4,vy:2+Math.random()*4,r:5+Math.random()*6,c:cols[i%cols.length],a:Math.random()*6,va:(Math.random()-.5)*.3,life:0});
+  if(confRun)return;confRun=true;const ctx=cv.getContext('2d');
+  (function loop(){ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,innerWidth,innerHeight);
+    CONF.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.05;p.a+=p.va;p.life++;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);ctx.fillStyle=p.c;ctx.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);ctx.restore()});
+    CONF=CONF.filter(p=>p.y<innerHeight+30&&p.life<400);if(CONF.length)requestAnimationFrame(loop);else{confRun=false;ctx.clearRect(0,0,innerWidth,innerHeight)}})()}
+
+/* Tutoriel */
+let TU=null;
+function tutoSteps(){const m=S.device.mobile,L=[];
+  L.push(m?{ic:'<span class="phone-ic" style="font-size:80px">📳</span>',t:'Secoue ton téléphone',p:"…pour mélanger le paquet et piocher une carte.<br><small>(Si ça ne marche pas, touche simplement le paquet.)</small>"}:{ic:'🖱️',t:'Pioche une carte',p:'Clique sur le paquet, ou appuie sur la touche <b>Espace</b>.'});
+  L.push(m?{ic:'<span class="swipe-demo">🃏</span>',t:'Glisse la carte du doigt',p:'➡️ à droite : c\'est un <b>BESOIN</b> 🏠<br>⬅️ à gauche : c\'est une <b>ENVIE</b> 🎈<br>⬇️ en bas : <b>je passe</b>'}:{ic:'<span class="swipe-demo">🃏</span>',t:'Glisse la carte à la souris',p:'Dépose-la dans la colonne <b>BESOINS</b> 🏠 (à droite) ou <b>ENVIES</b> 🎈 (à gauche).<br>Au clavier : <b>→ ← ↓</b>'});
+  if(S.mode==='ados')L.push({ic:'🎚️',t:'Choisis le niveau',p:'<b>Éco</b>, <b>Normal</b> ou <b>Luxe</b> : le prix change… et la planète 🌿, ton confort 😊 et ta santé ❤️ aussi ! Gare aux <b>imprévus</b> ⚡'});
+  L.push({ic:`<div class="pep-s">${pepiteSVG('happy')}</div><span style="font-size:50px">🪙</span>`,t:'Nourris Pépite',p:m?'Fais glisser les pièces dans la tirelire pour <b>épargner</b>. Mais attention à ne pas finir <b>dans le rouge</b> !':'Glisse la pièce dans la tirelire (ou touche <b>+</b>) pour <b>épargner</b>. Attention à ne pas finir <b>dans le rouge</b> !'});
+  return L}
+function openTuto(){TU={i:0,steps:tutoSteps()};showTuto();$('#tuto').classList.add('on')}
+function showTuto(){const s=TU.steps[TU.i];$('#tIc').innerHTML=s.ic;$('#tT').textContent=s.t;$('#tP').innerHTML=s.p;
+  $('#tDots').innerHTML=TU.steps.map((_,i)=>`<i class="${i===TU.i?'on':''}"></i>`).join('');$('#tBtn').textContent=TU.i===TU.steps.length-1?"J'ai compris ! 👍":'Suivant ▶';
+  const c=$('.tuto-card');c.style.animation='none';void c.offsetWidth;c.style.animation='';sfx.pop()}
+function tutoNext(){if(S.device.mobile)enableMotion();TU.i++;if(TU.i>=TU.steps.length){$('#tuto').classList.remove('on');SAVE['tuto_'+S.mode]=1;store.set(SAVE);TU=null;
+  say(S.device.mobile?(S.motionOK?'📳 À toi : secoue ton téléphone !':'👆 À toi : touche le paquet !'):'🖱️ À toi : clique sur le paquet !');return}showTuto()}
+
+/* ---------- BILAN ---------- */
+let finishArm=0;
+function bilan(force){if(!G)return;
+  if(!force&&(G.current||G.deck.length)){const now=Date.now();if(now-finishArm>4000){finishArm=now;say('Il reste des cartes ! Appuie encore sur 🏁 pour voir le bilan quand même.',3500);return}}
+  showResult()}
+function showResult(){
+  const s=summary(),p=G.p,vacOk=!p.requireVac||!!G.placed.vacations,pass=s.rem>=0&&s.missing.length===0&&vacOk,
+    savOk=G.savings>=p.target,classOk=S.mode==='junior'||s.wrong.length===0,stars=pass?1+(savOk?1:0)+(classOk?1:0):0;
+  const key=S.mode+':'+p.id;if(stars>(SAVE.progress[key]||0)){SAVE.progress[key]=stars;store.set(SAVE)}
+  const n=S.name?' '+S.name:'';
+  $('#rTitle').textContent=stars===3?`Mission parfaite${n} !`:stars===2?`Bravo${n}, mission réussie !`:stars===1?`Mission réussie${n} !`:'Oups… presque !';
+  $('#rFamily').innerHTML=familyHTML(p,pass?'happy':'sad');
+  $('#rQuote').textContent=pass?`« Merci${n} ! Grâce à toi, on finit le mois sereinement 😊 »`:'« Aïe… on n\'y arrive pas ce mois-ci. Tu veux bien réessayer ? »';
+  $('#rNums').innerHTML=[['💰 Argent',fmt(s.income)],['🛒 Dépensé',fmt(s.spent)],['🐷 Épargné',fmt(G.savings)],[s.rem<0?'🔴 Manque':'✅ Reste',fmt(s.rem)]].map(([a,b])=>`<div class="num">${a}<b>${b}</b></div>`).join('');
+  const C=[];
+  C.push(s.rem>=0?[1,`Le mois est payé et il reste <b>${fmt(s.rem)}</b>.`]:[0,`Il manque <b>${fmt(-s.rem)}</b> : le compte est <b>dans le rouge</b>.`]);
+  C.push(s.missing.length?[0,`Besoin vital oublié : <b>${s.missing.map(c=>c.title).join(', ')}</b>.`]:[1,'Tous les besoins vitaux sont payés (logement, nourriture, santé…).']);
+  if(p.requireVac)C.push(vacOk?[1,'Papi et Mamie partent bien en vacances ! 🏖️']:[0,'Papi et Mamie voulaient <b>partir en vacances</b> !']);
+  C.push(savOk?[1,`Pépite a reçu <b>${fmt(G.savings)}</b> (objectif ${fmt(p.target)}).`]:[0,`Il manque <b>${fmt(p.target-G.savings)}</b> dans la tirelire (objectif ${fmt(p.target)}).`]);
+  if(S.mode==='ados')C.push(s.wrong.length?[0,`Mal rangé : ${s.wrong.map(c=>`<b>${c.title}</b> est plutôt ${c.hint==='priority'?'un besoin':'une envie'}`).join(' · ')}.`]:[1,'Toutes les cartes sont bien rangées en besoins / envies.']);
+  if(G.events.length)C.push([1,`Imprévus gérés : ${G.events.map(e=>e.icon+' '+sign(e.amount)+' €').join(', ')}`]);
+  $('#rChecks').innerHTML=C.map(([ok,t],i)=>`<li style="animation-delay:${.6+i*.12}s"><span>${ok?'✅':'❌'}</span><span>${t}</span></li>`).join('');
+  let tip;
+  if(s.missing.length)tip='Les <b>besoins vitaux</b> passent toujours en premier : sans eux, impossible de vivre !';
+  else if(!vacOk)tip='Ajoute la carte <b>Vacances</b> (même en version Camping ⛺) : c\'était leur rêve !';
+  else if(s.rem<0)tip=S.mode==='ados'?'Essaie la version <b>Éco</b> sur les grosses dépenses, ou laisse de côté une <b>envie</b>.':'Laisse de côté une <b>envie</b> (shopping, loisirs…) : on peut vivre sans !';
+  else if(!savOk)tip=`Il te reste ${fmt(s.rem)} : glisse encore des pièces dans ma tirelire !`;
+  else if(!classOk)tip='Une <b>envie</b>, c\'est ce qui fait plaisir mais dont on peut se passer. Un <b>besoin</b>, on ne peut pas l\'éviter.';
+  else tip=S.mode==='ados'?`Parfait ! Score planète ${sign(s.eco)}, confort ${sign(s.com)}, santé ${sign(s.hea)}. Tu gères comme un pro 😎`:'Parfait ! Tu sais faire la différence entre besoins et envies, et tu penses à épargner 🐷💖';
+  $('#rPep').innerHTML=pepiteSVG(pass?'happy':'sad');$('#rSay').innerHTML=tip;
+  if(S.mode==='ados'){const bar=(l,v,c)=>`<div class="sb"><span class="lb">${l} <b>${sign(v)}</b></span><span class="tr"><i style="background:${c}" data-w="${Math.max(4,Math.min(100,(v+40)/1.6))}"></i></span></div>`;
+    $('#rStats').innerHTML=`<div class="statbars">${bar('🌿 Planète',s.eco,'#22c55e')}${bar('😊 Confort',s.com,'#3b82f6')}${bar('❤️ Santé',s.hea,'#f43f5e')}</div>`}else $('#rStats').innerHTML='';
+  $$('#rStars span').forEach(x=>x.classList.remove('on'));
+  go('result');
+  setTimeout(()=>$$('#rStats i').forEach(i=>i.style.width=i.dataset.w+'%'),100);
+  if(pass){sfx.win();setTimeout(()=>confetti(160),300)}else sfx.lose();
+  $$('#rStars span').forEach((x,i)=>{if(i<stars)setTimeout(()=>{x.classList.add('on');sfx.star(i);vib(30)},700+i*450)});
+}
+function replay(){startGame(G.p.id)}
+function nextFamily(){const i=PROFILES.findIndex(x=>x.id===G.p.id);openStory(PROFILES[(i+1)%PROFILES.length].id)}
+
+/* ---------- CLAVIER (ordinateur) ---------- */
+window.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT')return;
+  if($('#tuto').classList.contains('on')){if(e.key==='Enter'||e.key===' '){e.preventDefault();tutoNext()}return}
+  if(S.screen==='story'&&(e.key==='Enter'||e.key===' '||e.key==='ArrowRight')){e.preventDefault();storyNext();return}
+  if(S.screen!=='game'||!G)return;
+  if(e.key===' '||e.key==='Enter'){e.preventDefault();if(G.current&&G.current.type==='event')acceptEvent();else if(!G.current&&!G.deck.length)bilan(true);else draw()}
+  else if(e.key==='ArrowRight')decide('need');else if(e.key==='ArrowLeft')decide('want');else if(e.key==='ArrowDown'){e.preventDefault();decide('skip')}
+  else if(e.key==='1')setTier('eco');else if(e.key==='2')setTier('std');else if(e.key==='3')setTier('vip');
+  else if(e.key==='+')addSavings(50);else if(e.key==='-')addSavings(-50);
+});
+
+/* ---------- DÉMARRAGE ---------- */
+detectDevice();initBg();renderAges();bindCoin();
+$('#inName').value=S.name;if(SAVE.age)pickAge(SAVE.age,true);
+go('home');
+</script>
+</body>
+</html>
