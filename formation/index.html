@@ -7,67 +7,246 @@
 <title>Formation enseignants — Fehmi KLABI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--paper:#F4F7F7;--card:#fff;--ink:#14262B;--muted:#5A6C71;--teal:#0E6E6B;--teal2:#0A5A58;--pale:#E2EFEE;--mag:#C2185B;--magp:#FBE8F0;--line:#D2DEDE;--shadow:0 12px 35px rgba(20,38,43,.08);--amber:#9A6900;--amberp:#FFF5D9}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,sans-serif}.page{max-width:1080px;margin:auto;padding:22px 22px 72px}.hero,.card,.lockbox,.pathway{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.hero{padding:32px 36px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:-145px;top:-175px;background:var(--pale)}.top{display:flex;justify-content:space-between;gap:20px;position:relative;z-index:1}.brand,.kicker{font:700 12px Archivo,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--teal)}.badge{background:var(--magp);color:var(--mag);font-weight:700;border-radius:999px;padding:7px 11px}.hero h1,h2,h3{font-family:Archivo,sans-serif}.hero h1{position:relative;z-index:1;font-size:clamp(35px,6vw,62px);line-height:1;margin:28px 0 12px}.lead,.identity{position:relative;z-index:1}.lead{color:var(--muted);font-size:19px;max-width:70ch}.identity{font-weight:600}.lockbox{max-width:520px;margin:34px auto 0;padding:25px}.lockbox input{width:100%;border:1px solid #B8C7C8;border-radius:10px;padding:12px;font:inherit;margin:10px 0}.btn{display:inline-block;text-decoration:none;border:0;border-radius:10px;padding:10px 13px;font:inherit;font-weight:700;cursor:pointer}.primary{background:var(--teal);color:#fff}.outline{background:#fff;border:1px solid var(--line);color:var(--ink)}.hidden{display:none!important}.section{margin-top:28px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.card{padding:22px}.card p{color:var(--muted)}.mission{border-left:5px solid var(--teal)}.opening{border-left:5px solid var(--mag);background:linear-gradient(135deg,#fff,#fff7fa)}.science{border-left:5px solid var(--amber);background:linear-gradient(135deg,#fff,#fffaf0)}.robotics{border-left:5px solid var(--teal);background:linear-gradient(135deg,#fff,#f5fbfa)}.callout{padding:14px 16px;border-radius:12px;background:var(--pale);color:var(--teal2);font-weight:600}.pathway{padding:24px;margin-top:18px;background:linear-gradient(135deg,#fff,#f7fbfb)}.pathway-head{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line)}.pathway-head h2{margin:5px 0 7px}.pathway-head p{margin:0;color:var(--muted);max-width:82ch}.pathway .grid{grid-template-columns:repeat(3,minmax(0,1fr))}.pathway .session-card{box-shadow:none;border:1px solid var(--line);background:#fff}.subsection-title{margin:34px 0 14px}.session-card{text-decoration:none;color:inherit;display:block}.session-card:hover{transform:translateY(-1px)}.session-card .num{font:700 30px Archivo;color:var(--teal);margin-top:6px}.go{color:var(--mag);font-weight:700;margin-top:12px}.deposit{border-left:5px solid var(--mag);background:linear-gradient(135deg,#fff,#fff7fa)}.deposit-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.footer{margin-top:38px;border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:14px}.footer a{color:var(--teal2);font-weight:700;text-decoration:none}.error{color:#A31446;font-weight:700}.small{font-size:14px;color:var(--muted)}@media(max-width:900px){.pathway .grid{grid-template-columns:1fr}}@media(max-width:760px){.grid{grid-template-columns:1fr}.hero{padding:25px 21px}.badge{display:none}.pathway{padding:18px}}
+/* Accueil de l'espace formation — style « Carnet d'atelier » (arbre des ateliers, cartes à retourner).
+   Ancienne version : étiquette git « avant-nouveau-style ». */
+:root{--paper:#FBF6EC;--ink:#1D1A16;--muted:#5C544A;--soft:#E9E1D2;--acc:#C2410C;--yel:#F7C548;--line:#1D1A16}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper) radial-gradient(rgba(29,26,22,.10) 1.2px,transparent 1.2px) 0 0/22px 22px;color:var(--ink);font:18px/1.6 "Atkinson Hyperlegible",system-ui,sans-serif}
+a{color:var(--ink)}a:hover{color:var(--acc)}
+.ft,h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif}
+.meta{font:700 12px/1.25 "Atkinson Hyperlegible",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#6B6257}
+.page{max-width:1120px;margin:auto;padding:0 28px 96px}
+.hidden{display:none!important}
+.pillbox{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--ink);border-radius:999px;font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;font:inherit;font-weight:700;font-size:16px;border-radius:999px;padding:10px 20px;cursor:pointer;text-decoration:none;border:2px solid var(--ink)}
+.btn.primary{background:var(--acc);border-color:var(--acc);color:#fff}.btn.primary:hover{background:#9A3412;color:#fff}
+.btn.light{background:#fff;color:var(--ink)}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:4px}
 
-/* ---- Refonte v8 : accueil formation plus aéré ---- */
-body{font-size:18px;line-height:1.6}
-.page{max-width:1000px;padding:0 24px 90px}
-.site-head{display:flex;align-items:center;gap:22px;padding:26px 0 18px}.site-head img{height:56px;width:auto;display:block;mix-blend-mode:multiply}
-.site-head .t{border-left:2px solid var(--line);padding-left:22px}.site-head .t b{display:block;font:700 12px Archivo,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}.site-head .t span{font:600 20px Archivo,sans-serif}
-.hero2{padding:48px 0 30px}.hero2 h1{font:700 clamp(34px,6vw,54px)/1.08 Archivo,sans-serif;margin:0 0 16px;max-width:18ch}.hero2 p{font-size:20px;color:var(--muted);max-width:56ch;margin:0}.hero2 .who{font-size:15px;margin-top:20px;color:var(--ink);font-weight:600}
-.lockbox{box-shadow:none;border-radius:18px;padding:30px}
-.group{margin-top:68px}.group>h2{font:700 26px Archivo,sans-serif;margin:0 0 6px}.group>p.sub{margin:0 0 22px;color:var(--muted);font-size:16px}
-.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.tiles.two{grid-template-columns:repeat(2,minmax(0,1fr))}.tiles.one{grid-template-columns:1fr}
-.tile{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;transition:border-color .15s,transform .15s}
-.tile:hover{border-color:var(--teal);transform:translateY(-2px)}
-.tile .k{font:700 12px Archivo,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--teal)}
-.tile h3{font:700 21px/1.25 Archivo,sans-serif;margin:4px 0 2px}.tile p{margin:0;color:var(--muted);font-size:16px}.tile .go{margin-top:auto;padding-top:14px;color:var(--mag);font-weight:700;font-size:15px}
-.tile.start{background:var(--teal);border-color:var(--teal);color:#fff}.tile.start .k,.tile.start p{color:#dff1ef}.tile.start .go{color:#fff}.tile.start h3{font-size:26px}
-.intent{margin-top:40px;border-left:4px solid var(--teal);padding:4px 0 4px 20px;color:var(--ink);max-width:70ch}.intent b{display:block;margin-bottom:4px}
-.deposit2{margin-top:68px;background:var(--magp);border-radius:18px;padding:28px 30px;display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}.deposit2 h2{margin:0 0 4px;font:700 22px Archivo,sans-serif}.deposit2 p{margin:0;color:var(--ink);font-size:16px}
-.footer{margin-top:60px}
-@media(max-width:860px){.tiles,.tiles.two{grid-template-columns:1fr}.hero2{padding-top:30px}.group{margin-top:52px}.site-head .t span{font-size:17px}}
-@media(max-width:520px){.site-head{flex-wrap:wrap;gap:12px}.site-head .t{border-left:0;padding-left:0}}
- .didactic-tiles{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.didactic-tiles .tile{padding:20px}.didactic-tiles .tile h3{font-size:19px}.didactic-tiles .bilan-tile{border:2px solid var(--teal);background:#f0f9f8}@media(max-width:980px){.didactic-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.didactic-tiles{grid-template-columns:1fr}} .outils-tile{border-style:dashed}
+.site-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:24px 0}
+.brandpill{padding:8px 22px 8px 10px;gap:16px}.brandpill img{height:42px;width:auto;mix-blend-mode:multiply}
+.brandpill b{display:block}.brandpill span.t{font:700 18px "Bricolage Grotesque",sans-serif}
+
+.hero{display:flex;gap:40px;align-items:center;padding:36px 0 12px}
+.hero .txt{flex:1 1 600px;display:flex;flex-direction:column;gap:18px}
+.chip{align-self:flex-start;background:var(--yel);border:2px solid var(--ink);border-radius:999px;padding:6px 14px;font-weight:700;font-size:14px}
+.hero h1{margin:0;font-weight:800;font-size:clamp(36px,6vw,60px);line-height:1.02;letter-spacing:-.02em}
+.hero p{margin:0}.hero .lead{font-size:20px;color:var(--muted);max-width:56ch}.hero .who{font-size:15px;font-weight:700}
+.sun{flex:0 0 220px;height:220px;border-radius:50%;background:var(--yel);border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;position:relative}
+.sun i{position:absolute;border-radius:50%;border:3px solid var(--ink)}
+.sun i:nth-child(1){width:70px;height:70px;background:var(--acc);right:-10px;top:6px}
+.sun i:nth-child(2){width:38px;height:38px;background:#BFE3CF;left:4px;bottom:18px}
+
+.lockbox{max-width:540px;margin:34px auto 0;padding:30px;background:#fff;border:2px solid var(--ink);border-radius:32px;box-shadow:0 10px 0 rgba(29,26,22,.10)}
+.lockbox h2{margin:6px 0 4px;font-size:28px}
+.lockbox input{width:100%;border:2px solid var(--ink);border-radius:999px;padding:12px 18px;font:inherit;margin:8px 0 14px}
+.small{font-size:14px;color:var(--muted)}.error{color:#A31446;font-weight:700}
+
+.intent{display:flex;gap:18px;align-items:flex-start;background:#fff;border:2px dashed var(--ink);border-radius:28px;padding:22px 26px;margin-top:28px}
+.intent .q{flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:var(--yel);border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font:800 22px "Bricolage Grotesque",sans-serif}
+.intent p{margin:0}.intent p+p{color:var(--muted);font-size:17px}
+
+/* L'arbre */
+.tree{position:relative;height:740px;margin-top:24px}
+#links{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.tree path{fill:none;stroke-linecap:round;transition:stroke .3s,stroke-width .3s}
+.trunk{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:170px;height:170px;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;box-shadow:0 0 0 10px var(--paper),0 0 0 13px var(--ink)}
+.trunk b{font:800 20px/1.05 "Bricolage Grotesque",sans-serif}.trunk small{font-size:12px;color:var(--soft)}
+.node{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:10px;background:none;border:0;padding:0;cursor:pointer;font:inherit;color:var(--ink);width:140px}
+.disc{width:88px;height:88px;border-radius:50%;border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 0 rgba(29,26,22,.12);transition:transform .25s,box-shadow .25s}
+.node:hover .disc{transform:translateY(-4px) scale(1.04)}
+.lbl{font:700 15px/1.2 "Bricolage Grotesque",sans-serif;text-align:center;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:6px 12px}
+.node.on .lbl{background:var(--ink);color:var(--paper)}
+.node.on .disc{box-shadow:0 0 0 6px var(--paper),0 0 0 9px var(--acc)}
+.node.spin .disc{animation:spin .9s cubic-bezier(.3,.7,.2,1)}
+@keyframes spin{from{transform:rotate(0) scale(.8)}to{transform:rotate(360deg) scale(1)}}
+.node:focus-visible{outline:none}.node:focus-visible .disc{outline:3px solid var(--acc);outline-offset:6px}
+.pills{display:none;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:24px}
+.pill{display:flex;align-items:center;gap:8px;font:700 15px "Bricolage Grotesque",sans-serif;border:2px solid var(--ink);border-radius:999px;padding:6px 14px 6px 6px;cursor:pointer;color:var(--ink);min-height:44px}
+.pill .dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;border:2px solid var(--ink)}
+.pill[aria-pressed="true"]{background:var(--ink)!important;color:var(--paper)}
+
+/* La branche ouverte */
+.panel{margin-top:36px;scroll-margin-top:20px}
+.phead{display:flex;align-items:center;gap:20px;flex-wrap:wrap;border:2px solid var(--ink);border-radius:48px;padding:14px 26px 14px 14px}
+.phead .ico{width:76px;height:76px;background:#fff}
+.phead h2{margin:0;font-weight:800;font-size:32px;line-height:1.1}.phead p{margin:4px 0 0;font-size:17px;color:#3A352E}
+.phead .txt{flex:1 1 320px}.count{background:#fff;border:2px solid var(--ink);border-radius:999px;padding:6px 14px;font-weight:700;font-size:14px}
+.ico{width:64px;height:64px;border-radius:50%;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px;margin-top:26px}
+.fc{perspective:1200px;height:310px}
+.fc .in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.fc.flip .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:28px;border:2px solid var(--ink);padding:24px;display:flex;flex-direction:column;gap:10px;text-align:left}
+.front{background:#fff;cursor:pointer;font:inherit;color:var(--ink);box-shadow:0 8px 0 rgba(29,26,22,.10);transition:transform .2s}
+.front:hover{transform:translateY(-3px)}
+.back{transform:rotateY(180deg);background:var(--ink);color:var(--paper);overflow:auto}
+.face h3{margin:0;font-weight:700;font-size:20px;line-height:1.2}
+.hint{margin-top:auto;display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:#6B6257}
+.back p{margin:0;font-size:15px;line-height:1.5;color:var(--soft)}
+.open{margin-top:auto;align-self:flex-start;text-decoration:none;background:var(--yel);color:var(--ink);font-weight:700;border-radius:999px;padding:11px 18px}
+.open:hover{color:var(--ink);background:#FFD666}
+.turn{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:50%;border:2px solid var(--paper);background:none;color:var(--paper);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.back h3{padding-right:48px}
+
+.deposit{margin-top:72px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;background:var(--ink);color:var(--paper);border-radius:40px;padding:34px 40px}
+.deposit .l{display:flex;align-items:center;gap:18px}
+.deposit .up{width:64px;height:64px;border-radius:50%;background:var(--yel);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.deposit h2{margin:0 0 2px;font-weight:800;font-size:26px}.deposit p{margin:0;font-size:16px;color:var(--soft)}
+.deposit .btn{background:var(--yel);border-color:var(--yel);color:var(--ink)}
+.footer{margin-top:40px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+@media(prefers-reduced-motion:reduce){.fc .in,.disc{transition:none!important;animation:none!important}}
+@media(max-width:860px){.tree{display:none}.pills{display:flex}.hero{flex-direction:column;align-items:flex-start}.sun{display:none}.phead{border-radius:28px}}
+@media print{.tree,.pills,.site-head .btn,.deposit,.footer{display:none}.fc{height:auto}.fc .in{transform:none!important}.back{position:static;transform:none;background:#fff;color:#000}.front{display:none}}
 </style>
 </head>
 <body><main class="page">
-<div class="site-head"><img src="../img/logo-aefe.png" alt="AEFE — Agence pour l’enseignement français à l’étranger"><div class="t"><b>Technologie · Formation</b><span>Espace enseignants</span></div></div>
-<header class="hero2"><h1>Formation des enseignants</h1><p>Vivre la tâche comme vos élèves, observer ce qui s’y joue, puis en faire des choix pédagogiques.</p><p class="who">Fehmi KLABI · Professeur de technologie · Formateur · Conseiller pédagogique</p></header>
-<div id="login" class="lockbox"><span class="kicker">Votre espace formation</span><h2>Entrer dans la formation</h2><p class="small">Saisissez le code communiqué pendant la formation.</p><form id="form"><label for="code"><strong>Code d’accès</strong></label><input id="code" type="password" autocomplete="off" placeholder="Code formation"><button class="btn primary" type="submit">Entrer →</button><p class="error" id="err" hidden>Code incorrect. Vérifiez la saisie.</p></form><p class="small" id="retour-info" hidden>Après la saisie du code, la page demandée s’ouvrira directement.</p><p class="small">Le code est mémorisé sur ce navigateur : vous ne le saisissez qu’une fois. « Fermer l’accès », en bas de page, l’efface.</p></div>
-<section id="hub" class="hidden">
-<div class="intent"><b>Pourquoi la tâche vient-elle avant l’explication ?</b>Certaines tâches sont proposées <strong>avant l’explication</strong>, là où vos élèves buteront. Vous les vivez pour observer ce qui s’y joue : les représentations, les stratégies, les obstacles. La difficulté n’est jamais le but : elle sert à penser, expliquer et reconstruire un modèle plus solide.</div>
-<section class="group"><div class="tiles one"><a class="tile" href="brise-glace/index.html"><span class="k">Pour commencer · Brise-glace · 20 à 25 min</span><h3>Le stylo tourne</h3><p>Un stylo, seize questions tirées au sort, deux jokers : chacun se présente en répondant, et le groupe parcourt les trois thèmes du programme de cycle 4.</p><span class="go">Lancer le brise-glace →</span></a></div></section>
-<section class="group" style="margin-top:20px"><div class="tiles one"><a class="tile start" href="atelier-ouverture/index.html"><span class="k">Ensuite · 90 min</span><h3>Atelier d’ouverture</h3><p>Que faire apprendre en 3e avec cet objet ? Découvrir le nouveau programme sans commencer par sa lecture.</p><span class="go">Commencer →</span></a></div></section>
-<section class="group"><h2>Informations</h2><p class="sub">Pour s’informer : les nouveaux programmes, les classes CHAMS, le parcours ASTROTECH, le concours général du collège et le DNB 2027.</p><div class="tiles "><a class="tile bilan-tile" href="nouveaux-programmes/index.html"><span class="k">Nouveaux programmes · Diaporama à projeter</span><h3>📽️ Les nouveaux programmes de technologie</h3><p>Le programme de cycle 4, ce qui change depuis 2020, comment l’enseigner et le DNB 2027 : 38 diapositives avec les notes du formateur, à projeter ou télécharger.</p><span class="go">Projeter →</span></a><a class="tile " href="chams/index.html"><span class="k">Information</span><h3>Les classes CHAMS</h3><p>Classes à horaires aménagés en mathématiques et sciences : principe, calendrier, place de la technologie, exemple « Une classe au frais ».</p><span class="go">Ouvrir →</span></a><a class="tile " href="astrotech/index.html"><span class="k">Ressource · CM1 → 3e</span><h3>ASTROTECH · Astronomie et technologies</h3><p>Parcours interdisciplinaire sciences et technologie : six séquences, de l’ombre d’un bâton au rover autonome, en deux démarches (comprendre, puis concevoir), avec simulateurs et dossiers enseignants.</p><span class="go">Découvrir →</span></a><a class="tile " href="concours-general-college/index.html"><span class="k">Information</span><h3>Le concours général du collège</h3><p>Nouveau en 2026-2027 : cinq épreuves en 3e, dont informatique, technologie et numérique. Inscriptions du 12 octobre au 19 novembre, sujet zéro.</p><span class="go">Ouvrir →</span></a><a class="tile " href="../cg/index.html"><span class="k">Accès libre · Préparation</span><h3>Préparer le concours général · ITN</h3><p>Présentation du concours, niveau d'exigence, ce qu'il faut savoir, sujet zéro corrigé et deux sujets d'entraînement en PDF (énoncés et corrigés). Lien à partager sans code.</p><span class="go">Ouvrir →</span></a><a class="tile " href="dnb-2027/index.html"><span class="k">Information</span><h3>DNB 2027 · Nouveautés</h3><p>Note de service, nouvelle organisation des épreuves, sujet de référence de technologie.</p><span class="go">Ouvrir →</span></a><a class="tile outils-tile" href="outils-a-tester/index.html"><span class="k">Nouveaux outils à tester</span><h3>🧪 À essayer en classe</h3><p><strong>Simulateur réseau</strong> : construire et tester un réseau en ligne, scénarios guidés de la 5e à la 3e.</p><p><strong>CapyCAD</strong> : CAO 3D libre dans le navigateur, alternative à Tinkercad.</p><p><strong>La Ressourcerie</strong> : toutes les applications créées par des collègues pour la technologie.</p><span class="go">Ouvrir →</span></a></div></section>
-<section class="group"><h2>Les parcours didactiques</h2><p class="sub">Un atelier de 105 min : chaque table travaille un atelier en trois tours de 20 min, une personne change de table à chaque tour, puis chaque table présente son bilan. Les parcours complets (8 h) restent disponibles en autoformation.</p><div class="tiles didactic-tiles"><a class="tile bilan-tile" href="ateliers-didactiques/index.html"><span class="k">Atelier collectif · 105 min · 3 ateliers + bilan</span><h3>🔄 Trois ateliers, une question</h3><p>À quel moment la difficulté aide-t-elle à apprendre, et à quel moment empêche-t-elle de penser ?</p><span class="go">Lancer l’atelier →</span></a><a class="tile " href="reseaux/index.html"><span class="k">Parcours complet · 8 h</span><h3>Réseaux</h3><p>Internet, adressage, DNS, routage : comprendre et enseigner les réseaux.</p><span class="go">Ouvrir →</span></a><a class="tile " href="donnees-decision/index.html"><span class="k">Parcours complet · 8 h</span><h3>Données &amp; décision</h3><p>Capteurs, seuils, IA, biais : quand la donnée nous trompe.</p><span class="go">Ouvrir →</span></a><a class="tile " href="visseuse-sysml/index.html"><span class="k">Parcours complet · 8 h</span><h3>Analyse fonctionnelle &amp; SysML</h3><p>À partir d’une visseuse sans fil : un objet simple… vraiment ?</p><span class="go">Ouvrir →</span></a></div></section>
-<section class="group" id="investigation-explicitation"><h2>Enseignement explicite et démarche implicite</h2><p class="sub">Repère didactique · Ce qui distingue vraiment les deux démarches, leur impact didactique et pédagogique, illustré par une serre connectée.</p><div class="tiles"><a class="tile start" href="investigation-explicitation/index.html"><span class="k">Module court · Ressource pédagogique</span><h3>Enseignement explicite, démarche implicite</h3><p>Définitions, différences réelles, impact sur le savoir et sur la classe, une séance de serre automatisée minute par minute, une grille de visite-conseil et un atelier entre pairs.</p><span class="go">Consulter le document →</span></a><a class="tile" href="investigation-explicitation/diaporama.html"><span class="k">23 diapositives · Projection directe</span><h3>Diaporama interactif</h3><p>La même démarche illustrée diapositive par diapositive, avec les notes du formateur (touche N), navigation au clavier et impression PDF.</p><span class="go">Lancer le diaporama →</span></a></div><div class="callout" style="margin-top:16px">Ce qui n’est pas dit n’est pas appris par tous : rendre visibles le but, la méthode et le savoir, puis retirer l’aide à mesure que l’élève progresse.</div></section>
-<section class="group"><h2>Analyser et faire évoluer ses pratiques</h2><p class="sub">Des modules courts pour prendre du recul sur ses séquences.</p><div class="tiles "><a class="tile " href="expertise-sequence/index.html"><span class="k">Atelier collectif · 90 min</span><h3>Expertiser une séquence</h3><p>Vous héritez d’une séquence : que gardez-vous, que changez-vous, et pourquoi ?</p><span class="go">Ouvrir →</span></a><a class="tile " href="projet-conception/index.html"><span class="k">Atelier collectif · 90 min · Évaluation</span><h3>Évaluer pour faire apprendre</h3><p>Où, quand et comment évaluer ? Construisez deux évaluations, justifiez leur place dans la séquence et présentez-les aux autres groupes.</p><span class="go">Ouvrir →</span></a><a class="tile " href="sciences-cognitives/index.html"><span class="k">Ressource</span><h3>Sciences cognitives</h3><p>Comprendre le travail mental de l’élève : charge cognitive, feedback, transfert.</p><span class="go">Ouvrir →</span></a><a class="tile " href="fablab-5-euros/index.html"><span class="k">Atelier collectif · 90 min · FabLab sans machines</span><h3>Faire pour apprendre, apprendre pour faire · Le FabLab à 5 €</h3><p>Vivre un défi porte-courrier avec du carton et 5 €, analyser ce que la manipulation fait apprendre, puis inventer d’autres projets pour la 5e, la 4e et la 3e.</p><span class="go">Vivre l’atelier →</span></a><a class="tile " href="reparabilite/index.html"><span class="k">Atelier réflexif · 60 min</span><h3>Réparer, est-ce apprendre ?</h3><p>De ce que j’observe à la panne : décomposer l’objet en blocs fonctionnels, formuler des hypothèses, tester pour éliminer. Quatre cas à diagnostiquer puis à enseigner, et un bilan sur la démarche de diagnostic.</p><span class="go">Ouvrir l’atelier →</span></a></div></section>
-<section class="group" id="intelligence-artificielle"><h2>L’intelligence artificielle en technologie</h2><p class="sub">L’IA comme objet à enseigner et comme outil du professeur : une formation avec ateliers et une présentation sans atelier.</p><div class="tiles "><a class="tile " href="ia-technologie/index.html"><span class="k">Formation</span><h3>L’IA en technologie : un objet à enseigner, un outil à maîtriser</h3><p>Didactique, pédagogie, impact sur les élèves, posture professionnelle : deux ateliers (entraîner un modèle, retravailler une séance) et des études de cas de labo.</p><span class="go">Ouvrir →</span></a><a class="tile " href="ia-technologie/presentation.html"><span class="k">Présentation · Sans atelier</span><h3>L’IA et le professeur de technologie</h3><p>Partie professeur (progressions, différenciation, outils, évaluation, correction automatisée) et partie élèves (quand utiliser l’IA, se former, éviter la dépendance, classe et maison), avec le rappel du cadre d’usage.</p><span class="go">Ouvrir →</span></a></div></section>
-<section class="group"><h2>Objets connectés & robotique</h2><p class="sub">De l’objet connecté aux robots programmables.</p><div class="tiles "><a class="tile " href="objets-connectes/index.html"><span class="k">Parcours complet</span><h3>Objets connectés & IoT</h3><p>De l’architecture d’un objet connecté à la classe IoT.</p><span class="go">Ouvrir →</span></a><a class="tile " href="maqueen/index.html"><span class="k">Aucun prérequis · 20 activités</span><h3>Maqueen & MakeCode</h3><p>Du premier programme à la situation-problème en classe. Comparaison avec mBot et mBot2.</p><span class="go">Ouvrir →</span></a><a class="tile " href="mbot2/index.html"><span class="k">Aucun prérequis · 16 fiches</span><h3>mBot2 & mBlock 5</h3><p>Chaque programme expliqué bloc par bloc, en mots simples.</p><span class="go">Ouvrir →</span></a></div><div class="tiles one" style="margin-top:20px"><a class="tile start" href="atelier-conception/index.html"><span class="k">Atelier collectif · 90 min</span><h3>Concevoir une situation où les élèves réfléchissent et apprennent</h3><p>Problème posé aux élèves, compétences du programme, parcours, évaluation par critères observables, exercice type DNB. Conducteur du formateur, fiche de conception, trois exemples remplis (Maqueen, mBot2, objets connectés).</p><span class="go">Ouvrir l’atelier →</span></a></div></section>
-<section class="group"><h2>Olympiades des Sciences de l’Ingénieur</h2><p class="sub">Préparer et cadrer les projets.</p><div class="tiles one"><a class="tile " href="osi-sante/index.html"><span class="k">Atelier collectif · 60 min</span><h3>Thématique Santé</h3><p>Cadrer avant de concevoir : limites, données sensibles, décisions collectives.</p><span class="go">Ouvrir →</span></a></div></section>
+<header class="site-head">
+<div class="pillbox brandpill"><img src="../img/logo-aefe.png" alt="AEFE — Agence pour l’enseignement français à l’étranger"><div><b class="meta">Technologie · Formation</b><span class="t">Espace enseignants</span></div></div>
+<button id="logout" class="btn light hidden" type="button">Fermer l’accès</button>
+</header>
 
-<section class="group" id="lycee-francais-bruxelles"><h2>Lycée français de Bruxelles</h2><p class="sub">Projet de technologie en classe de 3e avec Minecraft Education, conforme au programme de cycle 4 (BO n°9 du 29 février 2024).</p><div class="tiles one"><a class="tile start" href="lycee-francais-bruxelles/mission-nouvelle-terre/index.html"><span class="k">Projet 3e · Minecraft Education · 10 épisodes · 36 séances</span><h3>Mission Nouvelle Terre</h3><p>2075 : concevoir une station humaine sur la Lune. Dix épisodes racontés par un équipage, la vraie science de l’espace, des plans et des schémas pour chaque construction, de la redstone, du Code Builder, des points de contrôle, des badges et une évaluation tous les deux défis.</p><span class="go">Ouvrir le projet →</span></a></div><div class="tiles two" style="margin-top:20px"><a class="tile" href="lycee-francais-bruxelles/mission-nouvelle-terre/espace-professeur.html"><span class="k">Espace professeur · Accès libre</span><h3>Fiches professeur et évaluations</h3><p>Diagnostic, programme 2024, matrice de couverture, dix fiches professeur avec corrigés, évaluations type DNB, missions pratiques, DNB blanc.</p><span class="go">Ouvrir →</span></a><a class="tile" href="lycee-francais-bruxelles/mission-nouvelle-terre/espace-professeur.html#qcm-telechargement"><span class="k">Téléchargement · XML PRONOTE</span><h3>Les 5 QCM PRONOTE</h3><p>Un QCM de 20 questions par paire de défis, au format XML Moodle, à importer dans PRONOTE.</p><span class="go">Télécharger →</span></a></div></section>
-<section class="group"><h2>Pour clôturer</h2><p class="sub">Partager ses pratiques, puis garder le fil rouge de la formation.</p><div class="tiles "><a class="tile start" href="echange-pratiques/index.html"><span class="k">Atelier collectif · 60 min maximum</span><h3>Échange de pratiques</h3><p>Quatre ou cinq enseignants présentent chacun un projet en 10 à 15 minutes, puis on passe au suivant.</p><span class="go">Ouvrir →</span></a><a class="tile " href="bilan-formation/index.html" target="_blank" rel="noopener"><span class="k">Diaporama de clôture</span><h3>Bilan de la formation</h3><p>Cinq idées qui traversent tous les modules, et une question à emporter : qu’est-ce que je fais lundi ?</p><span class="go">Ouvrir le diaporama →</span></a></div></section>
-<section class="group"><h2>Nos sites en ligne</h2><p class="sub">Deux sites compagnons de la formation, à garder sous la main.</p><div class="tiles "><a class="tile " href="https://xseorkly.github.io/fablab-en-classe/" target="_blank" rel="noopener"><span class="k">Site · accès par mot de passe</span><h3>Le FabLab en classe</h3><p>47 fiches de la PS à la 3e, 66 situations, 174 matériels, et le dossier de formation de 3 heures. « Faire pour apprendre, apprendre pour faire ». Mot de passe donné en formation.</p><span class="go">Ouvrir le site ↗</span></a><a class="tile " href="https://xseorkly.github.io/programme2/" target="_blank" rel="noopener"><span class="k">Site · cycle 4</span><h3>Maîtriser les programmes et ressources pédagogiques</h3><p>Du programme 2024 à la séquence, aux ressources et à l’évaluation : progressivité, fiches de connaissances, recherche parmi plus de 250 ressources.</p><span class="go">Ouvrir le site ↗</span></a></div></section>
-<section class="group"><h2>Ressources &amp; Cie</h2><p class="sub">Le dossier partagé : séquences, académies, TraAM, IA, objets connectés.</p><div class="tiles one"><a class="tile start" href="ressources/index.html"><span class="k">Dossier Google Drive</span><h3>Ressources &amp; Cie</h3><p>Les liens du Drive présentés par thème, prêts à ouvrir.</p><span class="go">Ouvrir →</span></a></div></section>
-<div class="deposit2"><div><h2>Déposer vos travaux</h2><p>Transmettez une production réalisée pendant un atelier (PDF, synthèse, fiche projet). Les dépôts sont classés dans le répertoire Formation.</p></div><a class="btn primary" href="../depot-formation.html" target="_blank" rel="noopener noreferrer">Déposer dans Formation ↗</a></div>
-<div class="footer"><a href="../index.html">← Retour au site Technologie 3e</a> · <button id="logout" class="btn outline" type="button">Fermer l’accès</button></div>
-</section></main>
-<script>const HASH='f0c5b979866566c0932b9a5d220d0e74c9743bab0731dd34a89911dd3817c9c2';const KEY='formation_teachers_unlocked_v1';
+<section class="hero">
+<div class="txt">
+<span class="chip">Formation 2026-2027</span>
+<h1>Vivre la tâche comme vos élèves, puis en faire des choix.</h1>
+<p class="lead">Observer ce qui s’y joue, puis en faire des choix pédagogiques. Choisissez une branche de l’arbre : chaque atelier est une carte à retourner.</p>
+<p class="who">Fehmi KLABI · Professeur de technologie · Formateur · Conseiller pédagogique</p>
+</div>
+<div class="sun" aria-hidden="true"><i></i><i></i><svg width="110" height="110" viewBox="0 0 24 24" fill="none" stroke="#1D1A16" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"/></svg></div>
+</section>
+
+<div id="login" class="lockbox"><span class="meta">Votre espace formation</span><h2>Entrer dans la formation</h2><p class="small">Saisissez le code communiqué pendant la formation.</p><form id="form"><label for="code"><strong>Code d’accès</strong></label><input id="code" type="password" autocomplete="off" placeholder="Code formation"><button class="btn primary" type="submit">Entrer →</button><p class="error" id="err" hidden>Code incorrect. Vérifiez la saisie.</p></form><p class="small" id="retour-info" hidden>Après la saisie du code, la page demandée s’ouvrira directement.</p><p class="small">Le code est mémorisé sur ce navigateur : vous ne le saisissez qu’une fois. « Fermer l’accès », en haut de page, l’efface.</p></div>
+
+<section id="hub" class="hidden">
+<div class="intent"><span class="q" aria-hidden="true">?</span><div><p><strong>Pourquoi la tâche vient-elle avant l’explication ?</strong></p><p>Certaines tâches sont proposées <strong>avant l’explication</strong>, là où vos élèves buteront. Vous les vivez pour observer ce qui s’y joue : les représentations, les stratégies, les obstacles. La difficulté n’est jamais le but : elle sert à penser, expliquer et reconstruire un modèle plus solide.</p></div></div>
+
+<nav aria-label="L’arbre des ateliers">
+<div class="tree" id="tree"><svg id="links" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true"></svg><div class="trunk"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FBF6EC" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V12M12 12C12 8 9 6 5 6c0 4 3 6 7 6zM12 12c0-4 3-6 7-6 0 4-3 6-7 6zM12 8V2"/></svg><b>Formation<br>Techno</b><small id="nb"></small></div></div>
+<div class="pills" id="pills"></div>
+</nav>
+
+<section class="panel" id="panel" aria-live="polite">
+<div class="phead" id="phead"><span class="ico" id="pico"></span><div class="txt"><h2 id="ptitle"></h2><p id="psub"></p></div><span class="count" id="pcount"></span></div>
+<div class="cards" id="cards"></div>
+</section>
+
+<div class="deposit"><div class="l"><span class="up" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1D1A16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg></span><div><h2>Déposer vos travaux</h2><p>Transmettez une production réalisée pendant un atelier (PDF, synthèse, fiche projet). Les dépôts sont classés dans le répertoire Formation.</p></div></div><a class="btn" href="../depot-formation.html" target="_blank" rel="noopener noreferrer">Déposer dans Formation ↗</a></div>
+<div class="footer"><a class="btn light" href="../index.html">← Retour au site Technologie 3e</a></div>
+</section>
+</main>
+
+<script>
+/* ---------- Contenu de l'arbre : une branche = une rubrique, un outil = une carte ---------- */
+const I={flag:'M4 22V4M4 4h13l-2.5 4L17 12H4',info:'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 16v-4M12 8h.01',route:'M6 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM6 17V10a3 3 0 0 1 3-3h7M18 7v7a3 3 0 0 1-3 3H8',bulb:'M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V16h8v-1.3A7 7 0 0 0 12 2z',cpu:'M6 6h12v12H6zM9.5 9.5h5v5h-5zM9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4',bot:'M5 9h14v11H5zM12 5v4M12 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM9 13.5h.01M15 13.5h.01M9.5 17h5M2 13v3M22 13v3',check:'M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0zM8 12l3 3 5-6',users:'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8',calendar:'M4 5h16v16H4zM4 10h16M9 3v4M15 3v4',book:'M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5zM4 19.5V21h16',star:'M12 2l3 7h7l-5.5 4.5 2 7.5-6.5-4-6.5 4 2-7.5L2 9h7z',flask:'M9 2h6M10 2v7L4 20a1 1 0 0 0 1 2h14a1 1 0 0 0 1-2l-6-11V2M7 15h10',net:'M12 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM5 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM19 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 9v4M12 13l-6 4M12 13l6 4',chart:'M3 3v18h18M7 15l4-4 3 3 6-7',gear:'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1',brain:'M9 3a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 6 2V5a2 2 0 0 0-3-2zM15 3a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-6 2',box:'M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10',wrench:'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z',wifi:'M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 20h.01',chat:'M21 12a8 8 0 0 1-11.5 7.2L3 21l1.8-6.5A8 8 0 1 1 21 12z',slides:'M2 3h20v14H2zM12 17v4M8 21h8M7 8h6M7 12h10',globe:'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20',rocket:'M5 15c-1.5 1.3-2 5-2 5s3.7-.5 5-2M12 15l-3-3a22 22 0 0 1 2-4A13 13 0 0 1 22 2c0 2.7-.8 7.5-6 11a22 22 0 0 1-4 2zM9 12H4s.5-3 2-4c1.6-1.1 5 0 5 0M12 15v5s3-.5 4-2c1.1-1.6 0-5 0-5',download:'M12 3v12M7 10l5 5 5-5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2',link:'M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7',folder:'M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'};
+const B=[
+{id:'commencer',name:'Pour commencer',icon:I.flag,color:'#FFD9C7',sub:'Se présenter, puis entrer dans le programme par l’objet.',tools:[
+{t:'Le stylo tourne',m:'Brise-glace · 20 à 25 min',i:I.users,d:'Un stylo, seize questions tirées au sort, deux jokers : chacun se présente en répondant, et le groupe parcourt les trois thèmes du programme de cycle 4.',h:'brise-glace/index.html',g:'Lancer le brise-glace'},
+{t:'Atelier d’ouverture',m:'Ensuite · 90 min',i:I.box,d:'Que faire apprendre en 3e avec cet objet ? Découvrir le nouveau programme sans commencer par sa lecture.',h:'atelier-ouverture/index.html',g:'Commencer'}]},
+{id:'informations',name:'Informations',icon:I.info,color:'#FFF0B8',sub:'Pour s’informer : les nouveaux programmes, les classes CHAMS, le parcours ASTROTECH, le concours général du collège et le DNB 2027.',tools:[
+{t:'Les nouveaux programmes de technologie',m:'Nouveaux programmes · Diaporama à projeter',i:I.slides,d:'Le programme de cycle 4, ce qui change depuis 2020, comment l’enseigner et le DNB 2027 : 38 diapositives avec les notes du formateur, à projeter ou télécharger.',h:'nouveaux-programmes/index.html',g:'Projeter'},
+{t:'Les classes CHAMS',m:'Information',i:I.calendar,d:'Classes à horaires aménagés en mathématiques et sciences : principe, calendrier, place de la technologie, exemple « Une classe au frais ».',h:'chams/index.html',g:'Ouvrir'},
+{t:'ASTROTECH · Astronomie et technologies',m:'Ressource · CM1 → 3e',i:I.star,d:'Parcours interdisciplinaire sciences et technologie : six séquences, de l’ombre d’un bâton au rover autonome, en deux démarches (comprendre, puis concevoir), avec simulateurs et dossiers enseignants.',h:'astrotech/index.html',g:'Découvrir'},
+{t:'Le concours général du collège',m:'Information',i:I.flag,d:'Nouveau en 2026-2027 : cinq épreuves en 3e, dont informatique, technologie et numérique. Inscriptions du 12 octobre au 19 novembre, sujet zéro.',h:'concours-general-college/index.html',g:'Ouvrir'},
+{t:'Préparer le concours général · ITN',m:'Accès libre · Préparation',i:I.book,d:'Présentation du concours, niveau d’exigence, ce qu’il faut savoir, sujet zéro corrigé et deux sujets d’entraînement en PDF (énoncés et corrigés). Lien à partager sans code.',h:'../cg/index.html',g:'Ouvrir'},
+{t:'DNB 2027 · Nouveautés',m:'Information',i:I.check,d:'Note de service, nouvelle organisation des épreuves, sujet de référence de technologie.',h:'dnb-2027/index.html',g:'Ouvrir'},
+{t:'À essayer en classe',m:'Nouveaux outils à tester',i:I.flask,d:'Simulateur réseau : construire et tester un réseau en ligne. CapyCAD : CAO 3D libre dans le navigateur. La Ressourcerie : les applications créées par des collègues pour la technologie.',h:'outils-a-tester/index.html',g:'Ouvrir'}]},
+{id:'parcours',name:'Parcours didactiques',icon:I.route,color:'#CDEBD9',sub:'Un atelier de 105 min : chaque table travaille un atelier en trois tours de 20 min, puis chaque table présente son bilan. Les parcours complets (8 h) restent disponibles en autoformation.',tools:[
+{t:'Trois ateliers, une question',m:'Atelier collectif · 105 min · 3 ateliers + bilan',i:I.users,d:'À quel moment la difficulté aide-t-elle à apprendre, et à quel moment empêche-t-elle de penser ?',h:'ateliers-didactiques/index.html',g:'Lancer l’atelier'},
+{t:'Réseaux',m:'Parcours complet · 8 h',i:I.net,d:'Internet, adressage, DNS, routage : comprendre et enseigner les réseaux.',h:'reseaux/index.html',g:'Ouvrir'},
+{t:'Données & décision',m:'Parcours complet · 8 h',i:I.chart,d:'Capteurs, seuils, IA, biais : quand la donnée nous trompe.',h:'donnees-decision/index.html',g:'Ouvrir'},
+{t:'Analyse fonctionnelle & SysML',m:'Parcours complet · 8 h',i:I.gear,d:'À partir d’une visseuse sans fil : un objet simple… vraiment ?',h:'visseuse-sysml/index.html',g:'Ouvrir'}]},
+{id:'explicite',name:'Explicite & implicite',icon:I.book,color:'#D6E8F7',sub:'Repère didactique : ce qui distingue vraiment les deux démarches, illustré par une serre connectée.',tools:[
+{t:'Enseignement explicite, démarche implicite',m:'Module court · Ressource pédagogique',i:I.book,d:'Définitions, différences réelles, impact sur le savoir et sur la classe, une séance de serre automatisée minute par minute, une grille de visite-conseil et un atelier entre pairs.',h:'investigation-explicitation/index.html',g:'Consulter le document'},
+{t:'Diaporama interactif',m:'23 diapositives · Projection directe',i:I.slides,d:'La même démarche illustrée diapositive par diapositive, avec les notes du formateur (touche N), navigation au clavier et impression PDF.',h:'investigation-explicitation/diaporama.html',g:'Lancer le diaporama'}]},
+{id:'pratiques',name:'Faire évoluer ses pratiques',icon:I.bulb,color:'#E2EDC9',sub:'Des modules courts pour prendre du recul sur ses séquences.',tools:[
+{t:'Expertiser une séquence',m:'Atelier collectif · 90 min',i:I.check,d:'Vous héritez d’une séquence : que gardez-vous, que changez-vous, et pourquoi ?',h:'expertise-sequence/index.html',g:'Ouvrir'},
+{t:'Évaluer pour faire apprendre',m:'Atelier collectif · 90 min · Évaluation',i:I.chart,d:'Où, quand et comment évaluer ? Construisez deux évaluations, justifiez leur place dans la séquence et présentez-les aux autres groupes.',h:'projet-conception/index.html',g:'Ouvrir'},
+{t:'Sciences cognitives',m:'Ressource',i:I.brain,d:'Comprendre le travail mental de l’élève : charge cognitive, feedback, transfert.',h:'sciences-cognitives/index.html',g:'Ouvrir'},
+{t:'Le FabLab à 5 €',m:'Atelier collectif · 90 min · FabLab sans machines',i:I.box,d:'Vivre un défi porte-courrier avec du carton et 5 €, analyser ce que la manipulation fait apprendre, puis inventer d’autres projets pour la 5e, la 4e et la 3e.',h:'fablab-5-euros/index.html',g:'Vivre l’atelier'},
+{t:'Réparer, est-ce apprendre ?',m:'Atelier réflexif · 60 min',i:I.wrench,d:'Décomposer l’objet en blocs fonctionnels, formuler des hypothèses, tester pour éliminer. Quatre cas à diagnostiquer puis à enseigner.',h:'reparabilite/index.html',g:'Ouvrir l’atelier'}]},
+{id:'ia',name:'Intelligence artificielle',icon:I.cpu,color:'#F3D9EC',sub:'L’IA comme objet à enseigner et comme outil du professeur : une formation avec ateliers et une présentation sans atelier.',tools:[
+{t:'L’IA en technologie : un objet à enseigner, un outil à maîtriser',m:'Formation',i:I.cpu,d:'Didactique, pédagogie, impact sur les élèves, posture professionnelle : deux ateliers (entraîner un modèle, retravailler une séance) et des études de cas de labo.',h:'ia-technologie/index.html',g:'Ouvrir'},
+{t:'L’IA et le professeur de technologie',m:'Présentation · Sans atelier',i:I.slides,d:'Partie professeur (progressions, différenciation, outils, évaluation, correction automatisée) et partie élèves (quand utiliser l’IA, éviter la dépendance), avec le cadre d’usage.',h:'ia-technologie/presentation.html',g:'Ouvrir'}]},
+{id:'robotique',name:'Objets connectés & robotique',icon:I.bot,color:'#FFE3B3',sub:'De l’objet connecté aux robots programmables.',tools:[
+{t:'Objets connectés & IoT',m:'Parcours complet',i:I.wifi,d:'De l’architecture d’un objet connecté à la classe IoT.',h:'objets-connectes/index.html',g:'Ouvrir'},
+{t:'Maqueen & MakeCode',m:'Aucun prérequis · 20 activités',i:I.bot,d:'Du premier programme à la situation-problème en classe. Comparaison avec mBot et mBot2.',h:'maqueen/index.html',g:'Ouvrir'},
+{t:'mBot2 & mBlock 5',m:'Aucun prérequis · 16 fiches',i:I.gear,d:'Chaque programme expliqué bloc par bloc, en mots simples.',h:'mbot2/index.html',g:'Ouvrir'},
+{t:'Concevoir une situation où les élèves réfléchissent et apprennent',m:'Atelier collectif · 90 min',i:I.bulb,d:'Problème posé, compétences du programme, parcours, évaluation par critères observables, exercice type DNB. Conducteur, fiche de conception, trois exemples remplis.',h:'atelier-conception/index.html',g:'Ouvrir l’atelier'}]},
+{id:'osi',name:'Olympiades des SI',icon:I.star,color:'#D3EEF0',sub:'Olympiades des Sciences de l’Ingénieur : préparer et cadrer les projets.',tools:[
+{t:'Thématique Santé',m:'Atelier collectif · 60 min',i:I.check,d:'Cadrer avant de concevoir : limites, données sensibles, décisions collectives.',h:'osi-sante/index.html',g:'Ouvrir'}]},
+{id:'bruxelles',name:'Lycée français de Bruxelles',icon:I.globe,color:'#FBD5D5',sub:'Projet de technologie en classe de 3e avec Minecraft Education, conforme au programme de cycle 4 (BO n°9 du 29 février 2024).',tools:[
+{t:'Mission Nouvelle Terre',m:'Projet 3e · 10 épisodes · 36 séances',i:I.rocket,d:'2075 : concevoir une station humaine sur la Lune. Dix épisodes racontés par un équipage, la vraie science de l’espace, des plans, de la redstone, du Code Builder, des badges et une évaluation tous les deux défis.',h:'lycee-francais-bruxelles/mission-nouvelle-terre/index.html',g:'Ouvrir le projet'},
+{t:'Fiches professeur et évaluations',m:'Espace professeur · Accès libre',i:I.book,d:'Diagnostic, programme 2024, matrice de couverture, dix fiches professeur avec corrigés, évaluations type DNB, missions pratiques, DNB blanc.',h:'lycee-francais-bruxelles/mission-nouvelle-terre/espace-professeur.html',g:'Ouvrir'},
+{t:'Les 5 QCM PRONOTE',m:'Téléchargement · XML PRONOTE',i:I.download,d:'Un QCM de 20 questions par paire de défis, au format XML Moodle, à importer dans PRONOTE.',h:'lycee-francais-bruxelles/mission-nouvelle-terre/espace-professeur.html#qcm-telechargement',g:'Télécharger'}]},
+{id:'sites',name:'Sites & ressources',icon:I.link,color:'#EDE3D2',sub:'Deux sites compagnons de la formation, et le dossier partagé.',tools:[
+{t:'Le FabLab en classe',m:'Site · accès par mot de passe',i:I.box,d:'47 fiches de la PS à la 3e, 66 situations, 174 matériels, et le dossier de formation de 3 heures. Mot de passe donné en formation.',h:'https://xseorkly.github.io/fablab-en-classe/',g:'Ouvrir le site ↗',x:1},
+{t:'Maîtriser les programmes et ressources pédagogiques',m:'Site · cycle 4',i:I.route,d:'Du programme 2024 à la séquence, aux ressources et à l’évaluation : progressivité, fiches de connaissances, recherche parmi plus de 250 ressources.',h:'https://xseorkly.github.io/programme2/',g:'Ouvrir le site ↗',x:1},
+{t:'Ressources & Cie',m:'Dossier Google Drive',i:I.folder,d:'Séquences, académies, TraAM, IA, objets connectés : les liens du Drive présentés par thème, prêts à ouvrir.',h:'ressources/index.html',g:'Ouvrir'}]},
+{id:'cloturer',name:'Pour clôturer',icon:I.check,color:'#E4DDF3',sub:'Partager ses pratiques, puis garder le fil rouge de la formation.',tools:[
+{t:'Échange de pratiques',m:'Atelier collectif · 60 min maximum',i:I.chat,d:'Quatre ou cinq enseignants présentent chacun un projet en 10 à 15 minutes, puis on passe au suivant.',h:'echange-pratiques/index.html',g:'Ouvrir'},
+{t:'Bilan de la formation',m:'Diaporama de clôture',i:I.slides,d:'Cinq idées qui traversent tous les modules, et une question à emporter : qu’est-ce que je fais lundi ?',h:'bilan-formation/index.html',g:'Ouvrir le diaporama',x:1}]}
+];
+
+/* ---------- Construction de l'arbre ---------- */
+const NS='http://www.w3.org/2000/svg';
+const svgIco=(d,s,w)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="#1D1A16" stroke-width="${w||1.7}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+const tree=document.getElementById('tree'),links=document.getElementById('links'),pills=document.getElementById('pills');
+document.getElementById('nb').textContent=B.length+' branches';
+const cx=500,cy=300,rx=420,ry=250,nodes=[],paths=[],pillEls=[];
+B.forEach((b,i)=>{
+  const a=-Math.PI/2+i*2*Math.PI/B.length,x=cx+rx*Math.cos(a),y=cy+ry*Math.sin(a);
+  const mx=cx+(x-cx)*.5+(y-cy)*.18,my=cy+(y-cy)*.5-(x-cx)*.18;
+  const p=document.createElementNS(NS,'path');p.setAttribute('d',`M${cx} ${cy} Q${mx.toFixed(1)} ${my.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}`);p.setAttribute('vector-effect','non-scaling-stroke');links.appendChild(p);paths.push(p);
+  const n=document.createElement('button');n.type='button';n.className='node';n.style.left=(x/10)+'%';n.style.top=(y/6)+'%';
+  n.innerHTML=`<span class="disc" style="background:${b.color}">${svgIco(b.icon,40)}</span><span class="lbl">${esc(b.name)}</span>`;
+  n.addEventListener('click',()=>choisir(b.id,true));tree.appendChild(n);nodes.push(n);
+  const q=document.createElement('button');q.type='button';q.className='pill';q.style.background=b.color;
+  q.innerHTML=`<span class="dot">${svgIco(b.icon,18,2)}</span>${esc(b.name)}`;q.addEventListener('click',()=>choisir(b.id,true));pills.appendChild(q);pillEls.push(q);
+});
+
+function choisir(id,scroll){
+  const k=Math.max(0,B.findIndex(b=>b.id===id)),b=B[k];
+  nodes.forEach((n,i)=>{const on=i===k;n.classList.toggle('on',on);n.setAttribute('aria-pressed',on);n.classList.remove('spin');
+    paths[i].setAttribute('stroke',on?'#C2410C':'#1D1A16');paths[i].setAttribute('stroke-width',on?5:2.5);paths[i].setAttribute('stroke-dasharray',on?'0':'2 9')});
+  void nodes[k].offsetWidth;nodes[k].classList.add('spin');
+  pillEls.forEach((q,i)=>q.setAttribute('aria-pressed',i===k));
+  document.getElementById('phead').style.background=b.color;
+  document.getElementById('pico').innerHTML=svgIco(b.icon,40);
+  document.getElementById('ptitle').textContent=b.name;
+  document.getElementById('psub').textContent=b.sub;
+  document.getElementById('pcount').textContent=b.tools.length+(b.tools.length>1?' ateliers':' atelier');
+  const cards=document.getElementById('cards');cards.innerHTML='';
+  b.tools.forEach(t=>{
+    const c=document.createElement('div');c.className='fc';
+    const ext=t.x?' target="_blank" rel="noopener"':'',go=/[↗→]$/.test(t.g)?t.g:t.g+' →';
+    c.innerHTML=`<div class="in"><button type="button" class="face front" aria-label="Retourner la carte : ${esc(t.t)}"><span class="ico" style="background:${b.color}">${svgIco(t.i,32)}</span><span class="meta">${esc(t.m)}</span><h3>${esc(t.t)}</h3><span class="hint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/></svg>Retourner</span></button><div class="face back"><button type="button" class="turn" aria-label="Revenir au recto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg></button><h3>${esc(t.t)}</h3><p>${esc(t.d)}</p><a class="open" href="${esc(t.h)}"${ext}>${esc(go)}</a></div></div>`;
+    const flip=()=>c.classList.toggle('flip');
+    c.querySelector('.front').addEventListener('click',flip);c.querySelector('.turn').addEventListener('click',flip);
+    cards.appendChild(c);
+  });
+  if(location.hash.slice(1)!==b.id)history.replaceState(null,'','#'+b.id);
+  if(scroll&&window.matchMedia('(max-width:860px)').matches)document.getElementById('panel').scrollIntoView({behavior:'smooth'});
+}
+/* Anciens liens vers une rubrique (#intelligence-artificielle, #lycee-francais-bruxelles…) */
+const alias={'intelligence-artificielle':'ia','lycee-francais-bruxelles':'bruxelles','investigation-explicitation':'explicite'};
+const h=location.hash.slice(1);choisir(alias[h]||h||'commencer',false);
+
+/* ---------- Accès par code (inchangé) ---------- */
+const HASH='f0c5b979866566c0932b9a5d220d0e74c9743bab0731dd34a89911dd3817c9c2';const KEY='formation_teachers_unlocked_v1';
 async function hash(s){const d=new TextEncoder().encode(s);const h=await crypto.subtle.digest('SHA-256',d);return [...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,'0')).join('')}
 function memorise(){try{return localStorage.getItem(KEY)==='1'||sessionStorage.getItem(KEY)==='1'}catch(e){return false}}
 function memoriser(){try{localStorage.setItem(KEY,'1')}catch(e){}try{sessionStorage.setItem(KEY,'1')}catch(e){}}
 function oublier(){try{localStorage.removeItem(KEY)}catch(e){}try{sessionStorage.removeItem(KEY)}catch(e){}}
-/* Page demandée avant la saisie du code : acceptée seulement si elle est dans l'espace formation. */
 function retour(){const r=new URLSearchParams(location.search).get('retour');if(!r)return null;try{const u=new URL(r,location.origin);const base=new URL('.',location.href).pathname;if(u.origin===location.origin&&u.pathname.startsWith(base)&&u.pathname!==location.pathname&&u.pathname!==base)return u.pathname+u.search+u.hash}catch(e){}return null}
-function show(){document.getElementById('login').classList.add('hidden');document.getElementById('hub').classList.remove('hidden')}
+function show(){document.getElementById('login').classList.add('hidden');document.getElementById('hub').classList.remove('hidden');document.getElementById('logout').classList.remove('hidden')}
 function entrer(){const r=retour();if(r)location.replace(r);else show()}
 if(retour())document.getElementById('retour-info').hidden=false;
 if(memorise())entrer();
 document.getElementById('form').addEventListener('submit',async e=>{e.preventDefault();if(await hash(document.getElementById('code').value.trim())===HASH){memoriser();entrer()}else document.getElementById('err').hidden=false});
-document.getElementById('logout').addEventListener('click',()=>{oublier();location.replace(location.pathname)});</script>
+document.getElementById('logout').addEventListener('click',()=>{oublier();location.replace(location.pathname)});
+</script>
 </body></html>
