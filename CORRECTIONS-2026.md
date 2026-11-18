@@ -43,6 +43,12 @@ Moteur : `assets/evaluation.js`, styles dans `assets/site-addons.css`.
 - Ancienne partie 3 analyse du routage déplacée en `seq2-act1-p4.html` (mot de passe inchangé : `Chemin2C`).
 - Mot de passe de la nouvelle partie 2 : `Adresse2B`.
 
+### Partie 2 refaite pour 23 élèves — novembre 2026
+- Nouveau déroulé : 3 îlots (7 + 7 + 6 élèves) et 3 élèves routeurs ; pendant l’étape du débit, les routeurs deviennent chronométreur, clap et compteur.
+- La page publique n’utilise que des prénoms fictifs (Léa, Noah, Youssef, Inès, Emma, Adam). Les vrais prénoms de la classe figurent uniquement dans les documents chiffrés.
+- Nouvelles illustrations : `img/seq2-act1-p2-*.png`. Correction réécrite (même mot de passe élève).
+- Espace professeur en bas de la page : guide professeur, fiche élève et kit à imprimer (Word et PDF), chiffrés en AES-GCM dans `assets/seq2-docs/` et déchiffrés dans le navigateur. Le mot de passe professeur n’est volontairement écrit nulle part dans le dépôt.
+
 
 ## Séquence 5 — Réinventer le porte-courrier
 - Ajout de 7 séances interactives : besoin, contexte/cas d’utilisation, Ishikawa 6M, cahier des charges, idéation/matrice de décision, croquis & Tinkercad, tests/amélioration/pitch.
