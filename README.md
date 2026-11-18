@@ -26,6 +26,7 @@ techno-3e/
 │   │   arrosage-capteur-niveau-eau.hex, enregistrer-des-donnees.hex
 │   ├── MY_DATA.csv        ← 48 h de relevés, séance 5
 │   └── montre-connectee.csv (biais et limites)
+├── assets/seq2-docs/ ← documents professeur de la partie 2, chiffrés (mot de passe professeur)
 ├── outils/
 │   ├── aide-reseau.html    ← fiche d'aide réseau (vocabulaire, Filius, calculs)
 │   ├── reseau-simple.html  ← trajet d'un paquet et tables de routage

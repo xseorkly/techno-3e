@@ -380,6 +380,30 @@ table.routage th{background:var(--teal-pale);color:var(--teal);font-family:"Arch
 @media print{.pager{display:none!important}}
 </style>
 
+<style id="p2-23eleves">
+.note-fictif{font-size:13.5px;color:#5A6C71;font-style:italic;margin-top:8px}
+.sous-titre{margin:22px 0 8px}
+.fig{margin:14px 0;text-align:center}.fig img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--trait,#D2DEDE);background:#fff}.fig.petite img{max-width:520px}
+.fig figcaption{font-size:13.5px;color:#5A6C71;margin-top:6px}
+.regles-jeu{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:12px 0}
+.regles-jeu>div{background:#FFF8E6;border:1px solid #F0D9A0;border-radius:10px;padding:11px 13px;font-size:14.5px}.regles-jeu b{display:block;margin-bottom:4px;color:#7A5A00}
+.trajet-sel{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0;font-weight:700}
+.trajet-sel select{padding:8px 10px;border:1px solid var(--trait,#D2DEDE);border-radius:8px;font:inherit;min-width:70px;background:#fff}
+.trajet-sel .noeud{padding:7px 12px;border-radius:8px;color:#fff}.trajet-sel .noeud.a{background:#2E86AB}.trajet-sel .noeud.c{background:#3A9D5D}
+.tab-debit{width:100%;border-collapse:collapse;margin:6px 0 12px}.tab-debit th,.tab-debit td{border:1px solid var(--trait,#D2DEDE);padding:7px;text-align:center}
+.tab-debit thead th{background:#FCEBDB;font-size:13.5px}.tab-debit input{width:100%;max-width:120px;padding:7px;border:1px solid var(--trait,#D2DEDE);border-radius:7px;font:inherit;text-align:center}
+.bonus-defi{margin-top:14px;padding:12px;background:#FFF8E6;border-radius:10px;border:1px dashed #E0B84C}
+.docsprof{margin:26px 0;padding:20px 22px;border:2px solid #5B3E96;border-radius:14px;background:#F6F2FB}
+.docsprof h2{color:#5B3E96;margin-top:0}.docsprof .saisie{display:flex;gap:8px;flex-wrap:wrap}
+.docsprof .saisie input{flex:1;min-width:200px;padding:10px 12px;border:1px solid #C9BCE0;border-radius:8px;font:inherit}
+.docsprof button{padding:9px 16px;border:0;border-radius:8px;background:#5B3E96;color:#fff;font:inherit;font-weight:700;cursor:pointer}.docsprof button:disabled{opacity:.6;cursor:wait}
+.docs-liste{margin-top:14px}.doc-ligne{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:#fff;border:1px solid #DDD2EE;border-radius:10px;padding:12px 14px;margin:8px 0}
+.doc-ligne span{display:block;font-size:13.5px;color:#5A6C71}.doc-btns{display:flex;gap:6px}
+.docs-etat{font-size:13.5px;color:#5A6C71;min-height:1em}
+.docsprof [hidden]{display:none!important}
+#bilan .qcm label{display:flex;gap:10px;align-items:flex-start;margin:7px 0;cursor:pointer}#bilan .qcm .lt{font-weight:700;min-width:1.2em}
+@media print{.docsprof{display:none}}
+</style>
 </head>
 <body>
 
@@ -442,7 +466,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="cycle"><span class="lab">Cycle 4</span><span class="niv">5</span><span class="niv">4</span><span class="niv actif">3</span></div>
     <div class="marque"><img src="img/logo-lfv.png" alt="Lycée français de Vienne" onerror="this.remove()"><p class="fil">Technologie · Séquence 2 · Activité 1</p></div>
     <h1 class="titre">Les chemins de l'information — partie 2 : le réseau postal de la classe</h1>
-    <p class="sous">Adresse IP · table de routage · débit · activité sans ordinateur · 55 min</p>
+    <p class="sous">Adresse IP · table de routage · débit · activité sans ordinateur pour 23 élèves · 55 min</p>
     <nav class="chrono" id="chrono" aria-label="Étapes de l'activité">
       <a href="#mission"><b>5′</b>Mission</a><a href="#ip"><b>12′</b>Adresse IP</a><a href="#routage"><b>15′</b>Routage</a><a href="#debit"><b>10′</b>Débit</a><a href="#defi"><b>8′</b>Défi</a><a href="#bilan"><b>5′</b>Bilan</a><a href="#entrainement"><b>bonus</b>Entraînement</a>
     </nav>
@@ -453,7 +477,7 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="champ"><label for="prenom">Prénom</label><input id="prenom" autocomplete="given-name"></div>
     <div class="champ"><label for="classe">Classe</label><input id="classe" placeholder="3e A"></div>
     <div class="champ"><label for="groupe">Groupe</label><input id="groupe"></div>
-    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role" placeholder="routeur, expéditeur, chronométreur…"></div>
+    <div class="champ"><label for="role">Rôle dans le groupe</label><input id="role" placeholder="îlot A, routeur R2, porteur…"></div>
     <div class="champ"><label for="date">Date</label><input id="date" type="date"></div>
   </section>
 
@@ -464,8 +488,9 @@ document.getElementById("navfiches").addEventListener("change", function(){
 
   <section class="hero-probleme" id="mission">
     <h2>Mission — faire voyager un « colis numérique »</h2>
-    <p>Un élève du <strong>réseau A</strong> doit envoyer un message à un élève du <strong>réseau C</strong>. Vous n’avez pas d’ordinateur : la classe va devenir le réseau.</p>
+    <p><strong>Léa</strong>, dans le <strong>réseau A</strong>, doit envoyer un message à <strong>Emma</strong>, dans le <strong>réseau C</strong>. Vous n’avez pas d’ordinateur : <strong>la classe devient le réseau</strong>.</p>
     <p><strong>Question :</strong> comment le colis sait-il <em>à qui</em> aller, <em>par où</em> passer et <em>combien de colis</em> peuvent circuler en même temps ?</p>
+    <p class="note-fictif">Dans cette fiche en ligne, Léa, Noah, Youssef, Inès, Emma et Adam sont des personnages fictifs. En classe, ta carte d’adresse porte ton prénom.</p>
   </section>
 
   <div class="analogie-grid" aria-label="Les analogies de l'activité">
@@ -477,86 +502,112 @@ document.getElementById("navfiches").addEventListener("change", function(){
     <div class="analogie"><div class="ico">🚚🚚🚚</div><b>Débit</b><span>Comme la capacité d’une route : combien de colis passent pendant un temps donné.</span></div>
   </div>
 
-  <div class="sansordi"><b>Matériel du groupe :</b> 10 à 12 petites enveloppes ou cartes « paquet », 3 feuilles « Routeur R1 / R2 / R3 », un chronomètre et cette fiche imprimée. Les élèves jouent les appareils et les routeurs.</div>
+  <h3 class="sous-titre">La classe devient un réseau</h3>
+  <figure class="fig"><img src="img/seq2-act1-p2-plan-salle.png" alt="Plan de la salle : trois îlots de tables (îlot A réseau 192.168.1.x avec 7 élèves, îlot B réseau 192.168.2.x avec 7 élèves, îlot C réseau 192.168.3.x avec 6 élèves) reliés à trois routeurs R1, R2 et R3 placés en ligne."><figcaption>3 îlots = 3 réseaux. 20 élèves dans les îlots et 3 élèves routeurs. R1 et R3 ne se parlent pas : tout passe par R2.</figcaption></figure>
+  <div class="regles-jeu">
+    <div><b>🪪 Ta carte d’adresse</b>Pose-la devant toi, bien visible. Elle indique ton réseau (îlot) et ton numéro d’appareil.</div>
+    <div><b>🤐 Règle d’or</b>Interdit de dire les prénoms ! Une enveloppe circule seulement grâce aux adresses écrites dessus.</div>
+    <div><b>✉️ Les enveloppes</b>Chaque paquet porte deux adresses : « De » (la source) et « Pour » (la destination).</div>
+  </div>
+  <div class="qbox"><h3>Ma place dans le réseau</h3>
+    <div class="qrow"><label for="ma-place">Je suis…</label><select id="ma-place"><option value="">Choisir…</option><option>dans l’îlot A (réseau 1)</option><option>dans l’îlot B (réseau 2)</option><option>dans l’îlot C (réseau 3)</option><option>le routeur R1</option><option>le routeur R2</option><option>le routeur R3</option></select></div>
+    <div class="qrow"><label for="mon-ip">Mon adresse IP (écrite sur ma carte)</label><input id="mon-ip" placeholder="192.168.…" inputmode="decimal" autocomplete="off"></div>
+  </div>
 
   <article class="bloc" id="ip"><div class="marge"><span class="duree">12′</span></div><div class="corps">
     <h2>1 — Adresse IP : « À quelle adresse dois-je livrer ? »</h2>
-    <p class="amorce">Dans notre modèle, chaque quartier est un réseau en <strong>/24</strong>. Les trois premiers nombres indiquent le réseau ; le dernier différencie les appareils de ce réseau.</p>
+    <p class="amorce">Chaque îlot est un réseau en <strong>/24</strong> : les trois premiers nombres indiquent le <strong>réseau</strong>, le dernier indique l’<strong>appareil</strong> dans ce réseau.</p>
+    <figure class="fig petite"><img src="img/seq2-act1-p2-adresse-ip.png" alt="L'adresse 192.168.1.4 découpée : 192.168.1 désigne le réseau, 4 désigne l'appareil."></figure>
     <div class="ip-neighborhoods">
-      <div class="quartier"><h4>Quartier / réseau A</h4><div class="ip-card">Léa<code>192.168.1.4</code></div><div class="ip-card">Noah<code>192.168.1.9</code></div></div>
-      <div class="quartier"><h4>Quartier / réseau B</h4><div class="ip-card">Youssef<code>192.168.2.7</code></div><div class="ip-card">Inès<code>192.168.2.12</code></div></div>
-      <div class="quartier"><h4>Quartier / réseau C</h4><div class="ip-card">Emma<code>192.168.3.8</code></div><div class="ip-card">Adam<code>192.168.3.15</code></div></div>
+      <div class="quartier"><h4>Îlot A — réseau 1</h4><div class="ip-card">Léa<code>192.168.1.4</code></div><div class="ip-card">Noah<code>192.168.1.9</code></div></div>
+      <div class="quartier"><h4>Îlot B — réseau 2</h4><div class="ip-card">Youssef<code>192.168.2.7</code></div><div class="ip-card">Inès<code>192.168.2.12</code></div></div>
+      <div class="quartier"><h4>Îlot C — réseau 3</h4><div class="ip-card">Emma<code>192.168.3.8</code></div><div class="ip-card">Adam<code>192.168.3.15</code></div></div>
     </div>
-    <div class="sansordi"><b>Manipulation :</b> donne une enveloppe à Léa. Sur l’enveloppe, écris « destination : 192.168.2.7 ». Sans prononcer le prénom du destinataire, faites parvenir l’enveloppe au bon élève en utilisant seulement les cartes d’adresse.</div>
+    <div class="sansordi"><b>Manipulation :</b> le professeur distribue les paquets n°1, 2 et 3. Chacun reste dans <strong>son îlot</strong> (par exemple de 192.168.1.4 vers 192.168.1.9). Faites passer l’enveloppe au bon camarade <strong>sans dire de prénom</strong>, en lisant seulement les cartes. Puis demandez-vous : et si l’enveloppe devait aller dans un autre îlot ?</div>
     <div class="qbox"><h3>Je vérifie ce que j’ai compris</h3>
-      <div class="qrow"><label for="ip-dest">Qui reçoit 192.168.2.7 ?</label><select id="ip-dest"><option value="">Choisir…</option><option>Léa</option><option>Youssef</option><option>Emma</option></select></div>
-      <div class="qrow"><label for="ip-meme">Léa et Youssef sont-ils dans le même réseau ?</label><select id="ip-meme"><option value="">Choisir…</option><option>Oui</option><option>Non</option></select></div>
-      <div class="qrow"><label for="ip-double">Peut-on donner la même IP à deux appareils du même réseau en même temps ?</label><select id="ip-double"><option value="">Choisir…</option><option>Oui</option><option>Non</option></select></div>
+      <div class="qrow"><label for="ip-meme">Qui est dans le même réseau que Léa ?</label><select id="ip-meme"><option value="">Choisir…</option><option>Noah</option><option>Youssef</option><option>Emma</option></select></div>
+      <div class="qrow"><label for="ip-reseau">Dans 192.168.2.7, quelle partie désigne le réseau ?</label><input id="ip-reseau" placeholder="192.168.…" autocomplete="off"></div>
+      <div class="qrow"><label for="ip-appareil">… et quelle partie désigne l’appareil ?</label><input id="ip-appareil" autocomplete="off"></div>
+      <div class="qrow"><label for="ip-routeur">Léa envoie une enveloppe à Noah. Faut-il passer par un routeur ?</label><select id="ip-routeur"><option value="">Choisir…</option><option>Oui</option><option>Non, ils sont dans le même réseau</option></select></div>
+      <div class="qrow"><label for="ip-double">Deux appareils du même réseau peuvent-ils avoir la même adresse IP en même temps ?</label><select id="ip-double"><option value="">Choisir…</option><option>Oui</option><option>Non</option></select></div>
       <label for="ip-role"><strong>Avec tes mots : à quoi sert une adresse IP ?</strong></label><textarea id="ip-role" data-rep placeholder="Une adresse IP sert à…" aria-label="Rôle d'une adresse IP"></textarea>
     </div>
   </div></article>
 
   <article class="bloc" id="routage"><div class="marge"><span class="duree">15′</span></div><div class="corps">
     <h2>2 — Table de routage : « Vers quel centre de tri maintenant ? »</h2>
-    <p class="amorce">Un paquet destiné à un autre réseau arrive à un routeur. Le routeur ne devine pas : il consulte sa table et choisit le <strong>prochain saut</strong>.</p>
+    <p class="amorce">Un paquet destiné à un autre réseau passe par les routeurs. Un routeur ne devine pas : il lit seulement le <strong>3e nombre</strong> de l’adresse de destination, consulte sa table et choisit le <strong>prochain saut</strong>.</p>
     <div class="route-map">
-      <div class="routeur-card"><div class="rname">R1</div><table><tr><th>Destination</th><th>Envoyer vers</th></tr><tr><td>réseau 1</td><td>direct</td></tr><tr><td>réseau 2</td><td>R2</td></tr><tr><td>réseau 3</td><td>R2</td></tr></table></div>
-      <div class="arrow">→</div>
-      <div class="routeur-card"><div class="rname">R2</div><table><tr><th>Destination</th><th>Envoyer vers</th></tr><tr><td>réseau 1</td><td>R1</td></tr><tr><td>réseau 2</td><td>direct</td></tr><tr><td>réseau 3</td><td>R3</td></tr></table></div>
-      <div class="arrow">→</div>
-      <div class="routeur-card"><div class="rname">R3</div><table><tr><th>Destination</th><th>Envoyer vers</th></tr><tr><td>réseau 1</td><td>R2</td></tr><tr><td>réseau 2</td><td>R2</td></tr><tr><td>réseau 3</td><td>direct</td></tr></table></div>
+      <div class="routeur-card"><div class="rname">R1</div><table><tr><th>Destination</th><th>Envoyer vers</th></tr><tr><td>réseau 1</td><td>je livre dans l’îlot A</td></tr><tr><td>réseau 2</td><td>R2</td></tr><tr><td>réseau 3</td><td>R2</td></tr></table></div>
+      <div class="arrow">↔</div>
+      <div class="routeur-card"><div class="rname">R2</div><table><tr><th>Destination</th><th>Envoyer vers</th></tr><tr><td>réseau 1</td><td>R1</td></tr><tr><td>réseau 2</td><td>je livre dans l’îlot B</td></tr><tr><td>réseau 3</td><td>R3</td></tr></table></div>
+      <div class="arrow">↔</div>
+      <div class="routeur-card"><div class="rname">R3</div><table><tr><th>Destination</th><th>Envoyer vers</th></tr><tr><td>réseau 1</td><td>R2</td></tr><tr><td>réseau 2</td><td>R2</td></tr><tr><td>réseau 3</td><td>je livre dans l’îlot C</td></tr></table></div>
     </div>
-    <div class="role-strip"><div class="role-card"><b>Source</b>192.168.1.4</div><div class="role-card"><b>Routeur</b>R1</div><div class="role-card"><b>Routeur</b>R2</div><div class="role-card"><b>Destination</b>192.168.3.8</div></div>
-    <div class="sansordi"><b>Manipulation :</b> trois élèves deviennent R1, R2 et R3. Le paquet part de Léa vers Emma. À chaque étape, le « routeur » doit lire la destination et montrer dans sa table pourquoi il transmet au voisin choisi.</div>
-    <div class="qbox"><h3>Je suis le paquet</h3>
-      <div class="qrow"><label for="route-r1">R1 reçoit un paquet pour le réseau 3. Prochaine étape ?</label><select id="route-r1"><option value="">Choisir…</option><option>R1 le garde</option><option>R2</option><option>R3 directement</option></select></div>
-      <div class="qrow"><label for="route-r2">R2 reçoit ensuite ce paquet. Prochaine étape ?</label><select id="route-r2"><option value="">Choisir…</option><option>R1</option><option>R2 le garde</option><option>R3</option></select></div>
-      <div class="qrow"><label for="route-tout">R1 doit-il connaître par cœur tous les gestes futurs du paquet ?</label><select id="route-tout"><option value="">Choisir…</option><option>Oui</option><option>Non, il choisit surtout la prochaine étape</option></select></div>
+    <div class="sansordi"><b>Manipulation :</b> Léa (192.168.1.4) a le paquet n°4, pour 192.168.3.8. À chaque étape, le routeur qui reçoit l’enveloppe lit la destination <strong>à voix haute</strong> et montre la ligne de sa table : « réseau 3, je l’envoie à R2 ». Ensuite : paquet n°5 (Emma répond à Léa), puis n°6 (Youssef écrit à Noah).</div>
+    <div class="qbox"><h3>Je suis le paquet n°4</h3>
+      <div class="qrow"><label for="route-premier">À qui Léa donne-t-elle d’abord son enveloppe ?</label><select id="route-premier"><option value="">Choisir…</option><option>Directement à Emma</option><option>À R1, le routeur de son îlot</option><option>À R3</option></select></div>
+      <div class="trajet-sel" aria-label="Trajet du paquet n°4">
+        <span class="noeud a">Léa</span><span>→</span>
+        <select id="route-s1" aria-label="Premier routeur"><option value="">?</option><option>R1</option><option>R2</option><option>R3</option></select><span>→</span>
+        <select id="route-s2" aria-label="Deuxième routeur"><option value="">?</option><option>R1</option><option>R2</option><option>R3</option></select><span>→</span>
+        <select id="route-s3" aria-label="Troisième routeur"><option value="">?</option><option>R1</option><option>R2</option><option>R3</option></select><span>→</span>
+        <span class="noeud c">Emma</span>
+      </div>
+      <div class="qrow"><label for="route-retour">Trajet retour : Emma répond à Léa. Écris le trajet.</label><input id="route-retour" placeholder="Emma → … → Léa" autocomplete="off"></div>
+      <div class="qrow"><label for="route-tout">R1 doit-il connaître tout le chemin jusqu’à Emma ?</label><select id="route-tout"><option value="">Choisir…</option><option>Oui</option><option>Non, il connaît seulement le prochain saut</option></select></div>
       <label for="route-role"><strong>Avec tes mots : à quoi sert une table de routage ?</strong></label><textarea id="route-role" data-rep placeholder="Une table de routage permet au routeur de…" aria-label="Rôle d'une table de routage"></textarea>
     </div>
   </div></article>
 
   <article class="bloc" id="debit"><div class="marge"><span class="duree">10′</span></div><div class="corps">
     <h2>3 — Débit : « Combien de colis peuvent passer ? »</h2>
-    <p class="amorce">Cette fois, on ne change ni l’adresse ni le chemin. On compare simplement la <strong>capacité de deux liaisons</strong>.</p>
-    <div class="debit-wrap">
-      <div class="road"><h4>Route A — petite route</h4><div class="lane"><span class="packet">1</span></div><p><strong>Règle :</strong> 1 paquet toutes les 2 secondes.</p></div>
-      <div class="road"><h4>Route B — grande route</h4><div class="lane wide"><span class="packet">1</span><span class="packet">2</span><span class="packet">3</span></div><p><strong>Règle :</strong> 3 paquets toutes les 2 secondes.</p></div>
+    <p class="amorce">Cette fois, on ne change ni l’adresse ni le chemin. On compare la <strong>capacité de deux liaisons</strong> pendant 10 secondes.</p>
+    <figure class="fig"><img src="img/seq2-act1-p2-debit.png" alt="Deux routes entre une table de départ et une table d'arrivée : la route A transporte 1 paquet à chaque clap, la route B en transporte 3."></figure>
+    <div class="regles-jeu">
+      <div><b>⏱️ Chronométreur</b>Le routeur R1 lance le chrono et dit « stop » au bout de 10 s.</div>
+      <div><b>👏 Clap</b>Le routeur R2 frappe dans ses mains toutes les 2 secondes.</div>
+      <div><b>🔢 Compteur</b>Le routeur R3 compte les paquets arrivés sur chaque route.</div>
+      <div><b>🚶 Porteurs</b>Deux élèves de l’îlot C : à chaque clap, 1 enveloppe sur la route A, 3 enveloppes sur la route B.</div>
     </div>
-    <div class="sansordi"><b>Manipulation :</b> pendant 10 secondes, faites réellement passer les enveloppes selon la règle de chaque route. Un élève chronomètre, un autre compte les paquets arrivés.</div>
     <div class="qbox"><h3>Je mesure</h3>
-      <div class="qrow"><label for="debit-a">Paquets arrivés sur la route A en 10 s</label><input id="debit-a" type="number" min="0" inputmode="numeric"></div>
-      <div class="qrow"><label for="debit-b">Paquets arrivés sur la route B en 10 s</label><input id="debit-b" type="number" min="0" inputmode="numeric"></div>
+      <table class="tab-debit"><thead><tr><th>Route</th><th>Paquets à chaque clap</th><th>Paquets arrivés en 10 s</th><th>Paquets par seconde</th></tr></thead><tbody>
+        <tr><th>Route A</th><td><input id="debit-clap-a" type="number" min="0" inputmode="numeric" aria-label="Route A, paquets par clap"></td><td><input id="debit-a" type="number" min="0" inputmode="numeric" aria-label="Route A, paquets en 10 s"></td><td><input id="debit-ps-a" inputmode="decimal" aria-label="Route A, paquets par seconde"></td></tr>
+        <tr><th>Route B</th><td><input id="debit-clap-b" type="number" min="0" inputmode="numeric" aria-label="Route B, paquets par clap"></td><td><input id="debit-b" type="number" min="0" inputmode="numeric" aria-label="Route B, paquets en 10 s"></td><td><input id="debit-ps-b" inputmode="decimal" aria-label="Route B, paquets par seconde"></td></tr>
+      </tbody></table>
       <div class="qrow"><label for="debit-fort">Quelle route a le plus grand débit ?</label><select id="debit-fort"><option value="">Choisir…</option><option>Route A</option><option>Route B</option><option>Elles ont le même débit</option></select></div>
+      <div class="qrow"><label for="debit-unites">Range les unités de la plus petite à la plus grande</label><select id="debit-unites"><option value="">Choisir…</option><option>Mbit/s &lt; bit/s &lt; Gbit/s &lt; kbit/s</option><option>bit/s &lt; kbit/s &lt; Mbit/s &lt; Gbit/s</option><option>bit/s &lt; Mbit/s &lt; kbit/s &lt; Gbit/s</option></select></div>
       <label for="debit-role"><strong>Avec tes mots : qu’est-ce que le débit ?</strong></label><textarea id="debit-role" data-rep placeholder="Le débit indique…" aria-label="Définition du débit"></textarea>
     </div>
-    <div class="bandeau"><p><strong>Passage au vrai réseau :</strong> au lieu de compter des enveloppes par seconde, on compte des bits par seconde : bit/s, kbit/s, Mbit/s, Gbit/s.</p></div>
+    <div class="bandeau"><p><strong>Passage au vrai réseau :</strong> un paquet est fait de bits. Au lieu de compter des enveloppes par seconde, on compte des bits par seconde : bit/s, kbit/s (mille), Mbit/s (million), Gbit/s (milliard).</p></div>
   </div></article>
 
   <article class="bloc" id="defi"><div class="marge"><span class="duree">8′</span></div><div class="corps">
     <h2>4 — Défi final : expliquer tout le voyage</h2>
     <div class="challenge">
-      <p><strong>Mission :</strong> 10 paquets doivent aller de <code>192.168.1.3</code> à <code>192.168.3.8</code>.</p>
-      <div class="capacity"><span class="node">Réseau 1</span><span class="linkcap">10 paquets/s</span><span class="node">R1</span><span class="linkcap">2 paquets/s</span><span class="node">R2</span><span class="linkcap">8 paquets/s</span><span class="node">R3 / réseau 3</span></div>
-      <p>Le paquet connaît sa destination grâce à son adresse IP. Les routeurs utilisent leur table. Mais une des liaisons laisse passer beaucoup moins de données que les autres.</p>
+      <p><strong>Mission :</strong> l’élève qui a la carte <code>192.168.1.3</code> envoie <strong>10 paquets</strong> à Emma (<code>192.168.3.8</code>). Le professeur pose trois panneaux sur les liaisons :</p>
+      <div class="capacity"><span class="node">192.168.1.3</span><span class="linkcap">10 paquets/s</span><span class="node">R1</span><span class="linkcap">2 paquets/s</span><span class="node">R2</span><span class="linkcap">8 paquets/s</span><span class="node">R3 → .8</span></div>
+      <p>Le paquet connaît sa destination grâce à son adresse IP. Les routeurs utilisent leur table. Mais une des liaisons laisse passer beaucoup moins de paquets que les autres.</p>
     </div>
     <div class="qbox">
-      <div class="qrow"><label for="defi-ip">Quelle information permet de savoir à qui livrer ?</label><select id="defi-ip"><option value="">Choisir…</option><option>L'adresse IP</option><option>Le débit</option><option>Le nom du routeur</option></select></div>
-      <div class="qrow"><label for="defi-route">Qu'utilise un routeur pour choisir la prochaine étape ?</label><select id="defi-route"><option value="">Choisir…</option><option>Une table de routage</option><option>La taille de l'écran</option><option>Le Wi-Fi</option></select></div>
-      <div class="qrow"><label for="defi-bouchon">Quelle liaison limite ici le transfert global ?</label><select id="defi-bouchon"><option value="">Choisir…</option><option>10 paquets/s</option><option>2 paquets/s</option><option>8 paquets/s</option></select></div>
-      <label for="defi-exp"><strong>Explique le voyage en 3 ou 4 phrases en utilisant : adresse IP, routeur, table de routage, débit.</strong></label><textarea id="defi-exp" data-rep placeholder="Le paquet porte… Puis le routeur… Le débit…" aria-label="Explication du défi final"></textarea>
+      <div class="qrow"><label for="defi-reseau">Réseau de destination</label><select id="defi-reseau"><option value="">Choisir…</option><option>Réseau 1</option><option>Réseau 2</option><option>Réseau 3</option></select></div>
+      <div class="qrow"><label for="defi-routeurs">Routeurs traversés</label><select id="defi-routeurs"><option value="">Choisir…</option><option>R1 puis R3</option><option>R1 puis R2 puis R3</option><option>R2 seulement</option></select></div>
+      <div class="qrow"><label for="defi-bouchon">Quelle liaison limite le transfert global ?</label><select id="defi-bouchon"><option value="">Choisir…</option><option>10 paquets/s</option><option>2 paquets/s</option><option>8 paquets/s</option></select></div>
+      <div class="qrow"><label for="defi-temps">Temps minimum pour faire passer les 10 paquets (en secondes)</label><input id="defi-temps" type="number" min="0" step="0.5" inputmode="decimal"></div>
+      <label for="defi-exp"><strong>Raconte le voyage en 3 ou 4 phrases : l’adresse IP, puis la table de routage, puis la liaison limitante.</strong></label><textarea id="defi-exp" data-rep placeholder="Le paquet porte… Puis le routeur… La liaison…" aria-label="Explication du défi final"></textarea>
+      <div class="bonus-defi"><label for="defi-panne"><strong>Bonus :</strong> R2 tombe en panne. Que se passe-t-il ? Que faudrait-il ajouter au réseau ?</label><textarea id="defi-panne" data-rep placeholder="Si R2 tombe en panne…" aria-label="Bonus : panne de R2"></textarea></div>
     </div>
   </div></article>
 
   <article class="bloc" id="bilan"><div class="marge"><span class="duree">5′</span></div><div class="corps">
     <h2>5 — Mon bilan</h2><p class="amorce">Complète ces trois phrases sans regarder le haut de la fiche.</p>
     <div class="bilan3">
-      <div class="fill-line"><strong>Adresse IP →</strong><textarea id="bilan-ip" data-rep aria-label="Bilan adresse IP"></textarea></div>
-      <div class="fill-line"><strong>Table de routage →</strong><textarea id="bilan-route" data-rep aria-label="Bilan table de routage"></textarea></div>
-      <div class="fill-line"><strong>Débit →</strong><textarea id="bilan-debit" data-rep aria-label="Bilan débit"></textarea></div>
+      <div class="fill-line"><strong>Une adresse IP sert à →</strong><textarea id="bilan-ip" data-rep aria-label="Bilan adresse IP"></textarea></div>
+      <div class="fill-line"><strong>Une table de routage sert à →</strong><textarea id="bilan-route" data-rep aria-label="Bilan table de routage"></textarea></div>
+      <div class="fill-line"><strong>Le débit, c’est →</strong><textarea id="bilan-debit" data-rep aria-label="Bilan débit"></textarea></div>
     </div>
     <h3>Je me situe</h3>
-    <div class="qcm" data-qcm="auto" data-titre="Auto-évaluation"><label><input type="radio" name="auto" id="auto1" value="1"><span class="lt">1</span><span>J’ai encore besoin d’aide pour distinguer les trois notions.</span></label><label><input type="radio" name="auto" id="auto2" value="2"><span class="lt">2</span><span>Je reconnais les notions mais j’hésite pour les expliquer.</span></label><label><input type="radio" name="auto" id="auto3" value="3"><span class="lt">3</span><span>Je sais expliquer les trois notions avec les analogies.</span></label><label><input type="radio" name="auto" id="auto4" value="4"><span class="lt">4</span><span>Je sais expliquer le voyage d’un paquet et repérer un goulot d’étranglement.</span></label></div>
+    <div class="qcm" data-qcm="auto" data-titre="Auto-évaluation"><label><input type="radio" name="auto" id="auto1" value="1"><span class="lt">1</span><span>Je sais associer adresse IP, routeur et débit à une image (adresse postale, centre de tri, route).</span></label><label><input type="radio" name="auto" id="auto2" value="2"><span class="lt">2</span><span>Je sais expliquer avec mes mots le rôle de l’adresse IP, de la table de routage et du débit.</span></label><label><input type="radio" name="auto" id="auto3" value="3"><span class="lt">3</span><span>Je sais suivre un paquet de réseau en réseau et trouver la liaison limitante.</span></label><label><input type="radio" name="auto" id="auto4" value="4"><span class="lt">4</span><span>Je sais expliquer ce qui se passe en cas de panne et proposer un chemin de secours.</span></label></div>
   </div></article>
 
   <article class="bloc" id="entrainement"><div class="marge"><span class="duree">bonus</span></div><div class="corps">
@@ -589,6 +640,17 @@ document.getElementById("navfiches").addEventListener("change", function(){
   </div></article>
 
   <section class="corrbloc" id="correction"><h2>Correction expliquée et bilan de l’activité</h2><p class="intro">Entre le mot de passe donné par le professeur pour afficher les réponses, les explications et ce qu’il faut retenir.</p><div class="saisie"><input type="password" id="corr-mdp" placeholder="Mot de passe" aria-label="Mot de passe de la correction" autocomplete="off" spellcheck="false"><button type="button" id="corr-btn">Afficher</button></div><p class="refus" id="corr-refus" hidden>Mot de passe incorrect.</p><div class="corr" id="corr-contenu" hidden></div></section>
+  <section class="docsprof" id="docs-prof"><h2>Espace professeur — documents de la séance</h2>
+    <p class="intro">Guide professeur illustré (déroulé, répartition des 23 élèves, corrigé), fiche élève à imprimer et kit de jeu (affiches d’îlot, feuilles routeur, cartes d’adresse, étiquettes des paquets, cartes rôles). Les fichiers sont chiffrés : ils ne s’ouvrent qu’avec le mot de passe du professeur.</p>
+    <div class="saisie"><input type="password" class="docs-mdp" placeholder="Mot de passe professeur" aria-label="Mot de passe des documents professeur" autocomplete="off" spellcheck="false"><button type="button" class="docs-btn">Déverrouiller</button></div>
+    <p class="refus docs-refus" hidden>Mot de passe incorrect.</p>
+    <div class="docs-liste" hidden>
+      <div class="doc-ligne"><div><b>Guide professeur</b><span>7 pages · déroulé minuté, plan de salle, répartition nominative, corrigé</span></div><div class="doc-btns"><button type="button" data-f="guide-prof.docx" data-n="Guide_professeur_reseau_postal.docx">Word</button><button type="button" data-f="guide-prof.pdf" data-n="Guide_professeur_reseau_postal.pdf">PDF</button></div></div>
+      <div class="doc-ligne"><div><b>Fiche élève à imprimer</b><span>4 pages recto-verso · 1 par élève</span></div><div class="doc-btns"><button type="button" data-f="fiche-eleve.docx" data-n="Fiche_eleve_reseau_postal.docx">Word</button><button type="button" data-f="fiche-eleve.pdf" data-n="Fiche_eleve_reseau_postal.pdf">PDF</button></div></div>
+      <div class="doc-ligne"><div><b>Kit à imprimer</b><span>13 pages · affiches, routeurs, 20 cartes d’adresse, 22 étiquettes, cartes rôles</span></div><div class="doc-btns"><button type="button" data-f="kit-a-imprimer.docx" data-n="Kit_a_imprimer_reseau_postal.docx">Word</button><button type="button" data-f="kit-a-imprimer.pdf" data-n="Kit_a_imprimer_reseau_postal.pdf">PDF</button></div></div>
+      <p class="docs-etat" aria-live="polite"></p>
+    </div>
+  </section>
 <div id="alerte" class="alerte" hidden></div>
 </main>
 <nav class="pager" aria-label="Navigation dans la Séquence 2"><a href="seq2-act1-p1.html">← Partie 1 · Matériels du réseau</a><a href="seq2-act1-p3.html">Partie 3 · Filius →</a></nav>
@@ -611,7 +673,7 @@ el("effacer").addEventListener("click",function(){if(!confirm("Effacer toutes te
 (function(){var d=new Date(),p=function(n){return String(n).padStart(2,"0")};if(!el("date").value)el("date").value=d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())})();restaurer();tous("textarea").forEach(grandir);maj();
 function lire(){var d={id:{},rep:{}};["nom","prenom","classe","groupe","role","date"].forEach(function(k){d.id[k]=el(k).value.trim()});controles().forEach(function(c){if(["nom","prenom","classe","groupe","role","date","corr-mdp"].indexOf(c.id)>=0)return;if(c.type==="radio"){if(c.checked)d.rep[c.name]=c.value}else d.rep[c.id]=c.value});return d}
 function propre(t){return String(t||"").replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/→/g,"->").replace(/ /g," ")}
-function construirePDF(d){if(!window.jspdf||!window.jspdf.jsPDF){window.print();return null}var doc=new window.jspdf.jsPDF({unit:"mm",format:"a4"}),M=14,y=18,B=278,page=1;function chk(h){if(y+h>B){doc.addPage();page++;y=18}}function title(t){chk(14);doc.setFont("helvetica","bold");doc.setFontSize(13);doc.setTextColor(14,110,107);doc.text(propre(t),M,y);y+=7;doc.setDrawColor(210,222,222);doc.line(M,y,196,y);y+=5}function line(k,v){v=propre(v||"(non répondu)");var txt=doc.splitTextToSize(k+" : "+v,178);chk(txt.length*5+3);doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(20,38,43);doc.text(txt,M,y);y+=txt.length*5+2}doc.setFont("helvetica","bold");doc.setFontSize(16);doc.setTextColor(20,38,43);doc.text("Technologie 3e - Séquence 2 - Activité 1 - Partie 2",M,y);y+=8;doc.setFontSize(11);doc.setTextColor(90,108,113);doc.text("Le réseau postal de la classe : adresse IP, routage et débit",M,y);y+=10;line("Élève",(d.id.nom+" "+d.id.prenom).trim());line("Classe",d.id.classe);line("Groupe / rôle",(d.id.groupe||"")+" "+(d.id.role||""));title("1. Adresse IP");line("Destinataire de 192.168.2.7",d.rep["ip-dest"]);line("Même réseau ?",d.rep["ip-meme"]);line("Deux IP identiques ?",d.rep["ip-double"]);line("Mon explication",d.rep["ip-role"]);title("2. Table de routage");line("R1 ->",d.rep["route-r1"]);line("R2 ->",d.rep["route-r2"]);line("R1 connaît tout le trajet ?",d.rep["route-tout"]);line("Mon explication",d.rep["route-role"]);title("3. Débit");line("Route A en 10 s",d.rep["debit-a"]);line("Route B en 10 s",d.rep["debit-b"]);line("Plus grand débit",d.rep["debit-fort"]);line("Mon explication",d.rep["debit-role"]);title("4. Défi final");line("Identifier la destination",d.rep["defi-ip"]);line("Choisir la prochaine étape",d.rep["defi-route"]);line("Goulot d'étranglement",d.rep["defi-bouchon"]);line("Explication",d.rep["defi-exp"]);title("5. Bilan");line("Adresse IP",d.rep["bilan-ip"]);line("Table de routage",d.rep["bilan-route"]);line("Débit",d.rep["bilan-debit"]);line("Auto-évaluation",d.rep["auto"]);return doc}
+function construirePDF(d){if(!window.jspdf||!window.jspdf.jsPDF){window.print();return null}var doc=new window.jspdf.jsPDF({unit:"mm",format:"a4"}),M=14,y=18,B=278,page=1;function chk(h){if(y+h>B){doc.addPage();page++;y=18}}function title(t){chk(14);doc.setFont("helvetica","bold");doc.setFontSize(13);doc.setTextColor(14,110,107);doc.text(propre(t),M,y);y+=7;doc.setDrawColor(210,222,222);doc.line(M,y,196,y);y+=5}function line(k,v){v=propre(v||"(non répondu)");var txt=doc.splitTextToSize(k+" : "+v,178);chk(txt.length*5+3);doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(20,38,43);doc.text(txt,M,y);y+=txt.length*5+2}doc.setFont("helvetica","bold");doc.setFontSize(16);doc.setTextColor(20,38,43);doc.text("Technologie 3e - Séquence 2 - Activité 1 - Partie 2",M,y);y+=8;doc.setFontSize(11);doc.setTextColor(90,108,113);doc.text("Le réseau postal de la classe : adresse IP, routage et débit",M,y);y+=10;line("Élève",(d.id.nom+" "+d.id.prenom).trim());line("Classe",d.id.classe);line("Groupe / rôle",(d.id.groupe||"")+" "+(d.id.role||""));line("Ma place dans le réseau",(d.rep["ma-place"]||"")+" "+(d.rep["mon-ip"]||""));title("1. Adresse IP");line("Même réseau que Léa",d.rep["ip-meme"]);line("Dans 192.168.2.7, partie réseau",d.rep["ip-reseau"]);line("Partie appareil",d.rep["ip-appareil"]);line("Léa -> Noah : routeur ?",d.rep["ip-routeur"]);line("Deux IP identiques ?",d.rep["ip-double"]);line("Mon explication",d.rep["ip-role"]);title("2. Table de routage");line("Léa donne d'abord son enveloppe",d.rep["route-premier"]);line("Trajet du paquet n°4","Léa -> "+(d.rep["route-s1"]||"?")+" -> "+(d.rep["route-s2"]||"?")+" -> "+(d.rep["route-s3"]||"?")+" -> Emma");line("Trajet retour",d.rep["route-retour"]);line("R1 connaît tout le chemin ?",d.rep["route-tout"]);line("Mon explication",d.rep["route-role"]);title("3. Débit");line("Route A",(d.rep["debit-clap-a"]||"?")+" par clap, "+(d.rep["debit-a"]||"?")+" en 10 s, "+(d.rep["debit-ps-a"]||"?")+" paquet(s)/s");line("Route B",(d.rep["debit-clap-b"]||"?")+" par clap, "+(d.rep["debit-b"]||"?")+" en 10 s, "+(d.rep["debit-ps-b"]||"?")+" paquet(s)/s");line("Plus grand débit",d.rep["debit-fort"]);line("Unités",d.rep["debit-unites"]);line("Mon explication",d.rep["debit-role"]);title("4. Défi final");line("Réseau de destination",d.rep["defi-reseau"]);line("Routeurs traversés",d.rep["defi-routeurs"]);line("Liaison limitante",d.rep["defi-bouchon"]);line("Temps minimum (s)",d.rep["defi-temps"]);line("Le voyage",d.rep["defi-exp"]);line("Bonus : panne de R2",d.rep["defi-panne"]);title("5. Bilan");line("Une adresse IP sert à",d.rep["bilan-ip"]);line("Une table de routage sert à",d.rep["bilan-route"]);line("Le débit, c'est",d.rep["bilan-debit"]);line("Auto-évaluation",d.rep["auto"]);return doc}
 el("pdf").addEventListener("click",function(){var d=lire(),m=[];[["nom","ton nom"],["prenom","ton prénom"],["classe","ta classe"]].forEach(function(x){if(!d.id[x[0]])m.push(x[1])});if(m.length){alerte.hidden=false;alerte.textContent="Complète "+m.join(", ")+" avant de générer le PDF.";return}alerte.hidden=true;var b=this;b.disabled=true;b.textContent="Création du PDF…";try{var doc=construirePDF(d);if(doc){var nom=(d.id.nom+"-"+d.id.prenom+"-seq2-act1-p2.pdf").replace(/\s+/g,"-");doc.save(nom);etat.textContent="PDF téléchargé."}}catch(e){console.error(e);alerte.hidden=false;alerte.textContent="Le PDF n’a pas pu être créé. Utilise Imprimer / PDF navigateur."}b.disabled=false;b.textContent="Générer le PDF"});
 
 /* Entraînement : le livre interactif s'ouvre directement sur le chapitre cliqué */
@@ -681,7 +743,46 @@ el("pdf").addEventListener("click",function(){var d=lire(),m=[];[["nom","ton nom
 })();
 
 /* Correction protégée */
-var COFFRE="W1siMS4gTOKAmWFkcmVzc2UgSVAgOiBs4oCZYWRyZXNzZSBkdSBkZXN0aW5hdGFpcmUiLCBbIjxwPjxzdHJvbmc+RGFucyBjZXR0ZSBhY3Rpdml0w6ksIHVuZSBhZHJlc3NlIElQIGpvdWUgbGUgcsO0bGUgZOKAmXVuZSBhZHJlc3NlIHBvc3RhbGUuPC9zdHJvbmc+IEVsbGUgcGVybWV0IGRlIHNhdm9pciDDoCBxdWVsIGFwcGFyZWlsIHVuIHBhcXVldCBlc3QgZGVzdGluw6kuPC9wPiIsICI8cD5EYW5zIG5vdHJlIG1vZMOobGUsIG5vdXMgdXRpbGlzb25zIGRlcyByw6lzZWF1eCBlbiA8Y29kZT4vMjQ8L2NvZGU+IDogbGVzIHRyb2lzIHByZW1pZXJzIG5vbWJyZXMgcmVwcsOpc2VudGVudCBsZSByw6lzZWF1IGV0IGxlIGRlcm5pZXIgZGlmZsOpcmVuY2llIGxlcyBhcHBhcmVpbHMuIEV4ZW1wbGUgOiA8Y29kZT4xOTIuMTY4LjIuNzwvY29kZT4gYXBwYXJ0aWVudCBhdSByw6lzZWF1IDxjb2RlPjE5Mi4xNjguMi4wLzI0PC9jb2RlPi48L3A+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+UsOpcG9uc2VzPC9iPkxlIHBhcXVldCBkZXN0aW7DqSDDoCA8Y29kZT4xOTIuMTY4LjIuNzwvY29kZT4gdmEgw6AgWW91c3NlZi4gTMOpYSA8Y29kZT4xOTIuMTY4LjEuNDwvY29kZT4gZXQgWW91c3NlZiBuZSBzb250IHBhcyBkYW5zIGxlIG3Dqm1lIHLDqXNlYXUuIERldXggYXBwYXJlaWxzIG5lIGRvaXZlbnQgcGFzIGF2b2lyIGxhIG3Dqm1lIGFkcmVzc2UgSVAgZGFucyBsZSBtw6ptZSByw6lzZWF1IGF1IG3Dqm1lIG1vbWVudC48L2Rpdj4iLCAiPHA+PHN0cm9uZz7DgCByZXRlbmlyIDo8L3N0cm9uZz4gbOKAmWFkcmVzc2UgSVAgc2VydCDDoCBpZGVudGlmaWVyIGxvZ2lxdWVtZW50IGxhIHNvdXJjZSBldCBsYSBkZXN0aW5hdGlvbiBk4oCZdW5lIGNvbW11bmljYXRpb24gZGFucyB1biByw6lzZWF1IElQLjwvcD4iXV0sIFsiMi4gTGEgdGFibGUgZGUgcm91dGFnZSA6IGxlIHBhbm5lYXUgZHUgY2VudHJlIGRlIHRyaSIsIFsiPHA+TGUgcm91dGV1ciByZXNzZW1ibGUgw6AgdW4gPHN0cm9uZz5jZW50cmUgZGUgdHJpPC9zdHJvbmc+LiBJbCBsaXQgbOKAmWFkcmVzc2UgZGUgZGVzdGluYXRpb24sIGNvbnN1bHRlIHNhIDxzdHJvbmc+dGFibGUgZGUgcm91dGFnZTwvc3Ryb25nPiBldCBkw6ljaWRlIHZlcnMgcXVlbGxlIDxzdHJvbmc+cHJvY2hhaW5lIMOpdGFwZTwvc3Ryb25nPiBlbnZveWVyIGxlIHBhcXVldC48L3A+IiwgIjxwPlBvdXIgZW52b3llciB1biBwYXF1ZXQgZHUgcsOpc2VhdSAxIGF1IHLDqXNlYXUgMyBkYW5zIG5vdHJlIHNjaMOpbWEgOiA8c3Ryb25nPlIxIGVudm9pZSB2ZXJzIFIyPC9zdHJvbmc+LCBwdWlzIDxzdHJvbmc+UjIgZW52b2llIHZlcnMgUjM8L3N0cm9uZz4uIFIxIG7igJlhIHBhcyBiZXNvaW4gZGUgbcOpbW9yaXNlciBjaGFxdWUgbW91dmVtZW50IGZ1dHVyIDogaWwgY2hvaXNpdCBsZSBwcm9jaGFpbiBzYXV0IMOgIHBhcnRpciBkZSBzYSB0YWJsZS48L3A+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+RXJyZXVyIGZyw6lxdWVudGU8L2I+VW5lIHRhYmxlIGRlIHJvdXRhZ2UgbuKAmWVzdCBwYXMgdW5lIGNhcnRlIHF1aSBjb250aWVudCBvYmxpZ2F0b2lyZW1lbnQgdG91dCBsZSB0cmFqZXQuIEVsbGUgY29udGllbnQgZGVzIHJvdXRlcyBwZXJtZXR0YW50IGRlIGTDqXRlcm1pbmVyIG/DuSB0cmFuc21ldHRyZSBsZSBwYXF1ZXQgZW5zdWl0ZS48L2Rpdj4iXV0sIFsiMy4gTGUgZMOpYml0IDogY29tYmllbiBkZSBkb25uw6llcyBwYXNzZW50IHBlbmRhbnQgdW4gdGVtcHMgZG9ubsOpID8iLCBbIjxwPkxhIHBldGl0ZSByb3V0ZSBhdXRvcmlzZSA8c3Ryb25nPjEgcGFxdWV0IHRvdXRlcyBsZXMgMiBzZWNvbmRlczwvc3Ryb25nPi4gRW4gMTAgc2Vjb25kZXMsIGVsbGUgcGV1dCBkb25jIGZhaXJlIHBhc3NlciA8c3Ryb25nPjUgcGFxdWV0czwvc3Ryb25nPi4gTGEgZ3JhbmRlIHJvdXRlIGF1dG9yaXNlIDxzdHJvbmc+MyBwYXF1ZXRzIHRvdXRlcyBsZXMgMiBzZWNvbmRlczwvc3Ryb25nPiwgc29pdCA8c3Ryb25nPjE1IHBhcXVldHMgZW4gMTAgc2Vjb25kZXM8L3N0cm9uZz4uPC9wPiIsICI8cD48c3Ryb25nPkxlIGTDqWJpdCBtZXN1cmUgdW5lIHF1YW50aXTDqSBkZSBkb25uw6llcyBwYXIgdW5pdMOpIGRlIHRlbXBzLjwvc3Ryb25nPiBTdXIgdW4gcsOpc2VhdSByw6llbCwgb24gbOKAmWV4cHJpbWUgc291dmVudCBlbiBiaXQvcywga2JpdC9zLCBNYml0L3Mgb3UgR2JpdC9zLjwvcD4iLCAiPGRpdiBjbGFzcz1cInJldGVuaXJcIj48Yj7DgCBuZSBwYXMgY29uZm9uZHJlPC9iPlVuIGTDqWJpdCDDqWxldsOpIG5lIHNpZ25pZmllIHBhcyBxdeKAmXVuIHBhcXVldCBpbmRpdmlkdWVsIMKrIHJvdWxlIHBsdXMgdml0ZSDCuy4gQ2VsYSBzaWduaWZpZSBzdXJ0b3V0IHF1ZSBkYXZhbnRhZ2UgZGUgZG9ubsOpZXMgcGV1dmVudCDDqnRyZSB0cmFuc21pc2VzIHBlbmRhbnQgbGEgbcOqbWUgZHVyw6llLjwvZGl2PiJdXSwgWyI0LiBEw6lmaSBmaW5hbCA6IHLDqXVuaXIgbGVzIHRyb2lzIG5vdGlvbnMiLCBbIjxwPlBvdXIgZW52b3llciAxMCBwYXF1ZXRzIGRlIDxjb2RlPjE5Mi4xNjguMS4zPC9jb2RlPiB2ZXJzIDxjb2RlPjE5Mi4xNjguMy44PC9jb2RlPiA6IGzigJk8c3Ryb25nPmFkcmVzc2UgSVA8L3N0cm9uZz4gaW5kaXF1ZSBsYSBkZXN0aW5hdGlvbiwgY2hhcXVlIDxzdHJvbmc+cm91dGV1cjwvc3Ryb25nPiB1dGlsaXNlIHNhIDxzdHJvbmc+dGFibGUgZGUgcm91dGFnZTwvc3Ryb25nPiBwb3VyIGNob2lzaXIgbGUgcHJvY2hhaW4gc2F1dCwgZXQgbGUgPHN0cm9uZz5kw6liaXQ8L3N0cm9uZz4gZGUgY2hhcXVlIGxpYWlzb24gbGltaXRlIGxhIHF1YW50aXTDqSBkZSBkb25uw6llcyBxdWkgcGV1dCBsYSB0cmF2ZXJzZXIuPC9wPiIsICI8cD5BdmVjIGRlcyBsaWFpc29ucyBkZSAxMCwgMiBldCA4IHBhcXVldHMvcyBzdXIgbGUgbcOqbWUgdHJhamV0LCBsYSBsaWFpc29uIMOgIDxzdHJvbmc+MiBwYXF1ZXRzL3M8L3N0cm9uZz4gZXN0IGxlIDxzdHJvbmc+Z291bG90IGTigJnDqXRyYW5nbGVtZW50PC9zdHJvbmc+IDogZWxsZSBsaW1pdGUgbGUgdHJhbnNmZXJ0IGdsb2JhbC48L3A+Il1dLCBbIjUuIEJpbGFuIGRlIGzigJlhY3Rpdml0w6kg4oCUIGNlIHF1ZSB0dSBkb2lzIHNhdm9pciBleHBsaXF1ZXIiLCBbIjx1bD48bGk+PHN0cm9uZz5BZHJlc3NlIElQPC9zdHJvbmc+IOKGkiBwZXJtZXQgZOKAmWlkZW50aWZpZXIgbG9naXF1ZW1lbnQgbGUgZGVzdGluYXRhaXJlIGTigJl1bmUgY29tbXVuaWNhdGlvbi48L2xpPjxsaT48c3Ryb25nPlRhYmxlIGRlIHJvdXRhZ2U8L3N0cm9uZz4g4oaSIGluZGlxdWUgYXUgcm91dGV1ciB2ZXJzIHF1ZWxsZSBwcm9jaGFpbmUgw6l0YXBlIHRyYW5zbWV0dHJlIGxlIHBhcXVldC48L2xpPjxsaT48c3Ryb25nPkTDqWJpdDwvc3Ryb25nPiDihpIgcXVhbnRpdMOpIGRlIGRvbm7DqWVzIHRyYW5zbWlzZSBwZW5kYW50IHVuZSBkdXLDqWUgZG9ubsOpZS48L2xpPjwvdWw+IiwgIjxwPjxzdHJvbmc+TGEgcGhyYXNlIMOgIHNhdm9pciBkaXJlIDo8L3N0cm9uZz4gwqsgTGUgcGFxdWV0IHBvcnRlIHVuZSBhZHJlc3NlIElQIGRlIGRlc3RpbmF0aW9uLiBMZXMgcm91dGV1cnMgY29uc3VsdGVudCBsZXVycyB0YWJsZXMgZGUgcm91dGFnZSBwb3VyIGzigJlhY2hlbWluZXIgZGUgcsOpc2VhdSBlbiByw6lzZWF1LiBMZSBkw6liaXQgZGVzIGxpYWlzb25zIGTDqXRlcm1pbmUgbGEgcXVhbnRpdMOpIGRlIGRvbm7DqWVzIHF1aSBwZXV0IMOqdHJlIHRyYW5zbWlzZSBwZW5kYW50IHVuIHRlbXBzIGRvbm7DqS4gwrs8L3A+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+UHJvY2hhaW5lIMOpdGFwZTwvYj5EYW5zIGxhIHBhcnRpZSAzLCB0dSB2YXMgcmV0cm91dmVyIGNlcyB0cm9pcyBpZMOpZXMgZGFucyBGaWxpdXMgOiB0dSBjb25maWd1cmVyYXMgbGVzIGFkcmVzc2VzLCBsZXMgcGFzc2VyZWxsZXMgZXQgdHUgdGVzdGVyYXMgbGVzIGNvbW11bmljYXRpb25zLjwvZGl2PiJdXV0=",EMPREINTE=4054366658;function empreinte(t){var h=5381;for(var i=0;i<t.length;i++)h=((h*33)^t.charCodeAt(i))>>>0;return h}function rendre(l){var h="",buf=[];function vide(){if(buf.length){h+="<ul>"+buf.map(function(x){return "<li>"+x+"</li>"}).join("")+"</ul>";buf=[]}}l.forEach(function(x){if(/^\s*<(ul|ol|div|svg|p|a|table|figure|img|h[1-6]|blockquote)\b/i.test(x)){vide();h+=x}else buf.push(x)});vide();return h}var cb=el("corr-btn"),ci=el("corr-mdp"),cr=el("corr-refus"),cc=el("corr-contenu");function ouvrir(){if(empreinte(ci.value.trim())!==EMPREINTE){cr.hidden=false;ci.value="";ci.focus();return}cr.hidden=true;var sec=JSON.parse(decodeURIComponent(escape(atob(COFFRE))));cc.innerHTML=sec.map(function(x){return "<h3>"+x[0]+"</h3>"+rendre(x[1])}).join("");cc.hidden=false;ci.closest(".saisie").hidden=true;cc.scrollIntoView({behavior:"smooth",block:"nearest"})}cb.addEventListener("click",ouvrir);ci.addEventListener("keydown",function(e){if(e.key==="Enter")ouvrir()});
+var COFFRE="W1siMS4gTOKAmWFkcmVzc2UgSVAgOiBs4oCZYWRyZXNzZSBkdSBkZXN0aW5hdGFpcmUiLCBbIjxwPjxzdHJvbmc+RGFucyBjZXR0ZSBhY3Rpdml0w6ksIHVuZSBhZHJlc3NlIElQIGpvdWUgbGUgcsO0bGUgZOKAmXVuZSBhZHJlc3NlIHBvc3RhbGUuPC9zdHJvbmc+IEVsbGUgcGVybWV0IGRlIHNhdm9pciDDoCBxdWVsIGFwcGFyZWlsIHVuIHBhcXVldCBlc3QgZGVzdGluw6kuPC9wPiIsICI8cD5DaGFxdWUgw65sb3QgZXN0IHVuIHLDqXNlYXUgZW4gPGNvZGU+LzI0PC9jb2RlPiA6IGxlcyB0cm9pcyBwcmVtaWVycyBub21icmVzIHJlcHLDqXNlbnRlbnQgbGUgcsOpc2VhdSwgbGUgZGVybmllciBkaWZmw6lyZW5jaWUgbGVzIGFwcGFyZWlscy4gPGNvZGU+MTkyLjE2OC4yLjc8L2NvZGU+IGFwcGFydGllbnQgYXUgcsOpc2VhdSA8Y29kZT4xOTIuMTY4LjI8L2NvZGU+ICjDrmxvdCBCKSA7IGPigJllc3QgbOKAmWFwcGFyZWlsIG7CsDcuPC9wPiIsICI8ZmlndXJlIGNsYXNzPVwiZmlnIHBldGl0ZVwiPjxpbWcgc3JjPVwiaW1nL3NlcTItYWN0MS1wMi1hZHJlc3NlLWlwLnBuZ1wiIGFsdD1cIjE5Mi4xNjguMSA9IHLDqXNlYXUsIDQgPSBhcHBhcmVpbFwiPjwvZmlndXJlPiIsICI8ZGl2IGNsYXNzPVwicmV0ZW5pclwiPjxiPlLDqXBvbnNlczwvYj5Ob2FoIGVzdCBkYW5zIGxlIG3Dqm1lIHLDqXNlYXUgcXVlIEzDqWEgKDxjb2RlPjE5Mi4xNjguMTwvY29kZT4pLiBEYW5zIDxjb2RlPjE5Mi4xNjguMi43PC9jb2RlPiA6IHLDqXNlYXUgPSA8Y29kZT4xOTIuMTY4LjI8L2NvZGU+LCBhcHBhcmVpbCA9IDxjb2RlPjc8L2NvZGU+LiBMw6lhIOKGkiBOb2FoIDogPHN0cm9uZz5wYXMgZGUgcm91dGV1cjwvc3Ryb25nPiwgaWxzIHNvbnQgZGFucyBsZSBtw6ptZSByw6lzZWF1LiBEZXV4IGFwcGFyZWlscyBuZSBkb2l2ZW50IGphbWFpcyBhdm9pciBsYSBtw6ptZSBhZHJlc3NlIElQIGRhbnMgbGUgbcOqbWUgcsOpc2VhdSBhdSBtw6ptZSBtb21lbnQuPC9kaXY+IiwgIjxwPjxzdHJvbmc+w4AgcmV0ZW5pciA6PC9zdHJvbmc+IGzigJlhZHJlc3NlIElQIGlkZW50aWZpZSB1biBhcHBhcmVpbCBzdXIgdW4gcsOpc2VhdSA7IGVsbGUgaW5kaXF1ZSBzb24gcsOpc2VhdSBldCBzb24gbnVtw6lybyBkYW5zIGNlIHLDqXNlYXUuPC9wPiJdXSwgWyIyLiBMYSB0YWJsZSBkZSByb3V0YWdlIDogbGUgcGFubmVhdSBkdSBjZW50cmUgZGUgdHJpIiwgWyI8cD5MZSByb3V0ZXVyIGxpdCBs4oCZYWRyZXNzZSBkZSBkZXN0aW5hdGlvbiAoaWNpIGxlIDNlIG5vbWJyZSksIGNvbnN1bHRlIHNhIDxzdHJvbmc+dGFibGUgZGUgcm91dGFnZTwvc3Ryb25nPiBldCBjaG9pc2l0IGxlIDxzdHJvbmc+cHJvY2hhaW4gc2F1dDwvc3Ryb25nPi48L3A+IiwgIjxmaWd1cmUgY2xhc3M9XCJmaWdcIj48aW1nIHNyYz1cImltZy9zZXEyLWFjdDEtcDItdHJhamV0LnBuZ1wiIGFsdD1cIlRyYWpldCBMw6lhIHZlcnMgUjEgdmVycyBSMiB2ZXJzIFIzIHZlcnMgRW1tYVwiPjwvZmlndXJlPiIsICI8ZGl2IGNsYXNzPVwicmV0ZW5pclwiPjxiPlLDqXBvbnNlczwvYj5Mw6lhIGRvbm5lIGTigJlhYm9yZCBzb24gZW52ZWxvcHBlIMOgIDxzdHJvbmc+UjE8L3N0cm9uZz4sIGxlIHJvdXRldXIgZGUgc29uIMOubG90LiBUcmFqZXQgOiBMw6lhIOKGkiA8c3Ryb25nPlIxIOKGkiBSMiDihpIgUjM8L3N0cm9uZz4g4oaSIEVtbWEgKDMgcm91dGV1cnMpLiBUcmFqZXQgcmV0b3VyIDogRW1tYSDihpIgUjMg4oaSIFIyIOKGkiBSMSDihpIgTMOpYS4gUjEgbmUgY29ubmHDrnQgcGFzIHRvdXQgbGUgY2hlbWluIDogaWwgY29ubmHDrnQgc2V1bGVtZW50IGxlIHByb2NoYWluIHNhdXQuPC9kaXY+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+RXJyZXVyIGZyw6lxdWVudGU8L2I+VW5lIHRhYmxlIGRlIHJvdXRhZ2UgbuKAmWVzdCBwYXMgdW5lIGNhcnRlIGRlIHRvdXQgbGUgdHJhamV0LiBFbGxlIGRpdCBzZXVsZW1lbnQgw6AgcXVpIHRyYW5zbWV0dHJlIGxlIHBhcXVldCBlbnN1aXRlLCBzZWxvbiBsZSByw6lzZWF1IGRlIGRlc3RpbmF0aW9uLjwvZGl2PiJdXSwgWyIzLiBMZSBkw6liaXQgOiBjb21iaWVuIGRlIHBhcXVldHMgcGFzc2VudCBwZW5kYW50IHVuIHRlbXBzIGRvbm7DqSA/IiwgWyI8cD5Sb3V0ZSBBIDogMSBwYXF1ZXQgw6AgY2hhcXVlIGNsYXAsIHVuIGNsYXAgdG91dGVzIGxlcyAyIHMg4oaSIDxzdHJvbmc+NSBwYXF1ZXRzIGVuIDEwIHM8L3N0cm9uZz4sIHNvaXQgPHN0cm9uZz4wLDUgcGFxdWV0L3M8L3N0cm9uZz4uIFJvdXRlIEIgOiAzIHBhcXVldHMgw6AgY2hhcXVlIGNsYXAg4oaSIDxzdHJvbmc+MTUgcGFxdWV0cyBlbiAxMCBzPC9zdHJvbmc+LCBzb2l0IDxzdHJvbmc+MSw1IHBhcXVldC9zPC9zdHJvbmc+LiBMYSByb3V0ZSBCIGEgbGUgcGx1cyBncmFuZCBkw6liaXQuPC9wPiIsICI8cD48c3Ryb25nPkxlIGTDqWJpdCBtZXN1cmUgdW5lIHF1YW50aXTDqSBkZSBkb25uw6llcyBwYXIgdW5pdMOpIGRlIHRlbXBzLjwvc3Ryb25nPiBVbml0w6lzLCBkZSBsYSBwbHVzIHBldGl0ZSDDoCBsYSBwbHVzIGdyYW5kZSA6IGJpdC9zICZsdDsga2JpdC9zICZsdDsgTWJpdC9zICZsdDsgR2JpdC9zICjDlzEgMDAwIMOgIGNoYXF1ZSBmb2lzKS48L3A+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+w4AgbmUgcGFzIGNvbmZvbmRyZTwvYj5VbiBkw6liaXQgw6lsZXbDqSBuZSB2ZXV0IHBhcyBkaXJlIHF14oCZdW4gcGFxdWV0IMKrIHJvdWxlIHBsdXMgdml0ZSDCuy4gQ2VsYSB2ZXV0IGRpcmUgcXVlIGRhdmFudGFnZSBkZSBkb25uw6llcyBwYXNzZW50IHBlbmRhbnQgbGEgbcOqbWUgZHVyw6llLjwvZGl2PiJdXSwgWyI0LiBEw6lmaSBmaW5hbCA6IHLDqXVuaXIgbGVzIHRyb2lzIG5vdGlvbnMiLCBbIjxmaWd1cmUgY2xhc3M9XCJmaWdcIj48aW1nIHNyYz1cImltZy9zZXEyLWFjdDEtcDItZ291bG90LnBuZ1wiIGFsdD1cIkxhIGxpYWlzb24gUjEtUjIgw6AgMiBwYXF1ZXRzIHBhciBzZWNvbmRlIGVzdCBsZSBnb3Vsb3QgZCfDqXRyYW5nbGVtZW50XCI+PC9maWd1cmU+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+UsOpcG9uc2VzPC9iPlLDqXNlYXUgZGUgZGVzdGluYXRpb24gOiA8c3Ryb25nPnLDqXNlYXUgMzwvc3Ryb25nPi4gUm91dGV1cnMgdHJhdmVyc8OpcyA6IDxzdHJvbmc+UjEgcHVpcyBSMiBwdWlzIFIzPC9zdHJvbmc+LiBMaWFpc29uIGxpbWl0YW50ZSA6IDxzdHJvbmc+UjEg4oaSIFIyLCAyIHBhcXVldHMvczwvc3Ryb25nPi4gVGVtcHMgbWluaW11bSA6IDEwIMO3IDIgPSA8c3Ryb25nPjUgc2Vjb25kZXM8L3N0cm9uZz4uPC9kaXY+IiwgIjxwPjxzdHJvbmc+RXhlbXBsZSBkZSByw6ljaXQgOjwvc3Ryb25nPiDCqyBMZSBwYXF1ZXQgcGFydCBkZSAxOTIuMTY4LjEuMyBhdmVjIGzigJlhZHJlc3NlIGRlIGRlc3RpbmF0aW9uIDE5Mi4xNjguMy44LiBSMSB2b2l0IHF1ZSBsZSByw6lzZWF1IGVzdCBsZSAzIGV0LCBk4oCZYXByw6hzIHNhIHRhYmxlLCBs4oCZZW52b2llIMOgIFIyLCBxdWkgbOKAmWVudm9pZSDDoCBSMywgcXVpIGxlIGxpdnJlIMOgIGzigJlhcHBhcmVpbCA4LiBMYSBsaWFpc29uIFIxLVIyIG5lIGxhaXNzZSBwYXNzZXIgcXVlIDIgcGFxdWV0cyBwYXIgc2Vjb25kZSA6IGxlcyAxMCBwYXF1ZXRzIG1ldHRlbnQgYXUgbW9pbnMgNSBzZWNvbmRlcy4gwrs8L3A+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+Qm9udXMgOiBwYW5uZSBkZSBSMjwvYj5QbHVzIHJpZW4gbmUgcGFzc2UgZW50cmUgbOKAmcOubG90IEEgZXQgbOKAmcOubG90IEMgOiBpbCBu4oCZZXhpc3RlIHF14oCZdW4gc2V1bCBjaGVtaW4uIElsIGZhdWRyYWl0IHVuIGNoZW1pbiBkZSBzZWNvdXJzIChwYXIgZXhlbXBsZSB1bmUgbGlhaXNvbiBSMS1SMykgZXQgdW4gcHJvdG9jb2xlIGRlIHJvdXRhZ2UgcG91ciBxdWUgbGVzIHJvdXRldXJzIG1ldHRlbnQgbGV1cnMgdGFibGVzIMOgIGpvdXIuPC9kaXY+Il1dLCBbIjUuIEJpbGFuIGRlIGzigJlhY3Rpdml0w6kg4oCUIGNlIHF1ZSB0dSBkb2lzIHNhdm9pciBleHBsaXF1ZXIiLCBbIjx1bD48bGk+PHN0cm9uZz5BZHJlc3NlIElQPC9zdHJvbmc+IOKGkiBpZGVudGlmaWUgdW4gYXBwYXJlaWwgZXQgc29uIHLDqXNlYXUsIGNvbW1lIHVuZSBhZHJlc3NlIHBvc3RhbGUuPC9saT48bGk+PHN0cm9uZz5UYWJsZSBkZSByb3V0YWdlPC9zdHJvbmc+IOKGkiBpbmRpcXVlIGF1IHJvdXRldXIgbGUgcHJvY2hhaW4gc2F1dCBzZWxvbiBsZSByw6lzZWF1IGRlIGRlc3RpbmF0aW9uLjwvbGk+PGxpPjxzdHJvbmc+RMOpYml0PC9zdHJvbmc+IOKGkiBxdWFudGl0w6kgZGUgZG9ubsOpZXMgdHJhbnNtaXNlIHBhciBzZWNvbmRlIDsgbGEgbGlhaXNvbiBsYSBwbHVzIGxlbnRlIGxpbWl0ZSB0b3V0IGxlIHRyYWpldC48L2xpPjwvdWw+IiwgIjxwPjxzdHJvbmc+TGEgcGhyYXNlIMOgIHNhdm9pciBkaXJlIDo8L3N0cm9uZz4gwqsgTGUgcGFxdWV0IHBvcnRlIHVuZSBhZHJlc3NlIElQIGRlIGRlc3RpbmF0aW9uLiBMZXMgcm91dGV1cnMgY29uc3VsdGVudCBsZXVycyB0YWJsZXMgZGUgcm91dGFnZSBwb3VyIGzigJlhY2hlbWluZXIgZGUgcsOpc2VhdSBlbiByw6lzZWF1LiBMZSBkw6liaXQgZGVzIGxpYWlzb25zIGTDqXRlcm1pbmUgbGEgcXVhbnRpdMOpIGRlIGRvbm7DqWVzIHRyYW5zbWlzZSBwZW5kYW50IHVuIHRlbXBzIGRvbm7DqS4gwrs8L3A+IiwgIjxkaXYgY2xhc3M9XCJyZXRlbmlyXCI+PGI+UHJvY2hhaW5lIMOpdGFwZTwvYj5EYW5zIGxhIHBhcnRpZSAzLCB0dSByZXRyb3V2ZXMgY2VzIHRyb2lzIGlkw6llcyBkYW5zIEZpbGl1cyA6IHR1IGNvbmZpZ3VyZXJhcyBsZXMgYWRyZXNzZXMsIGxlcyBwYXNzZXJlbGxlcyBldCB0dSB0ZXN0ZXJhcyBsZXMgY29tbXVuaWNhdGlvbnMuPC9kaXY+Il1dXQ==",EMPREINTE=4054366658;function empreinte(t){var h=5381;for(var i=0;i<t.length;i++)h=((h*33)^t.charCodeAt(i))>>>0;return h}function rendre(l){var h="",buf=[];function vide(){if(buf.length){h+="<ul>"+buf.map(function(x){return "<li>"+x+"</li>"}).join("")+"</ul>";buf=[]}}l.forEach(function(x){if(/^\s*<(ul|ol|div|svg|p|a|table|figure|img|h[1-6]|blockquote)\b/i.test(x)){vide();h+=x}else buf.push(x)});vide();return h}var cb=el("corr-btn"),ci=el("corr-mdp"),cr=el("corr-refus"),cc=el("corr-contenu");function ouvrir(){if(empreinte(ci.value.trim())!==EMPREINTE){cr.hidden=false;ci.value="";ci.focus();return}cr.hidden=true;var sec=JSON.parse(decodeURIComponent(escape(atob(COFFRE))));cc.innerHTML=sec.map(function(x){return "<h3>"+x[0]+"</h3>"+rendre(x[1])}).join("");cc.hidden=false;ci.closest(".saisie").hidden=true;cc.scrollIntoView({behavior:"smooth",block:"nearest"})}cb.addEventListener("click",ouvrir);ci.addEventListener("keydown",function(e){if(e.key==="Enter")ouvrir()});
+})();
+</script>
+<script>
+/* Espace professeur : fichiers chiffrés AES-GCM (clé PBKDF2-SHA256, 250 000 itérations) */
+(function(){
+  "use strict";
+  var zone=document.getElementById("docs-prof"); if(!zone) return;
+  var inp=zone.querySelector(".docs-mdp"), btn=zone.querySelector(".docs-btn"), refus=zone.querySelector(".docs-refus"),
+      liste=zone.querySelector(".docs-liste"), etat=zone.querySelector(".docs-etat"), mdp=null, DOSSIER="assets/seq2-docs/";
+  if(!window.crypto||!window.crypto.subtle){refus.textContent="Ce navigateur ne permet pas d’ouvrir les documents chiffrés.";refus.hidden=false;btn.disabled=true;return}
+  async function dechiffrer(nom,motdepasse){
+    var r=await fetch(DOSSIER+nom+".bin",{cache:"no-store"}); if(!r.ok) throw new Error("introuvable");
+    var buf=new Uint8Array(await r.arrayBuffer()), sel=buf.slice(0,16), iv=buf.slice(16,28), data=buf.slice(28);
+    var base=await crypto.subtle.importKey("raw",new TextEncoder().encode(motdepasse),"PBKDF2",false,["deriveKey"]);
+    var cle=await crypto.subtle.deriveKey({name:"PBKDF2",salt:sel,iterations:250000,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["decrypt"]);
+    return await crypto.subtle.decrypt({name:"AES-GCM",iv:iv},cle,data);
+  }
+  function telecharger(contenu,nom){
+    var type=/\.pdf$/.test(nom)?"application/pdf":"application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+    var url=URL.createObjectURL(new Blob([contenu],{type:type})), a=document.createElement("a");
+    a.href=url; a.download=nom; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){URL.revokeObjectURL(url)},4000);
+  }
+  async function deverrouiller(){
+    var v=inp.value.trim(); if(!v) return;
+    btn.disabled=true; btn.textContent="Vérification…"; refus.hidden=true;
+    try{ await dechiffrer("kit-a-imprimer.docx",v); mdp=v; liste.hidden=false; zone.querySelector(".saisie").hidden=true; inp.value=""; }
+    catch(e){ refus.textContent=(e&&e.message==="introuvable")?"Documents introuvables sur le serveur.":"Mot de passe incorrect."; refus.hidden=false; }
+    btn.disabled=false; btn.textContent="Déverrouiller";
+  }
+  btn.addEventListener("click",deverrouiller);
+  inp.addEventListener("keydown",function(e){if(e.key==="Enter")deverrouiller()});
+  liste.addEventListener("click",async function(e){
+    var b=e.target.closest("button[data-f]"); if(!b||!mdp) return;
+    var t=b.textContent; b.disabled=true; b.textContent="…"; etat.textContent="Déchiffrement de "+b.dataset.n+"…";
+    try{ telecharger(await dechiffrer(b.dataset.f,mdp),b.dataset.n); etat.textContent=b.dataset.n+" téléchargé."; }
+    catch(err){ etat.textContent="Impossible d’ouvrir ce document."; }
+    b.disabled=false; b.textContent=t;
+  });
 })();
 </script>
 <script src="assets/correction-bilan.js"></script>
