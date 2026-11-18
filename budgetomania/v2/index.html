@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#ff5f9e">
+<title>Budgetomania 2 – Les 3 mois de Pépite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none;background:#7cc8ff}
+body{font-family:'Fredoka',system-ui,'Segoe UI',Roboto,sans-serif;color:var(--ink);-webkit-user-select:none;user-select:none;
+  --ink:#2a2140;--sky1:#7cc8ff;--sky2:#ffe49a;--sky3:#ffc2dc;--city:#7fb0e0;--city2:#a3c9ef;--win:#fff6c2;
+  --accent:#ff5f9e;--accent-d:#d63c7c;--green:#16a36f;--red:#e11d48;--panel:rgba(255,255,255,.94);
+  --bling:#c9a227;--sante:#e5383b;--eco:#2fa84f}
+body.ados{--sky1:#2d1263;--sky2:#ff8a4c;--sky3:#c2418e;--city:#1d0b3d;--city2:#341a6b;--win:#ffd166;--accent:#ff4f8b;--accent-d:#c42a63}
+button{font-family:inherit;cursor:pointer;border:0;color:inherit}
+input{font-family:inherit}
+.neg{color:var(--red)!important}.pos{color:var(--green)!important}
+
+/* ---------- FOND ---------- */
+#bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:linear-gradient(175deg,var(--sky1) 0%,var(--sky3) 62%,var(--sky2) 100%);background-size:100% 160%;animation:sky 16s ease-in-out infinite alternate}
+@keyframes sky{to{background-position:0 100%}}
+.layer{position:absolute;inset:-40px;transform:translate(calc(var(--px,0px)*var(--d)),calc(var(--py,0px)*var(--d)));transition:transform .3s ease-out}
+.sun{position:absolute;top:8%;right:10%;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,#fffbd6 0,#ffd54a 55%,rgba(255,213,74,0) 72%);animation:glow 4s ease-in-out infinite}
+body.ados .sun{top:auto;bottom:14%;right:calc(50% - 130px);width:260px;height:260px;background:radial-gradient(circle,#fff1c9 0,#ff9f5a 50%,rgba(255,120,80,0) 72%)}
+@keyframes glow{50%{filter:brightness(1.15)}}
+.cloud{position:absolute;left:0;height:calc(var(--w)*.38);width:var(--w);background:#fff;border-radius:999px;opacity:.9;animation:drift var(--t) linear infinite;animation-delay:var(--dl)}
+.cloud::before,.cloud::after{content:'';position:absolute;background:#fff;border-radius:50%}
+.cloud::before{width:55%;height:140%;left:14%;bottom:20%}.cloud::after{width:40%;height:110%;right:12%;bottom:25%}
+body.ados .cloud,body.ados .cloud::before,body.ados .cloud::after{background:#ffb3d1}
+body.ados .cloud{opacity:.22}
+@keyframes drift{from{transform:translateX(-40vw)}to{transform:translateX(140vw)}}
+.fcoin{position:absolute;bottom:-70px;width:var(--s);height:var(--s);animation:rise var(--t) linear infinite;animation-delay:var(--dl);opacity:.85}
+@keyframes rise{from{transform:translateY(0) rotate(0)}to{transform:translateY(-125vh) rotate(540deg)}}
+.spark{position:absolute;width:3px;height:3px;background:#fff;border-radius:50%;animation:tw 2s infinite alternate}
+body.junior .spark{display:none}
+@keyframes tw{from{opacity:.2}to{opacity:1}}
+.city{position:absolute;left:0;right:0;bottom:0;width:100%;height:30vh}
+.city .b{fill:var(--city)}.city .b2{fill:var(--city2)}.city .w{fill:var(--win);animation:tw 3s infinite alternate}
+.hills{position:absolute;left:0;right:0;bottom:0;width:100%;height:14vh}
+body.ados .hills{display:none}
+
+/* ---------- COMMUN ---------- */
+.screen{position:fixed;inset:0;z-index:2;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 10px) 12px calc(env(safe-area-inset-bottom) + 10px);opacity:0;visibility:hidden;transform:translateY(18px) scale(.98);transition:opacity .4s,transform .4s,visibility .4s}
+.screen.active{opacity:1;visibility:visible;transform:none}
+.scroll{flex:1;overflow:auto;min-height:0;display:flex;flex-direction:column;align-items:center;gap:12px;padding-bottom:16px}
+.wrap{width:100%;max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px;align-items:center}
+.btn{background:var(--accent);color:#fff;font-weight:700;font-size:20px;padding:13px 24px;border-radius:20px;box-shadow:0 6px 0 var(--accent-d),0 12px 24px rgba(0,0,0,.18);transition:transform .1s,box-shadow .1s,filter .2s}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--accent-d)}
+.btn.big{font-size:23px;padding:15px 32px}
+.btn.green{background:var(--green);box-shadow:0 6px 0 #0d7a52,0 12px 24px rgba(0,0,0,.18)}
+.btn.ghost{background:#fff;color:var(--ink);box-shadow:0 6px 0 #cfc6e6}
+.btn.off{filter:grayscale(1);opacity:.55}
+.btn.pulse{animation:pulseS 1.2s infinite}
+.ibtn{width:42px;height:42px;border-radius:14px;background:var(--panel);font-size:20px;box-shadow:0 4px 0 rgba(0,0,0,.12);flex:none;display:flex;align-items:center;justify-content:center}
+.ibtn:active{transform:translateY(3px);box-shadow:none}
+.panel{background:var(--panel);border-radius:24px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.15);width:100%}
+.bar{display:flex;align-items:center;gap:8px}
+.bar-title{flex:1;text-align:center;font-weight:700;font-size:19px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.25);min-width:0}
+.bubble{position:relative;background:#fff;border-radius:18px;padding:10px 14px;font-weight:500;box-shadow:0 6px 16px rgba(0,0,0,.12);font-size:16px;line-height:1.35}
+.bubble::before{content:'';position:absolute;left:-8px;top:50%;margin-top:-8px;border:8px solid transparent;border-right-color:#fff;border-left:0}
+.pep-row{display:flex;align-items:center;gap:10px;width:100%}
+.pep-s{width:80px;height:74px;flex:none;animation:bounce 2s infinite;cursor:pointer}
+.title-w{font-size:clamp(26px,7vw,40px);font-weight:700;color:#fff;text-align:center;text-shadow:0 3px 0 rgba(0,0,0,.25);line-height:1.1}
+@keyframes pulseS{50%{transform:scale(1.06)}}
+@keyframes popIn{from{opacity:0;transform:translateY(30px) scale(.9)}}
+@keyframes bounce{0%,100%{transform:translateY(0) scale(1,1)}45%{transform:translateY(-14px) scale(.97,1.03)}55%{transform:translateY(-14px)}90%{transform:translateY(0) scale(1.06,.94)}}
+@keyframes shakeX{0%,100%{transform:none}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+@keyframes shakeHard{0%,100%{transform:none}15%{transform:translateX(-16px) rotate(-8deg)}35%{transform:translateX(16px) rotate(8deg)}55%{transform:translateX(-12px) rotate(-5deg)}75%{transform:translateX(9px) rotate(4deg)}}
+.jump{animation:jump .8s !important}
+@keyframes jump{30%{transform:translateY(-60px) rotate(-12deg)}70%{transform:translateY(-60px) rotate(360deg)}100%{transform:rotate(360deg)}}
+.phone-ic{display:inline-block;animation:phoneShake .7s infinite}
+@keyframes phoneShake{0%,100%{transform:rotate(0)}25%{transform:rotate(-20deg)}75%{transform:rotate(20deg)}}
+
+/* Visages */
+.family{display:flex;align-items:flex-end;justify-content:center;gap:2px;flex-wrap:nowrap}
+.face{width:64px;flex:none;animation:bob 2.4s ease-in-out infinite}
+.face.kid{width:48px}
+.face svg{width:100%;height:auto;display:block;overflow:visible}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px) rotate(1.5deg)}}
+.family.big .face{width:min(20vw,100px)}.family.big .face.kid{width:min(15vw,74px)}
+.family.mini .face{width:26px}.family.mini .face.kid{width:20px}
+.family.hop .face{animation:hop .55s}
+@keyframes hop{40%{transform:translateY(-14px) scale(1.08)}}
+.blink{animation:blink 4.2s infinite;transform-origin:center;transform-box:fill-box}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+
+/* Accueil */
+.logo{font-weight:700;font-size:clamp(42px,12vw,66px);line-height:1;text-align:center;color:#fff;text-shadow:0 4px 0 var(--accent-d),0 10px 20px rgba(0,0,0,.25);animation:wobble 3s ease-in-out infinite;margin-top:6px}
+.logo .l2{color:#ffe14d}.logo sup{font-size:.45em;background:#fff;color:var(--accent-d);border-radius:12px;padding:0 8px;text-shadow:none;vertical-align:top;margin-left:4px}
+@keyframes wobble{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg) scale(1.03)}}
+.tag{background:#fff;color:var(--accent-d);font-weight:700;padding:6px 16px;border-radius:999px;box-shadow:0 4px 0 rgba(0,0,0,.1)}
+.pep-big{width:150px;height:140px;animation:bounce 1.8s ease-in-out infinite;cursor:pointer}
+.panel label{display:block;font-weight:700;margin:6px 0}
+#inName{width:100%;font-size:20px;padding:10px 14px;border-radius:14px;border:3px solid #e9e2fb;outline:none;color:var(--ink)}
+#inName:focus{border-color:var(--accent)}
+.ages{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.age{font-size:21px;font-weight:700;padding:10px 0;border-radius:14px;background:#f2edff;color:var(--ink);box-shadow:0 4px 0 #d9cff5;transition:transform .15s}
+.age.sel{background:var(--accent);color:#fff;box-shadow:0 4px 0 var(--accent-d);transform:scale(1.12)}
+.mode-badge{margin-top:12px;text-align:center;font-weight:500;min-height:26px;font-size:15px}
+.mode-badge b.m{display:inline-block;padding:4px 12px;border-radius:999px;color:#fff;margin-bottom:4px;font-size:16px}
+.dev-badge{background:rgba(255,255,255,.88);border-radius:16px;padding:8px 14px;font-size:15px;text-align:center}
+.credits{margin-top:auto;padding:6px 14px;background:rgba(30,15,60,.45);border-radius:14px;text-align:center;font-size:13px;font-weight:500;color:#fff;line-height:1.4}
+
+/* Grandes cartes à retourner (ménage, événements, emploi) */
+.flip{width:min(78vw,320px);aspect-ratio:3/4;perspective:1000px;cursor:pointer;flex:none}
+.flip.small{width:min(28vw,150px)}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .8s cubic-bezier(.3,1.4,.5,1);transform-style:preserve-3d}
+.flip.open .flip-in{transform:rotateY(180deg)}
+.face-b,.face-f{position:absolute;inset:0;border-radius:26px;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:6px solid #fff;box-shadow:0 16px 36px rgba(0,0,0,.28);overflow:hidden}
+.face-b{background:repeating-linear-gradient(45deg,#ff7eb3 0 16px,#ff96c2 16px 32px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fff;font-weight:700;text-align:center;padding:10px}
+body.ados .face-b{background:repeating-linear-gradient(45deg,#7c3aed 0 16px,#8b5cf6 16px 32px)}
+.face-b .q{width:84px;height:84px;border-radius:50%;background:#fff;color:var(--accent);font-size:50px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 0 rgba(0,0,0,.12)}
+.flip.small .face-b .q{width:50px;height:50px;font-size:30px}
+.face-b small{background:rgba(0,0,0,.25);border-radius:999px;padding:4px 10px;font-size:14px}
+.face-f{transform:rotateY(180deg);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px;text-align:center}
+.flip.shake{animation:shakeHard .5s}
+.flip.idle{animation:idleW 2.6s infinite}
+@keyframes idleW{0%,78%,100%{transform:rotate(0)}82%{transform:rotate(-4deg)}86%{transform:rotate(4deg)}90%{transform:rotate(-2deg)}}
+.flip.dim{opacity:.45;transform:scale(.92)}
+.flip.picked .face-f{box-shadow:0 0 0 5px #ffd54a,0 16px 36px rgba(0,0,0,.3)}
+.hh-name{font-size:24px;font-weight:700}
+.hh-inc{font-size:30px;font-weight:700;color:var(--green)}
+.hh-sub{font-size:15px;opacity:.7}
+.ev-ico{font-size:72px;animation:bounce 2s infinite}
+.flip.small .ev-ico{font-size:40px}
+.ev-t{font-size:22px;font-weight:700}
+.flip.small .ev-t{font-size:14px}
+.jobs{display:flex;gap:10px;justify-content:center}
+.jobs .flip{transition:transform .5s cubic-bezier(.3,1.4,.5,1),opacity .4s}
+
+/* Objectifs */
+.goals{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}
+.goal{background:#fff;border-radius:22px;padding:14px 8px;text-align:center;box-shadow:0 6px 0 rgba(0,0,0,.08),0 10px 20px rgba(0,0,0,.1);border:4px solid transparent;transition:transform .2s;animation:popIn .5s backwards;position:relative}
+.goal .gi{font-size:46px;display:block;animation:bounce 2.2s infinite}
+.goal b{display:block;font-size:18px;margin-top:4px}
+.goal small{display:block;font-size:13px;opacity:.7;margin-top:2px;line-height:1.2}
+.goal.sel{border-color:var(--gc);transform:scale(1.06);background:#fffbea}
+.goal.sel::after{content:'🎯 Mon objectif';position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gc);color:#fff;font-size:12px;padding:2px 10px;border-radius:999px;white-space:nowrap;font-weight:700}
+.rules{font-size:15px;line-height:1.45}
+.rules p{margin:.35em 0}
+
+/* ---------- JEU ---------- */
+#scr-game{gap:7px;padding-left:10px;padding-right:10px}
+.g-top .bar-title{font-size:16px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;margin-left:4px;text-shadow:none;vertical-align:middle}
+.badge.infl{background:#ffe0b3;color:#8a4b00}.badge.promo{background:#d6f5dc;color:#1d7a37}.badge.lic{background:#fdd;color:#a4161a}.badge.none{background:#eee;color:#444}
+.hud{background:var(--panel);border-radius:18px;padding:8px 10px;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.money{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.mbox{text-align:center;line-height:1.1}
+.mbox .l{font-size:11px;opacity:.65;text-transform:uppercase;letter-spacing:.3px}
+.mbox .v{font-size:19px;font-weight:700}
+.mbox .s{font-size:12px;min-height:14px}
+.scores{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+.sc{border-radius:12px;background:#f6f3ff;text-align:center;padding:3px 2px;border:3px solid transparent;line-height:1.1;transition:transform .2s}
+.sc.goalc{border-color:var(--bling);background:#fffbea}
+.sc .l{font-size:12px;font-weight:600}
+.sc .v{font-size:19px;font-weight:700}
+.sc .d{font-size:12px;font-weight:700;min-height:13px}
+.sc.bump{animation:bumpS .4s}
+@keyframes bumpS{40%{transform:scale(1.12)}}
+.cats{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:4px 2px}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex:1 0 auto;min-width:64px;padding:6px 6px 4px;border-radius:16px;font-weight:700;font-size:12px;text-align:center;position:relative;border:3px solid rgba(0,0,0,.12);box-shadow:0 4px 0 rgba(0,0,0,.12);transition:transform .2s}
+.cat .ci{font-size:22px;display:block;line-height:1.1}
+.cat .cn{display:block;font-size:11px;font-weight:600;opacity:.75;min-height:13px}
+.cat.open{transform:translateY(-3px) scale(1.06);outline:3px solid var(--ink);outline-offset:1px}
+.cat.done::after{content:'✔';position:absolute;top:-7px;right:-5px;background:var(--green);color:#fff;border-radius:50%;width:20px;height:20px;font-size:12px;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.cat-head{color:#fff;font-weight:600;font-size:14px;text-align:center;line-height:1.25;background:rgba(30,15,60,.45);border-radius:12px;padding:4px 10px;align-self:center;max-width:100%}
+.track{flex:1;min-height:0;display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px calc(50% - min(36vw,135px)) 10px;align-items:center;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.ocard{flex:none;width:min(72vw,270px);max-height:100%;scroll-snap-align:center;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,.22);border:5px solid #fff;position:relative;touch-action:pan-x;transition:transform .3s cubic-bezier(.3,1.5,.5,1),box-shadow .3s;animation:dealIn .5s cubic-bezier(.3,1.5,.5,1) backwards;display:flex;flex-direction:column;cursor:grab}
+@keyframes dealIn{from{opacity:0;transform:translateY(60px) rotate(8deg) scale(.7)}}
+.ocard.center{transform:scale(1.04);box-shadow:0 0 0 4px #ffd54a,0 18px 36px rgba(0,0,0,.3)}
+.ocard.taken{border-color:var(--green)}
+.ocard.taken .oart::before{content:'✔ PRIS';position:absolute;top:10px;left:10px;z-index:3;background:var(--green);color:#fff;font-weight:700;border-radius:10px;padding:2px 10px;font-size:14px;transform:rotate(-8deg)}
+.ocard.nope{animation:nope .45s}
+@keyframes nope{0%,100%{transform:none}20%{transform:translateX(-12px) rotate(-3deg)}40%{transform:translateX(12px) rotate(3deg)}60%{transform:translateX(-8px)}80%{transform:translateX(5px)}}
+.oart{height:clamp(84px,17vh,140px);background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex:none}
+.oart::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 25% 15%,rgba(255,255,255,.55),transparent 50%)}
+.oart .ray{position:absolute;width:300%;height:300%;background:repeating-conic-gradient(rgba(255,255,255,.16) 0 10deg,transparent 10deg 20deg);animation:spin 18s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.oemo{font-size:clamp(50px,10vh,76px);position:relative;z-index:1;filter:drop-shadow(0 6px 6px rgba(0,0,0,.25))}
+.ocard.center .oemo{animation:emojiBounce 1.6s ease-in-out infinite}
+@keyframes emojiBounce{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-8px) rotate(5deg) scale(1.07)}}
+.obody{padding:8px 10px 10px;text-align:center;display:flex;flex-direction:column;gap:3px}
+.oname{font-size:19px;font-weight:700;line-height:1.1}
+.oprice{font-size:26px;font-weight:700;color:var(--accent-d);line-height:1.1}
+.oprice s{font-size:14px;color:var(--ink);opacity:.5;font-weight:500}
+.oprice small{font-size:13px;color:var(--ink);opacity:.6;font-weight:500}
+.ocost{font-size:13px;opacity:.75;min-height:15px}
+.ofx{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;margin-top:2px}
+.ofx span{background:#f6f3ff;border-radius:999px;padding:2px 7px;font-size:13px;font-weight:700}
+.onote{font-size:12px;background:#fff1d6;border-radius:8px;padding:2px 6px;font-weight:600}
+.otip{font-size:12px;background:#e3f9ec;color:#0d7a52;border-radius:8px;padding:2px 6px;font-weight:700}
+.g-act{display:flex;gap:8px;justify-content:center;align-items:center}
+.act{flex:1;max-width:260px;padding:11px 8px;border-radius:16px;font-weight:700;font-size:17px;color:#fff;background:var(--green);box-shadow:0 5px 0 #0d7a52}
+.act.rem{background:#94a3b8;box-shadow:0 5px 0 #64748b}
+.act:active{transform:translateY(4px);box-shadow:none}
+.nav{width:44px;height:44px;border-radius:50%;background:var(--panel);font-size:20px;font-weight:700;box-shadow:0 4px 0 rgba(0,0,0,.12);flex:none}
+.foot{display:grid;grid-template-columns:1fr 1.25fr;gap:8px;align-items:stretch}
+.basket{background:var(--panel);border-radius:18px;padding:6px 10px;display:flex;align-items:center;gap:8px;box-shadow:0 5px 0 rgba(0,0,0,.1);text-align:left;line-height:1.1}
+.basket .bi{font-size:28px}
+.basket b{font-size:16px}
+.basket small{display:block;font-size:12px;opacity:.7}
+.basket.got{animation:gulp .5s}
+@keyframes gulp{30%{transform:scale(1.12,.9)}60%{transform:scale(.95,1.06)}}
+.basket.hot{box-shadow:0 0 0 5px #fff,0 0 30px #fff}
+.endbtn{font-size:17px;padding:10px 8px;border-radius:18px}
+.miss{font-size:12.5px;color:#fff;text-align:center;min-height:16px;line-height:1.25;background:rgba(30,15,60,.5);border-radius:10px;padding:3px 8px}
+.miss:empty{display:none}
+.side{display:none}
+.blist .bcat{font-weight:700;margin:8px 0 4px;font-size:14px}
+.row{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:12px;background:#f7f4ff;margin-bottom:5px}
+.row .em{font-size:22px}.row .tx{flex:1;min-width:0;line-height:1.15;font-size:14px}.row .pr{font-weight:700;font-size:14px}
+.row button{background:#fff;border-radius:10px;padding:4px 8px;font-weight:600;box-shadow:0 2px 0 #ddd;font-size:13px}
+.empty{opacity:.7;text-align:center;padding:12px;font-size:14px}
+
+/* Tiroir, tuto, say, confetti */
+.drawer{position:fixed;inset:0;background:rgba(20,10,40,.45);z-index:40;display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;transition:.3s}
+.drawer.on{opacity:1;visibility:visible}
+.sheet{background:#fff;width:100%;max-width:560px;border-radius:26px 26px 0 0;padding:14px 14px calc(env(safe-area-inset-bottom) + 16px);max-height:78vh;overflow:auto;transform:translateY(100%);transition:transform .35s cubic-bezier(.3,1.3,.5,1)}
+.drawer.on .sheet{transform:none}
+.sheet-h{display:flex;justify-content:space-between;align-items:center;font-size:20px;margin-bottom:8px}
+.tuto{position:fixed;inset:0;z-index:50;background:rgba(30,10,60,.6);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:.3s}
+.tuto.on{opacity:1;visibility:visible}
+.tuto-card{background:#fff;border-radius:28px;padding:22px;max-width:390px;width:100%;text-align:center;animation:popIn .4s}
+.tuto-ic{font-size:70px;height:100px;display:flex;align-items:center;justify-content:center;gap:10px}
+.tuto-t{font-size:22px;font-weight:700;margin:6px 0}
+.tuto-p{font-size:16.5px;margin-bottom:14px;line-height:1.4}
+.dots{display:flex;gap:6px;justify-content:center;margin-bottom:12px}
+.dots i{width:10px;height:10px;border-radius:50%;background:#ddd}.dots i.on{background:var(--accent)}
+.swipe-up{display:inline-block;animation:swUp 2s infinite}
+@keyframes swUp{0%,100%{transform:none}40%{transform:translateY(-34px) scale(.9)}}
+.swipe-x{display:inline-block;animation:swX 2.4s infinite}
+@keyframes swX{0%,100%{transform:none}30%{transform:translateX(40px)}70%{transform:translateX(-40px)}}
+.say{position:fixed;left:50%;bottom:150px;transform:translateX(-50%) scale(.6);background:#fff;border-radius:20px;padding:10px 16px;width:max-content;max-width:min(92vw,460px);font-weight:600;font-size:15.5px;box-shadow:0 10px 30px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .25s,transform .35s cubic-bezier(.3,1.6,.5,1);z-index:45;text-align:center;line-height:1.35}
+.say.on{opacity:1;transform:translateX(-50%) scale(1)}
+.say::after{content:'';position:absolute;bottom:-10px;left:50%;margin-left:-10px;border:10px solid transparent;border-top-color:#fff;border-bottom:0}
+.say b{color:var(--accent-d)}
+.fly{position:fixed;z-index:60;pointer-events:none;font-size:30px;transition:transform .7s cubic-bezier(.5,-.4,.6,1),opacity .7s}
+#confetti{position:fixed;inset:0;z-index:70;pointer-events:none;width:100%;height:100%}
+
+/* Synthèse */
+.verdict{font-size:19px;font-weight:700;padding:14px;border-radius:18px;text-align:center;line-height:1.35;width:100%}
+.verdict.win{background:#e3f9ec;color:#0d7a52}.verdict.lose{background:#ffe4e8;color:#a4161a}.verdict.info{background:#eaf6ff;color:var(--ink)}
+.verdict small{font-weight:500;font-size:15px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{padding:6px 4px;border-bottom:1px solid #eee;text-align:left}
+th{font-size:12.5px;opacity:.65}
+td.r,th.r{text-align:right}
+h3{margin:0 0 8px;font-size:17px}
+.legend{display:flex;gap:12px;justify-content:center;margin-top:6px;font-size:13px;flex-wrap:wrap}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.hint{font-size:13px;opacity:.7;text-align:center;margin:6px 0 0}
+.res-family{margin-top:4px}
+
+@media (max-height:720px){
+  .hud{padding:6px 8px}.mbox .v{font-size:17px}.sc .v{font-size:17px}.cat{padding:4px 5px 3px}.cat .ci{font-size:19px}
+  .oname{font-size:17px}.oprice{font-size:22px}.act{padding:9px 6px;font-size:16px}
+}
+
+/* ---------- ORDINATEUR ---------- */
+@media (min-width:900px){
+  body.desktop #scr-game{display:grid;grid-template-columns:1fr 330px;grid-template-rows:auto auto auto auto 1fr auto auto;grid-template-areas:"top top" "hud side" "cats side" "head side" "track side" "act side" "foot side";gap:10px;padding:14px 22px}
+  body.desktop .g-top{grid-area:top}body.desktop .hud{grid-area:hud}body.desktop .cats{grid-area:cats;justify-content:center}
+  body.desktop .cat-head{grid-area:head}body.desktop .track{grid-area:track}body.desktop .g-act{grid-area:act}body.desktop .foot{grid-area:foot}
+  body.desktop .side{grid-area:side;display:flex;flex-direction:column;background:var(--panel);border-radius:22px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,.15);min-height:0;border:4px dashed transparent;transition:border-color .2s}
+  body.desktop .side.hot{border-color:var(--green)}
+  body.desktop .side .blist{flex:1;overflow:auto;min-height:0}
+  body.desktop .track{flex-wrap:wrap;overflow:auto;scroll-snap-type:none;justify-content:center;align-content:flex-start;padding:12px}
+  body.desktop .ocard{width:220px;max-height:none;touch-action:none}
+  body.desktop .oart{height:100px}body.desktop .oemo{font-size:58px}
+  body.desktop .ocard:hover{transform:translateY(-4px)}
+  body.desktop .ocard.center{transform:translateY(-6px) scale(1.03)}
+  body.desktop .nav{display:none}
+  body.desktop .foot .basket{display:none}
+  body.desktop .foot{grid-template-columns:1fr}
+  body.desktop .goals{gap:18px}
+  body.desktop .flip.small{width:170px}
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body class="junior">
+
+<div id="bg">
+  <div class="layer" style="--d:.3"><div class="sun"></div><div id="sparks"></div></div>
+  <div class="layer" style="--d:.6" id="clouds"></div>
+  <div class="layer" style="--d:.9" id="coins"></div>
+  <div class="layer" style="--d:1.2"><svg class="city" id="city" viewBox="0 0 1200 220" preserveAspectRatio="xMidYMax slice"></svg>
+    <svg class="hills" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,70 Q150,10 320,60 T650,50 T980,40 T1200,60 V120 H0Z" fill="#7ed9a0"/><path d="M0,95 Q200,50 420,90 T860,80 T1200,85 V120 H0Z" fill="#5cc887"/></svg></div>
+</div>
+
+<!-- ACCUEIL -->
+<section class="screen" id="scr-home">
+  <div class="scroll"><div class="wrap" style="max-width:520px;flex:1">
+    <div class="logo"><span>Budget</span><span class="l2">omania</span><sup>2</sup></div>
+    <div class="tag">🐷 Les 3 mois de Pépite</div>
+    <div id="homePep" class="pep-big" onclick="pepJump(this)"></div>
+    <div class="panel">
+      <label for="inName">Ton prénom <small style="font-weight:400;opacity:.6">(facultatif)</small></label>
+      <input id="inName" maxlength="14" placeholder="Ex : Lina" autocomplete="off">
+      <label style="margin-top:12px">Quel âge as-tu ?</label>
+      <div id="ages" class="ages"></div>
+      <div id="modeBadge" class="mode-badge">Choisis ton âge pour découvrir ton mode de jeu</div>
+    </div>
+    <div id="devBadge" class="dev-badge"></div>
+    <button id="btnGo" class="btn big off" onclick="start()">🚀 C'est parti !</button>
+    <footer class="credits">Créé avec Claude.ai – EF2D Technologie Fehmi KLABI – Groupe EducFi AEFE</footer>
+  </div></div>
+</section>
+
+<!-- TIRAGE DU MÉNAGE -->
+<section class="screen" id="scr-hh">
+  <header class="bar"><button class="ibtn" onclick="go('home')">⚙️</button><div class="bar-title">Étape 1 · Ton ménage</div><button class="ibtn snd" onclick="toggleSound()">🔊</button></header>
+  <div class="scroll"><div class="wrap">
+    <div class="pep-row"><div class="pep-s" id="hhPep" onclick="pepJump(this)"></div><div class="bubble" id="hhSay"></div></div>
+    <div class="flip idle" id="hhCard" onclick="drawHousehold()"><div class="flip-in">
+      <div class="face-b"><div class="q">?</div><div id="hhBackTxt"></div></div>
+      <div class="face-f" id="hhFront"></div></div></div>
+    <div id="hhBtns" style="display:none;gap:10px;flex-wrap:wrap;justify-content:center">
+      <button class="btn ghost" onclick="rerollHousehold()">🎲 Un autre ménage</button>
+      <button class="btn green" onclick="go('goal')">Choisir mon objectif ▶</button>
+    </div>
+  </div></div>
+</section>
+
+<!-- OBJECTIF -->
+<section class="screen" id="scr-goal">
+  <header class="bar"><button class="ibtn" onclick="go('hh')">←</button><div class="bar-title">Étape 2 · Ton objectif</div><button class="ibtn snd" onclick="toggleSound()">🔊</button></header>
+  <div class="scroll"><div class="wrap">
+    <div class="pep-row"><div class="pep-s" id="goalPep" onclick="pepJump(this)"></div><div class="bubble rules" id="goalRules"></div></div>
+    <div class="goals" id="goals"></div>
+    <div class="panel rules" id="goalMsg" style="text-align:center"></div>
+    <button class="btn big off" id="btnStart" onclick="startGame()">Commencer le mois 1 ▶</button>
+  </div></div>
+</section>
+
+<!-- ÉVÉNEMENT -->
+<section class="screen" id="scr-event">
+  <header class="bar"><span style="width:42px"></span><div class="bar-title" id="evTitle"></div><button class="ibtn snd" onclick="toggleSound()">🔊</button></header>
+  <div class="scroll"><div class="wrap" id="evBox"></div></div>
+</section>
+
+<!-- JEU -->
+<section class="screen" id="scr-game">
+  <header class="bar g-top"><button class="ibtn" onclick="openRules()" title="Règles">📖</button><div class="bar-title" id="gTitle"></div><div id="gFamily" class="family mini"></div><button class="ibtn snd" onclick="toggleSound()">🔊</button></header>
+  <div class="hud" id="hud">
+    <div class="money">
+      <div class="mbox"><div class="l">💰 Budget du mois</div><div class="v" id="mR"></div><div class="s" id="mRs"></div></div>
+      <div class="mbox"><div class="l">Reste</div><div class="v" id="mLeft"></div><div class="s" id="mPrev"></div></div>
+      <div class="mbox"><div class="l">🐷 Épargne</div><div class="v" id="mSav"></div><div class="s">cumulée</div></div>
+    </div>
+    <div class="scores" id="scores"></div>
+  </div>
+  <div class="cats" id="cats"></div>
+  <div class="cat-head" id="catHead"></div>
+  <div class="track" id="track"></div>
+  <div class="g-act" id="gAct"><button class="nav" onclick="navOpt(-1)">‹</button><button class="act" id="actBtn" onclick="toggleTake()"></button><button class="nav" onclick="navOpt(1)">›</button></div>
+  <div class="foot">
+    <button class="basket" id="basketBtn" onclick="openBasket()"><span class="bi">🧺</span><span><b id="bTot"></b><small id="bCnt"></small></span></button>
+    <div style="display:flex;flex-direction:column;gap:4px"><div class="miss" id="miss"></div><button class="btn endbtn" id="btnEnd" onclick="endRound()">Terminer le mois ✔</button></div>
+  </div>
+  <aside class="side" id="side"><h3>🧺 Mes dépenses du mois</h3><div class="hint" style="text-align:left;margin:0 0 6px">Glisse une carte ici pour la prendre</div><div class="blist" id="sideList"></div></aside>
+</section>
+
+<!-- SYNTHÈSE -->
+<section class="screen" id="scr-end">
+  <div class="scroll"><div class="wrap">
+    <div class="title-w" id="synthTitle"></div>
+    <div id="endFamily" class="family big res-family"></div>
+    <div class="verdict" id="verdict"></div>
+    <div class="pep-row"><div class="pep-s" id="endPep"></div><div class="bubble" id="endSay"></div></div>
+    <div class="panel"><h3>📊 Taux de consommation et taux d'épargne</h3><div id="chart"></div>
+      <div class="legend"><span><i style="background:#3aa8f5"></i>Consommation (D ÷ R)</span><span><i style="background:#2fa84f"></i>Épargne (E ÷ R)</span></div>
+      <p class="hint">Les deux taux font toujours 100 % ensemble. Un taux d'épargne négatif veut dire que le ménage a puisé dans son épargne.</p></div>
+    <div class="panel"><h3>💶 Le budget mois par mois</h3><table id="budgetTable"></table></div>
+    <div class="panel"><h3>🏆 Les scores</h3><table id="scoreTable"></table></div>
+    <div class="panel"><h3 id="expTitle"></h3><table id="expTable"></table></div>
+    <button class="btn big green" id="btnNext"></button>
+  </div></div>
+</section>
+
+<div class="drawer" id="drawer" onclick="if(event.target===this)closeDrawer()"><div class="sheet"><div class="sheet-h"><b id="dTitle"></b><button class="ibtn" onclick="closeDrawer()">✕</button></div><div id="dBody"></div></div></div>
+<div class="tuto" id="tuto"><div class="tuto-card"><div class="dots" id="tDots"></div><div class="tuto-ic" id="tIc"></div><div class="tuto-t" id="tT"></div><div class="tuto-p" id="tP"></div><button class="btn" id="tBtn" onclick="tutoNext()">Suivant ▶</button></div></div>
+<div class="say" id="say"></div>
+<canvas id="confetti"></canvas>
+
+<script>
+/* =====================================================================
+   BUDGETOMANIA 2 – LES 3 MOIS DE PÉPITE
+   Règles et calculs identiques au jeu Budgetomania (cartes) :
+   ménage tiré au sort, objectif Bling-bling / Santé / Écologie, 3 tours,
+   6 catégories (au moins un choix chacune), inflation +10 % au tour 2,
+   carte emploi au tour 3, épargne cumulée, taux de consommation/épargne.
+   ===================================================================== */
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+const fmt=n=>(n<0?'−':'')+Math.abs(Math.round(n)).toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')+' €';
+const pct=n=>n.toFixed(1).replace('.',',')+' %';
+const sgn=n=>(n>0?'+':'')+n;
+const KEY='budgetomania2_pepite';
+const store={get(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}},set(o){try{localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}}};
+let SAVE=store.get();
+const S={age:null,name:SAVE.name||'',mode:'junior',sound:true,motionOK:false,motionOn:false,device:{mobile:true},screen:'home'};
+
+/* ===== Données du jeu (identiques à l'original) ===== */
+const NB_ROUNDS=3, INFLATION=0.10, PROMOTION=500;
+const P={ // personnages (visages dessinés)
+ a1:{n:'Paul',skin:'#f2c4a0',hair:'#6b3e1e',style:'short',shirt:'#3b82f6'},
+ a2:{n:'Claire',skin:'#f5d0b5',hair:'#c2410c',style:'long',shirt:'#10b981'},
+ k1:{n:'Jules',kid:true,skin:'#f2c4a0',hair:'#6b3e1e',style:'cap',cap:'#f59e0b',shirt:'#ef4444'},
+ k2:{n:'Rose',kid:true,skin:'#f5d0b5',hair:'#c2410c',style:'pony',shirt:'#a855f7'},
+ sofia:{n:'Sofia',skin:'#e8b48f',hair:'#5a2d14',style:'bun',shirt:'#0ea5e9'},
+ nino:{n:'Nino',kid:true,skin:'#f1c19c',hair:'#2b1a0e',style:'cap',cap:'#ef4444',shirt:'#facc15'},
+ ana:{n:'Ana',skin:'#c98b62',hair:'#2a160c',style:'long',shirt:'#f97316'},
+ diego:{n:'Diego',skin:'#b5774e',hair:'#1a1a1a',style:'short',shirt:'#334155'},
+ lucas:{n:'Lucas',kid:true,skin:'#c98b62',hair:'#1a1a1a',style:'curly',shirt:'#22c55e'},
+ ines:{n:'Inès',kid:true,skin:'#d49a70',hair:'#3a1f10',style:'pony',shirt:'#a855f7'},
+ tom:{n:'Tom',kid:true,skin:'#c98b62',hair:'#1a1a1a',style:'short',shirt:'#ef4444'},
+ lola:{n:'Lola',kid:true,skin:'#d49a70',hair:'#2a160c',style:'bun',shirt:'#ec4899'},
+ linh:{n:'Linh',skin:'#f0cfa8',hair:'#111',style:'long',shirt:'#e11d48'},
+ minh:{n:'Minh',skin:'#e9c39b',hair:'#111',style:'short',shirt:'#0f766e',glasses:true},
+ an:{n:'An',kid:true,skin:'#f0cfa8',hair:'#111',style:'curly',shirt:'#facc15'}
+};
+const HOUSEHOLDS=[
+ {adults:2,children:2,income:2000,name:'La famille Martin',people:['a1','a2','k1','k2']},
+ {adults:1,children:1,income:1500,name:'Sofia & Nino',people:['sofia','nino']},
+ {adults:2,children:4,income:4500,name:'La famille Morales',people:['ana','diego','lucas','ines','tom','lola']},
+ {adults:2,children:1,income:4000,name:'La famille Nguyen',people:['linh','minh','an']}
+];
+const GOALS={bling:{name:'Bling-bling',desc:'Vivre dans le luxe et le confort',ico:'💎',c:'#c9a227'},
+ sante:{name:'Santé',desc:'Prendre soin de sa santé et de celle de sa famille',ico:'❤️',c:'#e5383b'},
+ eco:{name:'Écologie',desc:'Réduire son impact sur la planète',ico:'🍃',c:'#2fa84f'}};
+const SCORE_ORDER=['bling','sante','eco'];
+const CATEGORIES=[
+ {id:'logement',name:'Logement',ico:'🏠',color:'#c6f36b',c2:'#84cc16',options:[
+  {n:'Pavillon en banlieue',i:'🏡',p:250,u:'pers',eco:-5,bling:5,sante:5},
+  {n:'Appartement banlieue',i:'🏢',p:125,u:'pers',eco:0,bling:-5,sante:0},
+  {n:'Maison de centre-ville',i:'🏰',p:375,u:'pers',eco:-10,bling:15,sante:5},
+  {n:'Cabane dans les bois',i:'🛖',p:75,u:'pers',eco:10,bling:-10,sante:10,car:true},
+  {n:'Appartement centre-ville',i:'🏙️',p:225,u:'pers',eco:5,bling:5,sante:5},
+  {n:'Appartement périurbain',i:'🏬',p:100,u:'pers',eco:-5,bling:-10,sante:-5},
+  {n:'Habiter dans un van',i:'🚐',p:25,u:'pers',eco:-10,bling:-10,sante:-5,car:true},
+  {n:'Maison périurbaine',i:'🏘️',p:200,u:'pers',eco:-10,bling:10,sante:0,car:true}]},
+ {id:'transport',name:'Transport',ico:'🚌',color:'#e5e7eb',c2:'#94a3b8',options:[
+  {n:'À pied',i:'🚶',p:0,u:'pers',eco:10,bling:-10,sante:10},
+  {n:'Bus',i:'🚌',p:50,u:'pers',eco:5,bling:-5,sante:0},
+  {n:'Voiture',i:'🚗',p:300,u:'adulte',eco:-10,bling:10,sante:-10,isCar:true},
+  {n:'Bus + marche',i:'🚏',p:30,u:'pers',eco:10,bling:-5,sante:5},
+  {n:'Assurance automobile',i:'🛡️',p:50,u:'adulte',eco:0,bling:0,sante:0,needsCar:true}]},
+ {id:'nourriture',name:'Nourriture',ico:'🛒',color:'#ff9fd6',c2:'#ff5fb8',options:[
+  {n:'Hard Discount',i:'🥫',p:50,u:'pers',eco:-10,bling:-10,sante:-10},
+  {n:'Supermarché',i:'🛒',p:100,u:'pers',eco:-5,bling:0,sante:0},
+  {n:'Marché local',i:'🥕',p:150,u:'pers',eco:5,bling:5,sante:5},
+  {n:'Épicerie Bio',i:'🥬',p:250,u:'pers',eco:10,bling:10,sante:10}]},
+ {id:'education',name:'Éducation',ico:'🎓',color:'#ffcf7a',c2:'#f59e0b',options:[
+  {n:'École publique',i:'🏫',p:0,u:'enfant',eco:0,bling:0,sante:0},
+  {n:'École privée sous contrat',i:'🏛️',p:100,u:'enfant',eco:0,bling:5,sante:0},
+  {n:'École privée internationale',i:'🏦',p:500,u:'enfant',eco:0,bling:10,sante:0}]},
+ {id:'loisirs',name:'Loisirs',ico:'🎨',color:'#ff8a9b',c2:'#f2566b',options:[
+  {n:'Arts plastiques',i:'🎨',p:100,u:'mois',eco:0,bling:5,sante:5},
+  {n:'Tennis',i:'🎾',p:200,u:'mois',eco:0,bling:5,sante:10},
+  {n:'Équitation',i:'🏇',p:400,u:'mois',eco:5,bling:10,sante:10},
+  {n:'Télévision',i:'📺',p:0,u:'mois',eco:0,bling:-10,sante:-10},
+  {n:'Cinéma',i:'🎬',p:50,u:'mois',eco:0,bling:5,sante:0},
+  {n:'Musée',i:'🖼️',p:10,u:'mois',eco:0,bling:10,sante:0},
+  {n:'Potager / jardin partagé',i:'🌱',p:100,u:'mois',eco:10,bling:0,sante:10}]},
+ {id:'vacances',name:'Vacances',ico:'🏖️',color:'#8fd8ff',c2:'#3aa8f5',options:[
+  {n:'Plage sous les tropiques',i:'🏝️',p:1500,u:'unique',eco:-20,bling:20,sante:10},
+  {n:'Ski',i:'⛷️',p:700,u:'unique',eco:-10,bling:10,sante:10},
+  {n:'Randonnée',i:'🥾',p:100,u:'unique',eco:5,bling:0,sante:10},
+  {n:'Jeux à la maison',i:'🎲',p:0,u:'unique',eco:10,bling:-5,sante:5},
+  {n:'Tour du monde en avion',i:'✈️',p:2000,u:'unique',eco:-15,bling:15,sante:5},
+  {n:'Séjour en montagne',i:'🏔️',p:300,u:'unique',eco:10,bling:0,sante:10}]}
+];
+const UNIT_LABEL={mois:'/mois',pers:'/pers.',adulte:'/adulte',enfant:'/enfant',unique:''};
+const JOB_EVENTS={
+ lic:{ico:'📉',title:'Licenciement',text:"Tu perds ton emploi : aucun revenu ce mois-ci. Il faudra puiser dans l'épargne.",badge:'lic'},
+ promo:{ico:'🚀',title:'Promotion',text:`Bravo ! Les revenus augmentent de ${PROMOTION} € ce mois-ci.`,badge:'promo'},
+ rien:{ico:'😌',title:'Rien ne change',text:"Ouf, il ne se passe rien : l'emploi et le revenu restent les mêmes.",badge:'none'}};
+
+/* ===== État (mêmes règles que l'original) ===== */
+let state;
+function emptyChoices(){const c={};CATEGORIES.forEach(k=>c[k.id]=[]);return c}
+function newState(){state={hh:null,goal:null,round:1,priceMult:1,job:null,savings:0,history:[],chosen:emptyChoices(),openCat:'logement',pending:0}}
+const persons=()=>state.hh.adults+state.hh.children;
+function unitPrice(o){return Math.round(o.p*state.priceMult)}
+function cost(o){const h=state.hh,p=unitPrice(o);return{mois:p,unique:p,pers:p*persons(),adulte:p*h.adults,enfant:p*h.children}[o.u]}
+function income(){if(state.job==='lic')return 0;if(state.job==='promo')return state.hh.income+PROMOTION;return state.hh.income}
+const hhText=h=>`${h.adults} parent${h.adults>1?'s':''}, ${h.children} enfant${h.children>1?'s':''}`;
+function totalSpent(ch){ch=ch||state.chosen;let t=0;CATEGORIES.forEach(c=>ch[c.id].forEach(i=>t+=cost(c.options[i])));return t}
+function scores(ch){ch=ch||state.chosen;const s={bling:0,sante:0,eco:0};CATEGORIES.forEach(c=>ch[c.id].forEach(i=>{const o=c.options[i];SCORE_ORDER.forEach(k=>s[k]+=o[k])}));return s}
+function pastScores(){const s={bling:0,sante:0,eco:0};state.history.forEach(r=>SCORE_ORDER.forEach(k=>s[k]+=r.scores[k]));return s}
+function simulated(){if(state.pending===null)return null;const sim={};CATEGORIES.forEach(c=>sim[c.id]=[...state.chosen[c.id]]);
+  const arr=sim[state.openCat],i=state.pending;arr.includes(i)?arr.splice(arr.indexOf(i),1):arr.push(i);return sim}
+const hasCar=ch=>(ch||state.chosen).transport.some(i=>CATEGORIES[1].options[i].isCar);
+const needsCar=ch=>(ch||state.chosen).logement.some(i=>CATEGORIES[0].options[i].car);
+const hasInsurance=ch=>(ch||state.chosen).transport.some(i=>CATEGORIES[1].options[i].needsCar);
+function problems(){const left=income()-totalSpent(),pr=[];
+  const missing=CATEGORIES.filter(c=>state.chosen[c.id].length===0).map(c=>c.name);
+  if(missing.length)pr.push('Il reste à choisir : '+missing.join(', ')+'.');
+  if(needsCar()&&!hasCar())pr.push('Ton logement nécessite une voiture : choisis « Voiture » dans Transport.');
+  if(hasCar()&&!hasInsurance())pr.push("Avec une voiture, l'assurance automobile est obligatoire.");
+  if(-left>state.savings)pr.push(`Budget dépassé : il manque ${fmt(-left-state.savings)} même en utilisant toute l'épargne. Change tes choix.`);
+  return{pr,left,missing}}
+
+/* ===== Visages & Pépite ===== */
+function faceSVG(p,mood){
+  mood=mood||'happy';const s=p.skin,h=p.hair;let back='',front='';
+  switch(p.style){
+    case'long':back=`<path d="M16,56 Q14,14 50,14 Q86,14 84,56 L88,100 Q72,104 68,84 L32,84 Q28,104 12,100 Z" fill="${h}"/>`;front=`<path d="M21,50 Q22,20 50,20 Q78,20 79,50 Q70,30 52,31 Q40,40 21,50Z" fill="${h}"/>`;break;
+    case'bun':back=`<circle cx="50" cy="15" r="13" fill="${h}"/>`;front=`<path d="M20,52 Q18,21 50,21 Q82,21 80,52 Q74,33 50,32 Q26,33 20,52Z" fill="${h}"/>`;break;
+    case'pony':back=`<path d="M76,32 Q102,36 94,82 Q88,62 74,52Z" fill="${h}"/>`;front=`<path d="M20,52 Q18,18 50,18 Q82,18 80,52 Q66,30 44,33 Q30,36 20,52Z" fill="${h}"/><circle cx="79" cy="35" r="5" fill="#f472b6"/>`;break;
+    case'curly':front=[[27,36],[37,25],[50,21],[63,25],[73,36],[22,48],[78,48]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="11" fill="${h}"/>`).join('');break;
+    case'cap':front=`<path d="M19,49 Q18,16 50,16 Q82,16 81,49Z" fill="${p.cap||'#ef4444'}"/><path d="M48,44 L95,47 Q91,54 48,53Z" fill="${p.cap||'#ef4444'}" opacity=".85"/><circle cx="50" cy="17" r="3.5" fill="#fff"/><path d="M22,50 Q24,42 32,42" stroke="${h}" stroke-width="6" fill="none"/>`;break;
+    default:front=`<path d="M20,50 Q17,16 50,16 Q83,16 80,50 Q76,30 60,30 Q52,24 40,30 Q26,32 20,50Z" fill="${h}"/>`;
+  }
+  const brows={happy:'M33,45 Q38,41 44,44 M56,44 Q62,41 67,45',ok:'M34,45 L44,45 M56,45 L66,45',worried:'M33,43 L44,47 M67,43 L56,47',sad:'M33,47 L44,43 M67,47 L56,43'}[mood];
+  const mouth={happy:'<path d="M38,69 Q50,85 62,69 Q50,75 38,69Z" fill="#9f2d45"/><path d="M44,76 Q50,80 56,76" fill="#ff8fa3"/>',
+    ok:'<path d="M41,71 Q50,78 59,71" stroke="#5b2333" stroke-width="3" fill="none" stroke-linecap="round"/>',
+    worried:'<path d="M41,75 Q45.5,71 50,75 Q54.5,79 59,75" stroke="#5b2333" stroke-width="3" fill="none" stroke-linecap="round"/>',
+    sad:'<path d="M41,78 Q50,69 59,78" stroke="#5b2333" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M32,62 q-3,6 0,8 q3,-2 0,-8z" fill="#60a5fa"/>'}[mood];
+  const glasses=p.glasses?`<g fill="none" stroke="#3b2f2f" stroke-width="2.4"><circle cx="39" cy="56" r="8"/><circle cx="61" cy="56" r="8"/><path d="M47,56 L53,56"/></g>`:'';
+  const fr=p.kid?'<g fill="#c47a5a" opacity=".5"><circle cx="32" cy="66" r="1.3"/><circle cx="35" cy="69" r="1.3"/><circle cx="68" cy="66" r="1.3"/><circle cx="65" cy="69" r="1.3"/></g>':'';
+  return `<svg viewBox="0 0 100 120">${back}<path d="M10,120 Q14,92 50,90 Q86,92 90,120 Z" fill="${p.shirt}"/><path d="M40,91 Q50,100 60,91" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="3"/>
+  <rect x="42" y="78" width="16" height="16" rx="6" fill="${s}"/><circle cx="20" cy="58" r="6" fill="${s}"/><circle cx="80" cy="58" r="6" fill="${s}"/><ellipse cx="50" cy="55" rx="30" ry="31" fill="${s}"/>${front}
+  <circle cx="31" cy="66" r="6" fill="#ff7b9c" opacity=".35"/><circle cx="69" cy="66" r="6" fill="#ff7b9c" opacity=".35"/>${fr}
+  <g class="blink"><ellipse cx="39" cy="57" rx="3.8" ry="4.6" fill="#2b2140"/><ellipse cx="61" cy="57" rx="3.8" ry="4.6" fill="#2b2140"/><circle cx="40.3" cy="55.3" r="1.3" fill="#fff"/><circle cx="62.3" cy="55.3" r="1.3" fill="#fff"/></g>
+  <path d="${brows}" stroke="#3b2a20" stroke-width="2.6" fill="none" stroke-linecap="round"/>${glasses}${mouth}</svg>`}
+function pepiteSVG(mood){mood=mood||'happy';
+  const mouth={happy:'<path d="M50,86 Q60,96 70,86" stroke="#9b1d4f" stroke-width="3.5" fill="#ff5f9e" stroke-linecap="round"/>',ok:'<path d="M53,88 Q60,92 67,88" stroke="#9b1d4f" stroke-width="3.5" fill="none" stroke-linecap="round"/>',sad:'<path d="M52,92 Q60,85 68,92" stroke="#9b1d4f" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M36,62 q-4,7 0,9 q4,-2 0,-9z" fill="#60a5fa"/>'}[mood]||'';
+  return `<svg viewBox="0 0 120 112" style="width:100%;height:100%;overflow:visible"><path d="M103,58 q15,-3 9,-14 q-7,-6 -11,3" stroke="#e0457f" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <rect x="32" y="84" width="15" height="20" rx="7" fill="#ff86b3" stroke="#e0457f" stroke-width="3"/><rect x="73" y="84" width="15" height="20" rx="7" fill="#ff86b3" stroke="#e0457f" stroke-width="3"/>
+  <path d="M28,36 L33,9 L53,28Z" fill="#ff86b3" stroke="#e0457f" stroke-width="3" stroke-linejoin="round"/><path d="M92,36 L87,9 L67,28Z" fill="#ff86b3" stroke="#e0457f" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="60" cy="60" rx="46" ry="38" fill="#ff9cc2" stroke="#e0457f" stroke-width="3"/><ellipse cx="42" cy="40" rx="14" ry="7" fill="#fff" opacity=".45" transform="rotate(-18 42 40)"/><rect x="47" y="24" width="26" height="6" rx="3" fill="#b3245c"/>
+  <g class="blink"><ellipse cx="41" cy="55" rx="5.2" ry="6.4" fill="#2a2140"/><ellipse cx="79" cy="55" rx="5.2" ry="6.4" fill="#2a2140"/><circle cx="43" cy="52.5" r="2" fill="#fff"/><circle cx="81" cy="52.5" r="2" fill="#fff"/></g>
+  <circle cx="28" cy="70" r="7" fill="#ff5f9e" opacity=".4"/><circle cx="92" cy="70" r="7" fill="#ff5f9e" opacity=".4"/>
+  <ellipse cx="60" cy="71" rx="15" ry="11" fill="#ffc0d8" stroke="#e0457f" stroke-width="2.5"/><ellipse cx="55" cy="71" rx="2.8" ry="4.2" fill="#b3245c"/><ellipse cx="65" cy="71" rx="2.8" ry="4.2" fill="#b3245c"/>${mouth}</svg>`}
+function familyHTML(h,mood){return h.people.map((k,i)=>{const q=P[k];return`<div class="face ${q.kid?'kid':''}" style="animation-delay:${(i*.17).toFixed(2)}s">${faceSVG(q,mood)}</div>`}).join('')}
+
+/* ===== Sons, vibrations, mouvement ===== */
+let AC=null;
+function ac(){if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+function tone(f,d,type,v,delay,f2){if(!S.sound)return;const a=ac();if(!a)return;try{const t=a.currentTime+(delay||0);const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v||.08,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+d+.03)}catch(e){}}
+const sfx={pop:()=>tone(520,.09,'triangle',.08,0,900),tick:()=>tone(760,.04,'triangle',.03),
+ flip:()=>{tone(300,.08,'triangle',.06,0,700);tone(700,.1,'triangle',.05,.07,1200)},
+ coin:()=>{tone(988,.08,'square',.035);tone(1319,.2,'square',.035,.07)},
+ shuffle:()=>{for(let i=0;i<6;i++)tone(180+Math.random()*260,.05,'triangle',.05,i*.065,500)},
+ oops:()=>{tone(330,.14,'sawtooth',.045,0,220);tone(250,.22,'sawtooth',.045,.14,150)},
+ win:()=>[523,659,784,1047].forEach((f,i)=>tone(f,.28,'triangle',.08,i*.12)),
+ lose:()=>[392,330,262].forEach((f,i)=>tone(f,.32,'triangle',.07,i*.17)),
+ event:()=>[660,880,660,880].forEach((f,i)=>tone(f,.1,'square',.035,i*.09))};
+const vib=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
+function toggleSound(){S.sound=!S.sound;$$('.snd').forEach(b=>b.textContent=S.sound?'🔊':'🔇');if(S.sound)sfx.pop()}
+function detectDevice(){
+  const coarse=matchMedia('(pointer:coarse)').matches,hover=matchMedia('(hover:hover)').matches;
+  const touch=('ontouchstart' in window)||navigator.maxTouchPoints>0,small=Math.min(screen.width,screen.height)<=820;
+  const mobile=((coarse||touch)&&small)||(coarse&&!hover);S.device={mobile};
+  document.body.classList.toggle('mobile',mobile);document.body.classList.toggle('desktop',!mobile);
+  $('#devBadge').innerHTML=mobile?'📱 <b>Téléphone détecté</b> : tu vas <b>secouer</b> pour les tirages au sort et <b>lancer les cartes</b> du doigt !':'💻 <b>Ordinateur détecté</b> : clique et glisse les cartes à la <b>souris</b>, ou joue au <b>clavier</b> ⌨️';}
+let last=null,shakeHits=0,shakeT=0,lastShake=0,par={x:0};
+function onMotion(e){const a=e.accelerationIncludingGravity;if(!a||a.x==null)return;
+  if(!S.motionOK){S.motionOK=true;refreshShakeTexts()}
+  if(last){const d=Math.abs(a.x-last.x)+Math.abs(a.y-last.y)+Math.abs(a.z-last.z),now=performance.now();
+    if(d>26){if(now-shakeT>600)shakeHits=0;shakeHits++;shakeT=now;if(shakeHits>=3&&now-lastShake>1100){lastShake=now;shakeHits=0;onShake()}}}
+  last={x:a.x,y:a.y,z:a.z};par.x+=((-a.x*3)-par.x)*.08;setPar(par.x,0)}
+async function enableMotion(){if(S.motionOn)return;S.motionOn=true;
+  try{if(typeof DeviceMotionEvent!=='undefined'&&typeof DeviceMotionEvent.requestPermission==='function'){const r=await DeviceMotionEvent.requestPermission();if(r!=='granted')return}
+    window.addEventListener('devicemotion',onMotion)}catch(e){}}
+const shakeWord=()=>S.device.mobile?(S.motionOK?'<span class="phone-ic">📳</span> Secoue ton téléphone':'👆 Touche la carte'):'🖱️ Clique sur la carte';
+function refreshShakeTexts(){$$('.shk').forEach(e=>e.innerHTML=shakeWord());}
+function onShake(){vib(40);
+  if(S.screen==='hh'&&!$('#hhCard').classList.contains('open'))drawHousehold();
+  else if(S.screen==='hh')rerollHousehold();
+  else if(S.screen==='event'&&EV.shake)EV.shake();
+  else if(S.screen==='home')pepJump($('#homePep'));
+  else if(S.screen==='end')confetti(40);}
+function setPar(x,y){const b=$('#bg');b.style.setProperty('--px',x+'px');b.style.setProperty('--py',y+'px')}
+
+/* ===== Fond ===== */
+function initBg(){
+  let h='';for(let i=0;i<6;i++){const w=90+Math.random()*130;h+=`<div class="cloud" style="--w:${w}px;top:${4+Math.random()*40}%;--t:${40+Math.random()*50}s;--dl:-${Math.random()*80}s"></div>`}$('#clouds').innerHTML=h;
+  const coin=`<svg viewBox="0 0 40 40" width="100%" height="100%"><circle cx="20" cy="20" r="18" fill="#ffcf33" stroke="#c98a00" stroke-width="3"/><circle cx="20" cy="20" r="12" fill="none" stroke="#e0a100" stroke-width="2"/><text x="20" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#a86b00" font-family="sans-serif">€</text></svg>`;
+  h='';for(let i=0;i<12;i++)h+=`<div class="fcoin" style="left:${Math.random()*100}%;--s:${18+Math.random()*26}px;--t:${14+Math.random()*16}s;--dl:-${Math.random()*30}s">${coin}</div>`;$('#coins').innerHTML=h;
+  h='';for(let i=0;i<40;i++)h+=`<div class="spark" style="left:${Math.random()*100}%;top:${Math.random()*60}%;animation-delay:${Math.random()*2}s"></div>`;$('#sparks').innerHTML=h;
+  let c='',x=0;while(x<1200){const w=50+Math.random()*80,ht=60+Math.random()*130,cls=Math.random()<.5?'b':'b2';c+=`<rect class="${cls}" x="${x}" y="${220-ht}" width="${w}" height="${ht}" rx="4"/>`;
+    for(let wy=220-ht+12;wy<205;wy+=20)for(let wx=x+8;wx<x+w-12;wx+=16)if(Math.random()<.45)c+=`<rect class="w" x="${wx}" y="${wy}" width="8" height="10" rx="2" style="animation-delay:${(Math.random()*3).toFixed(1)}s"/>`;x+=w+4}
+  $('#city').innerHTML=c;
+  window.addEventListener('mousemove',e=>{if(!S.device.mobile)setPar((e.clientX/innerWidth-.5)*-30,(e.clientY/innerHeight-.5)*-16)})}
+
+/* ===== Navigation & petits effets ===== */
+function go(id){$('#say').classList.remove('on');closeDrawer();$$('.screen').forEach(s=>s.classList.toggle('active',s.id==='scr-'+id));S.screen=id;
+  if(id==='home')$('#homePep').innerHTML=pepiteSVG('happy');if(id==='hh')renderHH();if(id==='goal')renderGoal()}
+function pepJump(el){if(!el)return;el.classList.remove('jump');void el.offsetWidth;el.classList.add('jump');sfx.pop();setTimeout(()=>el.classList.remove('jump'),850)}
+let sayT=null;
+function say(html,ms){const el=$('#say');el.innerHTML='🐷 '+html;
+  if(S.screen==='game'){const t=$('.foot').getBoundingClientRect().top;el.style.bottom=(innerHeight-t+12)+'px'}else el.style.bottom='';
+  el.classList.add('on');clearTimeout(sayT);sayT=setTimeout(()=>el.classList.remove('on'),ms||3000)}
+function flyBits(fromEl,toEl,txt,n){if(!fromEl||!toEl)return;const a=fromEl.getBoundingClientRect(),b=toEl.getBoundingClientRect();
+  for(let i=0;i<n;i++){const s=document.createElement('div');s.className='fly';s.textContent=txt;const x=a.left+a.width/2+(Math.random()-.5)*60,y=a.top+a.height/2+(Math.random()-.5)*40;
+    s.style.left=x+'px';s.style.top=y+'px';s.style.transitionDelay=(i*.05)+'s';document.body.appendChild(s);
+    setTimeout(()=>{s.style.transform=`translate(${b.left+b.width/2-x}px,${b.top+b.height/2-y}px) scale(.4)`;s.style.opacity='.15'},30);setTimeout(()=>s.remove(),1200)}}
+let CONF=[],confRun=false;
+function confetti(n){const cv=$('#confetti'),dpr=devicePixelRatio||1;cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;const cols=['#ff5f9e','#ffd54a','#34d399','#60a5fa','#a78bfa','#fb923c'];
+  for(let i=0;i<n;i++)CONF.push({x:Math.random()*innerWidth,y:-20-Math.random()*innerHeight*.4,vx:(Math.random()-.5)*4,vy:2+Math.random()*4,r:5+Math.random()*6,c:cols[i%cols.length],a:Math.random()*6,va:(Math.random()-.5)*.3,life:0});
+  if(confRun)return;confRun=true;const ctx=cv.getContext('2d');
+  (function loop(){ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,innerWidth,innerHeight);
+    CONF.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.05;p.a+=p.va;p.life++;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);ctx.fillStyle=p.c;ctx.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);ctx.restore()});
+    CONF=CONF.filter(p=>p.y<innerHeight+30&&p.life<400);if(CONF.length)requestAnimationFrame(loop);else{confRun=false;ctx.clearRect(0,0,innerWidth,innerHeight)}})()}
+const nom=()=>S.name||'toi';
+
+/* ===== Accueil : âge → mode ===== */
+function renderAges(){$('#ages').innerHTML=[7,8,9,10,11,12,13,14,15,16].map(a=>`<button class="age" data-a="${a}" onclick="pickAge(${a})">${a===16?'16+':a}</button>`).join('')}
+function applyMode(){document.body.classList.toggle('junior',S.mode==='junior');document.body.classList.toggle('ados',S.mode==='ados')}
+function pickAge(a,silent){S.age=a;S.mode=a<=11?'junior':'ados';applyMode();$$('.age').forEach(b=>b.classList.toggle('sel',+b.dataset.a===a));
+  $('#modeBadge').innerHTML=S.mode==='junior'?'<b class="m" style="background:#16a36f">🧸 Mode Junior</b><br>Mêmes règles, avec <b>Pépite qui t\'aide</b> : elle te montre les cartes bonnes pour ton objectif.':'<b class="m" style="background:#8b5cf6">🚀 Mode Ados</b><br>Les règles du vrai Budgetomania, <b>sans aide</b> : à toi de calculer !';
+  $('#btnGo').classList.remove('off');if(!silent){sfx.pop();vib(15)}}
+function start(){if(!S.age){say('Choisis d\'abord ton âge !');return}ac();S.name=$('#inName').value.trim().slice(0,14);SAVE.name=S.name;SAVE.age=S.age;store.set(SAVE);
+  if(S.device.mobile)enableMotion();sfx.win();newState();go('hh')}
+
+/* ===== Étape 1 : ménage tiré au sort ===== */
+function renderHH(){$('#hhPep').innerHTML=pepiteSVG('happy');const open=$('#hhCard').classList.contains('open');
+  $('#hhSay').innerHTML=open?`Voici ton ménage pour <b>3 mois</b> ! C'est avec ce <b>revenu mensuel</b> que tu vas choisir toutes tes dépenses. Attention : des <b>événements</b> peuvent arriver au début des mois 2 et 3 !`:`Bonjour ${S.name?'<b>'+S.name+'</b> ':''}! D'abord, on tire ton <b>ménage au sort</b> 🎲`;
+  $('#hhBackTxt').innerHTML=`<span class="shk">${shakeWord()}</span><small>pour tirer ton ménage</small>`}
+function drawHousehold(){const c=$('#hhCard');if(c.classList.contains('open')){rerollHousehold();return}
+  sfx.shuffle();vib([30,30,30]);c.classList.remove('idle');c.classList.add('shake');
+  setTimeout(()=>{c.classList.remove('shake');state.hh=HOUSEHOLDS[Math.random()*HOUSEHOLDS.length|0];fillHH();c.classList.add('open');sfx.flip();
+    setTimeout(()=>{sfx.win();confetti(40)},450);$('#hhBtns').style.display='flex';renderHH()},500)}
+function rerollHousehold(){const c=$('#hhCard');sfx.shuffle();vib(30);c.classList.remove('open');
+  setTimeout(()=>{c.classList.add('shake');let h;do{h=HOUSEHOLDS[Math.random()*HOUSEHOLDS.length|0]}while(h===state.hh);state.hh=h;fillHH()},350);
+  setTimeout(()=>{c.classList.remove('shake');c.classList.add('open');sfx.flip()},850)}
+function fillHH(){const h=state.hh;$('#hhFront').innerHTML=`<div class="family big" style="max-width:100%">${familyHTML(h,'happy')}</div><div class="hh-name">${h.name}</div><div class="hh-sub">${hhText(h)}</div><div class="hh-inc">💰 ${fmt(h.income)}<small style="font-size:15px;color:var(--ink);opacity:.6"> /mois</small></div>`;
+  const n=h.people.length;$$('#hhFront .face').forEach(f=>f.style.width=(f.classList.contains('kid')?Math.min(60,190/n):Math.min(84,250/n))+'px')}
+
+/* ===== Étape 2 : objectif ===== */
+function renderGoal(){$('#goalPep').innerHTML=pepiteSVG('happy');
+  $('#goalRules').innerHTML=`Chaque dépense fait gagner ou perdre des points dans <b>3 scores</b> : 💎 Bling-bling, ❤️ Santé et 🍃 Écologie.<br>👉 Choisis <b>UN objectif</b>. Tu gagnes si, à la fin des 3 mois, <b>le score de ton objectif est le plus élevé des trois</b> (et positif).`;
+  $('#goals').innerHTML=Object.entries(GOALS).map(([k,g],i)=>`<button class="goal ${state.goal===k?'sel':''}" style="--gc:${g.c};animation-delay:${i*.1}s" onclick="pickGoal('${k}')"><span class="gi">${g.ico}</span><b>${g.name}</b><small>${g.desc}</small></button>`).join('');
+  $('#goalMsg').innerHTML=state.goal?`<span class="pos" style="font-weight:700">Ton objectif : ${GOALS[state.goal].ico} ${GOALS[state.goal].name}. Tu peux commencer !</span>`:'<b style="color:var(--red)">⬆ Choisis ton objectif pour pouvoir commencer.</b>';
+  $('#btnStart').classList.toggle('off',!state.goal);$('#btnStart').classList.toggle('pulse',!!state.goal)}
+function pickGoal(k){state.goal=k;sfx.pop();vib(20);renderGoal()}
+function startGame(){if(!state.goal){say('Choisis d\'abord ton objectif !');return}state.round=1;state.chosen=emptyChoices();state.openCat='logement';state.pending=0;go('game');renderGame(true);
+  setTimeout(()=>{if(!SAVE['tuto_'+S.mode])openTuto()},500)}
+
+/* ===== Événements (tours 2 et 3) ===== */
+let EV={};
+function startRound(n){state.round=n;state.openCat='logement';state.pending=0;state.chosen=emptyChoices();
+  if(n===2){state.priceMult=1+INFLATION;showInflation()}else if(n===3)showJobGame()}
+function showInflation(){EV={};$('#evTitle').textContent='Début du mois 2';
+  $('#evBox').innerHTML=`<div class="pep-row"><div class="pep-s" id="evPep"></div><div class="bubble">Un nouveau mois commence… mais il se passe quelque chose ! Découvre l'événement du mois 2.</div></div>
+   <div class="flip idle" id="evCard"><div class="flip-in"><div class="face-b"><div class="q">!</div><span class="shk">${shakeWord()}</span><small>pour découvrir l'événement</small></div>
+   <div class="face-f"><div class="ev-ico">📈</div><div class="ev-t">Inflation !</div><div><b>Tous les prix augmentent de ${INFLATION*100} %</b></div><div class="hh-sub">logement, transport, nourriture, éducation, loisirs, vacances</div></div></div></div>
+   <div id="evMore"></div>`;
+  $('#evPep').innerHTML=pepiteSVG('ok');
+  const reveal=()=>{if(EV.done)return;EV.done=true;const c=$('#evCard');c.classList.remove('idle');c.classList.add('shake');sfx.shuffle();vib([30,30,30]);
+    setTimeout(()=>{c.classList.remove('shake');c.classList.add('open');sfx.event();vib([60,40,60]);
+      $('#evPep').innerHTML=pepiteSVG('sad');
+      $('#evMore').innerHTML=`<div class="panel rules" style="animation:popIn .5s"><p>Ton revenu, lui, <b>ne change pas</b> : avec le même argent, tu peux acheter <b>moins de choses</b>. C'est une <b>baisse de ton pouvoir d'achat</b>.</p><p>⚠️ Un nouveau mois commence : tu dois <b>refaire tous tes choix</b> de dépenses avec les nouveaux prix.</p></div>
+       <button class="btn big green pulse" style="margin-top:6px" onclick="resumeGame()">Commencer le mois 2 ▶</button>`},500)};
+  EV.shake=reveal;$('#evCard').onclick=reveal;go('event')}
+function showJobGame(){EV={deck:['lic','promo','rien'].sort(()=>Math.random()-.5)};$('#evTitle').textContent='Début du mois 3';
+  $('#evBox').innerHTML=`<div class="pep-row"><div class="pep-s" id="evPep"></div><div class="bubble">Et ton emploi ? Une carte cache un <b>licenciement</b>, une autre une <b>promotion</b> (+${PROMOTION} €), la dernière… <b>rien du tout</b>.<br><span class="shk">${shakeWord()}</span> pour mélanger, puis <b>choisis une carte</b> !</div></div>
+   <div class="jobs" id="jobs">${EV.deck.map((e,i)=>`<div class="flip small" data-i="${i}" onclick="pickJob(${i})"><div class="flip-in"><div class="face-b"><div class="q">?</div></div><div class="face-f"></div></div></div>`).join('')}</div>
+   <button class="btn ghost" id="mixBtn" onclick="mixJobs()">🔀 Mélanger les cartes</button><div id="evMore" style="width:100%"></div>`;
+  $('#evPep').innerHTML=pepiteSVG('ok');EV.shake=()=>{if(!EV.picked)mixJobs()};go('event')}
+function mixJobs(){if(EV.picked||EV.mixing)return;EV.mixing=true;sfx.shuffle();vib([30,30,30,30]);
+  const cards=$$('#jobs .flip'),w=cards[0].getBoundingClientRect().width+10;let k=0;
+  const step=()=>{cards.forEach((c,i)=>{const o=[[w,0,-w],[-w,w,0],[0,-w,w]][k%3][i];c.style.transform=`translateX(${o}px) rotate(${(Math.random()-.5)*16}deg)`});k++;
+    if(k<5)setTimeout(step,170);else{cards.forEach(c=>c.style.transform='');EV.deck.sort(()=>Math.random()-.5);EV.mixing=false}};step()}
+function pickJob(i){if(EV.picked||EV.mixing)return;EV.picked=true;state.job=EV.deck[i];sfx.flip();vib(40);$('#mixBtn').style.display='none';
+  $$('#jobs .flip').forEach((c,j)=>{const e=JOB_EVENTS[EV.deck[j]];c.querySelector('.face-f').innerHTML=`<div class="ev-ico">${e.ico}</div><div class="ev-t">${e.title}</div>`;
+    setTimeout(()=>{c.classList.add('open');c.classList.add(j===i?'picked':'dim')},j===i?0:700)});
+  const e=JOB_EVENTS[state.job];
+  setTimeout(()=>{state.job==='promo'?(sfx.win(),confetti(80)):state.job==='lic'?sfx.lose():sfx.coin();
+    $('#evPep').innerHTML=pepiteSVG(state.job==='lic'?'sad':'happy');
+    $('#evMore').innerHTML=`<div class="panel rules" style="text-align:center;animation:popIn .5s"><div style="font-size:22px;font-weight:700">${e.ico} ${e.title}</div><p>${e.text}</p>
+      <p>Revenu du mois 3 : <b>${fmt(income())}</b> · Épargne disponible : <b>${fmt(state.savings)}</b></p><p style="opacity:.75">⚠️ L'inflation du mois 2 est toujours là, et tu dois refaire tous tes choix.</p></div>
+      <div style="text-align:center;margin-top:10px"><button class="btn big green pulse" onclick="resumeGame()">Commencer le mois 3 ▶</button></div>`},900)}
+function resumeGame(){go('game');renderGame(true)}
+
+/* ===== Le mois : catégories & cartes ===== */
+function badges(){let b='';if(state.priceMult>1)b+=`<span class="badge infl">📈 +${INFLATION*100} %</span>`;
+  if(state.job){const e=JOB_EVENTS[state.job];b+=`<span class="badge ${e.badge}">${e.ico} ${e.title}</span>`}return b}
+function renderGame(rebuild){
+  const h=state.hh;$('#gTitle').innerHTML=`Mois ${state.round}/${NB_ROUNDS}${badges()}`;
+  renderHUD();renderCats();if(rebuild)renderTrack();else refreshCards();renderFoot();
+  $('#gFamily').innerHTML=familyHTML(h,familyMood())}
+function familyMood(){const left=income()-totalSpent();if(-left>state.savings)return'sad';if(left<0)return'worried';return'happy'}
+function renderHUD(){
+  const sim=simulated(),R=income(),left=R-totalSpent();
+  $('#mR').textContent=fmt(R);$('#mRs').innerHTML=state.job==='lic'?'<span class="neg">licenciement</span>':state.job==='promo'?'<span class="pos">+ promotion</span>':'&nbsp;';
+  $('#mLeft').textContent=fmt(left);$('#mLeft').className='v'+(left<0?' neg':'');
+  if(sim){const d=totalSpent(sim)-totalSpent();$('#mPrev').innerHTML=d===0?'&nbsp;':`<span class="${d>0?'neg':'pos'}">${d>0?'−':'+'}${fmt(Math.abs(d))}</span> → ${fmt(R-totalSpent(sim))}`}
+  else $('#mPrev').innerHTML=left<0?'<span class="neg">pris sur l\'épargne</span>':'&nbsp;';
+  $('#mSav').textContent=fmt(state.savings);
+  const p=pastScores(),s=scores(),ss=sim?scores(sim):null;
+  $('#scores').innerHTML=SCORE_ORDER.map(k=>{const d=ss?ss[k]-s[k]:0,g=GOALS[k];
+    return`<div class="sc ${state.goal===k?'goalc':''}" style="${state.goal===k?'border-color:'+g.c:''}"><div class="l">${g.ico} ${g.name}${state.goal===k?' 🎯':''}</div><div class="v" style="color:${g.c}">${p[k]+s[k]}</div><div class="d ${d>0?'pos':d<0?'neg':''}">${ss?(d===0?'±0':sgn(d)):'&nbsp;'}</div></div>`}).join('')}
+function renderCats(){
+  $('#cats').innerHTML=CATEGORIES.map((c,i)=>{const n=state.chosen[c.id].length;
+    return`<button class="cat ${n?'done':''} ${state.openCat===c.id?'open':''}" style="background:${c.color}" onclick="openCat('${c.id}')"><span class="ci">${c.ico}</span>${c.name}<span class="cn">${n?n+' choix':'à choisir'}</span></button>`}).join('');
+  const cat=CATEGORIES.find(c=>c.id===state.openCat);
+  $('#catHead').innerHTML=`${cat.ico} <b>${cat.name}</b> · ${S.device.mobile?'↔ fais défiler · <b>⬆ lance la carte</b> pour la prendre':'clique une carte, puis <b>glisse-la dans ton panier</b> → · plusieurs choix possibles'}`}
+function optHTML(cat,o,i){
+  const up=unitPrice(o),taken=state.chosen[cat.id].includes(i);
+  const best=S.mode==='junior'&&state.goal&&o[state.goal]>0&&o[state.goal]>=Math.max(...SCORE_ORDER.map(k=>o[k]));
+  return`<div class="ocard ${taken?'taken':''} ${state.pending===i?'center':''}" data-i="${i}" style="animation-delay:${i*.05}s">
+   <div class="oart" style="--c1:${cat.color};--c2:${cat.c2}"><div class="ray"></div><div class="oemo">${o.i}</div></div>
+   <div class="obody"><div class="oname">${o.n}</div>
+    <div class="oprice">${up} €<small>${UNIT_LABEL[o.u]}</small> ${up!==o.p?`<s>${o.p} €</s>`:''}</div>
+    <div class="ocost">${o.u==='mois'||o.u==='unique'?(o.u==='unique'?'dépense unique':'forfait mensuel'):'soit <b>'+fmt(cost(o))+'</b> pour ton ménage'}</div>
+    <div class="ofx"><span>💎 ${sgn(o.bling)}</span><span>❤️ ${sgn(o.sante)}</span><span>🍃 ${sgn(o.eco)}</span></div>
+    ${o.car?'<div class="onote">🚗 nécessite une voiture</div>':''}${o.needsCar?'<div class="onote">🛡️ obligatoire avec une voiture</div>':''}
+    ${best?`<div class="otip">⭐ Bon pour ton objectif ${GOALS[state.goal].ico}</div>`:''}</div></div>`}
+function renderTrack(){
+  const cat=CATEGORIES.find(c=>c.id===state.openCat),tr=$('#track');
+  tr.innerHTML=cat.options.map((o,i)=>optHTML(cat,o,i)).join('');
+  $$('#track .ocard').forEach(bindCard);
+  if(S.device.mobile){tr.scrollLeft=0;requestAnimationFrame(()=>scrollToOpt(state.pending||0,false))}
+  updateAct()}
+function refreshCards(){const cat=CATEGORIES.find(c=>c.id===state.openCat);
+  $$('#track .ocard').forEach(el=>{const i=+el.dataset.i;el.classList.toggle('taken',state.chosen[cat.id].includes(i));el.classList.toggle('center',state.pending===i)});updateAct()}
+function updateAct(){const b=$('#actBtn');if(state.pending===null){b.textContent='Choisis une carte';b.className='act rem';return}
+  const taken=state.chosen[state.openCat].includes(state.pending);b.textContent=taken?'↩️ Retirer ce choix':'✔ Je prends !';b.className='act'+(taken?' rem':'')}
+function openCat(id){if(state.openCat===id)return;state.openCat=id;state.pending=0;sfx.flip();vib(10);renderCats();renderTrack();renderHUD();
+  const ch=$$('#cats .cat')[CATEGORIES.findIndex(c=>c.id===id)];ch&&ch.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})}
+function setPending(i){if(state.pending===i)return;state.pending=i;sfx.tick();refreshCards();renderHUD()}
+function scrollToOpt(i,smooth){const el=$$('#track .ocard')[i];if(!el)return;const tr=$('#track');
+  tr.scrollTo({left:el.offsetLeft-(tr.clientWidth-el.offsetWidth)/2,behavior:smooth===false?'auto':'smooth'})}
+function navOpt(d){const n=CATEGORIES.find(c=>c.id===state.openCat).options.length;let i=(state.pending===null?0:state.pending)+d;
+  if(i<0||i>=n){const ci=CATEGORIES.findIndex(c=>c.id===state.openCat)+(d>0?1:-1);if(ci>=0&&ci<CATEGORIES.length){openCat(CATEGORIES[ci].id);if(d<0){const m=CATEGORIES[ci].options.length-1;state.pending=m;refreshCards();renderHUD();scrollToOpt(m)}}return}
+  setPending(i);if(S.device.mobile)scrollToOpt(i)}
+let scT=null;
+$('#track').addEventListener('scroll',()=>{if(!S.device.mobile)return;clearTimeout(scT);scT=setTimeout(()=>{const tr=$('#track'),mid=tr.getBoundingClientRect().left+tr.clientWidth/2;let best=0,bd=1e9;
+  $$('#track .ocard').forEach((el,i)=>{const r=el.getBoundingClientRect(),d=Math.abs(r.left+r.width/2-mid);if(d<bd){bd=d;best=i}});setPending(best)},70)},{passive:true});
+
+/* Prendre / retirer (logique identique : sélection → valider) */
+function toggleTake(fromEl){if(state.pending===null)return;
+  const cat=CATEGORIES.find(c=>c.id===state.openCat),i=state.pending,o=cat.options[i],removing=state.chosen[cat.id].includes(i);
+  const sim=simulated();state.chosen=sim;
+  const el=fromEl||$$('#track .ocard')[i],bk=S.device.mobile||innerWidth<900?$('#basketBtn'):$('#side');
+  if(removing){sfx.pop();vib(15);say(`<b>${o.n}</b> retiré de ton panier.`,1600)}
+  else{sfx.coin();vib(25);flyBits(el,bk,o.i,1);flyBits($('#mLeft'),bk,'🪙',4);bk.classList.remove('got');void bk.offsetWidth;bk.classList.add('got');
+    const tips=[];if(o.car&&!hasCar())tips.push('🚗 Ce logement nécessite une <b>voiture</b> : pense à la prendre dans Transport !');
+    if(o.isCar&&!hasInsurance())tips.push('🛡️ Avec une voiture, l\'<b>assurance</b> est obligatoire !');
+    if(tips.length)say(tips.join('<br>'),4200);else if(Math.random()<.35)say(['Bien joué ! 👍','Ajouté au panier ! 🧺','Super choix ! ✨'][Math.random()*3|0],1400)}
+  const fam=$('#gFamily');fam.classList.remove('hop');void fam.offsetWidth;fam.classList.add('hop');
+  $$('.sc').forEach(s=>{s.classList.remove('bump');void s.offsetWidth;s.classList.add('bump')});
+  renderGame(false)}
+/* Glisser la carte : vers le haut (téléphone) ou dans le panier (souris) */
+function hit(e,r,m){m=m||0;return e.clientX>=r.left-m&&e.clientX<=r.right+m&&e.clientY>=r.top-m&&e.clientY<=r.bottom+m}
+function bindCard(el){
+  const i=+el.dataset.i;let d=null;
+  el.addEventListener('click',()=>{if(el._dragged){el._dragged=false;return}if(S.device.mobile){if(state.pending!==i){setPending(i);scrollToOpt(i)}else toggleTake(el)}else{if(state.pending===i)toggleTake(el);else setPending(i)}});
+  el.addEventListener('pointerdown',e=>{d={x:e.clientX,y:e.clientY,id:e.pointerId,on:false}});
+  el.addEventListener('pointermove',e=>{if(!d||e.pointerId!==d.id)return;const dx=e.clientX-d.x,dy=e.clientY-d.y;
+    if(!d.on){if(Math.hypot(dx,dy)<10)return;if(S.device.mobile&&Math.abs(dx)>Math.abs(dy)){d=null;return}d.on=true;el._dragged=true;try{el.setPointerCapture(e.pointerId)}catch(_){}el.style.transition='none';if(state.pending!==i)setPending(i)}
+    el.style.transform=`translate(${S.device.mobile?dx*.3:dx}px,${dy}px) rotate(${dx/16}deg) scale(1.04)`;
+    const side=$('#side'),hot=S.device.mobile?dy<-80:hit(e,side.getBoundingClientRect(),10)||dy<-140;
+    (S.device.mobile?$('#basketBtn'):side).classList.toggle('hot',hot);d.hot=hot;d.dy=dy});
+  const end=e=>{if(!d||e.pointerId!==d.id)return;const was=d;d=null;$('#basketBtn').classList.remove('hot');$('#side').classList.remove('hot');
+    el.style.transition='transform .4s cubic-bezier(.3,1.6,.5,1)';el.style.transform='';
+    if(!was.on)return;setTimeout(()=>el._dragged=false,50);
+    const taken=state.chosen[state.openCat].includes(i);
+    if(was.hot&&!taken)toggleTake(el);else if(S.device.mobile&&was.dy>80&&taken)toggleTake(el);
+    else if(was.hot&&taken)say('Cette carte est déjà dans ton panier ✔',1500)};
+  el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end)}
+
+/* Panier */
+function basketHTML(withRemove){let html='',n=0;CATEGORIES.forEach(c=>{const arr=state.chosen[c.id];html+=`<div class="bcat">${c.ico} ${c.name}${arr.length?'':' <span class="neg" style="font-weight:500">· à choisir</span>'}</div>`;
+  arr.forEach(i=>{const o=c.options[i];n++;html+=`<div class="row"><span class="em">${o.i}</span><span class="tx">${o.n}</span><span class="pr">${fmt(cost(o))}</span>${withRemove?`<button onclick="removeItem('${c.id}',${i})">✕</button>`:''}</div>`})});
+  return html+`<div class="row" style="background:#fff3c4"><span class="tx"><b>Total des dépenses</b></span><span class="pr">${fmt(totalSpent())}</span></div>`}
+function removeItem(cid,i){const arr=state.chosen[cid];arr.splice(arr.indexOf(i),1);sfx.pop();renderGame(false);if($('#drawer').classList.contains('on'))openBasket()}
+function openBasket(){$('#dTitle').textContent='🧺 Mes dépenses du mois '+state.round;$('#dBody').innerHTML=basketHTML(true);$('#drawer').classList.add('on');sfx.pop()}
+function closeDrawer(){$('#drawer').classList.remove('on')}
+function renderFoot(){const {pr,left}=problems(),n=CATEGORIES.reduce((a,c)=>a+state.chosen[c.id].length,0);
+  $('#bTot').textContent=fmt(totalSpent());$('#bCnt').textContent=`${n} dépense${n>1?'s':''} · voir`;
+  $('#sideList').innerHTML=basketHTML(true);
+  const b=$('#btnEnd');b.classList.toggle('off',pr.length>0);b.classList.toggle('green',!pr.length);b.classList.toggle('pulse',!pr.length);
+  $('#miss').innerHTML=pr.length?'⚠️ '+pr[0]:(left<0?`✅ Prêt ! Tu vas puiser ${fmt(-left)} dans l'épargne.`:'✅ Tous les postes sont complets !')}
+function endRound(){const {pr,left}=problems();
+  if(pr.length){sfx.oops();vib([50,40,50]);say(pr.join('<br>'),5000);$('#btnEnd').animate([{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'none'}],{duration:300});return}
+  const R=income(),D=totalSpent(),E=R-D,items=[];
+  CATEGORIES.forEach(c=>state.chosen[c.id].forEach(i=>items.push({cat:c,o:c.options[i],cost:cost(c.options[i])})));
+  state.history.push({round:state.round,R,D,E,scores:scores(),items,inflation:state.priceMult>1,job:state.job});
+  state.savings+=E;sfx.win();go('end');renderEnd()}
+
+/* ===== Synthèse (calculs identiques) ===== */
+function chartSVG(hist){
+  const rates=hist.map(r=>r.R>0?{c:r.D/r.R*100,e:r.E/r.R*100}:null),vals=rates.filter(Boolean).flatMap(r=>[r.c,r.e]);
+  const lo=Math.min(0,Math.floor(Math.min(0,...vals)/25)*25),hi=Math.max(100,Math.ceil(Math.max(100,...vals)/25)*25);
+  const W=460,H=300,top=30,bot=250,left=50,y=v=>top+(hi-v)*(bot-top)/(hi-lo);let g='';
+  for(let p=lo;p<=hi;p+=25)g+=`<line x1="${left}" x2="${W-10}" y1="${y(p)}" y2="${y(p)}" stroke="${p===0?'#9ca3af':'#e5e7eb'}"/><text x="${left-6}" y="${y(p)+4}" text-anchor="end" font-size="12" fill="#6b7280">${p}%</text>`;
+  const slot=(W-left-10)/NB_ROUNDS,bw=Math.min(48,slot/3);
+  hist.forEach((r,k)=>{const cx=left+slot*k+slot/2,rt=rates[k];
+    g+=`<text x="${cx}" y="${H-18}" text-anchor="middle" font-size="14" font-weight="bold" fill="#2a2140">Mois ${r.round}</text>`;
+    if(!rt){g+=`<text x="${cx}" y="${y(50)}" text-anchor="middle" font-size="12" fill="#a4161a">Revenu nul :</text><text x="${cx}" y="${y(50)+16}" text-anchor="middle" font-size="12" fill="#a4161a">taux non calculables</text>`;return}
+    [[rt.c,'#3aa8f5',-bw-2],[rt.e,'#2fa84f',2]].forEach(([v,col,dx],j)=>{const y0=y(Math.max(0,v)),hg=Math.abs(y(0)-y(v));
+      g+=`<rect x="${cx+dx}" y="${y0}" width="${bw}" height="${hg}" rx="6" fill="${col}" style="transform-origin:${cx+dx}px ${y(0)}px;animation:growY .8s ${.2+k*.25+j*.1}s cubic-bezier(.3,1.4,.5,1) backwards"/>
+       <text x="${cx+dx+bw/2}" y="${v>=0?y(v)-6:y(v)+14}" text-anchor="middle" font-size="11" font-weight="bold" fill="#2a2140">${Math.round(v)}%</text>`})});
+  return`<style>@keyframes growY{from{transform:scaleY(0)}}</style><svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Taux de consommation et d'épargne par mois">${g}</svg>`}
+function renderEnd(){
+  const lastR=state.history[state.history.length-1],final=state.round===NB_ROUNDS,tot=pastScores(),best=Math.max(...SCORE_ORDER.map(k=>tot[k])),g=GOALS[state.goal];
+  $('#synthTitle').textContent=final?'Fin de la partie !':`Bilan du mois ${state.round}`;
+  const v=$('#verdict');let mood='happy',pepMood='happy',tip='';
+  if(final){const win=tot[state.goal]===best&&tot[state.goal]>0;mood=win?'happy':'sad';pepMood=win?'happy':'sad';
+    v.className='verdict '+(win?'win':'lose');
+    v.innerHTML=win?`🏆 Victoire${S.name?' '+S.name:''} ! Objectif ${g.ico} ${g.name} atteint : ton score ${g.name} (${tot[state.goal]}) est le plus élevé.<br><small>Épargne finale : ${fmt(state.savings)}</small>`
+      :`Objectif ${g.ico} ${g.name} non atteint : ton score ${g.name} (${tot[state.goal]}) ${tot[state.goal]<=0?"n'est pas positif":"n'est pas le plus élevé de tes trois scores"}.<br><small>Épargne finale : ${fmt(state.savings)}</small>`;
+    tip=win?`Bravo ! Tu as fait des choix cohérents avec ton objectif pendant 3 mois${state.savings>=0?' sans finir dans le rouge':''} 🎉`:`Regarde les petits scores sous chaque carte : choisis plus souvent celles qui font monter ${g.ico} ${g.name} !`;
+    if(win){setTimeout(()=>confetti(170),300)}else sfx.lose()}
+  else{const R=lastR.R;v.className='verdict info';
+    v.innerHTML=R>0?`Ce mois-ci, tu as consommé <b>${pct(lastR.D/R*100)}</b> de ton revenu et épargné <b>${pct(lastR.E/R*100)}</b>.<br><small>Épargne cumulée : ${fmt(state.savings)}</small>`
+      :`Sans revenu ce mois-ci, tu as puisé ${fmt(-lastR.E)} dans ton épargne.<br><small>Épargne cumulée : ${fmt(state.savings)}</small>`;
+    mood=lastR.E>=0?'happy':'worried';pepMood=lastR.E>=0?'happy':'ok';
+    tip=lastR.E>=0?`Le <b>taux de consommation</b>, c'est la part du revenu dépensée (D ÷ R). Le reste, c'est ton <b>taux d'épargne</b> (E ÷ R). Tu as mis ${fmt(lastR.E)} de côté !`:`Tu as dépensé plus que ton revenu : ton <b>taux d'épargne est négatif</b>, tu as puisé ${fmt(-lastR.E)} dans l'épargne.`}
+  $('#endFamily').innerHTML=familyHTML(state.hh,mood);$('#endPep').innerHTML=pepiteSVG(pepMood);$('#endSay').innerHTML=tip;
+  $('#chart').innerHTML=chartSVG(state.history);
+  const rate=(a,r)=>r.R>0?pct(a/r.R*100):'—';
+  $('#budgetTable').innerHTML=`<tr><th></th>${state.history.map(r=>`<th class="r">Mois ${r.round}</th>`).join('')}</tr>
+   <tr><td>Revenu (R)</td>${state.history.map(r=>`<td class="r">${fmt(r.R)}</td>`).join('')}</tr>
+   <tr><td>Dépenses (D)</td>${state.history.map(r=>`<td class="r">${fmt(r.D)}</td>`).join('')}</tr>
+   <tr><td>Épargne (E = R − D)</td>${state.history.map(r=>`<td class="r ${r.E<0?'neg':''}">${fmt(r.E)}</td>`).join('')}</tr>
+   <tr><td>Taux de consommation</td>${state.history.map(r=>`<td class="r">${rate(r.D,r)}</td>`).join('')}</tr>
+   <tr><td>Taux d'épargne</td>${state.history.map(r=>`<td class="r">${rate(r.E,r)}</td>`).join('')}</tr>
+   <tr><td>Événement</td>${state.history.map(r=>`<td class="r" style="font-size:12px">${[r.inflation?'📈 Inflation':'',r.job?JOB_EVENTS[r.job].ico+' '+JOB_EVENTS[r.job].title:''].filter(Boolean).join(' + ')||'—'}</td>`).join('')}</tr>`;
+  $('#scoreTable').innerHTML=`<tr><th></th>${state.history.map(r=>`<th class="r">M${r.round}</th>`).join('')}<th class="r">Total</th></tr>`+
+   SCORE_ORDER.map(k=>`<tr><td>${GOALS[k].ico} ${GOALS[k].name}${state.goal===k?' 🎯':''}</td>${state.history.map(r=>`<td class="r">${r.scores[k]}</td>`).join('')}<td class="r" style="color:${GOALS[k].c};font-weight:700">${tot[k]}</td></tr>`).join('');
+  $('#expTitle').textContent=`🧺 Tes dépenses du mois ${lastR.round}`;
+  $('#expTable').innerHTML=lastR.items.map(it=>`<tr><td>${it.o.i} ${it.cat.name} — ${it.o.n}</td><td class="r">${fmt(it.cost)}</td></tr>`).join('')+`<tr><td><b>Total</b></td><td class="r"><b>${fmt(lastR.D)}</b></td></tr>`;
+  const nb=$('#btnNext');nb.textContent=final?'↻ Rejouer avec un nouveau ménage':`Passer au mois ${state.round+1} ▶`;
+  nb.onclick=final?()=>{newState();$('#hhCard').classList.remove('open');$('#hhCard').classList.add('idle');$('#hhBtns').style.display='none';go('hh')}:()=>startRound(state.round+1);
+  $('#scr-end .scroll').scrollTop=0}
+
+/* ===== Tutoriel & règles ===== */
+let TU=null;
+function tutoSteps(){const m=S.device.mobile,L=[];
+  L.push({ic:'🏠🚌🛒🎓🎨🏖️',t:'6 catégories à remplir',p:'Chaque mois, tu dois choisir <b>au moins une dépense</b> dans chaque catégorie. Tu peux en prendre plusieurs !'});
+  L.push(m?{ic:'<span class="swipe-x">🃏</span>',t:'Fais défiler les cartes',p:'Glisse ↔ pour voir les choix. En haut, Pépite te montre l\'effet de la carte sur ton <b>budget</b> et tes <b>scores</b>.'}:{ic:'🖱️',t:'Clique une carte',p:'En haut, tu vois tout de suite son effet sur ton <b>budget</b> et tes <b>scores</b>. Au clavier : <b>← →</b> pour changer de carte.'});
+  L.push(m?{ic:'<span class="swipe-up">🃏</span>',t:'Lance-la vers le haut',p:'…pour la mettre dans ton panier 🧺 (ou touche « Je prends »). Pour la retirer, tire-la vers le bas.'}:{ic:'<span class="swipe-x">🃏</span>🧺',t:'Glisse-la dans ton panier',p:'Dépose la carte dans le panier à droite (ou appuie sur <b>Entrée</b>). Pour la retirer, clique sur ✕.'});
+  L.push({ic:'⚠️🚗',t:'Les règles à respecter',p:'Certains logements <b>nécessitent une voiture</b>, et une voiture rend l\'<b>assurance obligatoire</b>. Tu peux dépenser plus que ton revenu… seulement si ton <b>épargne</b> le permet !'});
+  return L}
+function openTuto(){TU={i:0,steps:tutoSteps()};showTuto();$('#tuto').classList.add('on')}
+function showTuto(){const s=TU.steps[TU.i];$('#tIc').innerHTML=s.ic;$('#tT').textContent=s.t;$('#tP').innerHTML=s.p;
+  $('#tDots').innerHTML=TU.steps.map((_,i)=>`<i class="${i===TU.i?'on':''}"></i>`).join('');$('#tBtn').textContent=TU.i===TU.steps.length-1?"J'ai compris ! 👍":'Suivant ▶';
+  const c=$('.tuto-card');c.style.animation='none';void c.offsetWidth;c.style.animation='';sfx.pop()}
+function tutoNext(){TU.i++;if(TU.i>=TU.steps.length){$('#tuto').classList.remove('on');SAVE['tuto_'+S.mode]=1;store.set(SAVE);TU=null;return}showTuto()}
+function openRules(){$('#dTitle').textContent='📖 Les règles';
+  $('#dBody').innerHTML=`<div class="rules"><p>🎯 <b>But</b> : à la fin des <b>3 mois</b>, le score de ton objectif (${GOALS[state.goal].ico} ${GOALS[state.goal].name}) doit être <b>le plus élevé de tes trois scores</b> et <b>positif</b>.</p>
+   <p>🗂️ Chaque mois, choisis <b>au moins une dépense</b> dans chacune des 6 catégories (plusieurs choix possibles). Tes choix sont remis à zéro au début de chaque mois.</p>
+   <p>🧮 Les prix sont <b>par personne</b>, <b>par adulte</b>, <b>par enfant</b>, <b>par mois</b> ou en <b>dépense unique</b> : la carte affiche le coût pour ton ménage.</p>
+   <p>🚗 Cabane, van et maison périurbaine <b>nécessitent une voiture</b>. Avec une voiture, l'<b>assurance</b> est obligatoire.</p>
+   <p>🐷 Ce que tu ne dépenses pas devient de l'<b>épargne</b> (E = R − D). Tu peux dépenser plus que ton revenu en puisant dans l'épargne, mais pas plus que ce qu'elle contient.</p>
+   <p>📈 Mois 2 : <b>inflation</b>, tous les prix +10 %. 🃏 Mois 3 : carte <b>emploi</b> (licenciement, promotion +500 € ou rien).</p></div>`;
+  $('#drawer').classList.add('on')}
+
+/* ===== Clavier (ordinateur) ===== */
+window.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;
+  if($('#tuto').classList.contains('on')){if(e.key==='Enter'||e.key===' '){e.preventDefault();tutoNext()}return}
+  if(e.key==='Escape'){closeDrawer();return}
+  if(S.screen==='hh'&&(e.key===' '||e.key==='Enter')){e.preventDefault();drawHousehold();return}
+  if(S.screen==='event'&&e.key===' '){e.preventDefault();EV.shake&&EV.shake();return}
+  if(S.screen!=='game')return;
+  if(e.key==='ArrowRight'){e.preventDefault();navOpt(1)}else if(e.key==='ArrowLeft'){e.preventDefault();navOpt(-1)}
+  else if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleTake()}
+  else if(/^[1-6]$/.test(e.key))openCat(CATEGORIES[+e.key-1].id)});
+window.addEventListener('resize',()=>{if(S.screen==='game'&&S.device.mobile)scrollToOpt(state.pending||0,false)});
+
+/* ===== Démarrage ===== */
+detectDevice();initBg();renderAges();newState();
+$('#inName').value=S.name;if(SAVE.age)pickAge(SAVE.age,true);
+go('home');
+</script>
+</body>
+</html>
