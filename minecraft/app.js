@@ -9,3 +9,6 @@ window.addEventListener('beforeprint',()=>{document.querySelectorAll('.challenge
 
 init();
 function defiTab(button){const section=button.closest('.defi-tools');section.querySelectorAll('[role=tab]').forEach(b=>b.setAttribute('aria-selected',String(b===button)));section.querySelectorAll('[role=tabpanel]').forEach(p=>p.hidden=p.dataset.panel!==button.dataset.tab)}
+
+/* V4 : chargement progressif ; les pages V3 restent utilisables si la V4 échoue. */
+(function(){var s=document.createElement('script');s.src='v4-data.js?v=4';s.onload=function(){var t=document.createElement('script');t.src='v4.js?v=4';document.body.appendChild(t)};document.body.appendChild(s)})();
