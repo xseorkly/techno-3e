@@ -1,0 +1,17 @@
+﻿Défi;Terrain élève;Modèle corrigé;Manipulations finales;Tests fonctionnels;Export .mcworld;Observations
+01;À tester;À tester;Le modèle place quatre blocs jaunes aux coins et un départ bleu.;À tester;À faire;
+02;À tester;À tester;Le modèle comporte une ouverture libre , une porte en bois peut être ajoutée manuellement.;À tester;À faire;
+03;À tester;À tester;Exemple fictif 9 × 7 m, à adapter au relevé réel.;À tester;À faire;
+04;À tester;À tester;Le modèle compare pierre opaque et bois avec six vitrages , données réelles à fournir par le professeur.;À tester;À faire;
+05;À tester;À tester;La correction représente un pont de plain-pied , Minecraft ne simule pas la flexion.;À tester;À faire;
+06;À tester;À tester;Maquette d’accès de plain-pied, pas certification réglementaire.;À tester;À faire;
+07;À tester;À tester;Le pack pose la terre et l’eau , labour et semis manuels nécessaires.;À tester;À faire;
+08;À tester;À tester;Montage automatique proposé , si le levier ne s’importe pas, le replacer manuellement sur le support.;À tester;À faire;
+09;À tester;À tester;Si besoin, isoler chaque branche avec un répéteur pointant vers la jonction.;À tester;À faire;
+10;À tester;À tester;Le pack prépare le mur et les plaques , poser la porte à la main pour éviter les incompatibilités d’état de bloc.;À tester;À faire;
+11;À tester;À tester;Le pack prépare le circuit avec torches , vérifier leur orientation et le signal en jeu avant de connecter la porte.;À tester;À faire;
+12;À tester;À tester;Poser le wagonnet manuellement , vérifier l’orientation des rails si nécessaire.;À tester;À faire;
+13;À tester;À tester;Le fichier MakeCode est un source JavaScript à coller, pas un monde ni un projet importable.;À tester;À faire;
+14;À tester;À tester;Le pack corrige visuellement le carré de référence , le code doit être testé pour la fermeture réelle.;À tester;À faire;
+15;À tester;À tester;Le modèle comporte deux parcours , on vérifie le comportement, pas une arrivée garantie.;À tester;À faire;
+16;À tester;À tester;Le modèle fournit un quartier de référence compact : terminer la porte, l’irrigation et vérifier les automatismes.;À tester;À faire;

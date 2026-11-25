@@ -1,0 +1,29 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Technologie collège - 16 défis",
+    "description": "Terrains et modèles à tester sur des mondes vierges",
+    "uuid": "8f608ba8-340b-4905-9ef4-35eaec306cba",
+    "version": [
+      1,
+      0,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      20,
+      0
+    ]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "7647db26-7d05-48bf-bf87-7a82d00d8c85",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ]
+}

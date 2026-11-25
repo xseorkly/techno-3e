@@ -1,0 +1,2 @@
+MINECRAFT EDUCATION – TECHNOLOGIE – V3
+Ouvrir index.html après extraction. Le dossier fichiers contient 32 fiches HTML imprimables, 32 fonctions de génération, 3 sources MakeCode, un pack .mcpack et une recette de tests. Aucun monde .mcworld préconstruit. Tester dans un monde vierge avant diffusion. Le pack modifie le terrain à partir de la position du joueur.
