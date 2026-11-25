@@ -1,0 +1,14 @@
+MISSION NOUVELLE TERRE - site complet
+
+Page d'entree : index.html
+- Je suis eleve de 4e  -> mission-nouvelle-terre-4e.html
+- Je suis eleve de 3e  -> mission-nouvelle-terre-3e.html
+- Je suis enseignant   -> enseignant.html (tutoriel enseignant, audit, mondes)
+
+Dossiers :
+- mondes/  : les deux mondes Minecraft Education (.mcworld)
+- assets/  : l'image d'accueil
+
+Mise en ligne : deposer le contenu du dossier tel quel (GitHub Pages, La Forge, ENT).
+Garder les dossiers mondes/ et assets/ a cote des pages HTML.
+Les espaces enseignant sont chiffres : le mot de passe n'est ecrit nulle part dans le site.
