@@ -1,11 +1,11 @@
-/* V4 : contenus pédagogiques originaux ; schémas et modèles du jeu à tester. */
+/* Contenus des 16 défis guidés (cours, étapes, aides, questions). */
 window.MC_V4_DATA = [
   {
     "id": "01",
     "title": "Se repérer sur un chantier",
     "story": "Un chef de chantier te demande de matérialiser les quatre coins d'une zone et de revenir au départ. Apprends à lire un plan et à te déplacer sans te perdre.",
     "lesson": "Coordonnées : X et Z repèrent la position au sol ; Y indique la hauteur. Un côté de 4 cases possède 3 intervalles entre les centres des blocs.",
-    "materials": "4 blocs de béton jaune ; monde préparé avec repères bleu et vert.",
+    "materials": "4 blocs de béton jaune. Le monde du défi contient déjà une plateforme de pierre, un repère bleu (départ) et un repère vert (premier coin du carré).",
     "module": "commandes.html",
     "steps": [
       [
@@ -91,7 +91,8 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Photo de dessus + deux coordonnées + explique la différence entre case et intervalle.",
-    "transfer": "Dans un autre carré de 5 cases, prévois les écarts avant de construire."
+    "transfer": "Dans un autre carré de 5 cases, prévois les écarts avant de construire.",
+    "level": "Découverte · 5e · 15 min"
   },
   {
     "id": "02",
@@ -184,7 +185,8 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Deux photos, dimensions et justification de deux matériaux.",
-    "transfer": "Propose une autre forme d'abri qui respecte les mêmes contraintes."
+    "transfer": "Propose une autre forme d'abri qui respecte les mêmes contraintes.",
+    "level": "Découverte · 5e · 25 min"
   },
   {
     "id": "03",
@@ -277,7 +279,8 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Plan coté et vue de dessus annotée, avec échelle et écarts.",
-    "transfer": "Refais une partie du plan avec 2 blocs pour 1 m et compare la précision."
+    "transfer": "Refais une partie du plan avec 2 blocs pour 1 m et compare la précision.",
+    "level": "Découverte · 5e · 35 min"
   },
   {
     "id": "04",
@@ -370,7 +373,8 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Deux photos, proportion vitrée et tableau de comparaison sourcé.",
-    "transfer": "Compare une troisième variante à 12 vitrages."
+    "transfer": "Compare une troisième variante à 12 vitrages.",
+    "level": "Découverte · 5e · 35 min"
   },
   {
     "id": "05",
@@ -463,7 +467,8 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Croquis, photo, comptage, résultat de traversée.",
-    "transfer": "Compare deux solutions de pont en papier avec une même charge."
+    "transfer": "Compare deux solutions de pont en papier avec une même charge.",
+    "level": "Conception · 5e–4e · 55 min"
   },
   {
     "id": "06",
@@ -556,7 +561,8 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Plans avant/après et tableau obstacle → correction → résultat.",
-    "transfer": "Sur un plan réel fourni, étudie la pente d'un accès."
+    "transfer": "Sur un plan réel fourni, étudie la pente d'un accès.",
+    "level": "Conception · 5e–4e · 55 min"
   },
   {
     "id": "07",
@@ -649,7 +655,8 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Vue de dessus, schéma de distribution et justification de l'organisation.",
-    "transfer": "Propose un arrosage commandé, représenté symboliquement."
+    "transfer": "Propose un arrosage commandé, représenté symboliquement.",
+    "level": "Conception · 5e–4e · 55 min"
   },
   {
     "id": "08",
@@ -742,7 +749,8 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Deux photos ON/OFF, tableau de test et schéma entrée → liaison → sortie.",
-    "transfer": "Allonge la ligne et teste avec et sans répéteur."
+    "transfer": "Allonge la ligne et teste avec et sans répéteur.",
+    "level": "Automatismes · 5e–4e · 25 min"
   },
   {
     "id": "09",
@@ -835,7 +843,8 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Tableau de quatre essais et photo ; explique pourquoi ce n'est pas un va-et-vient.",
-    "transfer": "Compare au défi 11 : quelle condition change ?"
+    "transfer": "Compare au défi 11 : quelle condition change ?",
+    "level": "Automatismes · 4e · 45 min"
   },
   {
     "id": "10",
@@ -928,7 +937,8 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Trois photos ou vidéo et schéma de la chaîne fonctionnelle.",
-    "transfer": "Remplace une plaque par un bouton et compare."
+    "transfer": "Remplace une plaque par un bouton et compare.",
+    "level": "Automatismes · 4e · 45 min"
   },
   {
     "id": "11",
@@ -1021,7 +1031,8 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Table de vérité complétée par tes essais, schéma et photo.",
-    "transfer": "Ajoute un voyant d'état fermé, puis vérifie son comportement."
+    "transfer": "Ajoute un voyant d'état fermé, puis vérifie son comportement.",
+    "level": "Automatismes · 4e–3e · 55–75 min"
   },
   {
     "id": "12",
@@ -1114,7 +1125,8 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Plan, deux observations ON/OFF, conclusion et limite expérimentale.",
-    "transfer": "Ajoute une détection de passage et un voyant."
+    "transfer": "Ajoute une détection de passage et un voyant.",
+    "level": "Automatismes · 4e–3e · 55 min"
   },
   {
     "id": "13",
@@ -1207,7 +1219,8 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Algorithme dessiné, capture du code et photo de l'arrivée.",
-    "transfer": "Modifie le segment central de 3 à 5 et prédis l'arrivée."
+    "transfer": "Modifie le segment central de 3 à 5 et prédis l'arrivée.",
+    "level": "Programmation & projet · 5e–4e · 45 min"
   },
   {
     "id": "14",
@@ -1300,7 +1313,8 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Code commenté, deux tailles photographiées et résultats des tests.",
-    "transfer": "Propose deux paramètres pour construire un rectangle."
+    "transfer": "Propose deux paramètres pour construire un rectangle.",
+    "level": "Programmation & projet · 4e–3e · 55–75 min"
   },
   {
     "id": "15",
@@ -1393,7 +1407,8 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Code, deux résultats et explication d'un échec possible.",
-    "transfer": "Ajoute une condition d'arrêt sur un bloc repère."
+    "transfer": "Ajoute une condition d'arrêt sur un bloc repère.",
+    "level": "Programmation & projet · 3e · 2 × 55 min"
   },
   {
     "id": "16",
@@ -1486,6 +1501,7 @@ window.MC_V4_DATA = [
       ]
     ],
     "evidence": "Monde exporté si possible, portfolio, programmes, budget, tableau de tests, trois indicateurs, contribution personnelle.",
-    "transfer": "Présente une amélioration argumentée fondée sur les résultats des tests."
+    "transfer": "Présente une amélioration argumentée fondée sur les résultats des tests.",
+    "level": "Programmation & projet · 3e · 4 à 6 × 55 min"
   }
 ];
