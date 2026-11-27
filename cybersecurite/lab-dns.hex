@@ -1,0 +1,8 @@
+# Synthetic DNS query payloads, only lab names in reserved .test
+# text2pcap -u 53000,53 lab-dns.hex lab-dns.pcapng
+000000 12 34 01 00 00 01 00 00 00 00 00 00 07 68 6f 72
+000010 69 7a 6f 6e 04 74 65 73 74 00 00 01 00 01
+
+000000 12 35 01 00 00 01 00 00 00 00 00 00 03 61 70 70
+000010 07 68 6f 72 69 7a 6f 6e 04 74 65 73 74 00 00 1c
+000020 00 01
