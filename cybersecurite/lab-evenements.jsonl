@@ -1,0 +1,5 @@
+{"ts":"2026-11-20T08:40:00Z","event_id":4625,"asset":"LAB-01","subject":"U-TEST","count":6,"result":"failure"}
+{"ts":"2026-11-20T08:41:00Z","event_id":4624,"asset":"LAB-01","subject":"U-TEST","result":"success"}
+{"ts":"2026-11-20T08:44:00Z","event_id":4728,"asset":"LAB-01","subject":"U-TEST","change_ticket":"unknown"}
+{"ts":"2026-11-20T08:48:00Z","event_id":9001,"asset":"LAB-04","subject":"service-test","result":"availability-alert"}
+{"ts":"2026-11-20T08:52:00Z","event_id":9002,"asset":"LAB-05","subject":"backup-test","result":"restore-test-failed"}
