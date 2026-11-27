@@ -1,0 +1,78 @@
+name: Recette cybersécurité Horizon
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/recette-cyber-horizon.yml'
+      - 'cybersecurite/lab-audit.py'
+      - 'cybersecurite/lab-actifs.csv'
+      - 'cybersecurite/lab-controles.csv'
+      - 'cybersecurite/lab-dns.hex'
+      - 'cybersecurite/lab-api-cve.ps1'
+      - 'cybersecurite/lab-collecte-ad.ps1'
+      - 'cybersecurite/collecte.ps1'
+permissions:
+  contents: read
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: cybersecurite
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python - contrôle réel
+        run: |
+          python3 lab-audit.py > "$RUNNER_TEMP/rapport-lab.json"
+          python3 -c 'import json,os; r=json.load(open(os.path.join(os.environ["RUNNER_TEMP"],"rapport-lab.json"))); assert r["assets"]==6; assert r["edr"]["positive_percent"]==66.67; assert r["patch_evidence"]["positive_percent"]==66.67; assert r["control_counts"]=={"pass":2,"fail":2,"unknown":2}; print("Python : conforme")'
+      - name: Wireshark CLI - installation
+        run: |
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y tshark
+          tshark --version
+      - name: Wireshark CLI - capture synthétique et analyse réelle
+        run: |
+          text2pcap -u 53000,53 lab-dns.hex "$RUNNER_TEMP/lab-dns.pcapng"
+          tshark -r "$RUNNER_TEMP/lab-dns.pcapng" -Y dns -T fields -e dns.qry.name -e dns.qry.type > "$RUNNER_TEMP/dns.tsv"
+          cat "$RUNNER_TEMP/dns.tsv"
+          python3 -c 'import os; p=os.path.join(os.environ["RUNNER_TEMP"],"dns.tsv"); assert open(p).read().splitlines()==["horizon.test\t1","app.horizon.test\t28"]'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: recette-linux
+          path: |
+            ${{ runner.temp }}/rapport-lab.json
+            ${{ runner.temp }}/dns.tsv
+            ${{ runner.temp }}/lab-dns.pcapng
+          retention-days: 7
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: cybersecurite
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+      - name: PowerShell - parser les scripts sans les exécuter
+        run: |
+          foreach ($file in @('lab-api-cve.ps1','lab-collecte-ad.ps1','collecte.ps1')) {
+            $tokens = $null
+            $errors = $null
+            [void][System.Management.Automation.Language.Parser]::ParseFile((Join-Path (Get-Location) $file), [ref]$tokens, [ref]$errors)
+            if ($errors.Count -gt 0) { $errors | Out-String | Write-Host; throw "Syntaxe invalide : $file" }
+            Write-Host "Syntaxe valide : $file"
+          }
+      - name: PowerShell - API NVD publique (sans inventaire)
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $report = & ./lab-api-cve.ps1 -CveId CVE-2021-44228 | ConvertFrom-Json
+          if ($report.id -ne 'CVE-2021-44228' -or @($report.references).Count -eq 0) { throw 'Fiche NVD invalide' }
+          $report | ConvertTo-Json -Depth 6 | Set-Content -Encoding utf8 "$env:RUNNER_TEMP/nvd.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: recette-windows
+          path: ${{ runner.temp }}/nvd.json
+          retention-days: 7
