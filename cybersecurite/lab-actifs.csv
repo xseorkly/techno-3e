@@ -1,0 +1,7 @@
+﻿"asset_id";"zone";"role";"edr";"patch_evidence";"last_seen";"owner"
+"LAB-01";"identite";"DC";"yes";"fresh";"2026-11-20";"Infrastructure"
+"LAB-02";"pedagogie";"Poste";"yes";"fresh";"2026-11-20";"Pédagogie"
+"LAB-03";"admin";"Poste";"no";"stale";"2026-11-20";"Administration"
+"LAB-04";"serveurs";"Application";"yes";"unknown";"2026-11-20";"Applications"
+"LAB-05";"backup";"Sauvegarde";"unknown";"fresh";"2026-11-20";"Infrastructure"
+"LAB-06";"pedagogie";"Poste";"yes";"fresh";"2026-11-20";"Pédagogie"
