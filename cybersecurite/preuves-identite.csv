@@ -1,0 +1,7 @@
+﻿"ID";"Contrôle";"Observation fictive";"Preuve";"Limite"
+"I01";"Comptes dédiés";"6 administrateurs, 2 utilisent aussi le compte pour des tâches bureautiques";"Revue des rôles agrégée";"À confirmer par entretien"
+"I02";"PAW";"2 postes d'administration dédiés pour 6 administrateurs";"Inventaire";"Couverture des usages inconnue"
+"I03";"LAPS";"850 postes avec preuve de rotation sur 1200";"Rapport agrégé";"Éligibilité détaillée à vérifier"
+"I04";"LDAP";"Clients hérités signalés";"Télémétrie agrégée";"Compatibilité inconnue"
+"I05";"AD CS";"Revue de modèles non documentée";"Registre de contrôle";"Ne démontre pas une mauvaise configuration"
+"I06";"Synchronisation identité";"Responsable de revue non désigné";"RACI fictif";"Périmètre à confirmer"
