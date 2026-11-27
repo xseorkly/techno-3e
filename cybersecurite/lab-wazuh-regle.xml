@@ -1,0 +1,10 @@
+<!-- Fragment pédagogique pour un MANAGER DE LABORATOIRE uniquement.
+Vérifier que l'identifiant local est libre. Sauvegarder les règles avant modification. -->
+<group name="horizon_lab,">
+  <rule id="100120" level="8">
+    <decoded_as>json</decoded_as>
+    <field name="horizon.event">^backup_restore$</field>
+    <field name="horizon.result">^failed$</field>
+    <description>Horizon lab : échec du test de restauration</description>
+  </rule>
+</group>
