@@ -1,0 +1,8 @@
+﻿"time_utc";"source_zone";"destination_zone";"protocol";"service";"action";"ticket"
+"08:00:01";"pedagogie";"dns";"UDP";"DNS";"allow";"NET-101"
+"08:00:02";"pedagogie";"applications";"TCP";"HTTPS";"allow";"NET-102"
+"08:00:03";"invites";"administration";"TCP";"HTTPS";"deny";""
+"08:00:04";"pedagogie";"administration";"TCP";"SMB";"allow";""
+"08:00:05";"gestion";"hyperviseurs";"TCP";"HTTPS";"allow";"NET-103"
+"08:00:06";"serveurs";"backup";"TCP";"Backup";"allow";"NET-104"
+"08:00:07";"invites";"internet";"TCP";"HTTPS";"allow";"NET-105"
