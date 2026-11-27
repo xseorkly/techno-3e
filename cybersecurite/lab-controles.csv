@@ -1,0 +1,7 @@
+﻿"asset_id";"control_id";"status";"evidence_id";"observation"
+"LAB-01";"IDENTITY-REVIEW";"unknown";"E01";"Revue des habilitations non fournie"
+"LAB-03";"EDR";"fail";"E02";"Agent absent selon inventaire de laboratoire"
+"LAB-04";"PATCH";"unknown";"E03";"Date de preuve non fournie"
+"LAB-05";"RESTORE";"fail";"E04";"Test de restauration échoué dans scénario fictif"
+"LAB-02";"EDR";"pass";"E05";"Agent actif"
+"LAB-06";"EDR";"pass";"E06";"Agent actif"
