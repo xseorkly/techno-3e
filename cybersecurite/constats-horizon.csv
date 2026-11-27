@@ -1,0 +1,7 @@
+﻿"ID";"Actif";"Sujet";"Constat";"Criticité indicative";"Preuve à obtenir";"Action"
+"F01";"P02";"180 postes Windows 10 22H2";"Statut de support/ESU absent";"Élevée à confirmer";"Inventaire + contrat ESU";"Vérifier couverture et plan de migration"
+"F02";"S04";"MFA accès messagerie";"MFA non documenté";"Élevée à confirmer";"Politique identité";"Vérifier et appliquer MFA adapté"
+"F03";"S02";"Droits de partage";"Dernière revue inconnue";"Moyenne à élevée";"Rapport ACL minimisé";"Revoir habilitations"
+"F04";"S06";"Sauvegardes";"Aucun test documenté";"Élevée";"Rapport de sauvegarde";"Tester restauration isolée"
+"F05";"N01";"Cloisonnement";"Flux pédagogie → administration non justifiés";"Élevée à confirmer";"Matrice de flux fictive";"Valider besoin puis restreindre"
+"F06";"S01";"Correctifs serveurs";"Versions détaillées non collectées";"Indéterminée";"Rapport correctifs";"Collecter preuve avant conclusion"
